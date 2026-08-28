@@ -130,5 +130,6 @@ Para probar la aplicación en tu ordenador sin necesidad de instalar entornos co
 ### 5.4. Despliegue Continuo Automático en GitHub Pages (CI/CD)
 * **Repositorio Oficial:** `https://github.com/Sebaspaezt/adaptacioncurricular`
 * **URL en Producción Web (En Vivo):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
-* **Flujo de Automatización:** Cada ajuste realizado y procesado por el orquestador (`orquestador_maestro_sincronizacion.py` o `sincronizar_ajustes.bat`) se compila y se envía automáticamente mediante `git push` a la rama `main`, actualizando la plataforma en vivo en GitHub Pages en tiempo real.
+* **Flujo de Automatización Autónoma:** Cada ajuste realizado y procesado en el desarrollo es ejecutado y sincronizado automáticamente por el asistente de desarrollo (**Antigravity**) mediante `git push` a la rama `main`, garantizando que cada iteración quede inmediatamente reflejada en vivo en la plataforma web de GitHub Pages sin requerir acciones manuales del usuario.
+
 
