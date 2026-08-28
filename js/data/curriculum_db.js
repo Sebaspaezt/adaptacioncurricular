@@ -1,0 +1,4388 @@
+var CURRICULUM_DB = {
+  "1": {
+    "num": 1,
+    "roman": "I",
+    "name": "CICLO 1",
+    "file_name": "CICLO 1.xlsx",
+    "stage_title": "CICLO I: Grados 1°, 2° y 3° (Básica Primaria Inicial - 6 a 8 años)",
+    "grados": [
+      "Grado 1° (Primaria)",
+      "Grado 2° (Primaria)",
+      "Grado 3° (Primaria)"
+    ],
+    "lenguaje": [
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Conciencia fonológica y trazo de grafías",
+        "DBA 1: Reconozco el sonido de las letras y escribo palabras sencillas de mi entorno.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Reconocer fonemas, grafías y palabras clave de autocuidado y seguridad en textos ilustrados.",
+        "Identifica vocales y consonantes en su nombre y palabras de alerta.",
+        "Escribe palabras sencillas y rótulos de autocuidado para su salón.",
+        "Expresa agrado y seguridad al reconocer palabras escritas.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Escritura de oraciones e ideas simples",
+        "DBA 2: Escribo textos sencillos para comunicar mensajes de protección y afecto.",
+        "Procesos cognitivos",
+        "Baja",
+        "Elaborar oraciones breves y mensajes claros para expresar necesidades y normas de convivencia.",
+        "Reconoce la estructura de una oración simple (sujeto y acción).",
+        "Elabora carteles ilustrados con normas de seguridad en el aula.",
+        "Colabora con sus compañeros en la escritura y respeta los turnos.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN E INTERPRETACIÓN",
+        "Lectura de imágenes y pictogramas de emergencia",
+        "DBA 3: Comprendo el significado de señales de advertencia, rutas y símbolos.",
+        "Procesos cognitivos",
+        "Baja",
+        "Interpretar pictogramas, señales de peligro y rutas de evacuación en el entorno escolar.",
+        "Interpreta símbolos visuales, flechas de evacuación y colores de alerta.",
+        "Sigue instrucciones gráficas durante simulacros de protección.",
+        "Mantiene la calma y apoya a sus pares al observar señales de peligro.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN E INTERPRETACIÓN",
+        "Comprensión de narraciones orales y cuentos",
+        "DBA 4: Identifico personajes, lugares y sucesos en relatos infantiles y fábulas.",
+        "Procesos cognitivos",
+        "Media",
+        "Comprender la secuencia de hechos (inicio, nudo, desenlace) en cuentos sobre resiliencia.",
+        "Describe la secuencia temporal y los personajes de una historia escuchada.",
+        "Dibuja el inicio, nudo y desenlace de relatos de superación y cuidado.",
+        "Muestra empatía con las emociones y vivencias de los personajes.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Exploración de rondas, rimas y canciones lúdicas",
+        "DBA 5: Disfruto de la lectura y expresión poética como apoyo emocional.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear rimas sencillas, coplas y rondas infantiles para la contención socioemocional.",
+        "Recuerda rimas, trabalenguas y canciones tradicionales de relajación.",
+        "Canta y dramatiza versos en rutinas de contención y juego grupal.",
+        "Participa con entusiasmo y confianza en rondas colectivas.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "MEDIOS DE COMUNICACIÓN",
+        "Interpretación de avisos y mensajes radiales",
+        "DBA 6: Reconozco medios sonoros y visuales de información escolar y comunitaria.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Analizar mensajes orales e informativos transmitidos por altavoces o radio escolar.",
+        "Diferencia un aviso urgente de un mensaje informativo cotidiano.",
+        "Transmite oralmente un mensaje de prevención a su familia y amigos.",
+        "Valora la información oportuna y veraz de sus docentes.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "ÉTICA DE LA COMUNICACIÓN",
+        "Escucha activa y turnos de conversación",
+        "DBA 7: Expreso mis ideas con respeto y escucho con atención a mis compañeros.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar pautas de escucha respetuosa y diálogo pacífico en asambleas de aula.",
+        "Reconoce la importancia del silencio y la mirada atenta al escuchar.",
+        "Pide la palabra levantando la mano y expone sus sentimientos.",
+        "Respeta las opiniones y diversidades de todos los compañeros.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Elaboración de fichas de datos personales y rescate",
+        "DBA 8: Escribo mis datos básicos para identificación y seguridad familiar.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Diligenciar fichas sencillas de identificación personal y red de apoyo seguro.",
+        "Identifica su nombre completo, edad, dirección y teléfono familiar.",
+        "Elabora su tarjeta de rescate para el morral de emergencia.",
+        "Muestra seguridad y confianza al comunicar sus datos de protección.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN TEXTUAL",
+        "Lectura de textos instructivos ilustrados",
+        "DBA 9: Sigo instrucciones paso a paso para lavado de manos y preparación de kits.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar la secuencia lógica en manuales gráficos de saneamiento e higiene WASH.",
+        "Identifica títulos, numerales e imágenes en recetas y guías de aseo.",
+        "Aplica los 5 pasos del lavado correcto de manos con agua segura.",
+        "Promueve prácticas de higiene y cuidado mutuo en su hogar.",
+        "Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Creación de títeres y dramatizaciones sencillas",
+        "DBA 10: Represento historias sobre el valor de la amistad y la valentía.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear representaciones teatrales con títeres para tramitar miedos y emociones.",
+        "Reconoce recursos gestuales y de entonación para expresar alegría y calma.",
+        "Construye un títere con material reciclado y representa una historia de paz.",
+        "Valora el trabajo cooperativo y el reconocimiento de sus talentos.",
+        "Etapa 3"
+      ]
+    ],
+    "matematicas": [
+      [
+        "Pensamiento Numérico",
+        "Conteo y representación manipulativa del 1 al 100",
+        "DBA 1: Cuento, agrupo y comparo colecciones de objetos concretos.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender el valor posicional en unidades y decenas mediante material del entorno.",
+        "Reconoce decenas y unidades usando semillas, tapas y regletas.",
+        "Cuenta raciones de alimentos y materiales del kit escolar.",
+        "Muestra honestidad y generosidad al repartir materiales del aula.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Numérico",
+        "Operaciones de adición y sustracción básica",
+        "DBA 2: Resuelvo situaciones aditivas sencillas de juntar, agregar y quitar.",
+        "Procesos cognitivos",
+        "Baja",
+        "Aplicar sumas y restas sin reagrupación en situaciones cotidianas de distribución.",
+        "Identifica cuándo una situación requiere sumar (juntar) o restar (quitar).",
+        "Calcula cantidades de botellas de agua y lápices necesarios en el grupo.",
+        "Ayuda solidariamente a sus compañeros en el conteo de insumos.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Espacial",
+        "Ubicación espacial y nociones topológicas",
+        "DBA 3: Describo posiciones y desplazamientos en el espacio escolar.",
+        "Procesos cognitivos",
+        "Baja",
+        "Recordar y aplicar nociones espaciales (cerca/lejos, dentro/fuera, arriba/abajo).",
+        "Reconoce puntos cardinales básicos y referencias del salón de clases.",
+        "Sigue con orden la ruta señalizada hacia el punto de encuentro seguro.",
+        "Demuestra serenidad y disciplina al desplazarse en simulacros.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Métrico",
+        "Medición no convencional de longitudes y tiempo",
+        "DBA 4: Comparo longitudes y duraciones usando pasos, cuartas y calendarios.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Aplicar medidas no estandarizadas para estimar distancias seguras y rutinas.",
+        "Identifica distancias seguras respecto a zonas de riesgo del patio.",
+        "Mide el espacio personal de seguridad usando pasos y brazos extendidos.",
+        "Cuida los instrumentos y espacios de medición compartidos.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Aleatorio",
+        "Recolección y conteo de datos con pictogramas",
+        "DBA 5: Organizo datos simples en tablas de conteo y gráficos de barras con figuras.",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar información sencilla sobre asistencia y estados de ánimo en pictogramas.",
+        "Interpreta gráficos de barras con iconos y dibujos sencillos.",
+        "Registra en una tabla la asistencia diaria y el termómetro emocional.",
+        "Valora el trabajo ordenado y la participación de todos.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Variacional",
+        "Patrones y secuencias sonoras y visuales",
+        "DBA 6: Reconozco y continúo secuencias de formas, colores y sonidos de alerta.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear patrones repetitivos en juegos rítmicos y señales sonoras de alarma y calma.",
+        "Identifica el patrón repetitivo en un ritmo o secuencia gráfica.",
+        "Reproduce secuencias de palmadas y tambor para alertar o invitar a la calma.",
+        "Se muestra atento y receptivo a las dinámicas colectivas del aula.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Numérico",
+        "Resolución de problemas de reparto equitativo",
+        "DBA 7: Reparto colecciones en partes iguales mediante agrupaciones concretas.",
+        "Procesos cognitivos",
+        "Alta",
+        "Resolver problemas de reparto equitativo de meriendas y materiales didácticos.",
+        "Comprende la noción intuitiva de mitad y partes iguales.",
+        "Distribuye equitativamente hojas de trabajo y útiles escolares.",
+        "Promueve la justicia y la equidad en el trato con sus pares.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Geométrico",
+        "Identificación de figuras planas básicas",
+        "DBA 8: Clasifico figuras geométricas (círculo, triángulo, cuadrado, rectángulo).",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Evaluar formas geométricas en señales de seguridad y edificaciones del entorno.",
+        "Diferencia lados rectos y curvos en objetos del salón.",
+        "Construye un mosaico geométrico con señales de prevención.",
+        "Aprecia el orden y la estética en las creaciones matemáticas.",
+        "Etapa 3"
+      ]
+    ],
+    "sociales": [
+      [
+        "Identidades y Diversidades",
+        "Mi historia personal, familia y escuela",
+        "DBA 1: Reconozco que soy un sujeto con derechos, identidad y una historia valiosa.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la importancia de la familia, el nombre propio y los derechos de la niñez.",
+        "Describe características de su familia y entorno comunitario cercano.",
+        "Elabora su árbol genealógico ilustrado y mapa de su vivienda.",
+        "Se valora a sí mismo y reconoce la dignidad de sus compañeros.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Acción Territorial y Riesgo",
+        "Reconocimiento de lugares seguros en la escuela",
+        "DBA 2: Identifico zonas de riesgo y puntos de encuentro en mi institución educativa.",
+        "Procesos cognitivos",
+        "Baja",
+        "Aplicar normas de autoprotección y reconocimiento del territorio escolar seguro.",
+        "Reconoce sitios peligrosos (muros inestables, quebradas, cables caídos).",
+        "Dibuja el plano de evacuación de su aula identificando zonas seguras.",
+        "Sigue las instrucciones de los docentes con responsabilidad.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Democracia y Convivencia",
+        "Normas de aula y acuerdos de paz",
+        "DBA 3: Participo en la construcción de acuerdos para el cuidado mutuo y la convivencia.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear pactos de convivencia que prevengan la discriminación y fomenten la empatía.",
+        "Comprende la función protectora de las normas escolares.",
+        "Participa en la asamblea infantil y propone acuerdos de respeto.",
+        "Trata con amabilidad, afecto y solidaridad a todos los compañeros.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensar Históricamente",
+        "Costumbres, tradiciones y relatos de los abuelos",
+        "DBA 4: Valoro los saberes ancestrales y las tradiciones orales de mi comunidad.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Analizar relatos tradicionales sobre la historia y resiliencia de su pueblo.",
+        "Identifica historias y costumbres transmitidas por sus abuelos.",
+        "Narra una tradición familiar sobre el cuidado de la tierra y los ríos.",
+        "Muestra orgullo por su identidad cultural y comunitaria.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Conflicto y Memoria",
+        "Reconocimiento y expresión del perdón y el diálogo",
+        "DBA 5: Uso el diálogo y el abrazo pedagógico para solucionar diferencias pacíficamente.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar estrategias lúdicas de mediación y reparación afectiva en el juego.",
+        "Reconoce cuando una acción o palabra genera tristeza en otro niño.",
+        "Expresa disculpas sinceras y ofrece alternativas de solución en el juego.",
+        "Promueve la reconciliación y el juego limpio en el recreo.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Democracia y Participación",
+        "Elección del personero estudiantil y gobierno escolar",
+        "DBA 6: Reconozco el valor del voto y la participación en las decisiones del aula.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar propuestas de bienestar escolar y participar en elecciones infantiles.",
+        "Comprende qué es un representante y cómo ayuda a mejorar la escuela.",
+        "Elabora una tarjeta de voto simbólico para elegir al monitor del aula.",
+        "Respeta los resultados de las votaciones con espíritu democrático.",
+        "Etapa 3"
+      ],
+      [
+        "Acción Territorial",
+        "El paisaje rural y urbano de mi municipio",
+        "DBA 7: Describo las características naturales y construidas de mi territorio.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Comparar elementos naturales (montañas, ríos) y construcciones en su entorno.",
+        "Identifica los recursos naturales y servicios básicos de su comunidad.",
+        "Modela en plastilina o arcilla el relieve y paisaje de su vereda o barrio.",
+        "Se compromete con la conservación y limpieza del entorno natural.",
+        "Etapa 3"
+      ]
+    ],
+    "naturales": [
+      [
+        "Entorno Vivo",
+        "Cuidado del cuerpo, sentidos y hábitos de salud",
+        "DBA 1: Describo los sentidos y su función en la detección de alertas tempranas.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la función protectora de la vista, oído, olfato y tacto ante peligros.",
+        "Identifica ojos, oídos y tacto como radares para percibir alertas del entorno.",
+        "Usa los sentidos para reconocer señales de humo, ruidos extraños o grietas.",
+        "Practica hábitos diarios de higiene, descanso y autocuidado corporal.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Vivo",
+        "Animales y plantas del entorno y su protección",
+        "DBA 2: Reconozco las necesidades de los seres vivos y protejo a los animales en emergencias.",
+        "Procesos cognitivos",
+        "Baja",
+        "Aplicar medidas de cuidado y refugio para mascotas y animales de granja en crisis.",
+        "Identifica qué necesitan las plantas y animales para sobrevivir (agua, luz, alimento).",
+        "Elabora un plan de protección y alimentación para animales domésticos.",
+        "Demuestra compasión, ternura y respeto por la naturaleza y la fauna local.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico & WASH",
+        "El agua como recurso vital y lavado correcto de manos",
+        "DBA 3: Reconozco la importancia del agua segura y la higiene para prevenir enfermedades.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar técnicas básicas de uso eficiente y desinfección del agua en la escuela.",
+        "Comprende que el agua contaminada transmite parásitos e infecciones.",
+        "Aplica los 5 pasos del lavado de manos con jabón antes de comer.",
+        "Cuida el agua y evita el desperdicio en lavamanos y bebederos.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "Estados del agua y fenómenos meteorológicos",
+        "DBA 4: Observo y describo cambios en el estado del tiempo, lluvias y calor.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Analizar variaciones del clima diario y su relación con crecientes de ríos.",
+        "Identifica cuándo el río o quebrada sube de nivel tras lluvias intensas.",
+        "Registra el clima diario (soleado, lluvioso, nublado) en el calendario del aula.",
+        "Mantiene la precaución y resguardo en días de tormenta eléctrica.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Educación Ambiental",
+        "Clasificación de basuras y cuidado del aula",
+        "DBA 5: Separo los residuos del salón y participo en jornadas de reciclaje.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar el impacto de las basuras en la obstrucción de canaletas y caños escolares.",
+        "Diferencia residuos orgánicos de materiales reciclables (papel, plástico).",
+        "Organiza con sus compañeros los recipientes de recolección en el salón.",
+        "Lidera con alegría el aseo del aula y no arroja basuras al suelo.",
+        "Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "Fuentes de luz, calor y sonido en el entorno",
+        "DBA 6: Diferencio fuentes naturales y artificiales de luz y sonido.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Crear instrumentos sonoros sencillos para emitir alertas y acompañar cantos.",
+        "Reconoce el sol, fuego, linternas y velas como fuentes lumínicas.",
+        "Construye una maraca o silbato con material reciclado para emitir señales.",
+        "Usa linternas y fuentes de luz con precaución y cuidado.",
+        "Etapa 3"
+      ]
+    ],
+    "dba_count": 81,
+    "dba_records": [
+      {
+        "id": "DBA-L-101",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 1 (Lenguaje 1°)",
+        "enunciado": "Identifica los diferentes medios de comunicación como una posibilidad para informarse, participar y acceder al universo cultural que lo rodea.",
+        "evidencias": "•  Establece semejanzas y diferencias entre los principales medios de comunicación de su contexto: radio, periódicos, televisión, revistas, vallas publicitarias, afiches e internet.\n•  Comprende los mensajes emitidos por diferentes\n• edios de comunicación.\n•  Distingue los medios de comunicación para reconocer los posibles usos que tienen en su entorno.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-102",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 2 (Lenguaje 1°)",
+        "enunciado": "Relaciona códigos no verbales, como los movimientos corporales y los gestos de las manos o del rostro, con el significado que pueden tomar de acuerdo con el contexto.",
+        "evidencias": "•  Identifica las intenciones de los gestos y los\n• ovimientos corporales de los interlocutores para dar cuenta de lo que quieren comunicar.\n•  Interpreta ilustraciones e imágenes en relación a sus colores, formas y tamaños.\n•  Representa objetos, personas y lugares mediante imágenes.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-103",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 3 (Lenguaje 1°)",
+        "enunciado": "Reconoce en los textos literarios la posibilidad de desarrollar su capacidad creativa y lúdica.",
+        "evidencias": "•  Escucha o lee adivinanzas, anagramas, retahílas, pregones y acrósticos que hacen parte de su entorno cultural.\n•  Comprende el sentido de los textos de la tradición oral como canciones y cuentos con los que interactúa.\n•  Entiende que hay diferencias en la forma en que se escriben algunos textos como los acrósticos y adivinanzas.\n• Interactúa con sus compañeros en dinámicas grupales que incluyen: declamación, canto,",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-104",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 4 (Lenguaje 1°)",
+        "enunciado": "Interpreta textos literarios como parte de su iniciación en la comprensión de textos.",
+        "evidencias": "•  Comparte sus impresiones sobre los textos literarios y las relaciona con situaciones que se dan en los contextos donde vive.\n•  Emplea las imágenes o ilustraciones de los textos literarios para comprenderlos.\n•  Expresa sus opiniones e impresiones a través de dibujos, caricaturas, canciones, y los comparte con sus compañeros.\n•  Identifica la repetición de algunos sonidos al final de los versos en textos de la tradición oral y los vincula con su respectiva escritura. Ejemplo Coleóptero Un paseóptero en helicóptero a la islóptera de Cococópteros, organisóptero un coleóptero. Entran todópteros aprentandóptero y volandóptero van con ruidóptero, los resongópteros muelonedópteros testarudópteros cascaridópteros. Clarisa Ruiz Tomado de: Robledo, B. (2001). (Comp.). En: Antología de poesía colombiana para niños. Bogotá: Alfaguara infantil, pp.63.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-105",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 5 (Lenguaje 1°)",
+        "enunciado": "Reconoce las temáticas presentes en los mensajes que escucha, a partir de la diferenciación de los sonidos que componen las palabras.",
+        "evidencias": "•  Extrae información del contexto comunicativo que le permite identificar quién lo produce y en dónde.\n•  Comprende las temáticas tratadas en diferentes textos que escucha.\n•  Segmenta los discursos que escucha en unidades significativas como las palabras.\n•  Identifica los sonidos presentes en las palabras, oraciones y discursos que escucha para comprender el sentido de lo que oye. Ejemplo Durante la escucha de diferentes textos: Agrupa las palabras que pertenecen a una misma familia de objetos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-106",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 6 (Lenguaje 1°)",
+        "enunciado": "Interpreta diversos textos a partir de la lectura de palabras sencillas y de las imágenes que contienen.",
+        "evidencias": "•  Comprende el propósito de los textos que lee, apoyándose en sus títulos, imágenes e ilustraciones.\n•  Explica las semejanzas y diferencias que encuentra entre lo que dice un texto y lo que muestran las imágenes o ilustraciones que lo acompañan.\n•  Lee palabras sencillas.\n•  Identifica la letra o grupo de letras que corresponden con un sonido al momento de pronunciar las palabras escritas. Ejemplo Para lograr una mejor comprensión de los textos que lee o que escucha de su profesor o profesora puede emplear estrategias en las que: u Establece relaciones entre las dos imágenes. u Comenta sobre el sentido que puede tener cada una de las historias a partir de las imágenes. u Atribuye acciones y funciones a cada personaje. u Pronuncia las palabras de un texto sencillo a partir del reconocimiento de las letras que las componen.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-107",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 7 (Lenguaje 1°)",
+        "enunciado": "Enuncia textos orales de diferente índole sobre temas de su interés o sugeridos por otros.",
+        "evidencias": "•  Emplea palabras adecuadas según la situación comunicativa en sus conversaciones y diálogos.\n•  Expresa sus ideas con claridad, teniendo en cuenta el orden de las palabras en los textos orales que produce.\n•  Practica las palabras que representan dificultades en su pronunciación y se autocorrige cuando las articula erróneamente en sus discursos.\n•  Adecúa el volumen de la voz teniendo en cuenta a su interlocutor y si el espacio en el que se encuentra es abierto o cerrado. Ejemplo En una conversación sobre temas de actualidad o problemas de su entorno como el siguiente: u \tRespeta los turnos en la conversación. u \tExpone con claridad lo que opina sobre el problema. u \tHabla sobre la manera de cuidar a las mascotas y de ayudar a los animales callejeros.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-108",
+        "area": "Lengua Castellana",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 8 (Lenguaje 1°)",
+        "enunciado": "Escribe palabras que le permiten comunicar sus ideas, preferencias y aprendizajes.",
+        "evidencias": "•  Construye textos cortos para relatar, comunicar ideas o sugerencias y hacer peticiones al interior del contexto en el que interactúa.\n•  Expresa sus ideas en torno a una sola temática a partir del vocabulario que conoce.\n•  Elabora listas de palabras parecidas y reconoce las diferencias que guardan entre sí (luna, lupa, lucha; casa, caza, taza; pelo, peso, perro).\n•  Escribe palabras sencillas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-201",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 1 (Lenguaje 2°)",
+        "enunciado": "Identifica las características de los medios de comunicación masiva a los que tiene acceso.",
+        "evidencias": "•  Utiliza los medios de comunicación masiva para informarse y manifestar sus puntos de vista.\n•  Identifica las diferencias y semejanzas entre los contenidos provenientes de los diversos medios de comunicación masiva con los que interactúa: radio, televisión, prensa.\n•  Contrasta las características de diferentes medios de comunicación masiva a partir de la manera como presentan la información.\n•  Expresa con claridad contenidos propios de los",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-202",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 2 (Lenguaje 2°)",
+        "enunciado": "Identifica la función que cumplen las señales y símbolos que aparecen en su entorno.",
+        "evidencias": "•  Utiliza las señales que circulan en su entorno para informar, prevenir, prohibir, instruir y obligar.\n•  Asocia los dibujos de las señales y símbolos con sus posibles significados.\n•  Identifica la función de las imágenes en textos como: manuales de instrucción, carteles y etiquetas de productos. Ejemplo u Revisa etiquetas de ropa, busca las señales que hay en ellas y las compara con otras. u Inventa señales con otros fines, por ejemplo: no\n• eter las manos en la lavadora mientras esté en funcionamiento, no comerse el detergente u otras precauciones que se deban tener en cuenta al momento de lavar la ropa.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-203",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 3 (Lenguaje 2°)",
+        "enunciado": "Identifica algunos elementos constitutivos de textos literarios como personajes, espacios y acciones.",
+        "evidencias": "•  Establece semejanzas y diferencias entre los textos literarios que lee.\n•  Relaciona los personajes, tiempos, espacios y acciones para dar sentido a la historia narrada.\n•  Reconoce las principales partes de un texto literario. Ejemplo En los cuentos se presentan personajes, situaciones y lugares que en algunos casos son parecidos y en otros diferentes. u Recuerda algunos de los cuentos que conoce y dibuja los lugares y los personajes donde se desarrollan los hechos de la narración. Identifica las características comunes en ellos. u Expone sus dibujos y conversa sobre: cómo actúan los personajes, qué acciones que realizan y de qué manera esto se relaciona con sus experiencias. u Escucha la lectura en voz alta de los cuentos trabajados e identifica las palabras que conforman el título.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-204",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 4 (Lenguaje 2°)",
+        "enunciado": "Comprende diversos textos literarios a partir de sus propias vivencias.",
+        "evidencias": "•  Reconstruye las acciones y los espacios donde se desarrolla la narración y atribuye nuevos perfiles a los personajes.\n•  Elabora hipótesis predictivas del contenido de textos literarios.\n•  Reconoce el orden lógico de los eventos en una narración.\n•  Lee en voz alta textos literarios teniendo en cuenta el ritmo, las pausas y la velocidad. Ejemplo Mientras lee textos literarios como las fábulas: u Hace pausas y cambia ritmos, tonos y velocidades en la lectura. u Dialoga sobre lo que entiende de ellas. u Expresa cuáles personajes de las fábulas le gustan",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-205",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 5 (Lenguaje 2°)",
+        "enunciado": "Identifica las palabras relevantes de un mensaje y las agrupa en unidades significativas: sonidos en palabras y palabras en oraciones.",
+        "evidencias": "•  Reconoce el propósito comunicativo de su interlocutor de acuerdo con las palabras que emplea en sus mensajes.\n•  Comprende el contenido global de un mensaje.\n•  Comprende que el cambio de un sonido vocálico o consonántico en una palabra modifica su significado.\n•  Distingue los sonidos articulados de la lengua de los sonidos ambientales. Ejemplo Para comprender textos orales: u Participa en conversaciones que recrean situaciones cotidianas en las que identifica las intenciones de  su interlocutor para responder de manera adecuada. u Representa situaciones en las que simula pedir un favor, solicitar una explicación para hacer una tarea o contar lo realizado el fin de semana anterior. u Escucha al otro con actitud de respeto y evalúa la claridad de las ideas, la pronunciación y la gestualidad.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-206",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 6 (Lenguaje 2°)",
+        "enunciado": "Predice y analiza los contenidos y estructuras de diversos tipos de texto, a partir de sus conocimientos previos.",
+        "evidencias": "•  Relaciona la información que proporciona el texto con sus conocimientos previos.\n•  Lee con suficiente fluidez para comprender un escrito.\n•  Comprende el tema global de los textos que lee, y responde preguntas sobre lo que en ellos aparece y no aparece escrito.\n•  Ordena las secuencias presentadas en el texto.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-207",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 7 (Lenguaje 2°)",
+        "enunciado": "Expresa sus ideas atendiendo a las características del contexto comunicativo en que las enuncia (interlocutores, temas, lugares).",
+        "evidencias": "•  Participa dentro los espacios de conversación que hay en su entorno.\n•  Respeta los turnos de uso de la palabra y las ideas expresadas por los interlocutores.\n•  Selecciona palabras que tienen sentido y relación con las ideas que quiere expresar en los diálogos.\n•  Incluye en su discurso palabras que contienen las letras ‘r’, ‘rr’ y ‘q’ con una pronunciación que permite a otros comprenderlas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-208",
+        "area": "Lengua Castellana",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 8 (Lenguaje 2°)",
+        "enunciado": "Produce diferentes tipos de textos para atender a un propósito comunicativo particular.",
+        "evidencias": "•  Selecciona el tipo de texto que quiere escribir de acuerdo con lo que pretende comunicar.\n•  Elige palabras adecuadas a una temática y a la redacción de tipos de escrito específicos como autorretratos, invitaciones, cartas, entre otros.\n•  Escribe oraciones en las que emplea palabras sencillas y palabras con estructuras silábicas complejas.\n•  Organiza grupos de palabras atendiendo a diversos criterios de carácter sonoro.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-301",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 1 (Lenguaje 3°)",
+        "enunciado": "Comprende las funciones que cumplen los medios de comunicación propios de su contexto.",
+        "evidencias": "•  Reconoce los usos de los medios de comunicación con los que se relaciona como periódicos, revistas, noticieros, vallas publicitarias, afiches e internet.\n•  Compara la información proveniente de diferentes\n• edios de comunicación.\n•  Diferencia los formatos en los que se presentan los medios de comunicación a los que tiene acceso. Ejemplo Durante la exploración de los medios de comunicación que hay en su contexto: Comparte con sus compañeros sus conocimientos sobre las definiciones, características y funciones de los medios de comunicación.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-302",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 2 (Lenguaje 3°)",
+        "enunciado": "Comprende que algunos escritos y manifestaciones artísticas pueden estar compuestos por texto, sonido e imágenes.",
+        "evidencias": "•  Identifica diversas manifestaciones artísticas como la escultura, la pintura y la danza, y relaciona su contenido con el contexto en el que vive.\n•  Interpreta la información difundida en textos no verbales: caricaturas, tiras cómicas, historietas, anuncios publicitarios y otros medios de expresión gráfica.\n•  Comprende que algunos escritos están compuestos por texto y gráficos, esquemas o imágenes.\n•  Analiza los sonidos que se emplean en diferentes",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-303",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 3 (Lenguaje 3°)",
+        "enunciado": "Reconoce algunas características de los textos narrativos, tales como el concepto de narrador y estructura narrativa, a partir de la recreación y disfrute de los mismos.",
+        "evidencias": "•  Diferencia entre textos ficcionales y no ficcionales.\n•  Verifica las hipótesis que plantea acerca del contenido de los textos que lee.\n•  Afianza su capacidad de contar historias mediante la creación de textos literarios narrativos.\n•  Identifica la voz que narra una historia.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-304",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 4 (Lenguaje 3°)",
+        "enunciado": "Escribe textos literarios coherentes, atendiendo a las características textuales e integrando sus saberes e intereses.",
+        "evidencias": "•  Comprende las características de un texto, cuyo propósito es narrar un hecho o expresar ideas, sentimientos o emociones.\n•  Establece en los textos literarios una relación de correspondencia entre los personajes, las acciones que realizan y los contextos en que se encuentran.\n•  Crea personajes para sus historias y describe cómo son, dónde viven, qué problemas deben enfrentar y cómo los solucionan.\n•  Construye planes textuales para sus escribir textos literarios.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-305",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 5 (Lenguaje 3°)",
+        "enunciado": "Identifica el papel del emisor y el receptor y sus propósitos comunicativos en una situación específica.",
+        "evidencias": "•  Asocia la intención comunicativa con el contexto en el que se producen los enunciados y el rol que desempeñan los interlocutores.\n•  Infiere el significado de palabras desconocidas, según el contexto donde se encuentren.\n•  Organiza secuencialmente las ideas que comprende de un texto oral.\n•  Deduce información de un emisor (como la edad, el sexo o la actitud) a partir de las características de su voz. Ejemplo Analiza el papel del emisor de una comunicación y la información que este emite:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-306",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 6 (Lenguaje 3°)",
+        "enunciado": "Interpreta el contenido y la estructura del texto, respondiendo preguntas de orden inferencial y crítico.",
+        "evidencias": "•  Ubica el contenido de un texto en relación con la situación comunicativa en que se presenta.\n•  Utiliza el contexto para inferir información.\n•  Discrimina los temas principales de un texto de los menos relevantes.\n• Reconoce las diferencias en las estructuras de diferentes tipos de escrito. Ejemplo Durante la lectura de textos como:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-307",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 7 (Lenguaje 3°)",
+        "enunciado": "Produce textos orales breves de diferente tipo ajustando el volumen, el tono de la voz, los movimientos corporales y los gestos, al tema y a la situación comunicativa.",
+        "evidencias": "•  Participa en comunicaciones orales atendiendo a diferentes propósitos comunicativos: narrar, argumentar, exponer, describir e informar.\n•  Elige las expresiones más pertinentes para dar claridad a sus intervenciones.\n•  Reconoce los roles de quien produce y de quien interpreta un texto en una situación comunicativa específica.\n•  Realiza cambios en la modulación de la voz para acompañar el sentido de lo que comunica. Elabora juegos de palabras atendiendo a la pronunciación de la sílaba inicial o final de las palabras. Ejemplo Prepara un diálogo atendiendo a esquemas de planeación como el siguiente:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-308",
+        "area": "Lengua Castellana",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 8 (Lenguaje 3°)",
+        "enunciado": "Produce textos verbales y no verbales en los que tiene en cuenta aspectos gramaticales y ortográficos.",
+        "evidencias": "•  Escribe diversos tipos de texto (como cartas, afiches, pancartas, plegables, cuentos, entre otros) para expresar sus opiniones frente a una problemática de su entorno local.\n•  Selecciona las palabras o expresiones más indicadas para escribir sus textos, teniendo en cuenta a quién van dirigidos y el tema a desarrollar.\n•  Diseña un plan para comunicarse con otros teniendo en cuenta aspectos como la concordancia verbal y la ortografía.\n•  Segmenta palabras escritas que contienen hiatos, diptongos y triptongos, apoyándose en los golpes de voz.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-101",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 1 (Matemáticas 1°)",
+        "enunciado": "Identifica los usos de los números (como código, cardinal, medida, ordinal) y las operaciones (suma y resta) en contextos de juego y vida cotidiana.",
+        "evidencias": "• Reconoce el conteo en situaciones cotidianas.\n• Compara colecciones de objetos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-102",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 2 (Matemáticas 1°)",
+        "enunciado": "Utiliza diferentes estrategias para contar, realizar operaciones (suma y resta) y resolver problemas aditivos sencillos.",
+        "evidencias": "• Realiza sumas sencillas con material concreto.\n• Resuelve problemas de quitar y agregar.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-103",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 3 (Matemáticas 1°)",
+        "enunciado": "Utiliza los números ordinales para secuenciar eventos y organizar objetos en el tiempo y el espacio.",
+        "evidencias": "• Ordena secuencias temporales.\n• Identifica posiciones: primero, segundo, tercero.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-104",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 4 (Matemáticas 1°)",
+        "enunciado": "Reconoce y describe regularidades y patrones en secuencias numéricas y geométricas sencillas.",
+        "evidencias": "• Continúa patrones de figuras y colores.\n• Identifica el elemento faltante en una serie.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-105",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 5 (Matemáticas 1°)",
+        "enunciado": "Reconoce y compara atributos que pueden ser medidos en objetos (longitud, peso, capacidad, duración).",
+        "evidencias": "• Compara objetos por su longitud (más largo, más corto).\n• Estima duraciones de actividades.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-106",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 6 (Matemáticas 1°)",
+        "enunciado": "Describe y representa trayectorias y posiciones de objetos y personas en el espacio cotidiano.",
+        "evidencias": "• Usa nociones de orientación: arriba, abajo, cerca, lejos.\n• Traza rutas sencillas de desplazamiento y evacuación.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-107",
+        "area": "Matemáticas",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 7 (Matemáticas 1°)",
+        "enunciado": "Clasifica y organiza datos en tablas de conteo y pictogramas sencillos con o sin escala.",
+        "evidencias": "• Recolecta información de su entorno escolar.\n• Lee gráficos de barras con figuras.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-201",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 1 (Matemáticas 2°)",
+        "enunciado": "Aplica el sistema de numeración decimal para comparar, ordenar y descomponer números hasta 999.",
+        "evidencias": "• Identifica centenas, decenas y unidades.\n• Realiza composiciones y descomposiciones aditivas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-202",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 2 (Matemáticas 2°)",
+        "enunciado": "Propone, formula y resuelve problemas aditivos de cambio, combinación y comparación en contextos significativos.",
+        "evidencias": "• Resuelve adiciones y sustracciones con y sin reagrupación.\n• Argumenta procedimientos de cálculo mental.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-203",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 3 (Matemáticas 2°)",
+        "enunciado": "Utiliza patrones y secuencias numéricas y geométricas para modelar situaciones sencillas.",
+        "evidencias": "• Descubre reglas de formación en secuencias numéricas.\n• Construye secuencias multiplicativas tempranas (de 2 en 2, de 5 en 5).",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-204",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 4 (Matemáticas 2°)",
+        "enunciado": "Compara y clasifica figuras bidimensionales y objetos tridimensionales según sus características geométricas.",
+        "evidencias": "• Diferencia círculos, triángulos, rectángulos y cuadrados.\n• Reconoce caras, aristas y vértices en sólidos sencillos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-205",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 5 (Matemáticas 2°)",
+        "enunciado": "Mide y estima longitudes y capacidades utilizando unidades estándar y no estándar.",
+        "evidencias": "• Utiliza la regla y el metro para medir distancias.\n• Estima volúmenes de recipientes y raciones de agua.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-206",
+        "area": "Matemáticas",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 6 (Matemáticas 2°)",
+        "enunciado": "Clasifica, organiza y presenta datos en tablas de doble entrada y diagramas de barras.",
+        "evidencias": "• Interpreta la moda en conjuntos de datos sencillos.\n• Responde preguntas a partir de gráficos estadísticos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-301",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 1 (Matemáticas 3°)",
+        "enunciado": "Interpreta, formula y resuelve problemas aditivos y multiplicativos (multiplicación y división) en situaciones de reparto y proporcionalidad.",
+        "evidencias": "• Aplica el algoritmo de la multiplicación y división.\n• Resuelve problemas de reparto equitativo de suministros.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-302",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 2 (Matemáticas 3°)",
+        "enunciado": "Comprende el uso de las fracciones como parte de un todo, razón o división en situaciones cotidianas.",
+        "evidencias": "• Representa fracciones gráficamente (mitades, tercios, cuartos).\n• Compara fracciones con igual denominador.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-303",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 3 (Matemáticas 3°)",
+        "enunciado": "Reconoce y genera equivalencias entre expresiones numéricas y patrones de cambio.",
+        "evidencias": "• Completa igualdades con términos desconocidos.\n• Modela relaciones aditivas y multiplicativas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-304",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 4 (Matemáticas 3°)",
+        "enunciado": "Describe y representa formas bidimensionales y tridimensionales a partir de sus propiedades geométricas y simetrías.",
+        "evidencias": "• Traza ejes de simetría en figuras planas.\n• Construye figuras a partir de patrones y dobleces.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-305",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 5 (Matemáticas 3°)",
+        "enunciado": "Realiza estimaciones y mediciones de longitud, área, perímetro, peso y tiempo utilizando unidades e instrumentos estandarizados.",
+        "evidencias": "• Calcula el perímetro de figuras poligonales.\n• Mide el área mediante recubrimiento con cuadrículas.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-306",
+        "area": "Matemáticas",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 6 (Matemáticas 3°)",
+        "enunciado": "Interpreta información estadística presentada en tablas y gráficos, identificando tendencias y posibilidades.",
+        "evidencias": "• Calcula e interpreta la moda en datos escolares.\n• Formula predicciones sobre eventos de azar sencillos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-101",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 1 (Sociales 1°)",
+        "enunciado": "Se ubica en el espacio que habita teniendo como referencia su propio cuerpo y los puntos cardinales.",
+        "evidencias": "• l Relaciona su izquierda-derecha, adelante – atrás con los puntos cardinales, al ubicar, en representaciones gráficas de la escuela, aquellos lugares como rectoría, cafetería, patio de recreo, coordinación y sala de profesores, entre otros. l Dibuja las instituciones sociales de carácter deportivo, educativo, religioso y político, existentes en su barrio, vereda o lugar donde vive. l Localiza en representaciones gráficas o dibujos de su barrio, vereda o lugar donde vive, algunos referentes (tienda, iglesia, parque, escuela) teniendo en cuenta los puntos cardinales y conoce los acontecimientos que se dan en estos lugares. l Describe verbalmente el recorrido que realiza entre su casa y la institución educativa donde estudia, señalando aquellos lugares que considera representativos o muy conocidos en su comunidad y el porqué de su importancia.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-102",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 2 (Sociales 1°)",
+        "enunciado": "Describe las características del paisaje geográfico del barrio, vereda o lugar donde vive, sus componentes y formas.",
+        "evidencias": "• l Reconoce las diferentes formas de relieve en su entorno geográfico o lugar donde vive, por",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-103",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 3 (Sociales 1°)",
+        "enunciado": "Describe el tiempo personal y se sitúa en secuencias de eventos propios y sociales.",
+        "evidencias": "• l Nombra ordenadamente los días de la semana y los meses del año. l Diferencia el ayer, el hoy y el mañana desde las actividades cotidianas que realiza y la duración de estas en horas y minutos mediante la lectura del reloj. l Identifica los miembros de su familia y verbaliza quiénes nacieron antes o después de él. ejemplo: costas, islas, montañas, valles, llanuras y/o mesetas. l Diferencia los estados del tiempo atmosférico de acuerdo con las sensaciones de calor y frío\n• anifiestas en su cuerpo y con base en los\n• omentos de lluvia y sequía que se dan en el lugar donde vive. l Identifica aquellas obras de infraestructura que se han realizado en su comunidad y expresa las ventajas que estas traen. l Representa de diferentes maneras, aquellos problemas ambientales que afectan el entorno de la comunidad en el contexto del barrio, vereda o lugar donde vive.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-104",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 4 (Sociales 1°)",
+        "enunciado": "Reconoce la noción de cambio a partir de las transformaciones que ha vivido en los últimos años a nivel personal, de su familia y del entorno barrial, veredal o del lugar donde vive.",
+        "evidencias": "• l Relata los principales acontecimientos sociales ocurridos en el aula de clase, por ejemplo, el inicio de la vida escolar, la celebración del día de los niños, las izadas de bandera o la celebración de cumpleaños, entre otros, diferenciando el antes y el ahora. l Señala las transformaciones recientes observadas en el entorno físico de su comunidad y el para qué se realizaron. l Describe aquellas organizaciones sociales a las que pertenece en su comunidad: familia, colegio y vecindario. l Plantea preguntas acerca de sucesos destacados que han tenido lugar en su comunidad. l Recuerda las fechas de los cumpleaños de sus padres, hermanos, amigos y compañeros de clase más cercanos, diferenciando las edades entre ellos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-105",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 5 (Sociales 1°)",
+        "enunciado": "Reconoce su individualidad y su pertenencia a los diferentes grupos sociales.",
+        "evidencias": "• l\tExpresa algunas características físicas y emocionales que lo hacen un ser único. l Compara similitudes y diferencias entre sus gustos, costumbres y formas de comunicarse, con los demás integrantes del salón de clase. l Reconoce de sí mismo, de sus compañeros y de sus familiares aquellas cualidades que le ayudan a estar mejor entre los demás. l Reconoce las costumbres y tradiciones culturales de su comunidad mediante los relatos de los abuelos y personas mayores del barrio, vereda o lugar donde vive. Ejemplo A partir de la conversación con adultos mayores o líderes de la comunidad, reconocidos gracias a sus conocimientos, habilidades o sabiduría ancestral (ya sea en el campo de la música, las artes, las letras, la gastronomía, el deporte...) el estudiante diferencia las costumbres y traduciones del ayer y del hoy.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-106",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 6 (Sociales 1°)",
+        "enunciado": "Comprende cambios en las formas de habitar de los grupos humanos, desde el reconocimiento de los tipos de vivienda que se encuentran en el contexto de su barrio, vereda o lugar donde vive.",
+        "evidencias": "• l\tSeñala los lugares de procedencia de su familia y comprende cómo llegaron a su vivienda actual. l\tNombra los materiales utilizados en la construcción de la casa donde vive y la distribución de las habitaciones que hay en ella. l\tIdentifica las viviendas que se destacan en su comunidad, que son patrimonio hoy y que deben conservarse. l\tReconoce el valor de la vivienda como el espacio donde tiene lugar su hogar y donde recibe seguridad y cuidado de su familia.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-107",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 7 (Sociales 1°)",
+        "enunciado": "Participa en la construcción de acuerdos básicos sobre normas para el logro de metas comunes en su contexto cercano (compañeros y familia) y se compromete con su cumplimiento.",
+        "evidencias": "• l\tPresenta sus ideas, intereses y sentimientos frente a las normas establecidas en la familia, en el salón de clase y otros espacios. l\tExpresa sus opiniones y colabora activamente en la construcción de los acuerdos grupales para la convivencia. l\tPlantea alternativas de solución frente a situaciones conflictivas en su familia y salón de clase. l\tReconoce la importancia del trabajo en equipo para el logro de las metas comunes. Las reglas de juego serán…",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-108",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 8 (Sociales 1°)",
+        "enunciado": "Establece relaciones de convivencia desde el reconocimiento y el respeto de sí mismo y de los demás.",
+        "evidencias": "• l\tExpresa el valor de sí mismo y de cada uno de los integrantes de la clase, explicando aquello que los diferencia y los identifica: el género, la procedencia, la edad, las ideas y creencias, entre otras. l\tExpresa aquello que lo hace igual a los demás en la institución, desde el conocimiento y el respeto a los deberes y derechos establecidos en el Manual de Convivencia. l\tIdentifica situaciones de maltrato que se dan en su entorno consigo mismo y/o con otras personas y sabe a quiénes acudir para pedir ayuda y protección. l\tParticipa de acciones que fomentan la sana convivencia en el entorno familiar y escolar.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-201",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 1 (Sociales 2°)",
+        "enunciado": "Comprende que el paisaje que vemos es resultado de las acciones humanas que se realizan en un espacio geográfico y que por esta razón, dicho paisaje cambia.",
+        "evidencias": "• l\tIdentifica las formas del relieve que se encuentran en la superficie terrestre (montaña, valle, llanura,\n• eseta e islas) y nombra aquellas que se observan en su localidad, comuna o vereda. l\tExpresa sus apreciaciones sobre los paisajes que observa en fotografías, folletos, revistas, periódicos y señala aquellos que prefiere. l\tTraza las formas básicas del paisaje de su\n• unicipio a través de dibujos y la elaboración de maquetas con barro, plastilina o materiales reutilizables que consiga en su contexto. l\tExplica los cambios que se han realizado en el paisaje del municipio debido a cultivos, construcciones recientes, carreteras, caminos, edificaciones y parques, entre otros.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-202",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 2 (Sociales 2°)",
+        "enunciado": "Reconoce los puntos cardinales y los usa para orientarse en el desplazamiento de un lugar a otro.",
+        "evidencias": "• l\tEstablece relaciones entre el espacio físico del salón de clases y otros espacios que hacen parte",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-203",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 3 (Sociales 2°)",
+        "enunciado": "Comprende la importancia de las fuentes históricas para la construcción de la memoria individual, familiar y colectiva.",
+        "evidencias": "• l\tDescribe las características de la conformación de su familia antes de su nacimiento. l\tReconoce las procedencias y los recorridos de los integrantes de su núcleo familiar antes de llegar al municipio donde viven actualmente, a través de relatos. l\tEstablece secuencias de datos históricos a nivel personal y familiar desde la lectura de su registro civil de nacimiento y elabora un árbol genealógico. de la Institución Educativa a través de dibujos, gráficos o planos, utilizando los puntos cardinales. l\tTraza las rutas seguidas por algunos de sus compañeros de clase para llegar a la escuela y las representa en un dibujo. l\tMide distancias reales entre varios lugares, con pasos y otras medidas que pueden inventarse en el grupo, identificando la distancia - cerca o lejos- entre dichos lugares. l\tDa orientaciones espaciales verbalmente o de otras formas para llegar a un lugar específico, utilizando expresiones de lateralidad (izquierda, derecha, adelante, atrás) y los puntos cardinales.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-204",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 4 (Sociales 2°)",
+        "enunciado": "Explica cambios y continuidades en los medios empleados por las personas para transportarse en su municipio, vereda o lugar donde vive.",
+        "evidencias": "• l Diferencia los cambios vividos en los medios de transporte en su entorno cercano, a partir de relatos de su familia. l Clasifica las formas de transportarse de las personas según el medio utilizado. l Describe el medio de transporte que más usa para llegar o salir de su casa y expone sus ventajas y desventajas. l Representa gráficamente la movilidad en su comunidad e identifica sus ventajas y desventajas. Ejemplo Mediante la observación de los medios de transporte de su municipio (acuáticos, terrestres y aéreos) y apoyado en la lectura de imágenes, identifica l Indaga por los lugares de origen y las razones de los desplazamientos de la población en su comunidad. su evolución, ventajas y desventajas en relación con los recursos naturales necesarios para su funcionamiento.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-205",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 5 (Sociales 2°)",
+        "enunciado": "Analiza las actividades económicas de su entorno y el impacto de estas en la comunidad.",
+        "evidencias": "• l Identifica los trabajos u oficios que las personas de su comunidad realizan para obtener su sustento y el de la familia. l Describe las actividades económicas que realizan los adultos en su hogar y los beneficios que éstas traen para todos los integrantes de la familia. l Compara los oficios que los abuelos realizaban anteriormente respecto de cómo se realizan hoy y diferencia los trabajos característicos de las zonas urbanas y rurales. l Reconoce experiencias donde algunos niños son explotados laboralmente y expresa razones para rechazar estas situaciones.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-206",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 6 (Sociales 2°)",
+        "enunciado": "Compara las características de las viviendas de su municipio, vereda o lugar donde vive con las de otros lugares.",
+        "evidencias": "• l Reconoce características de las viviendas rurales y urbanas a partir de los materiales utilizados para su construcción. l Describe y diferencia características de las viviendas de los grupos étnicos, a partir de la lectura de imágenes. l Identifica los cambios que se dan en las viviendas con el paso del tiempo. l Describe las ventajas y desventajas que representa tener vivienda en zona urbana o rural. Ejemplo A partir de la observación directa que realiza en su municipio y la descripción de imágenes como las que encuentra a continuación, reconoce y diferencia varios tipos de vivienda y materiales empleados en dichas construcciones, identifica los grupos étnicos que las habitan y señala las ventajas y desventajas que estas presentan. Los emberá de la zona de Urabá construyen sus viviendas sobre pilares, para proteger sus casas de las inundaciones de los ríos. El techo En las comunidades afrocolombianas del pacífico, las casas son construidas sobre pilares, para protegerse de las inundaciones del río o del mar, y hechas de madera con techo a cuatro aguas en tejas de zinc. Los indígenas Wayú que habitan en La Guajira, construyen sus casas con paredes que son una\n• ezcla de barro y madera, tienen techo a dos aguas en hojas secas de palma, y cerca de la casa construyen un pequeño kiosco que da sombra, bajo el cual, entre otras cosas, cuelgan las hamacas. Foto tomada de www.emberachigorodo.org (Organización Indigéna) en: goo.gl/v8rHom de sus casas es cónico y el piso es hecho de una corteza de árbol llamada jira. Foto tomada de www.unperiodico.unal.edu.co (Diario Universitario) en: goo.gl/3C8rkP Foto tomada de www.todoviajes.com (Página de Turísmo) en: goo.gl/hmqX4v",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-207",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 7 (Sociales 2°)",
+        "enunciado": "Reconoce la organización territorial en su municipio, desde: comunas, corregimientos, veredas, localidades y territorios indígenas.",
+        "evidencias": "• l\tIdentifica el croquis de su municipio y lo diferencia entre los demás municipios del departamento. l\tUbica las comunas, corregimientos, localidades y/o territorios indígenas en los que está organizado el territorio de su municipio, teniendo en cuenta los puntos cardinales. l\tNombra topónimos (nombres propios que adoptan los lugares geográficos) en su municipio y diferencia su ubicación en el medio urbano o rural.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-208",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 8 (Sociales 2°)",
+        "enunciado": "Reconoce y rechaza situaciones de exclusión o discriminación en su familia, entre sus amigos y en los compañeros del salón de clase.",
+        "evidencias": "• l\tDescribe diversas características de los grupos humanos (etnia, edad, religión, género) y explica aquello que más le gusta de sus compañeros y lo que pudiera cambiarse para mejorar la convivencia en el grupo. l\tEstablece semejanzas y diferencias entre los alimentos preferidos (en los integrantes de su familia) y en las preferencias en los juegos entre los compañeros del grupo en la escuela. l\tDiferencia la organización de grupos pequeños como la familia, salón de clase, colegio con las de los grupos más grandes como resguardo, territorios afrocolombianos y municipio. l\tExpresa sus sentimientos cuando es discriminado o aceptado en una actividad escolar y reconoce la importancia que tiene conocer y aceptar a las personas. l\tIdentifica las acciones que generan discriminación en su entorno y sabe a quién acudir para pedir ayuda y protección.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-301",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 1 (Sociales 3°)",
+        "enunciado": "Comprende la importancia de los océanos y mares en la organización económica y social de los pueblos costeros en la actualidad.",
+        "evidencias": "• l\tIdentifica los nombres de los continentes y de los océanos que conforman el planeta Tierra y reconoce las actividades que se realizan en las zonas costeras. l\tDiferencia los mares como porciones de los océanos y su importancia en la fijación de límites entre países. l\tPlantea preguntas sobre las problemáticas ambientales que viven los océanos en la actualidad y  explica el impacto en las poblaciones costeras. l\tRelaciona la ubicación geográfica de su departamento, municipio, resguardo o lugar donde vive, con la presencia o no de costas sobre los océanos, y reconoce las ventajas y desventajas de tenerlas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-302",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 2 (Sociales 3°)",
+        "enunciado": "Relaciona las características biogeográficas de su departamento, municipio, resguardo o lugar donde vive, con las actividades económicas que en ellos se realizan.",
+        "evidencias": "• l\tIdentifica la oferta de recursos naturales presentes en su región respecto del suelo, clima, flora, fauna y agua. l\tReconoce las actividades que se realizan en su región: agricultura, ganadería, pesca, industria,\n• inería o servicios. l\tDescribe las formas de organización social y económica utilizadas para la explotación de los recursos naturales (empresas, asociaciones, corporaciones autónomas regionales). l\tExpresa por qué en espacios con determinados climas no se cuenta con ciertos productos y destaca la importancia del trabajo que realizan quienes producen los alimentos para el bienestar de todos. Ejemplo Participa en la elaboración de la lista del\n• ercado de su familia e identifica los precios de los alimentos, el lugar de origen, la disposición y distribución de estos en el supermercado, tienda, plaza o lugares donde se comercializan e intercambian.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-303",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 3 (Sociales 3°)",
+        "enunciado": "Explica las acciones humanas que han incidido en las transformaciones del territorio asociadas al número de habitantes e infraestructura, en su departamento, municipio, resguardo o lugar donde vive.",
+        "evidencias": "• l\tReconoce los cambios y/o permanencias que se presentan en espacios como la escuela, la plaza principal y el mercado, entre otros. l\tDiferencia cambios dados en el territorio local por la construcción de obras públicas (carreteras, parques, alcantarillado, acueducto y hospitales, entre otros). l\tIndaga sobre el aumento o disminución de la población en el departamento, municipio, resguardo o lugar donde vive, a partir de diferentes fuentes documentales. l\tIdentifica problemas sociales relevantes en la población, originados en el uso de los recursos naturales.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-304",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 4 (Sociales 3°)",
+        "enunciado": "Comprende el legado de los grupos humanos en la gastronomía, la música y el paisaje de la región, municipio, resguardo o lugar donde vive.",
+        "evidencias": "• l\tIdentifica en su entorno algunos objetos, herramientas, aparatos, construcciones y documentos que brindan información acerca del pasado de su región. l\tDescribe algunas costumbres y tradiciones que le permiten reconocerse como miembro de un grupo poblacional y de una nación a través de la historia oral con sus abuelos. l\tCompara las fiestas que se celebran en diferentes\n• unicipios de su departamento, en aspectos como: origen, propósito, duración y participantes. l\tDescribe la diversidad en la gastronomía de diferentes regiones o provincias que conforman su departamento.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-305",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 5 (Sociales 3°)",
+        "enunciado": "Comprende la importancia del tiempo en la organización de las actividades sociales, económicas y culturales en su comunidad.",
+        "evidencias": "• l\tDescribe el tiempo dedicado en su familia a actividades como trabajar, estudiar, viajar, jugar, practicar deporte y leer. l\tOrganiza las actividades personales y familiares con base en el uso del calendario. l\tCompara las actividades escolares, familiares y de uso del tiempo libre, llevadas a cabo el año pasado con las que realiza actualmente y expresa aquellas que quiere hacer el año próximo. l\tElabora esquemas con la distribución del tiempo dedicado en procesos de producción y/o extracción de un producto típico en su región.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-306",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 6 (Sociales 3°)",
+        "enunciado": "Analiza las contribuciones de los grupos humanos que habitan en su departamento, municipio o lugar donde vive, a partir de sus características culturales: lengua, organización social, tipo de vivienda, cosmovisión y uso del suelo.",
+        "evidencias": "• l\tCaracteriza aquellos grupos humanos que habitan en su región (afrodescendientes, raizales, blancos, indígenas, gitanos y/o mestizos). l\tDescribe las expresiones culturales de cada uno de los grupos humanos identificados en su departamento, municipio, resguardo o lugar donde vive. l\tReconoce la diversidad cultural como una característica del pueblo colombiano y explica los aportes de los diferentes grupos humanos. l\tElabora conclusiones sobre la situación social y económica de los indígenas en su región haciendo uso de diferentes fuentes de información.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-307",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 7 (Sociales 3°)",
+        "enunciado": "Comprende la importancia de participar en las decisiones de su comunidad cercana (institución educativa) mediante la elección del gobierno escolar.",
+        "evidencias": "• l\tIdentifica los mecanismos de elección del gobierno escolar y la importancia de elegir y ser elegido. l\tReconoce el papel que cumplen los representantes de los estudiantes y el consejo estudiantil en la vida de la institución educativa, mediante su participación en la elección de estos. l\tCompara las propuestas que presentan los diferentes candidatos a ocupar los cargos de personero estudiantil. l\tExplica la organización y el funcionamiento del consejo directivo de su institución educativa.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-308",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 8 (Sociales 3°)",
+        "enunciado": "Comprende la estructura y el funcionamiento democrático a nivel del departamento como entidad política, administrativa y jurídica.",
+        "evidencias": "• l\tDiferencia los órganos y las funciones del poder público que tiene el departamento (gobernador, diputados y jueces) de los que tiene el municipio y los resguardos. l\tExplica la importancia del gobierno departamental en el mejoramiento de las condiciones de vida de los ciudadanos, en cuanto a educación, obras públicas, salud y recreación. l\tEmite sus opiniones frente a las problemáticas observadas en los procesos de elección de cargos políticos en la región. l\tPropone acciones que pueden desarrollar las instituciones departamentales para fortalecer la convivencia y la paz en las comunidades. Foto tomada de www.asamblea-boyaca.gov.co (Entidad Territorial) en: goo.gl/unKVYV",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-101",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 1 (Naturales 1°)",
+        "enunciado": "Comprende que los sentidos le permiten percibir algunas características de los objetos que nos rodean (temperatura, sabor, sonidos, olor, color, texturas y formas).",
+        "evidencias": "• q\tDescribe y caracteriza, utilizando el sentido apropiado, sonidos, sabores, olores, colores, texturas y formas. q\tCompara y describe cambios en las temperaturas (más caliente, similar, menos caliente) utilizando el tacto en diversos objetos (con diferente color) sometidos a fuentes de calor como el sol. q\tDescribe y caracteriza, utilizando la vista, diferentes tipos de luz (color, intensidad y fuente). q\tUsa instrumentos como la lupa para realizar observaciones de objetos pequeños y representarlos mediante dibujos. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-102",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 2 (Naturales 1°)",
+        "enunciado": "Comprende que existe una gran variedad de materiales y que éstos se utilizan para distintos fines, según sus características (longitud, dureza, flexibilidad, permeabilidad al agua, solubilidad, ductilidad, maleabilidad, color, sabor, textura).",
+        "evidencias": "• q\tClasifica materiales de uso cotidiano a partir de características que percibe con los sentidos, incluyendo materiales sólidos como madera, plástico, vidrio, metal, roca y líquidos como opacos, incoloros, transparentes, así como algunas propiedades (flexibilidad, dureza, permeabilidad al agua, color, sabor y textura). q\tPredice cuáles podrían ser los posibles usos de un material (por ejemplo, la goma), de acuerdo con sus características. q\tSelecciona qué materiales utilizaría para fabricar un objeto dada cierta necesidad (por ejemplo, un paraguas que evite el paso del agua). q\tUtiliza instrumentos no convencionales (sus\n• anos, palos, cuerdas, vasos, jarras) para medir y clasificar materiales según su tamaño. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-103",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 3 (Naturales 1°)",
+        "enunciado": "Comprende que los seres vivos (plantas y animales) tienen características comunes (se alimentan, respiran, tienen un ciclo de vida, responden al entorno) y los diferencia de los objetos inertes.",
+        "evidencias": "• q\tClasifica seres vivos (plantas y animales) de su entorno, según sus características observables (tamaño, cubierta corporal, cantidad y tipo de\n• iembros, forma de raíz, tallo, hojas, flores y frutos) y los diferencia de los objetos inertes,  a partir de criterios que tienen que ver con las características básicas de los seres vivos. q\tCompara características y partes de plantas y animales, utilizando instrumentos simples como la lupa para realizar observaciones. q\tDescribe las partes de las plantas (raíz, tallo, hojas, flores y frutos), así como las de animales de su entorno, según características observables (tamaño, cubierta corporal, cantidad y tipo de\n• iembros). q\tPropone acciones de cuidado a plantas y animales, teniendo en cuenta características como tipo de alimentación, ciclos de vida y relación con el entorno. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-104",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 1°",
+        "codigo_oficial": "DBA 4 (Naturales 1°)",
+        "enunciado": "Comprende que su cuerpo experimenta constantes cambios a lo largo del tiempo y reconoce a partir de su comparación que tiene características similares y diferentes a las de sus padres y compañeros.",
+        "evidencias": "• q\tRegistra cambios físicos ocurridos en su cuerpo durante el crecimiento, tales como peso, talla, longitud de brazos, piernas, pies y manos, así como algunas características que no varían como el color de ojos, piel y cabello. q\tDescribe su cuerpo y predice los cambios que se producirán en un futuro, a partir de los ejercicios de comparación que realiza entre un niño y un adulto. q\tDescribe y registra similitudes y diferencias físicas que observa entre niños y niñas de su grado reconociéndose y reconociendo al otro. q\tEstablece relaciones hereditarias a partir de las características físicas de sus padres, describiendo diferencias y similitudes. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-201",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 1 (Naturales 2°)",
+        "enunciado": "Comprende que una acción mecánica (fuerza) puede producir distintas deformaciones en un objeto, y que este resiste a las fuerzas de diferente modo, de acuerdo con el material del que está hecho.",
+        "evidencias": "• q\tCompara los cambios de forma que se generan sobre objetos constituidos por distintos materiales (madera, hierro, plástico, plastilina, resortes, papel, entre otros), cuando se someten a diferentes acciones relacionadas con la aplicación de fuerzas (estirar, comprimir, torcer, aplastar, abrir, partir, doblar, arrugar). q\tClasifica los materiales según su resistencia a ser deformados cuando se les aplica una fuerza. q\tPredice el tipo de acción requerida para producir una deformación determinada en un cierto material y las comunica haciendo uso de diferentes formatos (oral, escrito). Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-202",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 2 (Naturales 2°)",
+        "enunciado": "Comprende que las sustancias pueden encontrarse en distintos estados (sólido, líquido y gaseoso).",
+        "evidencias": "• q\tClasifica materiales de su entorno según su estado (sólidos, líquidos o gases) a partir de sus propiedades básicas (si tienen forma propia o adoptan la del recipiente que los contiene, si fluyen, entre otros). q\tCompara las características físicas observables (fluidez, viscosidad, transparencia) de un conjunto de líquidos (agua, aceite, miel). q\tReconoce el aire como un material a partir de evidencias de su presencia aunque no se pueda ver, en el marco de distintas experiencias (abanicar, soplar, entre otros). Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-203",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 3 (Naturales 2°)",
+        "enunciado": "Comprende la relación entre las características físicas de plantas y animales con los ambientes en donde viven, teniendo en cuenta sus necesidades básicas (luz, agua, aire, suelo, nutrientes, desplazamiento y protección).",
+        "evidencias": "• q\tDescribe y clasifica plantas y animales de su entorno, según su tipo de desplazamiento, dieta y protección. q\tExplica cómo las características físicas de un animal o planta le ayudan a vivir en un cierto ambiente. q\tPredice posibles problemas que podrían ocurrir cuando no se satisfacen algunas de las necesidades básicas en el desarrollo de plantas y animales, a partir de los resultados obtenidos en experimentaciones sencillas. q\tEstablece relaciones entre las características de los seres vivos y el ambiente donde habitan. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-204",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 2°",
+        "codigo_oficial": "DBA 4 (Naturales 2°)",
+        "enunciado": "Explica los procesos de cambios físicos que ocurren en el ciclo de vida de plantas y animales de su entorno, en un período de tiempo determinado.",
+        "evidencias": "• q\tRepresenta con dibujos u otros formatos los cambios en el desarrollo de plantas y animales en un período de tiempo, identificando procesos como la germinación, la floración y la aparición de frutos. q\tRepresenta con dibujos u otros formatos los cambios en el desarrollo de los animales en un período de tiempo, identificando procesos como el crecimiento y la reproducción. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-301",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 1 (Naturales 3°)",
+        "enunciado": "Comprende la forma en que se propaga la luz a través de diferentes materiales (opacos, transparentes como el aire, translúcidos como el papel y reflectivos como el espejo).",
+        "evidencias": "• q\tCompara, en un experimento, distintos materiales de acuerdo con la cantidad de luz que dejan pasar (opacos, transparentes, translúcidos y reflectivos) y selecciona el tipo de material que elegiría para un cierto fin (por ejemplo, un frasco que no permita ver su contenido). q\tSelecciona la fuente apropiada para iluminar completamente una determinada superficie teniendo en cuenta que la luz se propaga en todas las direcciones y viaja en línea recta. q\tDescribe las precauciones que debe tener presentes frente a la exposición de los ojos a rayos de luz directa (rayos láser, luz del sol) que pueden causarle daño. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-302",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 2 (Naturales 3°)",
+        "enunciado": "Comprende la forma en que se produce la sombra y la relación de su tamaño con las distancias entre la fuente de luz, el objeto interpuesto y el lugar donde se produce la sombra.",
+        "evidencias": "• q\tPredice dónde se producirá la sombra de acuerdo con  la posición de la fuente de luz y del objeto. q\tDesplaza la fuente de luz y el objeto para aumentar o reducir el tamaño de la sombra que se produce según las necesidades. q\tExplica los datos obtenidos mediante observaciones y mediciones, que registra en tablas y otros formatos, de lo que sucede con el tamaño de la sombra de un objeto variando la distancia a la fuente de luz. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-303",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 3 (Naturales 3°)",
+        "enunciado": "Comprende la naturaleza (fenómeno de la vibración) y las características del sonido (altura, timbre, intensidad) y que este se propaga en distintos medios (sólidos, líquidos, gaseosos).",
+        "evidencias": "• q\tDemuestra que el sonido es una vibración\n• ediante el uso de fuentes para producirlo: cuerdas (guitarra), parches (tambor) y tubos de aire (flauta), identificando en cada una el elemento que vibra. q\tDescribe y compara sonidos según su altura (grave o agudo) y su intensidad (fuerte o débil). q\tCompara y describe cómo se atenúa (reduce su intensidad) el sonido al pasar por diferentes\n• edios (agua, aire, sólidos) y cómo influye la distancia en este proceso. q\tClasifica materiales de acuerdo con la manera como atenúan un sonido. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-304",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 4 (Naturales 3°)",
+        "enunciado": "Comprende la influencia de la variación de la temperatura en los cambios de estado de la materia, considerando como ejemplo el caso del agua.",
+        "evidencias": "• q\tInterpreta los resultados de experimentos en los que se analizan los cambios de estado del agua al predecir lo qué ocurrirá con el estado de una sustancia dada una variación de la temperatura. q\tExplica fenómenos cotidianos en los que se pone de manifiesto el cambio de estado del agua a partir de las variaciones de temperatura (la evaporación del agua en el paso de líquido a gas y los vidrios empañados en el paso de gas a líquido, entre otros). q\tUtiliza instrumentos convencionales (balanza, probeta, termómetro) para hacer mediciones de masa, volumen y temperatura del agua que le permitan diseñar e interpretar experiencias sobre los cambios de estado del agua en función de las variaciones de temperatura. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-305",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 5 (Naturales 3°)",
+        "enunciado": "Explica la influencia de los factores abióticos (luz, temperatura, suelo y aire) en el desarrollo de los factores bióticos (fauna y flora) de un ecosistema.",
+        "evidencias": "• q\tDiferencia los factores bióticos (plantas y animales) de los abióticos (luz, agua, temperatura, suelo y aire) de un ecosistema propio de su región. q\tInterpreta el ecosistema de su región describiendo relaciones entre factores bióticos (plantas y animales) y abióticos (luz, agua, temperatura, suelo y  aire). q\tPredice los efectos que ocurren en los organismos al alterarse un factor abiótico en un ecosistema Ejemplo Reconoce y establece las relaciones correspondientes entre los factores bióticos y abióticos como en la imagen o en el entorno cercano y predice qué puede ocurrir si se altera alguno de ellos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-306",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 3°",
+        "codigo_oficial": "DBA 6 (Naturales 3°)",
+        "enunciado": "Comprende las relaciones de los seres vivos con otros organismos de su entorno (intra e interespecíficas) y las explica como esenciales para su supervivencia en un ambiente determinado.",
+        "evidencias": "• q\tInterpreta las relaciones de competencia, territorialidad, gregarismo, depredación, parasitismo, comensalismo, amensalismo y\n• utualismo, como esenciales para la supervivencia de los organismos en un ecosistema, dando ejemplos. q\tObserva y describe características que le permiten a algunos organismos camuflarse con el entorno, para explicar cómo mejoran su posibilidad de supervivencia. q\tPredice qué ocurrirá con otros organismos del\n• ismo ecosistema, dada una variación en sus condiciones ambientales o en una población de organismos. q\tDescribe y registra las relaciones intra e interespecíficas que le permiten sobrevivir como ser humano en un ecosistema. Ejemplo Describe el tipo de relación que se presenta entre los organismos en cada una de las siguientes imágenes e identifica la importancia de estas relaciones para su supervivencia.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      }
+    ],
+    "age_range": "6 a 8 años (Primera Infancia y Primaria Inicial: Grados 1°, 2° y 3°)"
+  },
+  "2": {
+    "num": 2,
+    "roman": "II",
+    "name": "CICLO 2",
+    "file_name": "CICLO 2.xlsx",
+    "stage_title": "CICLO II: Grados 4° y 5° (Básica Primaria Superior - 9 a 10 años)",
+    "grados": [
+      "Grado 4° (Primaria)",
+      "Grado 5° (Primaria)"
+    ],
+    "lenguaje": [
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Estructura de párrafos y textos instructivos",
+        "DBA 1: Produzco textos instructivos y guías de primeros auxilios escolares.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la secuencia de pasos, títulos e imperativos en manuales de contingencia.",
+        "Identifica título, materiales, precauciones y pasos secuenciales numerados.",
+        "Redacta el instructivo de evacuación y primeros auxilios del salón de clases.",
+        "Valora la claridad, precisión y utilidad del texto para salvar vidas.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN TEXTUAL",
+        "Lectura crítica de noticias y comunicados oficiales",
+        "DBA 2: Distingo hechos de opiniones en noticias sobre eventos de emergencia.",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar la veracidad de noticias comunitarias contrastando fuentes y fechas.",
+        "Reconoce la fuente, autor y fecha de emisión de un boletín informativo.",
+        "Compara dos versiones sobre una situación de emergencia en el municipio.",
+        "Evita la difusión de rumores falsos y consulta canales oficiales.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Mitos, leyendas y relatos ancestrales de la naturaleza",
+        "DBA 3: Interpreto relatos tradicionales sobre volcanes, ríos, selvas y vientos.",
+        "Procesos cognitivos",
+        "Media",
+        "Interpretar metáforas y saberes ecológicos en leyendas regionales de resiliencia.",
+        "Identifica la relación entre los personajes míticos y los fenómenos naturales.",
+        "Escribe un cuento sobre cómo su comunidad supera las adversidades con valentía.",
+        "Aprecia la memoria y sabiduría ecológica de los pueblos originarios.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "MEDIOS Y COMUNICACIÓN",
+        "Diseño de campañas y afiches de prevención WASH",
+        "DBA 4: Creo afiches publicitarios con mensajes persuasivos de saneamiento.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear carteles informativos combinando eslogan, imagen y texto persuasivo.",
+        "Reconoce el impacto visual del color, tipografía y lemas en campañas públicas.",
+        "Diseña un afiche sobre purificación de agua y prevención del dengue.",
+        "Se compromete activamente con la salud y bienestar de su institución educativa.",
+        "Etapa 3"
+      ],
+      [
+        "ÉTICA DE LA COMUNICACIÓN",
+        "Mesas redondas y resolución dialogada de dilemas",
+        "DBA 5: Expongo argumentos en debates escolares respetando la pluralidad de opiniones.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar posturas en mesas redondas escolares sobre convivencia y cuidado mutuo.",
+        "Formula razones claras y respetuosas para defender su punto de vista.",
+        "Modera el diálogo escolar en situaciones de desacuerdo en el aula.",
+        "Demuestra tolerancia, empatía y apertura ante las diferencias culturales.",
+        "Etapa 3"
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Elaboración de resúmenes y esquemas de síntesis",
+        "DBA 6: Sintetizo información clave mediante cuadros sinópticos y mapas mentales.",
+        "Procesos cognitivos",
+        "Media",
+        "Organizar ideas principales y secundarias en esquemas gráficos de estudio.",
+        "Identifica las ideas fuerza en un texto explicativo de ciencias o sociales.",
+        "Elabora un mapa mental sobre el plan de gestión del riesgo escolar.",
+        "Muestra método, disciplina y rigor en la organización de la información.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Poesía y declamación como expresión de emociones",
+        "DBA 7: Empleo figuras poéticas para expresar sentimientos de esperanza y arraigo.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear poemas y coplas alusivas a la paz territorial y la belleza de su región.",
+        "Reconoce rimas, metáforas y comparaciones en textos poéticos.",
+        "Decla un poema en el acto cultural de cierre de jornada escolar.",
+        "Fortalece su autoestima y lazos de hermandad con sus compañeros.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ]
+    ],
+    "matematicas": [
+      [
+        "Pensamiento Numérico",
+        "Fracciones y números decimales en racionamiento",
+        "DBA 1: Resuelvo problemas de reparto equitativo de agua y alimentos usando fracciones.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la representación de fracciones homogéneas y decimales en recursos básicos.",
+        "Calcula mitades, cuartos, octavos y litros de agua en raciones diarias.",
+        "Distribuye suministros de ayuda humanitaria de forma proporcional y exacta.",
+        "Promueve la equidad, transparencia y justicia distributiva en el grupo.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Métrico",
+        "Cálculo de áreas, perímetros y capacidades de agua",
+        "DBA 2: Calculo el área de albergues y el volumen de tanques de reserva de agua.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar fórmulas de área rectangular y conversión de litros a decímetros cúbicos.",
+        "Aplica fórmulas de área ($largo \\times ancho$) y perímetro en espacios de aula.",
+        "Estima la capacidad de almacenamiento de agua potable requerida para la IE.",
+        "Muestra rigor técnico y precisión en las mediciones de seguridad.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Aleatorio",
+        "Gráficos de barras y tablas de frecuencia de riesgo",
+        "DBA 3: Interpreto tablas de frecuencia y gráficos sobre eventos climáticos y salud.",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar la media aritmética y moda en datos de lluvias, temperatura y ausencias.",
+        "Calcula la moda y el promedio en series estadísticas sencillas.",
+        "Elabora un gráfico de barras para monitorear las condiciones de salud del salón.",
+        "Toma decisiones preventivas basadas en el análisis de datos reales.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Variacional",
+        "Ecuaciones sencillas y relaciones de cambio",
+        "DBA 4: Modelo situaciones de aumento de caudales y consumo de víveres en el tiempo.",
+        "Procesos cognitivos",
+        "Alta",
+        "Modelar relaciones de proporcionalidad directa y tasas de consumo escolar.",
+        "Identifica patrones de cambio lineal en variables de emergencia.",
+        "Calcula los días de duración de la reserva de víveres según el número de estudiantes.",
+        "Muestra previsión, anticipación y pensamiento estratégico.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Geométrico",
+        "Clasificación de polígonos y ángulos en planos",
+        "DBA 5: Clasifico ángulos y polígonos en el diseño de planos de evacuación.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Evaluar ángulos rectos, agudos y obtusos en estructuras y rutas de salida.",
+        "Mide ángulos con el transportador e identifica polígonos regulares.",
+        "Diseña un plano a escala del salón de clases con rutas sin obstáculos.",
+        "Valora la precisión técnica y la seguridad en el diseño de espacios.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Numérico",
+        "Operaciones combinadas con las cuatro operaciones",
+        "DBA 6: Resuelvo problemas multiplicativos y de división en logística comunitaria.",
+        "Procesos cognitivos",
+        "Baja",
+        "Aplicar algoritmos de multiplicación y división en el cálculo de presupuestos.",
+        "Resuelve problemas de varias etapas con suma, resta, multiplicación y división.",
+        "Calcula costos y cantidades de materiales para la huerta escolar.",
+        "Muestra perseverancia y verificación autónoma de sus resultados.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ]
+    ],
+    "sociales": [
+      [
+        "Acción Territorial",
+        "Geografía de Colombia, cuencas y mapas de amenaza",
+        "DBA 1: Analizo el relieve colombiano, las cuencas hidrográficas y riesgos naturales.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la ubicación de cordilleras, ríos principales y zonas de vulnerabilidad.",
+        "Ubica en el mapa de Colombia las regiones naturales, ríos y fallas sísmicas.",
+        "Diseña el mapa de riesgos y recursos de su vereda o barrio.",
+        "Participa con entusiasmo en brigadas escolares de gestión del riesgo.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Identidades y Diversidad",
+        "Diversidad étnica y cultural de las regiones de Colombia",
+        "DBA 2: Reconozco los aportes de pueblos indígenas, afrocolombianos y campesinos.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Analizar las tradiciones, saberes ecológicos y formas de organización comunitaria.",
+        "Describe la historia y valores culturales de las etnias de su territorio.",
+        "Organiza una muestra cultural sobre la resiliencia y saberes de su región.",
+        "Valora la diversidad étnica como la mayor riqueza de la nación.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Democracia y DDHH",
+        "Constitución Política de 1991 y derechos de la niñez",
+        "DBA 3: Identifico los derechos fundamentales y los mecanismos de protección escolar.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar mecanismos como el personero estudiantil y peticiones de protección.",
+        "Explica el derecho a la vida digna, salud, educación y recreación.",
+        "Redacta una propuesta de mejora escolar para el personero estudiantil.",
+        "Defiende los derechos de sus compañeros en situación de vulnerabilidad.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensar Históricamente",
+        "Independencia de Colombia y construcción de la República",
+        "DBA 4: Analizo los procesos independentistas y el papel de mujeres y sectores populares.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar causas y consecuencias de las luchas de independencia en la soberanía.",
+        "Explica los hechos clave del 20 de julio de 1810 y la Batalla de Boyacá de 1819.",
+        "Elabora un periódico histórico sobre los próceres y heroínas de la libertad.",
+        "Reconoce el valor de la libertad y el compromiso ciudadano con la paz.",
+        "Etapa 3"
+      ],
+      [
+        "Conflicto y Memoria",
+        "Causas y consecuencias de la migración y desplazamiento",
+        "DBA 5: Comprendo las causas de la migración y promuevo la acogida e inclusión.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear iniciativas de bienvenida, no estigmatización y apoyo a estudiantes recién llegados.",
+        "Identifica factores económicos, ambientales y de conflicto que causan migración.",
+        "Diseña un protocolo de bienvenida y apadrinamiento para nuevos compañeros.",
+        "Fomenta la fraternidad, la empatía y el rechazo a toda xenofobia.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ]
+    ],
+    "naturales": [
+      [
+        "Entorno Vivo",
+        "Ecosistemas, cadenas tróficas y equilibrio biológico",
+        "DBA 1: Explico la función de productores, consumidores y descomponedores.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender las interacciones en los ecosistemas locales y el impacto de la deforestación.",
+        "Identifica cadenas alimentarias y niveles tróficos en el bosque o río local.",
+        "Propone acciones de reforestación para proteger la microcuenca escolar.",
+        "Se compromete activamente con la defensa de la fauna y flora nativa.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico & WASH",
+        "Métodos de separación de mezclas y potabilización",
+        "DBA 2: Aplico filtración, decantación y cloración para purificar agua en emergencias.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar métodos físicos y químicos caseros para obtener agua segura para consumo.",
+        "Diferencia mezclas homogéneas y heterogéneas en aguas turbias.",
+        "Construye un filtro casero de tres capas (arena, grava y carbón activo).",
+        "Fomenta el consumo exclusivo de agua tratada en su familia y escuela.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Educación Ambiental",
+        "Manejo integral de residuos sólidos y reciclaje escolar",
+        "DBA 3: Diseño estrategias de clasificación en la fuente y puntos ecológicos.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear campañas de reducción del plástico de un solo uso y compostaje escolar.",
+        "Clasifica residuos en orgánicos, aprovechables y peligrosos según el código nacional.",
+        "Organiza puntos ecológicos y jornadas de compostaje con restos de merienda.",
+        "Lidera con el ejemplo el aseo y sostenibilidad de los espacios comunes.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "La energía, sus fuentes y transformaciones",
+        "DBA 4: Identifico transformaciones de energía cinética, eléctrica, lumínica y térmica.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar el uso de energías limpias (solar, eólica) en situaciones de corte eléctrico.",
+        "Explica cómo la energía del sol se transforma en electricidad y calor.",
+        "Construye un horno solar casero o circuito con panel fotovoltaico básico.",
+        "Promueve el ahorro de energía y el uso de tecnologías limpias.",
+        "Etapa 3"
+      ],
+      [
+        "Entorno Vivo",
+        "Sistemas del cuerpo humano (digestivo, respiratorio, circulatorio)",
+        "DBA 5: Explico la función integrada de los órganos en el mantenimiento de la vida.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Analizar la relación entre nutrición, respiración y prevención de epidemias.",
+        "Describe la función del corazón, pulmones y estómago en la nutrición celular.",
+        "Elabora una guía de hábitos saludables y prevención de enfermedades respiratorias.",
+        "Adopta estilos de vida saludables y promueve la actividad física diaria.",
+        "Etapa 3"
+      ]
+    ],
+    "dba_count": 55,
+    "dba_records": [
+      {
+        "id": "DBA-L-401",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 1 (Lenguaje 4°)",
+        "enunciado": "Analiza la información presentada por los diferentes medios de comunicación con los cuales interactúa.",
+        "evidencias": "•  Compara la información presentada por diversos\n• edios de comunicación (como la radio y la televisión) sobre una misma noticia.\n•  Reconoce las relaciones de contenido de diferentes textos informativos en torno a qué ocurrió, a quiénes, cuándo y en dónde.\n•  Identifica las diferentes estructuras por medio de las que los medios de comunicación masiva presentan información.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-402",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 2 (Lenguaje 4°)",
+        "enunciado": "Escribe textos a partir de información dispuesta en imágenes, fotografías, manifestaciones artísticas o conversaciones cotidianas.",
+        "evidencias": "•  Emplea elementos no verbales en los textos que escribe para enfatizar en una intención comunicativa específica.\n•  Comprende el sentido de las manifestaciones no verbales presentes en canciones, afiches y conversaciones.\n•  Complementa sus escritos por medio de secuencias de imágenes o dibujos. Ejemplo Para la creación de una línea de tiempo ilustrada: u \tIdentifica hechos, tiempos y lugares relevantes. u \tOrganiza la información temporalmente. u \tAgrega imágenes a cada uno de los eventos. . . f . . .",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-403",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 3 (Lenguaje 4°)",
+        "enunciado": "Crea textos literarios en los que articula lecturas previas e impresiones sobre un tema o situación.",
+        "evidencias": "•  Identifica el contexto en que se crea una obra literaria y lo relaciona con los conocimientos que tiene sobre él.\n•  Reconoce los temas que aborda un texto literario y sus vínculos con la vida cotidiana y escolar.\n•  Emplea figuras literarias en la producción de textos literarios.\n•  Produce textos literarios atendiendo a un género específico.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-404",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 4 (Lenguaje 4°)",
+        "enunciado": "Construye textos poéticos, empleando algunas figuras literarias.",
+        "evidencias": "•  Observa la realidad como punto de partida para la creación de textos poéticos.\n•  Reconstruye el sentido de los poemas a partir de la identificación de sus figuras literarias.\n•  Escribe poemas usando figuras literarias como la metáfora, el símil y la personificación.\n•  Declama poemas teniendo en cuenta la pronunciación y entonación necesaria para expresar emociones. Ejemplo Durante la creación de textos literarios como los caligramas u Elige un objeto o animal del entorno. u Observa las características y las relaciona con un sentimiento o idea. u Selecciona algunas figuras literarias que quiere usar. u Con base en las anotaciones crea un caligrama.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-405",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 5 (Lenguaje 4°)",
+        "enunciado": "Interpreta el tono del discurso de su interlocutor, a partir de las características de la voz, del ritmo, de las pausas y de la entonación.",
+        "evidencias": "•  Comprende los temas tratados en espacios de discusión y los incorpora en su discurso para apoyarlos o criticarlos.\n•  Establece intercambios en discursos orales a partir de lecturas previas, discusiones con sus compañeros y sus experiencias de formación escolar.\n•  Identifica las palabras que ordenan un discurso y enmarcan la introducción, el desarrollo y el cierre.\n•  Nota el tono y el estado de ánimo del emisor a partir del ritmo, las pausas y la velocidad de su discurso. Ejemplo En espacios de diálogo planeados: u Elige un tema. u Escribe una lista con las principales ideas. u Participa en la discusión como un experto. u Expresa ideas y respeta las de los otros. u Expone las conclusiones de los temas tratados.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-406",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 6 (Lenguaje 4°)",
+        "enunciado": "Organiza la información que encuentra en los textos que lee, utilizando técnicas para el procesamiento de la información que le facilitan el proceso de compresión e interpretación textual.",
+        "evidencias": "•  Comprende la intención comunicativa de diferentes tipos de texto.\n•  Infiere las temáticas que desarrolla un texto a partir de la información que contiene y el contexto de circulación en que se ubica.\n•  Identifica la estructura de los textos que lee de acuerdo con su intención comunicativa. Ejemplo En una la historieta como la de Liniers: u Determina el tema, las causas y las consecuencias de lo que ocurre. u Observa lo que sucede a los personajes en cada viñeta. u Adiciona enunciados de lo que pueden estar diciendo los personajes. u Usa sonidos onomatopéyicos para expresar las acciones de los personajes. u Escucha los resultados de otros escritos para identificar en qué coinciden o difieren. Liniers (2012). Macanudo 6. Buenos Aires: Editorial Común.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-407",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 7 (Lenguaje 4°)",
+        "enunciado": "Participa en espacios de discusión en los que adapta sus emisiones a los requerimientos de la situación comunicativa.",
+        "evidencias": "•  Participa en espacios de discusión grupal, como: conversatorios, exposiciones y tertulias, teniendo en cuenta la temática y la intencionalidad.\n•  Comprende el sentido de las discusiones para\n• anifestar sus puntos de vista en los temas verbales y no verbales.\n•  Conduce los temas de los discursos de acuerdo con el posible desarrollo de los mismos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-408",
+        "area": "Lengua Castellana",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 8 (Lenguaje 4°)",
+        "enunciado": "Produce textos atiendo a elementos como el tipo de público al que va dirigido, el contexto de circulación, sus saberes previos y la diversidad de formatos de la que dispone para su presentación.",
+        "evidencias": "•  Define la tipología textual que empleará en la producción de un escrito a partir del análisis del propósito comunicativo.\n•  Consulta diversos tipos de fuentes antes de redactar un texto.\n•  Construye un plan de escritura para definir los contenidos de un texto.\n•  Complementa el sentido de sus producciones escritas, mediante el uso consciente de recursos de puntuación, como la exclamación y la interrogación.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-501",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 1 (Lenguaje 5°)",
+        "enunciado": "Utiliza la información que recibe de los medios de comunicación para participar en espacios discursivos de opinión.",
+        "evidencias": "•  Caracteriza los elementos constitutivos de la comunicación.\n•  Reconoce los roles desempeñados por los sujetos que participan en las emisiones de los medios de comunicación.\n•  Dialoga con sus compañeros sobre el sentido de los mensajes emitidos por los medios de comunicación masiva.\n•  Selecciona la información de acuerdo con el formato en que ha sido presentada. Ejemplo A partir de la selección de un tema enunciado en los medios de comunicación: u Determina a qué categoría pertenece (deportes, política, tecnología, etc.) y analiza cómo se presenta la información. u Participa en un debate con otros estudiantes para compartir los análisis realizados.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-502",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 2 (Lenguaje 5°)",
+        "enunciado": "Interpreta mensajes directos e indirectos en algunas imágenes, símbolos o gestos.",
+        "evidencias": "•  Infiere el significado del lenguaje gestual y corporal de emoticones, gestos, fotografías y movimientos del cuerpo presentes en las situaciones comunicativas en las cuales participa.\n•  Compara manifestaciones artísticas de acuerdo con sus características y las visiones de mundo del entorno local y regional.\n•  Identifica la coherencia de las imágenes en los textos representados con ellas. Ejemplo u Crea convenciones a través de imágenes, tarjetas o dibujos para representar estados de ánimo, situaciones y expresiones que utiliza en su cotidianidad. u Luego las comparte con otros estudiantes, para que hagan hipótesis a propósito de las imágenes representadas y su significado.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-503",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 3 (Lenguaje 5°)",
+        "enunciado": "Comprende los roles que asumen los personajes en las obras literarias y su relación con la temática y la época en las que estas se desarrollan.",
+        "evidencias": "•  Establece diferencias entre narrador y autor, en los textos que lee y escribe.\n•  Reconoce las temáticas de los textos literarios que lee para relacionarlas con su contexto cotidiano.\n•  Identifica las características de los géneros literarios y establece nexos entre sus elementos constitutivos. Ejemplo Determina aspectos del texto literario como: u Temática que desarrolla. u Espacio en el que se desarrolla. u Posibles enseñanzas. u Vestuario y actitudes de los personajes.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-504",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 4 (Lenguaje 5°)",
+        "enunciado": "Reconoce en la lectura de los distintos géneros literarios diferentes posibilidades de recrear y ampliar su visión de mundo.",
+        "evidencias": "•  Expresa en sus escritos y enunciaciones la experiencia literaria que ha consolidado a partir de los textos con los que se relaciona.\n•  Conoce diferentes culturas a partir de la lectura de textos literarios.\n•  Deduce las semejanzas y diferencias de los géneros literarios a través de los textos que lee y escribe. Ejemplo Selecciona un poema y un cuento que aborden un tema semejante y luego de su lectura y análisis, determina: u Crea una cartelera sobre los dos textos leídos y la expone junto a las de sus compañeros en una galería.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-505",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 5 (Lenguaje 5°)",
+        "enunciado": "Comprende el sentido global de los mensajes, a partir de la relación entre la información explícita e implícita.",
+        "evidencias": "•  Asume una postura crítica y respetuosa frente a los mensajes que circulan en su medio.\n•  Prevé los contenidos del mensaje de un emisor a partir de sus entonaciones y la manera como organiza un discurso.\n•  Comprende la diferencia de diversos espacios de expresión oral, como la mesa redonda, el panel, el foro y el debate, atendiendo a su respectiva estructura. Ejemplo En una situación comunicativa específica como la discusión de un texto literario: u\t Define los siguientes aspectos: u\t Anticipa lo que van a decir sus compañeros. u\t Participa en una tertulia literaria.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-506",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 6 (Lenguaje 5°)",
+        "enunciado": "Identifica la intención comunicativa de los textos con los que interactúa a partir del análisis de su contenido y estructura.",
+        "evidencias": "•  Reconoce la función social de los textos que lee y las visiones de mundo que proponen.\n•  Aplica estrategias de comprensión a distintos tipos de texto que lee para dar cuenta de las relaciones entre diversos segmentos del mismo.\n•  Organiza de forma jerárquica los contenidos de un texto en relación con la forma en que son presentados. Ejemplo Para comprender la intención comunicativa de un texto: Analiza sus contenidos y estructura con el propósito de saber lo que busca comunicar el interlocutor:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-507",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 7 (Lenguaje 5°)",
+        "enunciado": "Construye textos orales atendiendo a los contextos de uso, a los posibles interlocutores y a las líneas temáticas pertinentes con el propósito comunicativo en el que se enmarca el discurso.",
+        "evidencias": "•  Reconoce los momentos adecuados para intervenir y para dar la palabra a los interlocutores de acuerdo con la situación y el propósito comunicativo.\n•  Construye saberes con otros a través de espacios de intercambio oral en los que comparte sus ideas y sus experiencias de formación.\n•  Ordena la información en secuencias lógicas acordes con la situación comunicativa particular.\n•  Articula con claridad los sonidos del discurso y lee de manera fluida. Ejemplo En la producción de textos orales, como la producción de un noticiero: Tiene en cuenta criterios como:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-508",
+        "area": "Lengua Castellana",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 8 (Lenguaje 5°)",
+        "enunciado": "Produce textos verbales y no verbales a partir de los planes textuales que elabora según la tipología a desarrollar.",
+        "evidencias": "•  Establece relaciones de coherencia entre los conceptos a tratar, el tipo de texto a utilizar y la intención comunicativa que media su producción.\n•  Elabora planes textuales que garantizan la progresión de las ideas que articula en un escrito.\n•  Emplea técnicas para la organización de ideas como esquemas y mapas mentales. Ejemplo Al empezar un proceso de escritura enmarcado en una situación comunicativa específica, se pregunta:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-401",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 1 (Matemáticas 4°)",
+        "enunciado": "Interpreta las fracciones como razón, relación parte-todo, cociente y operador en diferentes contextos.",
+        "evidencias": "• Opera con fracciones homogéneas y heterogéneas sencillas.\n• Resuelve situaciones de racionamiento y distribución de recursos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-402",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 2 (Matemáticas 4°)",
+        "enunciado": "Describe y justifica propiedades del sistema de numeración decimal y los números naturales en operaciones combinadas.",
+        "evidencias": "• Aplica propiedades conmutativa, asociativa y distributiva.\n• Resuelve problemas con las cuatro operaciones básicas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-403",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 3 (Matemáticas 4°)",
+        "enunciado": "Identifica y describe patrones de variación y relaciones de proporcionalidad directa en tablas y gráficos.",
+        "evidencias": "• Aplica factores de escala y tablas de proporcionalidad.\n• Modela consumos y reservas en el tiempo.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-404",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 4 (Matemáticas 4°)",
+        "enunciado": "Caracteriza y clasifica figuras planas (polígonos) y cuerpos geométricos por sus ángulos, lados y paralelismo.",
+        "evidencias": "• Mide y clasifica ángulos con el transportador.\n• Identifica rectas paralelas, perpendiculares y secantes.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-405",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 5 (Matemáticas 4°)",
+        "enunciado": "Elige instrumentos y unidades estandarizadas para estimar y calcular áreas, perímetros, capacidades y masas.",
+        "evidencias": "• Aplica fórmulas para el área de rectángulos y triángulos.\n• Convierte entre múltiplos y submúltiplos del metro y litro.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-406",
+        "area": "Matemáticas",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 6 (Matemáticas 4°)",
+        "enunciado": "Interpreta y elabora tablas de frecuencias y gráficos de barras o líneas para representar situaciones de su entorno.",
+        "evidencias": "• Identifica la media y moda en variables discretas.\n• Compara distribuciones de datos en dos poblaciones.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-501",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 1 (Matemáticas 5°)",
+        "enunciado": "Interpreta y utiliza los números naturales, fracciones y decimales en sus diferentes representaciones y operaciones.",
+        "evidencias": "• Realiza operaciones combinadas con decimales y fracciones.\n• Resuelve problemas financieros y de reparto proporcional.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-502",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 2 (Matemáticas 5°)",
+        "enunciado": "Comprende y utiliza conceptos de múltiplos, divisores, números primos y compuestos para resolver problemas.",
+        "evidencias": "• Calcula el MCD y MCM en situaciones de distribución periódica.\n• Aplica criterios de divisibilidad.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-503",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 3 (Matemáticas 5°)",
+        "enunciado": "Modela situaciones de dependencia y variación lineal mediante tablas, expresiones verbales y gráficos cartesianos.",
+        "evidencias": "• Interpreta la constante de proporcionalidad.\n• Representa pares ordenados en el plano cartesiano.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-504",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 4 (Matemáticas 5°)",
+        "enunciado": "Explica las relaciones entre el perímetro y el área de figuras cuando se modifican sus dimensiones.",
+        "evidencias": "• Calcula áreas de polígonos regulares y compuestos.\n• Analiza la variación del área al duplicar longitudes.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-505",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 5 (Matemáticas 5°)",
+        "enunciado": "Calcula el volumen de prismas rectangulares y reconoce unidades métricas cúbicas y de capacidad.",
+        "evidencias": "• Relaciona metro cúbico, decímetro cúbico y litro.\n• Calcula la capacidad de tanques de reserva de agua.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-506",
+        "area": "Matemáticas",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 6 (Matemáticas 5°)",
+        "enunciado": "Interpreta la media aritmética (promedio) y la mediana en conjuntos de datos y resuelve problemas de probabilidad simple.",
+        "evidencias": "• Calcula el promedio de calificaciones o indicadores escolares.\n• Expresa probabilidades como fracción o porcentaje.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-401",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 1 (Sociales 4°)",
+        "enunciado": "Comprende la importancia de los límites geográficos y el establecimiento de las fronteras en la organización de los territorios.",
+        "evidencias": "• l\tReconoce los límites geográficos de Colombia a partir de la lectura de un mapa político. l\tDescribe actividades económicas y culturales que se dan entre los países que comparten fronteras con Colombia. l\tExplica la importancia de las fronteras colombianas como un punto de encuentro con los pueblos vecinos y documenta situaciones vividas recientemente con los países limítrofes. l\tContrasta los límites de los departamentos en que se divide el territorio colombiano con base en su ubicación geográfica y su extensión.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-402",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 2 (Sociales 4°)",
+        "enunciado": "Diferencia las características geográficas del medio urbano y el medio rural, mediante el reconocimiento de la concentración de la población y el uso del suelo, que se da en ellos.",
+        "evidencias": "• l\tReconoce los usos del suelo propios de las ciudades (comercial, industrial, habitacional, deportivo y educativo, entre otros) y los del campo (agrícola, ganadero, minero, forestal y turístico, entre otros) a partir de la lectura de\n• apas temáticos. l\tIdentifica cambios generados en el uso del suelo tanto de las ciudades colombianas como de los espacios rurales en la última década. l\tCompara la cantidad de habitantes que viven en las ciudades colombianas con la población ubicada en los sectores rurales (a partir de la información del último censo de población realizado en el país o de otra fuente). l\tExpresa razones por las cuales actualmente la población se concentra más en las ciudades que en el campo.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-403",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 3 (Sociales 4°)",
+        "enunciado": "Comprende las razones de algunos cambios socioculturales en Colombia, motivados en los últimos años por el uso de la tecnología.",
+        "evidencias": "• l\tExplica cómo era la vida de los pueblos cuando no existía la energía eléctrica, el acueducto, el alcantarillado y el servicio de teléfono, entre otros. l\tRelaciona el acceso a las tecnologías de la salud como los hospitales, las vacunas, y los\n• edicamentos, con el bienestar de las familias. l\tDescribe la importancia de los medios de comunicación en el desarrollo de la política y la cultura ciudadana del país. l\tExpresa sus opiniones sobre los cambios generados en las relaciones con su familia, desde el uso del teléfono, la TV y el Internet entre otras tecnologías y, deduce los efectos que han tenido en la vida de las personas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-404",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 4 (Sociales 4°)",
+        "enunciado": "Analiza las características de las culturas ancestrales que a la llegada de los españoles, habitaban el territorio nacional.",
+        "evidencias": "• l\tReconoce los diferentes pueblos indígenas pertenecientes a las familias lingüísticas que habitaban el territorio colombiano (Chibcha, Caribe y Arawak) y los ubica espacialmente. l\tCompara las organizaciones sociales, económicas y religiosas de los pueblos ancestrales que habitaron el territorio colombiano (muiscas, taironas, calimas y zenúes, entre otros). l\tBusca información en diferentes fuentes sobre los legados culturales de las comunidades indígenas y describe su situación actual. l\tExplica las razones por las cuales la población indígena se vio reducida con la llegada de los europeos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-405",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 5 (Sociales 4°)",
+        "enunciado": "Evalúa la diversidad étnica y cultural del pueblo colombiano desde el reconocimiento de los grupos humanos existentes en el país: afrodescendientes, raizales, mestizos, indígenas y blancos.",
+        "evidencias": "• l\tIdentifica las características de los diferentes grupos humanos presentes en el territorio nacional. l\tExplica tradiciones y costumbres propias de los diversos grupos humanos del país respecto de la alimentación, la vivienda y su cosmovisión. l\tDescribe el intercambio de saberes que históricamente se ha dado entre las diversas culturas existentes en Colombia y sus aportes a la construcción de la idiosincrasia colombiana. l\tReconoce la importancia de preservar y fomentar las manifestaciones culturales de los diferentes grupos humanos presentes en el territorio nacional y que contribuyen a construir una sociedad más justa.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-406",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 6 (Sociales 4°)",
+        "enunciado": "Comprende la importancia de la división de poderes en una democracia y la forma como funciona en Colombia.",
+        "evidencias": "• l\tDiferencia las ramas del poder público (Legislativa, Ejecutiva y Judicial), sus funciones e importancia en el equilibrio de poderes. l\tReconoce la importancia del voto popular como\n• ecanismo de participación para ejercer la democracia en Colombia a partir del análisis de casos. l\tExplica las responsabilidades de los cargos de elección popular (personeros estudiantiles, alcaldes, concejales, gobernadores, diputados, congresistas, presidente de la república). l\tDescribe el papel de los órganos de control (procuraduría, contraloría y la defensoría del pueblo), para el funcionamiento de la democracia y el equilibrio de poderes.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-407",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 7 (Sociales 4°)",
+        "enunciado": "Analiza los derechos que protegen la niñez y los deberes que deben cumplirse en una sociedad democrática para el desarrollo de una sana convivencia.",
+        "evidencias": "• l\tDescribe los derechos de la niñez y asume una posición crítica frente a situaciones de discriminación y abuso por irrespeto a rasgos individuales de las personas. l\tSe identifica como un sujeto de derechos con unos deberes para con la comunidad educativa desde su participación en diferentes eventos escolares. l\tReconoce las personas, instituciones y autoridades a las que puede acudir para la protección y defensa de los derechos de la niñez y explica cómo buscar apoyo de ser necesario, en la personería estudiantil, el comité de convivencia escolar, la comisaría de familia, el Instituto Colombiano de Bienestar Familiar (ICBF) y/o la Policía Nacional. l\tDescribe situaciones en las que se ven vulnerados los derechos de la niñez y propone posibles soluciones para resolverlas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-408",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 8 (Sociales 4°)",
+        "enunciado": "Evalúa la importancia de satisfacer las necesidades básicas para el bienestar individual, familiar y colectivo.",
+        "evidencias": "• l\tIdentifica las necesidades básicas de todo ser humano (vivienda, alimentación, salud, educación y empleo) y explica si se satisfacen en su comunidad. l\tClasifica en orden de importancia las necesidades básicas que presentan los habitantes del territorio colombiano en la actualidad. l\tReconoce los factores económicos, sociales y políticos que influyen en la satisfacción de las necesidades básicas de las personas en la sociedad colombiana. l\tExpresa la responsabilidad que conlleva ser parte de una comunidad y sugiere posibles actuaciones en la búsqueda de la satisfacción de las necesidades básicas. Ejemplo A partir del diálogo con sus padres, realiza un listado de las necesidades básicas de la familia, las jerarquiza, diferencia los costos de los servicios básicos que requieren y elabora conclusiones de lo estudiado.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-501",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 1 (Sociales 5°)",
+        "enunciado": "Comprende la organización territorial existente en Colombia y las particularidades geográficas de las regiones.",
+        "evidencias": "• l\t\tExplica las formas de división territorial en Colombia: corregimiento, municipio, área\n• etropolitana, departamento,  región y territorio indígena. l\tCaracteriza los territorios colombianos denominados distritos (capital, especial, industrial, portuario, turístico, histórico y biodiverso) y los diferencia de los municipios y de las ciudades capitales. l\tDiferencia las regiones geográficas en las que está dividido el territorio colombiano y las reconoce a partir de la lectura de mapas temáticos. l\tRelaciona la existencia de los pisos térmicos con los recursos naturales de cada región e identifica su incidencia en la diversidad de cultivos y actividades humanas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-502",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 2 (Sociales 5°)",
+        "enunciado": "Comprende las ventajas que tiene para Colombia su posición geográfica y astronómica en relación con la economía nacional.",
+        "evidencias": "• l\tIdentifica la posición geográfica y astronómica del país, sus límites y extensión de sus fronteras terrestres y marítimas, mediante la lectura de\n• apas temáticos. l\tEstablece relaciones entre latitud, longitud, altitud y la proximidad al mar, con la diversidad de climas en Colombia. l\tExplica la presencia de la órbita geoestacionaria y su importancia para las telecomunicaciones del país. l\tPlantea preguntas que le permiten reconocer la importancia que tiene para el territorio colombiano y  la economía nacional, el hecho de contar con dos océanos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-503",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 3 (Sociales 5°)",
+        "enunciado": "Comprende que los cambios en la comunicación originados por los avances tecnológicos han generado transformaciones en la forma como se relacionan las personas en la sociedad actual.",
+        "evidencias": "• l\tExplica la importancia que ha tenido la comunicación para la sociedad colombiana en el siglo XX y XXI. l\tCompara las características de los medios de comunicación que emplearon sus padres (cuando eran niños), con los que él emplea en la actualidad. l\tArgumenta a partir de evidencias cómo el uso de diferentes medios de comunicación hace más fácil el acceso a la información y el aprendizaje. l\tParticipa en discusiones sobre el uso adecuado y respetuoso de los medios de comunicación en la construcción de las relaciones con otras personas, grupos sociales o instituciones. Fotografía tomada por Toro Vásquez, J. 2015",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-504",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 4 (Sociales 5°)",
+        "enunciado": "Analiza el periodo colonial en la Nueva Granada a partir de sus organizaciones políticas, económicas y sociales.",
+        "evidencias": "• l\tCompara el papel de las organizaciones políticas y administrativas como el Consejo Supremo de Indias, la Casa de Contratación de Sevilla, la Real Audiencia, los Cabildos, la Real Hacienda y el Virreinato con las actuales instituciones en Colombia. l\tDiferencia las formas organizativas del trabajo en la Colonia (la encomienda, la mita y el resguardo) y sus transformaciones en el sistema económico actual en Colombia. l\tExplica las diferencias entre los grupos sociales existentes en la Nueva Granada durante el periodo colonial y las implicaciones que tuvo en la estratificación de la población colombiana. l\tExamina el papel de la religión católica y su impacto en la vida cotidiana de las personas durante la época colonial a través del uso de diversas fuentes de información.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-505",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 5 (Sociales 5°)",
+        "enunciado": "Analiza el origen y consolidación de Colombia como república y sus cambios políticos, económicos y sociales.",
+        "evidencias": "• l\tPlantea preguntas sobre los antecedentes que influenciaron el proceso de independencia de Colombia (revolución de los comuneros, invasiones napoleónicas, entre otras). l\tExplica los acontecimientos que permitieron el nacimiento de la República y cómo estos incidieron en la vida económica y social de Colombia. l\tReconoce los cambios de fronteras que ha experimentado Colombia desde comienzos del siglo XIX hasta la actualidad (la Gran Colombia, la República de la Nueva Granada, la Confederación Granadina, los Estados Unidos de Colombia y la República de Colombia) a partir de la lectura de mapas temáticos. l\tRelaciona la aparición de los partidos políticos en Colombia con las luchas ideológicas que se dieron a lo largo del siglo XIX.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-506",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 6 (Sociales 5°)",
+        "enunciado": "Analiza los cambios ocurridos en la sociedad colombiana en la primera mitad del siglo XX, asociados a la expansión de la industria y el establecimiento de nuevas redes de comunicación.",
+        "evidencias": "• l\tExplica los cambios sociales y tecnológicos (radio, prensa escrita, telares y ferrocarriles) que se dieron en Colombia en la primera mitad del siglo XX y su incidencia en la reconfiguración de actividades económicas y sociales en el país. l\tReconoce la influencia de los partidos políticos (liberal y conservador) en las dinámicas económicas y sociales de Colombia en la primera\n• itad del siglo XX a partir del uso de diferentes fuentes de información. l\tIdentifica las consecuencias de los conflictos que afectaron la convivencia armónica de los ciudadanos colombianos en la primera mitad del siglo XX (Guerra de los Mil Días, masacre de las bananeras y la violencia partidista). l\tParticipa en debates y propone acciones para vivir en una sociedad pacífica y constructora de una cultura de paz.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-507",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 7 (Sociales 5°)",
+        "enunciado": "Comprende que en la sociedad colombiana existen derechos, deberes, principios y acciones para orientar y regular la convivencia de las personas.",
+        "evidencias": "• l\tDescribe los beneficios o ventajas que conlleva vivir en un Estado democrático a través del estudio de la Constitución de 1991. l\tIdentifica los derechos fundamentales contemplados en la Constitución (Título II, capítulo 1), y su aplicabilidad en la vida cotidiana a partir del análisis de casos. l\tCompara los derechos y deberes planteados en la Constitución Política del país con los derechos y deberes contemplados en el manual de convivencia de su institución educativa. l\tExplica el valor que tiene conocer los derechos y los mecanismos constitucionales para reclamar su debido cumplimiento.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-508",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 8 (Sociales 5°)",
+        "enunciado": "Analiza el papel de las organizaciones sociales en la preservación y el reconocimiento de los Derechos Humanos.",
+        "evidencias": "• l\tExplica las instituciones que defienden los",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-401",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 1 (Naturales 4°)",
+        "enunciado": "Comprende que la magnitud y la dirección en que se aplica una fuerza puede producir cambios en la forma como se mueve un objeto (dirección y rapidez).",
+        "evidencias": "• q\tDescribe las características de las fuerzas (magnitud y dirección) que se deben aplicar para producir un efecto dado (detener, acelerar, cambiar de dirección). q\tIndica, a partir de pequeñas experiencias, cuando una fuerza aplicada sobre un cuerpo no produce cambios en su estado de reposo, de movimiento o en su dirección. q\tComunica resultados sobre los efectos de la fuerza de fricción en el movimiento de los objetos al comparar superficies con distintos niveles de rozamiento. q\tPredice y explica en una situación de objetos desplazándose por diferentes superficies (lisas, rugosas) en cuál de ellas el cuerpo puede\n• antenerse por más tiempo en movimiento. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-402",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 2 (Naturales 4°)",
+        "enunciado": "Comprende los efectos y las ventajas de utilizar máquinas simples en diferentes tareas que requieren la aplicación de una fuerza.",
+        "evidencias": "• q\tExplora cómo los cambios en el tamaño de una palanca (longitud) o la posición del punto de apoyo afectan las fuerzas y los movimientos implicados. q\tDescribe la función que cumplen fuerzas en una\n• áquina simple para generar movimiento. q\tIdentifica y observa máquinas simples en objetos cotidianos para explicar su utilidad (aplicar una fuerza pequeña para generar una fuerza grande, generar un pequeño movimiento para crear un gran movimiento). q\tIdentifica y describe palancas presentes en su cuerpo, conformadas por sus sistemas óseo y\n• uscular. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-403",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 3 (Naturales 4°)",
+        "enunciado": "Comprende que el fenómeno del día y la noche se debe a que la Tierra rota sobre su eje y en consecuencia el sol sólo ilumina la mitad de su superficie.",
+        "evidencias": "• q\tRegistra y realiza dibujos de las sombras que proyecta un objeto que recibe la luz del Sol en diferentes momentos del día, relacionándolas con el movimiento aparente del Sol en el cielo. q\tExplica cómo se producen el día y la noche por\n• edio de una maqueta o modelo de la Tierra y del Sol. q\tObserva y registra algunos patrones de regularidad (ciclo del día y la noche), elabora tablas y comunica los resultados. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-404",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 4 (Naturales 4°)",
+        "enunciado": "Comprende que las fases de la Luna se deben a la posición relativa del Sol, la Luna y la Tierra a lo largo del mes.",
+        "evidencias": "• q\tRealiza observaciones de la forma de la Luna y las registra mediante dibujos, explicando cómo varían a lo largo del mes. q\tPredice cuál sería la fase de la Luna que un observador vería desde la Tierra, dada una cierta posición relativa entre la Tierra, el Sol y la Luna. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-405",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 5 (Naturales 4°)",
+        "enunciado": "Comprende que existen distintos tipos de mezclas (homogéneas y heterogéneas) que de acuerdo con los materiales que las componen pueden separarse mediante diferentes técnicas (filtración, tamizado, decantación, evaporación).",
+        "evidencias": "• q\tClasifica como homogénea o heterogénea una mezcla dada, a partir del número de fases observadas. q\tSelecciona las técnicas para separar una mezcla dada, de acuerdo con las propiedades de sus componentes. q\tPredice el tipo de mezcla que se producirá a partir de la combinación de materiales, considerando",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-406",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 6 (Naturales 4°)",
+        "enunciado": "Comprende que los organismos cumplen distintas funciones en cada uno de los niveles tróficos y que las relaciones entre ellos pueden representarse en cadenas y redes alimenticias.",
+        "evidencias": "• q\tIdentifica los niveles tróficos en cadenas y redes alimenticias y establece la función de cada uno en un ecosistema. q\tIndica qué puede ocurrir con las distintas poblaciones que forman parte de una red alimenticia cuando se altera cualquiera de sus niveles. q\tRepresenta cadenas, pirámides o redes tróficas para establecer relaciones entre los niveles tróficos. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-407",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 4°",
+        "codigo_oficial": "DBA 7 (Naturales 4°)",
+        "enunciado": "Comprende que existen distintos tipos de ecosistemas (terrestres y acuáticos) y que sus características físicas (temperatura, humedad, tipos de suelo, altitud) permiten que habiten en ellos diferentes seres vivos.",
+        "evidencias": "• q\tDiferencia tipos de ecosistemas (terrestres y acuáticos) correspondientes a distintas ubicaciones geográficas, para establecer sus principales características. q\tExplica cómo repercuten las características físicas (temperatura, humedad, tipo de suelo, altitud) de ecosistemas (acuáticos y terrestres) en la supervivencia de los organismos que allí habitan. q\tPropone representaciones de los ecosistemas representativos de su región, resaltando sus particularidades (especies endémicas, potencialidades ecoturísticas, entre otros.) y plantea estrategias para su conservación. Ejemplo Identifica entre varios organismos (pez, serpiente, escorpión, arbusto, vaca, perro), cuál o cuáles puede vivir en un ecosistema con las siguientes condiciones: temperaturas diarias con calentamiento del suelo durante el día y un fuerte enfriamiento durante la noche; poca humedad atmosférica, precipitaciones\n• uy escasas e irregulares entre 750 y 150 mm anuales; un río que solo lleva agua después de las precipitaciones y el resto del tiempo sus cauces permanecen secos. Explica cómo repercuten esas características físicas en la supervivencia de los organismos del ecosistema descrito.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-501",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 1 (Naturales 5°)",
+        "enunciado": "Comprende que un circuito eléctrico básico está formado por un generador o fuente (pila), conductores (cables) y uno o más dispositivos (bombillos, motores, timbres), que deben estar conectados apropiadamente (por sus dos polos) para que funcionen y produzcan diferentes efectos.",
+        "evidencias": "• q\tRealiza circuitos eléctricos simples que funcionan con fuentes (pilas), cables y dispositivos (bombillo,\n• otores, timbres) y los representa utilizando los símbolos apropiados. q\tIdentifica y soluciona dificultades cuando construye un circuito que no funciona. q\tIdentifica los diferentes efectos que se producen en los componentes de un circuito como luz y calor en un bombillo, movimiento en un motor y sonido en un timbre. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-502",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 2 (Naturales 5°)",
+        "enunciado": "Comprende que algunos materiales son buenos conductores de la corriente eléctrica y otros no (denominados aislantes) y que el paso de la corriente siempre genera calor.",
+        "evidencias": "• q\tConstruye experimentalmente circuitos sencillos para establecer qué materiales son buenos conductores de la corriente eléctrica y cuáles no. q\tIdentifica, en un conjunto de materiales dados, cuáles son buenos conductores de corriente y cuáles son aislantes de acuerdo a su comportamiento dentro de un circuito eléctrico básico. q\tExplica por qué algunos objetos se fabrican con ciertos materiales (por ejemplo, por qué los cables están recubiertos por plástico y formados por\n• etal) en función de su capacidad para conducir electricidad. q\tVerifica, con el tacto, que los compontes de un circuito (cables, pilas, bombillos, motores) se calientan cuando están funcionando, y lo atribuye al paso de la corriente eléctrica. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-503",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 3 (Naturales 5°)",
+        "enunciado": "Comprende que los sistemas del cuerpo humano están formados por órganos, tejidos y células y que la estructura de cada tipo de célula está relacionada con la función del tejido que forman.",
+        "evidencias": "• q\tExplica la estructura (órganos, tejidos y células) y las funciones de los sistemas de su cuerpo. q\tRelaciona el funcionamiento de los tejidos de un ser vivo con los tipos de células que posee. q\tAsocia el cuidado de sus sistemas con una alimentación e higiene adecuadas. Ejemplo A partir de una situación como la siguiente: En una tarde soleada, Alejandro, un estudiante de quinto grado salió a montar en bicicleta con sus amigos. En el camino Alejandro perdió el control de su bicicleta y cayó. Para no golpear su cabeza, reaccionó con prontitud poniendo sus brazos sobre el suelo con la mala fortuna de rasparse las manos y fracturarse el cúbito y el radio (huesos del brazo). De sus manos salía mucha sangre y sentía dolor. Indica qué órganos y sistemas del cuerpo de Alejandro interactúan mientras monta en bicicleta; igualmente cuáles fueron los tejidos y órganos que se lastimaron y qué tipo de células presenta cada uno; señala de qué manera la estructura de esas células ayuda a cumplir su función dentro del tejido y propone  cuidados que debe tener con su brazo fracturado y sus raspaduras para que sus tejidos se regeneren.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-504",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 5°",
+        "codigo_oficial": "DBA 4 (Naturales 5°)",
+        "enunciado": "Comprende que en los seres humanos (y en muchos otros animales) la nutrición involucra el funcionamiento integrado de un conjunto de sistemas de órganos: digestivo, respiratorio y circulatorio.",
+        "evidencias": "• q\tExplica el camino que siguen los alimentos en el organismo y los cambios que sufren durante el proceso de digestión desde que son ingeridos hasta que los nutrientes llegan a las células. q\tRelaciona las características de los órganos del sistema digestivo (tipos de dientes, características de intestinos y estómagos) de diferentes organismos con los tipos de alimento que consumen. q\tExplica por qué cuando se hace ejercicio físico aumentan tanto la frecuencia cardíaca como la respiratoria y vincula la explicación con los procesos de obtención de energía de las células. q\tExplica el intercambio gaseoso que ocurre en los alvéolos pulmonares, entre la sangre y el aire, y lo relaciona con los procesos de obtención de energía de las células. Ejemplo Explica a qué se debe el aumento del ritmo cardiaco de los jugadores de fútbol después de treinta\n• inutos de partido, identificando las necesidades de energía en sus células, que se libera a partir de la combinación del oxígeno (proveniente del sistema respiratorio) y de los nutrientes (provenientes del sistema digestivo) que son llevados por la sangre (como parte del sistema circulatorio).",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      }
+    ],
+    "age_range": "9 a 10 años (Básica Primaria Superior: Grados 4° y 5°)"
+  },
+  "3": {
+    "num": 3,
+    "roman": "III",
+    "name": "CICLO 3",
+    "file_name": "CICLO 3.xlsx",
+    "stage_title": "CICLO III: Grados 6° y 7° (Básica Secundaria Inicial)",
+    "grados": [
+      "Grado 6° (Bachillerato)",
+      "Grado 7° (Bachillerato)"
+    ],
+    "dba_count": 57,
+    "lenguaje": [
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Defino una temática para la elaboración de un texto oral con fines argumentativos.",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Seleccionar y delimitar temas pertinentes para elaborar textos orales argumentativos en debates.",
+        "Reconoce temas relevantes de su entorno y explica por qué son importantes para debatir.",
+        "Selecciona y justifica un tema de interés general o comunitario para desarrollar oralmente.",
+        "[Cognitiva-Reflexiva] Escucha y respeta las ideas de otros al momento de decidir el tema; demuestra apertura al diálogo."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Formulo una hipótesis para demostrarla en un texto oral con fines argumentativos.",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Formular hipótesis claras y estructurar argumentos para defender posturas en foros escolares.",
+        "Identifica la diferencia entre una opinión y una hipótesis sustentada.",
+        "Formula una hipótesis clara que sirva de base para organizar argumentos.",
+        "[Ético-Proyectiva] Muestra seguridad y respeto al exponer su punto de vista."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Llevo a cabo procedimientos de búsqueda, selección y almacenamiento de información acerca de la temática que voy a tratar.",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Buscar, seleccionar y registrar información de diversas fuentes para sustentar ensayos y discursos.",
+        "Distingue fuentes confiables y reconoce distintos tipos de información (hechos, opiniones, datos).",
+        "Elabora fichas o registros donde clasifica información según criterios de pertinencia.",
+        "[Social-Ciudadana] Demuestra curiosidad y responsabilidad en el manejo de la información."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Elaboro un plan textual, jerarquizando la información obtenida de diversas fuentes.",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Estructurar textos expositivos y explicativos con cohesión y coherencia sobre riesgos ambientales.",
+        "Reconoce la función de las partes del texto (introducción, desarrollo, conclusión).",
+        "Diseña un esquema o mapa que jerarquiza las ideas según su relevancia",
+        "[Personal-Emocional] Asume una actitud organizada y perseverante frente al trabajo de planeación."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Caracterizo estrategias argumentativas de tipo descriptivo.",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Interpretar novelas, cuentos y mitos universales reconociendo valores y dilemas éticos.",
+        "Identifica las características de una descripción argumentativa.",
+        "Subraya o ejemplifica estrategias descriptivas en textos leídos o escuchados.",
+        "[Cognitiva-Reflexiva] Valora la claridad y precisión como parte de una buena comunicación."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Utilizo estrategias descriptivas para producir un texto oral con fines argumentativos",
+        "Conozco y utilizo algunas estrategias argumentativas que posibilitan la construcción de textos orales en situaciones comunicativas auténticas",
+        "Analizar críticamente la publicidad y discursos mediáticos identificando estereotipos y sesgos.",
+        "Comprende el valor de la descripción para reforzar argumentos.",
+        "Incorpora descripciones pertinentes en su texto o exposición oral.",
+        "[Ético-Proyectiva] Se expresa con seguridad y coherencia, cuidando el respeto hacia su audiencia."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Defino una temática para la producción de un texto narrativo.",
+        "Produzco textos escritos que responden a necesidades específicas de comunicación, a procedimientos sistemáticos de elaboración y establezco nexos intertextuales y extratextuales.",
+        "Elegir y enfocar un tema para construir una historia con sentido.",
+        "Explica qué tema quiere narrar y por qué lo considera significativo.",
+        "Selecciona una temática y plantea el conflicto o idea central del relato.",
+        "[Social-Ciudadana] Muestra creatividad e interés por comunicar experiencias propias o colectivas."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Llevo a cabo procedimientos de búsqueda, selección y almacenamiento de información acerca de la temática que voy a tratar en mi texto narrativo.",
+        "Produzco textos escritos que responden a necesidades específicas de comunicación, a procedimientos sistemáticos de elaboración y establezco nexos intertextuales y extratextuales.",
+        "Reunir y organizar información o experiencias que sirvan para narrar una historia.",
+        "Reconoce la relación entre contexto y personajes en un relato.",
+        "Reúne testimonios, datos o recuerdos que enriquezcan su historia.",
+        "[Personal-Emocional] Escucha y respeta relatos de otros, reconociendo la diversidad de experiencias."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Elaboro un plan textual, organizando la información en secuencias lógicas.",
+        "Produzco textos escritos que responden a necesidades específicas de comunicación, a procedimientos sistemáticos de elaboración y establezco nexos intertextuales y extratextuales.",
+        "Planear y ordenar los hechos principales de la narración.",
+        "Reconoce la secuencia lógica de un relato.",
+        "Diseña un guion o esquema narrativo con eventos ordenados.",
+        "[Cognitiva-Reflexiva] Muestra constancia y organización al planear su trabajo."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Produzco una primera versión del texto narrativo, reviso y reescribo el texto a partir de las observaciones de mis compañeros y del profesor.",
+        "Produzco textos escritos que responden a necesidades específicas de comunicación, a procedimientos sistemáticos de elaboración y establezco nexos intertextuales y extratextuales.",
+        "Escribir, revisar y mejorar un texto narrativo con base en la retroalimentación recibida.",
+        "Comprende la importancia de revisar y mejorar los textos.",
+        "Reescribe su texto incorporando observaciones de sus pares y del docente.",
+        "[Ético-Proyectiva] Recibe con apertura la retroalimentación y demuestra disposición para mejorar."
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Integro en mi texto recursos que evidencien relaciones intertextuales y extratextuales (referencias a otros textos, contextos o discursos)",
+        "Produzco textos escritos que responden a necesidades específicas de comunicación, a procedimientos sistemáticos de elaboración y establezco nexos intertextuales y extratextuales.",
+        "Relacionar e integrar ideas o referencias de otros textos para enriquecer la narración.",
+        "Reconoce ejemplos de intertextualidad (alusiones, citas, referencias).",
+        "Incorpora referencias a otros textos, contextos o autores para reforzar su narración o argumento.",
+        "[Social-Ciudadana] Valora la cultura y la lectura como fuentes de inspiración y aprendizaje."
+      ],
+      [
+        "COMPRENSIÓN E INTERPRETACIÓN TEXTUAL",
+        "Reconozco las características de los diversos tipos de texto que leo.",
+        "Comprendo e interpreto diversos tipos de texto, para establecer sus relaciones internas y su clasificación en una tipología textual.",
+        "Identificar y describir las características principales de distintos tipos de texto.",
+        "Explica con sus propias palabras qué distingue un texto narrativo, expositivo o argumentativo.",
+        "Clasifica fragmentos o textos completos según su tipo y propósito comunicativo.",
+        "[Personal-Emocional] Muestra interés por explorar diferentes tipos de textos y comenta sus preferencias lectoras."
+      ]
+    ],
+    "matematicas": [
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Reconozco significados del número en diferentes contextos (medición, conteo, comparación, codificación, localización entre otros).",
+        "Recordar + Comprender",
+        "Interpretar y operar con números enteros y racionales en contextos de variación y balances.",
+        "Identifica tipos de significado del número en ejemplos cotidianos.",
+        "Clasifica situaciones según el significado del número presente.",
+        "[Social-Ciudadana] Comparte ejemplos numéricos del entorno con disposición."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Describo, comparo y cuantifico situaciones con números, en diferentes contextos y con diversas representaciones.",
+        "Comprender + Aplicar",
+        "Resolver problemas de proporcionalidad directa e inversa aplicados a dosis, mezclas y rendimientos.",
+        "Explica qué significan los números de una situación",
+        "Organiza datos en tablas, dibujos o frases y compara cantidades.",
+        "[Personal-Emocional] Registra datos ordenadamente para facilitar lectura e interpretación."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Describo situaciones que requieren el uso de medidas relativas.",
+        "Comprender",
+        "Calcular áreas y volúmenes de prismas y cilindros para almacenamiento de agua y suministros.",
+        "Reconoce expresiones de relación relativa en ejemplos reales.",
+        "Representa relaciones relativas en esquemas o frases simples..",
+        "[Cognitiva-Reflexiva] Justifica sus explicaciones con ejemplos cercanos."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Describo situaciones de medición utilizando fracciones comunes.",
+        "Comprender + Aplicar",
+        "Formular y resolver ecuaciones lineales de primer grado para modelar situaciones de recursos.",
+        "Reconoce fracciones como partes de un entero o medida.",
+        "Representa una medida usando fracciones en dibujos o situaciones reales.",
+        "[Ético-Proyectiva] Comparte ejemplos reales donde usa fracciones en contextos cotidianos."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Uso representaciones –principalmente concretas y pictóricas– para explicar el valor de posición en el sistema de numeración decimal.",
+        "Comprender + Aplicar",
+        "Interpretar medidas de tendencia central (media, mediana, moda) en reportes de diagnóstico escolar.",
+        "Identifica unidades, décimas y centésimas en un número decimal.",
+        "Construye o dibuja modelos que representan el valor posicional.",
+        "[Social-Ciudadana] Usa con cuidado materiales y representaciones al explicar."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Uso representaciones –principalmente concretas y pictóricas– para realizar equivalencias de un número en las diferentes unidades del sistema decimal.",
+        "Aplicar + Analizar",
+        "Aplicar y representar equivalencias de un mismo número en distintas unidades del sistema decimal mediante material concreto, tablas y diagr",
+        "Reconoce unidades del sistema decimal (u-d-c).",
+        "Transforma un número en equivalencias mediante tablas o materiales.",
+        "[Personal-Emocional] Explica con claridad el procedimiento que usó para la equivalencia."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Reconozco propiedades de los números (ser par, ser impar, etc.) y relaciones entre ellos (ser mayor que, ser menor que, ser múltiplo de, ser divisible por, etc.) en diferentes contextos.",
+        "Recordar + Analizar",
+        "Identificar y clasificar números según sus propiedades (paridad, múltiplos, divisibilidad) y compararlos en situaciones reales.",
+        "Identifica números pares/impares y múltiplos en listas dadas.",
+        "Clasifica números según propiedades",
+        "[Cognitiva-Reflexiva] Explica con respeto y claridad por qué un número cumple una propiedad."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Resuelvo y formulo problemas en situaciones aditivas de composición y de transformación.",
+        "Aplicar + Crear",
+        "Plantear y resolver problemas de suma y resta que involucren juntar, separar o transformar cantidades en contextos significativos.",
+        "Reconoce cuándo una situación requiere sumar o restar.",
+        "Resuelve problemas aditivos justificando su procedimiento.",
+        "[Ético-Proyectiva] Plantea problemas nuevos que involucren suma o resta."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Resuelvo y formulo problemas en situaciones de variación proporcional",
+        "Aplicar + Crear",
+        "Resolver y formular problemas sencillos de variación proporcional (aumentos, disminuciones y “por cada…”) en contextos cercanos",
+        "Identifica expresiones de proporcionalidad en ejemplos reales.",
+        "Resuelve problemas proporcionales explicando la relación usada.",
+        "[Social-Ciudadana] Propone nuevas situaciones proporcionales del entorno."
+      ],
+      [
+        "Pensamiento numérico y sistemas numéricos",
+        "Uso diversas estrategias de cálculo (especialmente cálculo mental) y de estimación para resolver problemas en situaciones aditivas y multiplicativas",
+        "Aplicar",
+        "Seleccionar y usar estrategias de cálculo mental y estimación para aproximar y comprobar resultados en problemas aditivos y multiplicativos de la vida diaria.",
+        "Identifica estrategias como redondeo, aproximación, descomposición.",
+        "Resuelve problemas usando estrategias de cálculo mental.",
+        "[Personal-Emocional] Elige estrategias con autonomía y confianza."
+      ]
+    ],
+    "sociales": [
+      [
+        "Eje 1: Identidades, Diversidades y Sujetos Sociales",
+        "Caracterizo las dinámicas poblacionales, los procesos migratorios y la diversidad cultural de las comunidades en el territorio.",
+        "Reconozco la diversidad étnica, cultural y social de Colombia y de las civilizaciones humanas.",
+        "Analizar las civilizaciones antiguas y sus formas de adaptación a los ecosistemas y ríos.",
+        "Conceptual: Dinámicas poblacionales, migración forzada, diversidad étnica (Afro, Indígena, Raizal).\nProcedimental: Análisis de mapas demográficos y testimonios locales.\nActitudinal: Respeto y valoración de la diversidad.",
+        "Identifica los factores que inciden en los desplazamientos y la composición multicultural.",
+        "Elabora cartografías sociales sencillas sobre la diversidad cultural de su comunidad."
+      ],
+      [
+        "Eje 1: Identidades, Diversidades y Sujetos Sociales",
+        "Identifico las características culturales y legados de los pueblos originarios y afrodescendientes de Colombia.",
+        "Reconozco y respeto los derechos fundamentales y la diversidad étnica consagrada en la Constitución.",
+        "Explicar la estructura física y política de Colombia y la distribución de sus recursos naturales.",
+        "Conceptual: Tradiciones culturales, saberes ancestrales, patrimonio vivo.\nProcedimental: Registro oral de relatos y costumbres comunitarias.\nActitudinal: Autoestima cultural.",
+        "Describe costumbres y relatos tradicionales presentes en su territorio.",
+        "Comparte tradiciones familiares y comunitarias mediante expresiones orales o gráficas."
+      ],
+      [
+        "Eje 2: Pensamiento Crítico, Comunicación y Diálogo",
+        "Comparo y contrasto diferentes fuentes (testimonios, noticias, relatos) para analizar un hecho social o comunitario.",
+        "Utilizo diversas fuentes de información para comprender situaciones sociales e históricas.",
+        "Evaluar los mecanismos constitucionales de participación ciudadana y protección de los DDHH.",
+        "Conceptual: Fuentes primarias y secundarias, puntos de vista, contraste de información.\nProcedimental: Comparación crítica de discursos y noticias.\nActitudinal: Rigor y espíritu crítico.",
+        "Distingue entre hechos y opiniones en fuentes orales y escritas.",
+        "Formula preguntas de indagación y compara relatos sobre un mismo evento."
+      ],
+      [
+        "Eje 3: Acción Territorial, Sostenibilidad y Gestión del Riesgo",
+        "Identifico zonas de riesgo, cuencas hídricas y elementos del entorno geográfico para proponer acciones de autoprotección comunitaria.",
+        "Reconozco la relación entre las características geográficas, los recursos del territorio y la gestión comunitaria del riesgo.",
+        "Elaborar cartografía social identificando factores de vulnerabilidad, amenazas y rutas seguras.",
+        "Conceptual: Geografía local, cuencas, zonas seguras y de amenaza en la comunidad.\nProcedimental: Mapeo de riesgos y rutas de evacuación escolar.\nActitudinal: Conciencia de prevención y cuidado colectivo.",
+        "Ubica las zonas seguras y los puntos de riesgo geográfico en la escuela y el barrio.",
+        "Dibuja un croquis de autoprotección comunitaria señalando áreas de vulnerabilidad."
+      ],
+      [
+        "Eje 3: Acción Territorial, Sostenibilidad y Gestión del Riesgo",
+        "Analizo el impacto de las actividades productivas y el cambio climático en el acceso al agua y la sostenibilidad del territorio.",
+        "Analizo cómo las actividades humanas transforman el espacio geográfico y generan problemas socioambientales.",
+        "Explicar las causas de problemáticas socioambientales y su incidencia en la vida comunitaria.",
+        "Conceptual: Recursos naturales, uso del suelo, cambio climático, justicia ambiental.\nProcedimental: Registro de problemáticas de agua y residuos en la vereda/barrio.\nActitudinal: Compromiso con la sostenibilidad.",
+        "Explica la importancia de cuidar las cuencas hídricas locales.",
+        "Propone alternativas prácticas para el uso responsable del agua en la escuela."
+      ],
+      [
+        "Eje 4: Pensar Históricamente (Ley 1874/2017)",
+        "Explico las características y legados culturales de las sociedades antiguas y medievales y su influencia en el mundo actual.",
+        "Comprendo que el presente es resultado de procesos históricos de cambio y continuidad.",
+        "Comparar formas de organización social y aportes culturales de civilizaciones del pasado.",
+        "Conceptual: Civilizaciones antiguas y medievales, legados científicos, jurídicos y artísticos.\nProcedimental: Elaboración de líneas de tiempo y cuadros comparativos.\nActitudinal: Curiosidad histórica.",
+        "Identifica aportes clave de civilizaciones del pasado en la vida contemporánea.",
+        "Organiza hechos históricos en esquemas temporales de causa y consecuencia."
+      ],
+      [
+        "Eje 4: Pensar Históricamente (Ley 1874/2017)",
+        "Comprendo el impacto social, demográfico y cultural del periodo colonial en los pueblos indígenas y afrodescendientes.",
+        "Analizo los procesos de encuentro, conquista y colonización en América y Colombia.",
+        "Analizar críticamente las relaciones de poder y las transformaciones culturales durante la Colonia.",
+        "Conceptual: Encuentro cultural, colonización, mestizaje, resistencia indígena y afro.\nProcedimental: Análisis de documentos coloniales y relatos de resistencia.\nActitudinal: Empatía histórica y justicia social.",
+        "Explica los efectos de la época colonial en las estructuras sociales de Colombia.",
+        "Redacta textos reflexivos sobre los procesos de resistencia y preservación cultural."
+      ],
+      [
+        "Eje 5: Conflicto Armado, Memoria Histórica y Cultura de Paz",
+        "Identifico las causas de conflictos cotidianos y del conflicto armado en el territorio para proponer rutas de diálogo y reconciliación.",
+        "Reconozco la importancia de la memoria histórica, la no repetición y los mecanismos pacíficos de resolución de conflictos.",
+        "Reconocer el diálogo y la escucha activa como herramientas básicas para la convivencia pacífica.",
+        "Conceptual: Conflicto, diálogo, memoria colectiva, convivencia escolar, no violencia.\nProcedimental: Aplicación de técnicas de escucha activa y mediación de pares.\nActitudinal: Empatía y rechazo a la violencia.",
+        "Reconoce que los conflictos pueden resolverse mediante el diálogo sin recurrir a la agresión.",
+        "Aplica pasos básicos de mediación pacífica ante desacuerdos en el aula."
+      ],
+      [
+        "Eje 5: Conflicto Armado, Memoria Histórica y Cultura de Paz",
+        "Analizo relatos de resiliencia y reconstrucción del tejido social en comunidades afectadas por el conflicto.",
+        "Comprendo el valor de la verdad, la reparación y las garantías de no repetición en la construcción de paz comunitaria.",
+        "Evaluar iniciativas comunitarias de paz y reconstrucción de memoria histórica.",
+        "Conceptual: Memoria histórica, víctimas, justicia restaurativa, tejido social.\nProcedimental: Recolección y socialización de relatos de esperanza y resiliencia comunitaria.\nActitudinal: Solidaridad y compromiso con la paz.",
+        "Describe cómo las comunidades logran recuperarse tras situaciones de crisis o conflicto.",
+        "Crea una galería de relatos comunitarios de paz y convivencia."
+      ],
+      [
+        "Eje 6: Democracia, Ciudadanía Activa y Justicia Social",
+        "Identifico las ramas del poder público, los derechos de la niñez y los mecanismos de participación en el gobierno escolar y municipal.",
+        "Comprendo la estructura del Estado colombiano, los derechos fundamentales y los mecanismos de participación ciudadana.",
+        "Explicar las funciones del gobierno escolar y las instituciones de protección de derechos de NNA.",
+        "Conceptual: Constitución de 1991, ramas del poder, derechos de los niños (ICBF, Personería), gobierno escolar.\nProcedimental: Simulación de elecciones escolares y peticiones ciudadanas.\nActitudinal: Sentido cívico.",
+        "Explica a qué instancias acudir para la protección de sus derechos.",
+        "Participa en la elaboración de acuerdos de convivencia y propuestas para el personero escolar."
+      ]
+    ],
+    "naturales": [
+      [
+        "Entorno Vivo y Biodiversidad",
+        "Explico la estructura y función de las células procariotas y eucariotas y la diversidad de seres vivos en mi entorno.",
+        "Comprendo la estructura celular como unidad básica de la vida y los criterios de clasificación biológica.",
+        "Explicar la estructura celular y las funciones de los organelos en seres unicelulares y pluricelulares.",
+        "Conceptual: Célula (partes y funciones), reinos de la naturaleza, biodiversidad colombiana.\nProcedimental: Observación y registro de seres vivos en muestras locales.\nActitudinal: Respeto por todas las formas de vida.",
+        "Distingue entre células animales, vegetales y bacterianas y sus funciones básicas.",
+        "Clasifica seres vivos de su región según criterios morfológicos y ecológicos."
+      ],
+      [
+        "Salud, Nutrición y Sistemas Humanos",
+        "Relaciono el funcionamiento de los sistemas digestivo, circulatorio, respiratorio y excretor con hábitos de higiene y nutrición en emergencias.",
+        "Comprendo la función de los sistemas del cuerpo humano en los procesos de nutrición y mantenimiento de la salud.",
+        "Analizar los ciclos biogeoquímicos (agua, carbono, nitrógeno) y su alteración por la acción humana.",
+        "Conceptual: Sistemas de nutrición humana, valor calórico y nutricional, higiene básica.\nProcedimental: Diseño de dietas equilibradas con alimentos disponibles en el territorio.\nActitudinal: Autocuidado del cuerpo.",
+        "Explica la función de los órganos de la digestión y la importancia de nutrientes esenciales.",
+        "Aplica protocolos de lavado de manos y conservación de alimentos en la escuela."
+      ],
+      [
+        "Entorno Físico-Químico y Agua Segura (WASH)",
+        "Aplico métodos de separación de mezclas (filtración, decantación, ebullición) para la purificación y desinfección de agua de consumo.",
+        "Comprendo las propiedades de la materia, la estructura de las sustancias y los métodos de separación de mezclas.",
+        "Clasificar sustancias puras y mezclas implementando métodos de separación en laboratorio y campo.",
+        "Conceptual: Materia, estados físicos, sustancias puras y mezclas, métodos de purificación.\nProcedimental: Construcción de un filtro casero de arena, grava y carbón.\nActitudinal: Cuidado del recurso hídrico.",
+        "Distingue mezclas homogéneas y heterogéneas y reconoce agentes contaminantes del agua.",
+        "Construye y opera un filtro de agua de emergencia con materiales del medio."
+      ],
+      [
+        "Entorno Físico-Químico: Materia y Elementos",
+        "Reconozco los elementos químicos esenciales para la vida y los compuestos comunes presentes en el entorno natural.",
+        "Comprendo el modelo atómico simple y la organización de los elementos en la tabla periódica.",
+        "Diseñar protocolos de saneamiento básico, manejo de excretas y desinfección WASH en la escuela.",
+        "Conceptual: Átomo, partículas subatómicas, tabla periódica, enlaces químicos básicos.\nProcedimental: Interpretación de símbolos químicos en etiquetas de productos cotidianos.\nActitudinal: Rigor científico.",
+        "Identifica los símbolos y propiedades de elementos clave como Carbono, Hidrógeno, Oxígeno y Nitrógeno.",
+        "Agrupa sustancias de uso cotidiano según su composición química."
+      ],
+      [
+        "Ecosistemas, Redes Tróficas y Ciclos Biogeoquímicos",
+        "Analizo los ciclos biogeoquímicos (agua, carbono, nitrógeno) y el flujo de energía en las cadenas tróficas locales.",
+        "Comprendo las relaciones entre los organismos y los factores abióticos en los ecosistemas.",
+        "Explicar cómo circula el agua y la energía en los ecosistemas del territorio.",
+        "Conceptual: Ecosistema, factores bióticos/abióticos, ciclo del agua, fotosíntesis y cadenas tróficas.\nProcedimental: Elaboración de diagramas de redes alimentarias de la región.\nActitudinal: Conciencia ecológica.",
+        "Describe las etapas del ciclo hidrológico y su impacto en el clima local.",
+        "Diseña un modelo de red trófica con especies de fauna y flora nativas."
+      ],
+      [
+        "Ecosistemas y Cambio Climático",
+        "Propongo alternativas de restauración ambiental, manejo de residuos sólidos y prevención de la deforestación en mi comunidad.",
+        "Evalúo el impacto de las actividades humanas en la alteración de los ecosistemas y propongo acciones de mitigación.",
+        "Diseñar un plan escolar de gestión de residuos y reforestación comunitaria.",
+        "Conceptual: Deforestación, efecto invernadero, residuos sólidos, compostaje, restauración ecológica.\nProcedimental: Implementación de huertas escolares o puntos ecológicos de reciclaje.\nActitudinal: Liderazgo ambiental.",
+        "Identifica los principales factores que degradan los suelos y bosques locales.",
+        "Diseña una campaña escolar para el manejo adecuado de residuos y ahorro de energía."
+      ],
+      [
+        "Entorno Físico: Fuerzas, Movimiento y Energía",
+        "Explico cómo actúan las fuerzas en fenómenos naturales (sismos, deslizamientos, corrientes de agua) y en máquinas simples.",
+        "Comprendo la relación entre fuerza, masa y aceleración y las diferentes formas de transferencia de energía.",
+        "Analizar la acción de la gravedad, la fricción y la presión en eventos geológicos y cotidianos.",
+        "Conceptual: Fuerzas (gravedad, fricción, tensión), energía mecánica, térmica y lumínica, estabilidad de estructuras.\nProcedimental: Experimentos sencillos sobre palancas, planos inclinados y resistencia sísmica.\nActitudinal: Pensamiento lógico y preventivo.",
+        "Explica la relación entre la pendiente del terreno, la gravedad y la ocurrencia de derrumbes.",
+        "Construye maquetas que demuestren la estabilidad estructural frente a vibraciones."
+      ],
+      [
+        "Entorno Físico: Energía y Tecnologías Limpias",
+        "Diseño soluciones sencillas de aprovechamiento de energía solar o eólica para situaciones de corte de fluido eléctrico.",
+        "Analizo la conservación de la energía y el aprovechamiento de fuentes renovables en contextos rurales o de emergencia.",
+        "Crear dispositivos o prototipos de bajo costo para iluminación o cocción solar en emergencias.",
+        "Conceptual: Energías renovables (solar, eólica, biomasa), conservación de energía, circuitos básicos.\nProcedimental: Construcción de un calentador o linterna solar casera.\nActitudinal: Innovación y resiliencia.",
+        "Describe cómo se transforma la energía lumínica en energía térmica o eléctrica.",
+        "Construye un prototipo sencillo de cocina o calentador solar con material reciclado."
+      ]
+    ],
+    "dba_records": [
+      {
+        "id": "DBA-L-601",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 1 (Lenguaje 6°)",
+        "enunciado": "Utiliza la información ofrecida por los medios de comunicación, teniendo en cuenta el mensaje, los interlocutores, la intencionalidad y el contexto de producción, para participar en los procesos comunicativos de su entorno.",
+        "evidencias": "•  Reconoce una visión particular de mundo de las distintas interlocuciones a las que accede en los\n• edios de comunicación.\n•  Interpreta los mensajes que circulan en los medios de comunicación de su contexto.\n•  Busca información específica en los contenidos emitidos por diversos medios de comunicación.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-602",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 2 (Lenguaje 6°)",
+        "enunciado": "Crea organizadores gráficos en los que integra signos verbales y no verbales para dar cuenta de sus conocimientos.",
+        "evidencias": "•  Utiliza los organizadores gráficos para procesar la información que encuentra en diferentes fuentes.\n•  Expone sus ideas en torno a un tema específico\n• ediante organizadores gráficos.\n•  Interpreta signos no verbales presentes en algunos textos gráficos, tales como mapas de ideas, cuadros sinópticos, planos, infografías y esquemas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-603",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 3 (Lenguaje 6°)",
+        "enunciado": "Reconoce las obras literarias como una posibilidad de circulación del conocimiento y de desarrollo de su imaginación.",
+        "evidencias": "•  Comprende que las obras literarias se enmarcan en contextos culturales e históricos que promueven la circulación de ciertos conocimientos.\n•  Interpreta los argumentos y temáticas que se enuncian en las obras literarias para crear nuevos textos.\n•  Define elementos literarios tales como personajes, lugar, tiempo, sentimientos acciones al interior de una obra literaria.\n•  Reconoce que elementos como el ritmo y la rima se emplean para comunicar sentimientos o emociones cuando se declaman textos poéticos. Ejemplo u\t Comprende y produce obras literarias a partir del análisis de elementos como:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-604",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 4 (Lenguaje 6°)",
+        "enunciado": "Identifica algunas expresiones de diferentes regiones y contextos en las obras literarias.",
+        "evidencias": "•  Reconoce que en las obras literarias se recrea la cultura propia de diferentes regiones.\n•  Comprende el sentido que tienen algunas expresiones populares al interior de las obras literarias.\n•  Clasifica expresiones formales y populares de la lengua en textos literarios.\n•  Recita textos literarios en los que se emplean expresiones populares con diferentes matices de voz. Ejemplo Frente a obras pertenecientes a diferentes contextos: Identifica las expresiones de su región y las compara con las de otras regiones: Extracto de: IE Normal Superior La Inmaculada. (2016). Negro he sido, negro soy, negro vengo, negro voy. Bogotá: Ministerio de Educación Nacional; Save the children.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-605",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 5 (Lenguaje 6°)",
+        "enunciado": "Interpreta obras de la tradición popular propias de su entorno.",
+        "evidencias": "•  Reconoce el componente cultural en coplas, trovas y refranes.\n•  Distingue los sentidos de expresiones literales y figuradas que circulan en obras de la tradición popular.\n•  Comprende los elementos líricos y las temáticas usadas en las expresiones artísticas de su entorno.\n•  Identifica la estructura de los textos de la tradición oral y las semejanzas con otro tipo de composiciones.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-606",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 6 (Lenguaje 6°)",
+        "enunciado": "Comprende diversos tipos de texto, a partir del análisis de sus contenidos, características formales e intenciones comunicativas.",
+        "evidencias": "•  Infiere la intención comunicativa de los textos (narrar, informar, exponer, argumentar, describir) a partir de las circunstancias en que han sido creados.\n•  Reconoce que los textos son el resultado de un grupo de párrafos que desarrollan ideas con diferente jerarquía y que están relacionados entre sí por un contenido general.\n•  Interpreta la función de elementos no verbales en el sentido del texto, como uso de negrita, corchetes, comillas, guiones, entre otros. Ejemplo Realiza un análisis de la intención comunicativa, las ideas centrales y la función de los signos: Palacios, A. (2010). Las estrellas son negras. Bogotá: Ministerio de Cultura. Recuperado de: www.banrepcultural.org",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-607",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 7 (Lenguaje 6°)",
+        "enunciado": "Produce discursos orales y los adecúa a las circunstancias del contexto: el público, la intención comunicativa y el tema a desarrollar.",
+        "evidencias": "•  Analiza el público a quien se dirige y las exigencias propias del contexto para producir textos orales.\n•  Selecciona las ideas que emplea en un discurso oral.\n•  Ordena su discurso de manera lógica para facilitar la comprensión de sus interlocutores.\n•  Adecúa las cualidades de la voz (volumen, tono) para dar expresividad a sus producciones orales. Ejemplo Para preparar la producción de un discurso oral:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-608",
+        "area": "Lengua Castellana",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 8 (Lenguaje 6°)",
+        "enunciado": "Produce diversos tipos de texto atendiendo a los destinatarios, al medio en que se escribirá y a los propósitos comunicativos.",
+        "evidencias": "•  Elige, entre diversos tipos de texto, aquel que\n• ejor se adecúa al propósito comunicativo del texto que debe escribir.\n•  Consulta diversas fuentes para nutrir sus textos, y comprende el sentido de lo que escribe atendiendo a factores como el contexto, la temática y el propósito comunicativo.\n•  Tiene en cuenta las concordancias gramaticales entre los elementos de la oración (género, número) al momento de escribir textos. Ejemplo Frente a una situación de comunicación específica como la producción de un diario de viaje: u\tRecopila información sobre un viaje, o una visita, a un lugar diferente a la casa, barrio o localidad. u\tEscribe todas las ideas sobre el viaje, tratando de hacer descripciones detalladas sobre el lugar, por ejemplo: la fecha, el clima, el paisaje y el vestuario de las personas. u\tEscribe el texto teniendo en cuenta que el propósito comunicativo es el de narrar. u\tRevisa la concordancia de las oraciones empleadas en el escrito. u\tIlustra con un dibujo o una fotografía el texto sobre el viaje.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-701",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 1 (Lenguaje 7°)",
+        "enunciado": "Clasifica la información que circula en los medios de comunicación con los que interactúa y la retoma como referente para sus producciones discursivas.",
+        "evidencias": "•  Recoge información con el fin de expresar su punto de vista frente a los medios de comunicación con los que interactúa.\n•  Selecciona la información principal que encuentra en los diferentes medios de comunicación y la utiliza para apoyar sus producciones.\n•  Analiza la estructura de la información que circula por los medios de comunicación y la emplea como soporte para sus producciones discursivas. Ejemplo u\t Elige una temática de actualidad y rastrea la información que encuentra sobre ella en diferentes medios de comunicación: prensa impresa o electrónica, noticieros, revistas o programas radiales. u\t Relaciona la información más relevante en el siguiente formato: Periódico Noticiero        Periódico      Noticiero local          de la noche      nacional         radial u\t Con base en la información recolectada, escribe una carta al lector para contradecir o apoyar una de las publicaciones revisadas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-702",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 2 (Lenguaje 7°)",
+        "enunciado": "Reconoce las diferencias y semejanzas entre sistemas verbales y no verbales para utilizarlos en contextos escolares y sociales.",
+        "evidencias": "•  Comprende la intención comunicativa de textos que contienen segmentos verbales y no verbales.\n•  Interpreta los mensajes difundidos por medio de sistemas verbales y no verbales del contexto.\n•  Reconoce la organización de los sistemas verbales y no verbales en el contexto y cómo estos contribuyen a dar sentido a los mensajes.\n•  Comprende que los gestos permiten complementar los mensajes y ayudan en la construcción de sentido por parte del interlocutor. Ejemplo Para comprender textos que emplean sistemas verbales y no verbales de comunicación: u \t Reconoce el sentido que tienen elementos como:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-703",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 3 (Lenguaje 7°)",
+        "enunciado": "Establece conexiones entre los elementos presentes en la literatura y los hechos históricos, culturales y sociales en los que se han producido.",
+        "evidencias": "•  Analiza el desarrollo de hechos históricos y conflictos sociales en historias presentes en obras literarias.\n•  Comprende la realidad que circunda a las obras literarias a partir de los conflictos y hechos desarrollados en textos como novelas y obras teatrales.\n•  Señala las diferencias entre textos literarios y no literarios que tratan hechos históricos y conflictos sociales a partir del reconocimiento de sus recursos estilísticos. Ejemplo Durante el análisis de una obra literaria: u Lee novelas que presentan acontecimientos históricos (un ejemplo podría ser la novela El día del odio de José Antonio Osorio Lizarazo). Identifica el tema general que se presenta y señala las ideas que lo soportan. u Organiza esta información en un cuadro sinóptico como el que se presenta en la imagen: u Busca información histórica relacionada con el tema para generar una discusión sobre los sucesos narrados en el texto y los acontecidos en la realidad del país durante una época específica.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-704",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 4 (Lenguaje 7°)",
+        "enunciado": "Clasifica las producciones literarias a partir del análisis de su contenido y estructura en diferentes géneros literarios.",
+        "evidencias": "•  Reconoce en los géneros literarios las visiones de mundo que imprimen los seres humanos en sus interacciones sociales.\n•  Categoriza las temáticas de los textos literarios con los que interactúa y en función de ello establece el género al que pertenecen.\n•  Analiza las características formales de los textos literarios con los que se relaciona, y a partir de ellas establece el género al que pertenecen y la época en que fueron escritos. Ejemplo Clasifica obras literarias en géneros como:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-705",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 5 (Lenguaje 7°)",
+        "enunciado": "Comprende discursos orales producidos con un objetivo determinado en diversos contextos sociales y escolares.",
+        "evidencias": "•  Escucha los discursos orales de su entorno para deducir los propósitos comunicativos de un interlocutor.\n•  Distingue líneas temáticas en los discursos que escucha, la manera como son planteadas por el autor, y las conexiones entre unas y otras a propósito de su intención comunicativa.\n•  Anticipa la estructura con que un interlocutor puede organizar su discurso oral.\n•  Discrimina los sonidos que hay en el ambiente para comprender el contexto donde se produce un discurso oral. Ejemplo Durante la emisión de un discurso oral: u \tIdentifica las características generales de un tema, por ejemplo, en  una conferencia sobre las tribus urbanas, comprende el tipo de música, la vestimenta, la ideología y otros aspectos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-706",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 6 (Lenguaje 7°)",
+        "enunciado": "Interpreta textos informativos, expositivos, narrativos, líricos, argumentativos y descriptivos, y da cuenta de sus características formales y no formales.",
+        "evidencias": "•  Identifica y caracteriza al posible destinatario del texto a partir del tratamiento de la temática.\n•  Identifica elementos como temáticas, léxico especializado y estilo empleados en los textos.\n•  Ubica el texto en una tipología particular de acuerdo con su estructura interna y las características formales empleadas. Ejemplo Establece semejanzas y diferencias entre periódicos, revistas, enciclopedias, libros de texto del colegio, cartillas y directorios, para identificar sus usos, estructuras, temáticas, contextos de circulación y expresiones empleadas.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-707",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 7 (Lenguaje 7°)",
+        "enunciado": "Construye narraciones orales, para lo cual retoma las características de los géneros que quiere relatar y los contextos de circulación de su discurso.",
+        "evidencias": "•  Define la estructura y el contenido de una producción oral, atendiendo a la necesidad comunicativa de narrar en un contexto particular. Da cuenta de la intencionalidad narrativa con la que ha elaborado su producción textual oral.\n•  Explica las problemáticas principales de sus narraciones orales, teniendo en cuenta las impresiones de sus interlocutores.\n•  Narra oralmente un acontecimiento en consideración a los elementos que componen una narración (lugar, tiempo, personajes, acciones).\n•  Articula los sonidos del discurso para dar claridad y expresividad a la narración. Ejemplo En un espacio en el que comparte narraciones orales: u \tEscucha con atención a sus compañeros para comprender los momentos de una narración y los sucesos que se relatan.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-708",
+        "area": "Lengua Castellana",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 8 (Lenguaje 7°)",
+        "enunciado": "Produce textos verbales y no verbales conforme a las características de una tipología seleccionada, a partir de un proceso de planificación textual.",
+        "evidencias": "•  Sabe cómo emplear diversos tipos de texto atendiendo al propósito comunicativo.\n•  Desarrolla en sus textos un único tema central, alrededor del cual organiza una serie de subtemas.\n•  Explica los conceptos principales de sus textos a partir de los párrafos en los que desarrolla su definición.\n•  Prepara esquemas previos a la escritura para estructurar jerárquicamente las ideas a desenvolver en su texto. Usa diversos tipos de conectores para unir las ideas del texto. Ejemplo A partir de la selección de un tipo de escrito como la reseña: Hace un plan de escritura como el siguiente y lo desarrolla en la producción del escrito:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-601",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 1 (Matemáticas 6°)",
+        "enunciado": "Interpreta y utiliza los números enteros y racionales en sus diferentes representaciones y contextos.",
+        "evidencias": "• Compara y ordena números enteros en la recta numérica.\n• Resuelve situaciones de ganancias/pérdidas y altitudes.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-602",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 2 (Matemáticas 6°)",
+        "enunciado": "Utiliza las propiedades de los números enteros para resolver problemas aditivos y multiplicativos combinados.",
+        "evidencias": "• Aplica la ley de signos y jerarquía de operaciones.\n• Resuelve ecuaciones de estructura aditiva simple.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-603",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 3 (Matemáticas 6°)",
+        "enunciado": "Comprende la relación entre fracciones, decimales, razones y porcentajes.",
+        "evidencias": "• Convierte entre fracciones, decimales y porcentajes.\n• Calcula descuentos e incrementos porcentuales.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-604",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 4 (Matemáticas 6°)",
+        "enunciado": "Propone y utiliza criterios para clasificar figuras bidimensionales y tridimensionales según sus propiedades.",
+        "evidencias": "• Clasifica polígonos regulares e irregulares.\n• Analiza prismas, pirámides y poliedros regulares.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-605",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 5 (Matemáticas 6°)",
+        "enunciado": "Calcula e interpreta el perímetro y el área de figuras planas en contextos de diseño y medición.",
+        "evidencias": "• Aplica fórmulas de área para figuras compuestas.\n• Resuelve problemas de estimación de materiales de construcción.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-606",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 6 (Matemáticas 6°)",
+        "enunciado": "Comprende y utiliza tablas de frecuencias, diagramas de barras, circulares y pictogramas para resumir información.",
+        "evidencias": "• Construye tablas de frecuencia con datos agrupados.\n• Interpreta diagramas circulares y de líneas.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-607",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 7 (Matemáticas 6°)",
+        "enunciado": "Analiza situaciones de variación proporcional directa y resuelve problemas con regla de tres.",
+        "evidencias": "• Identifica magnitudes directamente correlacionadas.\n• Calcula escalas en planos y mapas comunitarios.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-608",
+        "area": "Matemáticas",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 8 (Matemáticas 6°)",
+        "enunciado": "Reconoce y utiliza el lenguaje algebraico para representar relaciones numéricas y regularidades.",
+        "evidencias": "• Generaliza secuencias con expresiones algebraicas sencillas.\n• Traduce enunciados verbales a expresiones matemáticas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-701",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 1 (Matemáticas 7°)",
+        "enunciado": "Comprende y aplica las operaciones con números racionales (fracciones y decimales positivos y negativos).",
+        "evidencias": "• Realiza operaciones combinadas con números racionales.\n• Resuelve problemas contextualizados con racionales.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-702",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 2 (Matemáticas 7°)",
+        "enunciado": "Resuelve problemas que involucran ecuaciones lineales de primer grado con una incógnita.",
+        "evidencias": "• Modela situaciones reales mediante ecuaciones lineales.\n• Despeja variables aplicando propiedades de la igualdad.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-703",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 3 (Matemáticas 7°)",
+        "enunciado": "Comprende y aplica la proporcionalidad directa e inversa en problemas de contexto social y productivo.",
+        "evidencias": "• Resuelve problemas de regla de tres simple y compuesta.\n• Aplica repartos proporcionales directos e inversos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-704",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 4 (Matemáticas 7°)",
+        "enunciado": "Aplica transformaciones geométricas (traslación, rotación, reflexión, homotecia) en el plano cartesiano.",
+        "evidencias": "• Determina coordenadas de figuras transformadas.\n• Identifica simetrías y patrones en diseños artísticos y mapas.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-705",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 5 (Matemáticas 7°)",
+        "enunciado": "Calcula e interpreta el área superficial y el volumen de cuerpos geométricos (prismas y cilindros).",
+        "evidencias": "• Calcula volúmenes de almacenamiento de agua y víveres.\n• Relaciona capacidad y masa en fluidos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-706",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 6 (Matemáticas 7°)",
+        "enunciado": "Calcula e interpreta medidas de tendencia central (media, mediana, moda) y el rango en conjuntos de datos.",
+        "evidencias": "• Compara dos conjuntos de datos usando medidas estadísticas.\n• Identifica el sesgo o simetría de una distribución.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-707",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 7 (Matemáticas 7°)",
+        "enunciado": "Calcula la probabilidad teórica y experimental de eventos aleatorios simples y compuestos.",
+        "evidencias": "• Construye diagramas de árbol para listar espacios muestrales.\n• Interpreta la regla de Laplace en eventos equiprobables.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-708",
+        "area": "Matemáticas",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 8 (Matemáticas 7°)",
+        "enunciado": "Modela situaciones de cambio constante mediante funciones lineales y sus representaciones gráficas.",
+        "evidencias": "• Grafica rectas a partir de su pendiente e intercepto.\n• Interpreta la tasa de cambio en contextos físicos o económicos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-601",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 1 (Sociales 6°)",
+        "enunciado": "Comprende que existen diversas explicaciones y teorías sobre el origen del universo en nuestra búsqueda por entender que hacemos parte de un mundo más amplio.",
+        "evidencias": "• l Interpreta diferentes teorías científicas sobre el origen del universo (Big Bang, inflacionaria,\n• ultiuniversos), que le permiten reconocer cómo surgimos, cuándo y por qué. l Explica los elementos que componen nuestro sistema solar: planetas, estrellas, asteroides, cometas y su relación con la vida en la Tierra. l Compara teorías científicas, religiosas y mitos de culturas ancestrales sobre el origen del universo. l Expresa la importancia de explorar el universo como una posibilidad para entender el origen y el cambio de las formas de vida en la Tierra. Ejemplo A partir de la lectura de tres textos cortos sobre el origen del universo: de la Biblia, el Génesis (1:1- 10); de La historia jamás contada, de Carl Sagan, teoría del Big Bang; y el mito de Chiminigagua (mito muisca),  completa el siguiente cuadro:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-602",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 2 (Sociales 6°)",
+        "enunciado": "Comprende que la Tierra es un planeta en constante transformación cuyos cambios influyen en las formas del relieve terrestre y en la vida de las comunidades que la habitan.",
+        "evidencias": "• l Describe las interacciones que se dan entre el relieve, el clima, las zonas bioclimáticas (cambios en la temperaturas, mareas, vientos, corrientes\n• arinas, nubes, radiación solar) y las acciones humanas. l Explica la teoría de la deriva continental y la dinámica interna de la Tierra reconociendo los efectos que esta genera: sismos, tsunamis, erupciones volcánicas y cambios en el paisaje. l Diferencia las repercusiones de algunos fenómenos climáticos (huracanes, tornados, fenómeno del niño y de la niña, lluvias tropicales) en la vida de las personas. l Argumenta a partir de evidencias los efectos de un sismo en la población (tomando como ejemplo uno sucedido en Colombia) y conoce las recomendaciones a seguir, en caso de un sismo. Argumentos Similitudes Diferencias Su opinión Génesis La historia jamás contada Mito Muisca",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-603",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 3 (Sociales 6°)",
+        "enunciado": "Analiza los aspectos centrales del proceso de hominización y del desarrollo tecnológico dados durante la prehistoria, para explicar las transformaciones del entorno.",
+        "evidencias": "• l Diferencia las características fisiológicas y anatómicas presentes en los australopithecus, homo habilis, homo erectus, homo neanderthalensis y homo sapiens sapiens, reconociendo los factores que incidieron en estos cambios. l Identifica los cambios tecnológicos que tuvieron los homínidos (piedras talladas, huesos, conchas….) así como las repercusiones en su vida y en el entorno. l Explica el papel del trabajo de los homínidos (caza, pesca, recolección) y la importancia de estas actividades en la organización social y en el proceso de humanización. l Discute teorías sobre las posibles formas de poblamiento en los diferentes continentes.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-604",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 4 (Sociales 6°)",
+        "enunciado": "Analiza cómo en las sociedades antiguas surgieron las primeras ciudades y el papel de la agricultura y el comercio para la expansión de estas.",
+        "evidencias": "• l Relaciona el origen de la agricultura con el desarrollo de las sociedades antiguas y la aparición de elementos que permanecen en la actualidad (canales de riego, la escritura, el ladrillo). l Explica el papel de los ríos Nilo, Tigris, Éufrates, Indo, Ganges, Huang He y Yangtsé Kiang, en la construcción de las primeras ciudades y el origen de las civilizaciones antiguas y los ubica en un\n• apa actual de África y Asia. l Establece las implicaciones del proceso de sedentarización, la domesticación de animales y el empleo de mano de obra esclavizada, en la revolución agrícola para la humanidad. l Expresa opiniones sobre la influencia de la agricultura, el surgimiento de las ciudades, las primeras obras de ingeniería en la antigüedad y, su desarrollo en las sociedades actuales.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-605",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 5 (Sociales 6°)",
+        "enunciado": "Analiza los legados que las sociedades americanas prehispánicas dejaron en diversos campos.",
+        "evidencias": "• l Representa y sitúa en un mapa los espacios geográ cos en que se desarrollaron sociedades prehispánicas como mayas, aztecas, incas, chibchas u otros grupos ancestrales. l Describe los aportes tecnológicos y culturales de las sociedades prehispánicas como el calendario\n• aya, la arquitectura, los aspectos religiosos, la astronomía y las técnicas de cultivo. l y a c itílo p ,la ic o s a r u tc u rts e a l a r a p\n•  o C económica de las sociedades prehispánicas, con las sociedades actuales del continente americano, y establece similitudes y diferencias en sus procesos históricos. l Explica la importancia de alimentos domesticados en América como el maíz, el tomate y la papa, en la gastronomía del mundo contemporáneo.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-606",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 6 (Sociales 6°)",
+        "enunciado": "Analiza las distintas formas de gobierno ejercidas en la antigüedad y las compara con el ejercicio del poder político en el mundo contemporáneo.",
+        "evidencias": "• l Reconoce algunas formas de gobierno que se desarrollaron en las sociedades antiguas (tiranía, aristocracia, monarquía, teocracia, democracia ateniense) e identifica aquellas que permanecen en la actualidad. l Compara las características de la democracia ateniense, del poder feudal, del absolutismo y de la democracia parlamentaria. l Explica cómo en la antigüedad se accedía al poder, cómo se justificaba (origen divino), cómo se mantenía (uso de la fuerza y creación de ejércitos) y cuál era el protagonismo de las personas en la elección de sus gobernantes. l Describe semejanzas y diferencias que se obser van entre la democracia ateniense y las democracias actuales, en especial la colombiana, para señalar fortalezas, debilidades y alternativas que conduzcan a una mayor democratización. Machu Picchu (Perú). Fotografía tomada de: www.pixabay.com (banco de imágenes) en: goo.gl/BFM3xO Teotihuacán (Méxic o). Fotografía tomada de: www.pixabay.com (banco de imágenes) en: goo.gl/BFM3xO",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-607",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 7 (Sociales 6°)",
+        "enunciado": "Analiza cómo en el escenario político democrático entran en juego intereses desde diferentes sectores sociales, políticos y económicos, los cuales deben ser dirimidos por los ciudadanos.",
+        "evidencias": "• l Describe el origen de la ciudadanía, los cambios que ha tenido en el tiempo y su significado actual. l\tArgumenta la importancia de participar activamente en la toma de decisiones para el bienestar colectivo en la sociedad, en el contexto de una democracia. l Explica, a partir de ejemplos, las consecuencias que pueden tener, sobre sí mismo y sobre los demás, la no participación activa en las decisiones de una comunidad. l Plantea razones que permitan comprender la importancia de respetar las opiniones ajenas y aportar constructivamente a las discusiones en el grupo.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-608",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 8 (Sociales 6°)",
+        "enunciado": "Comprende que en una sociedad democrática no es aceptable ninguna forma de discriminación por origen étnico, creencias religiosas, género, discapacidad y/o apariencia física.",
+        "evidencias": "• l Reconoce que las personas tenemos derecho a no ser discriminadas, a la luz de la Declaración Universal de los Derechos Humanos y de la Constitución Nacional de Colombia de 1991. l Argumenta cómo los derechos de las personas se basan en el principio de la igualdad ante la ley, aunque cada uno viva y se exprese de\n• anera diferente. l Explica que pertenece a una sociedad multicultural y cómo ésta, ha contribuido a la construcción de su identidad (familia, colegio, barrio, región, país). l Reconoce a partir de situaciones de la vida cotidiana que el respeto hacia el otro es inherente a la condición humana.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-701",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 1 (Sociales 7°)",
+        "enunciado": "Comprende que las representaciones del mundo han cambiado a partir de las visiones de quienes las elaboran y de los avances de la tecnología.",
+        "evidencias": "• l Explica la importancia de los viajes de los exploradores del medioevo en la expansión del conocimiento del mundo. l Relaciona la concepción y representación del\n• undo que se tenía en la Edad Media influenciada por la Biblia con la cultura espacial europea y señala los cambios y las continuidades más relevantes. l Compara las representaciones del mundo conocido en la Edad Media y el representado hoy desde los mapas e imágenes satelitales y, describe el uso de la cartografía en la vida cotidiana de las personas. l Argumenta que las representaciones del espacio son producto de las imágenes que se tienen del mundo y que se modifican con el tiempo (fotografías aéreas, imágenes de satélite). Ejemplo Mediante la lectura de planisferios de diferentes épocas, explicar las diversas visiones del mundo que los pueblos han construido con base en el desarrollo de acciones como los viajes de los exploradores, el uso de instrumentos como la brújula y, el desarrollo del telescopio y de las imágenes de satélite, entre otros. Eratóstenes de Cirene (240 a.C) Mapa basado en www.wordpress.com (sistema de gestión de contenidos) en: https://goo.gl/LReagQ Mapa basado en www.cuentosydemasparapeques.com (página de literatura infantil) en: https://goo.gl/iSndAL Marco Polo (1275) Imagenes de Satélite (2014)",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-702",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 2 (Sociales 7°)",
+        "enunciado": "Interpreta las relaciones entre el crecimiento de la población, el desarrollo de los centros urbanos y las problemáticas sociales.",
+        "evidencias": "• l\tReconoce y utiliza conceptos propios de la geografía urbana (desarrollo, crecimiento, conurbación, área metropolitana y planificación urbana) a partir de la observación directa de estos fenómenos en su contexto. l\tLocaliza en zonas de la ciudad o del municipio la concentración de fenómenos sociales como la pobreza, la violencia, los asentamientos informales y explica las posibles causas y consecuencias de estos. l\tRelaciona la industrialización y la migración del campo a la ciudad con los procesos de organización de las ciudades en Colombia en las últimas décadas. l\tCompara las problemáticas urbanas\n• ás recurrentes de las ciudades actuales (contaminación, movilidad, sobrepoblación, falta de viviendas dignas, desempleo, inseguridad y\n• igraciones internas) con algunas similares en otros períodos históricos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-703",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 3 (Sociales 7°)",
+        "enunciado": "Analiza la influencia del imperio romano en la cultura de occidente y los aportes en diversos campos como la literatura, las leyes, la ingeniería y  la vida cotidiana.",
+        "evidencias": "• l\tReconoce el imperio romano como un sistema político, militar y económico que ejerció control territorial sobre gran parte de Europa y que influyó en la cultura latinoamericana. l\tDescribe el legado cultural del imperio romano en aspectos tales como el sistema político, el desarrollo de la infraestructura (vial, acueductos y puertos) y el comercio en diferentes lugares de Europa, norte de África y América Latina. l\tArgumenta las razones que llevaron a la crisis del imperio romano, para identificar los factores que pueden incidir en la decadencia de un Estado hoy en día. l\tExplica algunas actividades de la vida contemporánea que se inventaron en la antigua Roma (práctica de juegos públicos, el matrimonio, los gimnasios, uso de baños públicos,.. ) y cómo estas se han transformado con el paso de los siglos. Ejemplo A partir de la lectura comprensiva de un mapa del imperio romano, localiza las áreas de influencia y los legados que dejaron en estos territorios.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-704",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 4 (Sociales 7°)",
+        "enunciado": "Analiza la Edad Media como un periodo histórico que dio origen a instituciones sociales, económicas y políticas en relación con el mismo período de las sociedades precolombinas.",
+        "evidencias": "• l\tDescribe los principales eventos que identificaron las sociedades europeas en la Edad Media (lucha entre imperios, modelo económico feudal, poder económico y político de la iglesia, desigualdad social). l\tReconoce la organización social de las culturas precolombinas en los períodos clásico y posclásico y señala similitudes y diferencias con las sociedades medievales de Europa. l\tCompara características sociales, culturales y económicas de ciudades del año 1000 en el mundo como: París (Europa), Teotihuacán y Tikal (Centroamérica), Damasco (Asia) y El Cairo (Africa). l\tArgumenta las continuidades del ordenamiento político y social instaurado durante la Edad Media y las discontinuidades en el desarrollo de las culturas precolombinas con la llegada de los europeos a América. Fotografía tomada de:  www.pixabay.com (banco de imágenes) en: goo.gl/kOCkHy",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-705",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 5 (Sociales 7°)",
+        "enunciado": "Analiza el Renacimiento como una época que dio paso en Europa a una nueva configuración cultural en campos como las ciencias, la política, las artes y la literatura.",
+        "evidencias": "• l\tDescribe algunos acontecimientos que dieron paso a la Modernidad e incidieron en un nuevo pensamiento político, social, económico e intelectual. l\tInterpreta mapas temáticos  en los que reconoce ciudades estratégicas de Europa en el contexto del Renacimiento, por su importancia económica y cultural. l\tExplica las implicaciones políticas y económicas que tuvo la Reforma protestante para Europa y América. l\tReconoce en las expresiones artísticas del Renacimiento (pintura, escultura y literatura) la vida cotidiana y la organización social de los pueblos. Fotografía tomada de:  www.pixabay.com (banco de imágenes) en: goo.gl/dx9gOg",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-706",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 6 (Sociales 7°)",
+        "enunciado": "Evalúa las causas y consecuencias de los procesos de Conquista y colonización europea dados en en América.",
+        "evidencias": "• l Describe los procesos de Conquista y colonización en América, llevados a cabo por españoles, portugueses, ingleses, franceses y holandeses. l Explica los cambios y continuidades de las organizaciones sociales, políticas y económicas instauradas durante la época colonial en América. l Interpreta las consecuencias demográficas, políticas y culturales que tuvo para los pueblos ancestrales la llegada de los europeos al continente americano. l Argumenta la importancia de la diversidad étnica y cultural del país como elemento constitutivo de la identidad de América Latina. Ejemplo A partir de la reconstrucción de un contexto histó- rico, como el de la llegada de los europeos a América, compara diferentes hechos de que se dieron durante este período y explica el rol que tuvieron los distintos actores.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-707",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 7 (Sociales 7°)",
+        "enunciado": "Co mprende la responsabilidad que tiene una sociedad democrática para evitar la violación de los derechos fundamentales de sus ciudadanos.",
+        "evidencias": "• l Compara la Declaración Universal de los Derechos Humanos con los derechos fundamentales enunciados en la Constitución. l Plantea soluciones alternativas a las problemáticas de discriminación que se evidencian en Colombia. l Expresa una posición argumentada, a partir del estudio de casos  y la norma constitucional frente a hechos o situaciones en los que se vulneran los derechos fundamentales. l Identifica en qué situaciones puede usar  la tutela como mecanismo para la protección y defensa de los derechos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-708",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 8 (Sociales 7°)",
+        "enunciado": "Aplica procesos y técnicas de mediación de conflictos en pro del establecimiento de una cultura de la paz.",
+        "evidencias": "• l\tIdentifica las consecuencias de los conflictos en la vida cotidiana de las personas y plantea acciones para resolverlos de manera negociada. l\tReconoce los distintos puntos de vista de personas o grupos en una situación de conflicto, para plantear posibles alternativas de solución. l\tCompara diferentes estrategias para la solución de conflictos, como la negociación, el arbitraje, la conciliación, la mediación escolar y el diálogo, para la construcción de escenarios de paz y el fortalecimiento de la dignidad de las personas. l\tExplica situaciones donde el conflicto se ha convertido en una oportunidad para aprender y fortalecer las relaciones interpersonales y sociales. Ejemplo A partir de la identificación de una situación de índole económica, ambiental o social de su comunidad, diseña una estrategia que permita generar escenarios de paz, que contenga: diagnóstico, identificación de causas, actores, plan de acción y evaluación.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-601",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 1 (Naturales 6°)",
+        "enunciado": "Comprende cómo los cuerpos pueden ser cargados eléctricamente asociando esta carga a efectos de atracción y repulsión.",
+        "evidencias": "• q\tUtiliza procedimientos (frotar barra de vidrio con seda, barra de plástico con un paño, contacto entre una barra de vidrio cargada eléctricamente con una bola de icopor) con diferentes materiales para cargar eléctricamente un cuerpo. q\tIdentifica si los cuerpos tienen cargas iguales o contrarias a partir de los efectos de atracción o repulsión que se producen. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-602",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 2 (Naturales 6°)",
+        "enunciado": "Comprende que la temperatura (T) y la presión (P) influyen en algunas propiedades fisicoquímicas (solubilidad, viscosidad, densidad, puntos de ebullición y fusión) de las sustancias, y que estas pueden ser aprovechadas en las técnicas de separación de mezclas.",
+        "evidencias": "• q\tInterpreta los resultados de experimentos en los que se observa la influencia de la variación de la temperatura (T) y la presión (P) en los cambios de  estado de un grupo de sustancias, representándolos mediante el uso de gráficos y tablas. q\tExplica la relación entre la temperatura (T) y la presión (P) con algunas propiedades (densidad, solubilidad, viscosidad, puntos de ebullición y de fusión) de las sustancias a partir de ejemplos. q\tDiseña y realiza experiencias para separar mezclas homogéneas y heterogéneas utilizando técnicas (vaporización, cristalización, destilación), para justificar la elección de las mismas a partir de las propiedades fisicoquímicas de las sustancias involucradas. Ejemplo En la figura se representa una olla a presión con agua en su interior, el calor aportado permite que el agua cambie al estado gaseoso. La tabla de datos representa los valores obtenidos al realizar",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-603",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 3 (Naturales 6°)",
+        "enunciado": "Comprende la clasificación de los materiales a partir de grupos de sustancias (elementos y compuestos) y mezclas (homogéneas y heterogéneas).",
+        "evidencias": "• q\tDiferencia sustancias puras (elementos y compuestos) de mezclas (homogéneas y heterogéneas) en ejemplos de uso cotidiano. q\tIdentifica sustancias de uso cotidiano (sal de cocina, agua, cobre, entre otros) con sus símbolos químicos (NaCl, H2O, Cu). q\tExplica la importancia de las propiedades del agua como solvente para los ecosistemas y los organismos vivos, dando ejemplos de distintas soluciones acuosas. q\tReconoce la importancia de los coloides (como ejemplo de mezcla heterogénea) en los procesos industriales (Pinturas, lacas) y biomédicos (Alimentos y medicinas). un seguimiento al calentamiento del agua hasta que se acciona la válvula de seguridad. A partir de esta información explica la relación de la temperatura y la presión con el comportamiento de la sustancia y representa la relación del tiempo (t) con la temperatura (T) mediante una gráfica en la que identifica el punto de ebullición.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-604",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 4 (Naturales 6°)",
+        "enunciado": "Comprende algunas de las funciones básicas de la célula (transporte de membrana, obtención de energía y división celular) a partir del análisis de su estructura.",
+        "evidencias": "• q\tExplica el rol de la membrana plasmática en el mantenimiento del equilibrio interno de la célula, y describe la interacción del agua y las partículas (ósmosis y difusión) que entran y salen de la célula mediante el uso de modelos. q\tExplica el proceso de respiración celular e identifica el rol de la mitocondria en dicho proceso. q\tInterpreta modelos sobre los procesos de división celular (mitosis), como mecanismos que permiten explicar la regeneración de tejidos y el crecimiento de los organismos. q\tPredice qué ocurre a nivel de transporte de\n• embrana, obtención de energía y división celular en caso de daño de alguna de las organelas celulares.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-605",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 6°",
+        "codigo_oficial": "DBA 5 (Naturales 6°)",
+        "enunciado": "Comprende la clasificación de los organismos en grupos taxonómicos, de acuerdo con el tipo de células que poseen y reconoce la diversidad de especies que constituyen nuestro planeta y las relaciones de parentesco entre ellas.",
+        "evidencias": "• q\tIdentifica organismos (animales o plantas) de su entorno y los clasifica usando gráficos, tablas y otras representaciones siguiendo claves taxonómicas simples. q\tClasifica los organismos en diferentes dominios, de acuerdo con sus tipos de células (procariota, eucariota, animal, vegetal). q\tExplica la clasificación taxonómica como\n• ecanismo que permite reconocer la biodiversidad en el planeta y las relaciones de parentesco entre los organismos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-701",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 1 (Naturales 7°)",
+        "enunciado": "Comprende las formas y las transformaciones de energía en un sistema mecánico y la manera como, en los casos reales, la energía se disipa en el medio (calor, sonido).",
+        "evidencias": "• q\tRelaciona las variables velocidad y posición para describir las formas de energía mecánica (cinética y potencial gravitacional) que tiene un cuerpo en movimiento. q\tIdentifica  las formas de energía mecánica (cinética y potencial) que tienen lugar en diferentes puntos del movimiento en un sistema\n• ecánico (caída libre, montaña rusa, péndulo). q\tRepresenta gráficamente las energías cinética y potencial gravitacional en función del tiempo. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-702",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 2 (Naturales 7°)",
+        "enunciado": "Explica cómo las sustancias se forman a partir de la interacción de los elementos y que estos se encuentran agrupados en un sistema periódico.",
+        "evidencias": "• q\tUbica a los elementos en la Tabla Periódica con relación a los números atómicos (Z) y másicos (A). q\tUsa modelos y representaciones (Bohr, Lewis) que le permiten reconocer la estructura del átomo y su relación con su ubicación en la Tabla Periódica. q\tExplica la variación de algunas de las propiedades (densidad, temperatura de ebullición y fusión) de sustancias simples (metales, no metales,\n• etaloides y gases nobles) en la tabla periódica. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-703",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 3 (Naturales 7°)",
+        "enunciado": "Comprende que en las cadenas y redes tróficas existen flujos de materia y energía, y los relaciona con procesos de nutrición, fotosíntesis y respiración celular.",
+        "evidencias": "• q\tExplica tipos de nutrición (autótrofa y heterótrofa) en las cadenas y redes tróficas dentro de los ecosistemas. q Explica la fotosíntesis como un proceso de construcción de materia orgánica a partir del aprovechamiento de la energía solar y su combinación con el dióxido de carbono del aire y el agua, y predice qué efectos sobre la composición de la atmósfera terrestre podría tener su disminución a nivel global (por ejemplo, a partir de la tala masiva de bosques). q Compara el proceso de fotosíntesis con el de respiración celular, considerando sus reactivos y productos y su función en los organismos. Ejemplo Realiza una lista de organismos de su entorno y dibuja con ellos una red trófica, identificando los organismos autótrofos y heterótrofos; además, explica la eficiencia en los procesos de transformación de\n• ateria y energía que se dan en esta red. Plantea preguntas que posibiliten ejercicios de investigación, donde establece relación entre variables como respiración y nutrición o respiración y fotosíntesis.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-704",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 7°",
+        "codigo_oficial": "DBA 4 (Naturales 7°)",
+        "enunciado": "Comprende la relación entre los ciclos del carbono, el nitrógeno y del agua, explicando su importancia en el mantenimiento de los ecosistemas.",
+        "evidencias": "• q\tEstablece relaciones entre los ciclos del Carbono y Nitrógeno con el  mantenimiento de los suelos en un ecosistema. q\tExplica a partir de casos los efectos de la intervención humana (erosión, contaminación, deforestación) en los ciclos biogeoquímicos del suelo (Carbono, Nitrógeno) y del agua y sus consecuencias ambientales y propone posibles acciones para mitigarlas o remediarlas. q\tReconoce las principales funciones de los\n• icroorganismos, para identificar casos en los que se relacionen con los ciclos biogeoquímicos y su utilidad en la vida diaria. q\tPropone acciones de uso responsable del agua en su hogar, en la escuela y en sus contextos cercanos. Ejemplo A partir de casos como: La minería a cielo abierto, contamina cuerpos de agua por residuos sólidos y vertimientos domésticos e industriales; en consecuencia, aumenta el contenido de los sedimentos generando inundaciones por la desviación de los cauces de los ríos, transformación del paisaje y la pérdida de cultivos. (3 de Mayo de 1995). MINERÍA AFECTA AL MEDIO AMBIENTE. El Tiempo. Recuperado de  http://www.eltiempo.com/ archivo/documento/MAM497060 Un caso particular, ocurrió en Boyacá donde debido a la extracción de carbón a cielo abierto y precisamente en uno de sus páramos, entre diciembre de 2010 y enero de 2011 murieron cerca de 95.000 truchas en la Piscícola de Tasco a causa de la contaminación de las aguas donde se abastecen sus crías.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      }
+    ]
+  },
+  "4": {
+    "num": 4,
+    "roman": "IV",
+    "name": "CICLO 4",
+    "file_name": "CICLO 4.xlsx",
+    "stage_title": "CICLO IV: Grados 8° y 9° (Básica Secundaria Superior - 13 a 14 años)",
+    "grados": [
+      "Grado 8° (Secundaria)",
+      "Grado 9° (Secundaria)"
+    ],
+    "lenguaje": [
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Ensayos argumentativos y artículos de opinión",
+        "DBA 1: Escribo ensayos defendiendo posturas sobre derechos humanos, memoria y paz.",
+        "Procesos cognitivos",
+        "Media",
+        "Construir ensayos estructurados con tesis, argumentos respaldados y contraargumentación.",
+        "Formula tesis claras, argumentos lógicos y citas de fuentes verificadas.",
+        "Redacta manifiestos y artículos de opinión sobre la no repetición del conflicto.",
+        "Asume una postura ética, propositiva y constructiva frente a la realidad social.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN TEXTUAL",
+        "Análisis crítico de discursos, medios y redes sociales",
+        "DBA 2: Evalúo la ideología, sesgos y validez de fuentes periodísticas y redes.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar falacias argumentativas y desinformación en medios masivos y digitales.",
+        "Distingue argumentos falaces, estereotipos y sesgos ideológicos en la prensa.",
+        "Elabora un informe de contraste de fuentes sobre noticias del conflicto local.",
+        "Promueve el pensamiento crítico y la despolarización en debates juveniles.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Literatura testimonial latinoamericana y memoria histórica",
+        "DBA 3: Analizo obras literarias y testimonios sobre la memoria y la dignidad.",
+        "Procesos cognitivos",
+        "Media",
+        "Interpretar recursos estilísticos en crónicas y testimonios del conflicto armado.",
+        "Identifica figuras retóricas, polifonía y simbolismo en crónicas testimoniales.",
+        "Escribe relatos basados en historias de vida y resiliencia de su comunidad.",
+        "Muestra sensibilidad profunda ante el dolor y la dignidad de las víctimas.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "MEDIOS Y COMUNICACIÓN",
+        "Producción de podcasts y contenidos radiales comunitarios",
+        "DBA 4: Diseño productos de comunicación radial y digital para la prevención.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear cápsulas sonoras y podcasts juveniles de gestión del riesgo y derechos.",
+        "Guioniza, graba y edita cápsulas de audio para la emisora escolar comunitaria.",
+        "Produce campañas de prevención del reclutamiento forzado y violencia de género.",
+        "Utiliza las tecnologías de la información con alta responsabilidad social.",
+        "Etapa 3"
+      ],
+      [
+        "ÉTICA DE LA COMUNICACIÓN",
+        "Debates parlamentarios y construcción de consensos",
+        "DBA 5: Participo en debates formales formulando argumentos fundamentados.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar argumentos en dilemas bioéticos y de justicia social mediante el debate.",
+        "Aplica técnicas de refutación respetuosa y búsqueda de consensos colectivos.",
+        "Modera asambleas juveniles para resolver tensiones territoriales.",
+        "Fomenta la cultura de la no violencia y el respeto a la discrepancia.",
+        "Etapa 3"
+      ],
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Elaboración de informes de investigación escolar",
+        "DBA 6: Redacto informes técnicos con metodología, datos estadísticos y conclusiones.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Aplicar normas básicas de citación y rigor metodológico en informes escolares.",
+        "Estructura objetivos, justificación, marco de antecedentes y hallazgos.",
+        "Redacta el informe de la auditoría de riesgos de la institución educativa.",
+        "Demuestra honestidad académica y veracidad en el manejo de datos.",
+        "Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Teatro leído y dramaturgia de reconciliación",
+        "DBA 7: Creo guiones dramáticos que abordan dilemas éticos y reconciliación.",
+        "Procesos cognitivos",
+        "Media",
+        "Crear escenas teatrales para representar situaciones de mediación comunitaria.",
+        "Reconoce acotaciones, diálogos y conflicto dramático en textos teatrales.",
+        "Monta una obra de teatro foro sobre el perdón y la restauración de lazos.",
+        "Valora el arte como vehículo de sanación psicosocial comunitaria.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ]
+    ],
+    "matematicas": [
+      [
+        "Pensamiento Variacional",
+        "Álgebra aplicada y sistemas de ecuaciones lineales",
+        "DBA 1: Modelo relaciones lineales de consumo, transporte y costos en emergencias.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar sistemas de ecuaciones 2x2 para optimizar presupuestos y rutas de ayuda.",
+        "Resuelve sistemas de ecuaciones por métodos algebraicos y gráficos.",
+        "Calcula combinaciones óptimas de raciones y transporte de suministros.",
+        "Demuestra perseverancia y rigor en la modelación de problemas complejos.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Geométrico",
+        "Teorema de Pitágoras y trigonometría de pendientes",
+        "DBA 2: Calculo distancias inaccesibles y pendientes de laderas en riesgo de derrumbe.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar el Teorema de Pitágoras y razones trigonométricas en evaluaciones de terreno.",
+        "Aplica $a^2 + b^2 = c^2$ y razones seno, coseno, tangente en triángulos rectángulos.",
+        "Estima alturas de árboles en riesgo de caída y pendientes de taludes inestables.",
+        "Muestra precisión técnica en levantamientos de campo y seguridad física.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Aleatorio",
+        "Estadística descriptiva, muestreo y dispersión",
+        "DBA 3: Analizo censos de población afectada mediante varianza y desviación estándar.",
+        "Procesos cognitivos",
+        "Alta",
+        "Analizar medidas de dispersión y cuartiles en informes oficiales de emergencia.",
+        "Calcula la media, mediana, varianza, desviación estándar y percentiles.",
+        "Interpreta informes estadísticos del DANE, UNGRD y organismos humanitarios.",
+        "Valora la objetividad, transparencia y ética en el tratamiento de datos.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Variacional",
+        "Funciones cuadráticas y trayectorias parabólicas",
+        "DBA 4: Modelo fenómenos de aceleración, tiro parabólico y optimización de áreas.",
+        "Procesos cognitivos",
+        "Alta",
+        "Modelar situaciones de máxima cobertura mediante el vértice de funciones cuadráticas.",
+        "Identifica concavidad, vértice e interceptos de parábolas $y = ax^2 + bx + c$.",
+        "Calcula el área máxima para el montaje de carpas de albergue temporal.",
+        "Aplica las matemáticas al diseño de soluciones espaciales eficientes.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Métrico",
+        "Cálculo de áreas y volúmenes de cuerpos redondos",
+        "DBA 5: Calculo volúmenes de tanques cilíndricos, conos y reservorios comunitarios.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Aplicar fórmulas de volumen de cilindros y esferas en almacenamiento de agua.",
+        "Calcula $V = \\pi r^2 h$ para tanques cilíndricos y reservorios de emergencia.",
+        "Diseña el plan de cubicaje y almacenamiento de agua para la comunidad escolar.",
+        "Muestra responsabilidad en el cálculo de recursos vitales para la población.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Numérico",
+        "Notación científica y números irracionales en la física",
+        "DBA 6: Utilizo notación científica y leyes de exponentes para expresar magnitudes extremas.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Comprender órdenes de magnitud en escalas sísmicas y concentraciones químicas.",
+        "Opera con potencias de base 10 y números irracionales ($\\pi, \\sqrt{2}$).",
+        "Expresa en notación científica la energía liberada en un sismo y dosis de cloro.",
+        "Aprecia la potencia del lenguaje matemático en las ciencias naturales.",
+        "Etapa 3"
+      ]
+    ],
+    "sociales": [
+      [
+        "Pensar Históricamente",
+        "Conflicto armado en Colombia, causas y memoria histórica",
+        "DBA 1: Analizo el origen, actores y consecuencias del conflicto armado (Ley 1874).",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar el impacto del conflicto en la población civil y los procesos de paz.",
+        "Explica las causas estructurales (tierra, exclusión política) del conflicto colombiano.",
+        "Elabora una línea de tiempo y un archivo de memoria oral comunitaria.",
+        "Se compromete con la reconciliación, la empatía y la no estigmatización.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Acción Territorial",
+        "Geopolítica, medio ambiente y ordenamiento territorial",
+        "DBA 2: Evalúo conflictos socioambientales por megaminería, agua y deforestación.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar los impactos ecológicos de proyectos extractivos en cuencas hidrográficas.",
+        "Analiza la legislación ambiental y los Planes de Ordenamiento Territorial (POT).",
+        "Propone alternativas sostenibles de desarrollo local y protección de páramos.",
+        "Defiende el patrimonio ecológico y el derecho al agua de su comunidad.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Democracia Activa",
+        "Mecanismos de protección constitucional y justicia social",
+        "DBA 3: Utilizo acciones de tutela, derechos de petición y veedurías ciudadanas.",
+        "Procesos cognitivos",
+        "Alta",
+        "Aplicar mecanismos constitucionales para la garantía de derechos fundamentales.",
+        "Diferencia la acción de tutela, el derecho de petición y la acción popular.",
+        "Redacta un derecho de petición para exigir agua potable y salud para su escuela.",
+        "Ejerce una ciudadanía activa, crítica, ética y transformadora de su entorno.",
+        "Etapa 3"
+      ],
+      [
+        "Identidades y Diversidades",
+        "Movimientos sociales y luchas por la equidad de género",
+        "DBA 4: Reconozco el papel de los movimientos juveniles, campesinos y feministas.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Comprender la evolución de los derechos civiles y la igualdad de oportunidades.",
+        "Analiza la historia de las conquistas de derechos de las mujeres y minorías.",
+        "Organiza un foro escolar sobre masculinidades no violentas y equidad de género.",
+        "Promueve el respeto absoluto a la diversidad y la prevención de violencias.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensar Históricamente",
+        "Guerra Fría, dictaduras y revoluciones en América Latina",
+        "DBA 5: Analizo el impacto de las tensiones geopolíticas globales en el continente.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Comparar procesos dictatoriales y transiciones democráticas en América Latina.",
+        "Identifica la Doctrina de Seguridad Nacional y las violaciones a los DDHH.",
+        "Elabora un ensayo sobre la importancia de las instituciones democráticas.",
+        "Valora el Estado de Derecho y las garantías constitucionales de libertad.",
+        "Etapa 3"
+      ]
+    ],
+    "naturales": [
+      [
+        "Entorno Químico",
+        "Reacciones químicas, tabla periódica y desinfección WASH",
+        "DBA 1: Explico reacciones de oxidación, neutralización y desinfección del agua.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la química del cloro, pH y dosificaciones seguras de hipoclorito.",
+        "Identifica reactivos, productos y balanceo de ecuaciones químicas sencillas.",
+        "Calcula y aplica dosificaciones seguras de hipoclorito en tanques de la IE.",
+        "Maneja sustancias químicas con estrictos protocolos de bioseguridad.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "Leyes de Newton, energía mecánica y propagación de ondas sísmicas",
+        "DBA 2: Analizo la propagación de ondas sísmicas y vulnerabilidad estructural.",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar la relación entre fuerza, masa, aceleración y resistencia de edificaciones.",
+        "Diferencia ondas P, S y superficiales generadas en un movimiento telúrico.",
+        "Evalúa la vulnerabilidad de las estructuras escolares ante cargas sísmicas.",
+        "Lidera con solvencia técnica las brigadas de evacuación de la institución.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Educación Ambiental",
+        "Cambio climático global, efecto invernadero y resiliencia",
+        "DBA 3: Propongo planes de adaptación al cambio climático y reforestación comunitaria.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear proyectos escolares de captura de carbono, viveros y ahorro hídrico.",
+        "Explica el efecto invernadero, la huella de carbono y el calentamiento global.",
+        "Lidera el diseño de un vivero escolar de especies nativas para restauración.",
+        "Promueve estilos de vida sostenibles, circulares y de bajo impacto ambiental.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Vivo",
+        "Genética mendeliana, ADN y biodiversidad biológica",
+        "DBA 4: Explico la transmisión de caracteres hereditarios y mutaciones.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Comprender la estructura del ADN y la importancia de la variabilidad genética.",
+        "Resuelve cuadros de Punnett y analiza árboles genealógicos biológicos.",
+        "Elabora un banco de semillas tradicionales para preservar la agrobiodiversidad.",
+        "Reconoce la importancia de la soberanía alimentaria y la bioseguridad.",
+        "Etapa 3"
+      ],
+      [
+        "Entorno Físico-Químico",
+        "Termodinámica, calor, temperatura y equilibrio térmico",
+        "DBA 5: Explico los mecanismos de transferencia de calor (conducción, convección, radiación).",
+        "Procesos cognitivos",
+        "Alta",
+        "Aplicar conceptos térmicos en el diseño de albergues frescos y confortables.",
+        "Diferencia calor de temperatura y calcula equilibrios térmicos simples.",
+        "Diseña modelos de aislamiento térmico para techos y paredes en zonas cálidas.",
+        "Aporta soluciones tecnológicas adaptadas al clima de su región.",
+        "Etapa 3"
+      ]
+    ],
+    "dba_count": 57,
+    "dba_records": [
+      {
+        "id": "DBA-L-801",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 1 (Lenguaje 8°)",
+        "enunciado": "Caracteriza los discursos presentes en los medios de comunicación y otras fuentes de información, atendiendo al contenido, la intención comunicativa del autor y al contexto en que se producen.",
+        "evidencias": "•  Identifica la función social de los medios de comunicación y otras fuentes de información de la cultura, como una forma de construcción de identidad.\n•  Infiere el significado de palabras de acuerdo con el contexto en que se encuentren y los propósitos en que se enmarquen.\n•  Selecciona estrategias para organizar la información que circula en los medios masivos de comunicación. Ejemplo Durante la caracterización de la información emitida en los medios de comunicación, por ejemplo, las noticias: u \tCompara la información presentada por diferentes noticias. u \tAnaliza el lenguaje empleado en cada medio. u \tComprende el manejo que cada medio hace de dicha información. u \tConsidera las implicaciones sociales que conlleva cada mensaje presentado.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-802",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 2 (Lenguaje 8°)",
+        "enunciado": "Relaciona las manifestaciones artísticas con las comunidades y culturas en las que se producen.",
+        "evidencias": "•  Valora expresiones artísticas propias de los distintos pueblos y comunidades.\n•  Determina el contenido expresado en diferentes\n• anifestaciones artísticas.\n•  Resignifica las expresiones artísticas de origen popular para explorar usos no convencionales del léxico.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-803",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 3 (Lenguaje 8°)",
+        "enunciado": "Reconoce en las producciones literarias como cuentos, relatos cortos, fábulas y novelas, aspectos referidos a la estructura formal del género y a la identidad cultural que recrea.",
+        "evidencias": "•  Identifica las estrategias narrativas del autor para relatar su perspectiva sobre lo que ha ocurrido en una región.\n•  Construye el sentido de los textos literarios con base en las interacciones que sostiene con las comunidades de lectores y escritores a las que pertenece.\n•  Determina la identidad cultural presente en textos literarios y la relaciona con épocas y autores.\n•  Distingue las estructuras formales de textos literarios como la presencia de diferentes narradores que se encargan de nutrir la historia con diferentes puntos de vista sobre un suceso. Ejemplo Durante la lectura de obras literarias: u \t Lee textos literarios que contienen sucesos que han ocurrido en una región (por ejemplo, la novela Leopardo al Sol de Laura Restrepo). u \t Consulta sobre los temas y sucesos abordados en la obra (por ejemplo el tema del narcotráfico y el conflicto en Colombia), y los comenta con sus compañeros.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-804",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 4 (Lenguaje 8°)",
+        "enunciado": "Comprende que el género lírico es una construcción mediada por la musicalidad, la rima y el uso de figuras retóricas, que permiten recrear una idea, un sentimiento o una situación.",
+        "evidencias": "•  Relaciona los textos que lee con producciones artísticas en las que se presentan rimas, acompañamientos musicales o imágenes.\n•  Reconoce el sentido de las imágenes poéticas en las obras literarias que lee.\n•  Identifica elementos formales asociados a las figuras retóricas y al tipo de rima utilizada.\n•  Comprende la diferencia que se presenta entre la segmentación silábica gramatical y la segmentación silábica métrica, en los textos poéticos que lee o escribe. Ejemplo En la lectura de textos líricos: u \tReconoce las diferencias entre la escritura de un poema y otros textos. Tomado de: Cote Lamus, E. (2004). Antología. Bogotá: Universidad Externado de Colombia. Eduardo Cote Lamus",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-805",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 5 (Lenguaje 8°)",
+        "enunciado": "Escucha con atención a sus compañeros en diálogos informales y predice los contenidos de la comunicación.",
+        "evidencias": "•  Participa en espacios discursivos que se dan en la cotidianidad de la escuela con el propósito de conocer las posturas de sus compañeros frente a diversos temas.\n•  Comprende los contenidos de un diálogo y predice las posibles ideas que pueden darse en él.\n•  Identifica el nivel de formalidad o informalidad que se da en un diálogo con sus compañeros. Ejemplo Durante una conversación informal con sus compañeros: u \t Escucha lo que dicen sus compañeros y se adecúa al nivel de formalidad de la conversación.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-806",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 6 (Lenguaje 8°)",
+        "enunciado": "Infiere múltiples sentidos en los textos que lee y los relaciona con los conceptos macro del texto y con sus contextos de producción y circulación.",
+        "evidencias": "•  Identifica y caracteriza las voces que hablan en el texto.\n•  Elabora hipótesis sobre el sentido global de un texto a partir de la relación de información explícita e implícita.\n•  Identifica las características retóricas de las tipologías textuales con las que trabaja y señala en sus notas de clase los conceptos más relevantes. Ejemplo u \t Analiza las características propias de un texto como el narrativo: voz que narra, punto de vista de dicha voz, tipos de personajes, lugar, tiempo, orden la historia, recursos como la descripción o el diálogo, entre otras. El perturbado inquilino No creo en fantasmas, pero últimamente unas voces\n• iedosas han abrumado las habitaciones y muchas pisadas han medido la largura polvorienta de los corredores. He percibido charlas en que una voz le cuenta a otra sus pánicas aventuras de caza, o el cabal rendimiento de sus acciones en la capital Edimburgo, o sus prohibidos amores. Estoy muy intranquilo porque es la primera vez que semejantes seres impredecibles perturban la paz de este castillo en el que he sido feliz siglos y siglos, ambulando sus aposentos y patios, atravesando sin abrir las puertas, viendo el alba por entre sus ruinosas paredes, o inventando huracanados silbidos que hacen bambolear las ventanas como si las animara la vida . David Ramírez Tomado de: Bustamante, G. y Kremer, H. (2006). Antología del cuento corto colombiano. Bogotá: Universidad Pedagógica Nacional.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-807",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 7 (Lenguaje 8°)",
+        "enunciado": "Reconstruye en sus intervenciones el sentido de los textos desde la relación existente entre la temática, los interlocutores y el contexto histórico-cultural.",
+        "evidencias": "•  Expone sus puntos de vista para apoyar o contradecir las opiniones de sus interlocutores.\n•  Precisa el significado de los principales conceptos tratados en los textos orales que produce.\n•  Prepara una estructura retórica que contempla el contexto formal, el papel del orador y la posición del auditorio, como base para los intercambios orales en debates, plenarias y sustentaciones. Ejemplo Durante intercambios orales como la plenaria: u \t Plantea sus argumentos a partir de una planeación previa. u \t Conduce el tema de acuerdo con la manera como se desarrolla el discurso. u \t Usa verbos de pensamiento en sus intervenciones (opinar, definir, argumentar, etc.). u \t Apoya o refuta las ideas de sus interlocutores respetando sus posiciones.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-808",
+        "area": "Lengua Castellana",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 8 (Lenguaje 8°)",
+        "enunciado": "Compone diferentes tipos de texto atendiendo a las características de sus ámbitos de uso: privado/público o cotidiano/científico.",
+        "evidencias": "•  Estructura los textos que compone, para lo cual elige entre las diferentes formas que puede asumir la expresión (narración, explicación, descripción, argumentación) y su adecuación al ámbito de uso.\n•  Evalúa sus propios textos atendiendo a las características del género, el léxico empleado y el propósito comunicativo.\n•  Evalúa el uso adecuado de elementos gramaticales y ortográficos en las producciones propias y en las de otros.\n•  Emplea de forma precisa los signos de puntuación. Ejemplo En la composición de un texto escrito específico, por ejemplo un artículo de opinión: u \t Tiene en cuenta la estructura de este tipo de texto: un buen uso de conectores, un manejo adecuado de la ortografía y acontecimientos relacionados que puedan ampliar sus argumentos y que le ayuden a presentar de una manera más convincente sus ideas. Estructura general y estilo Uso de argumentos",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-901",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 1 (Lenguaje 9°)",
+        "enunciado": "Confronta los discursos provenientes de los medios de comunicación con los que interactúa en el medio para afianzar su punto de vista particular.",
+        "evidencias": "•  Participa en medios escolares en los que plantea su postura frente a un acontecimiento, situación o problemática que llama su atención o que incide en la cotidianidad institucional.\n•  Infiere significados implícitos, referentes ideológicos, sociales y culturales en los medios con los que interactúa.\n•  Elabora esquemas en los que relaciona las problemáticas que identifica en los medios de comunicación para proponer alternativas de confrontación y resolución. Ejemplo u \tHace interpretaciones a partir de los titulares y las imágenes de un texto informativo. u \tDefine el significado de las palabras de acuerdo con el contexto y la situación comunicativa en que se ha producido un texto. Adaptado de: Revista Semana. (19 de julio de 2016). Historia de los exámenes, ¿quién y por qué los inventó? Educación. Recuperado de: http://www.semana.com/ educacion/",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-902",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 2 (Lenguaje 9°)",
+        "enunciado": "Incorpora símbolos de orden deportivo, cívico, político, religioso, científico o publicitario en los discursos que produce, teniendo claro su uso dentro del contexto.",
+        "evidencias": "•  Identifica la función que cumplen diferentes símbolos y signos en los contextos comunicativos en los que participa.\n•  Reconoce el sentido de los símbolos presentes en desfiles, carnavales, exposiciones, entre otros.\n•  Utiliza símbolos, íconos u otras representaciones gráficas en los discursos que produce y los vincula con los conceptos de las temáticas a las que se refieren. Ejemplo Crea infografías a partir de una temática específica y en su realización hace un uso efectivo de elementos verbales y no verbales.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-903",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 3 (Lenguaje 9°)",
+        "enunciado": "Analiza el lenguaje literario como una manifestación artística que permite crear ficciones y expresar pensamientos o emociones.",
+        "evidencias": "•  Relaciona su interpretación de una obra literaria con las visiones de mundo vigentes en una época y/o movimiento literario.\n•  Reconoce la literatura como una memoria de los pensamientos y sucesos de una región o un país.\n•  Identifica el sentido del lenguaje figurado dentro de los textos que lee y expresa sus interpretaciones sobre el mismo.\n•  Reconoce que la literatura puede emplear lenguaje figurado y coloquial para dar expresividad al escrito. Ejemplo Durante la lectura de textos literarios: u \tElige cuentos de la tradición literaria para indagar sobre las costumbres, visiones de mundo, las características de los personajes principales y las diferentes versiones de varios autores.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-904",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 4 (Lenguaje 9°)",
+        "enunciado": "Compara los formatos de obras literarias y de producciones audiovisuales con el propósito de analizar elementos propios de la narración.",
+        "evidencias": "•  Identifica estrategias narrativas relacionadas con el abordaje de hechos históricos o problemáticas reales, en obras literarias o en producciones cinematográficas.\n•  Reconoce las problemáticas o los hechos narrados en obras literarias y en producciones audiovisuales.\n•  Reconoce la forma como se presentan los contenidos en textos literarios (prosa o verso) y en textos audiovisuales (planos, ángulos, movimientos de la cámara).\n•  Reconoce los sonidos presentes en producciones audiovisuales: ruidos ambientales, música y cambios en la voz de los personajes. Ejemplo Para comprender la relación entre la narrativa de los textos literarios y de las producciones audiovisuales: Completa una ficha técnica para analizar el contenido de dos obras de su contexto (como la película colombiana “Los colores de la montaña” y la obra literaria colombiana “La carroza de Bolívar”).",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-905",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 5 (Lenguaje 9°)",
+        "enunciado": "Comprende y respeta las opiniones en debates sobre temas de actualidad social.",
+        "evidencias": "•  Respeta los diferentes puntos de vista de sus compañeros y los turnos para tomar la palabra, en los debates en los que participa.\n•  Reconoce las posiciones de sus compañeros en un debate, a partir de la comparación entre lo que escucha y lo que piensa en torno a un tema.\n•  Comprende la estructura o la organización del debate a fin de garantizar la participación de distintas voces con posiciones contrarias.\n•  Analiza las características de la voz de sus interlocutores con el propósito de comprender el tono del discurso: ironía, agresividad, etc. Ejemplo Con el objeto de comprender las opiniones de otros: Participa en un debate en torno a un tema de actualidad social. Comprende que el debate sigue una estructura: presentación de la temática por parte del",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-906",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 6 (Lenguaje 9°)",
+        "enunciado": "Interpreta textos atendiendo al funcionamiento de la lengua en situaciones de comunicación, a partir del uso de estrategias de lectura.",
+        "evidencias": "•  Da cuenta del papel que desempeñan el interlocutor y el contexto en relación con la temática tratada y plantea su posición sobre la\n• isma.\n•  Infiere significados implícitos y referentes ideológicos, sociales y culturales en los textos que lee.\n•  Identifica las estructuras propias de las tipologías textuales que conoce. Ejemplo En la interpretación de textos: u \tSelecciona un texto de actualidad social, cultural o científico y cuestiona el papel de los interlocutores, del contexto, la temática y argumenta la posición personal.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-907",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 7 (Lenguaje 9°)",
+        "enunciado": "Produce textos orales, a partir del empleo de diversas estrategias para exponer sus argumentos.",
+        "evidencias": "•  Argumenta las posturas y sugerencias que plantea, en el momento de proponer alternativas para resolver un problema.\n•  Explica el significado de los conceptos que utiliza en sus opiniones y realiza una síntesis de las ideas\n• ás relevantes de su intervención.\n•  Da cuenta del orden en el que se produce una conversación y de los mecanismos que median la toma de decisiones y la interacción oral con otros.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-908",
+        "area": "Lengua Castellana",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 8 (Lenguaje 9°)",
+        "enunciado": "Produce textos verbales y no verbales, a partir de los planes textuales que elabora, y siguiendo procedimientos sistemáticos de corrección lingüística.",
+        "evidencias": "•  Evalúa el rol que debe cumplir como enunciador de un texto, según el propósito elegido y la situación comunicativa particular.\n•  Evalúa estrategias de progresión y desarrollo del tema seleccionado.\n•  Evalúa el seguimiento de un plan textual y el uso adecuado de elementos gramaticales y ortográficos en los textos que escribe. Ejemplo Realiza planes textuales para la producción de cualquier tipo de escrito (por ejemplo una relatoría) que permitirán, posteriormente, evaluar el texto: Redacta una relatoría sobre un tema de actualidad nacional o internacional a partir de un texto que lo desarrolle. Tiene en cuenta recomendaciones como:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-801",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 1 (Matemáticas 8°)",
+        "enunciado": "Reconoce la existencia de los números reales (incluyendo irracionales) y sus operaciones en la recta numérica.",
+        "evidencias": "• Representa números irracionales geométricamente.\n• Aproxima raíces cuadradas y ubica irracionales en la recta.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-802",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 2 (Matemáticas 8°)",
+        "enunciado": "Construye expresiones algebraicas equivalentes mediante factorización y productos notables.",
+        "evidencias": "• Aplica casos de factorización en polinomios.\n• Resuelve problemas geométricos modelados con expresiones algebraicas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-803",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 3 (Matemáticas 8°)",
+        "enunciado": "Resuelve sistemas de ecuaciones lineales 2x2 utilizando métodos algebraicos y gráficos.",
+        "evidencias": "• Aplica métodos de sustitución, igualación y reducción.\n• Modela problemas de mezclas, logística y costos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-804",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 4 (Matemáticas 8°)",
+        "enunciado": "Aplica el Teorema de Pitágoras y criterios de semejanza y congruencia de triángulos en situaciones reales.",
+        "evidencias": "• Calcula distancias y alturas inaccesibles.\n• Evalúa pendientes y estabilidad estructural de terrenos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-805",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 5 (Matemáticas 8°)",
+        "enunciado": "Calcula áreas y volúmenes de pirámides, conos y esferas en problemas de optimización espacial.",
+        "evidencias": "• Aplica fórmulas de volumen para cuerpos de revolución.\n• Estima capacidades de estructuras comunitarias.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-806",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 6 (Matemáticas 8°)",
+        "enunciado": "Interpreta y calcula medidas de posición (cuartiles, percentiles) y diagramas de caja y bigotes.",
+        "evidencias": "• Analiza la dispersión de datos censales y de salud.\n• Identifica datos atípicos o extremos en una población.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-807",
+        "area": "Matemáticas",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 7 (Matemáticas 8°)",
+        "enunciado": "Modela situaciones de variación funcional afín y cuadrática simple en tablas, fórmulas y gráficas.",
+        "evidencias": "• Identifica el vértice y concavidad de parábolas sencillas.\n• Modela trayectorias de proyectiles o costos parabólicos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-901",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 1 (Matemáticas 9°)",
+        "enunciado": "Utiliza los números reales, notación científica y leyes de exponentes para resolver problemas en ciencias.",
+        "evidencias": "• Opera con potencias, raíces y exponentes racionales.\n• Expresa magnitudes macro y microscópicas en notación científica.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-902",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 2 (Matemáticas 9°)",
+        "enunciado": "Resuelve ecuaciones cuadráticas mediante factorización, completación de cuadrados y fórmula general.",
+        "evidencias": "• Interpreta el discriminante para determinar la naturaleza de las raíces.\n• Modela situaciones de área máxima y trayectorias físicas.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-903",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 3 (Matemáticas 9°)",
+        "enunciado": "Modela situaciones de cambio exponencial y logarítmico en contextos biológicos, demográficos y financieros.",
+        "evidencias": "• Resuelve problemas de crecimiento bacteriano y decaimiento radioactivo.\n• Modela la propagación de epidemias y escala Richter de sismos.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-904",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 4 (Matemáticas 9°)",
+        "enunciado": "Aplica razones trigonométricas básicas (seno, coseno, tangente) en triángulos rectángulos para calcular distancias.",
+        "evidencias": "• Resuelve triángulos rectángulos con ángulos de elevación y depresión.\n• Realiza levantamientos topográficos sencillos en el terreno escolar.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-905",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 5 (Matemáticas 9°)",
+        "enunciado": "Aplica conceptos de geometría analítica plana: distancia entre puntos, punto medio y ecuación de la recta.",
+        "evidencias": "• Determina ecuaciones de rectas paralelas y perpendiculares.\n• Modela rutas de evacuación en coordenadas cartesianas.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-906",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 6 (Matemáticas 9°)",
+        "enunciado": "Calcula e interpreta medidas de dispersión (varianza, desviación estándar) en distribuciones de datos.",
+        "evidencias": "• Compara la homogeneidad de dos grupos de datos.\n• Interpreta informes técnicos y estadísticas oficiales del DANE/UNGRD.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-907",
+        "area": "Matemáticas",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 7 (Matemáticas 9°)",
+        "enunciado": "Utiliza técnicas de conteo (permutaciones y combinaciones) y probabilidad condicional en situaciones de riesgo.",
+        "evidencias": "• Calcula probabilidades en muestreos sin reemplazo.\n• Evalúa matrices de riesgo probabilístico comunitario.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-801",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 1 (Sociales 8°)",
+        "enunciado": "Evalúa la influencia de los procesos de cooperación económica y política entre los Estados Nacionales en la actualidad.",
+        "evidencias": "• l Reconoce la constitución de la Unión Europea como un ejemplo de cooperación entre países, sus objetivos, integrantes y su influencia en el orden mundial. l Describe diversas alianzas de cooperación dadas entre países: MERCOSUR (Suramérica), OTAN (Europa-América), NEPAD (Nueva Alianza para el desarrollo de África) y APEC (Foro de Cooperación Económica Asia-Pacífico). l Formula preguntas sobre cómo lograr el bienestar colectivo desde la cooperación y las alianzas internacionales. l Explica las relaciones económicas y políticas que Colombia sostiene hoy con otros países de la región y el resto del mundo.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-802",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 2 (Sociales 8°)",
+        "enunciado": "Comprende el fenómeno de las migraciones en distintas partes del mundo y cómo afectan a las dinámicas de los países receptores y a países de origen.",
+        "evidencias": "• l Describe el fenómeno de las migraciones humanas que tienen lugar en la actualidad. hacia Europa y hacia América del norte y los países de procedencia. l Reconoce los niveles en el Índice de Desarrollo Humano obtenidos por los diferentes países que reciben migrantes en campos como la educación, la salud y la seguridad. l Explica las principales diferencias entre los países que atraen emigrantes y aquellos de donde salen, así como las consecuencias del fenómeno de las migraciones en las relaciones entre los países. l Argumenta los aportes que han realizado los\n• igrantes a los países que los reciben y a la humanidad en general, casos de algunos artistas, políticos, economistas y científicos naturales y sociales procedentes de otros países. Ejemplo",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-803",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 3 (Sociales 8°)",
+        "enunciado": "Analiza los cambios sociales, económicos, políticos y culturales generados por el surgimiento y consolidación del capitalismo en Europa y las razones por las cuales este sigue siendo un sistema económico vigente.",
+        "evidencias": "• l Describe las transformaciones que se produjeron en Europa a finales del siglo XVIII y durante el siglo XIX a partir del desarrollo del comercio y la industria dando paso al surgimiento y consolidación del capitalismo. l Explica las características del sistema económico capitalista (propiedad privada, libre competencia, capital, consumo,....) y las ventajas o desventajas que trae para las sociedades que lo han asumido. l Compara los sistemas económicos actuales (capitalista, socialista y el de economía mixta) desde ámbitos como: la propiedad, el consumo de los recursos, la planificación y el control del Estado. l Reconoce las diferencias en el nivel de desarrollo económico, político y cultural entre los países de América Latina y de Europa, en la actualidad.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-804",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 4 (Sociales 8°)",
+        "enunciado": "Analiza los procesos de expansión territorial desarrollados por Europa durante el siglo XIX y las nuevas manifestaciones imperialistas observadas en las sociedades contemporáneas.",
+        "evidencias": "• l Describe la expansión y distribución territorial de los imperios europeos en Asia y África durante el siglo XIX e interpreta mapas temáticos. l Relaciona el crecimiento económico Europeo con la explotación de Asia y África durante el siglo XIX. l Compara la influencia de los países colonialistas en el siglo XIX en ámbitos como el comercio y la industria manufacturera, con la que ejercen las actuales potencias mundiales en el sector financiero, las telecomunicaciones, y las nuevas tecnologías de la información. l Explica la influencia actual de países como Estados Unidos en la dinámica económica, social y política de Colombia (Tratado del Libre Comercio, lucha contra las drogas, éxodo de colombianos,....). Ejemplo A partir de la lectura de caricaturas, analiza características del proceso imperialista.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-805",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 5 (Sociales 8°)",
+        "enunciado": "Comprende cómo se produjeron los procesos de independencia de las colonias americanas durante los siglos XVIII y XIX y sus implicaciones para las sociedades contemporáneas.",
+        "evidencias": "• l\tDescribe la influencia política y económica de las revoluciones Francesa e Industrial en los procesos de independencia de las colonias americanas. l\tReconoce los aportes de la Revolución Francesa en el campo político (Derechos del Hombre y del Ciudadano, soberanía popular, Constitución, división de poderes y estados nacionales). l\tCompara la organización político-administrativa entre las colonias americanas que estuvieron bajo el dominio europeo: inglesas, españolas, francesas, holandesas y portuguesas. l\tArgumenta acerca de las consecuencias que trae para los pueblos, en la actualidad, la intervención de algunos Estados más desarrollados en países con economías en desarrollo.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-806",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 6 (Sociales 8°)",
+        "enunciado": "Evalúa el impacto producido por los avances tecnológicos en el desarrollo social y económico de Colombia en el siglo XIX.",
+        "evidencias": "• l\tDescribe el papel del telégrafo, el correo, el ferrocarril, el barco de vapor, la industria textil y la electricidad en el desarrollo económico de Colombia. l\tRelaciona los procesos de industrialización dados en el país con los cambios sociales como el crecimiento de las ciudades y la diversificación de la economía. l\tReconoce el papel de la Comisión Corográfica de Agustín Codazzi como un aporte a la planeación y gestión del territorio colombiano desde su representación cartográfica. l\tExplica algunos problemas ambientales provocados por procesos de industrialización en Colombia y realiza conjeturas acerca de sus consecuencias a corto, mediano y largo plazo.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-807",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 7 (Sociales 8°)",
+        "enunciado": "Evalúa hechos trascendentales para la dignidad humana (abolición de la esclavitud, reconocimiento de los derechos de las mujeres, derechos de las minorías) y describe las discriminaciones que aún se presentan.",
+        "evidencias": "• Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-808",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 8 (Sociales 8°)",
+        "enunciado": "Evidencias de aprendizaje l l l l l l l Ejemplo A partir de la observación directa en su institución educativa y en el entorno donde vive, documenta como el diseño arquitectónico y urbanístico condiciona la movilidad de las personas en situación de discapacidad. Comprendelaimportanciadelasasociaciones, los gremios, los movimientos y organizaciones sindicales en la defensa de los derechos colectivos. Reconoce que la discriminación y la exclusión social son factores generadores de situaciones negativas como el deterioro de las relaciones entre personas o grupos, el incremento de la pobreza y la violencia, entre otras. Describe la situación actual, desde casos concretos, de la vulneración de los derechos fundamentales de las personas en Colombia. Explica algunas situaciones que develan prejuicios y estereotipos relacionados con la exclusión, la discriminación y la intolerancia a la diferencia, que han sufrido históricamente grupos como: mujeres, grupos étnicos minoritarios, homosexuales, personas con alguna condición de discapacidad. Propone acciones para mejorar el cumplimiento de los Derechos Humanos y constitucionales en Colombia y en el mundo Describe el surgimiento de los movimientos sociales (campesinos, estudiantiles y obreros) acaecidos durante el siglo XX en Colombia. Explica algunas herramientas y procedimientos alternativos (diálogo, conciliación, arbitraje, mediación,..) con los se cuenta para resolver un conflicto social o laboral. Interpreta a partir de evidencias sobre casos concretos (negociaciones Gobierno Colombiano -FARC, huelgas del magisterio,...), como todo conflicto social o laboral, puede resolverse mediante la concertación entre las partes. Argumenta la importancia de un desarrollo social, económico y tecnológico, fundamentado en una lógica orientada al bienestar colectivo. l A partir de la conmemoración del 1 de mayo en Colombia, realiza un ejercicio de revisión de fuentes (prensa, textos de consulta, Internet, entrevistas con personas afiliadas a sindicatos) en donde se indague la forma como se alcanzaron las reivindicaciones sociales y laborales de los trabajadores en Colombia, qué tipo de movimientos fueron necesarios para que los trabajadores obtuvieran sus derechos y las dificultades que ha tenido el sindicalismo en el país en los últimos 50 años.",
+        "evidencias": "• l l l l l l l Ejemplo A partir de la observación directa en su institución educativa y en el entorno donde vive, documenta como el diseño arquitectónico y urbanístico condiciona la movilidad de las personas en situación de discapacidad. Comprendelaimportanciadelasasociaciones, los gremios, los movimientos y organizaciones sindicales en la defensa de los derechos colectivos. Reconoce que la discriminación y la exclusión social son factores generadores de situaciones negativas como el deterioro de las relaciones entre personas o grupos, el incremento de la pobreza y la violencia, entre otras. Describe la situación actual, desde casos concretos, de la vulneración de los derechos fundamentales de las personas en Colombia. Explica algunas situaciones que develan prejuicios y estereotipos relacionados con la exclusión, la discriminación y la intolerancia a la diferencia, que han sufrido históricamente grupos como:\n• ujeres, grupos étnicos\n• inoritarios, homosexuales, personas con alguna condición de discapacidad. Propone acciones para mejorar el cumplimiento de los Derechos Humanos y constitucionales en Colombia y en el mundo Describe el surgimiento de los movimientos sociales (campesinos, estudiantiles y obreros) acaecidos durante el siglo XX en Colombia. Explica algunas herramientas y procedimientos alternativos (diálogo, conciliación, arbitraje,\n• ediación,..) con los se cuenta para resolver un conflicto social o laboral. Interpreta a partir de evidencias sobre casos concretos (negociaciones Gobierno Colombiano -FARC, huelgas del magisterio,...), como todo conflicto social o laboral, puede resolverse mediante la concertación entre las partes. Argumenta la importancia de un desarrollo social, económico y tecnológico, fundamentado en una lógica orientada al bienestar colectivo. l A partir de la conmemoración del 1 de mayo en Colombia, realiza un ejercicio de revisión de fuentes (prensa, textos de consulta, Internet, entrevistas con personas afiliadas a sindicatos) en donde se indague la forma como se alcanzaron las reivindicaciones sociales y laborales de los trabajadores en Colombia, qué tipo de movimientos fueron necesarios para que los trabajadores obtuvieran sus derechos y las dificultades que ha tenido el sindicalismo en el país en los últimos 50 años.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-901",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 1 (Sociales 9°)",
+        "enunciado": "Analiza la situación ambiental de los geosistemas más biodiversos de Colombia (selvas, páramos, arrecifes coralinos) y las problemáticas que enfrentan actualmente debido a la explotación a que han sido sometidos.",
+        "evidencias": "• l\tReconoce la importancia que tienen para la sociedad colombiana los geosistemas biodiversos existentes en el territorio colombiano y los ubica geográficamente. l\tExplica las consecuencias para la biodiversidad colombiana acciones como la ampliación de la frontera agrícola, el turismo desmedido y la explotación minera. l\tDescribe los niveles de deforestación observados en las selvas colombianas y la disminución de las áreas de páramo en nuestro país, así como su incidencia en el deterioro de las fuentes hídricas en Colombia. l\tArgumenta acerca de las condiciones de otros geosistemas colombianos como los manglares, las sabanas, los ríos, las ciénagas, los humedales, los bosques secos, los embalses y los estuarios.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-902",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 2 (Sociales 9°)",
+        "enunciado": "Comprende las consecuencias que han traído los procesos migratorios en la organización social y económica de Colombia en el siglo XX y en la actualidad.",
+        "evidencias": "• l\tIdentifica en la historia de Colombia las causas de los movimientos migratorios y su influencia en las condiciones de vida de la población actual del país. l\tDiferencia procesos de emigración e inmigración dados en Colombia en la actualidad. l\tRelaciona los movimientos de la población (del campo a la ciudad, entre ciudades y al interior de la ciudad) con los cambios políticos, ambientales, laborales y sociales dados en el territorio colombiano en las últimas décadas. l\tExplica desde situaciones de la vida cotidiana, las consecuencias económicas y sociales que tiene para el país el desplazamiento de las personas del campo a los centros urbanos. Ejemplo A partir del uso de datos estadísticos explica el comportamiento poblacional de algunas ciudades y departamentos del país  en los últimos cincuenta años.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-903",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 3 (Sociales 9°)",
+        "enunciado": "Analiza las crisis económicas dadas en la Colombia contemporánea y sus repercusiones en la vida cotidiana de las personas.",
+        "evidencias": "• l\tCaracteriza a través de estudios de caso algunas crisis económicas en Colombia (sustitución de importaciones, financiera e hipotecaria [UPAC], ruptura del pacto internacional del café, crisis internacional del petróleo). l\tEstablece algunas causas que han generado crisis económicas en Colombia, América Latina y el mundo, y sus efectos en la economía del hogar. l\tExplica las consecuencias sociales de las crisis económicas en la vida diaria de las personas (desempleo, impuestos, canasta familiar, poder adquisitivo). l\tPlantea hipótesis de un futuro económico posible en que las personas vivan en mejores condiciones de vida. Ejemplo A partir de diferentes fuentes documentales (videos, revistas, periódicos, Internet, televisión) explica, narra y analiza las repercusiones de las crisis económicas en la vida cotidiana de las personas como el aumento de la tasa de desempleo, el alza de impuestos, entre otros.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-904",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 4 (Sociales 9°)",
+        "enunciado": "Analiza los cambios sociales, políticos, económicos y culturales en Colombia en el siglo XX y su impacto en la vida de los habitantes del país.",
+        "evidencias": "• l\tExplica los cambios del proceso de modernización en Colombia en la primera mitad del siglo XX: construcción de vías de comunicación, urbanización y desarrollo industrial. l\tRelaciona el proceso de industrialización del país con el surgimiento de los sindicatos en la primera\n• itad del siglo XX, para el alcance de derechos de la clase trabajadora. l\tCompara los hábitos de vida de las personas antes y después de la llegada al país del cine, la radio, la aviación comercial y los automóviles. l\tEstablece posibles relaciones entre los hechos sociales y políticos de la segunda mitad del siglo XX en Colombia y los que tienen lugar en la actualidad (partidos políticos, violencia política, conflicto armado, desplazamiento, narcotráfico, reformas constitucionales, apertura económica, corrupción, entre otros).",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-905",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 5 (Sociales 9°)",
+        "enunciado": "Evalúa cómo las sociedades democráticas en un Estado social de Derecho tienen el deber de proteger y promover los derechos fundamentales de los ciudadanos.",
+        "evidencias": "• l\tIdentifica los derechos constitucionales fundamentales, los derechos sociales, económicos y culturales y los derechos colectivos y del ambiente. l Examina las implicaciones que tiene para la democracia y la ciudadanía la vulneración de los Derechos Humanos (DD. HH.) y sugiere para su protección mecanismos constitucionales. l Justifica el uso de los mecanismos de participación ciudadana: el voto, el plebiscito, el referendo, la consulta popular, el cabildo abierto, la iniciativa popular, la revocatoria del mandato. l Explica mediante estudios de caso el papel que cumplen las autoridades que protegen los DD. HH. en Colombia (Procuraduría General de la Nación, Defensoría del Pueblo y personerías). Ejemplo A partir del análisis de casos en que se refleje la vulneración de los DD. HH. y del DIH, propone acciones para su protección o su defensa.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-906",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 6 (Sociales 9°)",
+        "enunciado": "Comprende el papel de las mujeres en los cambios sociales, políticos, económicos y culturales en el mundo y la igualdad de derechos que han adquirido en los últimos años.",
+        "evidencias": "• l Identifica la participación de las mujeres en la historia de Colombia en el ámbito político, académico, cultural, industrial y financiero. l Caracteriza formas de violencia contra las mujeres en el país y en el mundo (psicológica, sexual, económica, doméstica, laboral, mediática y física) y propone alternativas para cambiarlas. l Explica las contribuciones de las mujeres en la construcción de una sociedad justa y creadora de una cultura de paz. l Propone acciones para que las diversas formas de identidad de género sean respetadas en el contexto del desarrollo de todas las potencialidades humanas. Foto tomadas de www.rcnradio.com (Cadena Radial) en: goo.gl/C7pPfw; www.agenciadenoticias.unal. edu.co (Página Universitaria) en  goo.gl/IJTDbA; www. semana.com (Diario Nacional) en goo.gl/y8UANp; www. elcolombiano.com (Diario Local) en goo.gl/GYHvlg; www.eluniversal.com.co (Diario Local) en goo.gl/CU4Lfu; www.banrepcultural.org (Banco Central) goo.gl/YPzwOB; www.eluniversal.com.co (Diario Local) goo.gl/CM8nt2; www.elpais.com (Diario Nacional) goo.gl/ oLa9EW",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-907",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 7 (Sociales 9°)",
+        "enunciado": "Evalúa cómo todo conflicto puede solucionarse mediante acuerdos en que las personas ponen de su parte para superar las diferencias.",
+        "evidencias": "• l Explica las consecuencias de aquellas acciones que pueden causar sufrimiento a otras personas. l Analiza los conflictos entre grupos con el fin de proponer alternativas de solución. l Plantea argumentos sobre los discursos que legitiman la violencia con el fin de rechazarlos como alternativa a la solución de los conflictos. l Propone alternativas para la solución de conflictos que ocurren en las relaciones, incluyendo las de pareja, y que se pueden resolver a partir de la escucha y comprensión de los diferentes puntos de vista.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-908",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 8 (Sociales 9°)",
+        "enunciado": "Comprende el impacto social del crecimiento económico desigual que se da en las diferentes regiones del país.",
+        "evidencias": "• l Reconoce cómo las condiciones geográficas regionales pueden influir en la construcción o no de infraestructuras y por ende en el crecimiento económico. l Compara las características que tienen las zonas con mejores índices de crecimiento económico respecto a aquellas con menor desarrollo. l Relaciona la inversión social, la presencia de los gremios económicos y del Estado en aquellas regiones de menor índice de desarrollo humano en Colombia. l Explica posibles acciones a considerar en el\n• ejoramiento del crecimiento de las regiones con menor índice de desarrollo humano. Ejemplo Mapa basado en: www.eldiplo.info (Página de noticias) en: goo.gl/kxZaQz",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-801",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 1 (Naturales 8°)",
+        "enunciado": "Comprende el funcionamiento de máquinas térmicas (motores de combustión, refrigeración) por medio de las leyes de la termodinámica (primera y segunda ley).",
+        "evidencias": "• q\tDescribe el cambio en la energía interna de un sistema a partir del trabajo mecánico realizado y del calor transferido. q\tExplica la primera ley de la termodinámica a partir de la energía interna de un sistema, el calor y el trabajo, con relación a la conservación de la energía. q\tDescribe la eficiencia mecánica de una máquina a partir de las relaciones entre el calor y trabajo\n• ecánico mediante la segunda ley de la termodinámica. q\tExplica, haciendo uso de las leyes termodinámicas, el funcionamiento térmico de diferentes máquinas (motor de combustión, refrigerador). Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-802",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 2 (Naturales 8°)",
+        "enunciado": "Comprende que en una reacción química se recombinan los átomos de las moléculas de los reactivos para generar productos nuevos, y que dichos productos se forman a partir de fuerzas intramoleculares (enlaces iónicos y covalentes).",
+        "evidencias": "• q\tExplica con esquemas, dada una reacción química, cómo se recombinan los átomos de cada molécula para generar moléculas nuevas. q\tRepresenta los tipos de enlaces (iónico y covalente) para explicar la formación de compuestos dados, a partir de criterios como la electronegatividad y las relaciones entre los electrones de valencia. q\tJustifica si un cambio en un material es físico o químico a partir de características observables que indiquen, para el caso de los cambios químicos, la formación de nuevas sustancias (cambio de color, desprendimiento de gas, entre otros). q\tPredice algunas de las propiedades (estado de agregación, solubilidad, temperatura de ebullición y de fusión) de los compuestos químicos a partir del tipo de enlace de sus átomos dentro de sus moléculas. Ejemplo Diseña un protocolo experimental para averiguar si se produce un cambio físico o químico al mezclar sustancias tales como vinagre-tiza y agua-tiza, para analizar si se generan sustancias nuevas a partir de",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-803",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 3 (Naturales 8°)",
+        "enunciado": "Comprende que el comportamiento de un gas ideal está determinado por las relaciones entre Temperatura (T),  Presión (P),  Volumen (V) y Cantidad de sustancia (n).",
+        "evidencias": "• q\tInterpreta los resultados de experimentos en los cuales analiza el comportamiento de un gas ideal al variar su temperatura, volumen, presión y cantidad de gas, explicando cómo influyen estas variables en el comportamiento observado. q\tExplica el comportamiento (difusión, compresión, dilatación, fluidez) de los gases a partir de la teoría cinético molecular. q\tExplica eventos cotidianos, (funcionamiento de un globo aerostático, pipetas de gas, inflar/ explotar una bomba), a partir de relaciones\n• atemáticas entre variables como la presión, la temperatura, la cantidad de gas y el volumen, identificando cómo las leyes de los gases (Boyle- Mariotte, Charles, Gay-Lussac, Ley combinada, ecuación de estado) permiten establecer dichas relaciones. Ejemplo Realiza experimentos para analizar las relaciones entre presión (P), temperatura (T), volumen (V) y cantidad de sustancia (n) de un gas (vapor de agua) que influyen en el comportamiento de los gases, utilizando recipientes como tarros, globos y ollas. Utiliza las leyes de los gases (Boyle, Charles, Gay-Lussac) para responder a preguntas como:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-804",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 4 (Naturales 8°)",
+        "enunciado": "Analiza relaciones entre sistemas de órganos (excretor, inmune, nervioso, endocrino, óseo y muscular) con los procesos de regulación de las funciones en los seres vivos.",
+        "evidencias": "• q\tRelaciona los fenómenos homeostáticos de los organismos con el funcionamiento de órganos y sistemas. q\tInterpreta modelos de equilibrio existente entre algunos de los sistemas (excretor, inmune, nervioso, endocrino, óseo y muscular). q\tRelaciona el papel biológico de las hormonas y las neuronas en la regulación y coordinación del funcionamiento de los sistemas del organismo y el mantenimiento de la homeostasis, dando ejemplos para funciones como la reproducción sexual, la digestión de los alimentos, la regulación de la presión sanguínea y la respuesta de “lucha o huida”. q\tExplica, a través de ejemplos, los efectos de hábitos no saludables en el funcionamiento adecuado de los sistemas excretor, nervioso, inmune, endocrino, óseo y muscular. ¿Cuál es la relación de las variables presión (P), temperatura (T), volumen (V) y cantidad de gas (n) con su comportamiento físico (difusión, compresión, dilatación, fluidez)? las propiedades de reactivos y productos. Justifica su respuesta basado en evidencias (resultados experimentales) y referentes teóricos (tipo de enlace de los productos formados).",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-805",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 8°",
+        "codigo_oficial": "DBA 5 (Naturales 8°)",
+        "enunciado": "Analiza la reproducción (asexual, sexual) de distintos grupos de seres vivos y su importancia para la preservación de la vida en el planeta.",
+        "evidencias": "• q\tDiferencia los tipos de reproducción en plantas y propone su aplicación de acuerdo con las condiciones del medio donde se realiza. q\tExplica los sistemas de reproducción sexual y asexual en animales y reconoce sus efectos en la variabilidad y preservación de especies. q\tIdentifica riesgos y consecuencias físicas y psicológicas de un embarazo en la adolescencia. q\tExplica la importancia de la aplicación de\n• edidas preventivas de patologías relacionadas con el sistema reproductor. Ejemplo Formula conclusiones a partir del análisis del siguiente caso: Se tiene un acuario con solo tres especies de organismos: peces, hidras y estrellas de mar. Luego de un tiempo se logra identificar que el número de peces se ha triplicado mientras que todas las hidras, al igual que las estrellas han quintuplicado su población. Explica las implicaciones de este aumento de la población para el acuario y para las especies que habitan en él. Predice las características de la descendencia de las especies que habitan en el acuario, identificando los organismos que tienen la posibilidad de producir descendientes en un tiempo más corto y aquellos que presentan mayor variabilidad. Además, reconoce los organismos que necesitan mayor energía para la reproducción, considerando la implicación de esta necesidad para el éxito reproductivo de la especie.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-901",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 1 (Naturales 9°)",
+        "enunciado": "Comprende que el movimiento de un cuerpo, en un marco de referencia inercial dado, se puede describir con gráficos y predecir por medio de expresiones matemáticas.",
+        "evidencias": "• q\tDescribe el movimiento de un cuerpo (rectilíneo uniforme y uniformemente acelerado, en dos dimensiones – circular uniforme y parabólico) en gráficos que relacionan el desplazamiento, la velocidad y la aceleración en función del tiempo. q\tPredice el movimiento de un cuerpo a partir de las expresiones matemáticas con las que se relaciona, según el caso, la distancia recorrida, la velocidad y la aceleración en función del tiempo. q\tIdentifica las modificaciones necesarias en la descripción del movimiento de un cuerpo, representada en gráficos, cuando se cambia de marco de referencia. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-902",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 2 (Naturales 9°)",
+        "enunciado": "Comprende que la acidez y la basicidad son propiedades químicas de algunas sustancias y las relaciona con su importancia biológica y su uso cotidiano e industrial.",
+        "evidencias": "• q\tCompara algunas teorías (Arrhenius, Brönsted – Lowry y Lewis) que explican el comportamiento químico de los ácidos y las bases para interpretar las propiedades ácidas o básicas de algunos compuestos. q\tDetermina la acidez y la basicidad de compuestos dados, de manera cualitativa (colorimetría) y cuantitativa (escala de pH - pOH). q\tExplica la función de los ácidos y las bases en procesos propios de los seres vivos (respiración y digestión en el estómago) y de procesos industriales (uso fertilizantes en la agricultura) y limpieza (jabón). Ejemplo Diseña protocolos experimentales en los cuales utiliza un conjunto de sustancias para clasificar materiales como ácidos o bases y determina sus niveles de acidez y basicidad. Para ello utiliza pH-metro, papel indicador o indicadores naturales y recursos tales como (vinagre, jabón, limón, detergente, plástico, vidrio, clavos) realizando los procedimientos",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-903",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 3 (Naturales 9°)",
+        "enunciado": "Analiza las relaciones cuantitativas entre solutos y solventes, así como los factores que afectan la formación de soluciones.",
+        "evidencias": "• q\tExplica qué factores afectan la formación de soluciones a partir de resultados obtenidos en procedimientos de preparación de soluciones de distinto tipo (insaturadas, saturadas y sobresaturadas) en los que modifica variables (temperatura, presión, cantidad de soluto y disolvente) q\tPredice qué ocurrirá con una solución si se\n• odifica una variable como la temperatura, la presión o las cantidades de soluto y solvente. q\tIdentifica los componentes de una solución y representa cuantitativamente el grado de concentración utilizando algunas expresiones\n• atemáticas: % en volumen, % en masa,\n• olaridad (M), molalidad (m). q\tExplica a partir de las fuerzas intermoleculares (Puentes de Hidrogeno, fuerzas de Van der Waals) las propiedades físicas (solubilidad, la densidad, el punto de ebullición y fusión y la tensión superficial) de sustancias liquidas. Ejemplo A partir de la información contenida en las etiquetas de los productos que contengan soluciones explica sus componentes (soluto-solvente) y calcula su",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-904",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 4 (Naturales 9°)",
+        "enunciado": "Comprende la forma en que los principios genéticos mendelianos y post-mendelianos explican la herencia y el mejoramiento de las especies existentes.",
+        "evidencias": "• q\tPredice mediante la aplicación de diferentes\n• ecanismos (probabilidades o punnet) las proporciones de las características heredadas por algunos organismos. q\tExplica la forma como se transmite la información de padres a hijos, identificando las causas de la variabilidad entre organismos de una misma familia. q\tDiseña experiencias que puedan demostrar cada una de las leyes de Mendel y los resultados numéricos obtenidos. q\tDemuestra la relación que existe entre el proceso de la meiosis y las segunda y tercera Leyes de la Herencia de Mendel. concentración. Elabora preguntas y predice posibles respuestas con base en argumentos de tipo teórico y experimental en las cuales se realicen variaciones de cantidad de soluto – solvente o se someta la\n• uestra a la acción de la temperatura u otras variaciones que considere necesarias. (disoluciones, mezclas)  que considere adecuados según el propósito y evaluando el nivel de precisión de los indicadores utilizados. Durante el proceso formula conclusiones y proyecta lo que podría pasar al aplicar el protocolo a nuevas sustancias. Reconoce además, algunos límites y variables que intervienen en las conclusiones que elabora.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-905",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 5 (Naturales 9°)",
+        "enunciado": "Explica la forma como se expresa la información genética contenida en el –ADN–, relacionando su expresión con los fenotipos de los organismos y reconoce su capacidad de modificación a lo largo del tiempo (por mutaciones y otros cambios), como un factor determinante en la generación de diversidad del planeta y en la evolución de las especies. Ejemplo En los guisantes las plantas altas (T) son dominantes de las enanas (t), el color amarillo de las semillas (A) es dominante del verde (a), y la semilla lisa (L) es dominante de la rugosa (l). Explica los genotipos, los fenotipos y las proporciones de los descendientes del siguiente cruce: TtAaLl     x      ttaall",
+        "evidencias": "• q\tInterpreta a partir de modelos la estructura del ADN y la forma como se expresa en los organismos, representando los pasos del proceso de traducción (es decir, de la síntesis de proteínas). q\tRelaciona la producción de proteínas en el organismo con algunas características fenotípicas para explicar la relación entre genotipo y fenotipo. q\tExplica los principales mecanismos de cambio en el ADN (mutación y otros) identificando variaciones en la estructura de las proteínas que dan lugar a cambios en el fenotipo de los organismos y la diversidad en las poblaciones. Ejemplo Analiza el siguiente caso: En un laboratorio un técnico investiga la producción de la insulina y su relación con la información genética del ADN que codifica para el gen de la insulina. A partir de las células del páncreas, por ejemplo de un ratón, obtienen la secuencia de ADN y con ésta la del ARNm. Utilizando el código genético el técnico pudo encontrar que el gen para la insulina contenía las siguientes tripletas de codones, e identificar los aminoácidos que contenía la proteína de la insulina:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-906",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 9°",
+        "codigo_oficial": "DBA 6 (Naturales 9°)",
+        "enunciado": "Analiza teorías científicas sobre el origen de las especies (selección natural y ancestro común) como modelos científicos que sustentan sus explicaciones desde diferentes evidencias y argumentaciones.",
+        "evidencias": "• q\tExplica las evidencias que dan sustento a la teoría del ancestro común y a la de selección natural (evidencias de distribución geográfica de las especies, restos fósiles, homologías, comparación entre secuencias de ADN). q\tExplica cómo actúa la selección natural en una población que vive en un determinado ambiente, cuando existe algún factor de presión de selección (cambios en las condiciones climáticas) y su efecto en la variabilidad de fenotipos. q\tArgumenta con evidencias científicas la influencia de las mutaciones en la selección natural de las especies. q\tIdentifica los procesos de transformación de los seres vivos ocurridos en cada una de las eras geológicas. Ejemplo Las siguientes imágenes muestran la acción de la selección natural sobre el camuflaje de una especie de escarabajo. Interpreta la gráfica de la parte superior y la explica utilizando el modelo de selección natural. Predice a partir de la información que brindan los gráficos cuál fue la mutación que ocurrió, para cuál de las dos especies (pájaros o escarabajos) es favorable. Explica cuál es la incidencia del cambio de coloración del escarabajo en la supervivencia del ave. Predice cómo será la población de escarabajos respecto de su color luego de varias generaciones. Emite las conclusiones utilizando argumentos científicos. Analizó la información anterior y la registró en un cuaderno. En un accidente del anterior registro la única información que quedó visible fue la secuencia de aminoácidos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      }
+    ],
+    "age_range": "13 a 14 años (Básica Secundaria Superior: Grados 8° y 9°)"
+  },
+  "5": {
+    "num": 5,
+    "roman": "V",
+    "name": "CICLO 5",
+    "file_name": "CICLO 5.xlsx",
+    "stage_title": "CICLO V: Grados 10° y 11° (Educación Media - 15 a 17 años)",
+    "grados": [
+      "Grado 10° (Media)",
+      "Grado 11° (Media)"
+    ],
+    "lenguaje": [
+      [
+        "PRODUCCIÓN TEXTUAL",
+        "Monografías, proyectos de investigación e informes técnicos",
+        "DBA 1: Produzco textos académicos rigurosos con fundamentación teórica y citas.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear monografías y diagnósticos técnicos PGIRE con normas APA y rigor metodológico.",
+        "Aplica normas APA, estados del arte, fundamentación teórica y trabajo de campo.",
+        "Redacta el informe técnico final del diagnóstico comunitario PGIRE de su municipio.",
+        "Demuestra honestidad intelectual, ética investigativa y compromiso social.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "COMPRENSIÓN TEXTUAL",
+        "Lectura crítica avanzada nivel Saber 11 y textos filosóficos",
+        "DBA 2: Analizo textos filosóficos, científicos y discursos sociopolíticos complejos.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar supuestos ideológicos, validez lógica y perspectivas interdisciplinarias.",
+        "Identifica premisas implícitas, falacias complejas y consistencia argumentativa.",
+        "Resuelve cuestionarios complejos de lectura crítica interdisciplinar tipo Saber 11.",
+        "Muestra madurez intelectual, juicio ético autónomo y pensamiento reflexivo.",
+        "Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Literatura universal, existencialismo y ética contemporánea",
+        "DBA 3: Interpreto grandes dilemas de la condición humana en la literatura universal.",
+        "Procesos cognitivos",
+        "Media",
+        "Analizar el sentido de la vida, la justicia, la libertad y el proyecto ético personal.",
+        "Compara visiones de mundo en obras clásicas, existencialistas y contemporáneas.",
+        "Escribe ensayos reflexivos sobre la reconstrucción del proyecto de vida en crisis.",
+        "Construye una cosmovisión solidaria, esperanzadora y con sentido existencial.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "MEDIOS Y COMUNICACIÓN",
+        "Comunicación estratégica y movilización social digital",
+        "DBA 4: Diseño campañas de comunicación estratégica e incidencia en políticas públicas.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear estrategias transmedia para la defensa de derechos humanos y ambientales.",
+        "Diseña narrativas transmedia, infografías técnicas y contenidos de incidencia.",
+        "Lanza una campaña digital para la consecución de recursos para la IE afectada.",
+        "Ejerce un liderazgo digital ético, transformador y orientado al bien común.",
+        "Etapa 3"
+      ],
+      [
+        "ÉTICA DE LA COMUNICACIÓN",
+        "Oratoria, sustentación técnica y debate universitario",
+        "DBA 5: Sustento ponencias técnicas ante comités municipales y jurados académicos.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar y defender proyectos de desarrollo comunitario ante autoridades públicas.",
+        "Aplica técnicas avanzadas de oratoria, argumentación y manejo de objeciones.",
+        "Sustenta el plan de gestión del riesgo ante el Consejo Municipal de Gestión del Riesgo.",
+        "Demuestra seguridad, liderazgo y elocuencia en la defensa comunitaria.",
+        "Etapa 3"
+      ],
+      [
+        "LITERATURA",
+        "Crítica literaria y ensayos estéticos contemporáneos",
+        "DBA 6: Produzco reseñas críticas y ensayos sobre expresiones artísticas de paz.",
+        "Procesos cognitivos",
+        "Media",
+        "Interpretar el valor estético y sanador de las artes en contextos de posconflicto.",
+        "Analiza el simbolismo, la estética y la catarsis en obras plásticas y literarias.",
+        "Publica una reseña crítica sobre exposiciones artísticas de memoria histórica.",
+        "Valora el patrimonio artístico como pilar de la memoria y la reconciliación.",
+        "Etapa 2, Etapa 3"
+      ]
+    ],
+    "matematicas": [
+      [
+        "Pensamiento Variacional",
+        "Cálculo diferencial e integral introductorio",
+        "DBA 1: Analizo razones de cambio, derivadas y modelos de vaciado y propagación.",
+        "Procesos cognitivos",
+        "Alta",
+        "Modelar matemáticamente razones de cambio instantáneo, derivadas y optimización.",
+        "Calcula derivadas, límites indeterminados y áreas bajo la curva en fenómenos físicos.",
+        "Modela curvas de contagio epidemiológico y vaciado de tanques de reserva de la IE.",
+        "Muestra pensamiento analítico avanzado y riguroso en situaciones de contingencia.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Geométrico",
+        "Trigonometría analítica, vectores de fuerza y estática",
+        "DBA 2: Resuelvo problemas de fuerzas, tensiones y vectores en infraestructuras.",
+        "Procesos cognitivos",
+        "Media",
+        "Aplicar razones trigonométricas, vectores y leyes de Newton en estructuras escolares.",
+        "Aplica descomposición vectorial y suma de momentos en equilibrio estático.",
+        "Evalúa la resistencia de techos, cerchas y muros ante vendavales y sismos.",
+        "Aplica las matemáticas a la ingeniería comunitaria y prevención de colapsos.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensamiento Aleatorio",
+        "Estadística inferencial, regresión y distribuciones probabilísticas",
+        "DBA 3: Construyo modelos de regresión lineal y probabilidades de riesgo comunitario.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar modelos de pronóstico climático y probabilístico con intervalos de confianza.",
+        "Calcula coeficientes de correlación de Pearson y rectas de regresión bivariada.",
+        "Presenta proyecciones estadísticas de riesgo a las autoridades municipales.",
+        "Demuestra liderazgo técnico en la toma de decisiones basada en evidencia.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Variacional",
+        "Modelación de funciones exponenciales y logarítmicas",
+        "DBA 4: Modelo fenómenos de decaimiento, absorción y crecimiento demográfico.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Modelar crecimiento poblacional y dispersión de contaminantes con funciones $e^{kx}$.",
+        "Aplica propiedades de logaritmos y exponenciales en ecuaciones diferenciales simples.",
+        "Simula escenarios de demanda de agua y víveres para albergues temporales.",
+        "Muestra visión prospectiva y rigor en la planificación de recursos.",
+        "Etapa 3"
+      ],
+      [
+        "Pensamiento Geométrico",
+        "Geometría analítica de las secciones cónicas",
+        "DBA 5: Aplico ecuaciones de parábolas, elipses y circunferencias en diseño técnico.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Aplicar ecuaciones canónicas en el diseño de antenas y reflectores de emergencia.",
+        "Deduce ecuaciones de cónicas y grafica sus elementos (foco, directriz, centro).",
+        "Diseña colectores solares parabólicos para desinfección de agua por calor.",
+        "Aporta soluciones técnicas innovadoras y de bajo costo a su comunidad.",
+        "Etapa 2, Etapa 3"
+      ]
+    ],
+    "sociales": [
+      [
+        "Democracia y Estado",
+        "Estructura del Estado colombiano y políticas públicas",
+        "DBA 1: Evalúo la gestión pública en atención a emergencias, víctimas y posconflicto.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar la efectividad institucional de las entidades del SNGRD, ministerios y alcaldías.",
+        "Analiza la Ley 1448 de Víctimas, Ley 1523 de Gestión del Riesgo y CONPES sociales.",
+        "Formula un proyecto de política pública juvenil para la resiliencia municipal.",
+        "Ejerce un liderazgo sociopolítico ético, propositivo y fiscalizador.",
+        "Etapa 3"
+      ],
+      [
+        "Acción Territorial",
+        "Geografía económica, globalización y soberanía alimentaria",
+        "DBA 2: Propongo modelos de desarrollo endógeno y seguridad alimentaria comunitaria.",
+        "Procesos cognitivos",
+        "Alta",
+        "Crear planes de bancos comunitarios de semillas y circuitos cortos de producción.",
+        "Analiza cadenas de suministro agroalimentarias e inflación en situaciones de crisis.",
+        "Diseña una red veredal de huertas agroecológicas y trueque solidario.",
+        "Fomenta la soberanía alimentaria y la economía solidaria comunitaria.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Memoria y Paz",
+        "Justicia transicional, verdad y construcción de paz territorial",
+        "DBA 3: Promuevo iniciativas de no repetición y pedagogía de la verdad en mi región.",
+        "Procesos cognitivos",
+        "Alta",
+        "Analizar los informes de la Comisión de la Verdad y la Jurisdicción Especial para la Paz.",
+        "Explica el Sistema Integral de Verdad, Justicia, Reparación y No Repetición.",
+        "Lidera cátedras de paz y talleres intergeneracionales de memoria comunitaria.",
+        "Se convierte en gestor de paz y reconciliación territorial en su entorno.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Pensar Históricamente",
+        "Economía política, modelos de desarrollo y crisis globales",
+        "DBA 4: Analizo los modelos de desarrollo económico y sus tensiones socioecológicas.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Comparar modelos de desarrollo extractivista vs sostenible en el siglo XXI.",
+        "Identifica las causas de la desigualdad global y el cambio climático antropogénico.",
+        "Elabora un ensayo sobre alternativas al desarrollo en comunidades rurales.",
+        "Asume un compromiso ético con la justicia social y planetaria.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Democracia y DDHH",
+        "Derecho Internacional Humanitario (DIH) y protección civil",
+        "DBA 5: Aplico los Convenios de Ginebra y protocolos de protección a bienes civiles.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la distinción entre combatientes y población civil y escuelas como zonas de paz.",
+        "Explica los principios de proporcionalidad, distinción y precaución del DIH.",
+        "Diseña un protocolo de blindaje pedagógico para proteger la escuela como espacio protegido.",
+        "Defiende la neutralidad y protección absoluta de los recintos escolares.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ]
+    ],
+    "naturales": [
+      [
+        "Entorno Químico",
+        "Química orgánica, polímeros y biocombustibles",
+        "DBA 1: Explico la síntesis de materiales ecológicos, bioplásticos y biocombustibles.",
+        "Conocimientos disciplinares",
+        "Baja",
+        "Comprender la estructura de hidrocarburos, grupos funcionales y biodegradabilidad.",
+        "Describe la estructura química de alcanos, alcoholes y polímeros sintéticos.",
+        "Desarrolla prototipos de bioplásticos a partir de almidón de yuca o maíz en la IE.",
+        "Fomenta la economía circular, el reciclaje químico y la transición energética.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "Electromagnetismo, circuitos y energía solar fotovoltaica",
+        "DBA 2: Diseño circuitos eléctricos autónomos para iluminación de emergencia.",
+        "Procesos cognitivos",
+        "Alta",
+        "Aplicar la Ley de Ohm, potencia y cálculo de paneles solares fotovoltaicos.",
+        "Aplica $V = I \\cdot R$ y $P = V \\cdot I$ en dimensionamiento de baterías e inversores.",
+        "Instala puntos de carga solar y luminarias de emergencia autónomas en la escuela.",
+        "Aporta soluciones técnicas prácticas e inmediatas ante apagones prolongados.",
+        "Etapa 1, Etapa 2, Etapa 3"
+      ],
+      [
+        "Bioética y Ambiente",
+        "Bioética, biotecnología y gestión del cambio global",
+        "DBA 3: Debato sobre el impacto ético de la biotecnología y la pérdida de biodiversidad.",
+        "Procesos cognitivos",
+        "Alta",
+        "Evaluar dilemas sobre patentes de semillas, transgénicos y conservación biológica.",
+        "Analiza implicaciones éticas de la manipulación genética y contaminación de cuencas.",
+        "Lidera el comité ambiental escolar y auditorías ecológicas de la institución.",
+        "Asume una ética biocéntrica de respeto absoluto por todas las formas de vida.",
+        "Etapa 3"
+      ],
+      [
+        "Entorno Físico-Químico",
+        "Cinética química, catálisis y equilibrio químico",
+        "DBA 4: Explico la velocidad de reacción y factores que afectan el equilibrio químico.",
+        "Conocimientos disciplinares",
+        "Media",
+        "Aplicar conceptos de cinética en la degradación de contaminantes y tratamiento de aguas.",
+        "Aplica el Principio de Le Chatelier en procesos de desinfección y coagulación.",
+        "Diseña un reactor casero para acelerar la sedimentación de turbidez en agua.",
+        "Muestra rigor experimental y manejo seguro de reactivos de laboratorio.",
+        "Etapa 2, Etapa 3"
+      ],
+      [
+        "Entorno Físico",
+        "Física moderna, radiación y protección radiológica",
+        "DBA 5: Reconozco el espectro electromagnético y efectos de la radiación ionizante.",
+        "Conocimientos disciplinares",
+        "Alta",
+        "Evaluar medidas de protección ante radiación UV y riesgos tecnológicos.",
+        "Diferencia radiación ionizante de no ionizante y sus efectos celulares.",
+        "Elabora una guía comunitaria sobre protección frente a radiación solar extrema.",
+        "Promueve la prevención en salud ocupacional y comunitaria.",
+        "Etapa 3"
+      ]
+    ],
+    "dba_count": 47,
+    "dba_records": [
+      {
+        "id": "DBA-L-1001",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 1 (Lenguaje 10°)",
+        "enunciado": "Asume una posición crítica y propositiva frente a los medios de comunicación masiva para analizar su influencia en la sociedad actual.",
+        "evidencias": "•  Valora la diversidad de visiones de mundo y posiciones ideológicas presentes en los medios de comunicación.\n•  Analiza los discursos culturales, sociales e ideológicos, expresados a través de distintos\n• edios de comunicación.\n•  Encuentra claves para comunicar sus ideas en la diferenciación de la estructura de textos como: el discurso político, el artículo de opinión y la caricatura.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-1002",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 2 (Lenguaje 10°)",
+        "enunciado": "Planea la producción de textos audiovisuales en los que articula elementos verbales y no verbales de la comunicación para desarrollar un tema o una historia.",
+        "evidencias": "•  Produce guiones para textos audiovisuales, donde caracteriza diferentes culturas, teniendo en cuenta aspectos étnicos, lingüísticos, sociales y culturales, entre otros, del mundo contemporáneo.\n•  Construye textos verbales y no verbales, donde demuestra un amplio conocimiento tanto del tema elegido como de las relaciones de significado y de sentido a nivel local y global.\n•  Elabora guiones para la producción de textos audiovisuales, como cortos o películas, en los que integra recursos no verbales. Ejemplo u \tElige un texto literario (novela, crónica u obra de teatro) para adaptar al cine. u \tResume la historia en bloques, ordenando el inicio, el conflicto y la resolución. u \tElabora un guion en el que detalla qué ocurrirá en cada escena haciendo uso de elementos no verbales. u \tCompleta el guion con la información sobre los escenarios, los personajes, los diálogos, las acotaciones, etc.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1003",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 3 (Lenguaje 10°)",
+        "enunciado": "Caracteriza la literatura en un momento particular de la historia desde el acercamiento a sus principales exponentes, textos, temáticas y recursos estilísticos.",
+        "evidencias": "•  Comprende la influencia de las épocas en la estructura  y configuración de los géneros literarios.\n•  Reconoce y da cuenta de las temáticas, los exponentes y los perfiles estilísticos de las obras literarias de una época o movimiento literario.\n•  Identifica las estructuras propias de cada género literario. Ejemplo Para reconocer la influencia de una época en las obras literarios elige un periodo específico como el Siglo de Oro Español que se dio entre el siglo XVI y el XVII, frente al que: u Identifica el contexto histórico, las características, las obras y los autores pertenecientes a un periodo específico. u Relaciona los contenidos y la estructura de un texto con el momento histórico en que se produjo. u Analiza la relación entre el texto y el contexto actual.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1004",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 4 (Lenguaje 10°)",
+        "enunciado": "Formula puntos de encuentro entre la literatura y las artes plásticas y visuales.",
+        "evidencias": "•  Amplía su visión de las corrientes literarias mediante el conocimiento de las manifestaciones artísticas de una época determinada.\n•  Determina las principales características de los textos literarios que lee y los relaciona con expresiones artísticas.\n•  Reconoce las diferencias formales entre las obras literarias y las artes plásticas o visuales. Ejemplo Para analizar la relación entre la literatura y las artes plásticas o visuales: u Observa una pintura como Los amantes de René Magritte. u Lee una pieza literaria que trate sobre una temática semejante como el poema “Los amantes” de Julio Cortázar. u Busca información sobre las dos obras teniendo en cuenta su estructura y características particulares. René Magritte. (1928). Les amants (Los amantes). Óleo sobre lienzo, 54 x 73.4 cm. New York: Museum of Modern Art. Yo no nací sino para quereros;\n• i alma os ha cortado a su medida; por hábito del alma mismo os quiero. Cuanto tengo confieso yo deberos; por vos nací, por vos tengo la vida, por vos he de morir, y por vos muero. Garcilaso de la Vega Escrito está en mi alma vuestro gesto (Soneto V) Escrito está en mi alma vuestro gesto, y cuanto yo escribir de vos deseo; vos sola lo escribisteis, yo lo leo tan solo, que aun de vos me guardo en esto. En esto estoy y estaré siempre puesto; que aunque no cabe en mí cuanto en vos veo, de tanto bien lo que no entiendo creo, tomando ya la fe por presupuesto.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1005",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 5 (Lenguaje 10°)",
+        "enunciado": "Participa en discursos orales en los que evalúa aspectos relacionados con la progresión temática, manejo de la voz, tono, estilo y puntos de vista sobre temas sociales, culturales, políticos y científicos.",
+        "evidencias": "•  Profundiza en los contextos en los que se dan las temáticas tratadas, a partir de la búsqueda de información en diversas fuentes.\n•  Evalúa la progresión temática, tono, estilo y vocabulario presentes en las intervenciones propias y en las de los otros.\n•  Comprende contenidos que no se dicen explícitamente por medio de ambigüedades o dobles sentidos.\n•  Aplica en su discurso oral la estructura de textos específicos como la ponencia o el debate.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1006",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 6 (Lenguaje 10°)",
+        "enunciado": "Comprende diversos tipos de texto, asumiendo una actitud crítica y argumentando sus puntos de vista frente a lo leído.",
+        "evidencias": "•  Deduce referentes sociales, culturales o ideológicos presentes en las voces que hablan en el texto y argumenta su posición al respecto.\n•  Evalúa textos escritos teniendo en cuenta el plan de contenido, las relaciones de sentido y las estrategias discursivas empleadas.\n•  Identifica las estrategias organizativas sugeridas en el texto. Ejemplo Durante la comprensión de textos: u Busca textos de temas de interés, pueden ser artículos científicos, de opinión, trabajos de investigación, noticias, entre otros. u Analiza los textos elegidos a la luz de preguntas como: u Asume una posición frente a los textos leídos y la argumenta. ¿ Cuál es la intencionalidad del autor en cada uno de los textos ? ¿Desde qué enfoque aborda los conceptos? ¿ Utiliza palabras, expresiones e ilustraciones claras ? ¿ Enuncia las ideas de\n• anera clara y coherente",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1007",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 7 (Lenguaje 10°)",
+        "enunciado": "Produce textos orales como ponencias, comentarios, relatorías o entrevistas, atendiendo a la progresión temática, a los interlocutores, al propósito y a la situación comunicativa.",
+        "evidencias": "•  Expresa de manera coherente y respetuosa sus posicionamientos frente a un texto o situación comunicativa cuando participa en espacios de discusión.\n•  Demuestra apropiación en el dominio del tema al explicar el significado de los conceptos clave que utiliza en sus opiniones.\n•  Construye un texto para ser leído en voz alta, como una relatoría, teniendo en cuenta la progresión temática y el uso de diversos tipos de argumentos.\n•  Interviene oralmente empleando aspectos no verbales de la comunicación como la impostación, el volumen y el tono de voz. Ejemplo Durante la producción de una ponencia: u Elabora fichas de lectura que den cuenta de la búsqueda en distintas fuentes. u Prepara los contenidos y estructura de la ponencia teniendo en cuenta a su interlocutor. u Lee la ponencia usando diversas estrategias orales, corporales y retóricas para llamar la atención de los oyentes.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1008",
+        "area": "Lengua Castellana",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 8 (Lenguaje 10°)",
+        "enunciado": "Escribe textos que evidencian procedimientos sistemáticos de corrección lingüística y el uso de estrategias de producción textual.",
+        "evidencias": "•  Divulga información científica sobre temas de su interés, mediante textos que motivan a sus compañeros a conocer dichas temáticas.\n•  Identifica el contenido que abarca la problemática desarrollada y evalúa los mecanismos que le dan sentido global al texto.\n•  Evalúa el uso adecuado de elementos gramaticales, ortográficos y sintácticos en los textos que produce. Ejemplo u Produce textos informativos como el artículo de divulgación científica siguiendo un proceso de investigación y de escritura:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1101",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 1 (Lenguaje 11°)",
+        "enunciado": "Participa en escenarios académicos, políticos y culturales; asumiendo una posición crítica y propositiva frente a los discursos que le presentan los distintos medios de comunicación y otras fuentes de información.",
+        "evidencias": "•  Analiza la información difundida en los medios de comunicación institucionales y regionales, para participar en procesos democráticos.\n•  Infiere la relación de los mensajes emitidos por los medios de comunicación masiva dentro de contextos sociales, culturales y políticos.\n•  Contrasta estilos, tonos y estrategias discursivas, para determinar sus modos de participación en los escenarios democráticos institucionales.\n•  Comprende que la entonación revela la intención de resaltar o encubrir información de parte del interlocutor. Ejemplo Durante la lectura de medios de comunicación: u\tCompara información de los medios de comunicación a partir de criterios como: línea temática, estrategias discursivas y mediáticas, parcialidad e imparcialidad en el tratamiento de la información y punto de vista. Noticias tomadas de: La Razón, Diario Digital. (2012). Madrid: Audiovisual Española y de El Mundo. (2014). Madrid: Unidad Editorial.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-L-1102",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 2 (Lenguaje 11°)",
+        "enunciado": "Expresa, con sentido crítico, cómo se articulan los códigos verbales y no verbales en diversas manifestaciones humanas y da cuenta de sus implicaciones culturales, sociales e ideológicas.",
+        "evidencias": "•  Identifica la intencionalidad de los anuncios publicitarios, políticos y deportivos que se producen en el contexto social y cultural.\n•  Comprende el sentido literal y figurado de distintos símbolos empleados en los medios de comunicación.\n•  Clasifica los elementos simbólicos presentes en diferentes situaciones como una clase, un videoclip o un concierto musical. Ejemplo Elige un género musical y selecciona un videoclip representativo para analizarlo a partir de los siguientes criterios: u\t Aspectos sociales, estéticos, ideológicos y culturales. u\t Estructura del video (partes que lo organizan). u\t Relación entre imágenes, sonidos y discursos. u\t Aspectos técnicos: tamaños, planos, formas, texturas y colores. u\t Gestos y expresiones corporales.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1103",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 3 (Lenguaje 11°)",
+        "enunciado": "Determina los textos que desea leer y la manera en que abordará su comprensión, con base en sus experiencias de formación e inclinaciones literarias.",
+        "evidencias": "•  Determina en los textos literarios las expresiones que pueden incidir tanto en las concepciones políticas, religiosas y culturales, como en la construcción de ciudadanía.\n•  Conjuga la lectura individual con la discusión grupal sobre los textos literarios.\n•  Comprende las temáticas, características, estilos, tonos, sentido local y global de las obras literarias que lee. Ejemplo Al leer obras literarias es posible establecer diálogos interdisciplinares con las ciencias sociales, las\n• atemáticas, el arte, entre otros. u\tAnaliza una obra literaria en función de:",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1104",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 4 (Lenguaje 11°)",
+        "enunciado": "Identifica, en las producciones literarias clásicas, diferentes temas que le permiten establecer comparaciones con las visiones de mundo de otras épocas.",
+        "evidencias": "•  Asume una postura frente a la vigencia de las obras literarias clásicas.\n•  Analiza obras literarias clásicas y las compara con otras que no pertenecen al canon.\n•  Reconoce que en las obras clásicas se abordan temas que vinculan a los seres humanos de diferentes épocas.\n•  Encuentra que el sentido de las obras literarias clásicas está determinado por sus recursos narrativos, poéticos y dramáticos. Ejemplo Para la apreciación literaria: u\t Selecciona una obra literaria representativa de un movimiento literario, época o autor clásico. u\t Escribe una reseña crítica en la que se desarrollen los siguientes elementos: temáticas, características formales del texto, recursos empleados y contexto de la obra. u\t Diseña una estrategia mediática para promover la lectura del texto leído.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1105",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 5 (Lenguaje 11°)",
+        "enunciado": "Comprende que los argumentos de sus interlocutores involucran procesos de comprensión, crítica y proposición.",
+        "evidencias": "•  Entiende las implicaciones sociales, políticas e ideológicas de los discursos que escucha.\n•  Comprende las posturas de un discurso sobre un tema de interés social y las relaciona con sus posturas previas.\n•  Comprende diferentes tipos de argumentos presentes en un discurso.\n•  Infiere las variantes dialectales, sociales y geográficas en la voz de sus interlocutores. Ejemplo Tanto en la vida cotidiana como en los escenarios académicos estamos expuestos a la comprensión e interpretación de diversas clases de discursos orales que son necesarios analizar con el fin de asumir puntos de vista propios. A continuación, se presentan algunas ideas a tener en cuenta para dicho análisis:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1106",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 6 (Lenguaje 11°)",
+        "enunciado": "Compara diversos tipos de texto, con capacidad crítica y argumentativa para establecer relaciones entre temáticas, características y los múltiples contextos en los que fueron producidos.",
+        "evidencias": "•  Relaciona el significado del texto con los contextos sociales, culturales y políticos en los que fue producido y plantea su posición al respecto.\n•  Contrasta textos, atendiendo a temáticas, características formales, estructura interna, léxico y estilo empleados, entre otros.\n•  Da cuenta de la organización y de los componentes del texto. Ejemplo Al hacer un análisis comparativo de dos tipologías textuales, por ejemplo, el texto expositivo y el texto lírico, tiene en cuenta los siguientes elementos: u\t Intencionalidad del autor de cada texto. u\t Recursos estilísticos (tipo de lenguaje: culto, coloquial, literario, especializado; uso de lenguaje literal y figurado, interrogaciones retóricas, apoyo en esquemas e ilustraciones, etc.). u\t Estructura por medio de la cual se ordena el texto. u\t Contextos sociales, culturales y políticos en los que se enmarca el texto.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-L-1107",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 7 (Lenguaje 11°)",
+        "enunciado": "Expresa por medio de producciones orales el dominio de un tema, un texto o la obra de un autor.",
+        "evidencias": "•  Enfatiza la importancia académica de un tema de su interés personal.\n•  Hace referencia a los contenidos de otros textos en sus producciones orales.\n•  Construye relaciones de contenido entre temas, categorías y conceptos.\n•  Desarrolla un tema académico de su interés, a través de la estructura de introducción, justificación, argumentación y conclusiones.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-L-1108",
+        "area": "Lengua Castellana",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 8 (Lenguaje 11°)",
+        "enunciado": "Produce textos académicos a partir de procedimientos sistemáticos de corrección lingüística, atendiendo al tipo de texto y al contexto comunicativo.",
+        "evidencias": "•  Evalúa la adecuación del texto en relación con su rol como enunciatario, las estrategias discursivas utilizadas y la visión de mundo que proyecta en su escrito.\n•  Evalúa el seguimiento de un plan textual y el uso de la lengua en textos propios y producidos por sus compañeros.\n•  Construye párrafos que tienen funciones específicas dentro del discurso como ampliar, introducir, sintetizar y concluir.\n•  Emplea diferentes tipos de argumento para sustentar sus puntos de vista. Ejemplo Escribe un ensayo sobre un tema polémico y de interés común; teniendo en cuenta las siguientes indicaciones:",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-1001",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 1 (Matemáticas 10°)",
+        "enunciado": "Utiliza las propiedades de las funciones reales (trigonométricas, polinómicas, racionales) y sus transformaciones gráficas.",
+        "evidencias": "• Analiza dominio, rango, asíntotas y periodicidad.\n• Grafica funciones trigonométricas con amplitud y desfase.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-1002",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 2 (Matemáticas 10°)",
+        "enunciado": "Aplica los Teoremas del Seno y del Coseno para resolver triángulos oblicuángulos en navegación y topografía.",
+        "evidencias": "• Calcula distancias y ángulos en poligonales de campo.\n• Modela tensiones y fuerzas estructurales en albergues.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-1003",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 3 (Matemáticas 10°)",
+        "enunciado": "Comprende y utiliza las secciones cónicas (circunferencia, parábola, elipse, hipérbola) en contextos físicos y espaciales.",
+        "evidencias": "• Deduce ecuaciones canónicas y generales de las cónicas.\n• Modela antenas parabólicas y zonas de cobertura de señales.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-1004",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 4 (Matemáticas 10°)",
+        "enunciado": "Aplica el álgebra vectorial bidimensional (suma de vectores, producto escalar) en física y mecánica.",
+        "evidencias": "• Descompone vectores de fuerza y velocidad.\n• Resuelve problemas de equilibrio estático en estructuras escolares.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-1005",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 5 (Matemáticas 10°)",
+        "enunciado": "Construye modelos de regresión lineal y calcula coeficientes de correlación en análisis bivariado de datos.",
+        "evidencias": "• Estima la recta de mejor ajuste para dos variables climáticas o de salud.\n• Evalúa la fuerza y sentido de la correlación de Pearson.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-1006",
+        "area": "Matemáticas",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 6 (Matemáticas 10°)",
+        "enunciado": "Interpreta y aplica distribuciones de probabilidad discreta (binomial) en análisis de escenarios de riesgo.",
+        "evidencias": "• Modela la probabilidad de éxitos en ensayos repetidos.\n• Evalúa la confiabilidad de sistemas de alerta temprana.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-1101",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 1 (Matemáticas 11°)",
+        "enunciado": "Comprende el concepto de límite de una función real y analiza la continuidad y comportamiento asintótico.",
+        "evidencias": "• Calcula límites algebraicos, trigonométricos e indeterminados.\n• Modela comportamientos límite en vaciado de tanques y flujos continuos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-1102",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 2 (Matemáticas 11°)",
+        "enunciado": "Interpreta la derivada como razón de cambio instantánea y como pendiente de la recta tangente a una curva.",
+        "evidencias": "• Aplica reglas de derivación a funciones algebraicas y trascendentes.\n• Resuelve problemas de optimización (máximos y mínimos) de recursos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-M-1103",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 3 (Matemáticas 11°)",
+        "enunciado": "Aplica la integral definida como acumulación de cambio y cálculo de áreas bajo la curva.",
+        "evidencias": "• Aplica el Teorema Fundamental del Cálculo.\n• Calcula volúmenes de sólidos de revolución y curvas de consumo de agua.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-1104",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 4 (Matemáticas 11°)",
+        "enunciado": "Modela fenómenos dinámicos de cambio mediante ecuaciones diferenciales de primer orden sencillas.",
+        "evidencias": "• Modela curvas de enfriamiento, vaciado de reservorios y crecimiento logístico.\n• Simula escenarios de contingencia y resiliencia comunitaria.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-M-1105",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 5 (Matemáticas 11°)",
+        "enunciado": "Interpreta y aplica la distribución normal y pruebas de hipótesis en estadística inferencial para toma de decisiones.",
+        "evidencias": "• Calcula puntuaciones Z e intervalos de confianza para la media poblacional.\n• Elabora conclusiones basadas en muestras estadísticas rigurosas.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-M-1106",
+        "area": "Matemáticas",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 6 (Matemáticas 11°)",
+        "enunciado": "Analiza y evalúa modelos matemáticos complejos para la formulación de proyectos técnicos comunitarios PGIRE.",
+        "evidencias": "• Integra herramientas de álgebra, cálculo y estadística en proyectos reales.\n• Sustenta informes técnicos ante comités de emergencia y autoridades locales.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-1001",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 1 (Sociales 10°)",
+        "enunciado": "Analiza conflictos que se presentan en el territorio colombiano originados por la degradación ambiental, el escaso desarrollo económico y la inestabilidad política.",
+        "evidencias": "• l\tExplica la disponibilidad y el uso del recurso hídrico en las diferentes regiones colombianas y los conflictos que se presentan en torno a este. l\tDiferencia los diversos tipos de contaminación que se presentan en el mundo y sugiere acciones orientadas hacia la sostenibilidad ambiental y la conciencia ecológica en la ciudadanía. l\tDescribe el impacto ambiental, económico, social y político que ha tenido la minería legal e ilegal, a partir del estudio de casos provenientes de distintas fuentes de información. l\tArgumenta la pérdida de biodiversidad en el país a partir de la revisión de los informes del Ministerio del Medio Ambiente, las corporaciones autónomas regionales y/o las ONG dedicadas al tema.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-1002",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 2 (Sociales 10°)",
+        "enunciado": "Evalúa las causas y consecuencias de la violencia en la segunda mitad del siglo XX en Colombia y su incidencia en los ámbitos social, político, económico y cultural.",
+        "evidencias": "• l\tEstablece semejanzas y diferencias entre los conflictos asociados a la convivencia social, a escala regional y nacional. l\tCompara los diferentes tipos de violencia (directa, estructural y cultural) que generan los actores armados y sus repercusiones en la vida nacional. l\tExplica las características de la violencia ejercida en el contexto del conflicto armado en Colombia y cómo afecta la vida social y cultura. l\tPropone estrategias para utilizar el diálogo  como recurso mediador en la solución de conflictos. Ejemplo A partir de la recolección, registro, clasificación, procesamiento e interpretación de fuentes primarias y secundarias, como prensa, documentales de audio y video  e Internet, analiza las causas, consecuencias y posibilidades de resolución pacífica de los conflictos que se viven en el país.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-1003",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 3 (Sociales 10°)",
+        "enunciado": "Comprende que existen multitud de culturas y una sola humanidad en el mundo y que entre ellas se presenta la discriminación y exclusión de algunos grupos, lo cual dificulta el bienestar de todos.",
+        "evidencias": "• l\tIdentifica formas de discriminación social, su origen y las consecuencias que generan en las sociedades actuales. l\tExplica la diversidad cultural y étnica como una característica de las sociedades actuales lo cual se constituye en una riqueza para la vida en comunidad. l\tCompara los mecanismos de protección  de DDHH (conciliación, acción de tutela, acciones populares, acción de cumplimiento). l\tArgumenta por qué es necesario rechazar las formas de discriminación, exclusión social o violencia que se observan en el mundo hoy. Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-1004",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 4 (Sociales 10°)",
+        "enunciado": "Interpreta el papel que cumplen los organismos internacionales como formas de alianza y organización entre los Estados y que responden a los intereses entre los países.",
+        "evidencias": "• l\tDescribe las características demográficas, económicas, sociales, políticas y culturales de las sociedades actuales, en el marco de una sociedad de la información y bajo el paradigma de la globalización. l\tReconoce el papel de los organismos multilaterales en la formulación de políticas económicas, jurídicas, ambientales y educativas para los países que hacen parte de estas organizaciones. l\tExplica cómo los organismos multilaterales de los que hace parte Colombia, inciden en sus políticas internas, desde el reconocimiento de las ventajas y desventajas que tiene el pertenecer a estos. l\tArgumenta el papel desempeñado por los organismos e instituciones nacionales e internacionales, en el mantenimiento del bienestar, la paz de los Estados y los Derechos Humanos.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-1005",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 5 (Sociales 10°)",
+        "enunciado": "Analiza los conflictos bélicos presentes en las sociedades contemporáneas, sus causas y consecuencias así como su incidencia en la vida cotidiana de los pueblos.",
+        "evidencias": "• l\tReconoce los avances militares, tecnológicos y científicos que las potencias utilizaron durante las dos Guerras Mundiales y otros conflictos acaecidos en el siglo XX y asume una posición crítica frente a estos. l\tDescribe el desarrollo histórico de las guerras\n• undiales y las consecuencias sociales que estos enfrentamientos provocaron para la humanidad. l\tExplica y representa las transformaciones geopolíticas que se dieron en el mundo después de las guerras mundiales desde la interpretación de mapas temáticos. l\tArgumenta acerca de las causas directas e indirectas que determinaron el inicio de los conflictos bélicos mundiales.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-1101",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 1 (Sociales 11°)",
+        "enunciado": "Analiza cómo el bienestar y la supervivencia de la humanidad dependen de la protección que hagan del ambiente los diferentes actores (políticos, económicos y sociales).",
+        "evidencias": "• l\tDescribe las razones económicas y políticas que sustentan aquellos países que más influyen en el problema del calentamiento global para no cambiar sus prácticas. l\tReconoce acciones y propuestas que ha creado la Organización de Naciones Unidas -ONU- (Protocolos ambientales y Cumbres de la Tierra), para evitar los efectos del calentamiento global en el mundo. l\tExplica las acciones que se sugieren desde las instituciones y organizaciones ambientales en Colombia para disminuir los efectos del calentamiento global. l\tPropone acciones a seguir para disminuir las causas y los efectos actuales del calentamiento global y el futuro en la vida del planeta.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-S-1102",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 2 (Sociales 11°)",
+        "enunciado": "Evalúa la importancia de la solución negociada de los conflictos armados para la búsqueda de la paz.",
+        "evidencias": "• l\tReconoce los principales conflictos sociales y políticos vividos en Colombia en las últimas décadas, a partir de la memoria histórica. l\tExplica la importancia que tiene para una sociedad la resolución pacífica de sus conflictos y el respeto por las diferencias políticas, ideológicas, de género, religiosas, étnicas o intereses económicos. l\tDescribe las implicaciones que tiene para las sociedades democráticas considerar la justicia, la verdad, el perdón y la reparación de las víctimas en los procesos de paz. l\tArgumenta razones para defender la búsqueda de la paz como un deber ético, moral y constitucional en el que se requiere el compromiso de todos los ciudadanos. Ejemplo A partir de la lectura de diferentes fuentes de información, caracteriza los procesos de paz que se desarrollaron en distintos países del mundo como El Salvador, Sudáfrica, Irlanda del Norte, Nepal y Colombia, entre otros, señalando los acuerdos básicos, la transición a la vida civil y política de los actores involucrados.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-S-1103",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 3 (Sociales 11°)",
+        "enunciado": "Analiza las consecuencias políticas, económicas y sociales de algunos conflictos geopolíticos desde finales del siglo XX hasta la actualidad a nivel mundial.",
+        "evidencias": "• l\tCaracteriza algunos conflictos geopolíticos contemporáneos ocurridos en distintos continentes por la disputa de recursos naturales, intereses económicos, ideológicos y religiosos. l\tReconoce que en las relaciones internacionales existen dinámicas geopolíticas que tienen implicaciones en las poblaciones fronterizas\n• ediante el análisis de casos recientes. l\tDescribe los intereses políticos, económicos e ideológicos de las grandes potencias que afectan las relaciones internacionales en la actualidad. l\tArgumenta las consecuencias sociales que generan los conflictos internacionales como el desplazamiento forzado, los refugiados y el genocidio de naciones.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-1104",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 4 (Sociales 11°)",
+        "enunciado": "Comprende las implicaciones sociales, económicas y políticas que tuvo la Guerra Fría en el mundo y las relaciona con las vividas en América Latina.",
+        "evidencias": "• l\tReconoce las características fundamentales de los dos bloques hegemónicos (Capitalista- Comunista), como sistemas políticos y económicos que se consolidaron en el marco de la Guerra Fría. l\tExplica las implicaciones que trajo a la vida cotidiana de los pueblos el que sus países hicieran parte de uno u otro bloque. l\tInterpreta las repercusiones sociales, políticas y económicas que la Guerra Fría tuvo para Latinoamérica en casos como la revolución cubana, el surgimiento de las dictaduras, las guerrillas y el intervencionismo. l\tPlantea argumentos acerca de las amenazas constantes con armas de destrucción masiva por parte de las potencias vencedoras en la segunda Guerra Mundial y establece relaciones con las tensiones mundiales en la actualidad.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-S-1105",
+        "area": "Ciencias Sociales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 5 (Sociales 11°)",
+        "enunciado": "Analiza la globalización como un proceso que redefine el concepto de territorio, las dinámicas de los mercados, las gobernanzas nacionales y las identidades locales.",
+        "evidencias": "• l\tReconoce las características de la globalización económica y política en el mundo contemporáneo y las tensiones que ha generado en las comunidades nacionales. l\tExplica y sitúa los bloques económicos y los tratados de integración que se han configurado en los últimos años, así como las consecuencias que estos han traído para Colombia y América Latina. l\tDescribe las ventajas y desventajas económicas, políticas y sociales que tiene el proceso de globalización en las sociedades actuales. l\tArgumenta acerca del papel de las organizaciones políticas y económicas en la integración de los países latinoamericanos (Mercosur, El Alba, Alianza del Pacífico y Unasur, entre otros).",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-1001",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 1 (Naturales 10°)",
+        "enunciado": "Comprende, que el reposo o el movimiento rectilíneo uniforme, se presentan cuando las fuerzas aplicadas sobre el sistema se anulan entre ellas, y que en presencia de fuerzas resultantes no nulas se producen cambios de velocidad.",
+        "evidencias": "• q\tPredice el equilibrio (de reposo o movimiento uniforme en línea recta) de un cuerpo a partir del análisis de las fuerzas que actúan sobre él (primera ley de Newton). q\tEstima, a partir de las expresiones matemáticas, los cambios de velocidad (aceleración) que experimenta un cuerpo a partir de la relación entre fuerza y masa (segunda ley de Newton). q\tIdentifica, en diferentes situaciones de interacción entre cuerpos (de forma directa y a distancia), la fuerza de acción y la de reacción e indica sus valores y direcciones (tercera ley de Newton). Ejemplo",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-1002",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 2 (Naturales 10°)",
+        "enunciado": "Comprende la conservación de la energía mecánica como un principio que permite cuantificar y explicar diferentes fenómenos mecánicos: choques entre cuerpos, movimiento pendular, caída libre, deformación de un sistema masa-resorte.",
+        "evidencias": "• q\tPredice cualitativa y cuantitativamente el\n• ovimiento de un cuerpo al hacer uso del principio de conservación de la energía mecánica en diferentes situaciones físicas. q\tIdentifica, en sistemas no conservativos (fricción, choques no elásticos, deformación, vibraciones) las transformaciones de energía que se producen en concordancia con la conservación de la energía. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-1003",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 3 (Naturales 10°)",
+        "enunciado": "Comprende que los diferentes mecanismos de reacción química (oxido-reducción, descomposición, neutralización y precipitación) posibilitan la formación de compuestos inorgánicos.",
+        "evidencias": "• q\tEstablece la relación entre la distribución de los electrones en el átomo y el comportamiento químico de los elementos, explicando cómo esta distribución determina la formación de compuestos, dados en ejemplos de elementos de la Tabla Periódica. q\tBalancea ecuaciones químicas dadas por el docente, teniendo en cuenta la ley de conservación de la masa y la conservación de la carga, al determinar cuantitativamente las relaciones molares entre reactivos y productos de una reacción (a partir de sus coeficientes). q\tUtiliza formulas y ecuaciones químicas para representar las reacciones entre compuestos inorgánicos (óxidos, ácidos, hidróxidos, sales) y posteriormente nombrarlos con base en la nomenclatura propuesta por la Unión Internacional de Química Pura y Aplicada (IUPAC). q\tExplica a partir de relaciones cuantitativas y reacciones químicas (oxido-reducción, descomposición, neutralización y precipitación) la formación de nuevos compuestos, dando ejemplos de cada tipo de reacción. Ejemplo Realiza actividades experimentales para analizar los factores que influyen en la formación de compuestos inorgánicos. Durante el proceso utiliza cálculos para saber exactamente la cantidad de reactivo necesario para obtener una cantidad de producto o cuánto producto se obtiene de acuerdo a la cantidad de reactivo. Utiliza fórmulas y ecuaciones para representar las reacciones que elabora y las clasifica según la función química. Durante el proceso recolecta información adicional",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-1004",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 10°",
+        "codigo_oficial": "DBA 4 (Naturales 10°)",
+        "enunciado": "Comprende que la biotecnología conlleva el uso y manipulación de la información genética a través de distintas técnicas (fertilización asistida, clonación reproductiva y terapéutica, modificación genética, terapias génicas), y que tiene implicaciones sociales, bioéticas y ambientales.",
+        "evidencias": "• q\tDescribe distintas técnicas biotecnológicas (fertilización asistida, clonación reproductiva y terapéutica, modificación genética, terapias génicas), explicando cómo funcionan y qué características generan en los organismos desarrollados. q\tExplica los usos de la biotecnología y sus efectos en diferentes contextos (salud, agricultura, producción energética y ambiente). q\tArgumenta, basado en  evidencias, los impactos bioéticos, legales, sociales y ambientales generados por el uso de transgénicos, clonación y terapias génicas. Ejemplo A partir del siguiente texto: Marcos (2011) critica la visión reduccionista que tuvo auge hacia el año 1972 y que se concreta en el Proyecto Genoma Humano. Al respecto reprocha la frase “Si todo está en los genes, entonces conozcamos exhaustivamente los nuestros y sabremos todo lo necesario para manejar la vida humana” y agrega: “comenzamos dando la bienvenida a métodos moleculares que produjeron importantes descubrimientos, pero acabamos para respaldar sus explicaciones y las comunica utilizando argumentos científicos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-1101",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 1 (Naturales 11°)",
+        "enunciado": "Comprende la naturaleza de la propagación del sonido y de la luz como fenómenos ondulatorios (ondas mecánicas y electromagnéticas, respectivamente).",
+        "evidencias": "• q\tClasifica las ondas de luz y sonido según el medio de propagación (mecánicas y electromagnéticas) y la dirección de la oscilación (longitudinales y transversales). q\tAplica las leyes y principios del movimiento ondulatorio (ley de reflexión, de refracción y principio de Huygens) para predecir el comportamiento de una onda y los hace visibles en casos prácticos, al incluir cambio de medio de propagación. q\tExplica los fenómenos ondulatorios de sonido y luz en casos prácticos (reflexión, refracción, interferencia, difracción, polarización). q\tExplica las cualidades del sonido (tono, intensidad, audibilidad) y de la luz (color y visibilidad) a partir de las características del fenómeno ondulatorio (longitud de onda, frecuencia, amplitud). Ejemplo Dadas las situaciones que se presentan en las fotos, explica, a partir de principios y leyes, lo que observa.",
+        "etapa_emergencia": "ETAPA 3: Educación Formal"
+      },
+      {
+        "id": "DBA-N-1102",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 2 (Naturales 11°)",
+        "enunciado": "Comprende que la interacción de las cargas en reposo genera fuerzas eléctricas y que cuando las cargas están en movimiento genera fuerzas magnéticas.",
+        "evidencias": "• q\tIdentifica el tipo de carga eléctrica (positiva o negativa) que adquiere un material cuando se somete a procedimientos de fricción o contacto. q\tReconoce que las fuerzas eléctricas y magnéticas pueden ser de atracción y repulsión, mientras que las gravitacionales solo generan efectos de atracción. q\tConstruye y explica el funcionamiento de un electroimán. Ejemplo",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      },
+      {
+        "id": "DBA-N-1103",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 3 (Naturales 11°)",
+        "enunciado": "Comprende las relaciones entre corriente y voltaje en circuitos resistivos sencillos en serie, en paralelo y mixtos.",
+        "evidencias": "• q\tDetermina las corrientes y los voltajes en elementos resistivos de un circuito eléctrico utilizando la ley de Ohm. q\tIdentifica configuraciones en serie, en paralelo y mixtas en diferentes circuitos representados en esquemas. q\tIdentifica características de circuitos en serie y paralelo a partir de la construcción de circuitos con resistencias. q\tPredice los cambios de iluminación en bombillos resistivos en un circuito al alterarlo (eliminar o agregar componentes en diferentes lugares). Ejemplo Dado el siguiente circuito: Identifica los cambios de iluminación en los bombillos restantes si el bombillo (X) se elimina.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-1104",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 4 (Naturales 11°)",
+        "enunciado": "Comprende que los diferentes mecanismos de reacción química (oxido-reducción, homólisis, heterólisis y pericíclicas) posibilitan la formación de distintos tipos de compuestos orgánicos.",
+        "evidencias": "• q\tRepresenta las reacciones químicas entre compuestos orgánicos utilizando fórmulas y ecuaciones químicas y la nomenclatura propuesta por la Unión Internacional de Química Pura y Aplicada (IUPAC). q\tClasifica compuestos orgánicos y moléculas de interés biológico (alcoholes, fenoles, cetonas, aldehídos, carbohidratos, lípidos, proteínas) a partir de la aplicación de pruebas químicas. q\tExplica el comportamiento exotérmico o endotérmico en una reacción química debido a la naturaleza de los reactivos, la variación de la temperatura, la presencia de catalizadores y los mecanismos propios de un grupo orgánico específico. Ejemplo Realiza actividades prácticas individuales o en equipo en las que busca clasificar compuestos orgánicos utilizando diferentes reactivos químicos (Benedict, Fehling, Bicarbonato de Sodio, Tollens), durante el proceso puede identificar algunos factores que influyen en que una reacción sea positiva o negativa para un grupo funcional analizado y un reactivo utilizado. Comunica detalladamente el proceso de indagación y de resultados con el uso de gráficos, tablas y ecuaciones. Adicionalmente, determina si una reacción es endotérmica o exotérmica según las evidencias y datos obtenidos.",
+        "etapa_emergencia": "ETAPA 1: Respuesta Inmediata"
+      },
+      {
+        "id": "DBA-N-1105",
+        "area": "Ciencias Naturales",
+        "grado": "Grado 11°",
+        "codigo_oficial": "DBA 5 (Naturales 11°)",
+        "enunciado": "Analiza cuestiones ambientales actuales, como el calentamiento global, contaminación, tala de bosques y minería, desde una visión sistémica (económico, social, ambiental y cultural).",
+        "evidencias": "• q\tExplica el fenómeno del calentamiento global, identificando sus causas y proponiendo acciones locales y globales para controlarlo. q\tIdentifica las implicaciones que tiene para Colombia, en los ámbitos social, ambiental y cultural el hecho de ser “un país mega diverso”. q\tArgumenta con base en evidencias sobre los efectos que tienen algunas actividades humanas (contaminación, minería, ganadería, agricultura, la construcción de carreteras y ciudades, tala de bosques) en la biodiversidad del país. q\tDiseña y propone investigaciones, en las que plantea acciones individuales y colectivas que promuevan el reconocimiento de las especies de su entorno para evitar su tala (plantas), captura y maltrato (animales) con fines de consumo o tráfico ilegal. Ejemplo A partir de la siguiente gráfica: Relaciona la información anterior con los siguientes datos: IDEAM, 2009 citado por Roca, M. (22 de septiembre de 2010). Explorando los Andes. Obtenido de Explorando los Andes: http://www.nevados.org/index.php/es/home/46- articulos-tematicos/calentamiento-global/270-avanza- el-cambio-climatico-y-el-deshielo-de-los-glaciares-en- colombia.html Grafica la información de la tabla y analiza el impacto que puede tener el derretimiento de los nevados para la biodiversidad de Colombia.",
+        "etapa_emergencia": "ETAPA 2: Recuperación Temprana"
+      }
+    ],
+    "age_range": "15 a 17 años (Educación Media Técnica y Académica: Grados 10° y 11°)"
+  },
+  "colombia_calendar_rules": {
+    "total_school_weeks": 40,
+    "school_year_start_month": 1,
+    "school_year_start_day": 20,
+    "school_year_end_month": 12,
+    "school_year_end_day": 10,
+    "weekly_capacity_per_subject": 1,
+    "emergency_capacity_rule": "Semanas_Restantes = Math.max(1, 40 - Math.floor((Fecha_Emergencia - Fecha_Inicio_Anio) / (7 * 24 * 60 * 60 * 1000)))",
+    "kpi_capacity_formula": "Math.min(Semanas_Restantes, Total_Subprocesos_Etapa)"
+  },
+  "situated_didactic_strategies": {
+    "LENGUAJE": {
+      "tier_small": "📖 LENGUAJE (Tutoría 1:1): Mediación individual del SABER/HACER mediante diarios de expresión, lectura guiada y vocabulario de contención.",
+      "tier_medium": "📖 LENGUAJE (Cooperativo): Trabajo en parejas para co-crear textos y círculos de la palabra, articulando el HACER con el apoyo mutuo.",
+      "tier_large": "📖 LENGUAJE (Micro-estaciones): Guías modulares autónomas de comprensión lectora, rincones de producción escrita y monitores pares."
+    },
+    "MATEMATICAS": {
+      "tier_small": "📐 MATEMÁTICAS (Tutoría 1:1): Nivelación personalizada usando material concreto del entorno, conteo directo y resolución guiada del HACER.",
+      "tier_medium": "📐 MATEMÁTICAS (Cooperativo): Retos de cálculo e inventarios en equipos cooperativos, aplicando el HACER a la distribución de recursos del aula.",
+      "tier_large": "📐 MATEMÁTICAS (Micro-estaciones): Estaciones rotativas de cálculo lúdico, resolución autónoma por ritmos y validación en parejas."
+    },
+    "CIENCIAS_SOCIALES": {
+      "tier_small": "🏛️ CIENCIAS SOCIALES (Tutoría 1:1): Diálogo individual sobre memoria y territorio, mediando el HACER en la reconstrucción comunitaria.",
+      "tier_medium": "🏛️ CIENCIAS SOCIALES (Cooperativo): Elaboración de cartografía social en equipos, asambleas de aula y acuerdos de convivencia pacífica.",
+      "tier_large": "🏛️ CIENCIAS SOCIALES (Micro-estaciones): Murales colectivos de identidad territorial, micro-talleres de ciudadanía y liderazgo estudiantil."
+    },
+    "CIENCIAS_NATURALES": {
+      "tier_small": "🔬 CIENCIAS NATURALES (Tutoría 1:1): Guía individual de autocuidado físico, observación ambiental y prácticas de higiene WASH.",
+      "tier_medium": "🔬 CIENCIAS NATURALES (Cooperativo): Brigadas escolares de agua segura, monitoreo de cuencas/riesgos y experimentos colaborativos.",
+      "tier_large": "🔬 CIENCIAS NATURALES (Micro-estaciones): Laboratorios rotativos de saneamiento, fichas de indagación del entorno y monitores de salud."
+    },
+    "SOCIOEMOCIONAL": {
+      "tier_small": "🧠 SOCIOEMOCIONAL (Tutoría 1:1): Acompañamiento individual con Kit Emocional NRC (BLP), escucha activa y validación del CONMIGO MISMO.",
+      "tier_medium": "🧠 SOCIOEMOCIONAL (Cooperativo): Dinámicas de empatía, juegos de roles de mediación pacífica (CON EL OTRO) y respiración consciente.",
+      "tier_large": "🧠 SOCIOEMOCIONAL (Micro-estaciones): Rincón de la calma, estaciones de autorregulación emocional y red de guardianes de bienestar."
+    },
+    "PROTECCION_PGIRE": {
+      "tier_small": "🛡️ PROTECCIÓN PGIRE (Tutoría 1:1): Plan familiar de contingencia personalizado y mapa individual de rutas seguras frente a la amenaza.",
+      "tier_medium": "🛡️ PROTECCIÓN PGIRE (Cooperativo): Simulacro pedagógico en equipos, asignación de roles de autoprotección y brigada de primeros auxilios.",
+      "tier_large": "🛡️ PROTECCIÓN PGIRE (Micro-estaciones): Estaciones de señalización escolar, comités de riesgo por sectores y difusión comunitaria."
+    }
+  },
+  "monitoreo_columns_schema": {
+    "B": "ID Registro",
+    "C": "Fecha / Hora",
+    "D": "Etapa Educativa",
+    "E": "Semana Lectiva",
+    "F": "Área / Asignatura",
+    "G": "📘 DBA / PENSAMIENTO EBC / ENTORNO",
+    "H": "📌 SUB-PROCESO EBC / HABILIDAD / RIESGO (Alineación Curricular & Prerrequisito)",
+    "I": "🎯 DESAFÍO PEDAGÓGICO Y OBJETIVO BLOOM",
+    "J": "🎯 Evidencias de Aprendizaje 360° (🧠 Saber / 🛠️ Hacer / ❤️ Ser)",
+    "K": "📝 Orientación Didáctica Situada (Estrategia Pedagógica Flexible NRC / INEE)",
+    "L": "✍️ Bitácora Cualitativa / Acreditación SIEE (Registro de Avance Oficial para Promoción)",
+    "M": "🎯 Estado de Monitoreo en Clase (⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado)"
+  },
+  "situated_didactic_rule": {
+    "formula_structure": "Grade (E34) + Classroom_Tier (E35) + PGIRE_Threat_Risk (E28/E31) + Evidencia_HACER/SER (Col J) + Desafio_Bloom (Col I)",
+    "tier_small": "Tutoría 1:1 (Acompañamiento individual y nivelación focalizada)",
+    "tier_medium": "Aprendizaje Cooperativo (Equipos de 4-5 y roles rotativos)",
+    "tier_large": "Micro-estaciones Autónomas (Rincones por ritmos y guías modulares)"
+  }
+};
