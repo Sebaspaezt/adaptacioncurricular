@@ -119,26 +119,32 @@ def run_synchronization():
         else:
             print(f'    [!] Error en pruebas: {res_test.stderr[:200]}')
             
-    # 6. Actualizacion de Registro de Ajustes (Changelog)
-    print('\n[6/6] Consolidando registro de ajustes y metadatos...')
-    ajustes = master_data.get('registro_ajustes', [])
-    ajustes_aplicados_ahora = 0
-    now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    for aj in ajustes:
-        if aj.get('estado') == 'PENDIENTE':
-            aj['estado'] = 'APLICADO'
-            aj['fecha_aplicacion'] = now_str
-            ajustes_aplicados_ahora += 1
-            
-    master_data['metadata']['ultima_sincronizacion'] = now_str
-    with open(master_json_path, 'w', encoding='utf-8') as f:
-        json.dump(master_data, f, indent=2, ensure_ascii=False)
-    with open(os.path.join(p1_dir, 'MATRIZ_MAESTRA_AJUSTES_Y_SINCRONIZACION.json'), 'w', encoding='utf-8') as f:
-        json.dump(master_data, f, indent=2, ensure_ascii=False)
-        
-    print(f'    [OK] Registro de ajustes actualizado ({ajustes_aplicados_ahora} ajustes aplicados).')
+    # 7. Sincronización Automática con GitHub (Despliegue Continuo Web)
+    print('\n[7/7] Sincronizando y desplegando en GitHub Pages...')
+    git_bin = r'C:\Program Files\Git\bin\git.exe'
+    if not os.path.exists(git_bin):
+        git_bin = 'git'
+    try:
+        # Añadir cambios
+        subprocess.run([git_bin, 'add', '.'], cwd=p2_dir, capture_output=True, text=True)
+        # Commit con timestamp
+        commit_msg = f"Actualización automática sincronizada: {now_str} (v{ver})"
+        commit_res = subprocess.run([git_bin, 'commit', '-m', commit_msg], cwd=p2_dir, capture_output=True, text=True)
+        if "nothing to commit" in commit_res.stdout:
+            print('    [OK] No hay cambios pendientes por subir a GitHub.')
+        else:
+            print('    [OK] Commit creado localmente en Proyecto 2.')
+            # Push a GitHub
+            push_res = subprocess.run([git_bin, 'push', 'origin', 'main'], cwd=p2_dir, capture_output=True, text=True)
+            if push_res.returncode == 0:
+                print('    [OK] ¡Despliegue exitoso en GitHub! Web actualizada en vivo.')
+            else:
+                print(f'    [!] Advertencia al enviar a GitHub: {push_res.stderr[:200]}')
+    except Exception as e:
+        print(f'    [!] No se pudo conectar con Git automáticamente: {e}')
+
     print('\n' + '=' * 80)
-    print('  SINCRONIZACION INTEGRAL PROYECTO 1 Y PROYECTO 2 FINALIZADA CON EXITO')
+    print('  SINCRONIZACION INTEGRAL PROYECTO 1, PROYECTO 2 Y GITHUB FINALIZADA CON EXITO')
     print('=' * 80)
     return True
 

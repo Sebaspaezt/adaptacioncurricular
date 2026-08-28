@@ -126,3 +126,9 @@ server {
 Para probar la aplicación en tu ordenador sin necesidad de instalar entornos complejos:
 1. **Opción Directa:** Doble clic sobre `index.html` en cualquier navegador web moderno.
 2. **Opción Servidor Ligero:** Ejecutar en terminal `python -m http.server 8080` o `npx serve .` y abrir `http://localhost:8080`.
+
+### 5.4. Despliegue Continuo Automático en GitHub Pages (CI/CD)
+* **Repositorio Oficial:** `https://github.com/Sebaspaezt/adaptacioncurricular`
+* **URL en Producción Web (En Vivo):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
+* **Flujo de Automatización:** Cada ajuste realizado y procesado por el orquestador (`orquestador_maestro_sincronizacion.py` o `sincronizar_ajustes.bat`) se compila y se envía automáticamente mediante `git push` a la rama `main`, actualizando la plataforma en vivo en GitHub Pages en tiempo real.
+
