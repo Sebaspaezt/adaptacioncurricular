@@ -3,7 +3,7 @@
     "titulo": "MATRIZ MAESTRA DE AJUSTES Y SINCRONIZACIÓN PEDAGÓGICA Y TÉCNICA (PROYECTOS 1 Y 2)",
     "iniciativa": "Iniciativa de Flexibilización y Adaptación Curricular en Situaciones de Emergencia (NRC / MEN)",
     "version": "2.0.0",
-    "ultima_sincronizacion": "2026-08-26 13:40:18",
+    "ultima_sincronizacion": "2026-08-31 14:03:10",
     "descripcion": "Fuente única de verdad (SSOT) para ingresar ajustes curriculares, normativos y didácticos aplicables simultáneamente a los libros Excel (Proyecto 1) y a la plataforma Web (Proyecto 2).",
     "rutas_proyectos": {
       "proyecto_1_excel": "E:\\Proyectos antigravity\\NRC\\Proyecto herramienta 1",
@@ -52,6 +52,12 @@
       "fase": "FASE 13: ESTANDARIZACIÓN Y GRADUACIÓN CURRICULAR INTEGRAL POR FRANJA DE EDAD (6 A 17 AÑOS)",
       "descripcion": "Depuración total de mallas curriculares en los 5 libros Excel (eliminación de filas residuales de Ciclo III), estandarización de 10 a 12 subprocesos graduados por ciclo y área (Lenguaje, Matemáticas, Ciencias Sociales MEN 2026, Ciencias Naturales/WASH), integración de EBC, DBA, objetivos Bloom completos (>40 caracteres), triada evaluativa Saber-Hacer-Ser y sincronización con plataforma web.",
       "impacto_proyectos": "Rigor pedagógico y validez evolutiva total según la edad del estudiante (Ciclo I: 6-8 años, Ciclo II: 9-10 años, Ciclo III: 11-12 años, Ciclo IV: 13-14 años, Ciclo V: 15-17 años)."
+    },
+    {
+      "fecha": "2026-08-27",
+      "fase": "FASE 12: HOMOLOGACIÓN INTEGRAL MULTICICLO DE DERECHOS BÁSICOS DE APRENDIZAJE (DBA MEN)",
+      "descripcion": "Corrección y poblamiento oficial de las bases de datos relacionales DBA para los 5 ciclos (Ciclos I, II, III, IV y V - Grados 1° a 11°), alineando las 4 áreas curriculares (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), evidencias del MEN, asignación de etapas de emergencia NRC y sincronización con mallas y plataforma Web.",
+      "impacto_proyectos": "Paridad curricular 1:1 total entre Proyecto 1 (Excel multiciclo) y Proyecto 2 (Web interactiva)."
     }
   ],
   "marco_normativo_y_bloom": {

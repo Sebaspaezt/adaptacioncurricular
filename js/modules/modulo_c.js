@@ -4,6 +4,21 @@ var ModuloC = {
     this.renderMonitoreo();
   },
 
+  getDidacticaStrategyForArea: function(areaKey, nnaCount) {
+    var strategies = (CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
+    var areaMap = {
+      'lenguaje': 'LENGUAJE',
+      'matematicas': 'MATEMATICAS',
+      'sociales': 'CIENCIAS_SOCIALES',
+      'naturales': 'CIENCIAS_NATURALES'
+    };
+    var stObj = strategies[areaMap[areaKey]] || {};
+    var n = parseInt(nnaCount, 10) || 25;
+    if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
+    if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
+    return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
+  },
+
   renderMonitoreo: function() {
     var self = this;
     var user = AuthManager.getUserData();
@@ -11,13 +26,15 @@ var ModuloC = {
     if (!d) {
       d = {
         ciclo: '3',
-        grado: 'Grado 6°',
-        nna: 25,
+        grado: 'Grado 6° (Bachillerato)',
+        nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación',
-        riesgosIE: 'Afectación de aulas y pérdida de material',
+        amenaza: 'Inundación lenta o desbordamiento',
+        ejemploIE: 'Afectación de aulas y pérdida de material',
+        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes',
+        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía',
         fechaInicio: new Date().toISOString().split('T')[0]
       };
     }
@@ -38,8 +55,28 @@ var ModuloC = {
       fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
 
       var areaKey = areas[(i - 1) % areas.length];
-      var items = cicloData[areaKey] || [];
-      var item = items[(i - 1) % (items.length || 1)] || { dba_code: 'DBA-1', dba_desc: 'Aprendizaje prioritario' };
+      var rawItems = cicloData[areaKey] || [];
+      var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
+      var parsedItem = ModuloB.getItemFields(rawItem) || {
+        factor: 'Eje Curricular',
+        subproceso: 'Contenido esencial',
+        dbaCode: 'DBA',
+        dbaDesc: 'Aprendizaje nuclear priorizado',
+        complejidad: 'Intermedia',
+        bloom: 'Aplicar y reflexionar',
+        didactica: 'Taller situado de aprendizaje'
+      };
+
+      var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
+
+      var tarjetaHTML = 
+        '<div style="line-height:1.45;">' +
+          '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+          '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+          '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
+          '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+        '</div>';
 
       semanas.push({
         num: i,
@@ -47,7 +84,7 @@ var ModuloC = {
         etapa: d.etapa,
         areaKey: areaKey,
         areaNombre: areaKey.toUpperCase(),
-        tarjeta: '🎓 ' + d.grado + ' | ' + d.didacticaNNA + ' [' + d.categoriaAmenaza + ' - ' + (d.riesgosIE || 'Riesgo escolar') + '] 🛠️ Didáctica: ' + (item.didactica || 'Taller situado') + ' -> 🎯 Desafío Bloom: ' + (item.bloom || 'Aplicar y reflexionar'),
+        tarjeta: tarjetaHTML,
         avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
         observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
       });
@@ -63,7 +100,7 @@ var ModuloC = {
         '<div class="card-header">' +
           '<div>' +
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</span>' +
+            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
           '</div>' +
           '<div style="display: flex; gap: 10px;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +

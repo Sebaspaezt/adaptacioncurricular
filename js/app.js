@@ -112,6 +112,12 @@ function initNavigation() {
           elem.style.display = (id === targetId) ? 'block' : 'none';
         }
       });
+
+      if (targetId === 'tab-rayuela') {
+        ModuloB.renderRayuela();
+      } else if (targetId === 'tab-monitoreo') {
+        ModuloC.renderMonitoreo();
+      }
     });
   });
 }
