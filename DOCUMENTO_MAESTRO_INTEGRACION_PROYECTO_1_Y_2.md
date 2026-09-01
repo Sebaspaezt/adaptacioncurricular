@@ -48,41 +48,45 @@ flowchart TD
     D --> F["💾 Guardado, Reanudación y Exportación JSON/Excel"]
 ```
 
-### 4.1. Módulo A: Diagnóstico Paramétrico y Control
+### 4.1. Módulo A: Diagnóstico Paramétrico y Control (Soporte Multirriesgo)
 * **Inducción Pedagógica Previa:**
   * 4 preguntas generadoras de apropiación en terreno.
   * Guía 1.1: Etapas de Respuesta a la Emergencia.
   * Guía 1.2: Escala Unificada de Afectación Educativa (Pág. 7).
   * Guía 1.3: Categorías de Riesgo Prevalente PGIRE.
-* **Formulario Paramétrico (Títulos Estrictos):**
+* **Formulario Paramétrico Multirriesgo:**
   1. `Selección de Ciclo` (Ciclos I al V).
   2. `1. Etapa de Respuesta a la Emergencia` $\rightarrow$ Auto-calcula `2. Nivel de Complejidad Cognitiva Bloom`.
-  3. `3. Tipo / Categoría Macro de Amenaza PGIRE` $\rightarrow$ Filtra `4. Amenaza Específica Diagnosticada` (40 amenazas).
-  4. Despliegue automático de:
-     * `5. Ejemplo en Institución Educativa`
+  3. `3. Tipo / Categoría Macro de Amenaza PGIRE` $\rightarrow$ Selección manual múltiple sin opción "Todas", reflejando situaciones concurrentes (*Natural*, *Socionatural*, *Antrópica*, *Conflicto Armado y Protección*).
+  4. `4. Amenaza(s) Específica(s) Diagnosticada(s)` $\rightarrow$ Filtro dinámico y selección múltiple de amenazas concurrentes (40 amenazas PGIRE).
+  5. Despliegue consolidado multilínea automático de:
+     * `5. Ejemplo(s) en Institución Educativa`
      * `6. Riesgos Asociados en la Institución Educativa`
-     * `7. Instancia GIRE Responsable y Ruta` (*Ruta de Protección Humanitaria* o *Mesa Territorial MTGIRE*).
-  5. Entradas del docente:
+     * `7. Instancia(s) GIRE Responsable(s) y Ruta(s)` (*Ruta de Protección Humanitaria*, *Mesa Territorial MTGIRE* o *Comité CIGIRE*).
+  6. Entradas del docente:
      * `8. Grado Escolar en Aula`
      * `9. Matrícula de NNA en Aula` $\rightarrow$ Determina estrategia: *Tutoría 1:1 (<15)*, *Cooperativo (15-35)* o *Micro-estaciones (>35)*.
      * `10. Fecha de Inicio de la Emergencia` $\rightarrow$ Genera el calendario semanal proyectado.
-* **Resumen de Diagnóstico:** Botón "Guardar Diagnóstico" y tarjeta de confirmación de parámetros.
+* **Resumen de Diagnóstico:** Botón "Guardar y Aplicar Diagnóstico de Aula" y tarjeta de confirmación de parámetros con badges por cada amenaza diagnosticada.
 
 ### 4.2. Módulo B: Rayuela Curricular (Biblioteca de Planificación)
-* Espacio de exploración profunda de la malla curricular priorizada:
-  * **Lenguaje:** Factor, Subproceso, EBC/DBA, Saber, Hacer, Ser y Mini-proyecto didáctico.
-  * **Matemáticas:** Pensamiento matemático, EBC/DBA, Complejidad y Didáctica situada.
-  * **Ciencias Sociales:** Eje generador MEN 2026, formación ciudadana y memoria territorial.
-  * **Ciencias Naturales:** Entorno vivo/físico, saneamiento WASH y gestión ambiental.
-  * **Habilidades para la Vida:** Socioemocional, autoconocimiento, regulación emocional y BLP.
-  * **Aprendizajes de Supervivencia:** Prevención de minas (ERM), rutas seguras y resiliencia.
+* Espacio de exploración profunda de la malla curricular priorizada con **encabezados contextualizados por tipología**:
+  * **Áreas Académicas (Lenguaje, Matemáticas, Sociales, Naturales):**
+    * Encabezados: `Factor / Eje` | `DBA / Aprendizaje Esencial` | `Complejidad & Bloom` | `Didáctica Situada / Mini-Proyecto`.
+  * **Socioemocional & Vida:**
+    * Encabezados: `Dimensión & Etapa de Respuesta` | `Habilidad & Objetivo de Aprendizaje (Bloom)` | `Proceso Cognitivo (Bloom)` | `Contenido de Aprendizaje & Evidencias Clave`.
+  * **Supervivencia & ERM:**
+    * Encabezados: `Tipología de Riesgo & Afectación` | `Aprendizaje Clave & Objetivo de Protección` | `Proceso Cognitivo (Bloom)` | `Mini-Proyecto Situado & Desafío`.
 
 ### 4.3. Módulo C: Monitoreo Semanal por Etapas
 * Tablero dinámico de seguimiento semana a semana (Semanas 1 a 64):
-  * **Tarjeta de Acción Pedagógica Semanal:** Integrada por *Grado + Estrategia NNA + Riesgo PGIRE + Didáctica Situada + Desafío Bloom*.
+  * **Panel de Orientación al Docente:**
+    * 💾 **Guardar Avance:** Explica la obligatoriedad de hacer clic para persistir los estados y observaciones en la base de datos local.
+    * 📥 **Exportar Bitácora:** Respaldo completo en formato JSON/archivo para guardar localmente o reportar a coordinación/NRC.
+    * 🖨️ **Imprimir Carta:** Maquetación CSS estricta para reportes imprimibles y exportables en PDF tamaño Carta (*Letter*).
+  * **Tarjeta de Acción Pedagógica Semanal:** Integrada por *Grado + Estrategia NNA + Riesgos PGIRE Concurrentes + Didáctica Situada + Desafío Bloom*.
   * **Métricas de Balance Curricular:** Porcentaje por área, conteo de semanas activas y semáforos de balance.
   * **Persistencia por Usuario:** Capacidad de pausar el registro y continuar más tarde en el navegador.
-  * **Impresión Oficial en Tamaño Carta:** Maquetación CSS estricta para reportes imprimibles y exportables en PDF.
 
 ### 4.4. Capa Transversal (Módulo D - Capacidades de Soporte)
 * **100% Offline-First / PWA:** Funcional sin conexión mediante `Service Worker` y almacenamiento local (`localStorage` / `IndexedDB`).

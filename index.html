@@ -228,38 +228,54 @@
               <input type="text" id="input-bloom" class="input-elite input-readonly" value="Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)" readonly>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">3. Tipo / Categoría Macro de Amenaza PGIRE (Selección Docente):</label>
-              <select id="select-cat-amenaza" class="select-elite">
-                <option value="">-- Seleccione Categoría --</option>
-                <option value="NATURAL" selected>NATURAL</option>
-                <option value="SOCIONATURAL">SOCIONATURAL</option>
-                <option value="ANTRÓPICA">ANTRÓPICA</option>
-                <option value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN">ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN</option>
-                <option value="TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)">TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">4. Amenaza Específica Diagnosticada (Selección Docente):</label>
-              <select id="select-amenaza" class="select-elite">
-                <option value="Inundación lenta o desbordamiento">Inundación lenta o desbordamiento</option>
-              </select>
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label" style="font-weight: 700; color: var(--primary);">
+                3. Tipo / Categoría Macro de Amenaza PGIRE (Seleccione una o varias categorías):
+              </label>
+              <div id="container-cat-checkboxes" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+                <label class="chip-category-label selected" data-cat="NATURAL">
+                  <input type="checkbox" name="cat_pgire" value="NATURAL" checked> 🌿 NATURAL
+                </label>
+                <label class="chip-category-label" data-cat="SOCIONATURAL">
+                  <input type="checkbox" name="cat_pgire" value="SOCIONATURAL"> 🌧️ SOCIONATURAL
+                </label>
+                <label class="chip-category-label" data-cat="ANTRÓPICA">
+                  <input type="checkbox" name="cat_pgire" value="ANTRÓPICA"> 🏭 ANTRÓPICA
+                </label>
+                <label class="chip-category-label" data-cat="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN">
+                  <input type="checkbox" name="cat_pgire" value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN"> 🛡️ CONFLICTO ARMADO Y PROTECCIÓN
+                </label>
+              </div>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">5. Ejemplo Contextualizado en Institución Educativa:</label>
-              <input type="text" id="input-ejemplo-ie" class="input-elite input-readonly" value="Afectación de aulas y pérdida de material por crecida del río." readonly>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
+                  4. Amenaza(s) Específica(s) Diagnosticada(s) (Seleccione una o varias opciones):
+                </label>
+                <span id="badge-total-amenazas" class="badge-pill badge-etapa2" style="font-size: 0.78rem;">1 seleccionada</span>
+              </div>
+              <div id="container-amenazas-checkboxes" style="max-height: 200px; overflow-y: auto; background: #ffffff; border: 1.5px solid var(--border-medium); border-radius: var(--radius-sm); padding: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px;">
+                <!-- Dinámico generado por modulo_a.js -->
+              </div>
+              <small style="color: var(--text-muted); display: block; margin-top: 4px;">
+                💡 Puede marcar múltiples amenazas concurrentes para reflejar situaciones de multirriesgo o emergencias complejas simultáneas.
+              </small>
+            </div>
+
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label">5. Ejemplo(s) Contextualizado(s) en Institución Educativa:</label>
+              <textarea id="input-ejemplo-ie" class="textarea-elite textarea-readonly" readonly rows="2">Afectación de aulas y pérdida de material por crecida del río.</textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">6. Riesgos Asociados en la Institución Educativa:</label>
-              <input type="text" id="input-riesgos-ie" class="input-elite input-readonly" value="Pérdida de continuidad académica y aislamiento de sedes." readonly>
+              <textarea id="input-riesgos-ie" class="textarea-elite textarea-readonly" readonly rows="2">Pérdida de continuidad académica y aislamiento de sedes.</textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">7. Instancia GIRE Responsable y Ruta Interinstitucional Activada:</label>
-              <input type="text" id="input-ruta-gire" class="input-elite input-readonly" value="🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)" readonly>
+              <label class="form-label">7. Instancia(s) GIRE Responsable(s) y Ruta(s) Interinstitucional(es) Activada(s):</label>
+              <textarea id="input-ruta-gire" class="textarea-elite textarea-readonly" readonly rows="2">🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)</textarea>
             </div>
 
             <div class="form-group">

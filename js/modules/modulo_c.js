@@ -30,8 +30,10 @@ var ModuloC = {
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
+        categorias: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación lenta o desbordamiento',
+        amenazas: ['Inundación'],
+        amenaza: 'Inundación',
         ejemploIE: 'Afectación de aulas y pérdida de material',
         riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes',
         rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía',
@@ -49,6 +51,10 @@ var ModuloC = {
     var semanas = [];
     var fechaBase = new Date(d.fechaInicio || new Date());
     var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
+
+    var amenazasLabel = (d.amenazas && d.amenazas.length > 0) ? d.amenazas.join(' + ') : (d.amenaza || 'Emergencia territorial');
+    var categoriasLabel = (d.categorias && d.categorias.length > 0) ? d.categorias.join(' / ') : (d.categoriaAmenaza || 'PGIRE');
+    var riesgosLabel = d.riesgosIE ? d.riesgosIE.replace(/\n/g, ' | ') : 'Riesgo institucional';
 
     for (var i = 1; i <= 16; i++) {
       var fechaSem = new Date(fechaBase);
@@ -72,7 +78,7 @@ var ModuloC = {
       var tarjetaHTML = 
         '<div style="line-height:1.45;">' +
           '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-          '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+          '<span style="color:#b91c1c;">⚠️ [' + categoriasLabel + ' - ' + amenazasLabel + ']:</span> ' + riesgosLabel + '<br>' +
           '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
           '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
           '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
@@ -100,14 +106,36 @@ var ModuloC = {
         '<div class="card-header">' +
           '<div>' +
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
+            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza(s): ' + amenazasLabel + '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 10px;">' +
+          '<div style="display: flex; gap: 10px;" class="no-print">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
             '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Exportar Bitácora</button>' +
             '<button id="btn-imprimir-carta" class="btn-elite btn-secondary">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
+
+        '<!-- Panel de Instrucciones para el Docente -->' +
+        '<div class="no-print" style="background: #f0fdf4; border: 1.5px solid #86efac; border-left: 6px solid #16a34a; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 22px;">' +
+          '<h4 style="color: #15803d; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 0.96rem;">' +
+            '<span>💡</span> Instrucciones de Operación y Registro de Bitácora para el Docente' +
+          '</h4>' +
+          '<div class="grid-3" style="gap: 12px; font-size: 0.86rem; line-height: 1.45; color: #166534;">' +
+            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d;">💾 Botón "Guardar Avance":</strong><br>' +
+              'Es obligatorio hacer clic en este botón para registrar y almacenar de forma segura en la plataforma sus calificaciones de avance y notas de evidencia de cada semana.' +
+            '</div>' +
+            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d;">📥 Botón "Exportar Bitácora":</strong><br>' +
+              'Descarga un archivo de respaldo en formato JSON con todo su plan y avances registrados, ideal para guardar copia en su computador o compartir con la coordinación.' +
+            '</div>' +
+            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d;">🖨️ Botón "Imprimir Carta":</strong><br>' +
+              'Genera la bitácora maquetada en tamaño Carta (<em>Letter</em>), lista para imprimir en físico o exportar como documento PDF oficial para acreditación formal en el SIEE.' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
         '<div class="grid-4" style="margin-bottom: 24px;">' +
           '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
             '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
