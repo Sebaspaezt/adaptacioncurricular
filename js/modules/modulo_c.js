@@ -1,5 +1,8 @@
 // Módulo C: Monitoreo Semanal por Etapas (Integración Completa por Semanas, Persistencia con Marcas de Tiempo y Exportación Excel/JSON)
 var ModuloC = {
+  duracionSemanas: 16,
+  filtroArea: 'todas',
+
   init: function() {
     this.renderMonitoreo();
   },
@@ -23,7 +26,6 @@ var ModuloC = {
     var habs = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
     if (habs.length === 0) return { habilidad: 'Contención Socioemocional', dimension: 'Personal-Emocional' };
     
-    // Filtrar según la etapa si es posible
     var etapaKey = (etapa || '').indexOf('ETAPA 1') !== -1 ? 'Etapa 1' :
                    (etapa || '').indexOf('ETAPA 3') !== -1 ? 'Etapa 3' : 'Etapa 2';
 
@@ -38,7 +40,6 @@ var ModuloC = {
     var sups = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
     if (sups.length === 0) return { miniproyecto: 'Protocolos seguros escolares', afectacion: 'Autoprotección' };
 
-    // Buscar si hay recomendados para este diagnóstico
     var recomendados = sups.filter(function(item) {
       return ModuloB.isSurvivalRecommended(item, userDiagnostic);
     });
@@ -79,19 +80,36 @@ var ModuloC = {
 
     var semanas = [];
     var fechaBase = new Date(d.fechaInicio || new Date());
+    var numSemanas = parseInt(this.duracionSemanas, 10) || 16;
     var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
 
     var amenazasLabel = (d.amenazas && d.amenazas.length > 0) ? d.amenazas.join(' + ') : (d.amenaza || 'Emergencia territorial');
     var categoriasLabel = (d.categorias && d.categorias.length > 0) ? d.categorias.join(' / ') : (d.categoriaAmenaza || 'PGIRE');
     var riesgosLabel = d.riesgosIE ? d.riesgosIE.replace(/\n/g, ' | ') : 'Riesgo institucional';
 
-    for (var i = 1; i <= 16; i++) {
+    for (var i = 1; i <= numSemanas; i++) {
       var fechaSem = new Date(fechaBase);
       fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
 
       var areaKey = areas[(i - 1) % areas.length];
-      var rawItems = cicloData[areaKey] || [];
-      var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
+      if (self.filtroArea !== 'todas') {
+        areaKey = self.filtroArea;
+      }
+
+      var rawItems = [];
+      if (areaKey === 'socioemocional') {
+        rawItems = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
+      } else if (areaKey === 'supervivencia') {
+        rawItems = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
+      } else {
+        rawItems = cicloData[areaKey] || [];
+      }
+
+      var itemIndex = self.filtroArea === 'todas' 
+        ? Math.floor((i - 1) / areas.length) % (rawItems.length || 1)
+        : (i - 1) % (rawItems.length || 1);
+
+      var rawItem = rawItems[itemIndex] || rawItems[0] || [];
       var parsedItem = ModuloB.getItemFields(rawItem) || {
         factor: 'Eje Curricular',
         subproceso: 'Contenido esencial',
@@ -106,20 +124,41 @@ var ModuloC = {
       var habSocio = self.getSocioemocionalForWeek(i, d.etapa);
       var supProt = self.getSupervivenciaForWeek(i, d);
 
-      var tarjetaHTML = 
-        '<div style="line-height:1.45;">' +
-          '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-          '<span style="color:#b91c1c;">⚠️ [' + categoriasLabel + ' - ' + amenazasLabel + ']:</span> ' + riesgosLabel + '<br>' +
-          '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
-          '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span><br>' +
-          '<span style="color:#065f46; font-size:0.83rem;">🌱 <strong>Socioemocional:</strong> ' + (habSocio.habilidad || 'Autocuidado y contención') + ' (' + (habSocio.dimension || 'DSE') + ')</span><br>' +
-          '<span style="color:#991b1b; font-size:0.83rem;">🛡️ <strong>Protección WASH/ERM:</strong> ' + (supProt.miniproyecto || 'Mapas y protocolos seguros') + '</span>' +
-        '</div>';
+      var tarjetaHTML = '';
+      if (parsedItem.type === 'socioemocional') {
+        tarjetaHTML = 
+          '<div style="line-height:1.45;">' +
+            '<strong>🌱 ' + parsedItem.dimension + ' (' + parsedItem.etapa + ')</strong><br>' +
+            '<span style="color:#065f46; font-weight:700;">Habilidad: ' + parsedItem.habilidad + '</span><br>' +
+            '<span style="color:var(--text-main);">' + (parsedItem.objetivo_bloom || parsedItem.habilidad) + '</span><br>' +
+            '<span style="color:#0369a1;">🎯 <strong>Evidencia:</strong> ' + parsedItem.evidencia_conmigo + '</span>' +
+          '</div>';
+      } else if (parsedItem.type === 'supervivencia') {
+        tarjetaHTML = 
+          '<div style="line-height:1.45;">' +
+            '<strong>🛡️ ' + parsedItem.tipo_riesgo + ' - ' + parsedItem.afectacion + '</strong><br>' +
+            '<span style="color:#991b1b; font-weight:700;">🛠️ Mini-Proyecto: ' + parsedItem.miniproyecto + '</span><br>' +
+            '<span style="color:var(--text-main);">' + (parsedItem.objetivo_aprendizaje || parsedItem.aprendizaje_clave) + '</span><br>' +
+            '<span style="color:#047857;">🎯 <strong>Desafío:</strong> ' + parsedItem.desafio + '</span>' +
+          '</div>';
+      } else {
+        tarjetaHTML = 
+          '<div style="line-height:1.45;">' +
+            '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+            '<span style="color:#b91c1c;">⚠️ [' + categoriasLabel + ' - ' + amenazasLabel + ']:</span> ' + riesgosLabel + '<br>' +
+            '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
+            '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+            '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span><br>' +
+            '<span style="color:#065f46; font-size:0.83rem;">🌱 <strong>Socioemocional:</strong> ' + (habSocio.habilidad || 'Autocuidado y contención') + ' (' + (habSocio.dimension || 'DSE') + ')</span><br>' +
+            '<span style="color:#991b1b; font-size:0.83rem;">🛡️ <strong>Protección WASH/ERM:</strong> ' + (supProt.miniproyecto || 'Mapas y protocolos seguros') + '</span>' +
+          '</div>';
+      }
 
-      var savedItem = savedMonitoreo[i] || {};
+      var savedKey = self.filtroArea === 'todas' ? i : (self.filtroArea + '_' + i);
+      var savedItem = savedMonitoreo[savedKey] || savedMonitoreo[i] || {};
       semanas.push({
         num: i,
+        savedKey: savedKey,
         fecha: fechaSem.toLocaleDateString('es-CO'),
         fechaRegistro: savedItem.fechaRegistro || 'Sin registrar',
         etapa: d.etapa,
@@ -135,8 +174,8 @@ var ModuloC = {
       });
     }
 
-    var logrados = Object.values(savedMonitoreo).filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
-    var enProceso = Object.values(savedMonitoreo).filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
+    var logrados = semanas.filter(function(s) { return s.avance && s.avance.indexOf('Logrado') !== -1; }).length;
+    var enProceso = semanas.filter(function(s) { return s.avance && s.avance.indexOf('proceso') !== -1; }).length;
     var pctAvance = Math.round((logrados / semanas.length) * 100);
 
     var html = 
@@ -207,9 +246,37 @@ var ModuloC = {
           '</div>' +
         '</div>' +
 
+        '<!-- Controles de Duración y Filtro por Área -->' +
+        '<div class="no-print" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:var(--radius-md); padding:14px 18px; margin-bottom:20px;">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">' +
+            '<div style="display:flex; align-items:center; gap:10px;">' +
+              '<label style="font-weight:700; font-size:0.88rem; color:#0f172a;">⏱️ Alcance Temporal del Monitoreo:</label>' +
+              '<select id="select-duracion-monitoreo" class="select-elite" style="width:auto; padding:6px 12px; font-weight:700; font-size:0.88rem;">' +
+                '<option value="16" ' + (self.duracionSemanas === 16 ? 'selected' : '') + '>16 Semanas (Fase de Choque / Semestre 1)</option>' +
+                '<option value="32" ' + (self.duracionSemanas === 32 ? 'selected' : '') + '>32 Semanas (Plan Anual Completo - Cobertura Total de DBAs)</option>' +
+                '<option value="40" ' + (self.duracionSemanas === 40 ? 'selected' : '') + '>40 Semanas (Año Lectivo Integral Extendido)</option>' +
+              '</select>' +
+            '</div>' +
+            '<div style="font-size:0.82rem; color:#475569; line-height:1.35; max-width:550px;">' +
+              '💡 <strong>Articulación con Módulo B:</strong> Módulo B contiene la biblioteca completa de referencia. En Módulo C se distribuyen semana a semana. Al seleccionar <strong>32 semanas</strong> se cubre el <strong>100% de los DBAs y procesos</strong> del Ciclo formativo.' +
+            '</div>' +
+          '</div>' +
+
+          '<div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">' +
+            '<span style="font-size:0.84rem; font-weight:700; color:#334155; margin-right:4px;">🔍 Filtrar Vista:' + '</span>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'todas' ? 'btn-primary' : 'btn-outline') + '" data-filtro="todas" style="padding:6px 12px; font-size:0.82rem;">🌟 Integrada (Todas)</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'lenguaje' ? 'btn-primary' : 'btn-outline') + '" data-filtro="lenguaje" style="padding:6px 12px; font-size:0.82rem;">📖 Lenguaje</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'matematicas' ? 'btn-primary' : 'btn-outline') + '" data-filtro="matematicas" style="padding:6px 12px; font-size:0.82rem;">📐 Matemáticas</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'sociales' ? 'btn-primary' : 'btn-outline') + '" data-filtro="sociales" style="padding:6px 12px; font-size:0.82rem;">🌍 Sociales</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'naturales' ? 'btn-primary' : 'btn-outline') + '" data-filtro="naturales" style="padding:6px 12px; font-size:0.82rem;">🔬 Naturales & WASH</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'socioemocional' ? 'btn-primary' : 'btn-outline') + '" data-filtro="socioemocional" style="padding:6px 12px; font-size:0.82rem;">🌱 Socioemocional</button>' +
+            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'supervivencia' ? 'btn-primary' : 'btn-outline') + '" data-filtro="supervivencia" style="padding:6px 12px; font-size:0.82rem;">🛡️ Supervivencia & ERM</button>' +
+          '</div>' +
+        '</div>' +
+
         '<div class="grid-4" style="margin-bottom: 20px;">' +
           '<div style="background: var(--surface-hover); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--text-muted);">Progreso Logrado</div>' +
+            '<div style="font-size: 0.78rem; color: var(--text-muted);">Progreso en Vista</div>' +
             '<div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
           '</div>' +
           '<div style="background: var(--color-etapa3-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
@@ -221,7 +288,7 @@ var ModuloC = {
             '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
           '</div>' +
           '<div style="background: var(--color-blue-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--color-blue);">Total Semanas Plan</div>' +
+            '<div style="font-size: 0.78rem; color: var(--color-blue);">Semanas Monitoreadas</div>' +
             '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
           '</div>' +
         '</div>' +
@@ -247,7 +314,7 @@ var ModuloC = {
                   '<td style="padding: 8px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
                   '<td style="padding: 8px; font-size: 0.82rem; line-height: 1.4; vertical-align: top;">' + s.tarjeta + '</td>' +
                   '<td style="padding: 8px; vertical-align: top;">' +
-                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 5px; font-size:0.84rem;">' +
+                    '<select class="select-elite select-avance" data-semana="' + s.savedKey + '" style="padding: 5px; font-size:0.84rem;">' +
                       '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                       '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                       '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
@@ -256,7 +323,7 @@ var ModuloC = {
                     fechaRegDisplay +
                   '</td>' +
                   '<td style="padding: 8px; vertical-align: top;">' +
-                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias SIEE" style="padding: 5px; font-size:0.84rem;">' +
+                    '<input type="text" class="input-elite input-obs" data-semana="' + s.savedKey + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias SIEE" style="padding: 5px; font-size:0.84rem;">' +
                   '</td>' +
                 '</tr>';
               }).join('') +
@@ -289,6 +356,24 @@ var ModuloC = {
     var btnExportarJson = document.getElementById('btn-exportar-json');
     var btnRestaurarJson = document.getElementById('btn-restaurar-json');
     var inputRestaurarJson = document.getElementById('input-restaurar-json');
+    var selectDuracion = document.getElementById('select-duracion-monitoreo');
+    var btnsFiltro = document.querySelectorAll('.btn-filtro-c');
+
+    if (selectDuracion) {
+      selectDuracion.addEventListener('change', function(e) {
+        self.duracionSemanas = parseInt(e.target.value, 10) || 16;
+        self.renderMonitoreo();
+      });
+    }
+
+    if (btnsFiltro) {
+      btnsFiltro.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          self.filtroArea = btn.getAttribute('data-filtro') || 'todas';
+          self.renderMonitoreo();
+        });
+      });
+    }
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
