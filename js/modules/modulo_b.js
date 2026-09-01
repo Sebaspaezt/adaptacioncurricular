@@ -1,9 +1,40 @@
 // Módulo B: Rayuela Curricular (Biblioteca de Planificación Curricular y Mallas Priorizadas)
 var ModuloB = {
   currentArea: 'lenguaje',
+  filterRecommendedOnly: false,
 
   init: function() {
     this.renderRayuela();
+  },
+
+  isSurvivalRecommended: function(item, userDiagnostic) {
+    if (!userDiagnostic) return false;
+    var cats = userDiagnostic.categorias || [userDiagnostic.categoriaAmenaza || ''];
+    var ams = userDiagnostic.amenazas || [userDiagnostic.amenaza || ''];
+    var catsStr = cats.join(' ').toUpperCase();
+    var amsStr = ams.join(' ').toUpperCase();
+    var afectacion = (item.afectacion || item.aprendizaje || '').toUpperCase();
+    var tipoRiesgo = (item.tipo_riesgo || item.tipo_afectacion || '').toUpperCase();
+
+    if (catsStr.indexOf('CONFLICTO') !== -1 || catsStr.indexOf('PROTECCIÓN') !== -1 || amsStr.indexOf('ARMADO') !== -1 || amsStr.indexOf('MINAS') !== -1 || amsStr.indexOf('MAP') !== -1 || amsStr.indexOf('CONFINAMIENTO') !== -1) {
+      if (afectacion.indexOf('MINAS') !== -1 || afectacion.indexOf('ARMADOS') !== -1 || afectacion.indexOf('SEXUAL') !== -1 || afectacion.indexOf('TRATA') !== -1 || afectacion.indexOf('JUSTICIA') !== -1) {
+        return true;
+      }
+    }
+
+    if (catsStr.indexOf('NATURAL') !== -1 || catsStr.indexOf('SOCIONATURAL') !== -1 || amsStr.indexOf('INUNDACIÓN') !== -1 || amsStr.indexOf('SISMO') !== -1 || amsStr.indexOf('DESLIZAMIENTO') !== -1 || amsStr.indexOf('HÍDRICA') !== -1) {
+      if (afectacion.indexOf('DESASTRES') !== -1 || afectacion.indexOf('PELIGROS') !== -1 || afectacion.indexOf('AGUA') !== -1 || afectacion.indexOf('WASH') !== -1 || afectacion.indexOf('SALUD') !== -1) {
+        return true;
+      }
+    }
+
+    if (catsStr.indexOf('ANTRÓPICA') !== -1 || amsStr.indexOf('VIOLENCIA') !== -1 || amsStr.indexOf('CIBERACOSO') !== -1 || amsStr.indexOf('SPA') !== -1) {
+      if (afectacion.indexOf('PSICOSOCIALES') !== -1 || afectacion.indexOf('VIOLENCIA') !== -1 || afectacion.indexOf('DIGITALES') !== -1 || afectacion.indexOf('ESTIGMA') !== -1) {
+        return true;
+      }
+    }
+
+    return false;
   },
 
   getItemFields: function(item) {
@@ -53,7 +84,10 @@ var ModuloB = {
           proceso_bloom: item.proceso_bloom || 'Comprender + Aplicar',
           contenido: item.contenido || '• Protocolos seguros de evacuación y alertas tempranas.\n• Rutas de protección institucional.',
           miniproyecto: item.miniproyecto || 'Mapa escolar de riesgos y protocolos seguros',
-          desafio: item.desafio || 'Diseñar un plan de acción de aula para emergencias'
+          desafio: item.desafio || 'Diseñar un plan de acción de aula para emergencias',
+          explorar: item.explorar || '',
+          crear: item.crear || '',
+          compartir: item.compartir || ''
         };
       }
       return {
@@ -104,26 +138,40 @@ var ModuloB = {
     var validItems = [];
     rawItems.forEach(function(item) {
       var parsed = self.getItemFields(item);
-      if (parsed) validItems.push(parsed);
+      if (parsed) {
+        if (self.currentArea === 'supervivencia') {
+          parsed.isRecommended = self.isSurvivalRecommended(item, d);
+        }
+        validItems.push(parsed);
+      }
     });
 
-    // Encabezados dinámicos según el tipo de área (Títulos estrictos según normativa y hoja Monitoreo)
+    // Ordenar supervivencia para que los recomendados aparezcan primero
+    if (this.currentArea === 'supervivencia') {
+      validItems.sort(function(a, b) {
+        if (a.isRecommended && !b.isRecommended) return -1;
+        if (!a.isRecommended && b.isRecommended) return 1;
+        return 0;
+      });
+    }
+
+    // Encabezados dinámicos según el tipo de área
     var theadHTML = '';
     if (this.currentArea === 'socioemocional') {
       theadHTML = 
         '<tr style="background: var(--surface-hover); text-align: left;">' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Dimensión & Etapa de Respuesta</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Dimensión & Etapa de Respuesta</th>' +
           '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">Habilidad & Objetivo de Aprendizaje (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Contenido de Aprendizaje & Evidencias Clave</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Contenido de Aprendizaje & Evidencias Clave</th>' +
         '</tr>';
     } else if (this.currentArea === 'supervivencia') {
       theadHTML = 
         '<tr style="background: var(--surface-hover); text-align: left;">' +
           '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Tipología de Riesgo & Afectación</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">Aprendizaje Clave & Objetivo de Protección</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Mini-Proyecto Situado & Desafío</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">Aprendizaje Clave & Objetivo de Protección</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Mini-Proyecto Situado & Fases de Acción</th>' +
         '</tr>';
     } else {
       theadHTML = 
@@ -146,34 +194,41 @@ var ModuloB = {
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700;">🌱 ' + item.habilidad + '</span><br>' +
-            '<span style="line-height:1.45; display:inline-block; margin-top:5px;">' + (item.objetivo_bloom || item.habilidad) + '</span>' +
+            '<span style="line-height:1.45; display:inline-block; margin-top:5px; font-weight:600;">' + (item.objetivo_bloom || item.habilidad) + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill badge-etapa2">' + (item.proceso_bloom || 'Aplicar') + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top; font-size: 0.83rem; line-height: 1.4;">' +
-            '<div style="background:#f8fafc; padding:6px 8px; border-radius:4px; margin-bottom:4px;">' +
+            '<div style="background:#f8fafc; padding:6px 8px; border-radius:4px; margin-bottom:4px; border:1px solid #e2e8f0;">' +
               '<strong>📚 Contenido:</strong><br>' + contenidoLimpio +
             '</div>' +
-            (item.evidencia_conmigo ? '<strong style="color:var(--primary);">🎯 Evidencia:</strong> <em>' + item.evidencia_conmigo + '</em>' : '') +
+            (item.evidencia_conmigo ? '<div style="margin-top:4px;"><strong style="color:var(--primary);">🎯 Evidencia (Propia):</strong> <em>' + item.evidencia_conmigo + '</em></div>' : '') +
+            (item.evidencia_otro ? '<div style="margin-top:2px;"><strong style="color:#0369a1;">👥 Evidencia (Con pares):</strong> <em>' + item.evidencia_otro + '</em></div>' : '') +
           '</td>' +
         '</tr>';
       } else if (item.type === 'supervivencia') {
-        return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+        var badgePriorizado = item.isRecommended ? '<span class="badge-pill" style="background:#fef3c7; color:#92400e; font-weight:800; margin-bottom:4px; display:inline-block;">⭐ PRIORIZADO SEGÚN DIAGNÓSTICO</span><br>' : '';
+        var filaBackground = item.isRecommended ? 'background-color: #fafdfb;' : '';
+
+        return '<tr style="border-bottom: 1px solid var(--border-light); ' + filaBackground + '">' +
           '<td style="padding: 10px; vertical-align: top;">' +
+            badgePriorizado +
             '<strong style="color:#b91c1c;">🛡️ ' + item.tipo_riesgo + '</strong><br>' +
             '<span class="badge-pill" style="background:#fee2e2; color:#991b1b; margin-top:3px;">' + item.afectacion + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
-            '<span style="color:var(--text-muted); font-size:0.82rem; display:block; margin-bottom:3px;">' + item.aprendizaje_clave + '</span>' +
+            '<span style="color:var(--text-muted); font-size:0.82rem; display:block; margin-bottom:3px; line-height:1.35;">' + item.aprendizaje_clave + '</span>' +
             '<strong style="color:var(--text-main); line-height:1.4; display:inline-block;">' + (item.objetivo_aprendizaje || item.aprendizaje_clave) + '</strong>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill badge-etapa1">' + (item.proceso_bloom || 'Comprender + Aplicar') + '</span>' +
           '</td>' +
-          '<td style="padding: 10px; vertical-align: top; line-height: 1.4;">' +
-            '<strong style="color: var(--primary); display:block;">🛠️ ' + item.miniproyecto + '</strong>' +
-            (item.desafio ? '<span style="color: var(--text-muted); font-size: 0.82rem; display:block; margin-top:4px;"><strong>Desafío:</strong> ' + item.desafio + '</span>' : '') +
+          '<td style="padding: 10px; vertical-align: top; line-height: 1.4; font-size:0.83rem;">' +
+            '<strong style="color: var(--primary); font-size:0.88rem; display:block;">🛠️ ' + item.miniproyecto + '</strong>' +
+            (item.desafio ? '<span style="color: #334155; display:block; margin-top:4px;"><strong>Desafío:</strong> ' + item.desafio + '</span>' : '') +
+            (item.explorar ? '<div style="background:#f1f5f9; padding:4px 6px; border-radius:3px; margin-top:4px;"><strong>1. Explorar:</strong> ' + item.explorar.split('\n')[0] + '</div>' : '') +
+            (item.crear ? '<div style="background:#f0fdf4; padding:4px 6px; border-radius:3px; margin-top:2px;"><strong>2. Crear:</strong> ' + item.crear.split('\n')[0] + '</div>' : '') +
           '</td>' +
         '</tr>';
       } else {
@@ -186,6 +241,14 @@ var ModuloB = {
         '</tr>';
       }
     }).join('');
+
+    var bannerContextual = '';
+    if (this.currentArea === 'supervivencia' && d && d.amenazas) {
+      bannerContextual = 
+        '<div class="no-print" style="background:#fefce8; border:1px solid #fde047; padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:14px; font-size:0.86rem; color:#854d0e;">' +
+          '⭐ <strong>Articulación con Diagnóstico de Aula:</strong> Los mini-proyectos marcados con <strong>PRIORIZADO</strong> responden directamente a las amenazas diagnosticadas (<em>' + (d.amenazas.join(', ')) + '</em>).' +
+        '</div>';
+    }
 
     var html = 
       '<div class="card-elite">' +
@@ -206,6 +269,7 @@ var ModuloB = {
             '</button>';
           }).join('') +
         '</div>' +
+        bannerContextual +
         '<div style="overflow-x: auto;">' +
           '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
             '<thead>' + theadHTML + '</thead>' +

@@ -66,45 +66,45 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Header */
+/* Header Sticky */
 .header-bar {
   background: var(--surface-white);
   border-bottom: 2px solid var(--primary);
-  padding: 14px 28px;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .brand-section {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .brand-badge {
   background: var(--primary);
   color: white;
   font-weight: 900;
-  font-size: 1.15rem;
-  padding: 6px 14px;
+  font-size: 1.1rem;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
   letter-spacing: 1px;
 }
 
 .brand-title {
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: var(--primary-dark);
   line-height: 1.2;
 }
 
 .brand-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   margin-top: 2px;
 }
@@ -112,14 +112,14 @@ body {
 .user-status-bar {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .user-badge {
   background: var(--surface-hover);
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 20px;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--primary-dark);
   border: 1px solid var(--border-medium);
@@ -135,22 +135,30 @@ body {
   border-color: var(--primary);
 }
 
-/* Navigation Tabs */
+/* Navigation Tabs Sticky */
 .nav-tabs-container {
-  background: var(--surface-white);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border-medium);
-  padding: 0 28px;
+  padding: 0 24px;
   display: flex;
   gap: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 59px;
+  z-index: 999;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
 }
 
 .nav-tab {
-  padding: 14px 22px;
+  padding: 12px 20px;
   border: none;
   background: none;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
@@ -159,6 +167,7 @@ body {
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .nav-tab:hover {
@@ -174,9 +183,9 @@ body {
 
 /* Main Layout */
 .main-container {
-  max-width: 1280px;
-  margin: 24px auto;
-  padding: 0 20px 60px;
+  max-width: 1340px;
+  margin: 20px auto;
+  padding: 0 18px 60px;
 }
 
 /* Cards */
@@ -505,36 +514,269 @@ body {
   font-weight: 500;
 }
 
+/* ========================================== */
+/* REGLAS RESPONSIVE MULTI-DISPOSITIVO        */
+/* ========================================== */
 
-/* Reglas de Impresión Tamaño Carta */
+/* Tablets & Pantallas Medianas (<= 992px) */
+@media (max-width: 992px) {
+  .header-bar {
+    padding: 10px 18px;
+  }
+  .nav-tabs-container {
+    top: 55px;
+    padding: 0 16px;
+  }
+  .main-container {
+    padding: 0 14px 50px;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celulares y Pantallas Pequeñas (<= 680px) */
+@media (max-width: 680px) {
+  .header-bar {
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .brand-section {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .user-status-bar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-tabs-container {
+    top: 86px;
+    padding: 0 10px;
+    gap: 4px;
+  }
+
+  .nav-tab {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  .main-container {
+    margin: 12px auto;
+    padding: 0 8px 40px;
+  }
+
+  .card-elite {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .btn-elite {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+  }
+
+  #container-cat-checkboxes {
+    flex-direction: column;
+  }
+
+  .chip-category-label {
+    width: 100%;
+  }
+
+  #container-amenazas-checkboxes {
+    grid-template-columns: 1fr !important;
+    max-height: 180px;
+  }
+}
+
+
+
+/* Reglas de Impresión Tamaño Carta Oficial (Letter) - NRC / MEN GIRE */
+@page {
+  size: letter portrait;
+  margin: 12mm 10mm 15mm 10mm;
+}
+
 @media print {
-  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button {
+  /* Ocultar elementos de navegación y UI web */
+  .no-print,
+  .header-bar,
+  .nav-tabs-container,
+  .modal-overlay,
+  button,
+  .btn-elite,
+  .tab-area-btn,
+  .accordion-header .chevron {
     display: none !important;
   }
-  
-  body {
-    background: white !important;
-    font-size: 11pt !important;
-    color: black !important;
+
+  /* Reset de página para evitar páginas en blanco iniciales */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 8.5pt !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
-  
+
+  .main-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Contenedores de tarjeta */
   .card-elite {
     box-shadow: none !important;
-    border: 1px solid #ccc !important;
-    padding: 10px !important;
-    margin-bottom: 15px !important;
-    page-break-inside: avoid;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 10px 0 !important;
+    page-break-inside: auto !important;
+    background: transparent !important;
   }
-  
+
+  .card-header {
+    border-bottom: 2px solid #005a36 !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .card-title {
+    font-size: 11pt !important;
+    color: #005a36 !important;
+  }
+
+  /* Encabezado Oficial Imprimible */
+  .print-only-header {
+    display: block !important;
+    border-bottom: 2px solid #005a36 !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Tabla de Impresión */
   .table-print {
     width: 100% !important;
     border-collapse: collapse !important;
+    font-size: 8pt !important;
+    page-break-inside: auto !important;
   }
-  
-  .table-print th, .table-print td {
-    border: 1px solid #999 !important;
+
+  .table-print thead {
+    display: table-header-group !important;
+  }
+
+  .table-print tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  .table-print th {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    border: 1px solid #94a3b8 !important;
+    padding: 5px 6px !important;
+    text-align: left !important;
+    font-size: 7.8pt !important;
+  }
+
+  .table-print td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 5px 6px !important;
+    vertical-align: top !important;
+    font-size: 7.8pt !important;
+  }
+
+  /* Desactivar inputs y selects interactivos para mostrar texto limpio */
+  select.select-avance {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border: none !important;
+    background: transparent !important;
+    font-weight: 700 !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
+  }
+
+  input.input-obs {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    width: 100% !important;
+    font-size: 8pt !important;
+  }
+
+  .badge-pill {
+    border: 1px solid #94a3b8 !important;
+    padding: 2px 6px !important;
+    font-size: 7pt !important;
+  }
+
+  /* Grilla de resumen de métricas */
+  .grid-4 {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .grid-4 > div {
+    border: 1px solid #cbd5e1 !important;
     padding: 6px 8px !important;
-    font-size: 9pt !important;
+    border-radius: 4px !important;
+  }
+
+  /* Firmas Oficiales al Final */
+  .print-signatures-block {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 40px !important;
+    margin-top: 25px !important;
+    page-break-inside: avoid !important;
+  }
+
+  .signature-box {
+    border-top: 1px solid #334155 !important;
+    padding-top: 6px !important;
+    text-align: center !important;
+    font-size: 8pt !important;
+  }
+}
+
+/* En pantalla, ocultar bloques exclusivos de impresión */
+@media screen {
+  .print-only-header,
+  .print-signatures-block {
+    display: none !important;
   }
 }
 
@@ -684,7 +926,7 @@ body {
         <!-- 1.3. Guía de categorías de riesgo prevalente -->
         <div class="accordion-item">
           <div class="accordion-header">
-            <span>1.3. Guía de categorías de riesgo prevalente</span>
+            <span>1.3. Guía de categorías de riesgo prevalente PGIRE</span>
             <span class="chevron">▼</span>
           </div>
           <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
@@ -709,7 +951,97 @@ body {
             </div>
 
             <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Elija primero la macro-categoría que predomina en su comunidad; el sistema filtrará automáticamente el listado de amenazas específicas y le presentará el ejemplo escolar, los riesgos asociados y la ruta interinstitucional de activación correspondiente (Ruta de Protección Humanitaria, Mesa Territorial MTGIRE o Comité CIGIRE).
+              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Puede marcar una o varias macro-categorías concurrentes; el sistema filtrará las amenazas específicas y consolidará automáticamente los ejemplos contextuales, los riesgos escolares y las rutas interinstitucionales (CIGIRE, MTGIRE o Ruta de Protección Humanitaria).
+            </p>
+          </div>
+        </div>
+
+        <!-- 1.4. Guía de enfoque: Habilidades para la Vida y Desarrollo Socioemocional -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>🌱 1.4. Guía de enfoque: Habilidades para la Vida y Desarrollo Socioemocional (DSE)</span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
+            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 12px;">
+              <strong style="color: #15803d; font-size: 0.92rem;">🏛️ Fundamentación Normativa y Pedagógica:</strong>
+              <p style="margin-top: 4px; margin-bottom: 0; color: #166534;">
+                Alineado con la <strong>Ley 2383 de 2024</strong> (Educación Socioemocional en Colombia), <strong>Ley 2491 de 2025</strong> (Integración obligatoria en PEI), los <strong>Lineamientos Curriculares MEN 2026 de Formación Integral</strong> y el marco internacional de <strong>UNICEF Innocenti (2025)</strong> de Capacidades de Aprendizaje para el Bienestar.
+              </p>
+            </div>
+
+            <p style="margin-bottom: 8px;"><strong>¿Por qué es indispensable en la adaptación curricular en emergencias?:</strong></p>
+            <p style="margin-bottom: 12px;">
+              En contextos de crisis aguda o prolongada, la afectación emocional y el estrés tóxico bloquean los centros cognitivos superiores del cerebro infantil. La contención emocional, el autoconocimiento y la regulación son la <strong>condición previa indispensable</strong> para que cualquier aprendizaje formal sea viable.
+            </p>
+
+            <p style="margin-bottom: 8px;"><strong>Las 4 Dimensiones Formativas y su Aplicación en Aula:</strong></p>
+            <div class="grid-2" style="gap: 12px; margin-bottom: 14px;">
+              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
+                <strong style="color: #047857;">1. Personal-Emocional (Etapa 1):</strong>
+                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
+                  Autoconocimiento, autorregulación, manejo del estrés, resiliencia y autocuidado. Busca restaurar la calma, reconocer emociones básicas y generar rutinas seguras.
+                </p>
+              </div>
+              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
+                <strong style="color: #0369a1;">2. Social-Ciudadana (Etapa 2):</strong>
+                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
+                  Empatía, comunicación asertiva, cooperación y resolución pacífica de conflictos. Fomenta el trabajo en equipo y la reconstrucción del tejido escolar.
+                </p>
+              </div>
+              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
+                <strong style="color: #b45309;">3. Cognitiva-Reflexiva (Etapa 2/3):</strong>
+                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
+                  Pensamiento crítico, creatividad y toma de decisiones en situaciones difíciles. Permite analizar las causas del entorno y proponer soluciones creativas.
+                </p>
+              </div>
+              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
+                <strong style="color: #6b21a8;">4. Ético-Proyectiva (Etapa 3):</strong>
+                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
+                  Propósito vital, responsabilidad ética y compromiso social. Permite proyectar el futuro vocacional y liderar iniciativas de paz y no repetición.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.5. Guía de enfoque: Capa de Protección y Aprendizajes de Supervivencia -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>🛡️ 1.5. Guía de enfoque: Capa de Protección y Aprendizajes de Supervivencia (WASH & ERM)</span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
+            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 12px;">
+              <strong style="color: #991b1b; font-size: 0.92rem;">🏛️ Marco Humanitario y Normativo de Protección:</strong>
+              <p style="margin-top: 4px; margin-bottom: 0; color: #7f1d1d;">
+                Fundamentado en las <strong>Normas Mínimas de Educación en Emergencias (INEE / MSEE)</strong>, los 3 procesos de la <strong>Ley 1523 de 2012</strong> (Conocimiento, Reducción y Manejo de Desastres) y la <strong>Resolución MEN 6519 de 2025</strong> (Política Pública GIRE).
+              </p>
+            </div>
+
+            <p style="margin-bottom: 8px;"><strong>¿Por qué el currículo académico estándar no es suficiente?:</strong></p>
+            <p style="margin-bottom: 12px;">
+              Los Estándares Básicos de Competencias tradicionales no contemplan protocolos ante minas antipersonal (ERM), agua y saneamiento de emergencia (WASH) ni mapas de rutas seguras escolares. En situaciones de crisis, la escuela debe convertirse en un <strong>espacio protector de la vida física y la dignidad</strong>.
+            </p>
+
+            <p style="margin-bottom: 8px;"><strong>Las 4 Tipologías de Riesgo de Protección y sus 16 Mini-Proyectos Situados:</strong></p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>1. Riesgos Físicos y Ambientales:</strong> Peligros y lesiones locativas, desastres naturales (sismos/inundaciones), Educación en el Riesgo de Minas (ERM) y cuidado del agua/higiene (WASH).
+              </div>
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>2. Riesgos Psicosociales y Emocionales:</strong> Salud mental ante crisis, estigmatización/exclusión y prevención de violencia física o verbal.
+              </div>
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>3. Riesgos Socioeducativos y de Bienestar:</strong> Prevención del trabajo infantil, atención a NNA separados de sus familias y hábitos de nutrición/salud comunitaria.
+              </div>
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>4. Riesgos de Protección Jurídica y Comunitaria:</strong> Prevención de violencia sexual, prevención del reclutamiento y utilización armada de NNA, trata de personas, entornos digitales inseguros y acceso a rutas de justicia.
+              </div>
+            </div>
+
+            <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
+              👉 <strong>Articulación dinámica con el Diagnóstico:</strong> Al seleccionar las amenazas en el Módulo A, el sistema resalta y vincula automáticamente en el Módulo B y en la Bitácora de Monitoreo del Módulo C los mini-proyectos de protección directamente pertinentes para responder a su contexto territorial.
             </p>
           </div>
         </div>
@@ -6503,9 +6835,40 @@ var ModuloA = {
 // Módulo B: Rayuela Curricular (Biblioteca de Planificación Curricular y Mallas Priorizadas)
 var ModuloB = {
   currentArea: 'lenguaje',
+  filterRecommendedOnly: false,
 
   init: function() {
     this.renderRayuela();
+  },
+
+  isSurvivalRecommended: function(item, userDiagnostic) {
+    if (!userDiagnostic) return false;
+    var cats = userDiagnostic.categorias || [userDiagnostic.categoriaAmenaza || ''];
+    var ams = userDiagnostic.amenazas || [userDiagnostic.amenaza || ''];
+    var catsStr = cats.join(' ').toUpperCase();
+    var amsStr = ams.join(' ').toUpperCase();
+    var afectacion = (item.afectacion || item.aprendizaje || '').toUpperCase();
+    var tipoRiesgo = (item.tipo_riesgo || item.tipo_afectacion || '').toUpperCase();
+
+    if (catsStr.indexOf('CONFLICTO') !== -1 || catsStr.indexOf('PROTECCIÓN') !== -1 || amsStr.indexOf('ARMADO') !== -1 || amsStr.indexOf('MINAS') !== -1 || amsStr.indexOf('MAP') !== -1 || amsStr.indexOf('CONFINAMIENTO') !== -1) {
+      if (afectacion.indexOf('MINAS') !== -1 || afectacion.indexOf('ARMADOS') !== -1 || afectacion.indexOf('SEXUAL') !== -1 || afectacion.indexOf('TRATA') !== -1 || afectacion.indexOf('JUSTICIA') !== -1) {
+        return true;
+      }
+    }
+
+    if (catsStr.indexOf('NATURAL') !== -1 || catsStr.indexOf('SOCIONATURAL') !== -1 || amsStr.indexOf('INUNDACIÓN') !== -1 || amsStr.indexOf('SISMO') !== -1 || amsStr.indexOf('DESLIZAMIENTO') !== -1 || amsStr.indexOf('HÍDRICA') !== -1) {
+      if (afectacion.indexOf('DESASTRES') !== -1 || afectacion.indexOf('PELIGROS') !== -1 || afectacion.indexOf('AGUA') !== -1 || afectacion.indexOf('WASH') !== -1 || afectacion.indexOf('SALUD') !== -1) {
+        return true;
+      }
+    }
+
+    if (catsStr.indexOf('ANTRÓPICA') !== -1 || amsStr.indexOf('VIOLENCIA') !== -1 || amsStr.indexOf('CIBERACOSO') !== -1 || amsStr.indexOf('SPA') !== -1) {
+      if (afectacion.indexOf('PSICOSOCIALES') !== -1 || afectacion.indexOf('VIOLENCIA') !== -1 || afectacion.indexOf('DIGITALES') !== -1 || afectacion.indexOf('ESTIGMA') !== -1) {
+        return true;
+      }
+    }
+
+    return false;
   },
 
   getItemFields: function(item) {
@@ -6555,7 +6918,10 @@ var ModuloB = {
           proceso_bloom: item.proceso_bloom || 'Comprender + Aplicar',
           contenido: item.contenido || '• Protocolos seguros de evacuación y alertas tempranas.\n• Rutas de protección institucional.',
           miniproyecto: item.miniproyecto || 'Mapa escolar de riesgos y protocolos seguros',
-          desafio: item.desafio || 'Diseñar un plan de acción de aula para emergencias'
+          desafio: item.desafio || 'Diseñar un plan de acción de aula para emergencias',
+          explorar: item.explorar || '',
+          crear: item.crear || '',
+          compartir: item.compartir || ''
         };
       }
       return {
@@ -6606,26 +6972,40 @@ var ModuloB = {
     var validItems = [];
     rawItems.forEach(function(item) {
       var parsed = self.getItemFields(item);
-      if (parsed) validItems.push(parsed);
+      if (parsed) {
+        if (self.currentArea === 'supervivencia') {
+          parsed.isRecommended = self.isSurvivalRecommended(item, d);
+        }
+        validItems.push(parsed);
+      }
     });
 
-    // Encabezados dinámicos según el tipo de área (Títulos estrictos según normativa y hoja Monitoreo)
+    // Ordenar supervivencia para que los recomendados aparezcan primero
+    if (this.currentArea === 'supervivencia') {
+      validItems.sort(function(a, b) {
+        if (a.isRecommended && !b.isRecommended) return -1;
+        if (!a.isRecommended && b.isRecommended) return 1;
+        return 0;
+      });
+    }
+
+    // Encabezados dinámicos según el tipo de área
     var theadHTML = '';
     if (this.currentArea === 'socioemocional') {
       theadHTML = 
         '<tr style="background: var(--surface-hover); text-align: left;">' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Dimensión & Etapa de Respuesta</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Dimensión & Etapa de Respuesta</th>' +
           '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">Habilidad & Objetivo de Aprendizaje (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Contenido de Aprendizaje & Evidencias Clave</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Contenido de Aprendizaje & Evidencias Clave</th>' +
         '</tr>';
     } else if (this.currentArea === 'supervivencia') {
       theadHTML = 
         '<tr style="background: var(--surface-hover); text-align: left;">' +
           '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Tipología de Riesgo & Afectación</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">Aprendizaje Clave & Objetivo de Protección</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Mini-Proyecto Situado & Desafío</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">Aprendizaje Clave & Objetivo de Protección</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Mini-Proyecto Situado & Fases de Acción</th>' +
         '</tr>';
     } else {
       theadHTML = 
@@ -6648,34 +7028,41 @@ var ModuloB = {
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700;">🌱 ' + item.habilidad + '</span><br>' +
-            '<span style="line-height:1.45; display:inline-block; margin-top:5px;">' + (item.objetivo_bloom || item.habilidad) + '</span>' +
+            '<span style="line-height:1.45; display:inline-block; margin-top:5px; font-weight:600;">' + (item.objetivo_bloom || item.habilidad) + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill badge-etapa2">' + (item.proceso_bloom || 'Aplicar') + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top; font-size: 0.83rem; line-height: 1.4;">' +
-            '<div style="background:#f8fafc; padding:6px 8px; border-radius:4px; margin-bottom:4px;">' +
+            '<div style="background:#f8fafc; padding:6px 8px; border-radius:4px; margin-bottom:4px; border:1px solid #e2e8f0;">' +
               '<strong>📚 Contenido:</strong><br>' + contenidoLimpio +
             '</div>' +
-            (item.evidencia_conmigo ? '<strong style="color:var(--primary);">🎯 Evidencia:</strong> <em>' + item.evidencia_conmigo + '</em>' : '') +
+            (item.evidencia_conmigo ? '<div style="margin-top:4px;"><strong style="color:var(--primary);">🎯 Evidencia (Propia):</strong> <em>' + item.evidencia_conmigo + '</em></div>' : '') +
+            (item.evidencia_otro ? '<div style="margin-top:2px;"><strong style="color:#0369a1;">👥 Evidencia (Con pares):</strong> <em>' + item.evidencia_otro + '</em></div>' : '') +
           '</td>' +
         '</tr>';
       } else if (item.type === 'supervivencia') {
-        return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+        var badgePriorizado = item.isRecommended ? '<span class="badge-pill" style="background:#fef3c7; color:#92400e; font-weight:800; margin-bottom:4px; display:inline-block;">⭐ PRIORIZADO SEGÚN DIAGNÓSTICO</span><br>' : '';
+        var filaBackground = item.isRecommended ? 'background-color: #fafdfb;' : '';
+
+        return '<tr style="border-bottom: 1px solid var(--border-light); ' + filaBackground + '">' +
           '<td style="padding: 10px; vertical-align: top;">' +
+            badgePriorizado +
             '<strong style="color:#b91c1c;">🛡️ ' + item.tipo_riesgo + '</strong><br>' +
             '<span class="badge-pill" style="background:#fee2e2; color:#991b1b; margin-top:3px;">' + item.afectacion + '</span>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
-            '<span style="color:var(--text-muted); font-size:0.82rem; display:block; margin-bottom:3px;">' + item.aprendizaje_clave + '</span>' +
+            '<span style="color:var(--text-muted); font-size:0.82rem; display:block; margin-bottom:3px; line-height:1.35;">' + item.aprendizaje_clave + '</span>' +
             '<strong style="color:var(--text-main); line-height:1.4; display:inline-block;">' + (item.objetivo_aprendizaje || item.aprendizaje_clave) + '</strong>' +
           '</td>' +
           '<td style="padding: 10px; vertical-align: top;">' +
             '<span class="badge-pill badge-etapa1">' + (item.proceso_bloom || 'Comprender + Aplicar') + '</span>' +
           '</td>' +
-          '<td style="padding: 10px; vertical-align: top; line-height: 1.4;">' +
-            '<strong style="color: var(--primary); display:block;">🛠️ ' + item.miniproyecto + '</strong>' +
-            (item.desafio ? '<span style="color: var(--text-muted); font-size: 0.82rem; display:block; margin-top:4px;"><strong>Desafío:</strong> ' + item.desafio + '</span>' : '') +
+          '<td style="padding: 10px; vertical-align: top; line-height: 1.4; font-size:0.83rem;">' +
+            '<strong style="color: var(--primary); font-size:0.88rem; display:block;">🛠️ ' + item.miniproyecto + '</strong>' +
+            (item.desafio ? '<span style="color: #334155; display:block; margin-top:4px;"><strong>Desafío:</strong> ' + item.desafio + '</span>' : '') +
+            (item.explorar ? '<div style="background:#f1f5f9; padding:4px 6px; border-radius:3px; margin-top:4px;"><strong>1. Explorar:</strong> ' + item.explorar.split('\n')[0] + '</div>' : '') +
+            (item.crear ? '<div style="background:#f0fdf4; padding:4px 6px; border-radius:3px; margin-top:2px;"><strong>2. Crear:</strong> ' + item.crear.split('\n')[0] + '</div>' : '') +
           '</td>' +
         '</tr>';
       } else {
@@ -6688,6 +7075,14 @@ var ModuloB = {
         '</tr>';
       }
     }).join('');
+
+    var bannerContextual = '';
+    if (this.currentArea === 'supervivencia' && d && d.amenazas) {
+      bannerContextual = 
+        '<div class="no-print" style="background:#fefce8; border:1px solid #fde047; padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:14px; font-size:0.86rem; color:#854d0e;">' +
+          '⭐ <strong>Articulación con Diagnóstico de Aula:</strong> Los mini-proyectos marcados con <strong>PRIORIZADO</strong> responden directamente a las amenazas diagnosticadas (<em>' + (d.amenazas.join(', ')) + '</em>).' +
+        '</div>';
+    }
 
     var html = 
       '<div class="card-elite">' +
@@ -6708,6 +7103,7 @@ var ModuloB = {
             '</button>';
           }).join('') +
         '</div>' +
+        bannerContextual +
         '<div style="overflow-x: auto;">' +
           '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
             '<thead>' + theadHTML + '</thead>' +
@@ -6736,7 +7132,7 @@ var ModuloB = {
   }
 };
 
-// Módulo C: Monitoreo Semanal por Etapas
+// Módulo C: Monitoreo Semanal por Etapas (Integración Completa por Semanas, Persistencia con Marcas de Tiempo y Exportación Excel/JSON)
 var ModuloC = {
   init: function() {
     this.renderMonitoreo();
@@ -6755,6 +7151,35 @@ var ModuloC = {
     if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
     if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
     return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
+  },
+
+  getSocioemocionalForWeek: function(weekNum, etapa) {
+    var habs = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
+    if (habs.length === 0) return { habilidad: 'Contención Socioemocional', dimension: 'Personal-Emocional' };
+    
+    // Filtrar según la etapa si es posible
+    var etapaKey = (etapa || '').indexOf('ETAPA 1') !== -1 ? 'Etapa 1' :
+                   (etapa || '').indexOf('ETAPA 3') !== -1 ? 'Etapa 3' : 'Etapa 2';
+
+    var habsEtapa = habs.filter(function(h) { return (h.etapa || '').indexOf(etapaKey) !== -1; });
+    if (habsEtapa.length === 0) habsEtapa = habs;
+
+    var idx = (weekNum - 1) % habsEtapa.length;
+    return habsEtapa[idx] || habs[0];
+  },
+
+  getSupervivenciaForWeek: function(weekNum, userDiagnostic) {
+    var sups = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
+    if (sups.length === 0) return { miniproyecto: 'Protocolos seguros escolares', afectacion: 'Autoprotección' };
+
+    // Buscar si hay recomendados para este diagnóstico
+    var recomendados = sups.filter(function(item) {
+      return ModuloB.isSurvivalRecommended(item, userDiagnostic);
+    });
+
+    var pool = recomendados.length > 0 ? recomendados : sups;
+    var idx = (weekNum - 1) % pool.length;
+    return pool[idx] || sups[0];
   },
 
   renderMonitoreo: function() {
@@ -6812,6 +7237,8 @@ var ModuloC = {
       };
 
       var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
+      var habSocio = self.getSocioemocionalForWeek(i, d.etapa);
+      var supProt = self.getSupervivenciaForWeek(i, d);
 
       var tarjetaHTML = 
         '<div style="line-height:1.45;">' +
@@ -6819,37 +7246,67 @@ var ModuloC = {
           '<span style="color:#b91c1c;">⚠️ [' + categoriasLabel + ' - ' + amenazasLabel + ']:</span> ' + riesgosLabel + '<br>' +
           '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
           '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span><br>' +
+          '<span style="color:#065f46; font-size:0.83rem;">🌱 <strong>Socioemocional:</strong> ' + (habSocio.habilidad || 'Autocuidado y contención') + ' (' + (habSocio.dimension || 'DSE') + ')</span><br>' +
+          '<span style="color:#991b1b; font-size:0.83rem;">🛡️ <strong>Protección WASH/ERM:</strong> ' + (supProt.miniproyecto || 'Mapas y protocolos seguros') + '</span>' +
         '</div>';
 
+      var savedItem = savedMonitoreo[i] || {};
       semanas.push({
         num: i,
         fecha: fechaSem.toLocaleDateString('es-CO'),
+        fechaRegistro: savedItem.fechaRegistro || 'Sin registrar',
         etapa: d.etapa,
         areaKey: areaKey,
         areaNombre: areaKey.toUpperCase(),
         tarjeta: tarjetaHTML,
-        avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
-        observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
+        parsedItem: parsedItem,
+        habSocio: habSocio,
+        supProt: supProt,
+        didacticaEstrategia: didacticaEstrategia,
+        avance: savedItem.avance || '⚪ Sin iniciar',
+        observaciones: savedItem.observaciones || ''
       });
     }
 
-    var logrados = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
-    var enProceso = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('proceso') !== -1; }).length;
-    var sinIniciar = semanas.length - logrados - enProceso;
+    var logrados = Object.values(savedMonitoreo).filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
+    var enProceso = Object.values(savedMonitoreo).filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
     var pctAvance = Math.round((logrados / semanas.length) * 100);
 
     var html = 
       '<div class="card-elite">' +
-        '<div class="card-header">' +
+        '<!-- Encabezado Oficial Imprimible -->' +
+        '<div class="print-only-header">' +
+          '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">' +
+            '<div>' +
+              '<h2 style="font-size:12pt; font-weight:900; color:#005a36; margin:0;">CONSEJO NORUEGO PARA REFUGIADOS (NRC) & MINISTERIO DE EDUCACIÓN NACIONAL (MEN)</h2>' +
+              '<p style="font-size:9.5pt; font-weight:700; color:#334155; margin:2px 0;">BITÁCORA OFICIAL DE MONITOREO Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS (GIRE)</p>' +
+            '</div>' +
+            '<div style="text-align:right; font-size:8pt; color:#64748b;">' +
+              '<span>Formato Oficial SIEE</span><br>' +
+              '<span>Fecha Emisión: ' + new Date().toLocaleDateString('es-CO') + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; font-size:8pt; background:#f8fafc; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">' +
+            '<div><strong>Docente:</strong> ' + ((user && user.nombreCompleto) || 'Docente Territorial') + '</div>' +
+            '<div><strong>Institución:</strong> ' + ((user && user.institucion) || 'I.E. Rural') + '</div>' +
+            '<div><strong>Ciclo / Grado:</strong> Ciclo ' + cicloKey + ' - ' + d.grado + '</div>' +
+            '<div><strong>Etapa Emergencia:</strong> ' + d.etapa + '</div>' +
+            '<div><strong>Amenaza(s):</strong> ' + amenazasLabel + '</div>' +
+            '<div><strong>Progreso SIEE:</strong> ' + pctAvance + '% Logrado (' + logrados + ' de ' + semanas.length + ' sem.)</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="card-header no-print">' +
           '<div>' +
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
             '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza(s): ' + amenazasLabel + '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 10px;" class="no-print">' +
+          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Exportar Bitácora</button>' +
-            '<button id="btn-imprimir-carta" class="btn-elite btn-secondary">🖨️ Imprimir Carta</button>' +
+            '<button id="btn-exportar-csv" class="btn-elite btn-secondary" title="Descargar archivo estructurado que se abre directamente en Excel">📊 Exportar a Excel (CSV)</button>' +
+            '<button id="btn-exportar-json" class="btn-elite btn-outline" title="Descargar respaldo técnico en JSON">📥 Respaldo JSON</button>' +
+            '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
 
@@ -6861,110 +7318,135 @@ var ModuloC = {
           '<div class="grid-3" style="gap: 12px; font-size: 0.86rem; line-height: 1.45; color: #166534;">' +
             '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
               '<strong style="color: #15803d;">💾 Botón "Guardar Avance":</strong><br>' +
-              'Es obligatorio hacer clic en este botón para registrar y almacenar de forma segura en la plataforma sus calificaciones de avance y notas de evidencia de cada semana.' +
+              'Es obligatorio hacer clic en este botón para registrar y guardar de forma segura en la plataforma sus calificaciones de avance, notas de evidencia y la fecha exacta del registro en aula.' +
             '</div>' +
             '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d;">📥 Botón "Exportar Bitácora":</strong><br>' +
-              'Descarga un archivo de respaldo en formato JSON con todo su plan y avances registrados, ideal para guardar copia en su computador o compartir con la coordinación.' +
+              '<strong style="color: #15803d;">📊 Botón "Exportar a Excel (CSV)":</strong><br>' +
+              'Descarga una hoja de cálculo estructurada con todas las columnas de la bitácora que <strong>se abre directamente con doble clic en Microsoft Excel</strong> o Google Sheets.' +
             '</div>' +
             '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
               '<strong style="color: #15803d;">🖨️ Botón "Imprimir Carta":</strong><br>' +
-              'Genera la bitácora maquetada en tamaño Carta (<em>Letter</em>), lista para imprimir en físico o exportar como documento PDF oficial para acreditación formal en el SIEE.' +
+              'Genera la bitácora oficial en hoja tamaño Carta (<em>Letter</em>), lista para imprimir en físico o exportar como documento PDF oficial con firmas para acreditación en el SIEE.' +
             '</div>' +
           '</div>' +
         '</div>' +
 
-        '<div class="grid-4" style="margin-bottom: 24px;">' +
-          '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
+        '<div class="grid-4" style="margin-bottom: 20px;">' +
+          '<div style="background: var(--surface-hover); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.78rem; color: var(--text-muted);">Progreso Logrado</div>' +
+            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
           '</div>' +
-          '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
+          '<div style="background: var(--color-etapa3-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.78rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
+            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
           '</div>' +
-          '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
+          '<div style="background: var(--color-etapa2-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.78rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
+            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
           '</div>' +
-          '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-blue);">Total Semanas Plan</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
+          '<div style="background: var(--color-blue-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.78rem; color: var(--color-blue);">Total Semanas Plan</div>' +
+            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
           '</div>' +
         '</div>' +
+
         '<div style="overflow-x: auto;">' +
-          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
+          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
             '<thead>' +
               '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 10px; width: 75px;">Semana</th>' +
-                '<th style="padding: 10px; width: 105px;">Fecha Est.</th>' +
-                '<th style="padding: 10px; width: 110px;">Área</th>' +
-                '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
-                '<th style="padding: 10px; width: 145px;">Estado</th>' +
-                '<th style="padding: 10px; width: 220px;">Observaciones / Evidencia</th>' +
+                '<th style="padding: 8px; width: 65px; text-align:center;">Semana</th>' +
+                '<th style="padding: 8px; width: 85px;">Fecha Est.</th>' +
+                '<th style="padding: 8px; width: 95px;">Área</th>' +
+                '<th style="padding: 8px;">Tarjeta de Acción Pedagógica Situada (Curricular + Socioemocional + Protección)</th>' +
+                '<th style="padding: 8px; width: 130px;">Estado de Avance</th>' +
+                '<th style="padding: 8px; width: 210px;">Observaciones / Evidencias SIEE</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>' +
               semanas.map(function(s) {
+                var fechaRegDisplay = s.fechaRegistro !== 'Sin registrar' ? '<div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">⏱️ Guardado: ' + s.fechaRegistro + '</div>' : '';
                 return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 10px; font-weight: 700; text-align: center;">Sem. ' + s.num + '</td>' +
-                  '<td style="padding: 10px;">' + s.fecha + '</td>' +
-                  '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
-                  '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
-                  '<td style="padding: 10px;">' +
-                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
+                  '<td style="padding: 8px; font-weight: 700; text-align: center; vertical-align: top;">Sem. ' + s.num + '</td>' +
+                  '<td style="padding: 8px; vertical-align: top;">' + s.fecha + '</td>' +
+                  '<td style="padding: 8px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
+                  '<td style="padding: 8px; font-size: 0.82rem; line-height: 1.4; vertical-align: top;">' + s.tarjeta + '</td>' +
+                  '<td style="padding: 8px; vertical-align: top;">' +
+                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 5px; font-size:0.84rem;">' +
                       '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                       '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                       '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
                       '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
                     '</select>' +
+                    fechaRegDisplay +
                   '</td>' +
-                  '<td style="padding: 10px;">' +
-                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
+                  '<td style="padding: 8px; vertical-align: top;">' +
+                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias SIEE" style="padding: 5px; font-size:0.84rem;">' +
                   '</td>' +
                 '</tr>';
               }).join('') +
             '</tbody>' +
           '</table>' +
         '</div>' +
+
+        '<!-- Bloque Oficial de Firmas para Impresión Carta -->' +
+        '<div class="print-signatures-block">' +
+          '<div class="signature-box">' +
+            '<strong>' + ((user && user.nombreCompleto) || 'Docente Responsable') + '</strong><br>' +
+            '<span>Docente Titular de Aula / Responsable de Emergencia</span>' +
+          '</div>' +
+          '<div class="signature-box">' +
+            '<strong>Coordinación Académica / Rectoría</strong><br>' +
+            '<span>' + ((user && user.institucion) || 'Institución Educativa') + ' (Validez Institucional SIEE)</span>' +
+          '</div>' +
+        '</div>' +
       '</div>';
 
     container.innerHTML = html;
-    this.bindEvents();
+    this.bindEvents(semanas);
   },
 
-  bindEvents: function() {
+  bindEvents: function(semanas) {
     var self = this;
     var btnGuardar = document.getElementById('btn-guardar-monitoreo');
     var btnImprimir = document.getElementById('btn-imprimir-carta');
-    var btnExportar = document.getElementById('btn-exportar-json');
+    var btnExportarCsv = document.getElementById('btn-exportar-csv');
+    var btnExportarJson = document.getElementById('btn-exportar-json');
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
+        var user = AuthManager.getUserData();
+        var savedMonitoreo = (user && user.monitoreo) || {};
         var selects = document.querySelectorAll('.select-avance');
         var inputs = document.querySelectorAll('.input-obs');
-        var monitoreo = {};
+        var nowStr = new Date().toLocaleString('es-CO');
 
         selects.forEach(function(sel) {
           var sem = sel.getAttribute('data-semana');
-          monitoreo[sem] = monitoreo[sem] || {};
-          monitoreo[sem].avance = sel.value;
+          savedMonitoreo[sem] = savedMonitoreo[sem] || {};
+          savedMonitoreo[sem].avance = sel.value;
+          savedMonitoreo[sem].fechaRegistro = nowStr;
         });
 
         inputs.forEach(function(inp) {
           var sem = inp.getAttribute('data-semana');
-          monitoreo[sem] = monitoreo[sem] || {};
-          monitoreo[sem].observaciones = inp.value;
+          savedMonitoreo[sem] = savedMonitoreo[sem] || {};
+          savedMonitoreo[sem].observaciones = inp.value;
         });
 
-        AuthManager.saveUserData('monitoreo', monitoreo);
-        alert('✅ Registro de Monitoreo Semanal guardado exitosamente.');
+        AuthManager.saveUserData('monitoreo', savedMonitoreo);
+        alert('✅ Registro de Monitoreo Semanal guardado exitosamente con marca de tiempo.');
         self.renderMonitoreo();
       });
     }
 
-    if (btnExportar) {
-      btnExportar.addEventListener('click', function() {
+    if (btnExportarCsv) {
+      btnExportarCsv.addEventListener('click', function() {
+        self.exportToCsv(semanas);
+      });
+    }
+
+    if (btnExportarJson) {
+      btnExportarJson.addEventListener('click', function() {
         var data = AuthManager.getUserData();
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         var downloadAnchor = document.createElement('a');
@@ -6981,6 +7463,61 @@ var ModuloC = {
         window.print();
       });
     }
+  },
+
+  exportToCsv: function(semanas) {
+    var user = AuthManager.getUserData();
+    var d = user ? user.diagnostico : {};
+
+    // Encabezados CSV con delimitador punto y coma (Estándar Excel en español)
+    var headers = [
+      "Semana",
+      "Fecha Estimada",
+      "Fecha Registro Aula",
+      "Área Curricular",
+      "Grado Escolar",
+      "Estrategia NNA",
+      "Amenazas PGIRE",
+      "Código DBA",
+      "Aprendizaje Nuclear",
+      "Didáctica Situada",
+      "Desafío Bloom",
+      "Habilidad Socioemocional",
+      "Mini-Proyecto Supervivencia",
+      "Estado de Avance",
+      "Observaciones y Evidencias SIEE"
+    ];
+
+    var rows = semanas.map(function(s) {
+      return [
+        '"Sem. ' + s.num + '"',
+        '"' + s.fecha + '"',
+        '"' + (s.fechaRegistro || 'Sin registrar') + '"',
+        '"' + s.areaNombre + '"',
+        '"' + (d.grado || 'Ciclo ' + (d.ciclo || '3')) + '"',
+        '"' + (d.didacticaNNA || '') + '"',
+        '"' + ((d.amenazas || [d.amenaza || '']).join(' + ')) + '"',
+        '"' + (s.parsedItem.dbaCode || '') + '"',
+        '"' + (s.parsedItem.subproceso || s.parsedItem.dbaDesc || '').replace(/"/g, '""') + '"',
+        '"' + (s.parsedItem.didactica || '').replace(/"/g, '""') + '"',
+        '"' + (s.parsedItem.bloom || '').replace(/"/g, '""') + '"',
+        '"' + (s.habSocio.habilidad || '').replace(/"/g, '""') + '"',
+        '"' + (s.supProt.miniproyecto || '').replace(/"/g, '""') + '"',
+        '"' + (s.avance || '') + '"',
+        '"' + (s.observaciones || '').replace(/"/g, '""') + '"'
+      ].join(';');
+    });
+
+    var csvContent = "\uFEFF" + headers.join(';') + "\r\n" + rows.join("\r\n");
+    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", url);
+    downloadAnchor.setAttribute("download", "bitacora_monitoreo_nrc_" + (user.nombreCompleto || 'docente').replace(/\s+/g, '_') + ".csv");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    URL.revokeObjectURL(url);
   }
 };
 
