@@ -170,29 +170,39 @@ var ModuloC = {
           '</div>' +
           '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-csv" class="btn-elite btn-secondary" title="Descargar archivo estructurado que se abre directamente en Excel">📊 Exportar a Excel (CSV)</button>' +
+            '<button id="btn-exportar-csv" class="btn-elite btn-secondary" title="Descargar archivo que se abre directamente en Excel">📊 Exportar a Excel (CSV)</button>' +
             '<button id="btn-exportar-json" class="btn-elite btn-outline" title="Descargar respaldo técnico en JSON">📥 Respaldo JSON</button>' +
+            '<button id="btn-restaurar-json" class="btn-elite btn-outline" title="Cargar un archivo de respaldo JSON guardado previamente">📤 Restaurar JSON</button>' +
+            '<input type="file" id="input-restaurar-json" accept=".json" style="display: none;">' +
             '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
 
         '<!-- Panel de Instrucciones para el Docente -->' +
-        '<div class="no-print" style="background: #f0fdf4; border: 1.5px solid #86efac; border-left: 6px solid #16a34a; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 22px;">' +
-          '<h4 style="color: #15803d; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 0.96rem;">' +
-            '<span>💡</span> Instrucciones de Operación y Registro de Bitácora para el Docente' +
+        '<div class="no-print" style="background: #f0fdf4; border: 1.5px solid #86efac; border-left: 6px solid #16a34a; border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 22px;">' +
+          '<h4 style="color: #15803d; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 1rem;">' +
+            '<span>💡</span> Guía Operativa de Registro, Exportación y Respaldo para el Docente' +
           '</h4>' +
-          '<div class="grid-3" style="gap: 12px; font-size: 0.86rem; line-height: 1.45; color: #166534;">' +
-            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d;">💾 Botón "Guardar Avance":</strong><br>' +
-              'Es obligatorio hacer clic en este botón para registrar y guardar de forma segura en la plataforma sus calificaciones de avance, notas de evidencia y la fecha exacta del registro en aula.' +
+          '<div class="grid-2" style="gap: 12px; font-size: 0.86rem; line-height: 1.5; color: #166534;">' +
+            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d; font-size: 0.9rem;">💾 1. Guardar Avance en Plataforma:</strong><br>' +
+              'Guarda de forma segura en la memoria de su navegador sus calificaciones semanales (<em>Logrado, En proceso, etc.</em>), las evidencias del aula y la <strong>fecha/hora exacta del registro</strong>.' +
             '</div>' +
-            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d;">📊 Botón "Exportar a Excel (CSV)":</strong><br>' +
-              'Descarga una hoja de cálculo estructurada con todas las columnas de la bitácora que <strong>se abre directamente con doble clic en Microsoft Excel</strong> o Google Sheets.' +
+            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d; font-size: 0.9rem;">📊 2. Exportar a Excel (.CSV):</strong><br>' +
+              'Genera una hoja de cálculo estructurada con todas las columnas de la bitácora que <strong>se abre directamente con doble clic en Microsoft Excel o Google Sheets</strong> para lectura y edición tabular.' +
             '</div>' +
-            '<div style="background: #ffffff; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d;">🖨️ Botón "Imprimir Carta":</strong><br>' +
-              'Genera la bitácora oficial en hoja tamaño Carta (<em>Letter</em>), lista para imprimir en físico o exportar como documento PDF oficial con firmas para acreditación en el SIEE.' +
+            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
+              '<strong style="color: #15803d; font-size: 0.9rem;">🖨️ 3. Imprimir Carta (PDF Oficial):</strong><br>' +
+              'Genera la bitácora lista para imprimir en hoja tamaño Carta (<em>Letter</em>) o exportar en PDF oficial con membrete del MEN/NRC y espacio de firmas para acreditación formal en el SIEE.' +
+            '</div>' +
+            '<div style="background: #f8fafc; padding: 12px 14px; border-radius: var(--radius-sm); border: 1.5px solid #94a3b8;">' +
+              '<strong style="color: #0f172a; font-size: 0.9rem;">📥 4. ¿Para qué sirve el archivo "Respaldo JSON"?:</strong><br>' +
+              '<span style="color: #334155;">' +
+                '• <strong>¿Qué es?:</strong> Es una <em>fotografía digital exacta</em> y ultra-liviana (&lt;25 KB) de todo su diagnóstico y avances.<br>' +
+                '• <strong>Cero Pérdida de Datos:</strong> Si borra el historial del navegador o cambia de computador/celular, use el botón <strong>📤 Restaurar JSON</strong> para recuperar su bitácora en 1 segundo sin reescribir nada.<br>' +
+                '• <strong>Reporte Técnico:</strong> Puede enviarlo por WhatsApp a su Coordinación o equipo NRC para consolidación estadística regional.' +
+              '</span>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -277,6 +287,8 @@ var ModuloC = {
     var btnImprimir = document.getElementById('btn-imprimir-carta');
     var btnExportarCsv = document.getElementById('btn-exportar-csv');
     var btnExportarJson = document.getElementById('btn-exportar-json');
+    var btnRestaurarJson = document.getElementById('btn-restaurar-json');
+    var inputRestaurarJson = document.getElementById('input-restaurar-json');
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
@@ -321,6 +333,36 @@ var ModuloC = {
         document.body.appendChild(downloadAnchor);
         downloadAnchor.click();
         downloadAnchor.remove();
+      });
+    }
+
+    if (btnRestaurarJson && inputRestaurarJson) {
+      btnRestaurarJson.addEventListener('click', function() {
+        inputRestaurarJson.click();
+      });
+
+      inputRestaurarJson.addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+          try {
+            var parsed = JSON.parse(evt.target.result);
+            if (parsed.diagnostico || parsed.monitoreo) {
+              if (parsed.diagnostico) AuthManager.saveUserData('diagnostico', parsed.diagnostico);
+              if (parsed.monitoreo) AuthManager.saveUserData('monitoreo', parsed.monitoreo);
+              if (parsed.nombreCompleto) AuthManager.saveUserData('nombreCompleto', parsed.nombreCompleto);
+              if (parsed.institucion) AuthManager.saveUserData('institucion', parsed.institucion);
+              alert('✅ Respaldo JSON restaurado con éxito. Su diagnóstico y bitácora han sido cargados.');
+              self.renderMonitoreo();
+            } else {
+              alert('⚠️ El archivo seleccionado no contiene una estructura válida de bitácora NRC.');
+            }
+          } catch (err) {
+            alert('❌ Error al leer el archivo JSON: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
       });
     }
 
