@@ -1,164 +1,31 @@
-/* Reglas de Impresión Tamaño Carta Oficial (Letter) - NRC / MEN GIRE */
-@page {
-  size: letter portrait;
-  margin: 12mm 10mm 15mm 10mm;
-}
-
+/* Reglas de Impresión Tamaño Carta */
 @media print {
-  /* Ocultar elementos de navegación y UI web */
-  .no-print,
-  .header-bar,
-  .nav-tabs-container,
-  .modal-overlay,
-  button,
-  .btn-elite,
-  .tab-area-btn,
-  .accordion-header .chevron {
+  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button {
     display: none !important;
   }
-
-  /* Reset de página para evitar páginas en blanco iniciales */
-  html, body {
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 8.5pt !important;
-    line-height: 1.35 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  
+  body {
+    background: white !important;
+    font-size: 11pt !important;
+    color: black !important;
   }
-
-  .main-container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* Contenedores de tarjeta */
+  
   .card-elite {
     box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 0 10px 0 !important;
-    page-break-inside: auto !important;
-    background: transparent !important;
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+    page-break-inside: avoid;
   }
-
-  .card-header {
-    border-bottom: 2px solid #005a36 !important;
-    padding-bottom: 6px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .card-title {
-    font-size: 11pt !important;
-    color: #005a36 !important;
-  }
-
-  /* Encabezado Oficial Imprimible */
-  .print-only-header {
-    display: block !important;
-    border-bottom: 2px solid #005a36 !important;
-    padding-bottom: 8px !important;
-    margin-bottom: 12px !important;
-  }
-
-  /* Tabla de Impresión */
+  
   .table-print {
     width: 100% !important;
     border-collapse: collapse !important;
-    font-size: 8pt !important;
-    page-break-inside: auto !important;
   }
-
-  .table-print thead {
-    display: table-header-group !important;
-  }
-
-  .table-print tr {
-    page-break-inside: avoid !important;
-    page-break-after: auto !important;
-  }
-
-  .table-print th {
-    background-color: #f1f5f9 !important;
-    color: #0f172a !important;
-    font-weight: 700 !important;
-    border: 1px solid #94a3b8 !important;
-    padding: 5px 6px !important;
-    text-align: left !important;
-    font-size: 7.8pt !important;
-  }
-
-  .table-print td {
-    border: 1px solid #cbd5e1 !important;
-    padding: 5px 6px !important;
-    vertical-align: top !important;
-    font-size: 7.8pt !important;
-  }
-
-  /* Desactivar inputs y selects interactivos para mostrar texto limpio */
-  select.select-avance {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    border: none !important;
-    background: transparent !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    font-size: 8pt !important;
-  }
-
-  input.input-obs {
-    border: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-    width: 100% !important;
-    font-size: 8pt !important;
-  }
-
-  .badge-pill {
-    border: 1px solid #94a3b8 !important;
-    padding: 2px 6px !important;
-    font-size: 7pt !important;
-  }
-
-  /* Grilla de resumen de métricas */
-  .grid-4 {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
-    margin-bottom: 12px !important;
-  }
-
-  .grid-4 > div {
-    border: 1px solid #cbd5e1 !important;
+  
+  .table-print th, .table-print td {
+    border: 1px solid #999 !important;
     padding: 6px 8px !important;
-    border-radius: 4px !important;
-  }
-
-  /* Firmas Oficiales al Final */
-  .print-signatures-block {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 40px !important;
-    margin-top: 25px !important;
-    page-break-inside: avoid !important;
-  }
-
-  .signature-box {
-    border-top: 1px solid #334155 !important;
-    padding-top: 6px !important;
-    text-align: center !important;
-    font-size: 8pt !important;
-  }
-}
-
-/* En pantalla, ocultar bloques exclusivos de impresión */
-@media screen {
-  .print-only-header,
-  .print-signatures-block {
-    display: none !important;
+    font-size: 9pt !important;
   }
 }

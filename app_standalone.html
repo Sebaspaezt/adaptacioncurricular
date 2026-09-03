@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Herramienta de adaptación y flexibilización curricular en emergencias - NRC / MEN</title>
   
-  <style>
+<style>
 /* Variables de Diseño Swiss-Fine NRC */
 :root {
   --primary: #005A36;
@@ -66,45 +66,45 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Header Sticky */
+/* Header */
 .header-bar {
   background: var(--surface-white);
   border-bottom: 2px solid var(--primary);
-  padding: 12px 24px;
+  padding: 14px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
 }
 
 .brand-section {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .brand-badge {
   background: var(--primary);
   color: white;
   font-weight: 900;
-  font-size: 1.1rem;
-  padding: 5px 12px;
+  font-size: 1.15rem;
+  padding: 6px 14px;
   border-radius: var(--radius-sm);
   letter-spacing: 1px;
 }
 
 .brand-title {
-  font-size: 1.18rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--primary-dark);
   line-height: 1.2;
 }
 
 .brand-subtitle {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
   margin-top: 2px;
 }
@@ -112,14 +112,14 @@ body {
 .user-status-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .user-badge {
   background: var(--surface-hover);
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
-  font-size: 0.84rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--primary-dark);
   border: 1px solid var(--border-medium);
@@ -135,30 +135,22 @@ body {
   border-color: var(--primary);
 }
 
-/* Navigation Tabs Sticky */
+/* Navigation Tabs */
 .nav-tabs-container {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: var(--surface-white);
   border-bottom: 1px solid var(--border-medium);
-  padding: 0 24px;
+  padding: 0 28px;
   display: flex;
   gap: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-  position: sticky;
-  top: 59px;
-  z-index: 999;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: thin;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
 }
 
 .nav-tab {
-  padding: 12px 20px;
+  padding: 14px 22px;
   border: none;
   background: none;
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
@@ -167,7 +159,6 @@ body {
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
-  flex-shrink: 0;
 }
 
 .nav-tab:hover {
@@ -183,9 +174,9 @@ body {
 
 /* Main Layout */
 .main-container {
-  max-width: 1340px;
-  margin: 20px auto;
-  padding: 0 18px 60px;
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 20px 60px;
 }
 
 /* Cards */
@@ -427,356 +418,35 @@ body {
   color: var(--text-main);
 }
 
-/* Multi-select Category Chips & Threat Cards */
-.chip-category-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  background: var(--surface-hover);
-  border: 1.5px solid var(--border-medium);
-  cursor: pointer;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-main);
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-.chip-category-label:hover {
-  border-color: var(--primary);
-  background: var(--primary-subtle);
-}
-
-.chip-category-label input[type="checkbox"] {
-  accent-color: var(--primary);
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.chip-category-label.selected {
-  background: #e6f4ea;
-  border-color: var(--primary);
-  color: var(--primary-dark);
-}
-
-.threat-item-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: #ffffff;
-  border: 1px solid var(--border-light);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  font-size: 0.86rem;
-}
-
-.threat-item-card:hover {
-  background: var(--surface-hover);
-  border-color: var(--primary);
-}
-
-.threat-item-card.selected {
-  background: #f0fdf4;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
-}
-
-.threat-item-card input[type="checkbox"] {
-  accent-color: var(--primary);
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  cursor: pointer;
-}
-
-.textarea-elite {
-  width: 100%;
-  padding: 10px 14px;
-  font-family: inherit;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  border: 1.5px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-  background-color: var(--surface-white);
-  color: var(--text-main);
-  resize: vertical;
-  min-height: 64px;
-}
-
-.textarea-readonly {
-  background-color: #f8fafc;
-  color: #1e293b;
-  font-weight: 500;
-}
-
-/* ========================================== */
-/* REGLAS RESPONSIVE MULTI-DISPOSITIVO        */
-/* ========================================== */
-
-/* Tablets & Pantallas Medianas (<= 992px) */
-@media (max-width: 992px) {
-  .header-bar {
-    padding: 10px 18px;
-  }
-  .nav-tabs-container {
-    top: 55px;
-    padding: 0 16px;
-  }
-  .main-container {
-    padding: 0 14px 50px;
-  }
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Celulares y Pantallas Pequeñas (<= 680px) */
-@media (max-width: 680px) {
-  .header-bar {
-    padding: 10px 14px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .brand-section {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .brand-title {
-    font-size: 1.05rem;
-  }
-
-  .user-status-bar {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .nav-tabs-container {
-    top: 86px;
-    padding: 0 10px;
-    gap: 4px;
-  }
-
-  .nav-tab {
-    padding: 10px 12px;
-    font-size: 0.82rem;
-  }
-
-  .main-container {
-    margin: 12px auto;
-    padding: 0 8px 40px;
-  }
-
-  .card-elite {
-    padding: 14px;
-    margin-bottom: 16px;
-  }
-
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .grid-2, .grid-3, .grid-4 {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-  }
-
-  .btn-elite {
-    width: 100%;
-    justify-content: center;
-    padding: 10px 14px;
-  }
-
-  #container-cat-checkboxes {
-    flex-direction: column;
-  }
-
-  .chip-category-label {
-    width: 100%;
-  }
-
-  #container-amenazas-checkboxes {
-    grid-template-columns: 1fr !important;
-    max-height: 180px;
-  }
-}
-
-
-
-/* Reglas de Impresión Tamaño Carta Oficial (Letter) - NRC / MEN GIRE */
-@page {
-  size: letter portrait;
-  margin: 12mm 10mm 15mm 10mm;
-}
-
+/* Reglas de Impresión Tamaño Carta */
 @media print {
-  /* Ocultar elementos de navegación y UI web */
-  .no-print,
-  .header-bar,
-  .nav-tabs-container,
-  .modal-overlay,
-  button,
-  .btn-elite,
-  .tab-area-btn,
-  .accordion-header .chevron {
+  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button {
     display: none !important;
   }
-
-  /* Reset de página para evitar páginas en blanco iniciales */
-  html, body {
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 8.5pt !important;
-    line-height: 1.35 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  
+  body {
+    background: white !important;
+    font-size: 11pt !important;
+    color: black !important;
   }
-
-  .main-container {
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* Contenedores de tarjeta */
+  
   .card-elite {
     box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 0 10px 0 !important;
-    page-break-inside: auto !important;
-    background: transparent !important;
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+    page-break-inside: avoid;
   }
-
-  .card-header {
-    border-bottom: 2px solid #005a36 !important;
-    padding-bottom: 6px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .card-title {
-    font-size: 11pt !important;
-    color: #005a36 !important;
-  }
-
-  /* Encabezado Oficial Imprimible */
-  .print-only-header {
-    display: block !important;
-    border-bottom: 2px solid #005a36 !important;
-    padding-bottom: 8px !important;
-    margin-bottom: 12px !important;
-  }
-
-  /* Tabla de Impresión */
+  
   .table-print {
     width: 100% !important;
     border-collapse: collapse !important;
-    font-size: 8pt !important;
-    page-break-inside: auto !important;
   }
-
-  .table-print thead {
-    display: table-header-group !important;
-  }
-
-  .table-print tr {
-    page-break-inside: avoid !important;
-    page-break-after: auto !important;
-  }
-
-  .table-print th {
-    background-color: #f1f5f9 !important;
-    color: #0f172a !important;
-    font-weight: 700 !important;
-    border: 1px solid #94a3b8 !important;
-    padding: 5px 6px !important;
-    text-align: left !important;
-    font-size: 7.8pt !important;
-  }
-
-  .table-print td {
-    border: 1px solid #cbd5e1 !important;
-    padding: 5px 6px !important;
-    vertical-align: top !important;
-    font-size: 7.8pt !important;
-  }
-
-  /* Desactivar inputs y selects interactivos para mostrar texto limpio */
-  select.select-avance {
-    appearance: none !important;
-    -webkit-appearance: none !important;
-    border: none !important;
-    background: transparent !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    font-size: 8pt !important;
-  }
-
-  input.input-obs {
-    border: none !important;
-    background: transparent !important;
-    padding: 0 !important;
-    width: 100% !important;
-    font-size: 8pt !important;
-  }
-
-  .badge-pill {
-    border: 1px solid #94a3b8 !important;
-    padding: 2px 6px !important;
-    font-size: 7pt !important;
-  }
-
-  /* Grilla de resumen de métricas */
-  .grid-4 {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
-    margin-bottom: 12px !important;
-  }
-
-  .grid-4 > div {
-    border: 1px solid #cbd5e1 !important;
+  
+  .table-print th, .table-print td {
+    border: 1px solid #999 !important;
     padding: 6px 8px !important;
-    border-radius: 4px !important;
-  }
-
-  /* Firmas Oficiales al Final */
-  .print-signatures-block {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 40px !important;
-    margin-top: 25px !important;
-    page-break-inside: avoid !important;
-  }
-
-  .signature-box {
-    border-top: 1px solid #334155 !important;
-    padding-top: 6px !important;
-    text-align: center !important;
-    font-size: 8pt !important;
-  }
-}
-
-/* En pantalla, ocultar bloques exclusivos de impresión */
-@media screen {
-  .print-only-header,
-  .print-signatures-block {
-    display: none !important;
+    font-size: 9pt !important;
   }
 }
 
@@ -926,7 +596,7 @@ body {
         <!-- 1.3. Guía de categorías de riesgo prevalente -->
         <div class="accordion-item">
           <div class="accordion-header">
-            <span>1.3. Guía de categorías de riesgo prevalente PGIRE</span>
+            <span>1.3. Guía de categorías de riesgo prevalente</span>
             <span class="chevron">▼</span>
           </div>
           <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
@@ -951,97 +621,7 @@ body {
             </div>
 
             <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Puede marcar una o varias macro-categorías concurrentes; el sistema filtrará las amenazas específicas y consolidará automáticamente los ejemplos contextuales, los riesgos escolares y las rutas interinstitucionales (CIGIRE, MTGIRE o Ruta de Protección Humanitaria).
-            </p>
-          </div>
-        </div>
-
-        <!-- 1.4. Guía de enfoque: Habilidades para la Vida y Desarrollo Socioemocional -->
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <span>🌱 1.4. Guía de enfoque: Habilidades para la Vida y Desarrollo Socioemocional (DSE)</span>
-            <span class="chevron">▼</span>
-          </div>
-          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
-            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 12px;">
-              <strong style="color: #15803d; font-size: 0.92rem;">🏛️ Fundamentación Normativa y Pedagógica:</strong>
-              <p style="margin-top: 4px; margin-bottom: 0; color: #166534;">
-                Alineado con la <strong>Ley 2383 de 2024</strong> (Educación Socioemocional en Colombia), <strong>Ley 2491 de 2025</strong> (Integración obligatoria en PEI), los <strong>Lineamientos Curriculares MEN 2026 de Formación Integral</strong> y el marco internacional de <strong>UNICEF Innocenti (2025)</strong> de Capacidades de Aprendizaje para el Bienestar.
-              </p>
-            </div>
-
-            <p style="margin-bottom: 8px;"><strong>¿Por qué es indispensable en la adaptación curricular en emergencias?:</strong></p>
-            <p style="margin-bottom: 12px;">
-              En contextos de crisis aguda o prolongada, la afectación emocional y el estrés tóxico bloquean los centros cognitivos superiores del cerebro infantil. La contención emocional, el autoconocimiento y la regulación son la <strong>condición previa indispensable</strong> para que cualquier aprendizaje formal sea viable.
-            </p>
-
-            <p style="margin-bottom: 8px;"><strong>Las 4 Dimensiones Formativas y su Aplicación en Aula:</strong></p>
-            <div class="grid-2" style="gap: 12px; margin-bottom: 14px;">
-              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
-                <strong style="color: #047857;">1. Personal-Emocional (Etapa 1):</strong>
-                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
-                  Autoconocimiento, autorregulación, manejo del estrés, resiliencia y autocuidado. Busca restaurar la calma, reconocer emociones básicas y generar rutinas seguras.
-                </p>
-              </div>
-              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
-                <strong style="color: #0369a1;">2. Social-Ciudadana (Etapa 2):</strong>
-                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
-                  Empatía, comunicación asertiva, cooperación y resolución pacífica de conflictos. Fomenta el trabajo en equipo y la reconstrucción del tejido escolar.
-                </p>
-              </div>
-              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
-                <strong style="color: #b45309;">3. Cognitiva-Reflexiva (Etapa 2/3):</strong>
-                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
-                  Pensamiento crítico, creatividad y toma de decisiones en situaciones difíciles. Permite analizar las causas del entorno y proponer soluciones creativas.
-                </p>
-              </div>
-              <div style="background: #ffffff; border: 1px solid var(--border-medium); padding: 10px 12px; border-radius: var(--radius-sm);">
-                <strong style="color: #6b21a8;">4. Ético-Proyectiva (Etapa 3):</strong>
-                <p style="font-size: 0.82rem; margin-top: 4px; margin-bottom: 0; color: var(--text-muted);">
-                  Propósito vital, responsabilidad ética y compromiso social. Permite proyectar el futuro vocacional y liderar iniciativas de paz y no repetición.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 1.5. Guía de enfoque: Capa de Protección y Aprendizajes de Supervivencia -->
-        <div class="accordion-item">
-          <div class="accordion-header">
-            <span>🛡️ 1.5. Guía de enfoque: Capa de Protección y Aprendizajes de Supervivencia (WASH & ERM)</span>
-            <span class="chevron">▼</span>
-          </div>
-          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
-            <div style="background: #fef2f2; border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 12px;">
-              <strong style="color: #991b1b; font-size: 0.92rem;">🏛️ Marco Humanitario y Normativo de Protección:</strong>
-              <p style="margin-top: 4px; margin-bottom: 0; color: #7f1d1d;">
-                Fundamentado en las <strong>Normas Mínimas de Educación en Emergencias (INEE / MSEE)</strong>, los 3 procesos de la <strong>Ley 1523 de 2012</strong> (Conocimiento, Reducción y Manejo de Desastres) y la <strong>Resolución MEN 6519 de 2025</strong> (Política Pública GIRE).
-              </p>
-            </div>
-
-            <p style="margin-bottom: 8px;"><strong>¿Por qué el currículo académico estándar no es suficiente?:</strong></p>
-            <p style="margin-bottom: 12px;">
-              Los Estándares Básicos de Competencias tradicionales no contemplan protocolos ante minas antipersonal (ERM), agua y saneamiento de emergencia (WASH) ni mapas de rutas seguras escolares. En situaciones de crisis, la escuela debe convertirse en un <strong>espacio protector de la vida física y la dignidad</strong>.
-            </p>
-
-            <p style="margin-bottom: 8px;"><strong>Las 4 Tipologías de Riesgo de Protección y sus 16 Mini-Proyectos Situados:</strong></p>
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
-              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
-                <strong>1. Riesgos Físicos y Ambientales:</strong> Peligros y lesiones locativas, desastres naturales (sismos/inundaciones), Educación en el Riesgo de Minas (ERM) y cuidado del agua/higiene (WASH).
-              </div>
-              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
-                <strong>2. Riesgos Psicosociales y Emocionales:</strong> Salud mental ante crisis, estigmatización/exclusión y prevención de violencia física o verbal.
-              </div>
-              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
-                <strong>3. Riesgos Socioeducativos y de Bienestar:</strong> Prevención del trabajo infantil, atención a NNA separados de sus familias y hábitos de nutrición/salud comunitaria.
-              </div>
-              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
-                <strong>4. Riesgos de Protección Jurídica y Comunitaria:</strong> Prevención de violencia sexual, prevención del reclutamiento y utilización armada de NNA, trata de personas, entornos digitales inseguros y acceso a rutas de justicia.
-              </div>
-            </div>
-
-            <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>Articulación dinámica con el Diagnóstico:</strong> Al seleccionar las amenazas en el Módulo A, el sistema resalta y vincula automáticamente en el Módulo B y en la Bitácora de Monitoreo del Módulo C los mini-proyectos de protección directamente pertinentes para responder a su contexto territorial.
+              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Elija primero la macro-categoría que predomina en su comunidad; el sistema filtrará automáticamente el listado de amenazas específicas y le presentará el ejemplo escolar, los riesgos asociados y la ruta interinstitucional de activación correspondiente (Ruta de Protección Humanitaria, Mesa Territorial MTGIRE o Comité CIGIRE).
             </p>
           </div>
         </div>
@@ -1090,54 +670,38 @@ body {
               <input type="text" id="input-bloom" class="input-elite input-readonly" value="Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)" readonly>
             </div>
 
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label" style="font-weight: 700; color: var(--primary);">
-                3. Tipo / Categoría Macro de Amenaza PGIRE (Seleccione una o varias categorías):
-              </label>
-              <div id="container-cat-checkboxes" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
-                <label class="chip-category-label selected" data-cat="NATURAL">
-                  <input type="checkbox" name="cat_pgire" value="NATURAL" checked> 🌿 NATURAL
-                </label>
-                <label class="chip-category-label" data-cat="SOCIONATURAL">
-                  <input type="checkbox" name="cat_pgire" value="SOCIONATURAL"> 🌧️ SOCIONATURAL
-                </label>
-                <label class="chip-category-label" data-cat="ANTRÓPICA">
-                  <input type="checkbox" name="cat_pgire" value="ANTRÓPICA"> 🏭 ANTRÓPICA
-                </label>
-                <label class="chip-category-label" data-cat="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN">
-                  <input type="checkbox" name="cat_pgire" value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN"> 🛡️ CONFLICTO ARMADO Y PROTECCIÓN
-                </label>
-              </div>
+            <div class="form-group">
+              <label class="form-label">3. Tipo / Categoría Macro de Amenaza PGIRE (Selección Docente):</label>
+              <select id="select-cat-amenaza" class="select-elite">
+                <option value="">-- Seleccione Categoría --</option>
+                <option value="NATURAL" selected>NATURAL</option>
+                <option value="SOCIONATURAL">SOCIONATURAL</option>
+                <option value="ANTRÓPICA">ANTRÓPICA</option>
+                <option value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN">ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN</option>
+                <option value="TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)">TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">4. Amenaza Específica Diagnosticada (Selección Docente):</label>
+              <select id="select-amenaza" class="select-elite">
+                <option value="Inundación lenta o desbordamiento">Inundación lenta o desbordamiento</option>
+              </select>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
-                  4. Amenaza(s) Específica(s) Diagnosticada(s) (Seleccione una o varias opciones):
-                </label>
-                <span id="badge-total-amenazas" class="badge-pill badge-etapa2" style="font-size: 0.78rem;">1 seleccionada</span>
-              </div>
-              <div id="container-amenazas-checkboxes" style="max-height: 200px; overflow-y: auto; background: #ffffff; border: 1.5px solid var(--border-medium); border-radius: var(--radius-sm); padding: 10px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px;">
-                <!-- Dinámico generado por modulo_a.js -->
-              </div>
-              <small style="color: var(--text-muted); display: block; margin-top: 4px;">
-                💡 Puede marcar múltiples amenazas concurrentes para reflejar situaciones de multirriesgo o emergencias complejas simultáneas.
-              </small>
-            </div>
-
-            <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">5. Ejemplo(s) Contextualizado(s) en Institución Educativa:</label>
-              <textarea id="input-ejemplo-ie" class="textarea-elite textarea-readonly" readonly rows="2">Afectación de aulas y pérdida de material por crecida del río.</textarea>
+              <label class="form-label">5. Ejemplo Contextualizado en Institución Educativa:</label>
+              <input type="text" id="input-ejemplo-ie" class="input-elite input-readonly" value="Afectación de aulas y pérdida de material por crecida del río." readonly>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">6. Riesgos Asociados en la Institución Educativa:</label>
-              <textarea id="input-riesgos-ie" class="textarea-elite textarea-readonly" readonly rows="2">Pérdida de continuidad académica y aislamiento de sedes.</textarea>
+              <input type="text" id="input-riesgos-ie" class="input-elite input-readonly" value="Pérdida de continuidad académica y aislamiento de sedes." readonly>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">7. Instancia(s) GIRE Responsable(s) y Ruta(s) Interinstitucional(es) Activada(s):</label>
-              <textarea id="input-ruta-gire" class="textarea-elite textarea-readonly" readonly rows="2">🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)</textarea>
+              <label class="form-label">7. Instancia GIRE Responsable y Ruta Interinstitucional Activada:</label>
+              <input type="text" id="input-ruta-gire" class="input-elite input-readonly" value="🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)" readonly>
             </div>
 
             <div class="form-group">
@@ -1224,7 +788,7 @@ body {
     </div>
   </div>
 
-  <script>
+<script>
 // --- DATASETS MAESTROS ---
 var CURRICULUM_DB = {
   "1": {
@@ -5615,7 +5179,6 @@ var CURRICULUM_DB = {
   }
 };
 
-// Base de datos de Amenazas y Riesgos PGIRE (40 registros clasificados)
 var PGIRE_DB = [
   {
     "categoria": "NATURAL",
@@ -5625,63 +5188,63 @@ var PGIRE_DB = [
     "ruta": "🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Inundación",
     "ejemplo": "Creciente de río o quebrada",
     "riesgo": "Daños a infraestructura, suspensión de actividades académicas",
-    "ruta": "🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)"
+    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Vendaval",
     "ejemplo": "Fuertes vientos",
     "riesgo": "Caída de cubiertas, árboles o postes",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Tormenta eléctrica",
     "ejemplo": "Descargas atmosféricas",
     "riesgo": "Electrocución, daños en equipos",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Sequía",
     "ejemplo": "Escasez de agua",
     "riesgo": "Suspensión del servicio educativo",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Ola de calor",
     "ejemplo": "Altas temperaturas",
     "riesgo": "Afectaciones en salud",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Incendio forestal",
     "ejemplo": "Quema de cobertura vegetal",
     "riesgo": "Afectación de sedes rurales",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Heladas",
     "ejemplo": "Bajas temperaturas",
     "riesgo": "Afectación a estudiantes y cultivos escolares",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Granizada",
     "ejemplo": "Precipitaciones intensas",
     "riesgo": "Daños en cubiertas",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "NATURAL",
+    "categoria": "None",
     "amenaza": "Epidemias de origen natural",
     "ejemplo": "Brotes de enfermedades",
     "riesgo": "Ausentismo escolar",
@@ -5695,63 +5258,63 @@ var PGIRE_DB = [
     "ruta": "🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Erosión",
     "ejemplo": "Deterioro del terreno",
     "riesgo": "Riesgo estructural",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Inundaciones por mal drenaje",
     "ejemplo": "Alcantarillado insuficiente",
     "riesgo": "Daños locativos",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Avalanchas",
     "ejemplo": "Intervención de cuencas",
     "riesgo": "Aislamiento de la comunidad educativa",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Caída de árboles",
     "ejemplo": "Deforestación",
     "riesgo": "Lesiones y daños",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Incendios por quemas agrícolas",
     "ejemplo": "Prácticas inadecuadas",
     "riesgo": "Riesgo para estudiantes",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Contaminación de fuentes hídricas",
     "ejemplo": "Manejo inadecuado de residuos",
     "riesgo": "Riesgo sanitario",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Hundimientos",
     "ejemplo": "Alteración del suelo",
     "riesgo": "Daño estructural",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Deterioro de taludes",
     "ejemplo": "Excavaciones",
     "riesgo": "Riesgo de colapso",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "SOCIONATURAL",
+    "categoria": "None",
     "amenaza": "Desertificación",
     "ejemplo": "Degradación ambiental",
     "riesgo": "Afectación del abastecimiento de agua",
@@ -5765,63 +5328,63 @@ var PGIRE_DB = [
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Emergencia médica",
     "ejemplo": "Accidentes escolares",
     "riesgo": "Atención prehospitalaria",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Accidentes de tránsito",
     "ejemplo": "Transporte escolar",
     "riesgo": "Lesiones a estudiantes",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Fuga de gas",
     "ejemplo": "Laboratorios o cocinas",
     "riesgo": "Explosiones",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Riesgo eléctrico",
     "ejemplo": "Instalaciones deterioradas",
     "riesgo": "Electrocución",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Colapso estructural",
     "ejemplo": "Infraestructura en mal estado",
     "riesgo": "Lesiones graves",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Derrame de sustancias peligrosas",
     "ejemplo": "Laboratorios",
     "riesgo": "Contaminación",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Consumo de SPA",
     "ejemplo": "Entorno escolar",
     "riesgo": "Afectación de la convivencia",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Violencia escolar",
     "ejemplo": "Agresiones entre estudiantes",
     "riesgo": "Lesiones físicas y emocionales",
     "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA",
+    "categoria": "None",
     "amenaza": "Ciberacoso",
     "ejemplo": "Uso de redes sociales",
     "riesgo": "Afectación psicosocial",
@@ -5835,495 +5398,317 @@ var PGIRE_DB = [
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Reclutamiento, uso y utilización de NNA",
     "ejemplo": "Riesgo para estudiantes",
     "riesgo": "Deserción y vulneración de derechos",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "MAP/MUSE/AEI",
     "ejemplo": "Contaminación del territorio",
     "riesgo": "Accidentes por explosivos",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Enfrentamientos armados",
     "ejemplo": "Cercanía a la IE",
     "riesgo": "Lesiones y suspensión de clases",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Hostigamientos",
     "ejemplo": "Ataques a la comunidad",
     "riesgo": "Riesgo para docentes y estudiantes",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Desplazamiento forzado",
     "ejemplo": "Movilidad de familias",
     "riesgo": "Interrupción de la trayectoria educativa",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Confinamiento",
     "ejemplo": "Restricciones de movilidad",
     "riesgo": "Inasistencia escolar",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Violencia Basada en Género (VBG)",
     "ejemplo": "Riesgo para niñas, adolescentes y mujeres",
     "riesgo": "Vulneración de derechos",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Violencia sexual",
     "ejemplo": "Dentro o fuera del entorno escolar",
     "riesgo": "Afectación física y emocional",
     "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
   },
   {
-    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
+    "categoria": "None",
     "amenaza": "Uso u ocupación de la infraestructura educativa",
     "ejemplo": "Presencia de actores armados",
     "riesgo": "Suspensión del servicio educativo",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
   }
 ];
 
-// Base de datos de Habilidades para la Vida y Aprendizajes de Supervivencia
 var HABS_SUPS_DB = {
   "habilidades": [
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Autoconocimiento",
-      "objetivo_bloom": "Identificar y describir sus emociones, fortalezas y necesidades personales en situaciones cotidianas para comprender mejor quién es y cómo se siente.",
-      "proceso_bloom": "Comprender",
-      "contenido": "• Emociones básicas (alegría, miedo, tristeza, ira, sorpresa, calma).\n• Señales corporales y expresiones emocionales.\n• Fortalezas personales (lo que se me da bien).\n• Situaciones que influyen en cómo me siento.\n• Vocabulario emocional para describirse.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Conciencia corporal, observación emocional e identificación de patrones de calma.",
-      "evidencia_conmigo": "Describe verbalmente o por escrito cómo se siente en diferentes situaciones y reconoce qué cosas le producen bienestar o incomodidad.",
-      "evidencia_otro": "Explica a un compañero o docente sus emociones y necesidades de manera respetuosa.",
-      "evidencia_entorno": "Identifica espacios, actividades o rutinas del entorno escolar o comunitario que le ayudan a sentirse seguro o tranquilo."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa de respuesta en la emergencia. ",
+      "saber": "Dimensión de Habilidades para la Vida y Competencias Socioemocionales",
+      "hacer": "Habilidades para la Vida y Competencias Socioemocionales",
+      "ser": "Columna1"
     },
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Autorregulación emocional",
-      "objetivo_bloom": "Aplicar estrategias básicas (respiración, pausa activa, conteo, diálogo interno) para manejar sus emociones y mantener la calma en situaciones que generan tensión.",
-      "proceso_bloom": "Aplicar",
-      "contenido": "• Estrategias de respiración profunda.\n• Pausas activas para calmarse.\n• Técnicas de conteo y enfoque.\n• Diálogo interno positivo.\n• Reconocimiento de señales de descontrol emocional.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Autorrelajación profunda, pausa reflexiva y técnica de respiración sensorial.",
-      "evidencia_conmigo": "Utiliza de manera autónoma técnicas simples (respirar, contar, hacer pausa) para calmarse cuando se siente frustrado o alterado.",
-      "evidencia_otro": "Detiene una reacción impulsiva (gritar, empujar, discutir) y elige una forma más tranquila de comunicarse.",
-      "evidencia_entorno": "Mantiene la participación en actividades escolares o comunitarias a pesar de cambios, ruidos u otros estímulos que generan tensión."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Autoconocimiento",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Manejo del estrés y las emociones",
-      "objetivo_bloom": "Reconocer las situaciones que le generan estrés y usar recursos sencillos para expresar y gestionar sus emociones de manera adecuada",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "• Situaciones generadoras de estrés.\n• Formas sanas de expresar emociones (hablar, escribir, dibujar).\n• Rutinas de autoconsuelo (respirar, caminar, pedir apoyo).\n• Señales corporales del estrés.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Indagación de señales corporales de estrés y expresión emocional guiada.",
-      "evidencia_conmigo": "Reconoce señales corporales del estrés (tensión, inquietud, silencio prolongado) y las comunica.",
-      "evidencia_otro": "Pide apoyo a un docente, adulto o compañero cuando se siente sobrecargado emocionalmente.",
-      "evidencia_entorno": "Utiliza recursos del entorno (espacio de calma, cuaderno emocional, actividad lúdica) para regular su estado emocional."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Autorregulación emocional",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Autocuidado",
-      "objetivo_bloom": "Practicar acciones de autocuidado físico y emocional (descanso, hidratación, comunicación, pedir apoyo) para proteger su bienestar y seguridad.",
-      "proceso_bloom": "Aplicar",
-      "contenido": "• Hábitos básicos de autocuidado (alimentación, descanso, hidratación).\n• Cuidado emocional: hablar de lo que siento.\n• Identificación de situaciones que requieren pedir ayuda.\n• Higiene y cuidado personal como protección.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Percepción del bienestar físico y rutinas de cuidado consciente.",
-      "evidencia_conmigo": "Mantiene hábitos básicos de autocuidado (lavarse, hidratarse, descansar) sin supervisión constante.",
-      "evidencia_otro": "Informa cuando necesita ayuda o protección (si se siente enfermo, confundido o en riesgo).",
-      "evidencia_entorno": "Cuida los espacios compartidos y respeta normas de convivencia que promueven la seguridad colectiva."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Manejo del estrés y las emociones",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Resiliencia",
-      "objetivo_bloom": "Demostrar capacidades para afrontar dificultades, buscar apoyo y recuperarse gradualmente ante experiencias adversas.",
-      "proceso_bloom": "Aplicar + Analizar",
-      "contenido": "• Concepto simple de resiliencia (caerse y levantarse).\n• Estrategias para enfrentar retos.\n• Reconocer las propias redes de apoyo (familia, docentes, amigos).\n• Historias y ejemplos de resiliencia.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Reorganización de patrones emocionales ante la frustración.",
-      "evidencia_conmigo": "Intenta nuevamente una actividad después de una frustración y expresa disposición para seguir aprendiendo.",
-      "evidencia_otro": "Acepta apoyo de compañeros o docentes cuando atraviesa una dificultad y reconoce el valor de la ayuda recibida.",
-      "evidencia_entorno": "Participa en actividades comunitarias que buscan mejorar el clima emocional o reconstruir la armonía del grupo."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Autocuidado",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 1. Recreativa y preparatoria",
-      "dimension": "Personal-Emocional",
-      "habilidad": "Empatía",
-      "objetivo_bloom": "Reconocer y expresar comprensión hacia los sentimientos y experiencias de otras personas, mostrando respeto y disposición para ayudar.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "• Identificación de emociones en otros.\n• Lenguaje de respeto y apoyo.\n• Formas de escuchar activamente.\n• Expresiones de ayuda y comprensión.\n• Capacidades de Aprendizaje para el Bienestar (UNICEF 2025): Escucha activa receptiva y sintonía empática interpersonal.",
-      "evidencia_conmigo": "Reconoce cómo sus propias emociones influyen en la forma en que trata a otros.",
-      "evidencia_otro": "Responde con palabras o gestos de apoyo cuando observa que alguien está triste, molesto o preocupado.",
-      "evidencia_entorno": "Contribuye a actividades grupales mostrando consideración por los sentimientos y necesidades de los demás."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Resiliencia",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Social-Ciudadana",
-      "habilidad": "Empatía, diálogo y comunicación asertiva",
-      "objetivo_bloom": "Expresar sus ideas y emociones con respeto, y escuchar activamente a otras personas para comprender sus puntos de vista y construir acuerdos básicos.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "• La empatía: reconocer emociones y perspectivas ajenas.\n• Escucha activa (mirar, atender, no interrumpir).\n• Expresión respetuosa de ideas y emociones.\n• Frases y gestos para comunicar desacuerdo sin agresión.\n• Construcción de acuerdos simples en grupo.",
-      "evidencia_conmigo": "Reconoce cómo sus emociones influyen en la manera en que habla y responde a los demás, ajustando su tono o palabras para comunicarse con respeto.",
-      "evidencia_otro": "Escucha sin interrumpir, mira a la persona que habla y responde demostrando comprensión del punto de vista del otro.",
-      "evidencia_entorno": "Participa en conversaciones grupales proponiendo acuerdos o soluciones respetuosas cuando surgen desacuerdos"
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 1. Recreativa y preparatoria ",
+      "saber": "Personal-Emocional",
+      "hacer": "Empatía",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Social-Ciudadana",
-      "habilidad": "Cooperación y trabajo colectivo",
-      "objetivo_bloom": "Participar activamente en actividades grupales, aportando ideas y cumpliendo responsabilidades compartidas para alcanzar metas comunes.",
-      "proceso_bloom": "Aplicar",
-      "contenido": "• Qué significa cooperar y trabajar en equipo.\n• Roles en el trabajo colectivo (líder, apoyo, coordinador, gestor).\n• Responsabilidad compartida en tareas.\n• Aporte de ideas y respetar ideas de otros.\n• Estrategias para tomar decisiones en grupo.",
-      "evidencia_conmigo": "Asume su rol o tarea dentro del grupo y la cumple sin que le recuerden repetidamente.",
-      "evidencia_otro": "Aporta ideas al equipo, ayuda a otros miembros cuando lo necesitan y acepta sugerencias sin molestarse.",
-      "evidencia_entorno": "Participa activamente en proyectos o actividades colectivas que requieren coordinación, esfuerzo compartido o responsabilidad común."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Social-Ciudadana",
+      "hacer": "Empatía, diálogo y comunicación asertiva",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Cognitiva-Reflexiva",
-      "habilidad": "Pensamiento crítico y reflexivo",
-      "objetivo_bloom": "Aplicar estrategias de diálogo y mediación para resolver desacuerdos de manera pacífica y promover relaciones respetuosas en su entorno escolar y comunitario.",
-      "proceso_bloom": "Analizar + Evaluar",
-      "contenido": "• Qué es el pensamiento crítico (preguntar, analizar, justificar).\n• Diferenciar hechos, opiniones y emociones.\n• Formulación de preguntas para comprender una situación.\n• Identificación de causas y consecuencias.\n• Uso de ejemplos y evidencias simples para justificar ideas.",
-      "evidencia_conmigo": "Formula preguntas para comprender una situación (¿qué pasó?, ¿por qué?, ¿cómo me afecta?) y explica con sus palabras lo que entiende.",
-      "evidencia_otro": "Escucha las ideas de sus compañeros y compara diferentes puntos de vista antes de dar su opinión.",
-      "evidencia_entorno": "Justifica sus decisiones o conclusiones usando ejemplos, evidencias o información del contexto escolar o comunitario."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Social-Ciudadana",
+      "hacer": "Cooperación y trabajo colectivo",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Cognitiva-Reflexiva",
-      "habilidad": "Creatividad e innovación",
-      "objetivo_bloom": "Generar ideas nuevas y proponer soluciones creativas a situaciones o retos de su entorno, usando recursos disponibles de forma flexible",
-      "proceso_bloom": "Crear",
-      "contenido": "• Qué es la creatividad (ideas nuevas, imaginación, alternativas).\n• Técnicas sencillas de generación de ideas (lluvia de ideas, dibujos, combinaciones).\n• Uso creativo de materiales cercanos o reciclables.\n• Transformación de objetos o ideas para resolver necesidades.\n• Diseño de pequeñas propuestas o soluciones.",
-      "evidencia_conmigo": "Genera varias alternativas o ideas propias ante un mismo reto y elige la que considera más útil o interesante.",
-      "evidencia_otro": "Propone soluciones originales durante actividades grupales y acepta mejorar sus ideas gracias a aportes de otros.",
-      "evidencia_entorno": "Utiliza creativamente materiales disponibles —incluidos reciclados o de bajo costo— para resolver un problema o construir un producto."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Cognitiva-Reflexiva",
+      "hacer": "Pensamiento crítico y reflexivo",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Cognitiva-Reflexiva",
-      "habilidad": "Resolución de problemas y toma de decisiones",
-      "objetivo_bloom": "Identificar un problema, explorar posibles alternativas y elegir la opción más adecuada para resolverlo de manera responsable y contextualizada.",
-      "proceso_bloom": "Analizar + Evaluar",
-      "contenido": "• Definición simple de problema (algo que necesita solución).\n• Pasos básicos para resolver problemas: identificar, pensar opciones, elegir, actuar.\n• Estrategias para comparar alternativas (ventajas y desventajas).\n• Toma de decisiones responsables según el contexto.\n• Evaluación de la solución implementada (¿funcionó?, ¿qué mejorar?).",
-      "evidencia_conmigo": "Identifica claramente un problema, explica qué lo causó y expresa qué alternativas tiene para solucionarlo.",
-      "evidencia_otro": "Trabaja con otros para comparar opciones y tomar decisiones considerando las consecuencias para todas las personas involucradas.",
-      "evidencia_entorno": "Implementa una solución seleccionada y evalúa si funcionó, ajustándola cuando es necesario según el contexto."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Cognitiva-Reflexiva",
+      "hacer": "Creatividad e innovación",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 2. Lúdica y de apertura de la educación formal",
-      "dimension": "Social-Ciudadana",
-      "habilidad": "Convivencia democrática y resolución pacífica",
-      "objetivo_bloom": "Aplicar estrategias de diálogo y mediación para resolver desacuerdos de manera pacífica y promover relaciones respetuosas en su entorno escolar y comunitario.",
-      "proceso_bloom": "Aplicar + Analizar",
-      "contenido": "• Concepto básico de convivencia democrática.\n• Normas comunes y acuerdos del aula.\n• Estrategias de resolución pacífica de conflictos.\n• Pasos de la mediación escolar (escuchar, comprender, proponer, acordar).\n• Respeto por la diversidad en la convivencia.",
-      "evidencia_conmigo": "Identifica cuando está en desacuerdo y decide expresar su opinión sin agresión, usando estrategias aprendidas (decir cómo se siente, pedir turno, usar palabras respetuosas)",
-      "evidencia_otro": "Participa en mediaciones o diálogos sencillos proponiendo soluciones que consideren las necesidades de todas las personas involucradas.",
-      "evidencia_entorno": "Contribuye al cumplimiento de acuerdos o normas construidas colectivamente para mantener un ambiente de respeto, orden y seguridad."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Cognitiva-Reflexiva",
+      "hacer": "Resolución de problemas y toma de decisiones",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 3. Educación formal adaptada",
-      "dimension": "Ético-Proyectiva",
-      "habilidad": "Propósito vital y pensamiento prospectivo",
-      "objetivo_bloom": "Reflexionar sobre sus metas personales y valores, y proyectar acciones que le permitan construir un plan de vida acorde con sus intereses, capacidades y contexto.",
-      "proceso_bloom": "Crear",
-      "contenido": "• Qué es el propósito de vida (metas, valores, sueños).\n• Reconocer intereses personales y motivaciones.\n• Identificación de fortalezas y capacidades para proyectos personales.\n• Pasos simples para definir metas y acciones futuras.\n• Relación entre decisiones presentes y futuro deseado.",
-      "evidencia_conmigo": "Identifica y explica sus intereses, motivaciones o metas personales, mostrando claridad sobre aquello que desea alcanzar.",
-      "evidencia_otro": "Comparte su plan o metas con un docente o compañero y escucha retroalimentación para mejorar o ajustar sus ideas.",
-      "evidencia_entorno": "Propone y desarrolla pequeñas acciones o compromisos concretos (académicos, personales o comunitarios) que aportan a su proyecto de vida."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 2. Lúdica y de apertura de la educación formal ",
+      "saber": "Social-Ciudadana",
+      "hacer": "Convivencia democrática y resolución pacífica",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 3. Educación formal adaptada",
-      "dimension": "Ético-Proyectiva",
-      "habilidad": "Responsabilidad y toma de decisiones éticas",
-      "objetivo_bloom": "Analizar las consecuencias de sus decisiones y elegir opciones que reflejen responsabilidad, respeto y cuidado hacia sí mismo, los demás y el entorno.",
-      "proceso_bloom": "Analizar + Evaluar",
-      "contenido": "• Qué es actuar con responsabilidad (asumir consecuencias).\n• Criterios básicos para decidir éticamente (respeto, cuidado, justicia).\n• Reconocer consecuencias de las decisiones propias.\n• Toma de decisiones responsable en situaciones cotidianas.\n• Escenarios de reflexión ética (dilemas simples).",
-      "evidencia_conmigo": "Reconoce las posibles consecuencias de sus decisiones y explica por qué eligió la opción que considera más adecuada o respetuosa.",
-      "evidencia_otro": "Toma decisiones teniendo en cuenta el bienestar de sus compañeros y ajusta su comportamiento cuando identifica que puede afectar negativamente a alguien.",
-      "evidencia_entorno": "Participa en la solución de situaciones cotidianas del aula o la comunidad aplicando criterios de justicia, respeto y cuidado."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 3. Educación formal adaptada ",
+      "saber": "Ético-Proyectiva",
+      "hacer": "Propósito vital y pensamiento prospectivo",
+      "ser": "True"
     },
     {
-      "etapa": "Etapa 3. Educación formal adaptada",
-      "dimension": "Ético-Proyectiva",
-      "habilidad": "Compromiso social y resiliencia colectiva",
-      "objetivo_bloom": "Participar en acciones colaborativas que aporten al bienestar de su comunidad, demostrando solidaridad, respeto y disposición para reconstruir y fortalecer los vínculos colectivos.",
-      "proceso_bloom": "Aplicar",
-      "contenido": "• Qué es el compromiso social (aportarle al grupo, comunidad, familia).\n• Acciones de solidaridad y apoyo mutuo.\n• Trabajo comunitario como herramienta para reconstruir vínculos.\n• Identificación de necesidades de la comunidad cercana.\n• Estrategias para participar en iniciativas colectivas.",
-      "evidencia_conmigo": "Reconoce que sus acciones influyen en el grupo y muestra disposición para apoyar a otros cuando enfrenta dificultades.",
-      "evidencia_otro": "Participa activamente en actividades que promueven la solidaridad, la ayuda mutua o la reconstrucción del tejido social.",
-      "evidencia_entorno": "Colabora en iniciativas comunitarias o escolares orientadas al bienestar colectivo, demostrando respeto, responsabilidad y espíritu colaborativo."
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 3. Educación formal adaptada ",
+      "saber": "Ético-Proyectiva",
+      "hacer": "Responsabilidad y toma de decisiones éticas",
+      "ser": "True"
+    },
+    {
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Etapa 3. Educación formal adaptada ",
+      "saber": "Ético-Proyectiva",
+      "hacer": "Compromiso social y resiliencia colectiva",
+      "ser": "True"
+    },
+    {
+      "categoria": "",
+      "competencia": "",
+      "habilidad": "Total",
+      "saber": "",
+      "hacer": "=SUBTOTAL(103,Tabla1012[Habilidades para la Vida y Competencias Socioemocionales])",
+      "ser": ""
     }
   ],
   "supervivencia": [
     {
-      "tipo_riesgo": "Riesgos_físicos_y_ambientales",
-      "aprendizaje_clave": "Los NNAJ identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "afectacion": "Peligros y lesiones",
-      "objetivo_aprendizaje": "Identificar señales de peligro en el entorno y aplicar medidas básicas de autoprotección ante posibles accidentes.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de señales de peligro, zonas inseguras y nociones básicas de autoprotección y rutas seguras, asegurando coherencia vertical al permitir reconocer qué constituye un riesgo según el objetivo.\nProcedimental: Identificación de señales de peligro, selección de rutas seguras y aplicación de medidas como alejarse o avisar, coherente con el objetivo al traducirlo en acciones concretas de autoprotección.\nActitudinal:Actitudes de precaución, responsabilidad y cuidado propio y colectivo, necesarias para sostener las conductas preventivas que plantea el objetivo.",
-      "evidencia_conmigo": "Reconoce cuándo una situación, objeto o espacio representa peligro y toma distancia de manera autónoma para protegerse.",
-      "evidencia_otro": "Advierte a un compañero o compañera sobre un riesgo cercano y propone una acción segura (alejarse, avisar, cambiar de ruta).",
-      "evidencia_entorno": "Se desplaza por rutas seguras previamente identificadas y participa en la señalización básica de zonas de riesgo en el espacio educativo.",
-      "miniproyecto": "¿Cómo podemos hacer que nuestra escuela sea un lugar más seguro para evitar accidentes?",
-      "desafio": "Crear un mapa escolar de riesgos elaborado por los estudiantes, mostrando zonas peligrosas y rutas seguras.",
-      "explorar": "Salida de observación: ¿qué lugares se ven peligrosos? (escaleras, pisos mojados, cables).\nRegistro con dibujos o fotos (dependiendo de la edad).\nConversación guiada: ¿por qué representan peligro? ¿Qué acciones de cuidado funcionan?",
-      "crear": "Construcción del mapa de riesgos en cartulina o digital.\nSeñalización con íconos que los NNAJ dibujan: “alto riesgo”, “ruta segura”, “evitar”.\nDiseño de una mini-campaña “Nos cuidamos entre todos”.",
-      "compartir": "Presentación del mapa a otros cursos.\nPequeñas dramatizaciones: “qué hacer / qué no hacer”.\nInstalación temporal de señales hechas por ellos."
+      "tipo_afectacion": "Tipologías categoriales de riesgos de protección",
+      "riesgo": "Aprendizaje clave",
+      "aprendizaje": "Riesgos clasificados por tipo de afectación",
+      "miniproyecto": "Objetivo de aprendizaje"
     },
     {
-      "tipo_riesgo": "Riesgos_físicos_y_ambientales",
-      "aprendizaje_clave": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "afectacion": "Desastres naturales y ambientales",
-      "objetivo_aprendizaje": "Reconocer amenazas ambientales y explicar acciones seguras de respuesta, aplicando protocolos básicos ante sismos, inundaciones o incendios.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Conocimiento básico de tipos de desastres, señales de alerta, zonas seguras y protocolos de evacuación, en coherencia vertical con el objetivo de reconocer amenazas y respuestas seguras.\nProcedimental: Identificación de señales de riesgo ambiental, práctica de acciones iniciales y participación en simulacros siguiendo protocolos, directamente vinculado a las acciones del objetivo.\nActitudinal: Actitudes de calma, colaboración y respeto por instrucciones, que facilitan la ejecución segura de las acciones requeridas por el objetivo.",
-      "evidencia_conmigo": "Mantiene la calma ante una simulación o alarma y ejecuta las acciones iniciales del protocolo (agacharse, cubrirse, ubicarse en zona segura).",
-      "evidencia_otro": "Colabora con un par para seguir instrucciones del protocolo (formar fila, evacuar juntos, apoyar a quien necesita ayuda).",
-      "evidencia_entorno": "Reconoce señales de alerta, identifica zonas seguras y participa ordenadamente en simulacros siguiendo el protocolo institucional.",
-      "miniproyecto": "¿Qué necesitamos hacer para estar preparados ante un sismo en nuestra escuela?",
-      "desafio": "Diseñar un kit escolar de emergencia y un plan de acción sencillo para sismos.",
-      "explorar": "Ver un video corto sobre sismos (nivel básico).\nIdentificar señales de alerta y zonas seguras.\nConversación: ¿qué pasa si no estamos preparados?",
-      "crear": "Elaborar un “kit de aula” (simulado): linterna, lista de estudiantes, agua, pito, etc.\nCrear un afiche: “Pasos durante un sismo: agacharse – cubrirse – mantenerse firme”.\nEnsayar mini-simulacros en el aula.",
-      "compartir": "Presentar el kit a otra clase.\nParticipar en un simulacro escolar aplicando los pasos."
+      "tipo_afectacion": "Riesgos_físicos_y_ambientales",
+      "riesgo": "Los NNAJ identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
+      "aprendizaje": "Peligros y lesiones",
+      "miniproyecto": "Identificar señales de peligro en el entorno y aplicar medidas básicas de autoprotección ante posibles accidentes."
     },
     {
-      "tipo_riesgo": "Riesgos_físicos_y_ambientales",
-      "aprendizaje_clave": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "afectacion": "Educación en riesgo de minas y artefactos explosivos",
-      "objetivo_aprendizaje": "Identificar señales de riesgo asociadas a minas y artefactos explosivos, distinguir comportamientos seguros e inseguros y aplicar rutas de reporte seguro.",
-      "proceso_bloom": "Aplicar + Analizar",
-      "contenido": "Conceptual: Reconocimiento de señales de riesgo y diferencia entre comportamientos seguros e inseguros, coherente con el objetivo que exige identificar y distinguir situaciones peligrosas.\nProcedimental: Detección de indicios de explosivos, distinción de conductas y aplicación de rutas de reporte seguro, que operacionalizan exactamente lo solicitado en el objetivo.\nActitudinal: Autocontrol y prudencia frente a objetos sospechosos, junto con protección hacia pares, en línea con la conducta segura requerida por el objetivo.",
-      "evidencia_conmigo": "Diferencia un objeto o señal sospechosa e inmediatamente se detiene y se aleja sin tocar nada.",
-      "evidencia_otro": "Evita que un compañero se acerque a un objeto sospechoso y acuerda con él avisar a un adulto responsable.",
-      "evidencia_entorno": "Reconoce señales de advertencia (cintas, marcas, símbolos) y sigue rutas seguras de evacuación o reporte establecidas por la comunidad educativa.",
-      "miniproyecto": "¿Cómo podemos identificar y evitar objetos peligrosos en nuestro camino a la escuela?",
-      "desafio": "Crear un código escolar de “NO TOCAR – ALEJARSE – AVISAR” con símbolos y ejemplos seguros.",
-      "explorar": "Charla guiada: ¿qué es un objeto sospechoso? (objetos fuera de lugar, señales de advertencia, cintas).\nRelatos ficticios y seguros (“María encontró algo extraño en el camino…”).\nDiscusión: ¿qué harías tú?",
-      "crear": "Diseñar afiches con frases: “Si no sabes qué es: NO TOCAR”.\nHacer tarjetas con rutas de reporte: docente – directivo – policía comunitaria (según protocolos).\nCrear una historia breve sobre tomar decisiones seguras.",
-      "compartir": "Exponer los afiches en zonas de tránsito escolar.\nRealizar un juego de rol: “encuentro un objeto extraño → ¿qué hago?”"
+      "tipo_afectacion": "Riesgos_físicos_y_ambientales",
+      "riesgo": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
+      "aprendizaje": "Desastres naturales y ambientales",
+      "miniproyecto": "Reconocer amenazas ambientales y explicar acciones seguras de respuesta, aplicando protocolos básicos ante sismos, inundaciones o incendios."
     },
     {
-      "tipo_riesgo": "Riesgos_físicos_y_ambientales",
-      "aprendizaje_clave": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "afectacion": "Cuidado del agua y saneamiento (WASH)",
-      "objetivo_aprendizaje": "Reconocer prácticas adecuadas de higiene y manejo del agua y aplicar acciones diarias que reduzcan la exposición a enfermedades..",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Conocimientos básicos de higiene, manejo del agua y saneamiento, en coherencia con el objetivo de reconocer prácticas que reducen riesgos sanitarios.\nProcedimental: Aplicación del lavado de manos, uso responsable del agua y disposición adecuada de residuos, directamente vinculada al objetivo de aplicar acciones diarias seguras.\nActitudinal: Hábitos de higiene, valoración del agua y responsabilidad con instalaciones sanitarias, que sostienen la conducta preventiva exigida por el objetivo.",
-      "evidencia_conmigo": "Realiza correctamente el lavado de manos en momentos clave (antes de comer, después de baño, después de jugar) sin necesidad de recordatorio.",
-      "evidencia_otro": "Recuerda a un compañero la importancia del lavado de manos o del uso adecuado del agua cuando observa prácticas inseguras.",
-      "evidencia_entorno": "Usa responsablemente los puntos de agua, deposita residuos en los lugares adecuados y mantiene limpios los espacios comunes.",
-      "miniproyecto": "¿Cómo podemos mejorar la calidad del agua que usamos en la escuela usando objetos simples?",
-      "desafio": "Construir un filtro casero de agua usando materiales simples (arena, piedras, carbón, tela, botellas), y explicar cómo ayuda a reducir riesgos sanitarios.",
-      "explorar": "Observar muestras de agua del entorno escolar y conversar sobre su posible contaminación.\nIdentificar situaciones en la escuela donde el agua se usa de manera insegura.\nRelacionar la calidad del agua con el bienestar y la salud.\nPreguntas dinamizadoras de la fase:\n¿Qué hace que el agua esté sucia o contaminada?\n¿Qué problemas trae usar agua sin cuidar?\n¿Cómo sabemos si el agua es segura o no?",
-      "crear": "Diseñar un prototipo de filtro casero (arena, piedras, carbón, tela) como demostración del cuidado del agua.\nRelacionar el diseño con prácticas de higiene: lavado de manos, uso responsable del agua, disposición de residuos.\nObservar cambios entre “agua antes y después del filtrado”.\nPreguntas dinamizadoras de la fase:\n¿Como podría un filtro ayudar a mejorar el agua?\n¿Qué materiales naturales podrían retener la suciedad?\n¿Qué cambios vemos en el agua después de filtrarla?",
-      "compartir": "Explicar cómo funciona el filtro y por qué el agua requiere cuidados antes de usarse.\nElaborar recomendaciones de cuidado del agua en la escuela.\nProponer mejoras sencillas en los puntos de agua (limpieza, no desperdicio, señalización).\nPreguntas dinamizadoras de la fase:\n¿Qué aprendimos sobre el uso seguro del agua?\n¿Qué podemos recomendar para que en la escuela haya menos enfermedades por agua contaminada?\n¿Cómo podemos cuidar mejor el agua entre todos?"
+      "tipo_afectacion": "Riesgos_físicos_y_ambientales",
+      "riesgo": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
+      "aprendizaje": "Educación en riesgo de minas y artefactos explosivos",
+      "miniproyecto": "Identificar señales de riesgo asociadas a minas y artefactos explosivos, distinguir comportamientos seguros e inseguros y aplicar rutas de reporte seguro."
     },
     {
-      "tipo_riesgo": "Riesgos_psicosociales_y_emocionales",
-      "aprendizaje_clave": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
-      "afectacion": "Afectaciones psicosociales y salud mental",
-      "objetivo_aprendizaje": "Reconocer emociones asociadas a situaciones adversas y aplicar estrategias básicas de autocuidado y afrontamiento para fortalecer el bienestar emocional.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión básica de emociones asociadas a situaciones adversas, nociones de autocuidado y elementos iniciales del afrontamiento emocional. Esta base conceptual guarda coherencia vertical con el objetivo, ya que permite reconocer las emociones que requieren ser gestionadas.\nProcedimental: Aplicación de estrategias sencillas de autocuidado y afrontamiento, como identificar cómo se siente, buscar apoyo y practicar acciones que favorezcan el bienestar. Este componente es coherente verticalmente porque operacionaliza lo que el objetivo pide: aplicar estrategias ante afectaciones emocionales.\nActitudinal: Fomento de actitudes de reconocimiento emocional, apertura para pedir ayuda y disposición a cuidarse y cuidar el propio bienestar. Esto añade coherencia vertical al reforzar la postura personal que facilita el uso de las estrategias señaladas en el objetivo.",
-      "evidencia_conmigo": "Identifica cómo se siente en una situación adversa y usa una estrategia sencilla (respirar, retirarse, pedir apoyo) para regularse.",
-      "evidencia_otro": "Expresa cómo se siente ante un par o adulto de confianza y acepta apoyo o acompañamiento cuando lo requier",
-      "evidencia_entorno": "Participa en actividades del entorno escolar que promueven bienestar emocional (espacios tranquilos, pausas, ejercicios de serenidad).",
-      "miniproyecto": "Cómo podemos crear estrategias sencillas que nos ayuden a sentirnos mejor cuando vivimos situaciones difíciles?",
-      "desafio": "“Kit emocional escolar”\n(pequeño recurso con tarjetas de emociones, estrategias de autocuidado y rutas de apoyo en la escuela).",
-      "explorar": "Orientaciones: identificar emociones en situaciones adversas; reconocer señales corporales de malestar; conversar sobre autocuidado básico.\nPreguntas dinamizadoras:\n¿Qué emociones aparecen cuando algo difícil nos pasa?\n¿Cómo se siente mi cuerpo cuando estoy muy triste o enojado?\n¿Qué cosas pequeñas ayudan a calmarnos?",
-      "crear": "Orientaciones: diseñar el kit emocional (tarjetas de respiración, frases de apoyo, lista de adultos de confianza); ensayar estrategias de regulación.\nPreguntas dinamizadoras:\n¿Qué elementos no pueden faltar en un kit que ayude a sentirnos mejor?\n¿Qué estrategia funciona mejor para mí cuando estoy alterado?\n¿Cómo podemos mostrar, con un símbolo, que necesitamos una pausa?",
-      "compartir": "Orientaciones: explicar el kit a otros grupos; proponer un pequeño rincón tranquilo o rutina de pausa emocional.\nPreguntas dinamizadoras:\n¿Cómo puede nuestro kit ayudar a otros compañeros?\n¿Qué cambia en el aula cuando cuidamos nuestras emociones?\n¿Qué acuerdos necesitamos para usar el kit con respeto?"
+      "tipo_afectacion": "Riesgos_físicos_y_ambientales",
+      "riesgo": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
+      "aprendizaje": "Cuidado del agua y saneamiento (WASH)",
+      "miniproyecto": "Reconocer prácticas adecuadas de higiene y manejo del agua y aplicar acciones diarias que reduzcan la exposición a enfermedades.."
     },
     {
-      "tipo_riesgo": "Riesgos_psicosociales_y_emocionales",
-      "aprendizaje_clave": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
-      "afectacion": "Estigma y exclusión social",
-      "objetivo_aprendizaje": "Identificar situaciones de estigma o exclusión y aplicar estrategias de empatía, respeto y apoyo entre pares para favorecer la inclusión y la convivencia.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de qué es el estigma, cómo se expresa la exclusión y cuáles son sus efectos en la convivencia y el bienestar. Esta comprensión conceptual es coherente verticalmente con el objetivo porque facilita identificar situaciones de estigmatización.\nProcedimental:Aplicación de estrategias de empatía, respeto y apoyo entre pares, realizando acciones que favorecen la inclusión como escuchar, acompañar y evitar conductas discriminatorias. Esto guarda coherencia vertical al traducir en acciones concretas las prácticas inclusivas que exige el objetivo.\nActitudinal: Promoción de actitudes de respeto, aceptación y valoración del otro, necesarias para reducir la exclusión y fortalecer la convivencia. Estas actitudes completan la coherencia vertical al sostener emocionalmente el comportamiento inclusivo solicitado en el objetivo.",
-      "evidencia_conmigo": "Reconoce cuándo se siente excluido o tratado injustamente y expresa su necesidad de apoyo o acompañamiento.",
-      "evidencia_otro": "Escucha y apoya a un compañero que ha vivido exclusión, utilizando expresiones de empatía y respeto.",
-      "evidencia_entorno": "Participa en actividades o acuerdos de aula que buscan incluir a todos los compañeros, evitando conductas discriminatorias.",
-      "miniproyecto": "¿Cómo podemos crear un espacio o herramienta sencilla que ayude al curso a manejar emociones difíciles durante el día?",
-      "desafio": "Una Estación de Bienestar del Aula:\npuede ser una caja, cartel, rincón o set de tarjetas con ideas para calmarse.",
-      "explorar": "Orientaciones:  Conversar sobre situaciones que generan estrés o tristeza.\n Identificar qué cosas ayudan a sentirse mejor.\nPreguntas dinamizadoras:\n¿Qué hacemos cuando nos sentimos mal?\n¿Qué objetos o ideas nos ayudan a calmarnos?",
-      "crear": "Orientaciones: Diseñar ideas sencillas: tarjetas de respiración, frascos de calma, frases de apoyo, dibujos que tranquilizan.\nPreguntas dinamizadoras:\n¿Qué debería tener una estación de bienestar?\n¿Cómo hacemos que cualquiera pueda usarla fácilmente?",
-      "compartir": "Orientaciones: Armar la estación con materiales disponibles.\nUbicarla en el aula y explicar cómo usarla.\nPreguntas dinamizadoras:\n¿Funcionó para ayudar cuando alguien lo necesitó?\n¿Qué deberíamos mejorar?"
+      "tipo_afectacion": "Riesgos_psicosociales_y_emocionales",
+      "riesgo": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
+      "aprendizaje": "Afectaciones psicosociales y salud mental",
+      "miniproyecto": "Reconocer emociones asociadas a situaciones adversas y aplicar estrategias básicas de autocuidado y afrontamiento para fortalecer el bienestar emocional."
     },
     {
-      "tipo_riesgo": "Riesgos_psicosociales_y_emocionales",
-      "aprendizaje_clave": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
-      "afectacion": "Violencia física y emocional",
-      "objetivo_aprendizaje": "Reconocer comportamientos que generan violencia física o emocional y aplicar prácticas de comunicación respetuosa y convivencia pacífica que reduzcan conflictos.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de los comportamientos que generan violencia física o emocional y de sus efectos negativos para la convivencia. Esta base conceptual es coherente verticalmente porque permite reconocer las situaciones que el objetivo exige identificar.\nProcedimental:Aplicación de prácticas de comunicación respetuosa y estrategias de convivencia pacífica, actuando para desescalar conflictos y favorecer interacciones seguras. Esto se alinea verticalmente con el objetivo, puesto que convierte en acción las prácticas pacíficas que se requieren.\nActitudinal:Fomento de actitudes de respeto, autocontrol, manejo pacífico de diferencias y rechazo a la violencia como forma de relación. Estos elementos garantizan coherencia vertical al sostener las conductas pacíficas necesarias para cumplir el objetivo.",
-      "evidencia_conmigo": "Identifica cuándo una interacción le genera molestia o riesgo y elige una estrategia pacífica (hablar calmado, retirarse, pedir ayuda) para protegerse.",
-      "evidencia_otro": "Resuelve un desacuerdo con un compañero usando comunicación respetuosa sin recurrir a agresiones.",
-      "evidencia_entorno": "Participa en la creación o seguimiento de acuerdos de convivencia que previenen la violencia y promueven el trato respetuoso en el grupo.",
-      "miniproyecto": "¿Cómo podemos identificar y reducir situaciones de exclusión en nuestro curso?",
-      "desafio": "Mapa de Inclusión del Aula + Ruta de Apoyo:\nun cartel donde se muestren acciones que ayudan a incluir a todos, acompañado de una ruta clara para apoyar a un compañero que se sienta excluido.",
-      "explorar": "Orientaciones:  Identificar momentos en los que alguien se sintió excluido.\nReconocer conductas que hacen daño.\nPreguntas dinamizadoras:\n¿Cómo sabemos que alguien está siendo excluido?\n¿Qué señales hay? ¿Qué situaciones se repiten?",
-      "crear": "Orientaciones: Diseñar ideas para incluir a todos: “círculo de compañeros”, “turnos para invitar a otros”, frases de bienvenida, etc.\nElaborar la “Ruta de Apoyo”: ¿qué hacer si veo a alguien solo o triste?\nPreguntas dinamizadoras:\n¿Qué acciones pequeñas pueden hacer una diferencia?\n¿Cómo ayudamos sin incomodar?",
-      "compartir": "Orientaciones: Elaborar el Mapa de Inclusión y socializarlo. Practicar la Ruta de Apoyo mediante juegos o dramatizaciones.\nPreguntas dinamizadoras:\n¿El mapa ayudó a cambiar algo?\n¿Qué acuerdos debemos sumar?"
+      "tipo_afectacion": "Riesgos_psicosociales_y_emocionales",
+      "riesgo": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
+      "aprendizaje": "Estigma y exclusión social",
+      "miniproyecto": "Identificar situaciones de estigma o exclusión y aplicar estrategias de empatía, respeto y apoyo entre pares para favorecer la inclusión y la convivencia."
     },
     {
-      "tipo_riesgo": "Riesgos_socioeducativos_y_de_bienestar",
-      "aprendizaje_clave": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
-      "afectacion": "Trabajo infantil y explotación económica",
-      "objetivo_aprendizaje": "Reconocer los riesgos del trabajo infantil y explicar cómo estas situaciones afectan el bienestar y la permanencia educativa, aplicando estrategias básicas de autocuidado y búsqueda de apoyo",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de qué es el trabajo infantil, sus riesgos y cómo afecta el bienestar y la permanencia educativa. Esta base conceptual mantiene coherencia vertical al permitir reconocer las situaciones que el objetivo exige explicar y comprender.\nProcedimental: Identificación de situaciones de trabajo infantil, explicación de sus efectos en la vida escolar y aplicación de estrategias básicas de autocuidado y búsqueda de apoyo. Esto garantiza coherencia vertical al traducir el objetivo en acciones concretas que permiten enfrentar esta vulneración.\nActitudinal: Actitudes de autocuidado, rechazo al trabajo infantil y disposición para buscar apoyo en adultos o redes comunitarias. Esto refuerza la coherencia vertical al sostener emocionalmente las conductas que el objetivo requiere aplicar.",
-      "evidencia_conmigo": "Reconoce cuándo una actividad económica afecta su bienestar o su asistencia escolar y expresa la necesidad de detenerla o pedir ayuda.",
-      "evidencia_otro": "Comparte con un compañero o adulto de confianza situaciones que pueden considerarse trabajo infantil y solicita orientación o acompañamiento.",
-      "evidencia_entorno": "Participa en actividades escolares o comunitarias que informan sobre los riesgos del trabajo infantil y promueven alternativas seguras de participación.",
-      "miniproyecto": "¿Cómo podemos reconocer cuándo una actividad económica afecta nuestro bienestar y crear alternativas seguras para participar en la comunidad?",
-      "desafio": "Mapa visual de actividades seguras y no seguras para NNAJ, con recomendaciones y rutas de apoyo.",
-      "explorar": "Orientaciones: Conversar sobre tareas, trabajos o responsabilidades que realizan los estudiantes.\nIdentificar cuándo una actividad deja de ser segura y empieza a afectar bienestar, estudio o salud. Analizar casos breves o ejemplos del entorno.\nPreguntas dinamizadoras:\n¿Qué diferencia hay entre ayudar en casa y realizar un trabajo que afecta mi estudio?\n¿Cómo sabemos que una actividad económica ya no es segura?\n¿Qué señales indican que debo pedir ayuda?",
-      "crear": "Orientaciones: Hacer una lista de actividades “seguras” y “no seguras” según lo conversado.\nProponer alternativas de apoyo en la escuela o comunidad cuando alguien esté en riesgo.\nDiseñar mensajes o ideas que promuevan autocuidado y búsqueda de orientación.\nPreguntas dinamizadoras:\n¿Qué alternativas seguras puedo hacer para apoyar en mi casa o comunidad?\n¿Qué mensaje ayudaría a otros a reconocer riesgos?\n¿Qué debe incluir la ruta de apoyo para pedir ayuda?",
-      "compartir": "Orientaciones: Elaborar un Mapa de Actividades Seguras con colores, dibujos y rutas de apoyo.\nPresentarlo al grupo o comunidad escolar.\n Ubicarlo en un lugar visible.\nPreguntas dinamizadoras:\n¿El mapa ayuda a que otros reconozcan riesgos?\n¿Qué deberíamos agregar para hacerlo más útil?"
+      "tipo_afectacion": "Riesgos_psicosociales_y_emocionales",
+      "riesgo": "Los NNAJ reconocen y gestionan sus emociones ante situaciones adversas, fortaleciendo estrategias de autocuidado y afrontamiento. Promueven relaciones basadas en el respeto, la empatía y el apoyo entre pares, y participan en prácticas de convivencia pacífica que reducen la violencia y favorecen entornos emocionales seguros.",
+      "aprendizaje": "Violencia física y emocional",
+      "miniproyecto": "Reconocer comportamientos que generan violencia física o emocional y aplicar prácticas de comunicación respetuosa y convivencia pacífica que reduzcan conflictos."
     },
     {
-      "tipo_riesgo": "Riesgos_socioeducativos_y_de_bienestar",
-      "aprendizaje_clave": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
-      "afectacion": "Niñas y niños separados o no acompañados",
-      "objetivo_aprendizaje": "Identificar situaciones de separación o ausencia de referentes familiares y aplicar estrategias de búsqueda de apoyo seguro en adultos de confianza y redes comunitarias para proteger el bienestar y la continuidad educativa.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de qué implica la separación o ausencia de referentes familiares, sus riesgos y efectos en el bienestar y continuidad educativa. Este marco conceptual es coherente verticalmente porque permite identificar la situación que el objetivo demanda analizar.\nProcedimental: Identificación de casos de separación o ausencia de familiares y aplicación de estrategias de búsqueda de apoyo seguro con adultos de confianza o redes comunitarias. Esta dimensión operacionaliza directamente las acciones de protección y continuidad educativa exigidas por el objetivo.\nActitudinal: Actitudes de confianza, búsqueda de apoyo y reconocimiento del valor de redes protectoras. Estas actitudes sostienen la coherencia vertical al promover la disposición requerida por el objetivo para acceder a apoyo seguro.",
-      "evidencia_conmigo": "Identifica cuándo se encuentra sin un adulto de confianza y decide buscar apoyo seguro en una persona o institución cercana.",
-      "evidencia_otro": "Informa a un compañero o adulto cuando observa a alguien solo o sin acompañamiento, promoviendo la búsqueda de apoyo seguro.",
-      "evidencia_entorno": "Utiliza de manera adecuada los puntos de referencia o rutas de apoyo establecidas por la institución cuando se presenta una situación de separación.",
-      "miniproyecto": "¿Cómo podemos crear una ruta clara para que cualquier estudiante sepa dónde acudir si se encuentra sin un adulto de confianza?",
-      "desafio": "Ruta de Apoyo Seguro del Aula o Escuela, con puntos de referencia y adultos confiables.",
-      "explorar": "Orientaciones: Reconocer espacios y momentos donde un NNAJ puede quedar solo o sin acompañamiento.\nIdentificar riesgos asociados: confusión, peligros, desorientación, personas desconocidas.\nComentar experiencias reales del entorno escolar o comunitario.\nPreguntas dinamizadoras:\n¿En qué situaciones alguien puede quedar sin un adulto?\n¿Qué riesgos aparecen cuando un niño está solo?\n¿A quién acudiríamos inmediatamente?",
-      "crear": "Orientaciones: Ubicar dentro de la escuela y comunidad los espacios seguros.\nDefinir “adultos de confianza” y cómo reconocerlos.\nDiseñar mensajes o señales simples para orientar.\nPreguntas dinamizadoras:\n¿Qué lugares son seguros en la escuela?\n¿Qué características debe tener un adulto confiable?\n¿Cómo hacemos que la ruta sea clara para todos?",
-      "compartir": "Orientaciones:\nElaborar la Ruta de Apoyo Seguro (cartel, mapa, guía sencilla).\nSimular recorridos para memorizar y practicar la ruta.Compartirla con otros cursos o familias.\nPreguntas dinamizadoras:\n¿La ruta fue fácil de seguir?\n¿Qué parte del mapa necesita mejorarse?\n¿Cómo aseguramos que todos la conozcan?"
+      "tipo_afectacion": "Riesgos_socioeducativos_y_de_bienestar",
+      "riesgo": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
+      "aprendizaje": "Trabajo infantil y explotación económica",
+      "miniproyecto": "Reconocer los riesgos del trabajo infantil y explicar cómo estas situaciones afectan el bienestar y la permanencia educativa, aplicando estrategias básicas de autocuidado y búsqueda de apoyo"
     },
     {
-      "tipo_riesgo": "Riesgos_socioeducativos_y_de_bienestar",
-      "aprendizaje_clave": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
-      "afectacion": "Salud y nutrición",
-      "objetivo_aprendizaje": "Reconocer hábitos de autocuidado vinculados a la salud y la nutrición y aplicar prácticas que fortalezcan el bienestar físico y la continuidad educativa.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de hábitos de autocuidado relacionados con la salud y la nutrición, así como de su impacto en el bienestar físico y en la continuidad educativa. Esto mantiene coherencia vertical al permitir reconocer la importancia de estas prácticas, tal como exige el objetivo.\nProcedimental: Aplicación de prácticas cotidianas que fortalecen la salud y la nutrición, como higiene básica, alimentación adecuada y autocuidado. Esto se alinea verticalmente al objetivo al traducir en acciones concretas las prácticas que promueven bienestar y permanencia.\nActitudinal: Actitudes de responsabilidad frente al autocuidado, valoración de la salud y disposición a mantener hábitos que favorezcan el bienestar. Esto completa la coherencia vertical al sostener las acciones de cuidado que el objetivo requiere aplicar.",
-      "evidencia_conmigo": "Realiza prácticas básicas de autocuidado (alimentarse bien, hidratarse, higiene personal) de manera autónoma y constante.",
-      "evidencia_otro": "Invita o recuerda a sus pares la importancia de hábitos saludables y colabora en acciones que promuevan bienestar físico en el grupo.",
-      "evidencia_entorno": "Participa en espacios escolares que promueven alimentación saludable, actividad física o higiene comunitaria, aplicando lo aprendido.",
-      "miniproyecto": "¿Cómo podemos mejorar nuestros hábitos de autocuidado y promover una alimentación y salud adecuadas en nuestra comunidad escolar?",
-      "desafio": "Guía o mural de hábitos saludables creada por el grupo con recomendaciones prácticas para la vida diaria",
-      "explorar": "Orientaciones:\nConversar sobre hábitos actuales: alimentación, hidratación, descanso, higiene. Identificar cuáles ayudan al bienestar y cuáles generan malestar o riesgo.\n Revisar situaciones reales del entorno: consumo de alimentos poco saludables, falta de agua potable, poca actividad física.\nPreguntas dinamizadoras:\n¿Qué hábitos nos hacen sentir mejor durante el día?\n¿Qué prácticas están afectando nuestra salud?\n¿Cómo influye la alimentación o la hidratación en nuestro aprendizaje?",
-      "crear": "Orientaciones:\nCrear una lista de acciones simples para mejorar la salud.\nIdentificar recursos del entorno: puntos de agua, espacios para actividad física, tiempos para alimentación saludable.\nDiseñar recomendaciones útiles para el aula y hogar.\nPreguntas dinamizadoras:\n¿Qué cambios pequeños podríamos hacer hoy para mejorar nuestra salud?\n¿Qué hábitos deberíamos promover entre todos?\n¿Cómo podemos recordar diariamente estos hábitos?",
-      "compartir": "Orientaciones:                                                                         Crear una guía ilustrada de hábitos saludables o un mural visible.\nCompartir la guía con otros cursos y familias.\nEvaluar cambios tras una o dos semanas.\nPreguntas dinamizadoras:\n¿Qué hábito fue más difícil implementar?\n¿La guía ayudó a otros a mejorar su autocuidado?\n¿Qué deberíamos agregar o actualizar?"
+      "tipo_afectacion": "Riesgos_socioeducativos_y_de_bienestar",
+      "riesgo": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
+      "aprendizaje": "Niñas y niños separados o no acompañados",
+      "miniproyecto": "Identificar situaciones de separación o ausencia de referentes familiares y aplicar estrategias de búsqueda de apoyo seguro en adultos de confianza y redes comunitarias para proteger el bienestar y la continuidad educativa."
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Violencia sexual",
-      "objetivo_aprendizaje": "Reconocer situaciones que constituyen violencia sexual e identificar comportamientos de riesgo, aplicando rutas de denuncia y apoyo seguro.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de qué constituye violencia sexual, sus señales y las formas en que vulnera los derechos. Esta base conceptual garantiza coherencia vertical con el objetivo, ya que permite reconocer las situaciones que deben ser identificadas como riesgo.\nProcedimental: Identificación de señales o comportamientos de riesgo y aplicación de rutas de denuncia y apoyo seguro ante situaciones de violencia sexual. Esto mantiene coherencia vertical al traducir directamente el objetivo en acciones concretas de protección.\nActitudinal: Actitudes de rechazo a la violencia sexual, disposición a buscar ayuda y confianza en los mecanismos de apoyo seguro. Esto refuerza la coherencia vertical al sostener las conductas necesarias para activar rutas de protección.",
-      "evidencia_conmigo": "Reconoce cuando una situación le hace sentir incomodidad o riesgo y decide alejarse o pedir ayuda a un adulto de confianza.",
-      "evidencia_otro": "Acompaña a un compañero que manifiesta una situación incómoda o riesgosa y lo orienta a buscar apoyo seguro.",
-      "evidencia_entorno": "Informa a un adulto o autoridad escolar sobre señales de riesgo en espacios o situaciones del entorno educativo.",
-      "miniproyecto": "¿Cómo podemos ayudar a nuestra comunidad escolar a reconocer señales de riesgo y actuar de forma segura ante situaciones de violencia sexual?",
-      "desafio": "Afiche o guía escolar “Señales que Protegen” con pasos simples para identificar riesgos y activar rutas de apoyo.",
-      "explorar": "Orientaciones:\nAnalizar ejemplos cotidianos de situaciones que generan incomodidad o riesgo. Identificar señales de alerta comunes.\nConversar sobre adultos confiables y rutas de apoyo escolar.\nPreguntas dinamizadoras:\n¿Cómo sé que una situación no es segura para mí?\n¿Qué señales me ayudan a reconocer un riesgo?\n¿A quién puedo acudir si necesito apoyo?",
-      "crear": "Orientaciones:\nCrear un listado de acciones seguras para seguir cuando algo genera incomodidad.\nPensar mensajes simples para orientar a otros estudiantes.\nEvaluar qué información es clave para incluir en una guía escolar.\nPreguntas dinamizadoras:\n¿Qué mensaje le darías a otro compañero para que se cuide?\n¿Qué pasos son indispensables cuando aparece una señal de riesgo?\n¿Cómo explicarías una ruta de apoyo seguro?",
-      "compartir": "Orientaciones:\nDiseñar un afiche o guía con señales de alerta y pasos de acción.\nSocializarlo en el aula o en espacios escolares.\nUbicarlo en un lugar visible de la institución.\nPreguntas dinamizadoras:\n¿El afiche ayuda a entender qué hacer?\n¿Qué información debería mejorarse?\n¿Cómo aseguramos que todos conozcan estas rutas?"
+      "tipo_afectacion": "Riesgos_socioeducativos_y_de_bienestar",
+      "riesgo": "Los NNAJ reconocen cómo situaciones como el trabajo infantil, la separación familiar o el deterioro de salud y nutrición afectan su bienestar y permanencia educativa. Desarrollan hábitos de autocuidado y buscan apoyo en adultos de confianza y redes comunitarias, fortaleciendo su continuidad educativa y su proyecto de vida.",
+      "aprendizaje": "Salud y nutrición",
+      "miniproyecto": "Reconocer hábitos de autocuidado vinculados a la salud y la nutrición y aplicar prácticas que fortalezcan el bienestar físico y la continuidad educativa."
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Niñas, niños y adolescentes asociados a fuerzas o grupos armados",
-      "objetivo_aprendizaje": "Reconocer riesgos de reclutamiento y asociación con grupos armados e identificar señales de vulneración, aplicando rutas de denuncia y apoyo seguro.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de los riesgos del reclutamiento y la asociación con grupos armados, así como de las señales de vulneración vinculadas a estos casos. Esto es coherente verticalmente porque sustenta el reconocimiento de riesgos exigido por el objetivo.\nProcedimental: Identificación de señales de reclutamiento y aplicación de rutas de denuncia y apoyo seguro ante posibles intentos de vinculación. Este componente operacionaliza fielmente las acciones de protección planteadas por el objetivo.\nActitudinal: Actitudes de rechazo a la vinculación armada, reconocimiento del valor de la seguridad personal y disposición a buscar apoyo en adultos o instituciones. Esto sostiene la coherencia vertical al facilitar la protección activa del NNAJ.",
-      "evidencia_conmigo": "Identifica propuestas, acercamientos o situaciones sospechosas de reclutamiento y se aleja para buscar ayuda.",
-      "evidencia_otro": "Advierte a un par cuando nota señales de riesgo y lo acompaña a informar a un adulto o institución.",
-      "evidencia_entorno": "Reconoce zonas o dinámicas comunitarias de riesgo y sigue rutas institucionales de protección cuando se presentan alertas.",
-      "miniproyecto": "¿Cómo podemos identificar situaciones sospechosas de reclutamiento y protegernos entre todos?",
-      "desafio": "Mapa comunitario de zonas seguras y zonas de alerta con recomendaciones de autocuidado.",
-      "explorar": "Orientaciones:\nConversar sobre acercamientos sospechosos, ofertas engañosas o presiones externas comunes en comunidades afectadas.Identificar cuáles generan riesgo y cómo se manifiestan.\nPreguntas dinamizadoras:\n¿Qué tipo de propuesta podría ser peligrosa?\n¿Cómo reconocer una situación sospechosa?\n¿Por qué es importante alejarnos y pedir ayuda?",
-      "crear": "Orientaciones:\nIdentificar espacios seguros y adultos confiables del entorno.\nDiseñar recomendaciones claras para responder ante intentos de reclutamiento.\nDefinir mensajes clave de protección.\nPreguntas dinamizadoras:\n¿Qué lugares son seguros en nuestra comunidad?\n¿Cómo apoyar a un compañero que detecta señales de riesgo?\n¿Qué información necesitamos para actuar rápido?",
-      "compartir": "Orientaciones:\nCrear un mapa con zonas seguras y puntos de alerta.\nAñadir recomendaciones básicas para estudiantes.\nSocializar el mapa con el curso o comunidad educativa.\nPreguntas dinamizadoras:\n¿El mapa ayuda a reconocer riesgos?\n¿Qué señales deberíamos agregar?\n¿Cómo garantizar que todos conozcan la ruta de denuncia?"
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Violencia sexual",
+      "miniproyecto": "Reconocer situaciones que constituyen violencia sexual e identificar comportamientos de riesgo, aplicando rutas de denuncia y apoyo seguro."
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Trata y tráfico de personas",
-      "objetivo_aprendizaje": "Identificar señales de engaño, captación o traslado forzado y aplicar rutas de denuncia y búsqueda de apoyo seguro ante situaciones de trata.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de las señales de engaño, captación o traslado forzado que caracterizan la trata. Esta comprensión es coherente verticalmente porque permite identificar las situaciones que el objetivo exige reconocer.\nProcedimental: Identificación de señales de captación y aplicación de rutas de denuncia y búsqueda de apoyo seguro ante riesgos de trata. Esto mantiene coherencia vertical al operacionalizar las acciones concretas incluidas en el objetivo.\nActitudinal: Actitudes de desconfianza preventiva ante ofertas sospechosas, disposición a buscar apoyo y reconocimiento del valor de la autoprotección. Esto fortalece la coherencia vertical al sostener las respuestas protectoras esperadas.",
-      "evidencia_conmigo": "Detecta ofertas sospechosas (viajes, trabajo, regalos) y decide rechazarlas o pedir orientación a un adulto confiable.",
-      "evidencia_otro": "Comparte con un compañero o adulto las señales sospechosas detectadas en su entorno y participa en la búsqueda de apoyo seguro.",
-      "evidencia_entorno": "Sigue las rutas institucionales de reporte cuando identifica situaciones de captación o riesgo en su comunidad.",
-      "miniproyecto": "¿Cómo podemos identificar ofertas engañosas y evitar caer en situaciones de riesgo?",
-      "desafio": "Cartel “Ofertas que engañan” con ejemplos reales del entorno y rutas de denuncia seguras.",
-      "explorar": "Orientaciones:\nRevisar casos ficticios: regalos, trabajos, viajes o favores sospechosos.\nIdentificar qué elementos los hacen peligrosos.\nPreguntas dinamizadoras:\n¿Qué hace que una oferta sea engañosa?\n¿Qué señales indican que debo rechazarla?\n¿Por qué es importante contarle a un adulto?",
-      "crear": "Orientaciones:\nElaborar criterios simples para reconocer trampas o captación.\nDiseñar mensajes de autocuidado.\nPreguntas dinamizadoras:\n¿Cómo explicarías a un amigo que una oferta es riesgosa?\n¿Qué palabras o símbolos alertan sobre peligro?\n¿Qué debe incluir una ruta de denuncia para ser clara?",
-      "compartir": "Orientaciones:\nElaborar el cartel con ejemplos reales del entorno.\nSocializarlo con otros grados.\nUbicarlo en una zona visible del colegio.\nPreguntas dinamizadoras:\n¿El cartel previene que otros caigan en engaños?\n¿Qué podríamos mejorar?"
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Niñas, niños y adolescentes asociados a fuerzas o grupos armados",
+      "miniproyecto": "Reconocer riesgos de reclutamiento y asociación con grupos armados e identificar señales de vulneración, aplicando rutas de denuncia y apoyo seguro."
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Explotación y abuso en entornos de cuidado alternativo",
-      "objetivo_aprendizaje": "Reconocer prácticas de abuso o explotación en entornos de cuidado y aplicar rutas de reporte o denuncia que garanticen apoyo seguro",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de qué constituye abuso y explotación en entornos de cuidado y de las señales que permiten reconocer estas vulneraciones. Esto sustenta la coherencia vertical al alinear el conocimiento con lo que el objetivo exige identificar.\nProcedimental: Identificación de prácticas de abuso o explotación y aplicación de rutas de reporte o denuncia que garanticen apoyo seguro. Este nivel mantiene coherencia vertical al traducir el objetivo en acciones de protección concretas.\nActitudinal: Actitudes de sensibilidad frente a vulneraciones, disposición a denunciar y valoración del cuidado seguro. Esto refuerza la coherencia vertical al sostener la conducta protectora necesaria.",
-      "evidencia_conmigo": "Reconoce cuando un trato, exigencia o condición en un entorno de cuidado es inadecuada y comunica la situación a un adulto seguro.",
-      "evidencia_otro": "Brinda apoyo a un par que expresa haber vivido un trato abusivo y lo orienta hacia un adulto responsable o una ruta de denuncia.",
-      "evidencia_entorno": "Identifica prácticas riesgosas en el entorno de cuidado y comunica la situación a las autoridades escolares o comunitarias correspondientes.",
-      "miniproyecto": "¿Qué podemos hacer para reconocer malos tratos y mejorar la protección en los espacios donde nos cuidamos unos a otros?",
-      "desafio": "Código de Buen Trato del Aula creado colectivamente.",
-      "explorar": "Orientaciones:\nConversar sobre situaciones de trato injusto o abuso en espacios donde los estudiantes pasan tiempo (hogar, transporte, comunidad, escuela).\nIdentificar qué comportamientos son inadecuados.\nPreguntas dinamizadoras:\n¿Qué trato hace que un espacio sea seguro?\n¿Cómo reconozco que una exigencia o relación es abusiva?\n¿Qué puedo hacer si veo un trato injusto?",
-      "crear": "Orientaciones:\nDefinir principios básicos de buen trato.\nProponer acciones seguras para denunciar o pedir ayuda.\nPreguntas dinamizadoras:\n¿Qué reglas ayudan a que todos se sientan seguros?\n¿Cómo apoyar a alguien que vivió una situación de abuso?\n¿Qué mensajes deberíamos incluir para promover protección?",
-      "compartir": "Orientaciones:\nElaborar un Código de Buen Trato en cartel, mural o ficha para el aula.   Socializarlo con otros cursos.\nPreguntas dinamizadoras:\n¿El código incluye todo lo necesario?\n¿Qué punto debería reforzarse?"
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Trata y tráfico de personas",
+      "miniproyecto": "Identificar señales de engaño, captación o traslado forzado y aplicar rutas de denuncia y búsqueda de apoyo seguro ante situaciones de trata."
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Acceso a la justicia",
-      "objetivo_aprendizaje": "Reconocer derechos fundamentales e identificar mecanismos institucionales de protección y denuncia para situaciones de vulneración.",
-      "proceso_bloom": "Comprender + Aplicar",
-      "contenido": "Conceptual: Comprensión de los derechos fundamentales y de los mecanismos institucionales de protección y denuncia. Esta base conceptual es coherente verticalmente porque permite reconocer los elementos que el objetivo exige identificar.\nProcedimental: Identificación de rutas y mecanismos institucionales ante situaciones de vulneración y aplicación de acciones básicas para acceder a estos sistemas. Esto mantiene coherencia vertical al transformar el objetivo en acciones realizables.\nActitudinal: Actitudes de confianza en las instituciones, disposición a denunciar y valoración de la justicia como mecanismo de protección. Esto sostiene la coherencia vertical al promover el ejercicio responsable de los derechos.",
-      "evidencia_conmigo": "Reconoce cuando un derecho propio ha sido vulnerado y decide buscar información o pedir apoyo para activar rutas institucionales",
-      "evidencia_otro": "Acompaña a un compañero que expresa haber sido vulnerado en su derecho y lo motiva a acudir a las instituciones correspondientes.",
-      "evidencia_entorno": "Participa en actividades de la institución que promueven el conocimiento de derechos y las rutas de atención escolar o comunitaria.",
-      "miniproyecto": "¿Cómo podemos reconocer vulneraciones de derechos y saber exactamente a dónde acudir?",
-      "desafio": "Directorio simple de rutas y puntos de atención (cartel o folleto escolar).",
-      "explorar": "Orientaciones:\nIdentificar derechos básicos.\nReconocer cuándo han sido vulnerados.\nRevisar mecanismos de denuncia del colegio y comunidad.\nPreguntas dinamizadoras:\n¿Qué derecho se vulnera en esta situación?\n¿Cómo sé cuándo debo denunciar?\n¿Qué instituciones están cerca de nuestra comunidad?",
-      "crear": "Orientaciones:\nDefinir rutas claras y cortas para pedir ayuda.\nClasificar instituciones según tipo de apoyo.\nPreguntas dinamizadoras:\n¿Cuál es la primera acción si noto una vulneración?\n¿Qué información necesita tener un directorio?\n¿Cómo explicarlo para que otros lo entiendan?",
-      "compartir": "Orientaciones:\nElaborar un directorio visual con íconos.\nExplicarlo a los grupos del colegio.\nPreguntas dinamizadoras:\n¿El directorio es fácil de usar?\n¿Qué institución falta incluir?"
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Explotación y abuso en entornos de cuidado alternativo",
+      "miniproyecto": "Reconocer prácticas de abuso o explotación en entornos de cuidado y aplicar rutas de reporte o denuncia que garanticen apoyo seguro"
     },
     {
-      "tipo_riesgo": "Riesgos_de_protección_jurídica_y_comunitaria",
-      "aprendizaje_clave": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
-      "afectacion": "Entornos digitales inseguros",
-      "objetivo_aprendizaje": "Identificar comportamientos de riesgo en entornos digitales y aplicar acciones de denuncia o búsqueda de apoyo seguro frente a vulneraciones en línea.",
-      "proceso_bloom": "Aplicar + Analizar",
-      "contenido": "Conceptual: Comprensión de los comportamientos de riesgo en entornos digitales, así como de las formas de vulneración en línea. Esto es coherente verticalmente con el objetivo, ya que permite identificar los riesgos que deben ser reconocidos.\nProcedimental: Identificación de comportamientos digitales inseguros y aplicación de acciones de denuncia o búsqueda de apoyo seguro frente a vulneraciones en línea. Esto convierte el objetivo en acciones concretas de protección digital.\nActitudinal: Actitudes de uso responsable de tecnologías, autocuidado digital y rechazo a prácticas que vulneran la seguridad en línea. Esto refuerza la coherencia vertical al sostener las conductas protectoras requeridas.",
-      "evidencia_conmigo": "Evita compartir información personal o interactuar con mensajes sospechosos y toma medidas de seguridad digital básicas.",
-      "evidencia_otro": "Orienta a un par sobre cómo actuar ante un mensaje o contenido inseguro y le recomienda buscar apoyo seguro.",
-      "evidencia_entorno": "Reporta a la plataforma, docente o adulto responsable contenidos de riesgo y sigue rutas institucionales de denuncia digital.",
-      "miniproyecto": "¿Cómo podemos promover un uso seguro de internet y reaccionar ante contenidos o mensajes peligrosos?",
-      "desafio": "Protocolo escolar simple de Navegación Segura (cartel, guía o infografía).",
-      "explorar": "Orientaciones:\nIdentificar comportamientos digitales inseguros comunes. Analizar ejemplos de riesgos: mensajes extraños, solicitudes, enlaces, perfiles falsos.\nPreguntas dinamizadoras:\n¿Qué comportamientos digitales ponen en riesgo mi seguridad?\n¿Qué señales indican un perfil sospechoso?\n¿Cómo sé cuándo debo pedir ayuda?",
-      "crear": "Orientaciones:\nCrear recomendaciones básicas: privacidad, contraseñas, qué no compartir.\nDiseñar una ruta rápida de denuncia.\nPreguntas dinamizadoras:\n¿Qué reglas nos ayudan a navegar con seguridad?\n¿Qué puedo hacer si recibo un mensaje peligroso?\n¿Cómo apoyarías a un compañero que tuvo un problema en línea?",
-      "compartir": "Orientaciones:\nElaborar el protocolo escolar de navegación segura.\nCompartirlo con otros cursos o familias.\nPreguntas dinamizadoras:\n¿El protocolo ayuda a prevenir riesgos?\n¿Se entiende fácilmente?"
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Acceso a la justicia",
+      "miniproyecto": "Reconocer derechos fundamentales e identificar mecanismos institucionales de protección y denuncia para situaciones de vulneración."
+    },
+    {
+      "tipo_afectacion": "Riesgos_de_protección_jurídica_y_comunitaria",
+      "riesgo": "Los NNAJ comprenden sus derechos y reconocen situaciones de vulneración como violencia sexual, reclutamiento, trata o explotación. Identifican comportamientos de riesgo y conocen rutas de denuncia y apoyo seguro, fortaleciendo su participación responsable en redes de protección comunitaria.",
+      "aprendizaje": "Entornos digitales inseguros",
+      "miniproyecto": "Identificar comportamientos de riesgo en entornos digitales y aplicar acciones de denuncia o búsqueda de apoyo seguro frente a vulneraciones en línea."
+    },
+    {
+      "tipo_afectacion": "Total",
+      "riesgo": "",
+      "aprendizaje": "=SUBTOTAL(103,Tabla17[Riesgos clasificados por tipo de afectación])",
+      "miniproyecto": ""
     }
   ]
 };
@@ -6424,7 +5809,7 @@ var AuthManager = {
   }
 };
 
-// Módulo A: Diagnóstico Paramétrico PGIRE (Soporte Multirriesgo y Múltiples Amenazas Concurrentes)
+// Módulo A: Diagnóstico Paramétrico PGIRE
 var ModuloA = {
   cicloGradosMap: {
     '1': ['Grado 1° (Primaria)', 'Grado 2° (Primaria)', 'Grado 3° (Primaria)'],
@@ -6433,9 +5818,6 @@ var ModuloA = {
     '4': ['Grado 8° (Secundaria)', 'Grado 9° (Secundaria)'],
     '5': ['Grado 10° (Media)', 'Grado 11° (Media)']
   },
-
-  selectedCategories: ['NATURAL'],
-  selectedThreats: ['Inundación'],
 
   init: function(callbacks) {
     this.callbacks = callbacks || {};
@@ -6476,203 +5858,42 @@ var ModuloA = {
     });
   },
 
-  renderCategoryCheckboxes: function() {
-    var self = this;
-    var container = document.getElementById('container-cat-checkboxes');
-    if (!container) return;
+  filterAmenazas: function(categoria) {
+    var select = document.getElementById('select-amenaza');
+    if (!select) return;
+    select.innerHTML = '<option value="">-- Seleccione Amenaza Específica --</option>';
 
-    var categories = [
-      { id: 'NATURAL', label: '🌿 NATURAL' },
-      { id: 'SOCIONATURAL', label: '🌧️ SOCIONATURAL' },
-      { id: 'ANTRÓPICA', label: '🏭 ANTRÓPICA' },
-      { id: 'ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN', label: '🛡️ CONFLICTO ARMADO Y PROTECCIÓN' }
-    ];
-
-    container.innerHTML = categories.map(function(cat) {
-      var isChecked = self.selectedCategories.indexOf(cat.id) !== -1;
-      var selectedClass = isChecked ? 'selected' : '';
-      return '<label class="chip-category-label ' + selectedClass + '" data-cat="' + cat.id + '">' +
-        '<input type="checkbox" name="cat_pgire" value="' + cat.id + '" ' + (isChecked ? 'checked' : '') + '> ' +
-        cat.label +
-      '</label>';
-    }).join('');
-
-    var labels = container.querySelectorAll('.chip-category-label');
-    labels.forEach(function(lbl) {
-      var chk = lbl.querySelector('input[type="checkbox"]');
-      chk.addEventListener('change', function() {
-        self.handleCategoryChange();
+    var filtradas = PGIRE_DB || [];
+    if (categoria && categoria.indexOf('TODAS') === -1) {
+      filtradas = (PGIRE_DB || []).filter(function(item) {
+        return item.categoria.toUpperCase().indexOf(categoria.toUpperCase()) !== -1 ||
+               categoria.toUpperCase().indexOf(item.categoria.toUpperCase()) !== -1;
       });
+    }
+
+    filtradas.forEach(function(item) {
+      var opt = document.createElement('option');
+      opt.value = item.amenaza;
+      opt.textContent = item.amenaza;
+      select.appendChild(opt);
     });
   },
 
-  handleCategoryChange: function() {
-    var container = document.getElementById('container-cat-checkboxes');
-    if (!container) return;
-
-    var checkedBoxes = container.querySelectorAll('input[type="checkbox"]:checked');
-    this.selectedCategories = [];
-    checkedBoxes.forEach(function(chk) {
-      this.selectedCategories.push(chk.value);
-    }.bind(this));
-
-    // Si desmarcó todo, forzamos al menos NATURAL para mantener coherencia
-    if (this.selectedCategories.length === 0) {
-      this.selectedCategories = ['NATURAL'];
-      var firstChk = container.querySelector('input[value="NATURAL"]');
-      if (firstChk) firstChk.checked = true;
-    }
-
-    // Actualizar clases CSS de los chips
-    var labels = container.querySelectorAll('.chip-category-label');
-    labels.forEach(function(lbl) {
-      var chk = lbl.querySelector('input[type="checkbox"]');
-      if (chk.checked) {
-        lbl.classList.add('selected');
-      } else {
-        lbl.classList.remove('selected');
-      }
-    });
-
-    this.renderThreatsList();
-    this.updateAmenazaDetails();
-  },
-
-  renderThreatsList: function() {
-    var self = this;
-    var container = document.getElementById('container-amenazas-checkboxes');
-    var badge = document.getElementById('badge-total-amenazas');
-    if (!container) return;
-
-    // Filtrar amenazas que pertenezcan a alguna de las categorías seleccionadas
-    var filtradas = (PGIRE_DB || []).filter(function(item) {
-      return self.selectedCategories.indexOf(item.categoria) !== -1;
-    });
-
-    if (filtradas.length === 0) {
-      container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem; padding: 8px;">No hay amenazas disponibles para las categorías seleccionadas.</div>';
-      return;
-    }
-
-    // Mantener sólo las amenazas seleccionadas que sigan existiendo en el filtro
-    var nombresDisponibles = filtradas.map(function(x) { return x.amenaza; });
-    var validSelected = self.selectedThreats.filter(function(name) {
-      return nombresDisponibles.indexOf(name) !== -1;
-    });
-
-    // Si ninguna quedó seleccionada, seleccionamos por defecto la primera disponible
-    if (validSelected.length === 0 && filtradas.length > 0) {
-      validSelected = [filtradas[0].amenaza];
-    }
-    self.selectedThreats = validSelected;
-
-    container.innerHTML = filtradas.map(function(item) {
-      var isChecked = self.selectedThreats.indexOf(item.amenaza) !== -1;
-      var selectedClass = isChecked ? 'selected' : '';
-      var catShort = item.categoria.indexOf('CONFLICTO') !== -1 ? '🛡️ PROTECCIÓN' :
-                     item.categoria.indexOf('SOCIONATURAL') !== -1 ? '🌧️ SOCIONATURAL' :
-                     item.categoria.indexOf('ANTRÓPICA') !== -1 ? '🏭 ANTRÓPICA' : '🌿 NATURAL';
-
-      return '<label class="threat-item-card ' + selectedClass + '">' +
-        '<input type="checkbox" name="threat_checkbox" value="' + item.amenaza + '" ' + (isChecked ? 'checked' : '') + '>' +
-        '<div>' +
-          '<strong style="display:block; color:var(--text-main); font-size:0.88rem;">' + item.amenaza + '</strong>' +
-          '<span class="badge-pill" style="font-size:0.72rem; margin-top:2px; background:#f1f5f9; color:#475569;">' + catShort + '</span>' +
-        '</div>' +
-      '</label>';
-    }).join('');
-
-    if (badge) {
-      badge.textContent = self.selectedThreats.length + ' seleccionada(s)';
-    }
-
-    // Vincular eventos en cada checkbox de amenaza
-    var cards = container.querySelectorAll('.threat-item-card');
-    cards.forEach(function(card) {
-      var chk = card.querySelector('input[type="checkbox"]');
-      chk.addEventListener('change', function() {
-        self.handleThreatCheckboxChange();
-      });
-    });
-  },
-
-  handleThreatCheckboxChange: function() {
-    var container = document.getElementById('container-amenazas-checkboxes');
-    var badge = document.getElementById('badge-total-amenazas');
-    if (!container) return;
-
-    var checkedBoxes = container.querySelectorAll('input[type="checkbox"]:checked');
-    this.selectedThreats = [];
-    checkedBoxes.forEach(function(chk) {
-      this.selectedThreats.push(chk.value);
-    }.bind(this));
-
-    // Si desmarcó todo, mantenemos la primera del contenedor
-    if (this.selectedThreats.length === 0) {
-      var firstChk = container.querySelector('input[type="checkbox"]');
-      if (firstChk) {
-        firstChk.checked = true;
-        this.selectedThreats = [firstChk.value];
-      }
-    }
-
-    // Actualizar estilos de tarjeta
-    var cards = container.querySelectorAll('.threat-item-card');
-    cards.forEach(function(c) {
-      var chk = c.querySelector('input[type="checkbox"]');
-      if (chk.checked) {
-        c.classList.add('selected');
-      } else {
-        c.classList.remove('selected');
-      }
-    });
-
-    if (badge) {
-      badge.textContent = this.selectedThreats.length + ' seleccionada(s)';
-    }
-
-    this.updateAmenazaDetails();
-  },
-
-  updateAmenazaDetails: function() {
-    var self = this;
+  updateAmenazaDetails: function(amenazaNombre) {
+    var item = (PGIRE_DB || []).find(function(x) { return x.amenaza === amenazaNombre; });
     var elemEjemplo = document.getElementById('input-ejemplo-ie');
     var elemRiesgos = document.getElementById('input-riesgos-ie');
     var elemRuta = document.getElementById('input-ruta-gire');
 
-    var selectedItems = (PGIRE_DB || []).filter(function(x) {
-      return self.selectedThreats.indexOf(x.amenaza) !== -1;
-    });
-
-    if (selectedItems.length === 0) {
-      if (elemEjemplo) elemEjemplo.value = 'Sin selección de amenaza';
-      if (elemRiesgos) elemRiesgos.value = 'Sin selección de riesgos';
-      if (elemRuta) elemRuta.value = 'Ruta estándar CIGIRE';
-      return;
+    if (item) {
+      if (elemEjemplo) elemEjemplo.value = item.ejemplo;
+      if (elemRiesgos) elemRiesgos.value = item.riesgo;
+      if (elemRuta) elemRuta.value = item.ruta;
+    } else {
+      if (elemEjemplo) elemEjemplo.value = '';
+      if (elemRiesgos) elemRiesgos.value = '';
+      if (elemRuta) elemRuta.value = '';
     }
-
-    // Consolidar ejemplos
-    var ejemplosTexto = selectedItems.map(function(it, idx) {
-      return (selectedItems.length > 1 ? (idx + 1) + '. [' + it.amenaza + ']: ' : '') + it.ejemplo;
-    }).join('\n');
-
-    // Consolidar riesgos asociados
-    var riesgosTexto = selectedItems.map(function(it, idx) {
-      return (selectedItems.length > 1 ? (idx + 1) + '. [' + it.amenaza + ']: ' : '') + it.riesgo;
-    }).join('\n');
-
-    // Consolidar rutas únicas activadas
-    var rutasUnicas = [];
-    selectedItems.forEach(function(it) {
-      if (rutasUnicas.indexOf(it.ruta) === -1) {
-        rutasUnicas.push(it.ruta);
-      }
-    });
-    var rutasTexto = rutasUnicas.join('\n');
-
-    if (elemEjemplo) elemEjemplo.value = ejemplosTexto;
-    if (elemRiesgos) elemRiesgos.value = riesgosTexto;
-    if (elemRuta) elemRuta.value = rutasTexto;
   },
 
   bindEvents: function() {
@@ -6680,6 +5901,8 @@ var ModuloA = {
     var selectCiclo = document.getElementById('select-ciclo');
     var selectEtapa = document.getElementById('select-etapa');
     var inputBloom = document.getElementById('input-bloom');
+    var selectCat = document.getElementById('select-cat-amenaza');
+    var selectAmenaza = document.getElementById('select-amenaza');
     var inputNNA = document.getElementById('input-nna');
     var labelDidactica = document.getElementById('label-didactica-nna');
     var btnGuardar = document.getElementById('btn-guardar-diagnostico');
@@ -6693,6 +5916,19 @@ var ModuloA = {
     if (selectEtapa && inputBloom) {
       selectEtapa.addEventListener('change', function() {
         inputBloom.value = self.calculateBloom(selectEtapa.value);
+      });
+    }
+
+    if (selectCat) {
+      selectCat.addEventListener('change', function() {
+        self.filterAmenazas(selectCat.value);
+        self.updateAmenazaDetails('');
+      });
+    }
+
+    if (selectAmenaza) {
+      selectAmenaza.addEventListener('change', function() {
+        self.updateAmenazaDetails(selectAmenaza.value);
       });
     }
 
@@ -6716,10 +5952,8 @@ var ModuloA = {
       ciclo: document.getElementById('select-ciclo') ? document.getElementById('select-ciclo').value : '3',
       etapa: document.getElementById('select-etapa') ? document.getElementById('select-etapa').value : '',
       bloom: document.getElementById('input-bloom') ? document.getElementById('input-bloom').value : '',
-      categorias: this.selectedCategories,
-      categoriaAmenaza: this.selectedCategories.join(' / '),
-      amenazas: this.selectedThreats,
-      amenaza: this.selectedThreats.join(' + '),
+      categoriaAmenaza: document.getElementById('select-cat-amenaza') ? document.getElementById('select-cat-amenaza').value : '',
+      amenaza: document.getElementById('select-amenaza') ? document.getElementById('select-amenaza').value : '',
       ejemploIE: document.getElementById('input-ejemplo-ie') ? document.getElementById('input-ejemplo-ie').value : '',
       riesgosIE: document.getElementById('input-riesgos-ie') ? document.getElementById('input-riesgos-ie').value : '',
       rutaGIRE: document.getElementById('input-ruta-gire') ? document.getElementById('input-ruta-gire').value : '',
@@ -6730,14 +5964,14 @@ var ModuloA = {
       updatedAt: new Date().toISOString()
     };
 
-    if (!diagnostico.etapa || this.selectedThreats.length === 0) {
-      alert('Por favor complete los campos de Etapa y seleccione al menos una Amenaza para guardar el diagnóstico.');
+    if (!diagnostico.etapa || !diagnostico.amenaza) {
+      alert('Por favor complete los campos de Etapa y Amenaza para guardar el diagnóstico.');
       return;
     }
 
     AuthManager.saveUserData('diagnostico', diagnostico);
     this.renderDiagnosticSummary(diagnostico);
-    alert('✅ Diagnóstico Paramétrico PGIRE (Multirriesgo) guardado exitosamente.');
+    alert('✅ Diagnóstico de Aula guardado exitosamente.');
     
     if (this.callbacks.onDiagnosticSaved) {
       this.callbacks.onDiagnosticSaved(diagnostico);
@@ -6748,29 +5982,20 @@ var ModuloA = {
     var container = document.getElementById('resumen-diagnostico-card');
     if (!container) return;
 
-    var amenazasPills = (d.amenazas || [d.amenaza]).map(function(am) {
-      return '<span class="badge-pill badge-etapa2" style="margin-right: 4px; margin-bottom: 4px;">' + am + '</span>';
-    }).join('');
-
-    var categoriasPills = (d.categorias || [d.categoriaAmenaza]).map(function(cat) {
-      return '<span class="badge-pill badge-etapa1" style="margin-right: 4px; margin-bottom: 4px;">' + cat + '</span>';
-    }).join('');
-
     container.style.display = 'block';
     container.innerHTML = 
       '<div style="background: var(--surface-hover); padding: 18px; border-radius: var(--radius-md); border-left: 5px solid var(--primary);">' +
-        '<h4 style="color: var(--primary); font-weight: 700; margin-bottom: 8px;">🎯 Diagnóstico Paramétrico Guardado y Activo (Multirriesgo)</h4>' +
+        '<h4 style="color: var(--primary); font-weight: 700; margin-bottom: 8px;">🎯 Diagnóstico Guardado y Activo</h4>' +
         '<div class="grid-3" style="gap: 12px; font-size: 0.88rem;">' +
           '<div><strong>Ciclo:</strong> Ciclo ' + d.ciclo + ' | <strong>Grado:</strong> ' + d.grado + '</div>' +
           '<div><strong>Etapa:</strong> ' + d.etapa + '</div>' +
           '<div><strong>Complejidad Bloom:</strong> ' + d.bloom + '</div>' +
-          '<div style="grid-column: span 3;"><strong>Categoría(s) Macro:</strong> ' + categoriasPills + '</div>' +
-          '<div style="grid-column: span 3;"><strong>Amenaza(s) Diagnosticada(s):</strong> ' + amenazasPills + '</div>' +
+          '<div><strong>Amenaza:</strong> [' + d.categoriaAmenaza + '] ' + d.amenaza + '</div>' +
           '<div><strong>Estrategia NNA:</strong> ' + d.didacticaNNA + ' (' + d.nna + ' NNA)</div>' +
           '<div><strong>Fecha Inicio:</strong> ' + d.fechaInicio + '</div>' +
         '</div>' +
-        '<div style="margin-top: 10px; font-size: 0.85rem; color: #064e3b; border-top: 1px solid var(--border-light); padding-top: 8px;">' +
-          '<strong>Ruta(s) GIRE Activada(s):</strong><br><pre style="font-family: inherit; white-space: pre-wrap; margin-top: 4px;">' + d.rutaGIRE + '</pre>' +
+        '<div style="margin-top: 10px; font-size: 0.85rem; color: #064e3b;">' +
+          '<strong>Ruta GIRE Activada:</strong> ' + d.rutaGIRE +
         '</div>' +
       '</div>';
   },
@@ -6783,10 +6008,11 @@ var ModuloA = {
         ciclo: '3',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
-        categorias: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenazas: ['Inundación'],
-        amenaza: 'Inundación',
+        amenaza: 'Inundación lenta o desbordamiento',
+        ejemploIE: 'Afectación de aulas y pérdida de material por crecida del río.',
+        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes.',
+        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
         grado: 'Grado 6° (Bachillerato)',
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
@@ -6794,32 +6020,17 @@ var ModuloA = {
       };
     }
 
-    if (d.categorias && Array.isArray(d.categorias)) {
-      this.selectedCategories = d.categorias;
-    } else if (d.categoriaAmenaza) {
-      this.selectedCategories = [d.categoriaAmenaza];
-    } else {
-      this.selectedCategories = ['NATURAL'];
-    }
-
-    if (d.amenazas && Array.isArray(d.amenazas)) {
-      this.selectedThreats = d.amenazas;
-    } else if (d.amenaza) {
-      this.selectedThreats = [d.amenaza];
-    } else {
-      this.selectedThreats = ['Inundación'];
-    }
-
     if (document.getElementById('select-ciclo')) document.getElementById('select-ciclo').value = d.ciclo;
     this.updateGradosForCiclo(d.ciclo);
     if (document.getElementById('select-grado')) document.getElementById('select-grado').value = d.grado;
     if (document.getElementById('select-etapa')) document.getElementById('select-etapa').value = d.etapa;
     if (document.getElementById('input-bloom')) document.getElementById('input-bloom').value = d.bloom || this.calculateBloom(d.etapa);
-
-    this.renderCategoryCheckboxes();
-    this.renderThreatsList();
-    this.updateAmenazaDetails();
-
+    if (document.getElementById('select-cat-amenaza')) {
+      document.getElementById('select-cat-amenaza').value = d.categoriaAmenaza;
+      this.filterAmenazas(d.categoriaAmenaza);
+    }
+    if (document.getElementById('select-amenaza')) document.getElementById('select-amenaza').value = d.amenaza;
+    this.updateAmenazaDetails(d.amenaza);
     if (document.getElementById('input-nna')) {
       document.getElementById('input-nna').value = d.nna;
       if (document.getElementById('label-didactica-nna')) {
@@ -6832,43 +6043,12 @@ var ModuloA = {
   }
 };
 
-// Módulo B: Rayuela Curricular (Biblioteca de Planificación Curricular y Mallas Priorizadas)
+// Módulo B: Rayuela Curricular (Biblioteca de Planificación)
 var ModuloB = {
   currentArea: 'lenguaje',
-  filterRecommendedOnly: false,
 
   init: function() {
     this.renderRayuela();
-  },
-
-  isSurvivalRecommended: function(item, userDiagnostic) {
-    if (!userDiagnostic) return false;
-    var cats = userDiagnostic.categorias || [userDiagnostic.categoriaAmenaza || ''];
-    var ams = userDiagnostic.amenazas || [userDiagnostic.amenaza || ''];
-    var catsStr = cats.join(' ').toUpperCase();
-    var amsStr = ams.join(' ').toUpperCase();
-    var afectacion = (item.afectacion || item.aprendizaje || '').toUpperCase();
-    var tipoRiesgo = (item.tipo_riesgo || item.tipo_afectacion || '').toUpperCase();
-
-    if (catsStr.indexOf('CONFLICTO') !== -1 || catsStr.indexOf('PROTECCIÓN') !== -1 || amsStr.indexOf('ARMADO') !== -1 || amsStr.indexOf('MINAS') !== -1 || amsStr.indexOf('MAP') !== -1 || amsStr.indexOf('CONFINAMIENTO') !== -1) {
-      if (afectacion.indexOf('MINAS') !== -1 || afectacion.indexOf('ARMADOS') !== -1 || afectacion.indexOf('SEXUAL') !== -1 || afectacion.indexOf('TRATA') !== -1 || afectacion.indexOf('JUSTICIA') !== -1) {
-        return true;
-      }
-    }
-
-    if (catsStr.indexOf('NATURAL') !== -1 || catsStr.indexOf('SOCIONATURAL') !== -1 || amsStr.indexOf('INUNDACIÓN') !== -1 || amsStr.indexOf('SISMO') !== -1 || amsStr.indexOf('DESLIZAMIENTO') !== -1 || amsStr.indexOf('HÍDRICA') !== -1) {
-      if (afectacion.indexOf('DESASTRES') !== -1 || afectacion.indexOf('PELIGROS') !== -1 || afectacion.indexOf('AGUA') !== -1 || afectacion.indexOf('WASH') !== -1 || afectacion.indexOf('SALUD') !== -1) {
-        return true;
-      }
-    }
-
-    if (catsStr.indexOf('ANTRÓPICA') !== -1 || amsStr.indexOf('VIOLENCIA') !== -1 || amsStr.indexOf('CIBERACOSO') !== -1 || amsStr.indexOf('SPA') !== -1) {
-      if (afectacion.indexOf('PSICOSOCIALES') !== -1 || afectacion.indexOf('VIOLENCIA') !== -1 || afectacion.indexOf('DIGITALES') !== -1 || afectacion.indexOf('ESTIGMA') !== -1) {
-        return true;
-      }
-    }
-
-    return false;
   },
 
   getItemFields: function(item) {
@@ -6882,7 +6062,6 @@ var ModuloB = {
         dbaDesc = parts.slice(1).join(':').trim();
       }
       return {
-        type: 'academic',
         factor: item[0] || 'Eje Curricular',
         subproceso: item[1] || '',
         dbaCode: dbaCode,
@@ -6892,40 +6071,35 @@ var ModuloB = {
         didactica: item[7] || item[6] || 'Taller situado y pedagógico de aula'
       };
     } else if (item && typeof item === 'object') {
-      // Habilidades Socioemocionales y de Vida
-      if (item.dimension || (item.habilidad && item.saber)) {
+      if (item.habilidad && item.saber && item.hacer) {
+        if (item.habilidad.indexOf('Etapa de respuesta') !== -1 || (item.hacer && item.hacer.indexOf('=SUBTOTAL') !== -1)) {
+          return null;
+        }
         return {
-          type: 'socioemocional',
-          dimension: item.dimension || item.saber || 'Personal-Emocional',
-          etapa: item.etapa || 'Etapa 1. Recreativa y preparatoria',
-          habilidad: item.habilidad || item.hacer || 'Competencia para la vida y bienestar',
-          objetivo_bloom: item.objetivo_bloom || 'Identificar y gestionar emociones básicas en situaciones cotidianas.',
-          proceso_bloom: item.proceso_bloom || 'Comprender + Aplicar',
-          contenido: item.contenido || '• Autoconocimiento y contención emocional.\n• Técnicas de respiración y calma.',
-          evidencia_conmigo: item.evidencia_conmigo || 'Describe sus emociones y necesidades con tranquilidad.',
-          evidencia_otro: item.evidencia_otro || 'Escucha y apoya a sus compañeros en momentos de tensión.',
-          evidencia_entorno: item.evidencia_entorno || 'Participa en espacios seguros de cuidado mutuo.'
+          factor: item.saber || 'Dimensión Socioemocional',
+          subproceso: item.hacer || '',
+          dbaCode: 'SOCIOEMOCIONAL',
+          dbaDesc: item.habilidad || 'Competencia para la vida y bienestar',
+          complejidad: 'Transversal',
+          bloom: 'Autorregulación y empatía',
+          didactica: 'Círculos de palabra y kit de contención socioemocional'
         };
       }
-      // Aprendizajes de Supervivencia y Protección (WASH / ERM)
-      if (item.tipo_riesgo || item.afectacion || (item.tipo_afectacion && item.aprendizaje)) {
+      if (item.tipo_afectacion && item.aprendizaje) {
+        if (item.tipo_afectacion.indexOf('Tipologías') !== -1 || (item.aprendizaje && item.aprendizaje.indexOf('=SUBTOTAL') !== -1)) {
+          return null;
+        }
         return {
-          type: 'supervivencia',
-          tipo_riesgo: (item.tipo_riesgo || item.tipo_afectacion || 'Riesgos físicos y ambientales').replace(/_/g, ' '),
-          afectacion: item.afectacion || item.aprendizaje || 'Protección y autocuidado',
-          aprendizaje_clave: item.aprendizaje_clave || item.riesgo || 'Adopta conductas seguras y reconoce rutas de protección escolar.',
-          objetivo_aprendizaje: item.objetivo_aprendizaje || item.miniproyecto || 'Identificar riesgos en el entorno y aplicar medidas básicas de autoprotección.',
-          proceso_bloom: item.proceso_bloom || 'Comprender + Aplicar',
-          contenido: item.contenido || '• Protocolos seguros de evacuación y alertas tempranas.\n• Rutas de protección institucional.',
-          miniproyecto: item.miniproyecto || 'Mapa escolar de riesgos y protocolos seguros',
-          desafio: item.desafio || 'Diseñar un plan de acción de aula para emergencias',
-          explorar: item.explorar || '',
-          crear: item.crear || '',
-          compartir: item.compartir || ''
+          factor: (item.tipo_afectacion || '').replace(/_/g, ' '),
+          subproceso: item.aprendizaje || '',
+          dbaCode: 'ERM / WASH',
+          dbaDesc: item.riesgo || item.aprendizaje || 'Protección y autocuidado',
+          complejidad: 'Protección',
+          bloom: 'Identificar rutas y autocuidado',
+          didactica: item.miniproyecto || 'Protocolos seguros y mapas de riesgo escolar'
         };
       }
       return {
-        type: 'academic',
         factor: item.factor || item.eje || item.pensamiento || item.area || 'Eje Curricular',
         subproceso: item.subproceso || item.habilidad || '',
         dbaCode: item.dba_code || item.codigo || item.id || item.codigo_oficial || 'DBA OFICIAL',
@@ -6948,8 +6122,13 @@ var ModuloB = {
     var container = document.getElementById('modulo-b-content');
     if (!container) return;
 
-    var habsList = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
-    var supsList = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
+    var habsList = ((HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || []).filter(function(h) {
+      return h && h.habilidad && h.habilidad.indexOf('Etapa de respuesta') === -1 && (!h.hacer || h.hacer.indexOf('=SUBTOTAL') === -1);
+    });
+
+    var supsList = ((HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || []).filter(function(s) {
+      return s && s.tipo_afectacion && s.tipo_afectacion.indexOf('Tipologías') === -1 && (!s.aprendizaje || s.aprendizaje.indexOf('=SUBTOTAL') === -1);
+    });
 
     var areas = [
       { key: 'lenguaje', name: '📖 Lenguaje', count: (cicloData.lenguaje || []).length },
@@ -6972,117 +6151,8 @@ var ModuloB = {
     var validItems = [];
     rawItems.forEach(function(item) {
       var parsed = self.getItemFields(item);
-      if (parsed) {
-        if (self.currentArea === 'supervivencia') {
-          parsed.isRecommended = self.isSurvivalRecommended(item, d);
-        }
-        validItems.push(parsed);
-      }
+      if (parsed) validItems.push(parsed);
     });
-
-    // Ordenar supervivencia para que los recomendados aparezcan primero
-    if (this.currentArea === 'supervivencia') {
-      validItems.sort(function(a, b) {
-        if (a.isRecommended && !b.isRecommended) return -1;
-        if (!a.isRecommended && b.isRecommended) return 1;
-        return 0;
-      });
-    }
-
-    // Encabezados dinámicos según el tipo de área
-    var theadHTML = '';
-    if (this.currentArea === 'socioemocional') {
-      theadHTML = 
-        '<tr style="background: var(--surface-hover); text-align: left;">' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Dimensión & Etapa de Respuesta</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">Habilidad & Objetivo de Aprendizaje (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Contenido de Aprendizaje & Evidencias Clave</th>' +
-        '</tr>';
-    } else if (this.currentArea === 'supervivencia') {
-      theadHTML = 
-        '<tr style="background: var(--surface-hover); text-align: left;">' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Tipología de Riesgo & Afectación</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">Aprendizaje Clave & Objetivo de Protección</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 16%;">Proceso Cognitivo (Bloom)</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 30%;">Mini-Proyecto Situado & Fases de Acción</th>' +
-        '</tr>';
-    } else {
-      theadHTML = 
-        '<tr style="background: var(--surface-hover); text-align: left;">' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Factor / Eje</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">DBA / Aprendizaje Esencial</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Complejidad & Bloom</th>' +
-          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Didáctica Situada / Mini-Proyecto</th>' +
-        '</tr>';
-    }
-
-    // Filas dinámicas según el tipo de área
-    var tbodyHTML = validItems.map(function(item) {
-      if (item.type === 'socioemocional') {
-        var contenidoLimpio = (item.contenido || '').replace(/\n/g, '<br>');
-        return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            '<strong style="color:var(--primary-dark);">' + item.dimension + '</strong><br>' +
-            '<small style="color: var(--text-muted); line-height: 1.35; display:inline-block; margin-top:3px;">' + item.etapa + '</small>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700;">🌱 ' + item.habilidad + '</span><br>' +
-            '<span style="line-height:1.45; display:inline-block; margin-top:5px; font-weight:600;">' + (item.objetivo_bloom || item.habilidad) + '</span>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            '<span class="badge-pill badge-etapa2">' + (item.proceso_bloom || 'Aplicar') + '</span>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top; font-size: 0.83rem; line-height: 1.4;">' +
-            '<div style="background:#f8fafc; padding:6px 8px; border-radius:4px; margin-bottom:4px; border:1px solid #e2e8f0;">' +
-              '<strong>📚 Contenido:</strong><br>' + contenidoLimpio +
-            '</div>' +
-            (item.evidencia_conmigo ? '<div style="margin-top:4px;"><strong style="color:var(--primary);">🎯 Evidencia (Propia):</strong> <em>' + item.evidencia_conmigo + '</em></div>' : '') +
-            (item.evidencia_otro ? '<div style="margin-top:2px;"><strong style="color:#0369a1;">👥 Evidencia (Con pares):</strong> <em>' + item.evidencia_otro + '</em></div>' : '') +
-          '</td>' +
-        '</tr>';
-      } else if (item.type === 'supervivencia') {
-        var badgePriorizado = item.isRecommended ? '<span class="badge-pill" style="background:#fef3c7; color:#92400e; font-weight:800; margin-bottom:4px; display:inline-block;">⭐ PRIORIZADO SEGÚN DIAGNÓSTICO</span><br>' : '';
-        var filaBackground = item.isRecommended ? 'background-color: #fafdfb;' : '';
-
-        return '<tr style="border-bottom: 1px solid var(--border-light); ' + filaBackground + '">' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            badgePriorizado +
-            '<strong style="color:#b91c1c;">🛡️ ' + item.tipo_riesgo + '</strong><br>' +
-            '<span class="badge-pill" style="background:#fee2e2; color:#991b1b; margin-top:3px;">' + item.afectacion + '</span>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            '<span style="color:var(--text-muted); font-size:0.82rem; display:block; margin-bottom:3px; line-height:1.35;">' + item.aprendizaje_clave + '</span>' +
-            '<strong style="color:var(--text-main); line-height:1.4; display:inline-block;">' + (item.objetivo_aprendizaje || item.aprendizaje_clave) + '</strong>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top;">' +
-            '<span class="badge-pill badge-etapa1">' + (item.proceso_bloom || 'Comprender + Aplicar') + '</span>' +
-          '</td>' +
-          '<td style="padding: 10px; vertical-align: top; line-height: 1.4; font-size:0.83rem;">' +
-            '<strong style="color: var(--primary); font-size:0.88rem; display:block;">🛠️ ' + item.miniproyecto + '</strong>' +
-            (item.desafio ? '<span style="color: #334155; display:block; margin-top:4px;"><strong>Desafío:</strong> ' + item.desafio + '</span>' : '') +
-            (item.explorar ? '<div style="background:#f1f5f9; padding:4px 6px; border-radius:3px; margin-top:4px;"><strong>1. Explorar:</strong> ' + item.explorar.split('\n')[0] + '</div>' : '') +
-            (item.crear ? '<div style="background:#f0fdf4; padding:4px 6px; border-radius:3px; margin-top:2px;"><strong>2. Crear:</strong> ' + item.crear.split('\n')[0] + '</div>' : '') +
-          '</td>' +
-        '</tr>';
-      } else {
-        // Áreas académicas regulares (Lenguaje, Matemáticas, Sociales, Naturales)
-        return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-          '<td style="padding: 10px; vertical-align: top;"><strong>' + item.factor + '</strong><br><small style="color: var(--text-muted);">' + item.subproceso + '</small></td>' +
-          '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e0f2fe; color:#0369a1; font-weight:700;">' + item.dbaCode + '</span><br><span style="line-height:1.45; display:inline-block; margin-top:4px;">' + item.dbaDesc + '</span></td>' +
-          '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + item.complejidad + '</span><br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small></td>' +
-          '<td style="padding: 10px; vertical-align: top; color: var(--primary);"><strong>🛠️ ' + item.didactica + '</strong></td>' +
-        '</tr>';
-      }
-    }).join('');
-
-    var bannerContextual = '';
-    if (this.currentArea === 'supervivencia' && d && d.amenazas) {
-      bannerContextual = 
-        '<div class="no-print" style="background:#fefce8; border:1px solid #fde047; padding:10px 14px; border-radius:var(--radius-sm); margin-bottom:14px; font-size:0.86rem; color:#854d0e;">' +
-          '⭐ <strong>Articulación con Diagnóstico de Aula:</strong> Los mini-proyectos marcados con <strong>PRIORIZADO</strong> responden directamente a las amenazas diagnosticadas (<em>' + (d.amenazas.join(', ')) + '</em>).' +
-        '</div>';
-    }
 
     var html = 
       '<div class="card-elite">' +
@@ -7103,11 +6173,26 @@ var ModuloB = {
             '</button>';
           }).join('') +
         '</div>' +
-        bannerContextual +
         '<div style="overflow-x: auto;">' +
           '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
-            '<thead>' + theadHTML + '</thead>' +
-            '<tbody>' + tbodyHTML + '</tbody>' +
+            '<thead>' +
+              '<tr style="background: var(--surface-hover); text-align: left;">' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Factor / Eje</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">DBA / Aprendizaje Esencial</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Complejidad & Bloom</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Didáctica Situada / Mini-Proyecto</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+              validItems.map(function(item) {
+                return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+                  '<td style="padding: 10px; vertical-align: top;"><strong>' + item.factor + '</strong><br><small style="color: var(--text-muted);">' + item.subproceso + '</small></td>' +
+                  '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e0f2fe; color:#0369a1; font-weight:700;">' + item.dbaCode + '</span><br><span style="line-height:1.45; display:inline-block; margin-top:4px;">' + item.dbaDesc + '</span></td>' +
+                  '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + item.complejidad + '</span><br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small></td>' +
+                  '<td style="padding: 10px; vertical-align: top; color: var(--primary);"><strong>🛠️ ' + item.didactica + '</strong></td>' +
+                '</tr>';
+              }).join('') +
+            '</tbody>' +
           '</table>' +
         '</div>' +
       '</div>';
@@ -7132,11 +6217,8 @@ var ModuloB = {
   }
 };
 
-// Módulo C: Monitoreo Semanal por Etapas (Integración Completa por Semanas, Persistencia con Marcas de Tiempo y Exportación Excel/JSON)
+// Módulo C: Monitoreo Semanal por Etapas
 var ModuloC = {
-  duracionSemanas: 16,
-  filtroArea: 'todas',
-
   init: function() {
     this.renderMonitoreo();
   },
@@ -7156,33 +6238,6 @@ var ModuloC = {
     return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
   },
 
-  getSocioemocionalForWeek: function(weekNum, etapa) {
-    var habs = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
-    if (habs.length === 0) return { habilidad: 'Contención Socioemocional', dimension: 'Personal-Emocional' };
-    
-    var etapaKey = (etapa || '').indexOf('ETAPA 1') !== -1 ? 'Etapa 1' :
-                   (etapa || '').indexOf('ETAPA 3') !== -1 ? 'Etapa 3' : 'Etapa 2';
-
-    var habsEtapa = habs.filter(function(h) { return (h.etapa || '').indexOf(etapaKey) !== -1; });
-    if (habsEtapa.length === 0) habsEtapa = habs;
-
-    var idx = (weekNum - 1) % habsEtapa.length;
-    return habsEtapa[idx] || habs[0];
-  },
-
-  getSupervivenciaForWeek: function(weekNum, userDiagnostic) {
-    var sups = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
-    if (sups.length === 0) return { miniproyecto: 'Protocolos seguros escolares', afectacion: 'Autoprotección' };
-
-    var recomendados = sups.filter(function(item) {
-      return ModuloB.isSurvivalRecommended(item, userDiagnostic);
-    });
-
-    var pool = recomendados.length > 0 ? recomendados : sups;
-    var idx = (weekNum - 1) % pool.length;
-    return pool[idx] || sups[0];
-  },
-
   renderMonitoreo: function() {
     var self = this;
     var user = AuthManager.getUserData();
@@ -7194,10 +6249,8 @@ var ModuloC = {
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
-        categorias: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenazas: ['Inundación'],
-        amenaza: 'Inundación',
+        amenaza: 'Inundación lenta o desbordamiento',
         ejemploIE: 'Afectación de aulas y pérdida de material',
         riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes',
         rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía',
@@ -7214,36 +6267,15 @@ var ModuloC = {
 
     var semanas = [];
     var fechaBase = new Date(d.fechaInicio || new Date());
-    var numSemanas = parseInt(this.duracionSemanas, 10) || 16;
     var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
 
-    var amenazasLabel = (d.amenazas && d.amenazas.length > 0) ? d.amenazas.join(' + ') : (d.amenaza || 'Emergencia territorial');
-    var categoriasLabel = (d.categorias && d.categorias.length > 0) ? d.categorias.join(' / ') : (d.categoriaAmenaza || 'PGIRE');
-    var riesgosLabel = d.riesgosIE ? d.riesgosIE.replace(/\n/g, ' | ') : 'Riesgo institucional';
-
-    for (var i = 1; i <= numSemanas; i++) {
+    for (var i = 1; i <= 16; i++) {
       var fechaSem = new Date(fechaBase);
       fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
 
       var areaKey = areas[(i - 1) % areas.length];
-      if (self.filtroArea !== 'todas') {
-        areaKey = self.filtroArea;
-      }
-
-      var rawItems = [];
-      if (areaKey === 'socioemocional') {
-        rawItems = (HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || [];
-      } else if (areaKey === 'supervivencia') {
-        rawItems = (HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || [];
-      } else {
-        rawItems = cicloData[areaKey] || [];
-      }
-
-      var itemIndex = self.filtroArea === 'todas' 
-        ? Math.floor((i - 1) / areas.length) % (rawItems.length || 1)
-        : (i - 1) % (rawItems.length || 1);
-
-      var rawItem = rawItems[itemIndex] || rawItems[0] || [];
+      var rawItems = cicloData[areaKey] || [];
+      var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
       var parsedItem = ModuloB.getItemFields(rawItem) || {
         factor: 'Eje Curricular',
         subproceso: 'Contenido esencial',
@@ -7255,295 +6287,137 @@ var ModuloC = {
       };
 
       var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
-      var habSocio = self.getSocioemocionalForWeek(i, d.etapa);
-      var supProt = self.getSupervivenciaForWeek(i, d);
 
-      var tarjetaHTML = '';
-      if (parsedItem.type === 'socioemocional') {
-        tarjetaHTML = 
-          '<div style="line-height:1.45;">' +
-            '<strong>🌱 ' + parsedItem.dimension + ' (' + parsedItem.etapa + ')</strong><br>' +
-            '<span style="color:#065f46; font-weight:700;">Habilidad: ' + parsedItem.habilidad + '</span><br>' +
-            '<span style="color:var(--text-main);">' + (parsedItem.objetivo_bloom || parsedItem.habilidad) + '</span><br>' +
-            '<span style="color:#0369a1;">🎯 <strong>Evidencia:</strong> ' + parsedItem.evidencia_conmigo + '</span>' +
-          '</div>';
-      } else if (parsedItem.type === 'supervivencia') {
-        tarjetaHTML = 
-          '<div style="line-height:1.45;">' +
-            '<strong>🛡️ ' + parsedItem.tipo_riesgo + ' - ' + parsedItem.afectacion + '</strong><br>' +
-            '<span style="color:#991b1b; font-weight:700;">🛠️ Mini-Proyecto: ' + parsedItem.miniproyecto + '</span><br>' +
-            '<span style="color:var(--text-main);">' + (parsedItem.objetivo_aprendizaje || parsedItem.aprendizaje_clave) + '</span><br>' +
-            '<span style="color:#047857;">🎯 <strong>Desafío:</strong> ' + parsedItem.desafio + '</span>' +
-          '</div>';
-      } else {
-        tarjetaHTML = 
-          '<div style="line-height:1.45;">' +
-            '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-            '<span style="color:#b91c1c;">⚠️ [' + categoriasLabel + ' - ' + amenazasLabel + ']:</span> ' + riesgosLabel + '<br>' +
-            '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
-            '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-            '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span><br>' +
-            '<span style="color:#065f46; font-size:0.83rem;">🌱 <strong>Socioemocional:</strong> ' + (habSocio.habilidad || 'Autocuidado y contención') + ' (' + (habSocio.dimension || 'DSE') + ')</span><br>' +
-            '<span style="color:#991b1b; font-size:0.83rem;">🛡️ <strong>Protección WASH/ERM:</strong> ' + (supProt.miniproyecto || 'Mapas y protocolos seguros') + '</span>' +
-          '</div>';
-      }
+      var tarjetaHTML = 
+        '<div style="line-height:1.45;">' +
+          '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+          '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+          '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
+          '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+        '</div>';
 
-      var savedKey = self.filtroArea === 'todas' ? i : (self.filtroArea + '_' + i);
-      var savedItem = savedMonitoreo[savedKey] || savedMonitoreo[i] || {};
       semanas.push({
         num: i,
-        savedKey: savedKey,
         fecha: fechaSem.toLocaleDateString('es-CO'),
-        fechaRegistro: savedItem.fechaRegistro || 'Sin registrar',
         etapa: d.etapa,
         areaKey: areaKey,
         areaNombre: areaKey.toUpperCase(),
         tarjeta: tarjetaHTML,
-        parsedItem: parsedItem,
-        habSocio: habSocio,
-        supProt: supProt,
-        didacticaEstrategia: didacticaEstrategia,
-        avance: savedItem.avance || '⚪ Sin iniciar',
-        observaciones: savedItem.observaciones || ''
+        avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
+        observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
       });
     }
 
-    var logrados = semanas.filter(function(s) { return s.avance && s.avance.indexOf('Logrado') !== -1; }).length;
-    var enProceso = semanas.filter(function(s) { return s.avance && s.avance.indexOf('proceso') !== -1; }).length;
+    var logrados = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
+    var enProceso = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('proceso') !== -1; }).length;
+    var sinIniciar = semanas.length - logrados - enProceso;
     var pctAvance = Math.round((logrados / semanas.length) * 100);
 
     var html = 
       '<div class="card-elite">' +
-        '<!-- Encabezado Oficial Imprimible -->' +
-        '<div class="print-only-header">' +
-          '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">' +
-            '<div>' +
-              '<h2 style="font-size:12pt; font-weight:900; color:#005a36; margin:0;">CONSEJO NORUEGO PARA REFUGIADOS (NRC) & MINISTERIO DE EDUCACIÓN NACIONAL (MEN)</h2>' +
-              '<p style="font-size:9.5pt; font-weight:700; color:#334155; margin:2px 0;">BITÁCORA OFICIAL DE MONITOREO Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS (GIRE)</p>' +
-            '</div>' +
-            '<div style="text-align:right; font-size:8pt; color:#64748b;">' +
-              '<span>Formato Oficial SIEE</span><br>' +
-              '<span>Fecha Emisión: ' + new Date().toLocaleDateString('es-CO') + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; font-size:8pt; background:#f8fafc; padding:8px; border:1px solid #cbd5e1; border-radius:4px;">' +
-            '<div><strong>Docente:</strong> ' + ((user && user.nombreCompleto) || 'Docente Territorial') + '</div>' +
-            '<div><strong>Institución:</strong> ' + ((user && user.institucion) || 'I.E. Rural') + '</div>' +
-            '<div><strong>Ciclo / Grado:</strong> Ciclo ' + cicloKey + ' - ' + d.grado + '</div>' +
-            '<div><strong>Etapa Emergencia:</strong> ' + d.etapa + '</div>' +
-            '<div><strong>Amenaza(s):</strong> ' + amenazasLabel + '</div>' +
-            '<div><strong>Progreso SIEE:</strong> ' + pctAvance + '% Logrado (' + logrados + ' de ' + semanas.length + ' sem.)</div>' +
-          '</div>' +
-        '</div>' +
-
-        '<div class="card-header no-print">' +
+        '<div class="card-header">' +
           '<div>' +
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza(s): ' + amenazasLabel + '</span>' +
+            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
+          '<div style="display: flex; gap: 10px;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-csv" class="btn-elite btn-secondary" title="Descargar archivo que se abre directamente en Excel">📊 Exportar a Excel (CSV)</button>' +
-            '<button id="btn-exportar-json" class="btn-elite btn-outline" title="Descargar respaldo técnico en JSON">📥 Respaldo JSON</button>' +
-            '<button id="btn-restaurar-json" class="btn-elite btn-outline" title="Cargar un archivo de respaldo JSON guardado previamente">📤 Restaurar JSON</button>' +
-            '<input type="file" id="input-restaurar-json" accept=".json" style="display: none;">' +
-            '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
+            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Exportar Bitácora</button>' +
+            '<button id="btn-imprimir-carta" class="btn-elite btn-secondary">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
-
-        '<!-- Panel de Instrucciones para el Docente -->' +
-        '<div class="no-print" style="background: #f0fdf4; border: 1.5px solid #86efac; border-left: 6px solid #16a34a; border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 22px;">' +
-          '<h4 style="color: #15803d; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 1rem;">' +
-            '<span>💡</span> Guía Operativa de Registro, Exportación y Respaldo para el Docente' +
-          '</h4>' +
-          '<div class="grid-2" style="gap: 12px; font-size: 0.86rem; line-height: 1.5; color: #166534;">' +
-            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d; font-size: 0.9rem;">💾 1. Guardar Avance en Plataforma:</strong><br>' +
-              'Guarda de forma segura en la memoria de su navegador sus calificaciones semanales (<em>Logrado, En proceso, etc.</em>), las evidencias del aula y la <strong>fecha/hora exacta del registro</strong>.' +
-            '</div>' +
-            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d; font-size: 0.9rem;">📊 2. Exportar a Excel (.CSV):</strong><br>' +
-              'Genera una hoja de cálculo estructurada con todas las columnas de la bitácora que <strong>se abre directamente con doble clic en Microsoft Excel o Google Sheets</strong> para lectura y edición tabular.' +
-            '</div>' +
-            '<div style="background: #ffffff; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid #bbf7d0;">' +
-              '<strong style="color: #15803d; font-size: 0.9rem;">🖨️ 3. Imprimir Carta (PDF Oficial):</strong><br>' +
-              'Genera la bitácora lista para imprimir en hoja tamaño Carta (<em>Letter</em>) o exportar en PDF oficial con membrete del MEN/NRC y espacio de firmas para acreditación formal en el SIEE.' +
-            '</div>' +
-            '<div style="background: #f8fafc; padding: 12px 14px; border-radius: var(--radius-sm); border: 1.5px solid #94a3b8;">' +
-              '<strong style="color: #0f172a; font-size: 0.9rem;">📥 4. ¿Para qué sirve el archivo "Respaldo JSON"?:</strong><br>' +
-              '<span style="color: #334155;">' +
-                '• <strong>¿Qué es?:</strong> Es una <em>fotografía digital exacta</em> y ultra-liviana (&lt;25 KB) de todo su diagnóstico y avances.<br>' +
-                '• <strong>Cero Pérdida de Datos:</strong> Si borra el historial del navegador o cambia de computador/celular, use el botón <strong>📤 Restaurar JSON</strong> para recuperar su bitácora en 1 segundo sin reescribir nada.<br>' +
-                '• <strong>Reporte Técnico:</strong> Puede enviarlo por WhatsApp a su Coordinación o equipo NRC para consolidación estadística regional.' +
-              '</span>' +
-            '</div>' +
+        '<div class="grid-4" style="margin-bottom: 24px;">' +
+          '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
+            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
+          '</div>' +
+          '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
+            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
+          '</div>' +
+          '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
+            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
+          '</div>' +
+          '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="font-size: 0.8rem; color: var(--color-blue);">Total Semanas Plan</div>' +
+            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
           '</div>' +
         '</div>' +
-
-        '<!-- Controles de Duración y Filtro por Área -->' +
-        '<div class="no-print" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:var(--radius-md); padding:14px 18px; margin-bottom:20px;">' +
-          '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">' +
-            '<div style="display:flex; align-items:center; gap:10px;">' +
-              '<label style="font-weight:700; font-size:0.88rem; color:#0f172a;">⏱️ Alcance Temporal del Monitoreo:</label>' +
-              '<select id="select-duracion-monitoreo" class="select-elite" style="width:auto; padding:6px 12px; font-weight:700; font-size:0.88rem;">' +
-                '<option value="16" ' + (self.duracionSemanas === 16 ? 'selected' : '') + '>16 Semanas (Fase de Choque / Semestre 1)</option>' +
-                '<option value="32" ' + (self.duracionSemanas === 32 ? 'selected' : '') + '>32 Semanas (Plan Anual Completo - Cobertura Total de DBAs)</option>' +
-                '<option value="40" ' + (self.duracionSemanas === 40 ? 'selected' : '') + '>40 Semanas (Año Lectivo Integral Extendido)</option>' +
-              '</select>' +
-            '</div>' +
-            '<div style="font-size:0.82rem; color:#475569; line-height:1.35; max-width:550px;">' +
-              '💡 <strong>Articulación con Módulo B:</strong> Módulo B contiene la biblioteca completa de referencia. En Módulo C se distribuyen semana a semana. Al seleccionar <strong>32 semanas</strong> se cubre el <strong>100% de los DBAs y procesos</strong> del Ciclo formativo.' +
-            '</div>' +
-          '</div>' +
-
-          '<div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">' +
-            '<span style="font-size:0.84rem; font-weight:700; color:#334155; margin-right:4px;">🔍 Filtrar Vista:' + '</span>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'todas' ? 'btn-primary' : 'btn-outline') + '" data-filtro="todas" style="padding:6px 12px; font-size:0.82rem;">🌟 Integrada (Todas)</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'lenguaje' ? 'btn-primary' : 'btn-outline') + '" data-filtro="lenguaje" style="padding:6px 12px; font-size:0.82rem;">📖 Lenguaje</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'matematicas' ? 'btn-primary' : 'btn-outline') + '" data-filtro="matematicas" style="padding:6px 12px; font-size:0.82rem;">📐 Matemáticas</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'sociales' ? 'btn-primary' : 'btn-outline') + '" data-filtro="sociales" style="padding:6px 12px; font-size:0.82rem;">🌍 Sociales</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'naturales' ? 'btn-primary' : 'btn-outline') + '" data-filtro="naturales" style="padding:6px 12px; font-size:0.82rem;">🔬 Naturales & WASH</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'socioemocional' ? 'btn-primary' : 'btn-outline') + '" data-filtro="socioemocional" style="padding:6px 12px; font-size:0.82rem;">🌱 Socioemocional</button>' +
-            '<button class="btn-elite btn-filtro-c ' + (self.filtroArea === 'supervivencia' ? 'btn-primary' : 'btn-outline') + '" data-filtro="supervivencia" style="padding:6px 12px; font-size:0.82rem;">🛡️ Supervivencia & ERM</button>' +
-          '</div>' +
-        '</div>' +
-
-        '<div class="grid-4" style="margin-bottom: 20px;">' +
-          '<div style="background: var(--surface-hover); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--text-muted);">Progreso en Vista</div>' +
-            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
-          '</div>' +
-          '<div style="background: var(--color-etapa3-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
-            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
-          '</div>' +
-          '<div style="background: var(--color-etapa2-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
-            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
-          '</div>' +
-          '<div style="background: var(--color-blue-bg); padding: 12px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.78rem; color: var(--color-blue);">Semanas Monitoreadas</div>' +
-            '<div style="font-size: 1.5rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
-          '</div>' +
-        '</div>' +
-
         '<div style="overflow-x: auto;">' +
-          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
+          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
             '<thead>' +
               '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 8px; width: 65px; text-align:center;">Semana</th>' +
-                '<th style="padding: 8px; width: 85px;">Fecha Est.</th>' +
-                '<th style="padding: 8px; width: 95px;">Área</th>' +
-                '<th style="padding: 8px;">Tarjeta de Acción Pedagógica Situada (Curricular + Socioemocional + Protección)</th>' +
-                '<th style="padding: 8px; width: 130px;">Estado de Avance</th>' +
-                '<th style="padding: 8px; width: 210px;">Observaciones / Evidencias SIEE</th>' +
+                '<th style="padding: 10px; width: 75px;">Semana</th>' +
+                '<th style="padding: 10px; width: 105px;">Fecha Est.</th>' +
+                '<th style="padding: 10px; width: 110px;">Área</th>' +
+                '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
+                '<th style="padding: 10px; width: 145px;">Estado</th>' +
+                '<th style="padding: 10px; width: 220px;">Observaciones / Evidencia</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>' +
               semanas.map(function(s) {
-                var fechaRegDisplay = s.fechaRegistro !== 'Sin registrar' ? '<div style="font-size:0.72rem; color:var(--text-muted); margin-top:4px;">⏱️ Guardado: ' + s.fechaRegistro + '</div>' : '';
                 return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 8px; font-weight: 700; text-align: center; vertical-align: top;">Sem. ' + s.num + '</td>' +
-                  '<td style="padding: 8px; vertical-align: top;">' + s.fecha + '</td>' +
-                  '<td style="padding: 8px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
-                  '<td style="padding: 8px; font-size: 0.82rem; line-height: 1.4; vertical-align: top;">' + s.tarjeta + '</td>' +
-                  '<td style="padding: 8px; vertical-align: top;">' +
-                    '<select class="select-elite select-avance" data-semana="' + s.savedKey + '" style="padding: 5px; font-size:0.84rem;">' +
+                  '<td style="padding: 10px; font-weight: 700; text-align: center;">Sem. ' + s.num + '</td>' +
+                  '<td style="padding: 10px;">' + s.fecha + '</td>' +
+                  '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
+                  '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
+                  '<td style="padding: 10px;">' +
+                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
                       '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                       '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                       '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
                       '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
                     '</select>' +
-                    fechaRegDisplay +
                   '</td>' +
-                  '<td style="padding: 8px; vertical-align: top;">' +
-                    '<input type="text" class="input-elite input-obs" data-semana="' + s.savedKey + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias SIEE" style="padding: 5px; font-size:0.84rem;">' +
+                  '<td style="padding: 10px;">' +
+                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
                   '</td>' +
                 '</tr>';
               }).join('') +
             '</tbody>' +
           '</table>' +
         '</div>' +
-
-        '<!-- Bloque Oficial de Firmas para Impresión Carta -->' +
-        '<div class="print-signatures-block">' +
-          '<div class="signature-box">' +
-            '<strong>' + ((user && user.nombreCompleto) || 'Docente Responsable') + '</strong><br>' +
-            '<span>Docente Titular de Aula / Responsable de Emergencia</span>' +
-          '</div>' +
-          '<div class="signature-box">' +
-            '<strong>Coordinación Académica / Rectoría</strong><br>' +
-            '<span>' + ((user && user.institucion) || 'Institución Educativa') + ' (Validez Institucional SIEE)</span>' +
-          '</div>' +
-        '</div>' +
       '</div>';
 
     container.innerHTML = html;
-    this.bindEvents(semanas);
+    this.bindEvents();
   },
 
-  bindEvents: function(semanas) {
+  bindEvents: function() {
     var self = this;
     var btnGuardar = document.getElementById('btn-guardar-monitoreo');
     var btnImprimir = document.getElementById('btn-imprimir-carta');
-    var btnExportarCsv = document.getElementById('btn-exportar-csv');
-    var btnExportarJson = document.getElementById('btn-exportar-json');
-    var btnRestaurarJson = document.getElementById('btn-restaurar-json');
-    var inputRestaurarJson = document.getElementById('input-restaurar-json');
-    var selectDuracion = document.getElementById('select-duracion-monitoreo');
-    var btnsFiltro = document.querySelectorAll('.btn-filtro-c');
-
-    if (selectDuracion) {
-      selectDuracion.addEventListener('change', function(e) {
-        self.duracionSemanas = parseInt(e.target.value, 10) || 16;
-        self.renderMonitoreo();
-      });
-    }
-
-    if (btnsFiltro) {
-      btnsFiltro.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          self.filtroArea = btn.getAttribute('data-filtro') || 'todas';
-          self.renderMonitoreo();
-        });
-      });
-    }
+    var btnExportar = document.getElementById('btn-exportar-json');
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
-        var user = AuthManager.getUserData();
-        var savedMonitoreo = (user && user.monitoreo) || {};
         var selects = document.querySelectorAll('.select-avance');
         var inputs = document.querySelectorAll('.input-obs');
-        var nowStr = new Date().toLocaleString('es-CO');
+        var monitoreo = {};
 
         selects.forEach(function(sel) {
           var sem = sel.getAttribute('data-semana');
-          savedMonitoreo[sem] = savedMonitoreo[sem] || {};
-          savedMonitoreo[sem].avance = sel.value;
-          savedMonitoreo[sem].fechaRegistro = nowStr;
+          monitoreo[sem] = monitoreo[sem] || {};
+          monitoreo[sem].avance = sel.value;
         });
 
         inputs.forEach(function(inp) {
           var sem = inp.getAttribute('data-semana');
-          savedMonitoreo[sem] = savedMonitoreo[sem] || {};
-          savedMonitoreo[sem].observaciones = inp.value;
+          monitoreo[sem] = monitoreo[sem] || {};
+          monitoreo[sem].observaciones = inp.value;
         });
 
-        AuthManager.saveUserData('monitoreo', savedMonitoreo);
-        alert('✅ Registro de Monitoreo Semanal guardado exitosamente con marca de tiempo.');
+        AuthManager.saveUserData('monitoreo', monitoreo);
+        alert('✅ Registro de Monitoreo Semanal guardado exitosamente.');
         self.renderMonitoreo();
       });
     }
 
-    if (btnExportarCsv) {
-      btnExportarCsv.addEventListener('click', function() {
-        self.exportToCsv(semanas);
-      });
-    }
-
-    if (btnExportarJson) {
-      btnExportarJson.addEventListener('click', function() {
+    if (btnExportar) {
+      btnExportar.addEventListener('click', function() {
         var data = AuthManager.getUserData();
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         var downloadAnchor = document.createElement('a');
@@ -7555,101 +6429,16 @@ var ModuloC = {
       });
     }
 
-    if (btnRestaurarJson && inputRestaurarJson) {
-      btnRestaurarJson.addEventListener('click', function() {
-        inputRestaurarJson.click();
-      });
-
-      inputRestaurarJson.addEventListener('change', function(e) {
-        var file = e.target.files[0];
-        if (!file) return;
-        var reader = new FileReader();
-        reader.onload = function(evt) {
-          try {
-            var parsed = JSON.parse(evt.target.result);
-            if (parsed.diagnostico || parsed.monitoreo) {
-              if (parsed.diagnostico) AuthManager.saveUserData('diagnostico', parsed.diagnostico);
-              if (parsed.monitoreo) AuthManager.saveUserData('monitoreo', parsed.monitoreo);
-              if (parsed.nombreCompleto) AuthManager.saveUserData('nombreCompleto', parsed.nombreCompleto);
-              if (parsed.institucion) AuthManager.saveUserData('institucion', parsed.institucion);
-              alert('✅ Respaldo JSON restaurado con éxito. Su diagnóstico y bitácora han sido cargados.');
-              self.renderMonitoreo();
-            } else {
-              alert('⚠️ El archivo seleccionado no contiene una estructura válida de bitácora NRC.');
-            }
-          } catch (err) {
-            alert('❌ Error al leer el archivo JSON: ' + err.message);
-          }
-        };
-        reader.readAsText(file);
-      });
-    }
-
     if (btnImprimir) {
       btnImprimir.addEventListener('click', function() {
         window.print();
       });
     }
-  },
-
-  exportToCsv: function(semanas) {
-    var user = AuthManager.getUserData();
-    var d = user ? user.diagnostico : {};
-
-    // Encabezados CSV con delimitador punto y coma (Estándar Excel en español)
-    var headers = [
-      "Semana",
-      "Fecha Estimada",
-      "Fecha Registro Aula",
-      "Área Curricular",
-      "Grado Escolar",
-      "Estrategia NNA",
-      "Amenazas PGIRE",
-      "Código DBA",
-      "Aprendizaje Nuclear",
-      "Didáctica Situada",
-      "Desafío Bloom",
-      "Habilidad Socioemocional",
-      "Mini-Proyecto Supervivencia",
-      "Estado de Avance",
-      "Observaciones y Evidencias SIEE"
-    ];
-
-    var rows = semanas.map(function(s) {
-      return [
-        '"Sem. ' + s.num + '"',
-        '"' + s.fecha + '"',
-        '"' + (s.fechaRegistro || 'Sin registrar') + '"',
-        '"' + s.areaNombre + '"',
-        '"' + (d.grado || 'Ciclo ' + (d.ciclo || '3')) + '"',
-        '"' + (d.didacticaNNA || '') + '"',
-        '"' + ((d.amenazas || [d.amenaza || '']).join(' + ')) + '"',
-        '"' + (s.parsedItem.dbaCode || '') + '"',
-        '"' + (s.parsedItem.subproceso || s.parsedItem.dbaDesc || '').replace(/"/g, '""') + '"',
-        '"' + (s.parsedItem.didactica || '').replace(/"/g, '""') + '"',
-        '"' + (s.parsedItem.bloom || '').replace(/"/g, '""') + '"',
-        '"' + (s.habSocio.habilidad || '').replace(/"/g, '""') + '"',
-        '"' + (s.supProt.miniproyecto || '').replace(/"/g, '""') + '"',
-        '"' + (s.avance || '') + '"',
-        '"' + (s.observaciones || '').replace(/"/g, '""') + '"'
-      ].join(';');
-    });
-
-    var csvContent = "\uFEFF" + headers.join(';') + "\r\n" + rows.join("\r\n");
-    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    var url = URL.createObjectURL(blob);
-    var downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute("href", url);
-    downloadAnchor.setAttribute("download", "bitacora_monitoreo_nrc_" + (user.nombreCompleto || 'docente').replace(/\s+/g, '_') + ".csv");
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    downloadAnchor.remove();
-    URL.revokeObjectURL(url);
   }
 };
 
 
-// --- LOGICA DE CONTROL ---
+// --- CONTROLADOR GENERAL ---
 // Controlador Principal de la Aplicación Web NRC
 function initApp() {
   AuthManager.ensureDefaultUser();
