@@ -365,3 +365,71 @@ body {
   background: var(--surface-hover);
   color: var(--text-main);
 }
+
+/* Botón Flotante y Modal de Evaluadores / Feedback */
+.btn-feedback-floating {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: #0f766e;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-feedback-floating:hover {
+  background: #115e59;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.5);
+}
+
+.star-rating-container {
+  display: flex;
+  gap: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #cbd5e1;
+}
+
+.star-rating-container .star-icon.active {
+  color: #f59e0b;
+}
+
+.feedback-status-badge {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  display: none;
+  margin-top: 12px;
+}
+
+.feedback-status-badge.success {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.feedback-status-badge.error {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.feedback-status-badge.loading {
+  display: block;
+  background: #f0fdf4;
+  color: #0f766e;
+  border: 1px solid #ccfbf1;
+}

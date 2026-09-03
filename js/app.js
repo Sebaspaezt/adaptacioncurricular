@@ -2,6 +2,7 @@
 function initApp() {
   AuthManager.ensureDefaultUser();
   initAuthUI();
+  initFeedbackUI();
   initNavigation();
   initAccordions();
 
@@ -132,6 +133,115 @@ function initAccordions() {
       });
     }
   });
+}
+
+function initFeedbackUI() {
+  var modalFeedback = document.getElementById('modal-feedback');
+  var btnHeader = document.getElementById('btn-header-feedback');
+  var btnFloating = document.getElementById('btn-floating-feedback');
+  var btnClose = document.getElementById('btn-close-feedback-modal');
+  var formEvaluador = document.getElementById('form-evaluador');
+  var statusBadge = document.getElementById('feedback-status-msg');
+  var starIcons = document.querySelectorAll('#star-rating .star-icon');
+  var starsInput = document.getElementById('feedback-stars-val');
+
+  if (btnHeader) {
+    btnHeader.addEventListener('click', function() {
+      if (modalFeedback) modalFeedback.style.display = 'flex';
+    });
+  }
+
+  if (btnFloating) {
+    btnFloating.addEventListener('click', function() {
+      if (modalFeedback) modalFeedback.style.display = 'flex';
+    });
+  }
+
+  if (btnClose) {
+    btnClose.addEventListener('click', function() {
+      if (modalFeedback) modalFeedback.style.display = 'none';
+    });
+  }
+
+  if (starIcons.length > 0) {
+    starIcons.forEach(function(star) {
+      star.addEventListener('click', function() {
+        var val = parseInt(this.getAttribute('data-value'), 10);
+        if (starsInput) starsInput.value = val;
+        starIcons.forEach(function(s, idx) {
+          if (idx < val) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    });
+  }
+
+  if (formEvaluador) {
+    formEvaluador.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var evaluador = document.getElementById('feedback-evaluador') ? document.getElementById('feedback-evaluador').value.trim() : '';
+      var entidad = document.getElementById('feedback-entidad') ? document.getElementById('feedback-entidad').value.trim() : 'No especificada';
+      var modulo = document.getElementById('feedback-modulo') ? document.getElementById('feedback-modulo').value : 'General';
+      var emailContact = document.getElementById('feedback-email') ? document.getElementById('feedback-email').value.trim() : 'No proporcionado';
+      var estrellas = starsInput ? starsInput.value : '5';
+      var comentarios = document.getElementById('feedback-comentarios') ? document.getElementById('feedback-comentarios').value.trim() : '';
+
+      if (!evaluador || !comentarios) {
+        if (statusBadge) {
+          statusBadge.className = 'feedback-status-badge error';
+          statusBadge.textContent = '⚠️ Por favor complete su nombre y las observaciones de mejora.';
+        }
+        return;
+      }
+
+      if (statusBadge) {
+        statusBadge.className = 'feedback-status-badge loading';
+        statusBadge.textContent = '⌛ Enviando retroalimentación a juanitospt@gmail.com...';
+      }
+
+      var payload = {
+        _subject: "[Evaluación Web NRC] Nueva retroalimentación de evaluador: " + evaluador,
+        "Evaluador / Rol": evaluador,
+        "Entidad / Institución": entidad,
+        "Módulo Evaluado": modulo,
+        "Correo del Evaluador": emailContact,
+        "Calificación": estrellas + " de 5 estrellas",
+        "Comentarios y Sugerencias": comentarios,
+        "_template": "table"
+      };
+
+      fetch('https://formsubmit.co/ajax/juanitospt@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        if (statusBadge) {
+          statusBadge.className = 'feedback-status-badge success';
+          statusBadge.innerHTML = '✅ <strong>¡Comentario enviado exitosamente!</strong> Gracias por su evaluación. Las observaciones han sido enviadas a juanitospt@gmail.com.';
+        }
+        formEvaluador.reset();
+        if (starsInput) starsInput.value = '5';
+        starIcons.forEach(function(s) { s.classList.add('active'); });
+      })
+      .catch(function(err) {
+        if (statusBadge) {
+          statusBadge.className = 'feedback-status-badge error';
+          statusBadge.textContent = '❌ Hubo un error al enviar el formulario. Inténtelo nuevamente.';
+        }
+      });
+    });
+  }
 }
 
 if (document.readyState === 'loading') {
