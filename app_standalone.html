@@ -855,22 +855,22 @@ body {
         <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center;">Crear Nuevo Perfil</button>
       </div>
     </div>
-  <!-- Modal de Evaluadores / Retroalimentación -->
+  <!-- Modal de Evaluadores / Retroalimentación Multimódulo -->
   <div id="modal-feedback" class="modal-overlay" style="display: none;">
-    <div class="modal-content" style="max-width: 540px;">
+    <div class="modal-content" style="max-width: 680px; max-height: 90vh; overflow-y: auto;">
       <button id="btn-close-feedback-modal" class="modal-close-btn" onclick="document.getElementById('modal-feedback').style.display='none';" title="Cerrar ventana">✕</button>
       <h2 style="color: #0f766e; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-        <span>💬</span> Formulario de Evaluación y Mejora
+        <span>💬</span> Formulario de Evaluación y Mejora Multimódulo
       </h2>
-      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4;">
-        Sus comentarios serán enviados directamente al equipo responsable (<strong>juanitospt@gmail.com</strong>) para retroalimentar el desarrollo de la plataforma web.
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+        Sus observaciones sobre los 3 módulos del sistema y capturas de pantalla serán enviadas directamente al equipo responsable (<strong>juanitospt@gmail.com</strong>).
       </p>
 
-      <form id="form-evaluador">
+      <form id="form-evaluador" enctype="multipart/form-data">
         <div class="grid-2" style="gap: 12px; margin-bottom: 12px;">
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label">Nombre del Evaluador / Rol:</label>
-            <input type="text" id="feedback-evaluador" class="input-elite" placeholder="ej. Dra. Elena Gómez (Evaluadora)" required>
+            <label class="form-label">Nombre del Evaluador / Rol *:</label>
+            <input type="text" id="feedback-evaluador" class="input-elite" placeholder="ej. Dra. Elena Gómez (Evaluadora MEN)" required>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label">Entidad / Institución:</label>
@@ -880,43 +880,60 @@ body {
 
         <div class="grid-2" style="gap: 12px; margin-bottom: 12px;">
           <div class="form-group" style="margin-bottom: 0;">
-            <label class="form-label">Módulo u Objeto Evaluado:</label>
-            <select id="feedback-modulo" class="input-elite">
-              <option value="General / Toda la Plataforma">General / Toda la Plataforma</option>
-              <option value="Módulo A: Diagnóstico">Módulo A: Diagnóstico</option>
-              <option value="Módulo B: Rayuela Curricular">Módulo B: Rayuela Curricular</option>
-              <option value="Módulo C: Monitoreo Semanal">Módulo C: Monitoreo Semanal</option>
-              <option value="Usabilidad / Diseño Visual">Usabilidad / Diseño Visual</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin-bottom: 0;">
             <label class="form-label">Correo de contacto (opcional):</label>
             <input type="email" id="feedback-email" class="input-elite" placeholder="ej. evaluador@ejemplo.com">
           </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 12px;">
-          <label class="form-label">Calificación General de la Herramienta:</label>
-          <div id="star-rating" class="star-rating-container">
-            <span class="star-icon active" data-value="1">★</span>
-            <span class="star-icon active" data-value="2">★</span>
-            <span class="star-icon active" data-value="3">★</span>
-            <span class="star-icon active" data-value="4">★</span>
-            <span class="star-icon active" data-value="5">★</span>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Calificación General de la Herramienta:</label>
+            <div id="star-rating" class="star-rating-container">
+              <span class="star-icon active" data-value="1">★</span>
+              <span class="star-icon active" data-value="2">★</span>
+              <span class="star-icon active" data-value="3">★</span>
+              <span class="star-icon active" data-value="4">★</span>
+              <span class="star-icon active" data-value="5">★</span>
+            </div>
+            <input type="hidden" id="feedback-stars-val" value="5">
           </div>
-          <input type="hidden" id="feedback-stars-val" value="5">
         </div>
 
+        <div style="background: #f0fdf4; border-left: 4px solid #0f766e; padding: 10px 14px; border-radius: 4px; margin-bottom: 14px; font-size: 0.85rem; color: #115e59; line-height: 1.45;">
+          <strong>ℹ️ Instrucciones de Evaluación:</strong> Complete sus hallazgos, fortalezas o sugerencias en las 3 casillas correspondientes a cada módulo. Si no evaluó un módulo en particular, puede dejarlo en blanco.
+        </div>
+
+        <!-- Casilla Módulo A -->
         <div class="form-group" style="margin-bottom: 12px;">
-          <label class="form-label">Comentarios y Sugerencias de Mejora:</label>
-          <textarea id="feedback-comentarios" class="textarea-elite" rows="4" placeholder="Escriba aquí detalladamente las sugerencias de mejora, aspectos a corregir o fortalezas encontradas..." required></textarea>
+          <label class="form-label" style="font-weight: 700; color: #0f766e;">🎛️ 1. Módulo A: Diagnóstico Curricular y Parametrización</label>
+          <textarea id="feedback-modulo-a" class="textarea-elite" rows="3" placeholder="Observaciones sobre la matriz guía, selección de ciclos (I-V), etapas de emergencia, niveles Bloom, categorías PGIRE, diagnósticos NNA y rutas de protección..."></textarea>
+        </div>
+
+        <!-- Casilla Módulo B -->
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label" style="font-weight: 700; color: #005A36;">📚 2. Módulo B: Rayuela Curricular (Mallas y Áreas)</label>
+          <textarea id="feedback-modulo-b" class="textarea-elite" rows="3" placeholder="Observaciones sobre la matriz de mallas curriculares por áreas (Lenguaje, Mates, Ciencias), subprocesos graduados, EBC, DBA MEN 2026, triada evaluativa Saber-Hacer-Ser y didáctica..."></textarea>
+        </div>
+
+        <!-- Casilla Módulo C -->
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label" style="font-weight: 700; color: #d97706;">📋 3. Módulo C: Monitoreo Semanal y Avance Pedagógico</label>
+          <textarea id="feedback-modulo-c" class="textarea-elite" rows="3" placeholder="Observaciones sobre el registro de horas semanales, seguimiento de DBA, bitácora de campo, reporte de emergencias activas e impresión/exportación de informes..."></textarea>
+        </div>
+
+        <!-- Carga de Pantallazos / Evidencias -->
+        <div class="form-group" style="margin-bottom: 14px; background: #f8fafc; border: 1px dashed #cbd5e1; padding: 12px; border-radius: 8px;">
+          <label class="form-label" style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <span>📷</span> Adjuntar Pantallazos / Evidencias (PNG, JPG, JPEG):
+          </label>
+          <input type="file" id="feedback-adjuntos" accept="image/*" multiple class="input-elite" style="background: white; padding: 6px;">
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+            Puede seleccionar uno o varios archivos de imagen (pantallazos) para respaldar su evaluación.
+          </p>
         </div>
 
         <div id="feedback-status-msg" class="feedback-status-badge"></div>
 
         <div style="display: flex; gap: 10px; margin-top: 16px;">
-          <button type="submit" id="btn-submit-feedback" class="btn-elite" style="flex: 1; justify-content: center; background: #0f766e; color: white;">
-            <span>🚀</span> Enviar Retroalimentación
+          <button type="submit" id="btn-submit-feedback" class="btn-elite" style="flex: 1; justify-content: center; background: #0f766e; color: white; padding: 12px;">
+            <span>🚀</span> Enviar Retroalimentación y Evidencias
           </button>
         </div>
       </form>
@@ -6766,42 +6783,58 @@ function initFeedbackUI() {
 
       var evaluador = document.getElementById('feedback-evaluador') ? document.getElementById('feedback-evaluador').value.trim() : '';
       var entidad = document.getElementById('feedback-entidad') ? document.getElementById('feedback-entidad').value.trim() : 'No especificada';
-      var modulo = document.getElementById('feedback-modulo') ? document.getElementById('feedback-modulo').value : 'General';
       var emailContact = document.getElementById('feedback-email') ? document.getElementById('feedback-email').value.trim() : 'No proporcionado';
       var estrellas = starsInput ? starsInput.value : '5';
-      var comentarios = document.getElementById('feedback-comentarios') ? document.getElementById('feedback-comentarios').value.trim() : '';
 
-      if (!evaluador || !comentarios) {
+      var obsModuloA = document.getElementById('feedback-modulo-a') ? document.getElementById('feedback-modulo-a').value.trim() : '';
+      var obsModuloB = document.getElementById('feedback-modulo-b') ? document.getElementById('feedback-modulo-b').value.trim() : '';
+      var obsModuloC = document.getElementById('feedback-modulo-c') ? document.getElementById('feedback-modulo-c').value.trim() : '';
+
+      if (!evaluador) {
         if (statusBadge) {
           statusBadge.className = 'feedback-status-badge error';
-          statusBadge.textContent = '⚠️ Por favor complete su nombre y las observaciones de mejora.';
+          statusBadge.textContent = '⚠️ Por favor ingrese su Nombre o Rol de evaluador.';
+        }
+        return;
+      }
+
+      if (!obsModuloA && !obsModuloB && !obsModuloC) {
+        if (statusBadge) {
+          statusBadge.className = 'feedback-status-badge error';
+          statusBadge.textContent = '⚠️ Por favor diligencie las observaciones en al menos uno de los 3 módulos (A, B o C).';
         }
         return;
       }
 
       if (statusBadge) {
         statusBadge.className = 'feedback-status-badge loading';
-        statusBadge.textContent = '⌛ Enviando retroalimentación a juanitospt@gmail.com...';
+        statusBadge.textContent = '⌛ Enviando retroalimentación multimódulo y evidencias a juanitospt@gmail.com...';
       }
 
-      var payload = {
-        _subject: "[Evaluación Web NRC] Nueva retroalimentación de evaluador: " + evaluador,
-        "Evaluador / Rol": evaluador,
-        "Entidad / Institución": entidad,
-        "Módulo Evaluado": modulo,
-        "Correo del Evaluador": emailContact,
-        "Calificación": estrellas + " de 5 estrellas",
-        "Comentarios y Sugerencias": comentarios,
-        "_template": "table"
-      };
+      var formData = new FormData();
+      formData.append('_subject', '[Evaluación Web NRC] Nueva retroalimentación multimódulo de: ' + evaluador);
+      formData.append('Evaluador / Rol', evaluador);
+      formData.append('Entidad / Institución', entidad);
+      formData.append('Correo del Evaluador', emailContact);
+      formData.append('Calificación General', estrellas + ' de 5 estrellas');
+      formData.append('1. Observaciones Módulo A (Diagnóstico)', obsModuloA || 'Sin observaciones');
+      formData.append('2. Observaciones Módulo B (Rayuela Curricular)', obsModuloB || 'Sin observaciones');
+      formData.append('3. Observaciones Módulo C (Monitoreo Semanal)', obsModuloC || 'Sin observaciones');
+      formData.append('_template', 'table');
+
+      var fileInput = document.getElementById('feedback-adjuntos');
+      if (fileInput && fileInput.files.length > 0) {
+        for (var i = 0; i < fileInput.files.length; i++) {
+          formData.append('pantallazo_' + (i + 1), fileInput.files[i]);
+        }
+      }
 
       fetch('https://formsubmit.co/ajax/juanitospt@gmail.com', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: formData
       })
       .then(function(response) {
         return response.json();
@@ -6809,7 +6842,7 @@ function initFeedbackUI() {
       .then(function(data) {
         if (statusBadge) {
           statusBadge.className = 'feedback-status-badge success';
-          statusBadge.innerHTML = '✅ <strong>¡Comentario enviado exitosamente!</strong> Gracias por su evaluación. Las observaciones han sido enviadas a juanitospt@gmail.com.';
+          statusBadge.innerHTML = '✅ <strong>¡Evaluación y pantallazos enviados exitosamente!</strong> Gracias por su realimentación. Los informes han sido enviados a juanitospt@gmail.com.';
         }
         formEvaluador.reset();
         if (starsInput) starsInput.value = '5';

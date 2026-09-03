@@ -185,42 +185,58 @@ function initFeedbackUI() {
 
       var evaluador = document.getElementById('feedback-evaluador') ? document.getElementById('feedback-evaluador').value.trim() : '';
       var entidad = document.getElementById('feedback-entidad') ? document.getElementById('feedback-entidad').value.trim() : 'No especificada';
-      var modulo = document.getElementById('feedback-modulo') ? document.getElementById('feedback-modulo').value : 'General';
       var emailContact = document.getElementById('feedback-email') ? document.getElementById('feedback-email').value.trim() : 'No proporcionado';
       var estrellas = starsInput ? starsInput.value : '5';
-      var comentarios = document.getElementById('feedback-comentarios') ? document.getElementById('feedback-comentarios').value.trim() : '';
 
-      if (!evaluador || !comentarios) {
+      var obsModuloA = document.getElementById('feedback-modulo-a') ? document.getElementById('feedback-modulo-a').value.trim() : '';
+      var obsModuloB = document.getElementById('feedback-modulo-b') ? document.getElementById('feedback-modulo-b').value.trim() : '';
+      var obsModuloC = document.getElementById('feedback-modulo-c') ? document.getElementById('feedback-modulo-c').value.trim() : '';
+
+      if (!evaluador) {
         if (statusBadge) {
           statusBadge.className = 'feedback-status-badge error';
-          statusBadge.textContent = '⚠️ Por favor complete su nombre y las observaciones de mejora.';
+          statusBadge.textContent = '⚠️ Por favor ingrese su Nombre o Rol de evaluador.';
+        }
+        return;
+      }
+
+      if (!obsModuloA && !obsModuloB && !obsModuloC) {
+        if (statusBadge) {
+          statusBadge.className = 'feedback-status-badge error';
+          statusBadge.textContent = '⚠️ Por favor diligencie las observaciones en al menos uno de los 3 módulos (A, B o C).';
         }
         return;
       }
 
       if (statusBadge) {
         statusBadge.className = 'feedback-status-badge loading';
-        statusBadge.textContent = '⌛ Enviando retroalimentación a juanitospt@gmail.com...';
+        statusBadge.textContent = '⌛ Enviando retroalimentación multimódulo y evidencias a juanitospt@gmail.com...';
       }
 
-      var payload = {
-        _subject: "[Evaluación Web NRC] Nueva retroalimentación de evaluador: " + evaluador,
-        "Evaluador / Rol": evaluador,
-        "Entidad / Institución": entidad,
-        "Módulo Evaluado": modulo,
-        "Correo del Evaluador": emailContact,
-        "Calificación": estrellas + " de 5 estrellas",
-        "Comentarios y Sugerencias": comentarios,
-        "_template": "table"
-      };
+      var formData = new FormData();
+      formData.append('_subject', '[Evaluación Web NRC] Nueva retroalimentación multimódulo de: ' + evaluador);
+      formData.append('Evaluador / Rol', evaluador);
+      formData.append('Entidad / Institución', entidad);
+      formData.append('Correo del Evaluador', emailContact);
+      formData.append('Calificación General', estrellas + ' de 5 estrellas');
+      formData.append('1. Observaciones Módulo A (Diagnóstico)', obsModuloA || 'Sin observaciones');
+      formData.append('2. Observaciones Módulo B (Rayuela Curricular)', obsModuloB || 'Sin observaciones');
+      formData.append('3. Observaciones Módulo C (Monitoreo Semanal)', obsModuloC || 'Sin observaciones');
+      formData.append('_template', 'table');
+
+      var fileInput = document.getElementById('feedback-adjuntos');
+      if (fileInput && fileInput.files.length > 0) {
+        for (var i = 0; i < fileInput.files.length; i++) {
+          formData.append('pantallazo_' + (i + 1), fileInput.files[i]);
+        }
+      }
 
       fetch('https://formsubmit.co/ajax/juanitospt@gmail.com', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: formData
       })
       .then(function(response) {
         return response.json();
@@ -228,7 +244,7 @@ function initFeedbackUI() {
       .then(function(data) {
         if (statusBadge) {
           statusBadge.className = 'feedback-status-badge success';
-          statusBadge.innerHTML = '✅ <strong>¡Comentario enviado exitosamente!</strong> Gracias por su evaluación. Las observaciones han sido enviadas a juanitospt@gmail.com.';
+          statusBadge.innerHTML = '✅ <strong>¡Evaluación y pantallazos enviados exitosamente!</strong> Gracias por su realimentación. Los informes han sido enviados a juanitospt@gmail.com.';
         }
         formEvaluador.reset();
         if (starsInput) starsInput.value = '5';
