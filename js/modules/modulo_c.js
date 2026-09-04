@@ -30,11 +30,12 @@ var ModuloC = {
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
+        categoriasAmenaza: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación lenta o desbordamiento',
-        ejemploIE: 'Afectación de aulas y pérdida de material',
-        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes',
-        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía',
+        amenaza: 'Inundación',
+        ejemploIE: 'Creciente de río o quebrada',
+        riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+        rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
         fechaInicio: new Date().toISOString().split('T')[0]
       };
     }

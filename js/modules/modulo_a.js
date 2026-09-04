@@ -47,23 +47,46 @@ var ModuloA = {
     });
   },
 
-  filterAmenazas: function(categoria) {
+  getSelectedCategories: function() {
+    var checkboxes = document.querySelectorAll('.category-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var selectCat = document.getElementById('select-cat-amenaza');
+      if (selectCat && selectCat.value) {
+        selected.push(selectCat.value);
+      }
+    }
+    return selected;
+  },
+
+  filterAmenazas: function(categorias) {
     var select = document.getElementById('select-amenaza');
     if (!select) return;
     select.innerHTML = '<option value="">-- Seleccione Amenaza Específica --</option>';
 
-    var filtradas = PGIRE_DB || [];
-    if (categoria && categoria.indexOf('TODAS') === -1) {
-      filtradas = (PGIRE_DB || []).filter(function(item) {
-        return item.categoria.toUpperCase().indexOf(categoria.toUpperCase()) !== -1 ||
-               categoria.toUpperCase().indexOf(item.categoria.toUpperCase()) !== -1;
-      });
+    if (typeof categorias === 'string') {
+      categorias = [categorias];
     }
+    categorias = categorias || [];
+
+    var isAll = (categorias.length === 0 || categorias.indexOf('TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)') !== -1);
+
+    var filtradas = (PGIRE_DB || []).filter(function(item) {
+      if (isAll) return true;
+      return categorias.some(function(cat) {
+        var cUpper = String(cat).toUpperCase();
+        var itemCat = String(item.categoria || '').toUpperCase();
+        return itemCat.indexOf(cUpper) !== -1 || cUpper.indexOf(itemCat) !== -1;
+      });
+    });
 
     filtradas.forEach(function(item) {
       var opt = document.createElement('option');
       opt.value = item.amenaza;
-      opt.textContent = item.amenaza;
+      opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
       select.appendChild(opt);
     });
   },
@@ -75,9 +98,9 @@ var ModuloA = {
     var elemRuta = document.getElementById('input-ruta-gire');
 
     if (item) {
-      if (elemEjemplo) elemEjemplo.value = item.ejemplo;
-      if (elemRiesgos) elemRiesgos.value = item.riesgo;
-      if (elemRuta) elemRuta.value = item.ruta;
+      if (elemEjemplo) elemEjemplo.value = item.ejemplo || '';
+      if (elemRiesgos) elemRiesgos.value = item.riesgo || '';
+      if (elemRuta) elemRuta.value = item.ruta || '';
     } else {
       if (elemEjemplo) elemEjemplo.value = '';
       if (elemRiesgos) elemRiesgos.value = '';
@@ -90,11 +113,11 @@ var ModuloA = {
     var selectCiclo = document.getElementById('select-ciclo');
     var selectEtapa = document.getElementById('select-etapa');
     var inputBloom = document.getElementById('input-bloom');
-    var selectCat = document.getElementById('select-cat-amenaza');
     var selectAmenaza = document.getElementById('select-amenaza');
     var inputNNA = document.getElementById('input-nna');
     var labelDidactica = document.getElementById('label-didactica-nna');
     var btnGuardar = document.getElementById('btn-guardar-diagnostico');
+    var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
 
     if (selectCiclo) {
       selectCiclo.addEventListener('change', function() {
@@ -108,9 +131,39 @@ var ModuloA = {
       });
     }
 
+    categoryCheckboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var parentLabel = cb.closest('.category-chip');
+        if (parentLabel) {
+          if (cb.checked) {
+            parentLabel.classList.add('active');
+          } else {
+            parentLabel.classList.remove('active');
+          }
+        }
+        var selectedCats = self.getSelectedCategories();
+        self.filterAmenazas(selectedCats);
+        self.updateAmenazaDetails('');
+      });
+    });
+
+    var selectCat = document.getElementById('select-cat-amenaza');
     if (selectCat) {
       selectCat.addEventListener('change', function() {
-        self.filterAmenazas(selectCat.value);
+        var val = selectCat.value;
+        categoryCheckboxes.forEach(function(cb) {
+          if (val === 'TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)') {
+            cb.checked = true;
+          } else {
+            cb.checked = (cb.value === val);
+          }
+          var parentLabel = cb.closest('.category-chip');
+          if (parentLabel) {
+            if (cb.checked) parentLabel.classList.add('active');
+            else parentLabel.classList.remove('active');
+          }
+        });
+        self.filterAmenazas(self.getSelectedCategories());
         self.updateAmenazaDetails('');
       });
     }
@@ -137,12 +190,17 @@ var ModuloA = {
 
   saveDiagnostic: function() {
     var self = this;
+    var selectedCats = this.getSelectedCategories();
+    var selectAmenaza = document.getElementById('select-amenaza');
+    var amenazaVal = selectAmenaza ? selectAmenaza.value : '';
+
     var diagnostico = {
       ciclo: document.getElementById('select-ciclo') ? document.getElementById('select-ciclo').value : '3',
       etapa: document.getElementById('select-etapa') ? document.getElementById('select-etapa').value : '',
       bloom: document.getElementById('input-bloom') ? document.getElementById('input-bloom').value : '',
-      categoriaAmenaza: document.getElementById('select-cat-amenaza') ? document.getElementById('select-cat-amenaza').value : '',
-      amenaza: document.getElementById('select-amenaza') ? document.getElementById('select-amenaza').value : '',
+      categoriasAmenaza: selectedCats,
+      categoriaAmenaza: selectedCats.join(' + ') || 'MULTIRRIESGO',
+      amenaza: amenazaVal,
       ejemploIE: document.getElementById('input-ejemplo-ie') ? document.getElementById('input-ejemplo-ie').value : '',
       riesgosIE: document.getElementById('input-riesgos-ie') ? document.getElementById('input-riesgos-ie').value : '',
       rutaGIRE: document.getElementById('input-ruta-gire') ? document.getElementById('input-ruta-gire').value : '',
@@ -179,12 +237,12 @@ var ModuloA = {
           '<div><strong>Ciclo:</strong> Ciclo ' + d.ciclo + ' | <strong>Grado:</strong> ' + d.grado + '</div>' +
           '<div><strong>Etapa:</strong> ' + d.etapa + '</div>' +
           '<div><strong>Complejidad Bloom:</strong> ' + d.bloom + '</div>' +
-          '<div><strong>Amenaza:</strong> [' + d.categoriaAmenaza + '] ' + d.amenaza + '</div>' +
+          '<div><strong>Amenaza:</strong> [' + (d.categoriaAmenaza || 'PGIRE') + '] ' + d.amenaza + '</div>' +
           '<div><strong>Estrategia NNA:</strong> ' + d.didacticaNNA + ' (' + d.nna + ' NNA)</div>' +
           '<div><strong>Fecha Inicio:</strong> ' + d.fechaInicio + '</div>' +
         '</div>' +
         '<div style="margin-top: 10px; font-size: 0.85rem; color: #064e3b;">' +
-          '<strong>Ruta GIRE Activada:</strong> ' + d.rutaGIRE +
+          '<strong>Articulación Institucional PGIRE:</strong> ' + d.rutaGIRE +
         '</div>' +
       '</div>';
   },
@@ -197,11 +255,12 @@ var ModuloA = {
         ciclo: '3',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+        categoriasAmenaza: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación lenta o desbordamiento',
-        ejemploIE: 'Afectación de aulas y pérdida de material por crecida del río.',
-        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes.',
-        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
+        amenaza: 'Inundación',
+        ejemploIE: 'Creciente de río o quebrada',
+        riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+        rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
         grado: 'Grado 6° (Bachillerato)',
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
@@ -214,12 +273,29 @@ var ModuloA = {
     if (document.getElementById('select-grado')) document.getElementById('select-grado').value = d.grado;
     if (document.getElementById('select-etapa')) document.getElementById('select-etapa').value = d.etapa;
     if (document.getElementById('input-bloom')) document.getElementById('input-bloom').value = d.bloom || this.calculateBloom(d.etapa);
+
+    var cats = d.categoriasAmenaza || (d.categoriaAmenaza ? [d.categoriaAmenaza] : ['NATURAL']);
+    var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
+    categoryCheckboxes.forEach(function(cb) {
+      cb.checked = cats.indexOf(cb.value) !== -1;
+      var parentLabel = cb.closest('.category-chip');
+      if (parentLabel) {
+        if (cb.checked) parentLabel.classList.add('active');
+        else parentLabel.classList.remove('active');
+      }
+    });
+
     if (document.getElementById('select-cat-amenaza')) {
-      document.getElementById('select-cat-amenaza').value = d.categoriaAmenaza;
-      this.filterAmenazas(d.categoriaAmenaza);
+      document.getElementById('select-cat-amenaza').value = cats.length === 1 ? cats[0] : (cats.length > 1 ? 'TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)' : '');
     }
-    if (document.getElementById('select-amenaza')) document.getElementById('select-amenaza').value = d.amenaza;
+
+    this.filterAmenazas(cats);
+
+    if (document.getElementById('select-amenaza')) {
+      document.getElementById('select-amenaza').value = d.amenaza;
+    }
     this.updateAmenazaDetails(d.amenaza);
+
     if (document.getElementById('input-nna')) {
       document.getElementById('input-nna').value = d.nna;
       if (document.getElementById('label-didactica-nna')) {

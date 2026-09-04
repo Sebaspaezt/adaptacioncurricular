@@ -34,16 +34,6 @@ body {
   gap: 16px;
 }
 
-.brand-badge {
-  background: var(--primary);
-  color: white;
-  font-weight: 900;
-  font-size: 1.15rem;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  letter-spacing: 1px;
-}
-
 .brand-title {
   font-size: 1.25rem;
   font-weight: 800;
@@ -270,6 +260,47 @@ body {
   color: #334155;
   font-weight: 600;
   cursor: default;
+}
+
+/* Chips y Checkboxes Multi-Categoría */
+.category-chips-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border-medium);
+  background: var(--surface-white);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.category-chip:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.category-chip.active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.category-chip input[type="checkbox"] {
+  accent-color: var(--primary);
+  cursor: pointer;
 }
 
 /* Buttons */

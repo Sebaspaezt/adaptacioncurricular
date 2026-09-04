@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Herramienta de adaptación y flexibilización curricular en emergencias - NRC / MEN</title>
   
-<style>\n/* Variables de Diseño Swiss-Fine NRC */
+<style>
+/* Variables de Diseño Swiss-Fine NRC */
 :root {
   --primary: #005A36;
   --primary-dark: #003d24;
@@ -48,7 +49,8 @@
   
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-\n/* Componentes UI Swiss-Fine NRC */
+
+/* Componentes UI Swiss-Fine NRC */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -82,16 +84,6 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.brand-badge {
-  background: var(--primary);
-  color: white;
-  font-weight: 900;
-  font-size: 1.15rem;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  letter-spacing: 1px;
 }
 
 .brand-title {
@@ -322,6 +314,47 @@ body {
   cursor: default;
 }
 
+/* Chips y Checkboxes Multi-Categoría */
+.category-chips-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border-medium);
+  background: var(--surface-white);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.category-chip:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.category-chip.active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.category-chip input[type="checkbox"] {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
 /* Buttons */
 .btn-elite {
   padding: 10px 20px;
@@ -483,7 +516,8 @@ body {
   color: #0f766e;
   border: 1px solid #ccfbf1;
 }
-\n/* Reglas de Impresión Tamaño Carta */
+
+/* Reglas de Impresión Tamaño Carta */
 @page {
   size: letter portrait;
   margin: 12mm 10mm 15mm 10mm;
@@ -532,15 +566,19 @@ body {
     font-size: 8pt !important;
     line-height: 1.3 !important;
   }
+
+  .print-area-break {
+    page-break-before: always;
+  }
 }
-\n</style>
+
+</style>
 </head>
 <body>
 
   <!-- Barra Superior de Navegación y Perfil -->
   <header class="header-bar">
     <div class="brand-section">
-      <span class="brand-badge">NRC</span>
       <div>
         <h1 class="brand-title">Herramienta de adaptación y flexibilización curricular en emergencias</h1>
         <p class="brand-subtitle">Consejo Noruego para Refugiados (NRC) | MEN - GIRE (Ciclos I al V)</p>
@@ -705,7 +743,7 @@ body {
             </div>
 
             <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Elija primero la macro-categoría que predomina en su comunidad; el sistema filtrará automáticamente el listado de amenazas específicas y le presentará el ejemplo escolar, los riesgos asociados y la ruta interinstitucional de activación correspondiente (Ruta de Protección Humanitaria, Mesa Territorial MTGIRE o Comité CIGIRE).
+              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Puede marcar una o varias macro-categorías en el selector múltiple; el sistema consolidará dinámicamente el listado de amenazas específicas correspondientes y le presentará los riesgos asociados y las instancias de articulación interinstitucional según el PGIRE (Gestión del Riesgo, Bomberos, Defensa Civil, Cruz Roja, ICBF, Defensoría del Pueblo, Personería, Sector Salud, ONGs y actores humanitarios).
             </p>
           </div>
         </div>
@@ -754,11 +792,24 @@ body {
               <input type="text" id="input-bloom" class="input-elite input-readonly" value="Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)" readonly>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">3. Tipo / Categoría Macro de Amenaza PGIRE (Selección Docente):</label>
-              <select id="select-cat-amenaza" class="select-elite">
-                <option value="">-- Seleccione Categoría --</option>
-                <option value="NATURAL" selected>NATURAL</option>
+            <div class="form-group" style="grid-column: span 2;">
+              <label class="form-label">3. Tipo / Categoría Macro de Amenaza PGIRE (Selección Múltiple Docente):</label>
+              <div class="category-chips-container">
+                <label class="category-chip active">
+                  <input type="checkbox" class="category-chip-input" value="NATURAL" checked> 🌿 Natural
+                </label>
+                <label class="category-chip">
+                  <input type="checkbox" class="category-chip-input" value="SOCIONATURAL"> 🌧️ Socionatural
+                </label>
+                <label class="category-chip">
+                  <input type="checkbox" class="category-chip-input" value="ANTRÓPICA"> ⚡ Antrópica Institucional
+                </label>
+                <label class="category-chip">
+                  <input type="checkbox" class="category-chip-input" value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN"> 🛡️ Conflicto Armado y Protección
+                </label>
+              </div>
+              <select id="select-cat-amenaza" class="select-elite" style="display: none;">
+                <option value="NATURAL">NATURAL</option>
                 <option value="SOCIONATURAL">SOCIONATURAL</option>
                 <option value="ANTRÓPICA">ANTRÓPICA</option>
                 <option value="ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN">ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN</option>
@@ -766,26 +817,26 @@ body {
               </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">4. Amenaza Específica Diagnosticada (Selección Docente):</label>
               <select id="select-amenaza" class="select-elite">
-                <option value="Inundación lenta o desbordamiento">Inundación lenta o desbordamiento</option>
+                <option value="Inundación">[NATURAL] Inundación</option>
               </select>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">5. Ejemplo Contextualizado en Institución Educativa:</label>
-              <input type="text" id="input-ejemplo-ie" class="input-elite input-readonly" value="Afectación de aulas y pérdida de material por crecida del río." readonly>
+              <input type="text" id="input-ejemplo-ie" class="input-elite input-readonly" value="Creciente de río o quebrada" readonly>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">6. Riesgos Asociados en la Institución Educativa:</label>
-              <input type="text" id="input-riesgos-ie" class="input-elite input-readonly" value="Pérdida de continuidad académica y aislamiento de sedes." readonly>
+              <input type="text" id="input-riesgos-ie" class="input-elite input-readonly" value="Daños a infraestructura, suspensión de actividades académicas" readonly>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">7. Instancia GIRE Responsable y Ruta Interinstitucional Activada:</label>
-              <input type="text" id="input-ruta-gire" class="input-elite input-readonly" value="🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)" readonly>
+              <label class="form-label">7. Instancias y Actores de Articulación según PGIRE:</label>
+              <input type="text" id="input-ruta-gire" class="input-elite input-readonly" value="🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía" readonly>
             </div>
 
             <div class="form-group">
@@ -840,7 +891,7 @@ body {
   <div id="modal-auth" class="modal-overlay" style="display: none;">
     <div class="modal-content">
       <button id="btn-close-modal" class="modal-close-btn" onclick="document.getElementById('modal-auth').style.display='none';" title="Cerrar ventana">✕</button>
-      <h2 style="color: var(--primary); font-weight: 700; margin-bottom: 6px;">🔐 Perfil Docente Local - NRC</h2>
+      <h2 style="color: var(--primary); font-weight: 700; margin-bottom: 6px;">🔐 Perfil Docente Local</h2>
       <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px;">
         Los datos se almacenan de forma privada y segura en su navegador (Offline-First).
       </p>
@@ -857,7 +908,7 @@ body {
 
       <div class="form-group">
         <label class="form-label">Nombre Completo (Para reportes e impresión):</label>
-        <input type="text" id="auth-name" class="input-elite" placeholder="María Pérez" value="Docente Territorial NRC">
+        <input type="text" id="auth-name" class="input-elite" placeholder="María Pérez" value="Docente Territorial">
       </div>
 
       <div class="form-group">
@@ -5359,280 +5410,280 @@ var PGIRE_DB = [
     "amenaza": "Sismo",
     "ejemplo": "Movimiento sísmico",
     "riesgo": "Lesiones, colapso parcial de infraestructura, interrupción de clases",
-    "ruta": "🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Inundación",
     "ejemplo": "Creciente de río o quebrada",
     "riesgo": "Daños a infraestructura, suspensión de actividades académicas",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Vendaval",
     "ejemplo": "Fuertes vientos",
     "riesgo": "Caída de cubiertas, árboles o postes",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Tormenta eléctrica",
     "ejemplo": "Descargas atmosféricas",
     "riesgo": "Electrocución, daños en equipos",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Sequía",
     "ejemplo": "Escasez de agua",
     "riesgo": "Suspensión del servicio educativo",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Ola de calor",
     "ejemplo": "Altas temperaturas",
     "riesgo": "Afectaciones en salud",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Incendio forestal",
     "ejemplo": "Quema de cobertura vegetal",
     "riesgo": "Afectación de sedes rurales",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Heladas",
     "ejemplo": "Bajas temperaturas",
     "riesgo": "Afectación a estudiantes y cultivos escolares",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Granizada",
     "ejemplo": "Precipitaciones intensas",
     "riesgo": "Daños en cubiertas",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
-    "categoria": "None",
+    "categoria": "NATURAL",
     "amenaza": "Epidemias de origen natural",
     "ejemplo": "Brotes de enfermedades",
     "riesgo": "Ausentismo escolar",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía"
   },
   {
     "categoria": "SOCIONATURAL",
     "amenaza": "Deslizamientos",
     "ejemplo": "Tala de bosques y ocupación de laderas",
     "riesgo": "Afectación de sedes rurales",
-    "ruta": "🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Erosión",
     "ejemplo": "Deterioro del terreno",
     "riesgo": "Riesgo estructural",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Inundaciones por mal drenaje",
     "ejemplo": "Alcantarillado insuficiente",
     "riesgo": "Daños locativos",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Avalanchas",
     "ejemplo": "Intervención de cuencas",
     "riesgo": "Aislamiento de la comunidad educativa",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Caída de árboles",
     "ejemplo": "Deforestación",
     "riesgo": "Lesiones y daños",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Incendios por quemas agrícolas",
     "ejemplo": "Prácticas inadecuadas",
     "riesgo": "Riesgo para estudiantes",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Contaminación de fuentes hídricas",
     "ejemplo": "Manejo inadecuado de residuos",
     "riesgo": "Riesgo sanitario",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Hundimientos",
     "ejemplo": "Alteración del suelo",
     "riesgo": "Daño estructural",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Deterioro de taludes",
     "ejemplo": "Excavaciones",
     "riesgo": "Riesgo de colapso",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
-    "categoria": "None",
+    "categoria": "SOCIONATURAL",
     "amenaza": "Desertificación",
     "ejemplo": "Degradación ambiental",
     "riesgo": "Afectación del abastecimiento de agua",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Corporación Autónoma Regional (CAR)"
   },
   {
     "categoria": "ANTRÓPICA",
     "amenaza": "Incendio estructural",
     "ejemplo": "Cortocircuitos o fallas eléctricas",
     "riesgo": "Lesiones, pérdida de infraestructura",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Emergencia médica",
     "ejemplo": "Accidentes escolares",
     "riesgo": "Atención prehospitalaria",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Accidentes de tránsito",
     "ejemplo": "Transporte escolar",
     "riesgo": "Lesiones a estudiantes",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Fuga de gas",
     "ejemplo": "Laboratorios o cocinas",
     "riesgo": "Explosiones",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Riesgo eléctrico",
     "ejemplo": "Instalaciones deterioradas",
     "riesgo": "Electrocución",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Colapso estructural",
     "ejemplo": "Infraestructura en mal estado",
     "riesgo": "Lesiones graves",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Derrame de sustancias peligrosas",
     "ejemplo": "Laboratorios",
     "riesgo": "Contaminación",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Consumo de SPA",
     "ejemplo": "Entorno escolar",
     "riesgo": "Afectación de la convivencia",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Violencia escolar",
     "ejemplo": "Agresiones entre estudiantes",
     "riesgo": "Lesiones físicas y emocionales",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA",
     "amenaza": "Ciberacoso",
     "ejemplo": "Uso de redes sociales",
     "riesgo": "Afectación psicosocial",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🏫 Instancias PGIRE: Comité Institucional de Gestión del Riesgo (PGIRE) + Bomberos + Sector Salud / EPS + Secretaría de Educación / Infraestructura"
   },
   {
     "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Presencia de grupos armados",
     "ejemplo": "Entorno de la IE",
     "riesgo": "Restricción al derecho a la educación",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Reclutamiento, uso y utilización de NNA",
     "ejemplo": "Riesgo para estudiantes",
     "riesgo": "Deserción y vulneración de derechos",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "MAP/MUSE/AEI",
     "ejemplo": "Contaminación del territorio",
     "riesgo": "Accidentes por explosivos",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Enfrentamientos armados",
     "ejemplo": "Cercanía a la IE",
     "riesgo": "Lesiones y suspensión de clases",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Hostigamientos",
     "ejemplo": "Ataques a la comunidad",
     "riesgo": "Riesgo para docentes y estudiantes",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Desplazamiento forzado",
     "ejemplo": "Movilidad de familias",
     "riesgo": "Interrupción de la trayectoria educativa",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Confinamiento",
     "ejemplo": "Restricciones de movilidad",
     "riesgo": "Inasistencia escolar",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Violencia Basada en Género (VBG)",
     "ejemplo": "Riesgo para niñas, adolescentes y mujeres",
     "riesgo": "Vulneración de derechos",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Violencia sexual",
     "ejemplo": "Dentro o fuera del entorno escolar",
     "riesgo": "Afectación física y emocional",
-    "ruta": "🛡️ RUTA DE PROTECCIÓN HUMANITARIA (CIGIRE + ICBF + Defensoría + Personería + NRC)"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   },
   {
-    "categoria": "None",
+    "categoria": "ANTRÓPICA – CONFLICTO ARMADO Y PROTECCIÓN",
     "amenaza": "Uso u ocupación de la infraestructura educativa",
     "ejemplo": "Presencia de actores armados",
     "riesgo": "Suspensión del servicio educativo",
-    "ruta": "🏫 CIGIRE (Comité Institucional en IE - Res. MEN 6519/2025 y Circular 19/2022) + Bomberos / Salud / Convivencia"
+    "ruta": "🛡️ Ruta de Protección Interinstitucional PGIRE: ICBF + Defensoría del Pueblo + Personería Municipal + Comisarías de Familia + Mesa de Protección Humanitaria (ONGs y Agencias de Cooperación)"
   }
 ];
 
@@ -5912,11 +5963,12 @@ var AuthManager = {
           ciclo: '3',
           etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
           bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+          categoriasAmenaza: ['NATURAL'],
           categoriaAmenaza: 'NATURAL',
-          amenaza: 'Inundación lenta o desbordamiento',
-          ejemploIE: 'Afectación de aulas y pérdida de material por crecida del río.',
-          riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes.',
-          rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
+          amenaza: 'Inundación',
+          ejemploIE: 'Creciente de río o quebrada',
+          riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+          rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
           grado: 'Grado 6° (Bachillerato)',
           nna: 28,
           didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
@@ -6032,23 +6084,46 @@ var ModuloA = {
     });
   },
 
-  filterAmenazas: function(categoria) {
+  getSelectedCategories: function() {
+    var checkboxes = document.querySelectorAll('.category-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var selectCat = document.getElementById('select-cat-amenaza');
+      if (selectCat && selectCat.value) {
+        selected.push(selectCat.value);
+      }
+    }
+    return selected;
+  },
+
+  filterAmenazas: function(categorias) {
     var select = document.getElementById('select-amenaza');
     if (!select) return;
     select.innerHTML = '<option value="">-- Seleccione Amenaza Específica --</option>';
 
-    var filtradas = PGIRE_DB || [];
-    if (categoria && categoria.indexOf('TODAS') === -1) {
-      filtradas = (PGIRE_DB || []).filter(function(item) {
-        return item.categoria.toUpperCase().indexOf(categoria.toUpperCase()) !== -1 ||
-               categoria.toUpperCase().indexOf(item.categoria.toUpperCase()) !== -1;
-      });
+    if (typeof categorias === 'string') {
+      categorias = [categorias];
     }
+    categorias = categorias || [];
+
+    var isAll = (categorias.length === 0 || categorias.indexOf('TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)') !== -1);
+
+    var filtradas = (PGIRE_DB || []).filter(function(item) {
+      if (isAll) return true;
+      return categorias.some(function(cat) {
+        var cUpper = String(cat).toUpperCase();
+        var itemCat = String(item.categoria || '').toUpperCase();
+        return itemCat.indexOf(cUpper) !== -1 || cUpper.indexOf(itemCat) !== -1;
+      });
+    });
 
     filtradas.forEach(function(item) {
       var opt = document.createElement('option');
       opt.value = item.amenaza;
-      opt.textContent = item.amenaza;
+      opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
       select.appendChild(opt);
     });
   },
@@ -6060,9 +6135,9 @@ var ModuloA = {
     var elemRuta = document.getElementById('input-ruta-gire');
 
     if (item) {
-      if (elemEjemplo) elemEjemplo.value = item.ejemplo;
-      if (elemRiesgos) elemRiesgos.value = item.riesgo;
-      if (elemRuta) elemRuta.value = item.ruta;
+      if (elemEjemplo) elemEjemplo.value = item.ejemplo || '';
+      if (elemRiesgos) elemRiesgos.value = item.riesgo || '';
+      if (elemRuta) elemRuta.value = item.ruta || '';
     } else {
       if (elemEjemplo) elemEjemplo.value = '';
       if (elemRiesgos) elemRiesgos.value = '';
@@ -6075,11 +6150,11 @@ var ModuloA = {
     var selectCiclo = document.getElementById('select-ciclo');
     var selectEtapa = document.getElementById('select-etapa');
     var inputBloom = document.getElementById('input-bloom');
-    var selectCat = document.getElementById('select-cat-amenaza');
     var selectAmenaza = document.getElementById('select-amenaza');
     var inputNNA = document.getElementById('input-nna');
     var labelDidactica = document.getElementById('label-didactica-nna');
     var btnGuardar = document.getElementById('btn-guardar-diagnostico');
+    var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
 
     if (selectCiclo) {
       selectCiclo.addEventListener('change', function() {
@@ -6093,9 +6168,39 @@ var ModuloA = {
       });
     }
 
+    categoryCheckboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var parentLabel = cb.closest('.category-chip');
+        if (parentLabel) {
+          if (cb.checked) {
+            parentLabel.classList.add('active');
+          } else {
+            parentLabel.classList.remove('active');
+          }
+        }
+        var selectedCats = self.getSelectedCategories();
+        self.filterAmenazas(selectedCats);
+        self.updateAmenazaDetails('');
+      });
+    });
+
+    var selectCat = document.getElementById('select-cat-amenaza');
     if (selectCat) {
       selectCat.addEventListener('change', function() {
-        self.filterAmenazas(selectCat.value);
+        var val = selectCat.value;
+        categoryCheckboxes.forEach(function(cb) {
+          if (val === 'TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)') {
+            cb.checked = true;
+          } else {
+            cb.checked = (cb.value === val);
+          }
+          var parentLabel = cb.closest('.category-chip');
+          if (parentLabel) {
+            if (cb.checked) parentLabel.classList.add('active');
+            else parentLabel.classList.remove('active');
+          }
+        });
+        self.filterAmenazas(self.getSelectedCategories());
         self.updateAmenazaDetails('');
       });
     }
@@ -6122,12 +6227,17 @@ var ModuloA = {
 
   saveDiagnostic: function() {
     var self = this;
+    var selectedCats = this.getSelectedCategories();
+    var selectAmenaza = document.getElementById('select-amenaza');
+    var amenazaVal = selectAmenaza ? selectAmenaza.value : '';
+
     var diagnostico = {
       ciclo: document.getElementById('select-ciclo') ? document.getElementById('select-ciclo').value : '3',
       etapa: document.getElementById('select-etapa') ? document.getElementById('select-etapa').value : '',
       bloom: document.getElementById('input-bloom') ? document.getElementById('input-bloom').value : '',
-      categoriaAmenaza: document.getElementById('select-cat-amenaza') ? document.getElementById('select-cat-amenaza').value : '',
-      amenaza: document.getElementById('select-amenaza') ? document.getElementById('select-amenaza').value : '',
+      categoriasAmenaza: selectedCats,
+      categoriaAmenaza: selectedCats.join(' + ') || 'MULTIRRIESGO',
+      amenaza: amenazaVal,
       ejemploIE: document.getElementById('input-ejemplo-ie') ? document.getElementById('input-ejemplo-ie').value : '',
       riesgosIE: document.getElementById('input-riesgos-ie') ? document.getElementById('input-riesgos-ie').value : '',
       rutaGIRE: document.getElementById('input-ruta-gire') ? document.getElementById('input-ruta-gire').value : '',
@@ -6164,12 +6274,12 @@ var ModuloA = {
           '<div><strong>Ciclo:</strong> Ciclo ' + d.ciclo + ' | <strong>Grado:</strong> ' + d.grado + '</div>' +
           '<div><strong>Etapa:</strong> ' + d.etapa + '</div>' +
           '<div><strong>Complejidad Bloom:</strong> ' + d.bloom + '</div>' +
-          '<div><strong>Amenaza:</strong> [' + d.categoriaAmenaza + '] ' + d.amenaza + '</div>' +
+          '<div><strong>Amenaza:</strong> [' + (d.categoriaAmenaza || 'PGIRE') + '] ' + d.amenaza + '</div>' +
           '<div><strong>Estrategia NNA:</strong> ' + d.didacticaNNA + ' (' + d.nna + ' NNA)</div>' +
           '<div><strong>Fecha Inicio:</strong> ' + d.fechaInicio + '</div>' +
         '</div>' +
         '<div style="margin-top: 10px; font-size: 0.85rem; color: #064e3b;">' +
-          '<strong>Ruta GIRE Activada:</strong> ' + d.rutaGIRE +
+          '<strong>Articulación Institucional PGIRE:</strong> ' + d.rutaGIRE +
         '</div>' +
       '</div>';
   },
@@ -6182,11 +6292,12 @@ var ModuloA = {
         ciclo: '3',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+        categoriasAmenaza: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación lenta o desbordamiento',
-        ejemploIE: 'Afectación de aulas y pérdida de material por crecida del río.',
-        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes.',
-        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
+        amenaza: 'Inundación',
+        ejemploIE: 'Creciente de río o quebrada',
+        riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+        rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
         grado: 'Grado 6° (Bachillerato)',
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
@@ -6199,12 +6310,29 @@ var ModuloA = {
     if (document.getElementById('select-grado')) document.getElementById('select-grado').value = d.grado;
     if (document.getElementById('select-etapa')) document.getElementById('select-etapa').value = d.etapa;
     if (document.getElementById('input-bloom')) document.getElementById('input-bloom').value = d.bloom || this.calculateBloom(d.etapa);
+
+    var cats = d.categoriasAmenaza || (d.categoriaAmenaza ? [d.categoriaAmenaza] : ['NATURAL']);
+    var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
+    categoryCheckboxes.forEach(function(cb) {
+      cb.checked = cats.indexOf(cb.value) !== -1;
+      var parentLabel = cb.closest('.category-chip');
+      if (parentLabel) {
+        if (cb.checked) parentLabel.classList.add('active');
+        else parentLabel.classList.remove('active');
+      }
+    });
+
     if (document.getElementById('select-cat-amenaza')) {
-      document.getElementById('select-cat-amenaza').value = d.categoriaAmenaza;
-      this.filterAmenazas(d.categoriaAmenaza);
+      document.getElementById('select-cat-amenaza').value = cats.length === 1 ? cats[0] : (cats.length > 1 ? 'TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)' : '');
     }
-    if (document.getElementById('select-amenaza')) document.getElementById('select-amenaza').value = d.amenaza;
+
+    this.filterAmenazas(cats);
+
+    if (document.getElementById('select-amenaza')) {
+      document.getElementById('select-amenaza').value = d.amenaza;
+    }
     this.updateAmenazaDetails(d.amenaza);
+
     if (document.getElementById('input-nna')) {
       document.getElementById('input-nna').value = d.nna;
       if (document.getElementById('label-didactica-nna')) {
@@ -6300,6 +6428,97 @@ var ModuloB = {
     return null;
   },
 
+  buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList) {
+    var self = this;
+    var rawItems = [];
+    if (areaKey === 'socioemocional') {
+      rawItems = habsList;
+    } else if (areaKey === 'supervivencia') {
+      rawItems = supsList;
+    } else {
+      rawItems = cicloData[areaKey] || [];
+    }
+
+    var validItems = [];
+    rawItems.forEach(function(item) {
+      var parsed = self.getItemFields(item, areaKey);
+      if (parsed) validItems.push(parsed);
+    });
+
+    var isSocio = (areaKey === 'socioemocional');
+    var isSuperv = (areaKey === 'supervivencia');
+
+    var th1 = 'Factor / Eje (EBC)';
+    var th2 = 'DBA / Aprendizaje Esencial (Articulación EBC-DBA)';
+    var th3 = 'Complejidad & Bloom';
+    var th4 = 'Didáctica Situada / Mini-Proyecto';
+
+    if (isSocio) {
+      th1 = '🌱 Dimensión & Etapa de Respuesta';
+      th2 = 'Habilidad Clave & Competencia de Bienestar';
+      th3 = 'Enfoque & Proceso Psicosocial';
+      th4 = 'Didáctica de Contención Socioemocional';
+    } else if (isSuperv) {
+      th1 = '🛡️ Tipología de Riesgo & Afectación PGIRE';
+      th2 = 'Aprendizaje Clave & Enfoque de Autoprotección';
+      th3 = 'Complejidad de Seguridad & Desafío';
+      th4 = 'Mini-Proyecto Situado & Protocolos de Aula';
+    }
+
+    return '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 24px;">' +
+      '<thead>' +
+        '<tr style="background: var(--surface-hover); text-align: left;">' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">' + th1 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">' + th2 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">' + th3 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">' + th4 + '</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' +
+        validItems.map(function(item) {
+          var badgeBg = '#e0f2fe';
+          var badgeColor = '#0369a1';
+          if (isSocio) {
+            badgeBg = '#dcfce7';
+            badgeColor = '#166534';
+          } else if (isSuperv) {
+            badgeBg = '#fee2e2';
+            badgeColor = '#991b1b';
+          }
+
+          var articulacionHTML = '';
+          if (!isSocio && !isSuperv) {
+            articulacionHTML = '<div style="line-height:1.45; margin-top:5px; font-size: 0.88rem;">' +
+              '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700; margin-bottom: 4px;">' + item.dbaCode + '</span> ' +
+              '<span>' + item.dbaDesc + '</span>' +
+              (item.subproceso ? ('<div style="color: var(--primary-dark); font-size: 0.8rem; margin-top: 4px; background: var(--primary-subtle); padding: 4px 8px; border-radius: 4px;"><strong>🔗 Articulación EBC-DBA:</strong> ' + item.subproceso + '</div>') : '') +
+            '</div>';
+          } else {
+            articulacionHTML = '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700;">' + item.dbaCode + '</span>' +
+              '<div style="line-height:1.45; margin-top:5px;">' + item.dbaDesc + '</div>';
+          }
+
+          return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              '<strong>' + item.factor + '</strong>' +
+              (item.subproceso && (isSocio || isSuperv) ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              articulacionHTML +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              '<span class="badge-pill badge-etapa2">' + item.complejidad + '</span>' +
+              '<br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small>' +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
+              '<strong>🛠️ ' + item.didactica + '</strong>' +
+            '</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody>' +
+    '</table>';
+  },
+
   renderRayuela: function() {
     var self = this;
     var user = AuthManager.getUserData();
@@ -6327,41 +6546,18 @@ var ModuloB = {
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERM', count: supsList.length }
     ];
 
-    var rawItems = [];
-    if (this.currentArea === 'socioemocional') {
-      rawItems = habsList;
-    } else if (this.currentArea === 'supervivencia') {
-      rawItems = supsList;
-    } else {
-      rawItems = cicloData[this.currentArea] || [];
-    }
+    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, cicloData, habsList, supsList);
 
-    var validItems = [];
-    rawItems.forEach(function(item) {
-      var parsed = self.getItemFields(item, self.currentArea);
-      if (parsed) validItems.push(parsed);
-    });
-
-    // Determinar encabezados diferenciados según el tipo de área
-    var isSocio = (this.currentArea === 'socioemocional');
-    var isSuperv = (this.currentArea === 'supervivencia');
-
-    var th1 = 'Factor / Eje (EBC)';
-    var th2 = 'DBA / Aprendizaje Esencial (Articulación EBC-DBA)';
-    var th3 = 'Complejidad & Bloom';
-    var th4 = 'Didáctica Situada / Mini-Proyecto';
-
-    if (isSocio) {
-      th1 = '🌱 Dimensión & Etapa de Respuesta';
-      th2 = 'Habilidad Clave & Competencia de Bienestar';
-      th3 = 'Enfoque & Proceso Psicosocial';
-      th4 = 'Didáctica de Contención Socioemocional';
-    } else if (isSuperv) {
-      th1 = '🛡️ Tipología de Riesgo & Afectación PGIRE';
-      th2 = 'Aprendizaje Clave & Enfoque de Autoprotección';
-      th3 = 'Complejidad de Seguridad & Desafío';
-      th4 = 'Mini-Proyecto Situado & Protocolos de Aula';
-    }
+    var fullPrintHTML = areas.map(function(a, idx) {
+      var tableHTML = self.buildAreaTableHTML(a.key, cicloData, habsList, supsList);
+      var pageBreakClass = idx > 0 ? 'print-area-break' : '';
+      return '<div class="print-area-section ' + pageBreakClass + '" style="margin-bottom: 28px;">' +
+        '<h3 style="color: var(--primary); font-weight: 800; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">' +
+          a.name + ' — Malla Curricular Priorizada (Ciclo ' + cicloKey + ')' +
+        '</h3>' +
+        tableHTML +
+      '</div>';
+    }).join('');
 
     var html = 
       '<div class="card-elite">' +
@@ -6382,48 +6578,15 @@ var ModuloB = {
             '</button>';
           }).join('') +
         '</div>' +
-        '<div style="overflow-x: auto;">' +
-          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
-            '<thead>' +
-              '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">' + th1 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">' + th2 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">' + th3 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">' + th4 + '</th>' +
-              '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-              validItems.map(function(item) {
-                var badgeBg = '#e0f2fe';
-                var badgeColor = '#0369a1';
-                if (isSocio) {
-                  badgeBg = '#dcfce7';
-                  badgeColor = '#166534';
-                } else if (isSuperv) {
-                  badgeBg = '#fee2e2';
-                  badgeColor = '#991b1b';
-                }
-
-                return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<strong>' + item.factor + '</strong>' +
-                    (item.subproceso ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700;">' + item.dbaCode + '</span>' +
-                    '<div style="line-height:1.45; margin-top:5px;">' + item.dbaDesc + '</div>' +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<span class="badge-pill badge-etapa2">' + item.complejidad + '</span>' +
-                    '<br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small>' +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
-                    '<strong>🛠️ ' + item.didactica + '</strong>' +
-                  '</td>' +
-                '</tr>';
-              }).join('') +
-            '</tbody>' +
-          '</table>' +
+        '<div class="no-print" style="overflow-x: auto;">' +
+          activeTableHTML +
+        '</div>' +
+        '<div id="full-print-matrix-container" style="display: none;">' +
+          '<div style="text-align: center; margin-bottom: 18px; border-bottom: 2px solid #005A36; padding-bottom: 10px;">' +
+            '<h2 style="color: #005A36; font-size: 1.3rem; margin-bottom: 4px;">Malla Curricular Completa Flexibilizada en Emergencias</h2>' +
+            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + ((cicloData.grados || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
+          '</div>' +
+          fullPrintHTML +
         '</div>' +
       '</div>';
 
@@ -6441,7 +6604,16 @@ var ModuloB = {
     var btnPrint = document.getElementById('btn-imprimir-rayuela');
     if (btnPrint) {
       btnPrint.addEventListener('click', function() {
+        var printContainer = document.getElementById('full-print-matrix-container');
+        if (printContainer) {
+          printContainer.style.display = 'block';
+        }
         window.print();
+        setTimeout(function() {
+          if (printContainer) {
+            printContainer.style.display = 'none';
+          }
+        }, 1000);
       });
     }
   }
@@ -6479,11 +6651,12 @@ var ModuloC = {
         nna: 28,
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
+        categoriasAmenaza: ['NATURAL'],
         categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación lenta o desbordamiento',
-        ejemploIE: 'Afectación de aulas y pérdida de material',
-        riesgosIE: 'Pérdida de continuidad académica y aislamiento de sedes',
-        rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía',
+        amenaza: 'Inundación',
+        ejemploIE: 'Creciente de río o quebrada',
+        riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+        rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
         fechaInicio: new Date().toISOString().split('T')[0]
       };
     }

@@ -81,6 +81,97 @@ var ModuloB = {
     return null;
   },
 
+  buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList) {
+    var self = this;
+    var rawItems = [];
+    if (areaKey === 'socioemocional') {
+      rawItems = habsList;
+    } else if (areaKey === 'supervivencia') {
+      rawItems = supsList;
+    } else {
+      rawItems = cicloData[areaKey] || [];
+    }
+
+    var validItems = [];
+    rawItems.forEach(function(item) {
+      var parsed = self.getItemFields(item, areaKey);
+      if (parsed) validItems.push(parsed);
+    });
+
+    var isSocio = (areaKey === 'socioemocional');
+    var isSuperv = (areaKey === 'supervivencia');
+
+    var th1 = 'Factor / Eje (EBC)';
+    var th2 = 'DBA / Aprendizaje Esencial (Articulación EBC-DBA)';
+    var th3 = 'Complejidad & Bloom';
+    var th4 = 'Didáctica Situada / Mini-Proyecto';
+
+    if (isSocio) {
+      th1 = '🌱 Dimensión & Etapa de Respuesta';
+      th2 = 'Habilidad Clave & Competencia de Bienestar';
+      th3 = 'Enfoque & Proceso Psicosocial';
+      th4 = 'Didáctica de Contención Socioemocional';
+    } else if (isSuperv) {
+      th1 = '🛡️ Tipología de Riesgo & Afectación PGIRE';
+      th2 = 'Aprendizaje Clave & Enfoque de Autoprotección';
+      th3 = 'Complejidad de Seguridad & Desafío';
+      th4 = 'Mini-Proyecto Situado & Protocolos de Aula';
+    }
+
+    return '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 24px;">' +
+      '<thead>' +
+        '<tr style="background: var(--surface-hover); text-align: left;">' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">' + th1 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">' + th2 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">' + th3 + '</th>' +
+          '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">' + th4 + '</th>' +
+        '</tr>' +
+      '</thead>' +
+      '<tbody>' +
+        validItems.map(function(item) {
+          var badgeBg = '#e0f2fe';
+          var badgeColor = '#0369a1';
+          if (isSocio) {
+            badgeBg = '#dcfce7';
+            badgeColor = '#166534';
+          } else if (isSuperv) {
+            badgeBg = '#fee2e2';
+            badgeColor = '#991b1b';
+          }
+
+          var articulacionHTML = '';
+          if (!isSocio && !isSuperv) {
+            articulacionHTML = '<div style="line-height:1.45; margin-top:5px; font-size: 0.88rem;">' +
+              '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700; margin-bottom: 4px;">' + item.dbaCode + '</span> ' +
+              '<span>' + item.dbaDesc + '</span>' +
+              (item.subproceso ? ('<div style="color: var(--primary-dark); font-size: 0.8rem; margin-top: 4px; background: var(--primary-subtle); padding: 4px 8px; border-radius: 4px;"><strong>🔗 Articulación EBC-DBA:</strong> ' + item.subproceso + '</div>') : '') +
+            '</div>';
+          } else {
+            articulacionHTML = '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700;">' + item.dbaCode + '</span>' +
+              '<div style="line-height:1.45; margin-top:5px;">' + item.dbaDesc + '</div>';
+          }
+
+          return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              '<strong>' + item.factor + '</strong>' +
+              (item.subproceso && (isSocio || isSuperv) ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              articulacionHTML +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top;">' +
+              '<span class="badge-pill badge-etapa2">' + item.complejidad + '</span>' +
+              '<br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small>' +
+            '</td>' +
+            '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
+              '<strong>🛠️ ' + item.didactica + '</strong>' +
+            '</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody>' +
+    '</table>';
+  },
+
   renderRayuela: function() {
     var self = this;
     var user = AuthManager.getUserData();
@@ -108,41 +199,18 @@ var ModuloB = {
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERM', count: supsList.length }
     ];
 
-    var rawItems = [];
-    if (this.currentArea === 'socioemocional') {
-      rawItems = habsList;
-    } else if (this.currentArea === 'supervivencia') {
-      rawItems = supsList;
-    } else {
-      rawItems = cicloData[this.currentArea] || [];
-    }
+    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, cicloData, habsList, supsList);
 
-    var validItems = [];
-    rawItems.forEach(function(item) {
-      var parsed = self.getItemFields(item, self.currentArea);
-      if (parsed) validItems.push(parsed);
-    });
-
-    // Determinar encabezados diferenciados según el tipo de área
-    var isSocio = (this.currentArea === 'socioemocional');
-    var isSuperv = (this.currentArea === 'supervivencia');
-
-    var th1 = 'Factor / Eje (EBC)';
-    var th2 = 'DBA / Aprendizaje Esencial (Articulación EBC-DBA)';
-    var th3 = 'Complejidad & Bloom';
-    var th4 = 'Didáctica Situada / Mini-Proyecto';
-
-    if (isSocio) {
-      th1 = '🌱 Dimensión & Etapa de Respuesta';
-      th2 = 'Habilidad Clave & Competencia de Bienestar';
-      th3 = 'Enfoque & Proceso Psicosocial';
-      th4 = 'Didáctica de Contención Socioemocional';
-    } else if (isSuperv) {
-      th1 = '🛡️ Tipología de Riesgo & Afectación PGIRE';
-      th2 = 'Aprendizaje Clave & Enfoque de Autoprotección';
-      th3 = 'Complejidad de Seguridad & Desafío';
-      th4 = 'Mini-Proyecto Situado & Protocolos de Aula';
-    }
+    var fullPrintHTML = areas.map(function(a, idx) {
+      var tableHTML = self.buildAreaTableHTML(a.key, cicloData, habsList, supsList);
+      var pageBreakClass = idx > 0 ? 'print-area-break' : '';
+      return '<div class="print-area-section ' + pageBreakClass + '" style="margin-bottom: 28px;">' +
+        '<h3 style="color: var(--primary); font-weight: 800; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">' +
+          a.name + ' — Malla Curricular Priorizada (Ciclo ' + cicloKey + ')' +
+        '</h3>' +
+        tableHTML +
+      '</div>';
+    }).join('');
 
     var html = 
       '<div class="card-elite">' +
@@ -163,48 +231,15 @@ var ModuloB = {
             '</button>';
           }).join('') +
         '</div>' +
-        '<div style="overflow-x: auto;">' +
-          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
-            '<thead>' +
-              '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">' + th1 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">' + th2 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">' + th3 + '</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">' + th4 + '</th>' +
-              '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-              validItems.map(function(item) {
-                var badgeBg = '#e0f2fe';
-                var badgeColor = '#0369a1';
-                if (isSocio) {
-                  badgeBg = '#dcfce7';
-                  badgeColor = '#166534';
-                } else if (isSuperv) {
-                  badgeBg = '#fee2e2';
-                  badgeColor = '#991b1b';
-                }
-
-                return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<strong>' + item.factor + '</strong>' +
-                    (item.subproceso ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700;">' + item.dbaCode + '</span>' +
-                    '<div style="line-height:1.45; margin-top:5px;">' + item.dbaDesc + '</div>' +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top;">' +
-                    '<span class="badge-pill badge-etapa2">' + item.complejidad + '</span>' +
-                    '<br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small>' +
-                  '</td>' +
-                  '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
-                    '<strong>🛠️ ' + item.didactica + '</strong>' +
-                  '</td>' +
-                '</tr>';
-              }).join('') +
-            '</tbody>' +
-          '</table>' +
+        '<div class="no-print" style="overflow-x: auto;">' +
+          activeTableHTML +
+        '</div>' +
+        '<div id="full-print-matrix-container" style="display: none;">' +
+          '<div style="text-align: center; margin-bottom: 18px; border-bottom: 2px solid #005A36; padding-bottom: 10px;">' +
+            '<h2 style="color: #005A36; font-size: 1.3rem; margin-bottom: 4px;">Malla Curricular Completa Flexibilizada en Emergencias</h2>' +
+            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + ((cicloData.grados || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
+          '</div>' +
+          fullPrintHTML +
         '</div>' +
       '</div>';
 
@@ -222,7 +257,16 @@ var ModuloB = {
     var btnPrint = document.getElementById('btn-imprimir-rayuela');
     if (btnPrint) {
       btnPrint.addEventListener('click', function() {
+        var printContainer = document.getElementById('full-print-matrix-container');
+        if (printContainer) {
+          printContainer.style.display = 'block';
+        }
         window.print();
+        setTimeout(function() {
+          if (printContainer) {
+            printContainer.style.display = 'none';
+          }
+        }, 1000);
       });
     }
   }
