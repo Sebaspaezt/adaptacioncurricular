@@ -6,7 +6,7 @@ var ModuloC = {
 
   getDidacticaStrategyForArea: function(areaKey, nnaCount) {
     try {
-      var strategies = (CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
+      var strategies = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
       var areaMap = {
         'lenguaje': 'LENGUAJE',
         'matematicas': 'MATEMATICAS',
@@ -23,11 +23,60 @@ var ModuloC = {
     }
   },
 
+  parseItemData: function(item, areaKey) {
+    try {
+      if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') {
+        var res = ModuloB.getItemFields(item, areaKey);
+        if (res) return res;
+      }
+    } catch (e) {}
+
+    if (Array.isArray(item)) {
+      var dbaRaw = item[2] || '';
+      var dbaCode = 'DBA';
+      var dbaDesc = dbaRaw;
+      if (dbaRaw.indexOf(':') !== -1) {
+        var parts = dbaRaw.split(':');
+        dbaCode = parts[0].trim();
+        dbaDesc = parts.slice(1).join(':').trim();
+      }
+      return {
+        factor: item[0] || 'Eje Curricular',
+        subproceso: item[1] || '',
+        dbaCode: dbaCode,
+        dbaDesc: dbaDesc,
+        complejidad: item[4] || 'Intermedia',
+        bloom: item[5] || 'Aplicar y reflexionar en el entorno',
+        didactica: item[7] || item[6] || 'Taller pedagógico situado'
+      };
+    } else if (item && typeof item === 'object') {
+      return {
+        factor: item.factor || item.eje || item.pensamiento || 'Eje Curricular Priorizado',
+        subproceso: item.subproceso || item.habilidad || 'Contenido nuclear priorizado',
+        dbaCode: item.dba_code || item.codigo || 'DBA',
+        dbaDesc: item.dba_desc || item.enunciado || item.descripcion || 'Aprendizaje esencial priorizado por contexto',
+        complejidad: item.complejidad || 'Intermedia',
+        bloom: item.bloom || item.objetivo_bloom || 'Aplicar y reflexionar',
+        didactica: item.didactica || item.miniproyecto || 'Taller situado de aprendizaje cooperativo'
+      };
+    }
+
+    return {
+      factor: 'Eje Curricular Priorizado',
+      subproceso: 'Contenido nuclear priorizado en emergencia',
+      dbaCode: 'DBA',
+      dbaDesc: 'Aprendizaje esencial priorizado por contexto',
+      complejidad: 'Intermedia',
+      bloom: 'Aplicar y contextualizar en el entorno',
+      didactica: 'Taller situado y pedagógico de aula'
+    };
+  },
+
   renderMonitoreo: function() {
     try {
       var self = this;
       var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
-      var d = (typeof ModuloA !== 'undefined' && ModuloA.getLiveDiagnostic) ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
+      var d = (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.getLiveDiagnostic === 'function') ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
       if (!d) {
         d = {
           ciclo: '3',
@@ -46,15 +95,15 @@ var ModuloC = {
       }
 
       var cicloKey = String(d.ciclo || '3');
-      var currDB = (typeof CURRICULUM_DB !== 'undefined') ? CURRICULUM_DB : {};
-      var cicloData = currDB[cicloKey] || currDB['3'] || {};
+      var currDB = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB) ? CURRICULUM_DB : {};
+      var cicloData = currDB[cicloKey] || currDB['3'] || currDB['1'] || {};
       var savedMonitoreo = (user && user.monitoreo) || {};
 
       var container = document.getElementById('modulo-c-content');
       if (!container) return;
 
       var semanas = [];
-      var fechaBase = new Date(d.fechaInicio || new Date());
+      var fechaBase = new Date((d.fechaInicio || '').replace(/-/g, '/') || new Date());
       if (isNaN(fechaBase.getTime())) {
         fechaBase = new Date();
       }
@@ -67,23 +116,7 @@ var ModuloC = {
         var areaKey = areas[(i - 1) % areas.length];
         var rawItems = (cicloData && cicloData[areaKey]) || [];
         var rawItem = rawItems.length > 0 ? (rawItems[Math.floor((i - 1) / areas.length) % rawItems.length] || rawItems[0]) : null;
-        
-        var parsedItem = null;
-        if (typeof ModuloB !== 'undefined' && ModuloB.getItemFields && rawItem) {
-          parsedItem = ModuloB.getItemFields(rawItem, areaKey);
-        }
-        if (!parsedItem) {
-          parsedItem = {
-            factor: 'Eje Curricular Priorizado',
-            subproceso: 'Contenido y aprendizaje nuclear en emergencia',
-            dbaCode: 'DBA',
-            dbaDesc: 'Aprendizaje esencial priorizado por contexto',
-            complejidad: 'Intermedia',
-            bloom: 'Aplicar y reflexionar',
-            didactica: 'Taller situado de aprendizaje cooperativo'
-          };
-        }
-
+        var parsedItem = self.parseItemData(rawItem, areaKey);
         var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
         var tarjetaHTML = 
@@ -119,7 +152,7 @@ var ModuloC = {
           '<div class="card-header">' +
             '<div>' +
               '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-              '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
+              '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente Territorial') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural de Emergencia') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
             '</div>' +
             '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
               '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +

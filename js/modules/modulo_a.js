@@ -175,6 +175,13 @@ var ModuloA = {
       });
     }
 
+    var selectGrado = document.getElementById('select-grado');
+    if (selectGrado) {
+      selectGrado.addEventListener('change', function() {
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
     if (selectEtapa && inputBloom) {
       selectEtapa.addEventListener('change', function() {
         inputBloom.value = self.calculateBloom(selectEtapa.value);
