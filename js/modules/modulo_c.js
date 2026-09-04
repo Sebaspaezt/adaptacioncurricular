@@ -27,7 +27,7 @@ var ModuloC = {
     try {
       var self = this;
       var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
-      var d = user ? user.diagnostico : null;
+      var d = (typeof ModuloA !== 'undefined' && ModuloA.getLiveDiagnostic) ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
       if (!d) {
         d = {
           ciclo: '3',

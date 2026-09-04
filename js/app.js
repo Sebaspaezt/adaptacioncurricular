@@ -12,6 +12,10 @@ function initApp() {
       onDiagnosticSaved: function(d) {
         if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) ModuloB.renderRayuela();
         if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) ModuloC.renderMonitoreo();
+      },
+      onDiagnosticChanged: function(d) {
+        if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) ModuloB.renderRayuela();
+        if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) ModuloC.renderMonitoreo();
       }
     });
     if (typeof ModuloB !== 'undefined' && ModuloB.init) ModuloB.init();

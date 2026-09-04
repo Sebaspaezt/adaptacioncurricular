@@ -110,6 +110,53 @@ var ModuloA = {
     }
   },
 
+  getLiveDiagnostic: function() {
+    var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+    var d = user ? user.diagnostico : null;
+    var selectedCats = this.getSelectedCategories();
+    var selectAmenaza = document.getElementById('select-amenaza');
+    var amenazaVal = selectAmenaza ? selectAmenaza.value : '';
+    var selectCiclo = document.getElementById('select-ciclo');
+    var selectEtapa = document.getElementById('select-etapa');
+    var inputBloom = document.getElementById('input-bloom');
+    var selectGrado = document.getElementById('select-grado');
+    var inputNNA = document.getElementById('input-nna');
+    var inputFecha = document.getElementById('input-fecha-inicio');
+    var inputEjemplo = document.getElementById('input-ejemplo-ie');
+    var inputRiesgos = document.getElementById('input-riesgos-ie');
+    var inputRuta = document.getElementById('input-ruta-gire');
+
+    var ciclo = (selectCiclo && selectCiclo.value) || (d && d.ciclo) || '3';
+    var etapa = (selectEtapa && selectEtapa.value) || (d && d.etapa) || 'ETAPA 2: Recuperación temprana / Lúdica';
+    var bloom = (inputBloom && inputBloom.value) || (d && d.bloom) || this.calculateBloom(etapa);
+    var cats = (selectedCats && selectedCats.length > 0) ? selectedCats : ((d && d.categoriasAmenaza) || ['NATURAL']);
+    var catAmenaza = cats.join(' + ') || (d && d.categoriaAmenaza) || 'NATURAL';
+    var amenaza = amenazaVal || (d && d.amenaza) || 'Inundación';
+    var grado = (selectGrado && selectGrado.value) || (d && d.grado) || 'Grado 6° (Bachillerato)';
+    var nna = (inputNNA && inputNNA.value) || (d && d.nna) || 28;
+    var didactica = this.calculateDidacticaNNA(nna) || (d && d.didacticaNNA) || '👥 TRABAJO COOPERATIVO (15 a 35 NNA)';
+    var fechaInicio = (inputFecha && inputFecha.value) || (d && d.fechaInicio) || new Date().toISOString().split('T')[0];
+    var ejemploIE = (inputEjemplo && inputEjemplo.value) || (d && d.ejemploIE) || '';
+    var riesgosIE = (inputRiesgos && inputRiesgos.value) || (d && d.riesgosIE) || '';
+    var rutaGIRE = (inputRuta && inputRuta.value) || (d && d.rutaGIRE) || '';
+
+    return {
+      ciclo: String(ciclo),
+      grado: grado,
+      etapa: etapa,
+      bloom: bloom,
+      categoriasAmenaza: cats,
+      categoriaAmenaza: catAmenaza,
+      amenaza: amenaza,
+      ejemploIE: ejemploIE,
+      riesgosIE: riesgosIE,
+      rutaGIRE: rutaGIRE,
+      nna: parseInt(nna, 10) || 28,
+      didacticaNNA: didactica,
+      fechaInicio: fechaInicio
+    };
+  },
+
   bindEvents: function() {
     var self = this;
     var selectCiclo = document.getElementById('select-ciclo');
@@ -124,12 +171,14 @@ var ModuloA = {
     if (selectCiclo) {
       selectCiclo.addEventListener('change', function() {
         self.updateGradosForCiclo(selectCiclo.value);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
     if (selectEtapa && inputBloom) {
       selectEtapa.addEventListener('change', function() {
         inputBloom.value = self.calculateBloom(selectEtapa.value);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
@@ -146,6 +195,7 @@ var ModuloA = {
         var selectedCats = self.getSelectedCategories();
         self.filterAmenazas(selectedCats);
         self.updateAmenazaDetails('');
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     });
 
@@ -167,18 +217,28 @@ var ModuloA = {
         });
         self.filterAmenazas(self.getSelectedCategories());
         self.updateAmenazaDetails('');
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
     if (selectAmenaza) {
       selectAmenaza.addEventListener('change', function() {
         self.updateAmenazaDetails(selectAmenaza.value);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
     if (inputNNA && labelDidactica) {
       inputNNA.addEventListener('input', function() {
         labelDidactica.textContent = self.calculateDidacticaNNA(inputNNA.value);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    var inputFecha = document.getElementById('input-fecha-inicio');
+    if (inputFecha) {
+      inputFecha.addEventListener('change', function() {
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 

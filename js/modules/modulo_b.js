@@ -175,8 +175,8 @@ var ModuloB = {
 
   renderRayuela: function() {
     var self = this;
-    var user = AuthManager.getUserData();
-    var d = user ? user.diagnostico : null;
+    var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+    var d = (typeof ModuloA !== 'undefined' && ModuloA.getLiveDiagnostic) ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
     var cicloKey = String((d && d.ciclo) || '3');
     var cicloData = (CURRICULUM_DB && CURRICULUM_DB[cicloKey]) || (CURRICULUM_DB && CURRICULUM_DB['3']) || {};
 
