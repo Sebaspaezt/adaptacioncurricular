@@ -5,184 +5,208 @@ var ModuloC = {
   },
 
   getDidacticaStrategyForArea: function(areaKey, nnaCount) {
-    var strategies = (CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
-    var areaMap = {
-      'lenguaje': 'LENGUAJE',
-      'matematicas': 'MATEMATICAS',
-      'sociales': 'CIENCIAS_SOCIALES',
-      'naturales': 'CIENCIAS_NATURALES'
-    };
-    var stObj = strategies[areaMap[areaKey]] || {};
-    var n = parseInt(nnaCount, 10) || 25;
-    if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
-    if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
-    return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
+    try {
+      var strategies = (CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
+      var areaMap = {
+        'lenguaje': 'LENGUAJE',
+        'matematicas': 'MATEMATICAS',
+        'sociales': 'CIENCIAS_SOCIALES',
+        'naturales': 'CIENCIAS_NATURALES'
+      };
+      var stObj = strategies[areaMap[areaKey]] || {};
+      var n = parseInt(nnaCount, 10) || 25;
+      if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
+      if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
+      return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
+    } catch (e) {
+      return 'Aprendizaje situado y cooperativo';
+    }
   },
 
   renderMonitoreo: function() {
-    var self = this;
-    var user = AuthManager.getUserData();
-    var d = user ? user.diagnostico : null;
-    if (!d) {
-      d = {
-        ciclo: '3',
-        grado: 'Grado 6° (Bachillerato)',
-        nna: 28,
-        didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
-        etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
-        categoriasAmenaza: ['NATURAL'],
-        categoriaAmenaza: 'NATURAL',
-        amenaza: 'Inundación',
-        ejemploIE: 'Creciente de río o quebrada',
-        riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
-        rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
-        fechaInicio: new Date().toISOString().split('T')[0]
-      };
-    }
+    try {
+      var self = this;
+      var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+      var d = user ? user.diagnostico : null;
+      if (!d) {
+        d = {
+          ciclo: '3',
+          grado: 'Grado 6° (Bachillerato)',
+          nna: 28,
+          didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
+          etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
+          categoriasAmenaza: ['NATURAL'],
+          categoriaAmenaza: 'NATURAL',
+          amenaza: 'Inundación',
+          ejemploIE: 'Creciente de río o quebrada',
+          riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
+          rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
+          fechaInicio: new Date().toISOString().split('T')[0]
+        };
+      }
 
-    var cicloKey = String(d.ciclo || '3');
-    var cicloData = CURRICULUM_DB[cicloKey] || CURRICULUM_DB['3'] || {};
-    var savedMonitoreo = (user && user.monitoreo) || {};
+      var cicloKey = String(d.ciclo || '3');
+      var currDB = (typeof CURRICULUM_DB !== 'undefined') ? CURRICULUM_DB : {};
+      var cicloData = currDB[cicloKey] || currDB['3'] || {};
+      var savedMonitoreo = (user && user.monitoreo) || {};
 
-    var container = document.getElementById('modulo-c-content');
-    if (!container) return;
+      var container = document.getElementById('modulo-c-content');
+      if (!container) return;
 
-    var semanas = [];
-    var fechaBase = new Date(d.fechaInicio || new Date());
-    var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
+      var semanas = [];
+      var fechaBase = new Date(d.fechaInicio || new Date());
+      if (isNaN(fechaBase.getTime())) {
+        fechaBase = new Date();
+      }
+      var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
 
-    for (var i = 1; i <= 16; i++) {
-      var fechaSem = new Date(fechaBase);
-      fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
+      for (var i = 1; i <= 16; i++) {
+        var fechaSem = new Date(fechaBase);
+        fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
 
-      var areaKey = areas[(i - 1) % areas.length];
-      var rawItems = cicloData[areaKey] || [];
-      var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
-      var parsedItem = ModuloB.getItemFields(rawItem, areaKey) || {
-        factor: 'Eje Curricular',
-        subproceso: 'Contenido esencial',
-        dbaCode: 'DBA',
-        dbaDesc: 'Aprendizaje nuclear priorizado',
-        complejidad: 'Intermedia',
-        bloom: 'Aplicar y reflexionar',
-        didactica: 'Taller situado de aprendizaje'
-      };
+        var areaKey = areas[(i - 1) % areas.length];
+        var rawItems = (cicloData && cicloData[areaKey]) || [];
+        var rawItem = rawItems.length > 0 ? (rawItems[Math.floor((i - 1) / areas.length) % rawItems.length] || rawItems[0]) : null;
+        
+        var parsedItem = null;
+        if (typeof ModuloB !== 'undefined' && ModuloB.getItemFields && rawItem) {
+          parsedItem = ModuloB.getItemFields(rawItem, areaKey);
+        }
+        if (!parsedItem) {
+          parsedItem = {
+            factor: 'Eje Curricular Priorizado',
+            subproceso: 'Contenido y aprendizaje nuclear en emergencia',
+            dbaCode: 'DBA',
+            dbaDesc: 'Aprendizaje esencial priorizado por contexto',
+            complejidad: 'Intermedia',
+            bloom: 'Aplicar y reflexionar',
+            didactica: 'Taller situado de aprendizaje cooperativo'
+          };
+        }
 
-      var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
+        var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
-      var tarjetaHTML = 
-        '<div style="line-height:1.45;">' +
-          '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-          '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
-          '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + parsedItem.subproceso + ' (' + parsedItem.dbaDesc + ')</span><br>' +
-          '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-          '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+        var tarjetaHTML = 
+          '<div style="line-height:1.45;">' +
+            '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+            '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+            '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + (parsedItem.subproceso || '') + ' (' + (parsedItem.dbaDesc || '') + ')</span><br>' +
+            '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+            '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+          '</div>';
+
+        semanas.push({
+          num: i,
+          fecha: fechaSem.toLocaleDateString('es-CO'),
+          etapa: d.etapa,
+          areaKey: areaKey,
+          areaNombre: areaKey.toUpperCase(),
+          tarjeta: tarjetaHTML,
+          tarjetaPlana: (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.amenaza || 'Emergencia') + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.subproceso + ' - ' + parsedItem.dbaDesc + ' | Didáctica: ' + parsedItem.didactica + ' | Bloom: ' + parsedItem.bloom,
+          avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
+          observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
+        });
+      }
+
+      var monValues = Object.keys(savedMonitoreo).map(function(k) { return savedMonitoreo[k]; });
+      var logrados = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
+      var enProceso = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
+      var sinIniciar = semanas.length - logrados - enProceso;
+      var pctAvance = Math.round((logrados / semanas.length) * 100);
+
+      var html = 
+        '<div class="card-elite">' +
+          '<div class="card-header">' +
+            '<div>' +
+              '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
+              '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
+            '</div>' +
+            '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
+              '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
+              '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
+              '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
+              '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
+            '</div>' +
+          '</div>' +
+
+          '<!-- Guía e Instrucciones de Diligenciamiento de Monitoreo Semanal -->' +
+          '<div class="accordion-item no-print" style="margin-bottom: 20px;">' +
+            '<div class="accordion-header" style="background: var(--surface-hover);">' +
+              '<span>ℹ️ Instrucciones de diligenciamiento y seguimiento semanal pedagógico</span>' +
+              '<span class="chevron">▼</span>' +
+            '</div>' +
+            '<div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6; display: block;">' +
+              '<p style="margin-bottom: 8px;"><strong>1. ¿Cómo funciona el Monitoreo Semanal?:</strong> Cada fila representa una semana del plan curricular adaptado (16 semanas por ciclo). El sistema asigna automáticamente la rotación disciplinar (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), integrando la amenaza diagnosticada en el Módulo A y la didáctica según la matrícula de NNA.</p>' +
+              '<p style="margin-bottom: 8px;"><strong>2. Registro de Estado y Trazabilidad:</strong> Seleccione en la columna <em>Estado</em> el nivel de alcance de la semana (<em>⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado</em>) e ingrese en <em>Observaciones / Evidencia</em> las acciones desarrolladas, bitácora de aula o ajustes requeridos.</p>' +
+              '<p style="margin-bottom: 8px;"><strong>3. Guardar y Exportar:</strong> Haga clic en <strong>💾 Guardar Avance</strong> para registrar sus cambios localmente en su perfil. Puede descargar el reporte estructurado para Microsoft Excel con el botón <strong>📊 Exportar a Excel (CSV)</strong> o generar la copia oficial con <strong>🖨️ Imprimir Carta</strong>.</p>' +
+              '<p style="margin-bottom: 0; color: var(--primary);"><strong>4. Validez SIEE / ETC:</strong> Este registro sirve como evidencia formal de continuidad pedagógica y flexibilización curricular para presentar ante directivos docentes y la Secretaría de Educación (ETC).</p>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="grid-4" style="margin-bottom: 24px;">' +
+            '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+              '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
+            '</div>' +
+            '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+              '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
+            '</div>' +
+            '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+              '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
+            '</div>' +
+            '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+              '<div style="font-size: 0.8rem; color: var(--color-blue);">Total Semanas Plan</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="overflow-x: auto;">' +
+            '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
+              '<thead>' +
+                '<tr style="background: var(--surface-hover); text-align: left;">' +
+                  '<th style="padding: 10px; width: 75px;">Semana</th>' +
+                  '<th style="padding: 10px; width: 105px;">Fecha Est.</th>' +
+                  '<th style="padding: 10px; width: 110px;">Área</th>' +
+                  '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
+                  '<th style="padding: 10px; width: 145px;">Estado</th>' +
+                  '<th style="padding: 10px; width: 220px;">Observaciones / Evidencia</th>' +
+                '</tr>' +
+              '</thead>' +
+              '<tbody>' +
+                semanas.map(function(s) {
+                  return '<tr style="border-bottom: 1px solid var(--border-light);">' +
+                    '<td style="padding: 10px; font-weight: 700; text-align: center;">Sem. ' + s.num + '</td>' +
+                    '<td style="padding: 10px;">' + s.fecha + '</td>' +
+                    '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
+                    '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
+                    '<td style="padding: 10px;">' +
+                      '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
+                        '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
+                        '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
+                        '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
+                        '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
+                      '</select>' +
+                    '</td>' +
+                    '<td style="padding: 10px;">' +
+                      '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
+                    '</td>' +
+                  '</tr>';
+                }).join('') +
+              '</tbody>' +
+            '</table>' +
+          '</div>' +
         '</div>';
 
-      semanas.push({
-        num: i,
-        fecha: fechaSem.toLocaleDateString('es-CO'),
-        etapa: d.etapa,
-        areaKey: areaKey,
-        areaNombre: areaKey.toUpperCase(),
-        tarjeta: tarjetaHTML,
-        tarjetaPlana: (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.amenaza || 'Emergencia') + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.subproceso + ' - ' + parsedItem.dbaDesc + ' | Didáctica: ' + parsedItem.didactica + ' | Bloom: ' + parsedItem.bloom,
-        avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
-        observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
-      });
+      container.innerHTML = html;
+      this.bindEvents(semanas);
+    } catch (err) {
+      console.error('Error rendering Monitoreo C:', err);
+      var cElem = document.getElementById('modulo-c-content');
+      if (cElem) {
+        cElem.innerHTML = '<div class="card-elite" style="padding: 24px; color: #991b1b;">⚠️ Ocurrió un error al cargar el Módulo C. Por favor guarde su diagnóstico en el Módulo A y vuelva a intentarlo.</div>';
+      }
     }
-
-    var logrados = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
-    var enProceso = Object.values(savedMonitoreo).filter(function(x) { return x.avance && x.avance.indexOf('proceso') !== -1; }).length;
-    var sinIniciar = semanas.length - logrados - enProceso;
-    var pctAvance = Math.round((logrados / semanas.length) * 100);
-
-    var html = 
-      '<div class="card-elite">' +
-        '<div class="card-header">' +
-          '<div>' +
-            '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
-          '</div>' +
-          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
-            '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
-            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
-            '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
-          '</div>' +
-        '</div>' +
-
-        '<!-- Guía e Instrucciones de Diligenciamiento de Monitoreo Semanal -->' +
-        '<div class="accordion-item no-print" style="margin-bottom: 20px;">' +
-          '<div class="accordion-header" style="background: var(--surface-hover);">' +
-            '<span>ℹ️ Instrucciones de diligenciamiento y seguimiento semanal pedagógico</span>' +
-            '<span class="chevron">▼</span>' +
-          '</div>' +
-          '<div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6; display: block;">' +
-            '<p style="margin-bottom: 8px;"><strong>1. ¿Cómo funciona el Monitoreo Semanal?:</strong> Cada fila representa una semana del plan curricular adaptado (16 semanas por ciclo). El sistema asigna automáticamente la rotación disciplinar (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), integrando la amenaza diagnosticada en el Módulo A y la didáctica según la matrícula de NNA.</p>' +
-            '<p style="margin-bottom: 8px;"><strong>2. Registro de Estado y Trazabilidad:</strong> Seleccione en la columna <em>Estado</em> el nivel de alcance de la semana (<em>⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado</em>) e ingrese en <em>Observaciones / Evidencia</em> las acciones desarrolladas, bitácora de aula o ajustes requeridos.</p>' +
-            '<p style="margin-bottom: 8px;"><strong>3. Guardar y Exportar:</strong> Haga clic en <strong>💾 Guardar Avance</strong> para registrar sus cambios localmente en su perfil. Puede descargar el reporte estructurado para Microsoft Excel con el botón <strong>📊 Exportar a Excel (CSV)</strong> o generar la copia oficial con <strong>🖨️ Imprimir Carta</strong>.</p>' +
-            '<p style="margin-bottom: 0; color: var(--primary);"><strong>4. Validez SIEE / ETC:</strong> Este registro sirve como evidencia formal de continuidad pedagógica y flexibilización curricular para presentar ante directivos docentes y la Secretaría de Educación (ETC).</p>' +
-          '</div>' +
-        '</div>' +
-
-        '<div class="grid-4" style="margin-bottom: 24px;">' +
-          '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
-          '</div>' +
-          '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
-          '</div>' +
-          '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
-          '</div>' +
-          '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-            '<div style="font-size: 0.8rem; color: var(--color-blue);">Total Semanas Plan</div>' +
-            '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div style="overflow-x: auto;">' +
-          '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
-            '<thead>' +
-              '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 10px; width: 75px;">Semana</th>' +
-                '<th style="padding: 10px; width: 105px;">Fecha Est.</th>' +
-                '<th style="padding: 10px; width: 110px;">Área</th>' +
-                '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
-                '<th style="padding: 10px; width: 145px;">Estado</th>' +
-                '<th style="padding: 10px; width: 220px;">Observaciones / Evidencia</th>' +
-              '</tr>' +
-            '</thead>' +
-            '<tbody>' +
-              semanas.map(function(s) {
-                return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 10px; font-weight: 700; text-align: center;">Sem. ' + s.num + '</td>' +
-                  '<td style="padding: 10px;">' + s.fecha + '</td>' +
-                  '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
-                  '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
-                  '<td style="padding: 10px;">' +
-                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
-                      '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
-                      '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
-                      '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
-                      '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
-                    '</select>' +
-                  '</td>' +
-                  '<td style="padding: 10px;">' +
-                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
-                  '</td>' +
-                '</tr>';
-              }).join('') +
-            '</tbody>' +
-          '</table>' +
-        '</div>' +
-      '</div>';
-
-    container.innerHTML = html;
-    this.bindEvents(semanas);
   },
 
   bindEvents: function(semanas) {

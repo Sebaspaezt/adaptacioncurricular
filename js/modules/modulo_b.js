@@ -8,6 +8,7 @@ var ModuloB = {
 
   getItemFields: function(item, areaKey) {
     areaKey = areaKey || this.currentArea;
+    if (!item) return null;
     if (Array.isArray(item)) {
       var dbaRaw = item[2] || '';
       var dbaCode = 'DBA';
@@ -85,11 +86,11 @@ var ModuloB = {
     var self = this;
     var rawItems = [];
     if (areaKey === 'socioemocional') {
-      rawItems = habsList;
+      rawItems = habsList || [];
     } else if (areaKey === 'supervivencia') {
-      rawItems = supsList;
+      rawItems = supsList || [];
     } else {
-      rawItems = cicloData[areaKey] || [];
+      rawItems = (cicloData && cicloData[areaKey]) || [];
     }
 
     var validItems = [];
@@ -132,8 +133,8 @@ var ModuloB = {
           var badgeBg = '#e0f2fe';
           var badgeColor = '#0369a1';
           if (isSocio) {
-            badgeBg = '#dcfce7';
-            badgeColor = '#166534';
+            badgeBg = '#fef3c7';
+            badgeColor = '#92400e';
           } else if (isSuperv) {
             badgeBg = '#fee2e2';
             badgeColor = '#991b1b';
@@ -177,7 +178,7 @@ var ModuloB = {
     var user = AuthManager.getUserData();
     var d = user ? user.diagnostico : null;
     var cicloKey = String((d && d.ciclo) || '3');
-    var cicloData = CURRICULUM_DB[cicloKey] || CURRICULUM_DB['3'] || {};
+    var cicloData = (CURRICULUM_DB && CURRICULUM_DB[cicloKey]) || (CURRICULUM_DB && CURRICULUM_DB['3']) || {};
 
     var container = document.getElementById('modulo-b-content');
     if (!container) return;
@@ -191,10 +192,10 @@ var ModuloB = {
     });
 
     var areas = [
-      { key: 'lenguaje', name: '📖 Lenguaje', count: (cicloData.lenguaje || []).length },
-      { key: 'matematicas', name: '📐 Matemáticas', count: (cicloData.matematicas || []).length },
-      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: (cicloData.sociales || []).length },
-      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: (cicloData.naturales || []).length },
+      { key: 'lenguaje', name: '📖 Lenguaje', count: ((cicloData && cicloData.lenguaje) || []).length },
+      { key: 'matematicas', name: '📐 Matemáticas', count: ((cicloData && cicloData.matematicas) || []).length },
+      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: ((cicloData && cicloData.sociales) || []).length },
+      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: ((cicloData && cicloData.naturales) || []).length },
       { key: 'socioemocional', name: '🌱 Socioemocional & Vida', count: habsList.length },
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERM', count: supsList.length }
     ];
@@ -217,7 +218,7 @@ var ModuloB = {
         '<div class="card-header">' +
           '<div>' +
             '<h3 class="card-title">📚 Rayuela Curricular: Mallas Priorizadas (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">Grados: ' + ((cicloData.grados || []).join(', ')) + ' | Etapa activa: ' + ((d && d.etapa) || 'Etapa 2') + '</span>' +
+            '<span style="font-size: 0.85rem; color: var(--text-muted);">Grados: ' + (((cicloData && cicloData.grados) || []).join(', ')) + ' | Etapa activa: ' + ((d && d.etapa) || 'Etapa 2') + '</span>' +
           '</div>' +
           '<div style="display: flex; gap: 8px;">' +
             '<button id="btn-imprimir-rayuela" class="btn-elite btn-outline">🖨️ Imprimir Malla</button>' +
@@ -237,7 +238,7 @@ var ModuloB = {
         '<div id="full-print-matrix-container" style="display: none;">' +
           '<div style="text-align: center; margin-bottom: 18px; border-bottom: 2px solid #005A36; padding-bottom: 10px;">' +
             '<h2 style="color: #005A36; font-size: 1.3rem; margin-bottom: 4px;">Malla Curricular Completa Flexibilizada en Emergencias</h2>' +
-            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + ((cicloData.grados || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
+            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + (((cicloData && cicloData.grados) || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
           '</div>' +
           fullPrintHTML +
         '</div>' +

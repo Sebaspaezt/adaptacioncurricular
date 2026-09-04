@@ -51,14 +51,8 @@ var ModuloA = {
     var checkboxes = document.querySelectorAll('.category-chip-input:checked');
     var selected = [];
     checkboxes.forEach(function(cb) {
-      selected.push(cb.value);
+      if (cb.value) selected.push(cb.value);
     });
-    if (selected.length === 0) {
-      var selectCat = document.getElementById('select-cat-amenaza');
-      if (selectCat && selectCat.value) {
-        selected.push(selectCat.value);
-      }
-    }
     return selected;
   },
 
@@ -70,16 +64,24 @@ var ModuloA = {
     if (typeof categorias === 'string') {
       categorias = [categorias];
     }
-    categorias = categorias || [];
+    categorias = (categorias || []).filter(function(c) { return Boolean(c); });
 
+    // Si no hay categorías seleccionadas, no mostrar amenazas o mostrar todas si está vacío
     var isAll = (categorias.length === 0 || categorias.indexOf('TODAS LAS CATEGORÍAS (Diagnóstico Multirriesgo Integral)') !== -1);
 
     var filtradas = (PGIRE_DB || []).filter(function(item) {
       if (isAll) return true;
       return categorias.some(function(cat) {
-        var cUpper = String(cat).toUpperCase();
-        var itemCat = String(item.categoria || '').toUpperCase();
-        return itemCat.indexOf(cUpper) !== -1 || cUpper.indexOf(itemCat) !== -1;
+        var cUpper = String(cat).trim().toUpperCase();
+        var itemCat = String(item.categoria || '').trim().toUpperCase();
+        // Coincidencia exacta o discreta para evitar que NATURAL coincida con SOCIONATURAL
+        if (cUpper === 'NATURAL') return itemCat === 'NATURAL';
+        if (cUpper === 'SOCIONATURAL') return itemCat === 'SOCIONATURAL';
+        if (cUpper === 'ANTRÓPICA' || cUpper === 'ANTROPICA') return itemCat === 'ANTRÓPICA' || itemCat === 'ANTROPICA';
+        if (cUpper.indexOf('CONFLICTO') !== -1 || cUpper.indexOf('PROTECCIÓN') !== -1 || cUpper.indexOf('PROTECCION') !== -1) {
+          return itemCat.indexOf('CONFLICTO') !== -1 || itemCat.indexOf('PROTECCIÓN') !== -1 || itemCat.indexOf('PROTECCION') !== -1;
+        }
+        return itemCat === cUpper;
       });
     });
 

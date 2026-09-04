@@ -1,20 +1,24 @@
 // Controlador Principal de la Aplicación Web NRC
 function initApp() {
-  AuthManager.ensureDefaultUser();
-  initAuthUI();
-  initFeedbackUI();
-  initNavigation();
-  initAccordions();
+  try {
+    AuthManager.ensureDefaultUser();
+    initAuthUI();
+    initFeedbackUI();
+    initNavigation();
+    initAccordions();
 
-  // Iniciar Módulos
-  ModuloA.init({
-    onDiagnosticSaved: function(d) {
-      ModuloB.renderRayuela();
-      ModuloC.renderMonitoreo();
-    }
-  });
-  ModuloB.init();
-  ModuloC.init();
+    // Iniciar Módulos
+    ModuloA.init({
+      onDiagnosticSaved: function(d) {
+        if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) ModuloB.renderRayuela();
+        if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) ModuloC.renderMonitoreo();
+      }
+    });
+    if (typeof ModuloB !== 'undefined' && ModuloB.init) ModuloB.init();
+    if (typeof ModuloC !== 'undefined' && ModuloC.init) ModuloC.init();
+  } catch (e) {
+    console.error('Error during initApp:', e);
+  }
 }
 
 function initAuthUI() {
