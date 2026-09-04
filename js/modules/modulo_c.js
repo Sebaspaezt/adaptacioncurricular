@@ -57,7 +57,7 @@ var ModuloC = {
       var areaKey = areas[(i - 1) % areas.length];
       var rawItems = cicloData[areaKey] || [];
       var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
-      var parsedItem = ModuloB.getItemFields(rawItem) || {
+      var parsedItem = ModuloB.getItemFields(rawItem, areaKey) || {
         factor: 'Eje Curricular',
         subproceso: 'Contenido esencial',
         dbaCode: 'DBA',
@@ -85,6 +85,7 @@ var ModuloC = {
         areaKey: areaKey,
         areaNombre: areaKey.toUpperCase(),
         tarjeta: tarjetaHTML,
+        tarjetaPlana: (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.amenaza || 'Emergencia') + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.subproceso + ' - ' + parsedItem.dbaDesc + ' | Didáctica: ' + parsedItem.didactica + ' | Bloom: ' + parsedItem.bloom,
         avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
         observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
       });
@@ -102,12 +103,28 @@ var ModuloC = {
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
             '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 10px;">' +
+          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Exportar Bitácora</button>' +
-            '<button id="btn-imprimir-carta" class="btn-elite btn-secondary">🖨️ Imprimir Carta</button>' +
+            '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
+            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
+            '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
+
+        '<!-- Guía e Instrucciones de Diligenciamiento de Monitoreo Semanal -->' +
+        '<div class="accordion-item no-print" style="margin-bottom: 20px;">' +
+          '<div class="accordion-header" style="background: var(--surface-hover);">' +
+            '<span>ℹ️ Instrucciones de diligenciamiento y seguimiento semanal pedagógico</span>' +
+            '<span class="chevron">▼</span>' +
+          '</div>' +
+          '<div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6; display: block;">' +
+            '<p style="margin-bottom: 8px;"><strong>1. ¿Cómo funciona el Monitoreo Semanal?:</strong> Cada fila representa una semana del plan curricular adaptado (16 semanas por ciclo). El sistema asigna automáticamente la rotación disciplinar (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), integrando la amenaza diagnosticada en el Módulo A y la didáctica según la matrícula de NNA.</p>' +
+            '<p style="margin-bottom: 8px;"><strong>2. Registro de Estado y Trazabilidad:</strong> Seleccione en la columna <em>Estado</em> el nivel de alcance de la semana (<em>⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado</em>) e ingrese en <em>Observaciones / Evidencia</em> las acciones desarrolladas, bitácora de aula o ajustes requeridos.</p>' +
+            '<p style="margin-bottom: 8px;"><strong>3. Guardar y Exportar:</strong> Haga clic en <strong>💾 Guardar Avance</strong> para registrar sus cambios localmente en su perfil. Puede descargar el reporte estructurado para Microsoft Excel con el botón <strong>📊 Exportar a Excel (CSV)</strong> o generar la copia oficial con <strong>🖨️ Imprimir Carta</strong>.</p>' +
+            '<p style="margin-bottom: 0; color: var(--primary);"><strong>4. Validez SIEE / ETC:</strong> Este registro sirve como evidencia formal de continuidad pedagógica y flexibilización curricular para presentar ante directivos docentes y la Secretaría de Educación (ETC).</p>' +
+          '</div>' +
+        '</div>' +
+
         '<div class="grid-4" style="margin-bottom: 24px;">' +
           '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
             '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
@@ -164,25 +181,28 @@ var ModuloC = {
       '</div>';
 
     container.innerHTML = html;
-    this.bindEvents();
+    this.bindEvents(semanas);
   },
 
-  bindEvents: function() {
+  bindEvents: function(semanas) {
     var self = this;
     var btnGuardar = document.getElementById('btn-guardar-monitoreo');
     var btnImprimir = document.getElementById('btn-imprimir-carta');
-    var btnExportar = document.getElementById('btn-exportar-json');
+    var btnExportarJSON = document.getElementById('btn-exportar-json');
+    var btnExportarExcel = document.getElementById('btn-exportar-excel');
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
         var selects = document.querySelectorAll('.select-avance');
         var inputs = document.querySelectorAll('.input-obs');
-        var monitoreo = {};
+        var user = AuthManager.getUserData() || {};
+        var monitoreo = user.monitoreo || {};
 
         selects.forEach(function(sel) {
           var sem = sel.getAttribute('data-semana');
           monitoreo[sem] = monitoreo[sem] || {};
           monitoreo[sem].avance = sel.value;
+          monitoreo[sem].fechaRegistro = new Date().toLocaleString('es-CO');
         });
 
         inputs.forEach(function(inp) {
@@ -192,13 +212,59 @@ var ModuloC = {
         });
 
         AuthManager.saveUserData('monitoreo', monitoreo);
-        alert('✅ Registro de Monitoreo Semanal guardado exitosamente.');
+        alert('✅ Registro de Monitoreo Semanal guardado exitosamente con trazabilidad temporal.');
         self.renderMonitoreo();
       });
     }
 
-    if (btnExportar) {
-      btnExportar.addEventListener('click', function() {
+    if (btnExportarExcel) {
+      btnExportarExcel.addEventListener('click', function() {
+        var user = AuthManager.getUserData() || {};
+        var d = user.diagnostico || {};
+        var savedMonitoreo = user.monitoreo || {};
+
+        var rows = [
+          ['HERRAMIENTA DE ADAPTACIÓN Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS - NRC / MEN'],
+          ['Docente:', user.nombreCompleto || 'Docente NRC', 'Institución:', user.institucion || 'IE Rural', 'Ciclo:', 'Ciclo ' + (d.ciclo || '3')],
+          ['Etapa Emergencia:', d.etapa || '', 'Amenaza:', d.amenaza || '', 'Fecha Inicio:', d.fechaInicio || ''],
+          [''],
+          ['Semana', 'Fecha Estimada', 'Área Curricular', 'Tarjeta de Acción Pedagógica Situada', 'Estado / Avance', 'Observaciones / Evidencias', 'Fecha Registro']
+        ];
+
+        (semanas || []).forEach(function(s) {
+          var mon = savedMonitoreo[s.num] || {};
+          rows.push([
+            'Semana ' + s.num,
+            s.fecha,
+            s.areaNombre,
+            s.tarjetaPlana || '',
+            mon.avance || s.avance || '⚪ Sin iniciar',
+            mon.observaciones || s.observaciones || '',
+            mon.fechaRegistro || ''
+          ]);
+        });
+
+        var csvContent = '﻿' + rows.map(function(e) {
+          return e.map(function(item) {
+            var str = String(item || '').replace(/"/g, '""');
+            return '"' + str + '"';
+          }).join(';');
+        }).join('
+');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'monitoreo_curricular_nrc_' + (user.nombreCompleto || 'docente').replace(/\s+/g, '_') + '.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    if (btnExportarJSON) {
+      btnExportarJSON.addEventListener('click', function() {
         var data = AuthManager.getUserData();
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         var downloadAnchor = document.createElement('a');

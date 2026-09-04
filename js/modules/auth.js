@@ -28,7 +28,7 @@ var AuthManager = {
           rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
           grado: 'Grado 6° (Bachillerato)',
           nna: 28,
-          didacticaNNA: '👥 TRABAJO COOPERATIVO',
+          didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
           fechaInicio: new Date().toISOString().split('T')[0]
         },
         monitoreo: {}

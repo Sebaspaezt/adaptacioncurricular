@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Herramienta de adaptación y flexibilización curricular en emergencias - NRC / MEN</title>
   
-<style>
-/* Variables de Diseño Swiss-Fine NRC */
+<style>\n/* Variables de Diseño Swiss-Fine NRC */
 :root {
   --primary: #005A36;
   --primary-dark: #003d24;
@@ -49,8 +48,7 @@
   
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-
-/* Componentes UI Swiss-Fine NRC */
+\n/* Componentes UI Swiss-Fine NRC */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -485,40 +483,57 @@ body {
   color: #0f766e;
   border: 1px solid #ccfbf1;
 }
+\n/* Reglas de Impresión Tamaño Carta */
+@page {
+  size: letter portrait;
+  margin: 12mm 10mm 15mm 10mm;
+}
 
-/* Reglas de Impresión Tamaño Carta */
 @media print {
-  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button {
+  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button, .btn-feedback-floating, #modal-feedback, #modal-auth {
     display: none !important;
   }
   
   body {
     background: white !important;
-    font-size: 11pt !important;
+    font-size: 9.5pt !important;
     color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .main-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   .card-elite {
     box-shadow: none !important;
-    border: 1px solid #ccc !important;
+    border: 1px solid #999 !important;
     padding: 10px !important;
-    margin-bottom: 15px !important;
-    page-break-inside: avoid;
+    margin-bottom: 12px !important;
+    page-break-inside: auto !important;
   }
   
   .table-print {
     width: 100% !important;
     border-collapse: collapse !important;
+    page-break-inside: auto !important;
+  }
+  
+  .table-print tr {
+    page-break-inside: avoid !important;
   }
   
   .table-print th, .table-print td {
-    border: 1px solid #999 !important;
-    padding: 6px 8px !important;
-    font-size: 9pt !important;
+    border: 1px solid #777 !important;
+    padding: 5px 6px !important;
+    font-size: 8pt !important;
+    line-height: 1.3 !important;
   }
 }
-
-</style>
+\n</style>
 </head>
 <body>
 
@@ -542,8 +557,8 @@ body {
     </div>
   </header>
 
-  <!-- Pestañas de Módulos -->
-  <nav class="nav-tabs-container no-print">
+  <!-- Pestañas de Módulos (Sticky) -->
+  <nav class="nav-tabs-container no-print" style="position: sticky; top: 68px; z-index: 90;">
     <button id="tab-diagnostico" class="nav-tab active">
       <span>🎛️</span> Módulo A: Diagnóstico (instrucciones)
     </button>
@@ -5904,7 +5919,7 @@ var AuthManager = {
           rutaGIRE: '🏙️ MTGIRE / UNGRD / CMGRD / CDGRD / Alcaldía (Mesa Territorial de Gestión del Riesgo)',
           grado: 'Grado 6° (Bachillerato)',
           nna: 28,
-          didacticaNNA: '👥 TRABAJO COOPERATIVO',
+          didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
           fechaInicio: new Date().toISOString().split('T')[0]
         },
         monitoreo: {}
@@ -6210,7 +6225,8 @@ var ModuloB = {
     this.renderRayuela();
   },
 
-  getItemFields: function(item) {
+  getItemFields: function(item, areaKey) {
+    areaKey = areaKey || this.currentArea;
     if (Array.isArray(item)) {
       var dbaRaw = item[2] || '';
       var dbaCode = 'DBA';
@@ -6227,34 +6243,44 @@ var ModuloB = {
         dbaDesc: dbaDesc,
         complejidad: item[4] || 'Intermedia',
         bloom: item[5] || 'Aplicar y contextualizar en el entorno',
+        saber: item[6] || '',
+        hacer: item[7] || '',
+        ser: item[8] || '',
         didactica: item[7] || item[6] || 'Taller situado y pedagógico de aula'
       };
     } else if (item && typeof item === 'object') {
-      if (item.habilidad && item.saber && item.hacer) {
-        if (item.habilidad.indexOf('Etapa de respuesta') !== -1 || (item.hacer && item.hacer.indexOf('=SUBTOTAL') !== -1)) {
+      if (areaKey === 'socioemocional' || (item.habilidad && item.saber && item.hacer)) {
+        if (item.habilidad && (item.habilidad.indexOf('Etapa de respuesta') !== -1 || (item.hacer && item.hacer.indexOf('=SUBTOTAL') !== -1))) {
           return null;
         }
         return {
-          factor: item.saber || 'Dimensión Socioemocional',
-          subproceso: item.hacer || '',
+          factor: item.habilidad ? ('🏷️ ' + item.habilidad.trim()) : 'Dimensión Socioemocional',
+          subproceso: item.saber ? ('🎯 Dimensión: ' + item.saber) : '',
           dbaCode: 'SOCIOEMOCIONAL',
-          dbaDesc: item.habilidad || 'Competencia para la vida y bienestar',
+          dbaDesc: item.hacer || 'Competencia para la vida y bienestar integral',
           complejidad: 'Transversal',
           bloom: 'Autorregulación y empatía',
+          saber: 'Conmigo mismo: Autoconocimiento y gestión emocional',
+          hacer: 'Con el otro: Empatía, diálogo y resolución pacífica',
+          ser: 'Con el entorno: Convivencia y resiliencia colectiva',
           didactica: 'Círculos de palabra y kit de contención socioemocional'
         };
       }
-      if (item.tipo_afectacion && item.aprendizaje) {
-        if (item.tipo_afectacion.indexOf('Tipologías') !== -1 || (item.aprendizaje && item.aprendizaje.indexOf('=SUBTOTAL') !== -1)) {
+      if (areaKey === 'supervivencia' || (item.tipo_afectacion && item.aprendizaje)) {
+        if (item.tipo_afectacion && (item.tipo_afectacion.indexOf('Tipologías') !== -1 || (item.aprendizaje && item.aprendizaje.indexOf('=SUBTOTAL') !== -1))) {
           return null;
         }
+        var tipologiaLabel = (item.tipo_afectacion || 'Riesgo').replace(/_/g, ' ');
         return {
-          factor: (item.tipo_afectacion || '').replace(/_/g, ' '),
-          subproceso: item.aprendizaje || '',
+          factor: '🛡️ ' + tipologiaLabel,
+          subproceso: item.aprendizaje ? ('🔍 Foco de Riesgo: ' + item.aprendizaje) : '',
           dbaCode: 'ERM / WASH',
-          dbaDesc: item.riesgo || item.aprendizaje || 'Protección y autocuidado',
+          dbaDesc: item.riesgo || 'Protección escolar y salvaguarda de vidas',
           complejidad: 'Protección',
-          bloom: 'Identificar rutas y autocuidado',
+          bloom: item.miniproyecto || 'Identificar rutas seguras y protocolos de autocuidado',
+          saber: 'Identificación temprana de señales de peligro',
+          hacer: item.miniproyecto || 'Protocolos de autoprotección y rutas seguras',
+          ser: 'Cuidado mutuo y cultura de prevención comunitaria',
           didactica: item.miniproyecto || 'Protocolos seguros y mapas de riesgo escolar'
         };
       }
@@ -6265,6 +6291,9 @@ var ModuloB = {
         dbaDesc: item.dba_desc || item.enunciado || item.descripcion || item.evidencia || '',
         complejidad: item.complejidad || 'Intermedia',
         bloom: item.bloom || item.objetivo_bloom || 'Aplicar y reflexionar',
+        saber: item.saber || '',
+        hacer: item.hacer || '',
+        ser: item.ser || '',
         didactica: item.didactica || item.miniproyecto || item.estrategia || 'Taller situado de aprendizaje'
       };
     }
@@ -6309,9 +6338,30 @@ var ModuloB = {
 
     var validItems = [];
     rawItems.forEach(function(item) {
-      var parsed = self.getItemFields(item);
+      var parsed = self.getItemFields(item, self.currentArea);
       if (parsed) validItems.push(parsed);
     });
+
+    // Determinar encabezados diferenciados según el tipo de área
+    var isSocio = (this.currentArea === 'socioemocional');
+    var isSuperv = (this.currentArea === 'supervivencia');
+
+    var th1 = 'Factor / Eje (EBC)';
+    var th2 = 'DBA / Aprendizaje Esencial (Articulación EBC-DBA)';
+    var th3 = 'Complejidad & Bloom';
+    var th4 = 'Didáctica Situada / Mini-Proyecto';
+
+    if (isSocio) {
+      th1 = '🌱 Dimensión & Etapa de Respuesta';
+      th2 = 'Habilidad Clave & Competencia de Bienestar';
+      th3 = 'Enfoque & Proceso Psicosocial';
+      th4 = 'Didáctica de Contención Socioemocional';
+    } else if (isSuperv) {
+      th1 = '🛡️ Tipología de Riesgo & Afectación PGIRE';
+      th2 = 'Aprendizaje Clave & Enfoque de Autoprotección';
+      th3 = 'Complejidad de Seguridad & Desafío';
+      th4 = 'Mini-Proyecto Situado & Protocolos de Aula';
+    }
 
     var html = 
       '<div class="card-elite">' +
@@ -6336,19 +6386,40 @@ var ModuloB = {
           '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">' +
             '<thead>' +
               '<tr style="background: var(--surface-hover); text-align: left;">' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">Factor / Eje</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 32%;">DBA / Aprendizaje Esencial</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 20%;">Complejidad & Bloom</th>' +
-                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">Didáctica Situada / Mini-Proyecto</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 22%;">' + th1 + '</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 34%;">' + th2 + '</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 18%;">' + th3 + '</th>' +
+                '<th style="padding: 10px; border-bottom: 2px solid var(--border-medium); width: 26%;">' + th4 + '</th>' +
               '</tr>' +
             '</thead>' +
             '<tbody>' +
               validItems.map(function(item) {
+                var badgeBg = '#e0f2fe';
+                var badgeColor = '#0369a1';
+                if (isSocio) {
+                  badgeBg = '#dcfce7';
+                  badgeColor = '#166534';
+                } else if (isSuperv) {
+                  badgeBg = '#fee2e2';
+                  badgeColor = '#991b1b';
+                }
+
                 return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                  '<td style="padding: 10px; vertical-align: top;"><strong>' + item.factor + '</strong><br><small style="color: var(--text-muted);">' + item.subproceso + '</small></td>' +
-                  '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e0f2fe; color:#0369a1; font-weight:700;">' + item.dbaCode + '</span><br><span style="line-height:1.45; display:inline-block; margin-top:4px;">' + item.dbaDesc + '</span></td>' +
-                  '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill badge-etapa2">' + item.complejidad + '</span><br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small></td>' +
-                  '<td style="padding: 10px; vertical-align: top; color: var(--primary);"><strong>🛠️ ' + item.didactica + '</strong></td>' +
+                  '<td style="padding: 10px; vertical-align: top;">' +
+                    '<strong>' + item.factor + '</strong>' +
+                    (item.subproceso ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
+                  '</td>' +
+                  '<td style="padding: 10px; vertical-align: top;">' +
+                    '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700;">' + item.dbaCode + '</span>' +
+                    '<div style="line-height:1.45; margin-top:5px;">' + item.dbaDesc + '</div>' +
+                  '</td>' +
+                  '<td style="padding: 10px; vertical-align: top;">' +
+                    '<span class="badge-pill badge-etapa2">' + item.complejidad + '</span>' +
+                    '<br><small style="color: var(--text-muted); line-height:1.4; display:inline-block; margin-top:4px;">' + item.bloom + '</small>' +
+                  '</td>' +
+                  '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
+                    '<strong>🛠️ ' + item.didactica + '</strong>' +
+                  '</td>' +
                 '</tr>';
               }).join('') +
             '</tbody>' +
@@ -6435,7 +6506,7 @@ var ModuloC = {
       var areaKey = areas[(i - 1) % areas.length];
       var rawItems = cicloData[areaKey] || [];
       var rawItem = rawItems[Math.floor((i - 1) / areas.length) % (rawItems.length || 1)] || rawItems[0] || [];
-      var parsedItem = ModuloB.getItemFields(rawItem) || {
+      var parsedItem = ModuloB.getItemFields(rawItem, areaKey) || {
         factor: 'Eje Curricular',
         subproceso: 'Contenido esencial',
         dbaCode: 'DBA',
@@ -6463,6 +6534,7 @@ var ModuloC = {
         areaKey: areaKey,
         areaNombre: areaKey.toUpperCase(),
         tarjeta: tarjetaHTML,
+        tarjetaPlana: (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.amenaza || 'Emergencia') + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.subproceso + ' - ' + parsedItem.dbaDesc + ' | Didáctica: ' + parsedItem.didactica + ' | Bloom: ' + parsedItem.bloom,
         avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
         observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
       });
@@ -6480,12 +6552,28 @@ var ModuloC = {
             '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
             '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente NRC') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 10px;">' +
+          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
             '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Exportar Bitácora</button>' +
-            '<button id="btn-imprimir-carta" class="btn-elite btn-secondary">🖨️ Imprimir Carta</button>' +
+            '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
+            '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
+            '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
           '</div>' +
         '</div>' +
+
+        '<!-- Guía e Instrucciones de Diligenciamiento de Monitoreo Semanal -->' +
+        '<div class="accordion-item no-print" style="margin-bottom: 20px;">' +
+          '<div class="accordion-header" style="background: var(--surface-hover);">' +
+            '<span>ℹ️ Instrucciones de diligenciamiento y seguimiento semanal pedagógico</span>' +
+            '<span class="chevron">▼</span>' +
+          '</div>' +
+          '<div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6; display: block;">' +
+            '<p style="margin-bottom: 8px;"><strong>1. ¿Cómo funciona el Monitoreo Semanal?:</strong> Cada fila representa una semana del plan curricular adaptado (16 semanas por ciclo). El sistema asigna automáticamente la rotación disciplinar (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), integrando la amenaza diagnosticada en el Módulo A y la didáctica según la matrícula de NNA.</p>' +
+            '<p style="margin-bottom: 8px;"><strong>2. Registro de Estado y Trazabilidad:</strong> Seleccione en la columna <em>Estado</em> el nivel de alcance de la semana (<em>⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado</em>) e ingrese en <em>Observaciones / Evidencia</em> las acciones desarrolladas, bitácora de aula o ajustes requeridos.</p>' +
+            '<p style="margin-bottom: 8px;"><strong>3. Guardar y Exportar:</strong> Haga clic en <strong>💾 Guardar Avance</strong> para registrar sus cambios localmente en su perfil. Puede descargar el reporte estructurado para Microsoft Excel con el botón <strong>📊 Exportar a Excel (CSV)</strong> o generar la copia oficial con <strong>🖨️ Imprimir Carta</strong>.</p>' +
+            '<p style="margin-bottom: 0; color: var(--primary);"><strong>4. Validez SIEE / ETC:</strong> Este registro sirve como evidencia formal de continuidad pedagógica y flexibilización curricular para presentar ante directivos docentes y la Secretaría de Educación (ETC).</p>' +
+          '</div>' +
+        '</div>' +
+
         '<div class="grid-4" style="margin-bottom: 24px;">' +
           '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
             '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
@@ -6542,25 +6630,28 @@ var ModuloC = {
       '</div>';
 
     container.innerHTML = html;
-    this.bindEvents();
+    this.bindEvents(semanas);
   },
 
-  bindEvents: function() {
+  bindEvents: function(semanas) {
     var self = this;
     var btnGuardar = document.getElementById('btn-guardar-monitoreo');
     var btnImprimir = document.getElementById('btn-imprimir-carta');
-    var btnExportar = document.getElementById('btn-exportar-json');
+    var btnExportarJSON = document.getElementById('btn-exportar-json');
+    var btnExportarExcel = document.getElementById('btn-exportar-excel');
 
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function() {
         var selects = document.querySelectorAll('.select-avance');
         var inputs = document.querySelectorAll('.input-obs');
-        var monitoreo = {};
+        var user = AuthManager.getUserData() || {};
+        var monitoreo = user.monitoreo || {};
 
         selects.forEach(function(sel) {
           var sem = sel.getAttribute('data-semana');
           monitoreo[sem] = monitoreo[sem] || {};
           monitoreo[sem].avance = sel.value;
+          monitoreo[sem].fechaRegistro = new Date().toLocaleString('es-CO');
         });
 
         inputs.forEach(function(inp) {
@@ -6570,13 +6661,59 @@ var ModuloC = {
         });
 
         AuthManager.saveUserData('monitoreo', monitoreo);
-        alert('✅ Registro de Monitoreo Semanal guardado exitosamente.');
+        alert('✅ Registro de Monitoreo Semanal guardado exitosamente con trazabilidad temporal.');
         self.renderMonitoreo();
       });
     }
 
-    if (btnExportar) {
-      btnExportar.addEventListener('click', function() {
+    if (btnExportarExcel) {
+      btnExportarExcel.addEventListener('click', function() {
+        var user = AuthManager.getUserData() || {};
+        var d = user.diagnostico || {};
+        var savedMonitoreo = user.monitoreo || {};
+
+        var rows = [
+          ['HERRAMIENTA DE ADAPTACIÓN Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS - NRC / MEN'],
+          ['Docente:', user.nombreCompleto || 'Docente NRC', 'Institución:', user.institucion || 'IE Rural', 'Ciclo:', 'Ciclo ' + (d.ciclo || '3')],
+          ['Etapa Emergencia:', d.etapa || '', 'Amenaza:', d.amenaza || '', 'Fecha Inicio:', d.fechaInicio || ''],
+          [''],
+          ['Semana', 'Fecha Estimada', 'Área Curricular', 'Tarjeta de Acción Pedagógica Situada', 'Estado / Avance', 'Observaciones / Evidencias', 'Fecha Registro']
+        ];
+
+        (semanas || []).forEach(function(s) {
+          var mon = savedMonitoreo[s.num] || {};
+          rows.push([
+            'Semana ' + s.num,
+            s.fecha,
+            s.areaNombre,
+            s.tarjetaPlana || '',
+            mon.avance || s.avance || '⚪ Sin iniciar',
+            mon.observaciones || s.observaciones || '',
+            mon.fechaRegistro || ''
+          ]);
+        });
+
+        var csvContent = '﻿' + rows.map(function(e) {
+          return e.map(function(item) {
+            var str = String(item || '').replace(/"/g, '""');
+            return '"' + str + '"';
+          }).join(';');
+        }).join('
+');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'monitoreo_curricular_nrc_' + (user.nombreCompleto || 'docente').replace(/\s+/g, '_') + '.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    if (btnExportarJSON) {
+      btnExportarJSON.addEventListener('click', function() {
         var data = AuthManager.getUserData();
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         var downloadAnchor = document.createElement('a');
