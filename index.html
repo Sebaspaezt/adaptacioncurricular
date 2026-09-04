@@ -23,11 +23,11 @@
 
     <div class="user-status-bar">
       <button id="btn-header-feedback" class="btn-elite btn-secondary" onclick="document.getElementById('modal-feedback').style.display='flex';" style="padding: 6px 12px; font-size: 0.8rem; background: #0f766e; color: #fff; border: none; cursor: pointer;" title="Escribir comentarios de mejora como evaluador">💬 Evaluaciones</button>
-      <div id="user-profile-badge" class="user-badge" onclick="document.getElementById('modal-auth').style.display='flex';" title="Haga clic para cambiar de usuario o registrarse" style="cursor: pointer;">
+      <div id="user-profile-badge" class="user-badge" onclick="window.openAuthModal ? window.openAuthModal() : (document.getElementById('modal-auth').style.display='flex');" title="Haga clic para cambiar de usuario o registrarse" style="cursor: pointer;">
         <span>👤</span>
         <span id="user-display-name">Docente Territorial</span>
       </div>
-      <button id="btn-logout" class="btn-elite btn-outline" onclick="document.getElementById('modal-auth').style.display='flex';" style="padding: 6px 12px; font-size: 0.8rem; cursor: pointer;">Cerrar Sesión / Perfil</button>
+      <button id="btn-logout" class="btn-elite btn-outline" onclick="window.handleLogout ? window.handleLogout() : (document.getElementById('modal-auth').style.display='flex');" style="padding: 6px 12px; font-size: 0.8rem; cursor: pointer;">Cerrar Sesión / Perfil</button>
     </div>
   </header>
 
@@ -353,8 +353,8 @@
       </div>
 
       <div style="display: flex; gap: 10px; margin-top: 24px;">
-        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center;">Ingresar</button>
-        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center;">Crear Nuevo Perfil</button>
+        <button id="btn-login-submit" class="btn-elite btn-primary" onclick="var u=document.getElementById('auth-user').value.trim(),p=document.getElementById('auth-pass').value; if(!u||!p)return alert('Por favor ingrese usuario y contraseña.'); var res=AuthManager.login(u,p); if(res.success){window.closeAuthModal();var dName=document.getElementById('user-display-name');if(dName)dName.textContent=res.user.nombreCompleto||u; ModuloA.loadSavedDiagnostic(); ModuloB.renderRayuela(); ModuloC.renderMonitoreo(); alert('Bienvenido/a, '+(res.user.nombreCompleto||u));}else{alert(res.message);}" style="flex: 1; justify-content: center;">Ingresar</button>
+        <button id="btn-register-submit" class="btn-elite btn-secondary" onclick="var u=document.getElementById('auth-user').value.trim(),p=document.getElementById('auth-pass').value,n=document.getElementById('auth-name').value.trim(),ie=document.getElementById('auth-ie').value.trim(); if(!u||!p)return alert('Por favor ingrese al menos un usuario y una contraseña.'); var res=AuthManager.register(u,p,n,ie); if(res.success){window.closeAuthModal();var dName=document.getElementById('user-display-name');if(dName)dName.textContent=n||u; ModuloA.loadSavedDiagnostic(); ModuloB.renderRayuela(); ModuloC.renderMonitoreo(); alert('✅ Perfil docente creado y activado exitosamente para '+(n||u)+'.');}else{alert(res.message);}" style="flex: 1; justify-content: center;">Crear Nuevo Perfil</button>
       </div>
     </div>
   </div>
@@ -450,13 +450,13 @@
   </button>
 
   <!-- Inyección de Scripts Estándar (Compatible con file:/// y Servidores Web) -->
-  <script src="js/data/curriculum_db.js?v=11"></script>
-  <script src="js/data/pgire_db.js?v=11"></script>
-  <script src="js/data/habs_sups_db.js?v=11"></script>
-  <script src="js/modules/auth.js?v=11"></script>
-  <script src="js/modules/modulo_a.js?v=11"></script>
-  <script src="js/modules/modulo_b.js?v=11"></script>
-  <script src="js/modules/modulo_c.js?v=11"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="js/data/curriculum_db.js?v=12"></script>
+  <script src="js/data/pgire_db.js?v=12"></script>
+  <script src="js/data/habs_sups_db.js?v=12"></script>
+  <script src="js/modules/auth.js?v=12"></script>
+  <script src="js/modules/modulo_a.js?v=12"></script>
+  <script src="js/modules/modulo_b.js?v=12"></script>
+  <script src="js/modules/modulo_c.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>

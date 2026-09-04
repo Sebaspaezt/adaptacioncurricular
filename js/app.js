@@ -43,15 +43,38 @@ function initAuthUI() {
 
   updateDisplay();
 
+  window.openAuthModal = function() {
+    if (modalAuth) modalAuth.style.display = 'flex';
+  };
+
+  window.closeAuthModal = function() {
+    if (modalAuth) modalAuth.style.display = 'none';
+  };
+
+  window.handleLogout = function() {
+    if (confirm('¿Desea cerrar la sesión actual y cambiar de usuario?')) {
+      AuthManager.logout();
+      window.openAuthModal();
+      var uInput = document.getElementById('auth-user');
+      var pInput = document.getElementById('auth-pass');
+      var nInput = document.getElementById('auth-name');
+      var ieInput = document.getElementById('auth-ie');
+      if (uInput) uInput.value = '';
+      if (pInput) pInput.value = '';
+      if (nInput) nInput.value = '';
+      if (ieInput) ieInput.value = '';
+    }
+  };
+
   if (userBadge) {
     userBadge.addEventListener('click', function() {
-      if (modalAuth) modalAuth.style.display = 'flex';
+      window.openAuthModal();
     });
   }
 
   if (btnCloseModal) {
     btnCloseModal.addEventListener('click', function() {
-      if (modalAuth) modalAuth.style.display = 'none';
+      window.closeAuthModal();
     });
   }
 
@@ -63,7 +86,7 @@ function initAuthUI() {
       if (!u || !p) return alert('Por favor ingrese usuario y contraseña.');
       var res = AuthManager.login(u, p);
       if (res.success) {
-        if (modalAuth) modalAuth.style.display = 'none';
+        window.closeAuthModal();
         updateDisplay();
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
@@ -82,12 +105,15 @@ function initAuthUI() {
       var p = document.getElementById('auth-pass') ? document.getElementById('auth-pass').value : '';
       var n = document.getElementById('auth-name') ? document.getElementById('auth-name').value.trim() : '';
       var ie = document.getElementById('auth-ie') ? document.getElementById('auth-ie').value.trim() : '';
-      if (!u || !p) return alert('Por favor ingrese usuario y contraseña.');
+      if (!u || !p) return alert('Por favor ingrese al menos un nombre de usuario y una contraseña.');
       var res = AuthManager.register(u, p, n, ie);
       if (res.success) {
-        if (modalAuth) modalAuth.style.display = 'none';
+        window.closeAuthModal();
         updateDisplay();
-        alert('Perfil docente creado exitosamente.');
+        ModuloA.loadSavedDiagnostic();
+        ModuloB.renderRayuela();
+        ModuloC.renderMonitoreo();
+        alert('✅ Perfil docente creado y activado exitosamente para ' + (n || u) + '.');
       } else {
         alert(res.message);
       }
@@ -95,8 +121,9 @@ function initAuthUI() {
   }
 
   if (btnLogout) {
-    btnLogout.addEventListener('click', function() {
-      if (modalAuth) modalAuth.style.display = 'flex';
+    btnLogout.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.handleLogout();
     });
   }
 }
