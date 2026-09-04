@@ -597,13 +597,13 @@ body {
 
   <!-- Pestañas de Módulos (Sticky) -->
   <nav class="nav-tabs-container no-print" style="position: sticky; top: 68px; z-index: 90;">
-    <button id="tab-diagnostico" class="nav-tab active">
+    <button id="tab-diagnostico" class="nav-tab active" onclick="window.switchTab('tab-diagnostico');">
       <span>🎛️</span> Módulo A: Diagnóstico (instrucciones)
     </button>
-    <button id="tab-rayuela" class="nav-tab">
+    <button id="tab-rayuela" class="nav-tab" onclick="window.switchTab('tab-rayuela');">
       <span>📚</span> Módulo B: Rayuela Curricular
     </button>
-    <button id="tab-monitoreo" class="nav-tab">
+    <button id="tab-monitoreo" class="nav-tab" onclick="window.switchTab('tab-monitoreo');">
       <span>📋</span> Módulo C: Monitoreo semanal
     </button>
   </nav>
@@ -7138,32 +7138,46 @@ function initAuthUI() {
   }
 }
 
-function initNavigation() {
-  var tabs = document.querySelectorAll('.nav-tab');
-  var sections = {
-    'tab-diagnostico': document.getElementById('section-diagnostico'),
-    'tab-rayuela': document.getElementById('section-rayuela'),
-    'tab-monitoreo': document.getElementById('section-monitoreo')
-  };
+window.switchTab = function(tabId) {
+  try {
+    var tabs = document.querySelectorAll('.nav-tab');
+    tabs.forEach(function(t) {
+      if (t.id === tabId) {
+        t.classList.add('active');
+      } else {
+        t.classList.remove('active');
+      }
+    });
 
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      tab.classList.add('active');
+    var secDiag = document.getElementById('section-diagnostico');
+    var secRay = document.getElementById('section-rayuela');
+    var secMon = document.getElementById('section-monitoreo');
 
-      var targetId = tab.id;
-      Object.keys(sections).forEach(function(id) {
-        var elem = sections[id];
-        if (elem) {
-          elem.style.display = (id === targetId) ? 'block' : 'none';
-        }
-      });
+    if (secDiag) secDiag.style.display = (tabId === 'tab-diagnostico') ? 'block' : 'none';
+    if (secRay) secRay.style.display = (tabId === 'tab-rayuela') ? 'block' : 'none';
+    if (secMon) secMon.style.display = (tabId === 'tab-monitoreo') ? 'block' : 'none';
 
-      if (targetId === 'tab-rayuela') {
+    if (tabId === 'tab-rayuela') {
+      if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) {
         ModuloB.renderRayuela();
-      } else if (targetId === 'tab-monitoreo') {
+      }
+    } else if (tabId === 'tab-monitoreo') {
+      if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) {
         ModuloC.renderMonitoreo();
       }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (e) {
+    console.error('Error switching tab:', e);
+  }
+};
+
+function initNavigation() {
+  var tabs = document.querySelectorAll('.nav-tab');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.switchTab(tab.id);
     });
   });
 }
