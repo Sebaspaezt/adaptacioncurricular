@@ -7,19 +7,28 @@ function initApp() {
     initNavigation();
     initAccordions();
 
-    // Iniciar Módulos
+    // Iniciar Módulos y precargar vistas para acceso instantáneo
     ModuloA.init({
       onDiagnosticSaved: function(d) {
-        if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) ModuloB.renderRayuela();
-        if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) ModuloC.renderMonitoreo();
+        if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') ModuloB.renderRayuela();
+        if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') ModuloC.renderMonitoreo();
       },
       onDiagnosticChanged: function(d) {
-        if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) ModuloB.renderRayuela();
-        if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) ModuloC.renderMonitoreo();
+        if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') ModuloB.renderRayuela();
+        if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') ModuloC.renderMonitoreo();
       }
     });
-    if (typeof ModuloB !== 'undefined' && ModuloB.init) ModuloB.init();
-    if (typeof ModuloC !== 'undefined' && ModuloC.init) ModuloC.init();
+    if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.init === 'function') ModuloB.init();
+    if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.init === 'function') ModuloC.init();
+
+    // Garantizar renderizado inicial seguro en segundo plano
+    setTimeout(function() {
+      try {
+        if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
+          ModuloC.renderMonitoreo();
+        }
+      } catch (err) {}
+    }, 100);
   } catch (e) {
     console.error('Error during initApp:', e);
   }
@@ -148,11 +157,11 @@ window.switchTab = function(tabId) {
     if (secMon) secMon.style.display = (tabId === 'tab-monitoreo') ? 'block' : 'none';
 
     if (tabId === 'tab-rayuela') {
-      if (typeof ModuloB !== 'undefined' && ModuloB.renderRayuela) {
+      if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') {
         ModuloB.renderRayuela();
       }
     } else if (tabId === 'tab-monitoreo') {
-      if (typeof ModuloC !== 'undefined' && ModuloC.renderMonitoreo) {
+      if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
         ModuloC.renderMonitoreo();
       }
     }

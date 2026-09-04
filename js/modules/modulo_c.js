@@ -41,8 +41,8 @@ var ModuloC = {
         dbaDesc = parts.slice(1).join(':').trim();
       }
       return {
-        factor: item[0] || 'Eje Curricular',
-        subproceso: item[1] || '',
+        factor: item[0] || 'Eje Curricular Priorizado',
+        subproceso: item[1] || 'Contenido nuclear priorizado',
         dbaCode: dbaCode,
         dbaDesc: dbaDesc,
         complejidad: item[4] || 'Intermedia',
@@ -61,11 +61,18 @@ var ModuloC = {
       };
     }
 
+    var defaultAreaLabels = {
+      'lenguaje': 'Comprensión lectora y expresión de afecto y seguridad',
+      'matematicas': 'Resolución de problemas cotidianos y conteo contextualizado',
+      'sociales': 'Convivencia, autoprotección comunitaria y memoria territorial',
+      'naturales': 'Gestión ambiental, cuidado del agua y prevención de riesgos'
+    };
+
     return {
       factor: 'Eje Curricular Priorizado',
-      subproceso: 'Contenido nuclear priorizado en emergencia',
-      dbaCode: 'DBA',
-      dbaDesc: 'Aprendizaje esencial priorizado por contexto',
+      subproceso: defaultAreaLabels[areaKey] || 'Contenido nuclear priorizado en emergencia',
+      dbaCode: 'DBA Adaptado',
+      dbaDesc: 'Aprendizaje esencial priorizado según contexto territorial de emergencia',
       complejidad: 'Intermedia',
       bloom: 'Aplicar y contextualizar en el entorno',
       didactica: 'Taller situado y pedagógico de aula'
@@ -75,7 +82,10 @@ var ModuloC = {
   renderMonitoreo: function() {
     try {
       var self = this;
-      var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+      var container = document.getElementById('modulo-c-content');
+      if (!container) return;
+
+      var user = (typeof AuthManager !== 'undefined' && AuthManager && typeof AuthManager.getUserData === 'function') ? AuthManager.getUserData() : null;
       var d = (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.getLiveDiagnostic === 'function') ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
       if (!d) {
         d = {
@@ -99,19 +109,25 @@ var ModuloC = {
       var cicloData = currDB[cicloKey] || currDB['3'] || currDB['1'] || {};
       var savedMonitoreo = (user && user.monitoreo) || {};
 
-      var container = document.getElementById('modulo-c-content');
-      if (!container) return;
-
       var semanas = [];
-      var fechaBase = new Date((d.fechaInicio || '').replace(/-/g, '/') || new Date());
-      if (isNaN(fechaBase.getTime())) {
+      var fechaBaseStr = String(d.fechaInicio || '').trim();
+      var fechaBase = null;
+      if (fechaBaseStr) {
+        var parts = fechaBaseStr.split(/[-/]/);
+        if (parts.length === 3) {
+          fechaBase = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        }
+      }
+      if (!fechaBase || isNaN(fechaBase.getTime())) {
         fechaBase = new Date();
       }
+
       var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
 
       for (var i = 1; i <= 16; i++) {
-        var fechaSem = new Date(fechaBase);
+        var fechaSem = new Date(fechaBase.getTime());
         fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
+        var fechaFormatted = !isNaN(fechaSem.getTime()) ? fechaSem.toLocaleDateString('es-CO') : ('Semana ' + i);
 
         var areaKey = areas[(i - 1) % areas.length];
         var rawItems = (cicloData && cicloData[areaKey]) || [];
@@ -130,8 +146,8 @@ var ModuloC = {
 
         semanas.push({
           num: i,
-          fecha: fechaSem.toLocaleDateString('es-CO'),
-          etapa: d.etapa,
+          fecha: fechaFormatted,
+          etapa: d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica',
           areaKey: areaKey,
           areaNombre: areaKey.toUpperCase(),
           tarjeta: tarjetaHTML,
@@ -214,15 +230,15 @@ var ModuloC = {
                     '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
                     '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
                     '<td style="padding: 10px;">' +
-                      '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
-                        '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
-                        '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
-                        '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
-                        '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
-                      '</select>' +
+                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
+                      '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
+                      '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
+                      '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
+                      '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
+                    '</select>' +
                     '</td>' +
                     '<td style="padding: 10px;">' +
-                      '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
+                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
                     '</td>' +
                   '</tr>';
                 }).join('') +
@@ -253,8 +269,8 @@ var ModuloC = {
       btnGuardar.addEventListener('click', function() {
         var selects = document.querySelectorAll('.select-avance');
         var inputs = document.querySelectorAll('.input-obs');
-        var user = AuthManager.getUserData() || {};
-        var monitoreo = user.monitoreo || {};
+        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
+        var monitoreo = (user && user.monitoreo) || {};
 
         selects.forEach(function(sel) {
           var sem = sel.getAttribute('data-semana');
@@ -269,7 +285,9 @@ var ModuloC = {
           monitoreo[sem].observaciones = inp.value;
         });
 
-        AuthManager.saveUserData('monitoreo', monitoreo);
+        if (typeof AuthManager !== 'undefined' && AuthManager.saveUserData) {
+          AuthManager.saveUserData('monitoreo', monitoreo);
+        }
         alert('✅ Registro de Monitoreo Semanal guardado exitosamente con trazabilidad temporal.');
         self.renderMonitoreo();
       });
@@ -277,13 +295,13 @@ var ModuloC = {
 
     if (btnExportarExcel) {
       btnExportarExcel.addEventListener('click', function() {
-        var user = AuthManager.getUserData() || {};
-        var d = user.diagnostico || {};
-        var savedMonitoreo = user.monitoreo || {};
+        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
+        var d = (user && user.diagnostico) || {};
+        var savedMonitoreo = (user && user.monitoreo) || {};
 
         var rows = [
           ['HERRAMIENTA DE ADAPTACIÓN Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS - NRC / MEN'],
-          ['Docente:', user.nombreCompleto || 'Docente NRC', 'Institución:', user.institucion || 'IE Rural', 'Ciclo:', 'Ciclo ' + (d.ciclo || '3')],
+          ['Docente:', (user && user.nombreCompleto) || 'Docente NRC', 'Institución:', (user && user.institucion) || 'IE Rural', 'Ciclo:', 'Ciclo ' + (d.ciclo || '3')],
           ['Etapa Emergencia:', d.etapa || '', 'Amenaza:', d.amenaza || '', 'Fecha Inicio:', d.fechaInicio || ''],
           [''],
           ['Semana', 'Fecha Estimada', 'Área Curricular', 'Tarjeta de Acción Pedagógica Situada', 'Estado / Avance', 'Observaciones / Evidencias', 'Fecha Registro']
@@ -314,7 +332,7 @@ var ModuloC = {
         var link = document.createElement('a');
         var url = URL.createObjectURL(blob);
         link.setAttribute('href', url);
-        link.setAttribute('download', 'monitoreo_curricular_nrc_' + (user.nombreCompleto || 'docente').replace(/\s+/g, '_') + '.csv');
+        link.setAttribute('download', 'monitoreo_curricular_nrc_' + ((user && user.nombreCompleto) || 'docente').replace(/\s+/g, '_') + '.csv');
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -323,11 +341,11 @@ var ModuloC = {
 
     if (btnExportarJSON) {
       btnExportarJSON.addEventListener('click', function() {
-        var data = AuthManager.getUserData();
+        var data = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         var downloadAnchor = document.createElement('a');
         downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", "bitacora_nrc_" + (data.nombreCompleto || 'docente').replace(/\s+/g, '_') + ".json");
+        downloadAnchor.setAttribute("download", "bitacora_nrc_" + ((data && data.nombreCompleto) || 'docente').replace(/\s+/g, '_') + ".json");
         document.body.appendChild(downloadAnchor);
         downloadAnchor.click();
         downloadAnchor.remove();
