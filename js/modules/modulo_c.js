@@ -325,8 +325,7 @@ var ModuloC = {
             var str = String(item || '').replace(/"/g, '""');
             return '"' + str + '"';
           }).join(';');
-        }).join('
-');
+        }).join(String.fromCharCode(13, 10));
 
         var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         var link = document.createElement('a');
