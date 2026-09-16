@@ -1,6 +1,6 @@
-# 🌐 Proyecto 2: Plataforma Web de Flexibilización y Adaptación Curricular (NRC / MEN)
+# 🌐 Proyecto 2: Plataforma Web de Flexibilización y Adaptación Curricular (NRC / MEN / Gobernación de Norte de Santander)
 
-Plataforma Web interactiva, modular y *Offline-First* (PWA) diseñada para directivos, docentes y equipos territoriales del **Norwegian Refugee Council (NRC)** y del **Ministerio de Educación Nacional (MEN)** para la planificación, diagnóstico paramétrico y monitoreo escolar en situaciones de emergencia.
+Plataforma Web interactiva, modular y *Offline-First* (PWA) diseñada para directivos, docentes y equipos territoriales del **Norwegian Refugee Council (NRC)**, del **Ministerio de Educación Nacional (MEN)** y de la **Secretaría de Educación Departamental / Gobernación de Norte de Santander** para la planificación, diagnóstico paramétrico y monitoreo escolar en situaciones de emergencia.
 
 ---
 

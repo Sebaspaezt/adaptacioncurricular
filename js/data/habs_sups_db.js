@@ -159,13 +159,13 @@ var HABS_SUPS_DB = {
     {
       "tipo_afectacion": "Riesgos_físicos_y_ambientales",
       "riesgo": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "aprendizaje": "Educación en riesgo de minas y artefactos explosivos",
+      "aprendizaje": "Educación en el Riesgo de Artefactos Explosivos (ERAE – MAP/MUSE/AEI)",
       "miniproyecto": "Identificar señales de riesgo asociadas a minas y artefactos explosivos, distinguir comportamientos seguros e inseguros y aplicar rutas de reporte seguro."
     },
     {
       "tipo_afectacion": "Riesgos_físicos_y_ambientales",
       "riesgo": "El estudiantado identifica riesgos físicos y ambientales presentes en su entorno y adopta acciones básicas de autoprotección. Reconoce señales de peligro, rutas seguras y protocolos ante accidentes, desastres o artefactos explosivos. Practica medidas de higiene, cuidado del agua y saneamiento que reducen la exposición a enfermedades y refuerzan conductas seguras frente a emergencias ambientales.",
-      "aprendizaje": "Cuidado del agua y saneamiento (WASH)",
+      "aprendizaje": "Agua, Saneamiento e Higiene (WASH)",
       "miniproyecto": "Reconocer prácticas adecuadas de higiene y manejo del agua y aplicar acciones diarias que reduzcan la exposición a enfermedades.."
     },
     {

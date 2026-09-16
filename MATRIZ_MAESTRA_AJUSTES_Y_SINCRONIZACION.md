@@ -1,12 +1,13 @@
 # 🌐 MATRIZ MAESTRA DE AJUSTES Y SINCRONIZACIÓN (PROYECTO 1 & PROYECTO 2)
 **Iniciativa de Flexibilización y Adaptación Curricular en Situaciones de Emergencia (NRC / MEN)**  
+**Destinatario Institucional:** Secretaría de Educación Departamental / Gobernación de Norte de Santander  
 *Hub Central de Orquestación Curricular, Matrices Excel y Plataforma Web Interactiva*
 
 ---
 
 ## 📌 1. Propósito y Alcance del Archivo Maestro
 
-Este documento y su dataset estructurado [MATRIZ_MAESTRA_AJUSTES_Y_SINCRONIZACION.json](file:///e:/Proyectos%20antigravity/NRC/Proyecto%20herramienta%202%20(web)/MATRIZ_MAESTRA_AJUSTES_Y_SINCRONIZACION.json) constituyen el **Centro Único de Control y Entrada de Ajustes (Single Source of Truth & Control Hub)** para todo el ecosistema pedagógico y tecnológico de la iniciativa.
+Este documento y su dataset estructurado [MATRIZ_MAESTRA_AJUSTES_Y_SINCRONIZACION.json](file:///e:/Proyectos%20antigravity/NRC/Proyecto%20herramienta%202%20(web)/MATRIZ_MAESTRA_AJUSTES_Y_SINCRONIZACION.json) constituyen el **Centro Único de Control y Entrada de Ajustes (Single Source of Truth & Control Hub)** para todo el ecosistema pedagógico y tecnológico de la iniciativa, preparado para su entrega formal y puesta en producción en la infraestructura de la **Gobernación de Norte de Santander**.
 
 Permite que cualquier cambio pedagógico, normativo, didáctico o técnico que se ingrese sea aplicado **simultáneamente y de manera sincronizada** en:
 

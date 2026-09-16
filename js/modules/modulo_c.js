@@ -1,4 +1,4 @@
-// Módulo C: Monitoreo Semanal por Etapas
+// Módulo C: Monitoreo Semanal por Etapas (Versión 2.2 - Canasta Curricular, Normas INEE y Multirriesgo)
 var ModuloC = {
   init: function() {
     this.renderMonitoreo();
@@ -23,60 +23,76 @@ var ModuloC = {
     }
   },
 
-  parseItemData: function(item, areaKey) {
-    try {
-      if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') {
-        var res = ModuloB.getItemFields(item, areaKey);
-        if (res) return res;
-      }
-    } catch (e) {}
+  getSelectedBasket: function(user, cicloData, habsList, supsList, d) {
+    var userSelection = (user && user.seleccionCurricular) || {};
+    var userStates = (user && user.estadosCurriculo) || {};
+    var basket = {
+      lenguaje: [],
+      matematicas: [],
+      sociales: [],
+      naturales: [],
+      socioemocional: [],
+      supervivencia: []
+    };
 
-    if (Array.isArray(item)) {
-      var dbaRaw = item[2] || '';
-      var dbaCode = 'DBA';
-      var dbaDesc = dbaRaw;
-      if (dbaRaw.indexOf(':') !== -1) {
-        var parts = dbaRaw.split(':');
-        dbaCode = parts[0].trim();
-        dbaDesc = parts.slice(1).join(':').trim();
-      }
-      return {
-        factor: item[0] || 'Eje Curricular Priorizado',
-        subproceso: item[1] || 'Contenido nuclear priorizado',
-        dbaCode: dbaCode,
-        dbaDesc: dbaDesc,
-        complejidad: item[4] || 'Intermedia',
-        bloom: item[5] || 'Aplicar y reflexionar en el entorno',
-        didactica: item[7] || item[6] || 'Taller pedagógico situado'
-      };
-    } else if (item && typeof item === 'object') {
-      return {
-        factor: item.factor || item.eje || item.pensamiento || 'Eje Curricular Priorizado',
-        subproceso: item.subproceso || item.habilidad || 'Contenido nuclear priorizado',
-        dbaCode: item.dba_code || item.codigo || 'DBA',
-        dbaDesc: item.dba_desc || item.enunciado || item.descripcion || 'Aprendizaje esencial priorizado por contexto',
-        complejidad: item.complejidad || 'Intermedia',
-        bloom: item.bloom || item.objetivo_bloom || 'Aplicar y reflexionar',
-        didactica: item.didactica || item.miniproyecto || 'Taller situado de aprendizaje cooperativo'
-      };
+    var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
+    var hasAnyManual = false;
+
+    areas.forEach(function(aKey) {
+      var rawList = [];
+      if (aKey === 'socioemocional') rawList = habsList || [];
+      else if (aKey === 'supervivencia') rawList = supsList || [];
+      else rawList = (cicloData && cicloData[aKey]) || [];
+
+      rawList.forEach(function(item, idx) {
+        var parsed = (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') 
+          ? ModuloB.getItemFields(item, aKey, idx, rawList.length)
+          : { id: aKey + '_' + idx, dbaCode: 'DBA', dbaDesc: '', didactica: 'Taller situado' };
+
+        if (userSelection[parsed.id] === true) {
+          hasAnyManual = true;
+          basket[aKey].push(parsed);
+        }
+      });
+    });
+
+    // Si el docente no ha seleccionado manualmente aún en Módulo B, generar una canasta recomendada inteligente
+    if (!hasAnyManual) {
+      var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
+      
+      // Socioemocional
+      habsList.forEach(function(item, idx) {
+        var parsed = ModuloB.getItemFields(item, 'socioemocional', idx, habsList.length);
+        if (isEtapa1) {
+          if (parsed.etapaSocio === 'Etapa 1' && basket.socioemocional.length < 3) basket.socioemocional.push(parsed);
+        } else {
+          if (basket.socioemocional.length < 2) basket.socioemocional.push(parsed);
+        }
+      });
+
+      // Supervivencia (ERAE / WASH)
+      supsList.forEach(function(item, idx) {
+        var parsed = ModuloB.getItemFields(item, 'supervivencia', idx, supsList.length);
+        if (basket.supervivencia.length < 2) basket.supervivencia.push(parsed);
+      });
+
+      // Áreas Académicas (filtrar solo las que no estén marcadas como abordadas previas a la fecha)
+      ['lenguaje', 'matematicas', 'sociales', 'naturales'].forEach(function(aKey) {
+        var rawList = (cicloData && cicloData[aKey]) || [];
+        rawList.forEach(function(item, idx) {
+          var parsed = ModuloB.getItemFields(item, aKey, idx, rawList.length);
+          var isPrevio = (d && d.periodosPrevios && d.periodosPrevios.indexOf('Periodo ' + parsed.periodoNum) !== -1);
+          if (!isPrevio && basket[aKey].length < 3) {
+            basket[aKey].push(parsed);
+          }
+        });
+        if (basket[aKey].length === 0 && rawList.length > 0) {
+          basket[aKey].push(ModuloB.getItemFields(rawList[0], aKey, 0, rawList.length));
+        }
+      });
     }
 
-    var defaultAreaLabels = {
-      'lenguaje': 'Comprensión lectora y expresión de afecto y seguridad',
-      'matematicas': 'Resolución de problemas cotidianos y conteo contextualizado',
-      'sociales': 'Convivencia, autoprotección comunitaria y memoria territorial',
-      'naturales': 'Gestión ambiental, cuidado del agua y prevención de riesgos'
-    };
-
-    return {
-      factor: 'Eje Curricular Priorizado',
-      subproceso: defaultAreaLabels[areaKey] || 'Contenido nuclear priorizado en emergencia',
-      dbaCode: 'DBA Adaptado',
-      dbaDesc: 'Aprendizaje esencial priorizado según contexto territorial de emergencia',
-      complejidad: 'Intermedia',
-      bloom: 'Aplicar y contextualizar en el entorno',
-      didactica: 'Taller situado y pedagógico de aula'
-    };
+    return basket;
   },
 
   renderMonitoreo: function() {
@@ -94,13 +110,14 @@ var ModuloC = {
           nna: 28,
           didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
           etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
-          categoriasAmenaza: ['NATURAL'],
-          categoriaAmenaza: 'NATURAL',
+          bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+          amenazaPrincipal: 'Inundación',
+          amenazasTop3: ['Inundación'],
           amenaza: 'Inundación',
-          ejemploIE: 'Creciente de río o quebrada',
-          riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
-          rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
-          fechaInicio: new Date().toISOString().split('T')[0]
+          fechaInicio: new Date().toISOString().split('T')[0],
+          fechaAtencion: new Date().toISOString().split('T')[0],
+          periodoEnCurso: 'Periodo 1',
+          periodosPrevios: []
         };
       }
 
@@ -109,8 +126,18 @@ var ModuloC = {
       var cicloData = currDB[cicloKey] || currDB['3'] || currDB['1'] || {};
       var savedMonitoreo = (user && user.monitoreo) || {};
 
+      var habsList = ((HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || []).filter(function(h) {
+        return h && h.habilidad && h.habilidad.indexOf('Etapa de respuesta') === -1 && (!h.hacer || h.hacer.indexOf('=SUBTOTAL') === -1);
+      });
+
+      var supsList = ((HABS_SUPS_DB && HABS_SUPS_DB.supervivencia) || []).filter(function(s) {
+        return s && s.tipo_afectacion && s.tipo_afectacion.indexOf('Tipologías') === -1 && (!s.aprendizaje || s.aprendizaje.indexOf('=SUBTOTAL') === -1);
+      });
+
+      var basket = self.getSelectedBasket(user, cicloData, habsList, supsList, d);
+
       var semanas = [];
-      var fechaBaseStr = String(d.fechaInicio || '').trim();
+      var fechaBaseStr = String(d.fechaAtencion || d.fechaInicio || '').trim();
       var fechaBase = null;
       if (fechaBaseStr) {
         var parts = fechaBaseStr.split(/[-/]/);
@@ -122,45 +149,107 @@ var ModuloC = {
         fechaBase = new Date();
       }
 
-      var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
+      var isEtapa1 = (d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
+      var academicAreas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
 
+      var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
+
+      // Generar 16 semanas articuladas con la canasta y el enfoque INEE
       for (var i = 1; i <= 16; i++) {
         var fechaSem = new Date(fechaBase.getTime());
         fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
         var fechaFormatted = !isNaN(fechaSem.getTime()) ? fechaSem.toLocaleDateString('es-CO') : ('Semana ' + i);
 
-        var areaKey = areas[(i - 1) % areas.length];
-        var rawItems = (cicloData && cicloData[areaKey]) || [];
-        var rawItem = rawItems.length > 0 ? (rawItems[Math.floor((i - 1) / areas.length) % rawItems.length] || rawItems[0]) : null;
-        var parsedItem = self.parseItemData(rawItem, areaKey);
-        var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
+        var tarjetaHTML = '';
+        var tarjetaPlana = '';
+        var focoSemana = '';
+        var areaKey = '';
 
-        var tarjetaHTML = 
-          '<div style="line-height:1.45;">' +
-            '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-            '<span style="color:#b91c1c;">⚠️ [' + (d.categoriaAmenaza || 'AMENAZA') + ' - ' + (d.amenaza || 'Emergencia territorial') + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
-            '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ':</strong> ' + (parsedItem.subproceso || '') + ' (' + (parsedItem.dbaDesc || '') + ')</span><br>' +
-            '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-            '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
-          '</div>';
+        if (isEtapa1 && i <= 2) {
+          // Semanas 1 y 2 de Etapa 1: Enfoque INEE en Contención Socioemocional y Supervivencia (ERAE/WASH)
+          focoSemana = '🕊️ CONTENCIÓN PSICOSOCIAL & AUTOPROTECCIÓN (NORMAS INEE)';
+          areaKey = 'SOCIOEMOCIONAL & VIDA';
+
+          var socioItem = basket.socioemocional[(i - 1) % Math.max(1, basket.socioemocional.length)] || {
+            dbaCode: 'SOCIOEMOCIONAL',
+            dbaDesc: 'Autoconocimiento, regulación emocional y expresión de afecto seguro',
+            didactica: 'Círculo de la palabra y acogida emocional'
+          };
+
+          var supItem = basket.supervivencia[(i - 1) % Math.max(1, basket.supervivencia.length)] || {
+            dbaCode: 'ERAE / WASH',
+            dbaDesc: 'Protocolos de autoprotección, lavado de manos e identificación de zonas seguras',
+            didactica: 'Mapeo de riesgos en el aula y rutas seguras'
+          };
+
+          tarjetaHTML = 
+            '<div style="line-height:1.45;">' +
+              '<div style="background:#fef2f2; border-left:4px solid #b91c1c; padding:4px 8px; margin-bottom:6px; border-radius:4px; font-weight:800; font-size:0.8rem; color:#991b1b;">' +
+                '🕊️ SEMANA DE RESPUESTA INMEDIATA / CONTENCIÓN (NORMAS MÍNIMAS INEE)' +
+              '</div>' +
+              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') + '<br>' +
+              '<span style="color:#92400e;">🌱 <strong>' + socioItem.dbaCode + ':</strong> ' + socioItem.dbaDesc + '</span><br>' +
+              '<span style="color:#0369a1;">🛡️ <strong>' + supItem.dbaCode + ':</strong> ' + supItem.dbaDesc + '</span><br>' +
+              '<span style="color:#047857;">🛠️ <strong>Acción Situada:</strong> ' + socioItem.didactica + ' | ' + supItem.didactica + '</span><br>' +
+              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> Recordar y Comprender (Contención no amenazante)</span>' +
+            '</div>';
+
+          tarjetaPlana = 'Contención INEE | ' + (d.grado || 'Ciclo ' + cicloKey) + ' | ' + socioItem.dbaDesc + ' | ' + supItem.dbaDesc;
+
+        } else {
+          // Semanas académicas y proyectos integrados a partir de la canasta
+          var acaIdx = isEtapa1 ? (i - 3) : (i - 1);
+          areaKey = academicAreas[acaIdx % academicAreas.length];
+          focoSemana = areaKey.toUpperCase();
+
+          var areaBasket = basket[areaKey] || [];
+          var parsedItem = null;
+
+          if (areaBasket.length > 0) {
+            parsedItem = areaBasket[Math.floor(acaIdx / academicAreas.length) % areaBasket.length];
+          } else {
+            parsedItem = {
+              dbaCode: 'DBA Adaptado',
+              subproceso: 'Competencia priorizada en emergencia',
+              dbaDesc: 'Aprendizaje esencial seleccionado en la canasta curricular',
+              complejidad: 'Intermedia',
+              bloom: 'Aplicar y contextualizar en el entorno',
+              didactica: 'Taller situado y pedagógico de aula'
+            };
+          }
+
+          var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
+
+          tarjetaHTML = 
+            '<div style="line-height:1.45;">' +
+              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+              '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ' (' + (parsedItem.periodo || 'Plan Adaptado') + '):</strong> ' + (parsedItem.subproceso ? (parsedItem.subproceso + ' - ') : '') + parsedItem.dbaDesc + '</span><br>' +
+              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+            '</div>';
+
+          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + amenazasLabel + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.dbaDesc + ' | ' + parsedItem.didactica;
+        }
 
         semanas.push({
           num: i,
           fecha: fechaFormatted,
           etapa: d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica',
-          areaKey: areaKey,
-          areaNombre: areaKey.toUpperCase(),
+          foco: focoSemana,
+          areaNombre: focoSemana,
           tarjeta: tarjetaHTML,
-          tarjetaPlana: (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.amenaza || 'Emergencia') + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.subproceso + ' - ' + parsedItem.dbaDesc + ' | Didáctica: ' + parsedItem.didactica + ' | Bloom: ' + parsedItem.bloom,
+          tarjetaPlana: tarjetaPlana,
           avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
           observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
         });
       }
 
+      // Conteo de KPI
       var monValues = Object.keys(savedMonitoreo).map(function(k) { return savedMonitoreo[k]; });
       var logrados = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
       var enProceso = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
-      var sinIniciar = semanas.length - logrados - enProceso;
       var pctAvance = Math.round((logrados / semanas.length) * 100);
 
       var html = 
@@ -168,7 +257,12 @@ var ModuloC = {
           '<div class="card-header">' +
             '<div>' +
               '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-              '<span style="font-size: 0.85rem; color: var(--text-muted);">Docente: ' + ((user && user.nombreCompleto) || 'Docente Territorial') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural de Emergencia') + ' | Amenaza: ' + (d.amenaza || 'Territorial') + '</span>' +
+              '<span style="font-size: 0.85rem; color: var(--text-muted);">' +
+                'Gobernación de Norte de Santander | ' +
+                'Docente: ' + ((user && user.nombreCompleto) || 'Docente Territorial') + ' | ' +
+                'Amenazas: ' + amenazasLabel + ' | ' +
+                'Reanudación: ' + (d.fechaAtencion || d.fechaInicio) +
+              '</span>' +
             '</div>' +
             '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
               '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
@@ -178,18 +272,11 @@ var ModuloC = {
             '</div>' +
           '</div>' +
 
-          '<!-- Guía e Instrucciones de Diligenciamiento de Monitoreo Semanal -->' +
-          '<div class="accordion-item no-print" style="margin-bottom: 20px;">' +
-            '<div class="accordion-header" style="background: var(--surface-hover);">' +
-              '<span>ℹ️ Instrucciones de diligenciamiento y seguimiento semanal pedagógico</span>' +
-              '<span class="chevron">▼</span>' +
-            '</div>' +
-            '<div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6; display: block;">' +
-              '<p style="margin-bottom: 8px;"><strong>1. ¿Cómo funciona el Monitoreo Semanal?:</strong> Cada fila representa una semana del plan curricular adaptado (16 semanas por ciclo). El sistema asigna automáticamente la rotación disciplinar (Lenguaje, Matemáticas, Ciencias Sociales y Ciencias Naturales), integrando la amenaza diagnosticada en el Módulo A y la didáctica según la matrícula de NNA.</p>' +
-              '<p style="margin-bottom: 8px;"><strong>2. Registro de Estado y Trazabilidad:</strong> Seleccione en la columna <em>Estado</em> el nivel de alcance de la semana (<em>⚪ Sin iniciar, 🟡 En proceso, 🟢 Logrado, 🔴 Postergado</em>) e ingrese en <em>Observaciones / Evidencia</em> las acciones desarrolladas, bitácora de aula o ajustes requeridos.</p>' +
-              '<p style="margin-bottom: 8px;"><strong>3. Guardar y Exportar:</strong> Haga clic en <strong>💾 Guardar Avance</strong> para registrar sus cambios localmente en su perfil. Puede descargar el reporte estructurado para Microsoft Excel con el botón <strong>📊 Exportar a Excel (CSV)</strong> o generar la copia oficial con <strong>🖨️ Imprimir Carta</strong>.</p>' +
-              '<p style="margin-bottom: 0; color: var(--primary);"><strong>4. Validez SIEE / ETC:</strong> Este registro sirve como evidencia formal de continuidad pedagógica y flexibilización curricular para presentar ante directivos docentes y la Secretaría de Educación (ETC).</p>' +
-            '</div>' +
+          '<!-- Banner de Canasta Curricular Activa -->' +
+          '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.55;">' +
+            '<strong>🎯 Planificación Curricular Alimentada desde la Rayuela (Módulo B):</strong> ' +
+            'Este cronograma semanal integra las prioridades seleccionadas por el docente en la Rayuela Curricular. ' +
+            (isEtapa1 ? '<strong>Enfoque Normas INEE Activo:</strong> Las Semanas 1 y 2 están blindadas con soporte psicosocial y autoprotección ERAE/WASH.' : 'Las semanas distribuyen de forma equilibrada los proyectos y DBA priorizados.') +
           '</div>' +
 
           '<div class="grid-4" style="margin-bottom: 24px;">' +
@@ -210,151 +297,146 @@ var ModuloC = {
               '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
             '</div>' +
           '</div>' +
+
           '<div style="overflow-x: auto;">' +
             '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
               '<thead>' +
                 '<tr style="background: var(--surface-hover); text-align: left;">' +
                   '<th style="padding: 10px; width: 75px;">Semana</th>' +
-                  '<th style="padding: 10px; width: 105px;">Fecha Est.</th>' +
-                  '<th style="padding: 10px; width: 110px;">Área</th>' +
+                  '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
+                  '<th style="padding: 10px; width: 120px;">Enfoque / Área</th>' +
                   '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
-                  '<th style="padding: 10px; width: 145px;">Estado</th>' +
-                  '<th style="padding: 10px; width: 220px;">Observaciones / Evidencia</th>' +
+                  '<th style="padding: 10px; width: 140px;">Estado de Avance</th>' +
+                  '<th style="padding: 10px; width: 220px;">Evidencias / Bitácora Docente</th>' +
                 '</tr>' +
               '</thead>' +
               '<tbody>' +
                 semanas.map(function(s) {
                   return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                    '<td style="padding: 10px; font-weight: 700; text-align: center;">Sem. ' + s.num + '</td>' +
-                    '<td style="padding: 10px;">' + s.fecha + '</td>' +
-                    '<td style="padding: 10px;"><span class="badge-pill badge-etapa2">' + s.areaNombre + '</span></td>' +
-                    '<td style="padding: 10px; font-size: 0.84rem; line-height: 1.4;">' + s.tarjeta + '</td>' +
-                    '<td style="padding: 10px;">' +
-                    '<select class="select-elite select-avance" data-semana="' + s.num + '" style="padding: 6px;">' +
-                      '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
-                      '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
-                      '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
-                      '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
-                    '</select>' +
+                    '<td style="padding: 10px; font-weight: 700; color: var(--primary); vertical-align: top;">Semana ' + s.num + '</td>' +
+                    '<td style="padding: 10px; font-size: 0.82rem; color: var(--text-muted); vertical-align: top;">' + s.fecha + '</td>' +
+                    '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e2e8f0; color:#1e293b; font-size:0.75rem;">' + s.foco + '</span></td>' +
+                    '<td style="padding: 10px; vertical-align: top;">' + s.tarjeta + '</td>' +
+                    '<td style="padding: 10px; vertical-align: top;">' +
+                      '<select class="select-elite select-avance-semana" data-semana="' + s.num + '" style="font-size: 0.82rem; padding: 6px 8px;">' +
+                        '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
+                        '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
+                        '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
+                        '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
+                      '</select>' +
                     '</td>' +
-                    '<td style="padding: 10px;">' +
-                    '<input type="text" class="input-elite input-obs" data-semana="' + s.num + '" value="' + s.observaciones + '" placeholder="Logros / Evidencias" style="padding: 6px;">' +
+                    '<td style="padding: 10px; vertical-align: top;">' +
+                      '<textarea class="textarea-elite input-observaciones-semana" data-semana="' + s.num + '" rows="2" placeholder="Registro de evidencias, adaptaciones y acuerdos de aula..." style="font-size: 0.82rem;">' + s.observaciones + '</textarea>' +
                     '</td>' +
                   '</tr>';
                 }).join('') +
               '</tbody>' +
             '</table>' +
           '</div>' +
+
+          '<!-- Encabezado y Bloque de Firmas para Impresión Oficial SIEE -->' +
+          '<div class="print-signatures-block only-print" style="margin-top: 36px; padding-top: 24px; border-top: 2px solid #0f172a;">' +
+            '<div style="text-align: center; margin-bottom: 24px;">' +
+              '<h4 style="margin: 0; color: #005A36;">SECRETARÍA DE EDUCACIÓN DEPARTAMENTAL DE NORTE DE SANTANDER</h4>' +
+              '<p style="font-size: 0.8rem; color: #475569; margin-top: 4px;">Constancia Oficial de Flexibilización y Monitoreo Curricular en Situaciones de Emergencia (SIEE / MEN)</p>' +
+            '</div>' +
+            '<div style="display: flex; justify-content: space-around; text-align: center; margin-top: 50px;">' +
+              '<div style="width: 250px; border-top: 1.5px solid #000; padding-top: 6px;">' +
+                '<strong>' + ((user && user.nombreCompleto) || 'Docente Responsable') + '</strong><br>' +
+                '<span style="font-size: 0.78rem;">Docente de Aula / Sede Educativa</span>' +
+              '</div>' +
+              '<div style="width: 250px; border-top: 1.5px solid #000; padding-top: 6px;">' +
+                '<strong>Coordinación / Rectoría</strong><br>' +
+                '<span style="font-size: 0.78rem;">' + ((user && user.institucion) || 'Institución Educativa') + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
         '</div>';
 
       container.innerHTML = html;
-      this.bindEvents(semanas);
-    } catch (err) {
-      console.error('Error rendering Monitoreo C:', err);
-      var cElem = document.getElementById('modulo-c-content');
-      if (cElem) {
-        cElem.innerHTML = '<div class="card-elite" style="padding: 24px; color: #991b1b;">⚠️ Ocurrió un error al cargar el Módulo C. Por favor guarde su diagnóstico en el Módulo A y vuelva a intentarlo.</div>';
+
+      // Evento Guardar Avance
+      var btnGuardar = document.getElementById('btn-guardar-monitoreo');
+      if (btnGuardar) {
+        btnGuardar.addEventListener('click', function(e) {
+          e.preventDefault();
+          var u = AuthManager.getUserData() || {};
+          u.monitoreo = u.monitoreo || {};
+
+          container.querySelectorAll('.select-avance-semana').forEach(function(sel) {
+            var semNum = sel.getAttribute('data-semana');
+            var txtObs = container.querySelector('.input-observaciones-semana[data-semana="' + semNum + '"]');
+            u.monitoreo[semNum] = {
+              avance: sel.value,
+              observaciones: txtObs ? txtObs.value : '',
+              updatedAt: new Date().toISOString()
+            };
+          });
+
+          AuthManager.saveUserData('monitoreo', u.monitoreo);
+          self.renderMonitoreo();
+          alert('✅ Monitoreo Semanal guardado exitosamente en el perfil docente.');
+        });
       }
-    }
-  },
 
-  bindEvents: function(semanas) {
-    var self = this;
-    var btnGuardar = document.getElementById('btn-guardar-monitoreo');
-    var btnImprimir = document.getElementById('btn-imprimir-carta');
-    var btnExportarJSON = document.getElementById('btn-exportar-json');
-    var btnExportarExcel = document.getElementById('btn-exportar-excel');
+      // Evento Exportar a Excel (CSV con UTF-8 BOM)
+      var btnExcel = document.getElementById('btn-exportar-excel');
+      if (btnExcel) {
+        btnExcel.addEventListener('click', function() {
+          var csvRows = [];
+          csvRows.push(['Semana', 'Fecha Proyectada', 'Etapa', 'Foco Pedagógico', 'Multirriesgo Top 3', 'Tarjeta Curricular Resumida', 'Estado de Avance', 'Evidencias y Observaciones Docente']);
+          semanas.forEach(function(s) {
+            var txtObs = container.querySelector('.input-observaciones-semana[data-semana="' + s.num + '"]');
+            var selAvance = container.querySelector('.select-avance-semana[data-semana="' + s.num + '"]');
+            var obsVal = (txtObs ? txtObs.value : s.observaciones).replace(/;/g, ',').replace(/\n/g, ' ');
+            var avVal = selAvance ? selAvance.value : s.avance;
+            csvRows.push([
+              'Semana ' + s.num,
+              s.fecha,
+              s.etapa,
+              s.foco,
+              amenazasLabel,
+              s.tarjetaPlana.replace(/;/g, ','),
+              avVal,
+              obsVal
+            ]);
+          });
 
-    if (btnGuardar) {
-      btnGuardar.addEventListener('click', function() {
-        var selects = document.querySelectorAll('.select-avance');
-        var inputs = document.querySelectorAll('.input-obs');
-        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
-        var monitoreo = (user && user.monitoreo) || {};
-
-        selects.forEach(function(sel) {
-          var sem = sel.getAttribute('data-semana');
-          monitoreo[sem] = monitoreo[sem] || {};
-          monitoreo[sem].avance = sel.value;
-          monitoreo[sem].fechaRegistro = new Date().toLocaleString('es-CO');
+          var csvContent = '\uFEFF' + csvRows.map(function(e) { return e.join(';'); }).join('\n');
+          var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'monitoreo_semanal_ciclo_' + cicloKey + '_emergencia_' + new Date().toISOString().split('T')[0] + '.csv';
+          a.click();
+          URL.revokeObjectURL(url);
         });
+      }
 
-        inputs.forEach(function(inp) {
-          var sem = inp.getAttribute('data-semana');
-          monitoreo[sem] = monitoreo[sem] || {};
-          monitoreo[sem].observaciones = inp.value;
+      // Evento Exportar JSON Respaldo
+      var btnJSON = document.getElementById('btn-exportar-json');
+      if (btnJSON) {
+        btnJSON.addEventListener('click', function() {
+          var u = AuthManager.getUserData();
+          var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(u, null, 2));
+          var a = document.createElement('a');
+          a.href = dataStr;
+          a.download = 'respaldo_plan_curricular_nrc_' + new Date().toISOString().split('T')[0] + '.json';
+          a.click();
         });
+      }
 
-        if (typeof AuthManager !== 'undefined' && AuthManager.saveUserData) {
-          AuthManager.saveUserData('monitoreo', monitoreo);
-        }
-        alert('✅ Registro de Monitoreo Semanal guardado exitosamente con trazabilidad temporal.');
-        self.renderMonitoreo();
-      });
-    }
-
-    if (btnExportarExcel) {
-      btnExportarExcel.addEventListener('click', function() {
-        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
-        var d = (user && user.diagnostico) || {};
-        var savedMonitoreo = (user && user.monitoreo) || {};
-
-        var rows = [
-          ['HERRAMIENTA DE ADAPTACIÓN Y FLEXIBILIZACIÓN CURRICULAR EN EMERGENCIAS - NRC / MEN'],
-          ['Docente:', (user && user.nombreCompleto) || 'Docente NRC', 'Institución:', (user && user.institucion) || 'IE Rural', 'Ciclo:', 'Ciclo ' + (d.ciclo || '3')],
-          ['Etapa Emergencia:', d.etapa || '', 'Amenaza:', d.amenaza || '', 'Fecha Inicio:', d.fechaInicio || ''],
-          [''],
-          ['Semana', 'Fecha Estimada', 'Área Curricular', 'Tarjeta de Acción Pedagógica Situada', 'Estado / Avance', 'Observaciones / Evidencias', 'Fecha Registro']
-        ];
-
-        (semanas || []).forEach(function(s) {
-          var mon = savedMonitoreo[s.num] || {};
-          rows.push([
-            'Semana ' + s.num,
-            s.fecha,
-            s.areaNombre,
-            s.tarjetaPlana || '',
-            mon.avance || s.avance || '⚪ Sin iniciar',
-            mon.observaciones || s.observaciones || '',
-            mon.fechaRegistro || ''
-          ]);
+      // Evento Imprimir Carta
+      var btnPrint = document.getElementById('btn-imprimir-carta');
+      if (btnPrint) {
+        btnPrint.addEventListener('click', function() {
+          window.print();
         });
+      }
 
-        var csvContent = '﻿' + rows.map(function(e) {
-          return e.map(function(item) {
-            var str = String(item || '').replace(/"/g, '""');
-            return '"' + str + '"';
-          }).join(';');
-        }).join(String.fromCharCode(13, 10));
-
-        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        var link = document.createElement('a');
-        var url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'monitoreo_curricular_nrc_' + ((user && user.nombreCompleto) || 'docente').replace(/\s+/g, '_') + '.csv');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    }
-
-    if (btnExportarJSON) {
-      btnExportarJSON.addEventListener('click', function() {
-        var data = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : {};
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
-        var downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", "bitacora_nrc_" + ((data && data.nombreCompleto) || 'docente').replace(/\s+/g, '_') + ".json");
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-      });
-    }
-
-    if (btnImprimir) {
-      btnImprimir.addEventListener('click', function() {
-        window.print();
-      });
+    } catch (e) {
+      console.error('Error rendering Monitoreo Semanal:', e);
     }
   }
 };

@@ -1,10 +1,11 @@
 # 📘 DOCUMENTO MAESTRO DE INTEGRACIÓN: PROYECTO 1 & PROYECTO 2 (WEB)
-**Iniciativa de Flexibilización y Adaptación Curricular en Situaciones de Emergencia (NRC / MEN)**
+**Iniciativa de Flexibilización y Adaptación Curricular en Situaciones de Emergencia (NRC / MEN)**  
+**Destinatario Institucional:** Secretaría de Educación Departamental / Gobernación de Norte de Santander
 
 ---
 
 ## 📌 1. Resumen Ejecutivo y Alcance
-Este documento constituye la **fuente única de verdad (Single Source of Truth)** para la articulación entre el **Proyecto 1** (modelación curricular en hojas de cálculo, soporte normativo PGIRE/GIRE, matrices DBA y productos metodológicos) y el **Proyecto 2** (plataforma web interactiva *Open Source*, diseñada para despliegue en subdominio Linux y ejecución local autónoma).
+Este documento constituye la **fuente única de verdad (Single Source of Truth)** para la articulación entre el **Proyecto 1** (modelación curricular en hojas de cálculo, soporte normativo PGIRE/GIRE, matrices DBA y productos metodológicos) y el **Proyecto 2** (plataforma web interactiva *Open Source*, diseñada para despliegue en la infraestructura institucional de la **Gobernación de Norte de Santander** bajo subdominio oficial asignado por la Oficina TIC y ejecución local autónoma para sedes educativas en zonas de baja o nula conectividad).
 
 ---
 
@@ -97,19 +98,42 @@ flowchart TD
 
 ---
 
-## 🌐 5. Directrices de Despliegue en Subdominio Linux (Open Source)
+## 🌐 5. Directrices de Despliegue en Infraestructura Institucional (Gobernación de Norte de Santander)
 
-### 5.1. Entorno de Producción
-* **Servidor:** Linux (Debian / Ubuntu / Rocky Linux / Alpine).
-* **Hardware:** 4 vCPUs, 500 GB de almacenamiento libre.
-* **Servidor Web:** Nginx, Apache HTTP Server o Caddy.
-* **Cero Dependencia de Servidores Propietarios:** Sin necesidad de Windows Server ni bases de datos SQL comerciales.
+### 5.1. Especificación de la Máquina Virtual (Oficina TIC - Gobernación)
+En acuerdo y coordinación técnica con la Oficina de Tecnologías de la Información y las Comunicaciones (TIC) de la **Gobernación de Norte de Santander**, la plataforma se alojará en un servidor virtualizado dedicado con las siguientes características:
+* **Sistema Operativo:** Linux Ubuntu Server 24.04 LTS (o 22.04 LTS de 64 bits), asegurando soporte extendido y parches de seguridad de nivel gubernamental.
+* **Procesamiento (vCPUs):** 4 núcleos (suficiente holgura para el tráfico concurrente de docentes del departamento).
+* **Memoria RAM:** 16 GB de RAM (garantiza alto rendimiento para el servidor web, motor de base de datos y cache en memoria).
+* **Almacenamiento:** 500 GB en disco (espacio más que óptimo para el software base, logs del sistema, registros históricos de planeación y políticas de retención prolongada de backups).
+* **Motor de Base de Datos:** PostgreSQL versión 16 (o 15 LTS), instalado localmente en la misma máquina virtual con afinamiento de buffer y conexiones seguras vía socket/localhost.
+* **Servidor Web / Proxy Inverso:** Nginx con terminación SSL/TLS (HTTPS) gestionado por la Gobernación, compresión Brotli/Gzip y encabezados de seguridad HSTS.
+* **Red y Dominio:** Subdominio institucional asignado por TIC (ej. `adaptacioncurricular.nortedesantander.gov.co` o similar) con credenciales de despliegue y acceso SSH concedidas al equipo de instalación (CliO).
 
-### 5.2. Configuración Nginx Recomendada para Subdominio
+### 5.2. Paquete Integral de Entrega y Transferencia Tecnológica
+Para garantizar la plena autonomía, seguridad y sostenibilidad institucional en la Gobernación, el proceso de entrega incluye:
+1. **Código fuente completo de la herramienta:** Repositorio versionado con la totalidad de componentes frontend (PWA modular y standalone), scripts de sincronización y utilitarios.
+2. **Diccionario de datos:** Esquema estructurado con definición detallada de tablas, campos, llaves foráneas, tipos de datos y restricciones del modelo relacional pedagógico.
+3. **Credenciales y claves de acceso correspondientes:** Usuarios y roles administrativos tanto a nivel de sistema operativo como de base de datos PostgreSQL, entregados bajo protocolo confidencial.
+4. **Documentación técnica del software:** Manual de arquitectura, guía de instalación paso a paso, manual de despliegue en Linux y manual de soporte operativo para el equipo de TIC departamental.
+5. **Estrategia y configuración de backups y contingencia:** Rutina automatizada vía `cron` diario ejecutando `pg_dump` con compresión, retención rotativa local (7 días diarios, 4 semanales, 3 mensuales) y directrices para copia cruzada al almacenamiento institucional de la Gobernación.
+
+### 5.3. Configuración Nginx Recomendada para Subdominio Institucional
 ```nginx
 server {
     listen 80;
-    server_name nrc-curricular.tudominio.org; # Reemplazar con el subdominio asignado
+    server_name adaptacioncurricular.nortedesantander.gov.co; # Subdominio asignado por TIC
+
+    # Redirección obligatoria a HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name adaptacioncurricular.nortedesantander.gov.co;
+
+    ssl_certificate /etc/ssl/certs/gobernacion_nortedesantander.crt;
+    ssl_certificate_key /etc/ssl/private/gobernacion_nortedesantander.key;
 
     root /var/www/nrc-herramienta-web;
     index index.html;
@@ -128,14 +152,14 @@ server {
 }
 ```
 
-### 5.3. Ejecución y Prueba Local Autónoma
-Para probar la aplicación en tu ordenador sin necesidad de instalar entornos complejos:
-1. **Opción Directa:** Doble clic sobre `index.html` en cualquier navegador web moderno.
-2. **Opción Servidor Ligero:** Ejecutar en terminal `python -m http.server 8080` o `npx serve .` y abrir `http://localhost:8080`.
+### 5.4. Ejecución y Prueba Local Autónoma (Zonas sin Conectividad)
+Para garantizar la atención en sedes rurales dispersas del Catatumbo y Norte de Santander sin internet:
+1. **Opción Directa (Offline-First):** Abrir `index.html` o `app_standalone.html` en cualquier navegador web moderno sin requerir conexión a internet.
+2. **Opción Servidor Ligero:** Ejecutar `iniciar_servidor_local.bat` o `python -m http.server 8080`.
 
-### 5.4. Despliegue Continuo Automático en GitHub Pages (CI/CD)
+### 5.5. Despliegue Continuo en Entorno de Pruebas (CI/CD)
 * **Repositorio Oficial:** `https://github.com/Sebaspaezt/adaptacioncurricular`
 * **URL en Producción Web (En Vivo):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
-* **Flujo de Automatización Autónoma:** Cada ajuste realizado y procesado en el desarrollo es ejecutado y sincronizado automáticamente por el asistente de desarrollo (**Antigravity**) mediante `git push` a la rama `main`, garantizando que cada iteración quede inmediatamente reflejada en vivo en la plataforma web de GitHub Pages sin requerir acciones manuales del usuario.
+* **Flujo de Automatización:** Cada ajuste es sincronizado automáticamente por el asistente de desarrollo (**Antigravity**) mediante `git push` a la rama `main`, sirviendo de entorno de homologación previo al despliegue definitivo en el servidor institucional de la Gobernación.
 
 

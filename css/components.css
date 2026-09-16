@@ -464,3 +464,277 @@ body {
   color: #0f766e;
   border: 1px solid #ccfbf1;
 }
+
+/* =================================================== */
+/* COMPONENTES PARA BARRERAS, PERIODOS Y CANASTA (V2.2)*/
+/* =================================================== */
+
+/* Matriz de Barreras de Aprendizaje */
+.barriers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.barrier-card {
+  background: var(--surface-white);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.barrier-card.active-low {
+  border-color: #fde047;
+  background: #fefce8;
+}
+
+.barrier-card.active-med {
+  border-color: #fdba74;
+  background: #fff7ed;
+}
+
+.barrier-card.active-high {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.barrier-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.barrier-levels {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.barrier-level-btn {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-medium);
+  background: var(--surface-white);
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.barrier-level-btn:hover {
+  background: var(--surface-hover);
+}
+
+.barrier-level-btn.selected-ninguna {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-baja {
+  background: #fef08a;
+  color: #854d0e;
+  border-color: #eab308;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-media {
+  background: #fed7aa;
+  color: #9a3412;
+  border-color: #f97316;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-alta {
+  background: #fecaca;
+  color: #991b1b;
+  border-color: #ef4444;
+  font-weight: 700;
+}
+
+/* Multirriesgo Top 3 */
+.threat-top3-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.threat-top3-card {
+  background: #f8fafc;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.threat-top3-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+/* Periodos y Estados en Rayuela Curricular */
+.periodos-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  align-items: center;
+}
+
+.periodo-tab-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1.5px solid var(--border-medium);
+  background: white;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.periodo-tab-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.periodo-tab-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Filas según estado pedagógico */
+.row-addressed {
+  background-color: #f0fdf4 !important;
+  opacity: 0.82;
+}
+
+.row-addressed:hover {
+  opacity: 1;
+}
+
+.row-pending {
+  background-color: #ffffff;
+}
+
+.row-postponed {
+  background-color: #f8fafc !important;
+  opacity: 0.65;
+}
+
+/* Badges de estado pedagógico */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.status-badge-addressed {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.status-badge-pending {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
+}
+
+.status-badge-postponed {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+/* Canasta Curricular Dock Flotante */
+.selection-dock-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 85;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.selection-dock-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.dock-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.dock-badge.active-count {
+  background: #059669;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* Banners informativos */
+.info-banner-inee {
+  background: #f0fdf4;
+  border-left: 5px solid #059669;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #065f46;
+}
+
+.info-banner-periodo {
+  background: #eff6ff;
+  border-left: 5px solid #2563eb;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #1e40af;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
