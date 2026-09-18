@@ -17,8 +17,8 @@ body {
 /* Header */
 .header-bar {
   background: var(--surface-white);
-  border-bottom: 2px solid var(--primary);
-  padding: 14px 28px;
+  border-bottom: 3px solid var(--primary);
+  padding: 10px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,18 +34,49 @@ body {
   gap: 16px;
 }
 
-.brand-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--primary-dark);
-  line-height: 1.2;
+.brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.brand-subtitle {
-  font-size: 0.85rem;
+.brand-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-icon-edu-container {
+  background: var(--gov-petroleo);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon-edu {
+  height: 34px;
+  width: auto;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.brand-entity {
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-top: 2px;
 }
+
 
 .user-status-bar {
   display: flex;

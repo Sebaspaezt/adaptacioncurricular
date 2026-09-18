@@ -1,9 +1,21 @@
-/* Variables de Diseño Swiss-Fine NRC */
+/* Variables de Diseño Institucional - Gobernación de Norte de Santander & MinTIC UI/UX Kit 9.5 */
 :root {
-  --primary: #005A36;
-  --primary-dark: #003d24;
-  --primary-light: #008f56;
-  --primary-subtle: #e6f4ed;
+  /* Identidad Institucional Gobernación / SIT */
+  --gov-petroleo: #0e4c5b;
+  --gov-petroleo-dark: #09333e;
+  --gov-petroleo-light: #166d82;
+  --gov-petroleo-subtle: #e6f3f6;
+
+  /* MinTIC Kit UI/UX 9.5 */
+  --mintic-blue: #0066cc;
+  --mintic-blue-dark: #004c99;
+  --mintic-blue-light: #e6f0fa;
+
+  /* Primarios y secundarios del sistema */
+  --primary: #0e4c5b;
+  --primary-dark: #09333e;
+  --primary-light: #166d82;
+  --primary-subtle: #e6f3f6;
   
   --secondary: #d97706;
   --secondary-light: #fef3c7;
@@ -28,8 +40,8 @@
   --color-etapa3: #16a34a;
   --color-etapa3-bg: #dcfce7;
   
-  --color-blue: #0284c7;
-  --color-blue-bg: #e0f2fe;
+  --color-blue: #0066cc;
+  --color-blue-bg: #e6f0fa;
   
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -39,5 +51,6 @@
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
   
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+

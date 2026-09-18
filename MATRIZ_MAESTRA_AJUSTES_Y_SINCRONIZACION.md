@@ -135,5 +135,7 @@ El orquestador procesará los datos, actualizará todos los libros Excel de Proy
 | **v2.0.0** | 2026-08-26 | Equipo NRC / AGY | Creación del Hub Maestro de Sincronización Bidireccional (Proyecto 1 ↔ Proyecto 2), integración de 5 Ciclos, 40 amenazas PGIRE y automatización 1-click. | **OPERATIVO** |
 | **v2.1.0** | 2026-08-27 | Equipo NRC / AGY | Homologación integral multiciclo de bases relacionales de DBA oficiales MEN en los 5 libros Excel (Ciclos I, II, III, IV y V: 297 registros oficiales), corrección de encabezados de mallas y sincronización con plataforma web. | **OPERATIVO** |
 | **v2.2.0** | 2026-08-27 | Equipo NRC / AGY | Depuración curricular integral y graduación por franja de edad (6 a 17 años) en las 4 áreas (Lenguaje, Matemáticas, Ciencias Sociales y Naturales), eliminación de filas residuales de Ciclo III, calibración de EBC, Bloom y miniproyectos situados en Excel y Web. | **OPERATIVO** |
+| **v2.3.0** | 2026-09-18 | Gobernación / AGY | Integración formal de la infraestructura de Máquina Virtual provista por la Oficina TIC de la Gobernación de Norte de Santander (Ubuntu 24.04 LTS, IP 38.191.221.27, subdominio flexedu.nortedesantander.gov.co, SSL wildcard). Adopción de lineamientos de identidad visual MinTIC (Kit 9.5), paleta institucional `#0e4c5b`, logos oficiales sin fondo e icono de educación, y retiro de líneas residuales según directriz acordada. | **OPERATIVO** |
+
 
 

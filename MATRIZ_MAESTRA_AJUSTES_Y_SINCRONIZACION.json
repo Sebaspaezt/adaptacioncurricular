@@ -19,6 +19,18 @@
   },
   "registro_ajustes": [
     {
+      "id": "AJUSTE-2026-003",
+      "fecha": "2026-09-18",
+      "autor": "Gobernación de Norte de Santander / AGY",
+      "componente": "PROYECTO_2_WEB_INFRAESTRUCTURA",
+      "area_o_modulo": "Infraestructura MV, Subdominio flexedu, Identidad Visual MinTIC/Gobernación",
+      "tipo_ajuste": "DESPLIEGUE_Y_LINEAMIENTOS_INSTITUCIONALES",
+      "descripcion": "Configuración del entorno técnico de producción en la Máquina Virtual dispuesta por la Gobernación (Ubuntu Server 24.04 LTS, 16 GB RAM, 4 vCPU, 500 GB disco, IP 38.191.221.27, flexedu.nortedesantander.gov.co, SSL wildcard). Adopción de lineamientos de identidad visual MinTIC Kit 9.5, paleta institucional #0e4c5b, logos oficiales sin fondo e icono de educación, y retiro de línea residual acordada.",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
+    {
       "id": "AJUSTE-2026-002",
       "fecha": "2026-08-26",
       "autor": "Equipo Curricular NRC / AGY",

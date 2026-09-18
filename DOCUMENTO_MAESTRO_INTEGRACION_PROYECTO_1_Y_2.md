@@ -100,15 +100,26 @@ flowchart TD
 
 ## 🌐 5. Directrices de Despliegue en Infraestructura Institucional (Gobernación de Norte de Santander)
 
-### 5.1. Especificación de la Máquina Virtual (Oficina TIC - Gobernación)
-En acuerdo y coordinación técnica con la Oficina de Tecnologías de la Información y las Comunicaciones (TIC) de la **Gobernación de Norte de Santander**, la plataforma se alojará en un servidor virtualizado dedicado con las siguientes características:
-* **Sistema Operativo:** Linux Ubuntu Server 24.04 LTS (o 22.04 LTS de 64 bits), asegurando soporte extendido y parches de seguridad de nivel gubernamental.
-* **Procesamiento (vCPUs):** 4 núcleos (suficiente holgura para el tráfico concurrente de docentes del departamento).
-* **Memoria RAM:** 16 GB de RAM (garantiza alto rendimiento para el servidor web, motor de base de datos y cache en memoria).
-* **Almacenamiento:** 500 GB en disco (espacio más que óptimo para el software base, logs del sistema, registros históricos de planeación y políticas de retención prolongada de backups).
-* **Motor de Base de Datos:** PostgreSQL versión 16 (o 15 LTS), instalado localmente en la misma máquina virtual con afinamiento de buffer y conexiones seguras vía socket/localhost.
-* **Servidor Web / Proxy Inverso:** Nginx con terminación SSL/TLS (HTTPS) gestionado por la Gobernación, compresión Brotli/Gzip y encabezados de seguridad HSTS.
-* **Red y Dominio:** Subdominio institucional asignado por TIC (ej. `adaptacioncurricular.nortedesantander.gov.co` o similar) con credenciales de despliegue y acceso SSH concedidas al equipo de instalación (CliO).
+### 5.1. Especificación Técnica de la Máquina Virtual (Oficina TIC - Gobernación)
+Conforme a la notificación oficial de la Oficina de Tecnologías de la Información y las Comunicaciones (TIC) de la **Gobernación de Norte de Santander**, se ha dispuesto la Máquina Virtual (MV) dedicada para el entorno de desarrollo, conexión y puesta en producción del sistema:
+
+* **Sistema Operativo:** Ubuntu Server 24.04 LTS (versión de soporte extendido, recomendada para entornos productivos).
+* **Memoria RAM:** 16 GB RAM.
+* **Procesamiento (CPU):** 4 núcleos virtuales (vCPU).
+* **Almacenamiento (Disco 1):** 500 GB (destinado para actualizaciones, archivos de log, servicios internos del sistema, aplicativo y base de datos).
+* **Dirección IP pública:** `38.191.221.27`
+* **Dominio / Subdominio:** Registros DNS tipo A apuntando a la IP pública: [flexedu.nortedesantander.gov.co](http://flexedu.nortedesantander.gov.co/)
+* **Usuario de acceso SSH:** `goberti`
+* **Certificado SSL Wildcard:** `*.[nortedesantander.gov.co]` (instalado)
+  * Certificado público: `/etc/ssl/certs/wildcard_nortedesantander_gov_co.crt`
+  * Llave privada: `/etc/ssl/private/wildcard_nortedesantander_gov_co.key`
+* **Identidad Institucional y Lineamientos Gráficos:**
+  * Adopción de lineamientos de diseño UI/UX MinTIC (Kit 9.5).
+  * Colorimetría institucional del sector: Tono petróleo institucional `#0e4c5b` (utilizado para contraste con el Logo SIT blanco).
+  * Logo Gobernación de Norte de Santander (sin fondo).
+  * Ícono institucional de Educación (`ICONO_EDUCACION`) letra blanca sin fondo.
+  * Logo SIT blanco sin fondo (para fondo oscuro `#0e4c5b`).
+  * Denominación limpia oficial: **"Herramienta de adaptación y flexibilización curricular en emergencias"** (sin menciones de convenios ni entidades cooperantes en el subtítulo).
 
 ### 5.2. Paquete Integral de Entrega y Transferencia Tecnológica
 Para garantizar la plena autonomía, seguridad y sostenibilidad institucional en la Gobernación, el proceso de entrega incluye:
@@ -118,11 +129,11 @@ Para garantizar la plena autonomía, seguridad y sostenibilidad institucional en
 4. **Documentación técnica del software:** Manual de arquitectura, guía de instalación paso a paso, manual de despliegue en Linux y manual de soporte operativo para el equipo de TIC departamental.
 5. **Estrategia y configuración de backups y contingencia:** Rutina automatizada vía `cron` diario ejecutando `pg_dump` con compresión, retención rotativa local (7 días diarios, 4 semanales, 3 mensuales) y directrices para copia cruzada al almacenamiento institucional de la Gobernación.
 
-### 5.3. Configuración Nginx Recomendada para Subdominio Institucional
+### 5.3. Configuración Nginx Oficial para el Subdominio `flexedu.nortedesantander.gov.co`
 ```nginx
 server {
     listen 80;
-    server_name adaptacioncurricular.nortedesantander.gov.co; # Subdominio asignado por TIC
+    server_name flexedu.nortedesantander.gov.co;
 
     # Redirección obligatoria a HTTPS
     return 301 https://$host$request_uri;
@@ -130,12 +141,14 @@ server {
 
 server {
     listen 443 ssl http2;
-    server_name adaptacioncurricular.nortedesantander.gov.co;
+    server_name flexedu.nortedesantander.gov.co;
 
-    ssl_certificate /etc/ssl/certs/gobernacion_nortedesantander.crt;
-    ssl_certificate_key /etc/ssl/private/gobernacion_nortedesantander.key;
+    ssl_certificate /etc/ssl/certs/wildcard_nortedesantander_gov_co.crt;
+    ssl_certificate_key /etc/ssl/private/wildcard_nortedesantander_gov_co.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
 
-    root /var/www/nrc-herramienta-web;
+    root /var/www/flexedu;
     index index.html;
 
     location / {
@@ -157,9 +170,11 @@ Para garantizar la atención en sedes rurales dispersas del Catatumbo y Norte de
 1. **Opción Directa (Offline-First):** Abrir `index.html` o `app_standalone.html` en cualquier navegador web moderno sin requerir conexión a internet.
 2. **Opción Servidor Ligero:** Ejecutar `iniciar_servidor_local.bat` o `python -m http.server 8080`.
 
-### 5.5. Despliegue Continuo en Entorno de Pruebas (CI/CD)
+### 5.5. Entorno de Pruebas y Homologación (CI/CD GitHub Pages)
 * **Repositorio Oficial:** `https://github.com/Sebaspaezt/adaptacioncurricular`
-* **URL en Producción Web (En Vivo):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
-* **Flujo de Automatización:** Cada ajuste es sincronizado automáticamente por el asistente de desarrollo (**Antigravity**) mediante `git push` a la rama `main`, sirviendo de entorno de homologación previo al despliegue definitivo en el servidor institucional de la Gobernación.
+* **URL de Pruebas en Vivo (Homologación previa a la MV):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
+* **URL en Producción Definitiva (MV Gobernación):** [https://flexedu.nortedesantander.gov.co](https://flexedu.nortedesantander.gov.co)
+* **Flujo de Automatización:** Cada ajuste es validado y sincronizado automáticamente por el asistente de desarrollo (**Antigravity**) mediante `git push` a la rama `main`, sirviendo de entorno de homologación previo al despliegue definitivo en el servidor institucional de la Gobernación.
+
 
 

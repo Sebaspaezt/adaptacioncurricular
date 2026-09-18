@@ -1,6 +1,10 @@
-# 🌐 Proyecto 2: Plataforma Web de Flexibilización y Adaptación Curricular (NRC / MEN / Gobernación de Norte de Santander)
+# 🌐 Plataforma Web: Herramienta de Adaptación y Flexibilización Curricular en Emergencias
+**Gobernación de Norte de Santander / Secretaría de Educación Departamental / Subdominio: [flexedu.nortedesantander.gov.co](https://flexedu.nortedesantander.gov.co)**
 
-Plataforma Web interactiva, modular y *Offline-First* (PWA) diseñada para directivos, docentes y equipos territoriales del **Norwegian Refugee Council (NRC)**, del **Ministerio de Educación Nacional (MEN)** y de la **Secretaría de Educación Departamental / Gobernación de Norte de Santander** para la planificación, diagnóstico paramétrico y monitoreo escolar en situaciones de emergencia.
+Plataforma Web interactiva, modular y *Offline-First* (PWA) diseñada para que cualquier docente o directivo pueda registrarse, personalizar sus diagnósticos por etapas, ciclos, grados y matrícula de NNA, abordar afectaciones y multirriesgos PGIRE, y realizar monitoreo semanal con trazabilidad pedagógica y validez SIEE.
+
+* **URL en Producción Institucional (MV Gobernación):** [https://flexedu.nortedesantander.gov.co](https://flexedu.nortedesantander.gov.co)
+* **Entorno de Pruebas y Homologación (GitHub Pages):** [https://sebaspaezt.github.io/adaptacioncurricular/](https://sebaspaezt.github.io/adaptacioncurricular/)
 
 ---
 
@@ -16,7 +20,7 @@ Plataforma Web interactiva, modular y *Offline-First* (PWA) diseñada para direc
    *Motor de Sincronización Automática (1-Click)*. Actualiza las bases JS, compila la app web y sincroniza los libros de cálculo de Proyecto 1 con validación de 0 errores.
 
 4. **[DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md](DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md)**  
-   *Especificación Técnica y Arquitectura de Integración*. Marco normativo, gobernanza GIRE, directrices de despliegue en Linux (Nginx) y requisitos offline.
+   *Especificación Técnica y Arquitectura de Integración*. Marco normativo, gobernanza GIRE, directrices de despliegue en Linux Ubuntu Server 24.04 LTS (Nginx con SSL wildcard) y requisitos offline.
 
 ---
 
@@ -27,13 +31,14 @@ Hacer doble clic en **[app_standalone.html](app_standalone.html)** en cualquier 
 
 ### Opción 2: Ejecución Local con Servidor Ligero
 Hacer doble clic en **[iniciar_servidor_local.bat](iniciar_servidor_local.bat)** o ejecutar en terminal:
-`ash
+```bash
 python -m http.server 8080
-`
+```
 Y abrir en el navegador http://localhost:8080 para disfrutar de la experiencia completa PWA con Service Worker.
 
-### Opción 3: Despliegue en Servidor Linux (Producción / Open Source)
-Copia la carpeta en el directorio web (/var/www/nrc-herramienta-web) y configura el servidor Nginx siguiendo las directrices de [DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md](DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md).
+### Opción 3: Despliegue en Servidor Linux (Producción MV Gobernación)
+Desplegar en el directorio `/var/www/flexedu` y configurar el servidor Nginx con el certificado SSL Wildcard instalado en la MV siguiendo las directrices de [DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md](DOCUMENTO_MAESTRO_INTEGRACION_PROYECTO_1_Y_2.md).
+
 
 ---
 
