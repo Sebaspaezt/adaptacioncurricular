@@ -1102,12 +1102,40 @@ body {
               </div>
             </div>
 
+        <!-- 1.4. Guía para la identificación y flexibilización ante barreras de aprendizaje (BAP) -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>1.4. Guía para la identificación y flexibilización ante barreras de aprendizaje (BAP)</span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
+            <p style="margin-bottom: 10px;">
+              <strong>Marco Técnico y Pedagógico:</strong> En situaciones de emergencia, las barreras no residen intrínsecamente en el estudiante, sino en las condiciones del entorno escolar, comunitario y familiar derivadas de la crisis (<em>Decreto 1421 de 2017, Diseño Universal para el Aprendizaje DUA y Normas Mínimas INEE</em>).
+            </p>
+
+            <p style="margin-bottom: 8px;"><strong>¿Cómo diligenciar la Matriz de Barreras (Punto 11)?:</strong></p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>⚪ Ninguna:</strong> No se evidencian impactos que impidan el desarrollo ordinario en esta dimensión.
+              </div>
+              <div style="background: #fefce8; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #eab308;">
+                <strong>🟡 Baja:</strong> Intermitencia esporádica o afectación leve que se compensa con ajustes puntuales del docente en clase.
+              </div>
+              <div style="background: #fff7ed; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #f97316;">
+                <strong>🟠 Media:</strong> Afectación significativa en varios estudiantes (duelo, pérdida parcial de materiales o dificultades de acceso) que requiere flexibilización metodológica y trabajo colaborativo.
+              </div>
+              <div style="background: #fef2f2; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #ef4444;">
+                <strong>🔴 Alta:</strong> Obstáculo crítico y generalizado (cero conectividad, desplazamiento activo, trauma psicosocial severo o destrucción de la sede). Exige priorizar contención socioemocional, tutoría focalizada y módulos impresos de autoaprendizaje.
+              </div>
+            </div>
+
             <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Puede marcar una o varias categorías macro; el sistema consolidará dinámicamente el catálogo de amenazas específicas permitiéndole definir una <strong>Amenaza Principal</strong> y hasta dos <strong>Amenazas Secundarias / Concurrentes (Top 3)</strong>, articulando los riesgos institucionales y las rutas de protección interinstitucional según el PGIRE.
+              🔗 <strong>Articulación Relacional con Módulos B y C:</strong> Al marcar barreras en nivel <em>Medio o Alto</em>, la herramienta prioriza automáticamente en la <strong>Rayuela Curricular (Módulo B)</strong> las didácticas de apoyo (habilidades socioemocionales de contención, protocolos WASH y guías autónomas sin conectividad), e integra en las tarjetas del <strong>Monitoreo Semanal (Módulo C)</strong> alertas pedagógicas para que el docente implemente ajustes razonables sin sobrecargar al estudiante.
             </p>
           </div>
         </div>
       </div>
+
 
       <!-- 2. Panel de Control Paramétrico y Diagnóstico Integrado -->
       <div class="card-elite">
@@ -1252,7 +1280,7 @@ body {
               </div>
             </div>
 
-            <!-- NUEVA SECCIÓN: MATRIZ DE BARRERAS DE APRENDIZAJE Y PARTICIPACIÓN -->
+            <!-- SECCIÓN: MATRIZ DE BARRERAS DE APRENDIZAJE Y PARTICIPACIÓN -->
             <div class="form-group" style="grid-column: span 2; margin-top: 14px; border-top: 2px dashed var(--border-medium); padding-top: 18px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                 <label class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0;">
@@ -1260,13 +1288,21 @@ body {
                 </label>
                 <span class="badge-pill badge-etapa2">Emergencia ➔ Barreras ➔ Necesidades ➔ Flexibilización</span>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-                Valore el nivel de afectación en su grupo de estudiantes (<em>Baja, Media o Alta</em>) para modular la respuesta curricular y de bienestar:
-              </p>
+              
+              <div style="background: var(--surface-hover); border-left: 4px solid var(--primary); padding: 10px 14px; border-radius: 4px; margin-bottom: 12px; font-size: 0.84rem; line-height: 1.5;">
+                <strong>📋 Instrucciones de Diligenciamiento:</strong>
+                Marque el nivel de impacto observado en su grupo de NNA para cada tipología:
+                <br>• <strong>Ninguna:</strong> Condición habitual sin afectación por la emergencia.
+                <br>• <strong>Baja:</strong> Afectación leve compensable con mediación rutinaria en aula.
+                <br>• <strong>Media:</strong> Dificultad recurrente que requiere proyectos colaborativos y flexibilización de tiempos.
+                <br>• <strong>Alta:</strong> Bloqueo crítico que exige priorizar contención emocional, guías impresas o tutoría individualizada.
+                <br><em>Nota: Los niveles seleccionados alimentan automáticamente las priorizaciones del Módulo B y generan alertas de ajuste en el Monitoreo Semanal (Módulo C).</em>
+              </div>
               
               <div id="container-barreras-aprendizaje" class="barriers-grid">
                 <!-- Se inyectan dinámicamente las 12 barreras desde modulo_a.js -->
               </div>
+
 
               <div style="margin-top: 14px;">
                 <label class="form-label" style="font-weight: 600;">Descripción cualitativa del docente sobre las barreras del grupo:</label>
@@ -7231,13 +7267,29 @@ var ModuloB = {
     return 'pendiente';
   },
 
-  isItemSelectedForPlan: function(item, userSelection, autoRec) {
+  isItemSelectedForPlan: function(item, userSelection, state, isAcademic, d) {
     if (userSelection && typeof userSelection[item.id] !== 'undefined') {
       return Boolean(userSelection[item.id]);
     }
-    // Si no hay selección manual, usar la recomendación inicial
-    return Boolean(autoRec && autoRec[item.id]);
+    // Si no hay intervención manual previa:
+    // 1. Si el ítem ya fue abordado en periodos previos, NO se premarca para el plan (queda como abordado/excluido a menos que se active repaso)
+    if (state === 'abordado') {
+      return false;
+    }
+    // 2. En áreas académicas, premarcar los aprendizajes correspondientes al periodo en curso o sugeridos
+    if (isAcademic) {
+      var currentPNum = 1;
+      if (d && d.periodoEnCurso) {
+        var match = d.periodoEnCurso.match(/\d+/);
+        if (match) currentPNum = parseInt(match[0], 10);
+      }
+      // Se premarcan los del periodo lectivo en que ocurrió la emergencia
+      return item.periodoNum === currentPNum;
+    }
+    // 3. En áreas transversales (Socioemocional / Supervivencia), premarcar por defecto los prioritarios de contención
+    return true;
   },
+
 
   buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList, d, userStates, userSelection) {
     var self = this;
@@ -7288,6 +7340,18 @@ var ModuloB = {
       });
     }
 
+    // Extraer barreras de aprendizaje críticas para orientar didácticas en Módulo B
+    var activeBarriersList = [];
+    if (d && d.barreras) {
+      Object.keys(d.barreras).forEach(function(bKey) {
+        var lvl = d.barreras[bKey];
+        if (lvl === 'Media' || lvl === 'Alta') {
+          activeBarriersList.push(bKey);
+        }
+      });
+    }
+
+
     var th0 = 'Plan / Estado';
     var th1 = 'Factor / Eje & Periodo';
     var th2 = 'DBA / Aprendizaje Esencial';
@@ -7319,11 +7383,12 @@ var ModuloB = {
       '<tbody>' +
         validItems.map(function(item) {
           var state = self.getItemState(item, d, userStates);
-          var isChecked = self.isItemSelectedForPlan(item, userSelection);
+          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, (!isSocio && !isSuperv), d);
 
           var rowClass = 'row-pending';
           if (state === 'abordado') rowClass = 'row-addressed';
           else if (state === 'aplazado') rowClass = 'row-postponed';
+
 
           var badgeBg = '#e0f2fe';
           var badgeColor = '#0369a1';
@@ -7387,11 +7452,13 @@ var ModuloB = {
             '</td>' +
             '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
               '<strong>🛠️ ' + item.didactica + '</strong>' +
+              (activeBarriersList.length > 0 ? ('<div style="font-size:0.75rem; color:#9a3412; background:#ffedd5; padding:3px 6px; border-radius:4px; margin-top:4px;"><strong>🧩 Ajuste por Barrera:</strong> Diversificar consignas y apoyos (' + activeBarriersList.slice(0, 2).join(', ') + ')</div>') : '') +
             '</td>' +
           '</tr>';
         }).join('') +
       '</tbody>' +
     '</table>';
+
   },
 
   renderRayuela: function() {
@@ -7424,15 +7491,27 @@ var ModuloB = {
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERAE/WASH', count: supsList.length }
     ];
 
-    // Conteo en vivo de aprendizajes seleccionados por área
+    // Conteo en vivo de aprendizajes seleccionados por área (considerando selecciones explícitas o premarcado del periodo)
     var countsByArea = { lenguaje: 0, matematicas: 0, sociales: 0, naturales: 0, socioemocional: 0, supervivencia: 0 };
-    Object.keys(userSelection).forEach(function(k) {
-      if (userSelection[k]) {
-        var prefix = k.split('_')[0];
-        if (countsByArea[prefix] !== undefined) countsByArea[prefix]++;
-      }
+    areas.forEach(function(a) {
+      var raw = [];
+      if (a.key === 'socioemocional') raw = habsList || [];
+      else if (a.key === 'supervivencia') raw = supsList || [];
+      else raw = (cicloData && cicloData[a.key]) || [];
+
+      raw.forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, a.key, idx, raw.length);
+        if (parsed) {
+          var st = self.getItemState(parsed, d, userStates);
+          var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+          if (sel) {
+            countsByArea[a.key]++;
+          }
+        }
+      });
     });
     var totalSelected = Object.keys(countsByArea).reduce(function(acc, k) { return acc + countsByArea[k]; }, 0);
+
 
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
     var isAcademicArea = (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia');
@@ -7703,7 +7782,6 @@ var ModuloC = {
     };
 
     var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
-    var hasAnyManual = false;
 
     areas.forEach(function(aKey) {
       var rawList = [];
@@ -7711,20 +7789,33 @@ var ModuloC = {
       else if (aKey === 'supervivencia') rawList = supsList || [];
       else rawList = (cicloData && cicloData[aKey]) || [];
 
+      var isAcademic = (aKey !== 'socioemocional' && aKey !== 'supervivencia');
+
       rawList.forEach(function(item, idx) {
         var parsed = (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') 
           ? ModuloB.getItemFields(item, aKey, idx, rawList.length)
           : { id: aKey + '_' + idx, dbaCode: 'DBA', dbaDesc: '', didactica: 'Taller situado' };
 
-        if (userSelection[parsed.id] === true) {
-          hasAnyManual = true;
-          basket[aKey].push(parsed);
+        if (parsed) {
+          var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
+            ? ModuloB.getItemState(parsed, d, userStates) 
+            : 'pendiente';
+          var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
+            ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
+            : (userSelection[parsed.id] === true);
+
+          if (isSel) {
+            basket[aKey].push(parsed);
+          }
         }
       });
     });
 
-    // Si el docente no ha seleccionado manualmente aún en Módulo B, generar una canasta recomendada inteligente
-    if (!hasAnyManual) {
+    var totalItemsInBasket = Object.keys(basket).reduce(function(acc, k) { return acc + basket[k].length; }, 0);
+
+    // Salvaguarda: si por algún motivo extremo la canasta queda vacía, asegurar al menos 1 ítem nuclear por área
+    if (totalItemsInBasket === 0) {
+
       var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
       
       // Socioemocional
@@ -7888,16 +7979,33 @@ var ModuloC = {
 
           var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
+          // Articulación relacional con Barreras para el Aprendizaje y la Participación (BAP)
+          var barrerasAlertHTML = '';
+          if (d.barreras) {
+            var activeBAP = [];
+            Object.keys(d.barreras).forEach(function(bId) {
+              var lvl = d.barreras[bId];
+              if (lvl === 'Media' || lvl === 'Alta') {
+                activeBAP.push(bId + ' (' + lvl + ')');
+              }
+            });
+            if (activeBAP.length > 0) {
+              barrerasAlertHTML = '<span style="color:#c2410c; font-size:0.8rem; display:block; margin-top:3px;">🧩 <strong>Ajuste Razonable ante Barreras:</strong> Flexibilizar tiempos y diversificar formatos por ' + activeBAP.slice(0, 2).join(', ') + '.</span>';
+            }
+          }
+
           tarjetaHTML = 
             '<div style="line-height:1.45;">' +
               '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
               '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
               '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ' (' + (parsedItem.periodo || 'Plan Adaptado') + '):</strong> ' + (parsedItem.subproceso ? (parsedItem.subproceso + ' - ') : '') + parsedItem.dbaDesc + '</span><br>' +
               '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+              barrerasAlertHTML +
               '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
             '</div>';
 
           tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + amenazasLabel + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.dbaDesc + ' | ' + parsedItem.didactica;
+
         }
 
         semanas.push({

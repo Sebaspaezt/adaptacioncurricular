@@ -36,7 +36,6 @@ var ModuloC = {
     };
 
     var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
-    var hasAnyManual = false;
 
     areas.forEach(function(aKey) {
       var rawList = [];
@@ -44,20 +43,33 @@ var ModuloC = {
       else if (aKey === 'supervivencia') rawList = supsList || [];
       else rawList = (cicloData && cicloData[aKey]) || [];
 
+      var isAcademic = (aKey !== 'socioemocional' && aKey !== 'supervivencia');
+
       rawList.forEach(function(item, idx) {
         var parsed = (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') 
           ? ModuloB.getItemFields(item, aKey, idx, rawList.length)
           : { id: aKey + '_' + idx, dbaCode: 'DBA', dbaDesc: '', didactica: 'Taller situado' };
 
-        if (userSelection[parsed.id] === true) {
-          hasAnyManual = true;
-          basket[aKey].push(parsed);
+        if (parsed) {
+          var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
+            ? ModuloB.getItemState(parsed, d, userStates) 
+            : 'pendiente';
+          var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
+            ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
+            : (userSelection[parsed.id] === true);
+
+          if (isSel) {
+            basket[aKey].push(parsed);
+          }
         }
       });
     });
 
-    // Si el docente no ha seleccionado manualmente aún en Módulo B, generar una canasta recomendada inteligente
-    if (!hasAnyManual) {
+    var totalItemsInBasket = Object.keys(basket).reduce(function(acc, k) { return acc + basket[k].length; }, 0);
+
+    // Salvaguarda: si por algún motivo extremo la canasta queda vacía, asegurar al menos 1 ítem nuclear por área
+    if (totalItemsInBasket === 0) {
+
       var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
       
       // Socioemocional
@@ -221,16 +233,33 @@ var ModuloC = {
 
           var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
+          // Articulación relacional con Barreras para el Aprendizaje y la Participación (BAP)
+          var barrerasAlertHTML = '';
+          if (d.barreras) {
+            var activeBAP = [];
+            Object.keys(d.barreras).forEach(function(bId) {
+              var lvl = d.barreras[bId];
+              if (lvl === 'Media' || lvl === 'Alta') {
+                activeBAP.push(bId + ' (' + lvl + ')');
+              }
+            });
+            if (activeBAP.length > 0) {
+              barrerasAlertHTML = '<span style="color:#c2410c; font-size:0.8rem; display:block; margin-top:3px;">🧩 <strong>Ajuste Razonable ante Barreras:</strong> Flexibilizar tiempos y diversificar formatos por ' + activeBAP.slice(0, 2).join(', ') + '.</span>';
+            }
+          }
+
           tarjetaHTML = 
             '<div style="line-height:1.45;">' +
               '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
               '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
               '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ' (' + (parsedItem.periodo || 'Plan Adaptado') + '):</strong> ' + (parsedItem.subproceso ? (parsedItem.subproceso + ' - ') : '') + parsedItem.dbaDesc + '</span><br>' +
               '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+              barrerasAlertHTML +
               '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
             '</div>';
 
           tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + amenazasLabel + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.dbaDesc + ' | ' + parsedItem.didactica;
+
         }
 
         semanas.push({

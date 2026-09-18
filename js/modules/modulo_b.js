@@ -128,13 +128,29 @@ var ModuloB = {
     return 'pendiente';
   },
 
-  isItemSelectedForPlan: function(item, userSelection, autoRec) {
+  isItemSelectedForPlan: function(item, userSelection, state, isAcademic, d) {
     if (userSelection && typeof userSelection[item.id] !== 'undefined') {
       return Boolean(userSelection[item.id]);
     }
-    // Si no hay selección manual, usar la recomendación inicial
-    return Boolean(autoRec && autoRec[item.id]);
+    // Si no hay intervención manual previa:
+    // 1. Si el ítem ya fue abordado en periodos previos, NO se premarca para el plan (queda como abordado/excluido a menos que se active repaso)
+    if (state === 'abordado') {
+      return false;
+    }
+    // 2. En áreas académicas, premarcar los aprendizajes correspondientes al periodo en curso o sugeridos
+    if (isAcademic) {
+      var currentPNum = 1;
+      if (d && d.periodoEnCurso) {
+        var match = d.periodoEnCurso.match(/\d+/);
+        if (match) currentPNum = parseInt(match[0], 10);
+      }
+      // Se premarcan los del periodo lectivo en que ocurrió la emergencia
+      return item.periodoNum === currentPNum;
+    }
+    // 3. En áreas transversales (Socioemocional / Supervivencia), premarcar por defecto los prioritarios de contención
+    return true;
   },
+
 
   buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList, d, userStates, userSelection) {
     var self = this;
@@ -185,6 +201,18 @@ var ModuloB = {
       });
     }
 
+    // Extraer barreras de aprendizaje críticas para orientar didácticas en Módulo B
+    var activeBarriersList = [];
+    if (d && d.barreras) {
+      Object.keys(d.barreras).forEach(function(bKey) {
+        var lvl = d.barreras[bKey];
+        if (lvl === 'Media' || lvl === 'Alta') {
+          activeBarriersList.push(bKey);
+        }
+      });
+    }
+
+
     var th0 = 'Plan / Estado';
     var th1 = 'Factor / Eje & Periodo';
     var th2 = 'DBA / Aprendizaje Esencial';
@@ -216,11 +244,12 @@ var ModuloB = {
       '<tbody>' +
         validItems.map(function(item) {
           var state = self.getItemState(item, d, userStates);
-          var isChecked = self.isItemSelectedForPlan(item, userSelection);
+          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, (!isSocio && !isSuperv), d);
 
           var rowClass = 'row-pending';
           if (state === 'abordado') rowClass = 'row-addressed';
           else if (state === 'aplazado') rowClass = 'row-postponed';
+
 
           var badgeBg = '#e0f2fe';
           var badgeColor = '#0369a1';
@@ -284,11 +313,13 @@ var ModuloB = {
             '</td>' +
             '<td style="padding: 10px; vertical-align: top; color: var(--primary);">' +
               '<strong>🛠️ ' + item.didactica + '</strong>' +
+              (activeBarriersList.length > 0 ? ('<div style="font-size:0.75rem; color:#9a3412; background:#ffedd5; padding:3px 6px; border-radius:4px; margin-top:4px;"><strong>🧩 Ajuste por Barrera:</strong> Diversificar consignas y apoyos (' + activeBarriersList.slice(0, 2).join(', ') + ')</div>') : '') +
             '</td>' +
           '</tr>';
         }).join('') +
       '</tbody>' +
     '</table>';
+
   },
 
   renderRayuela: function() {
@@ -321,15 +352,27 @@ var ModuloB = {
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERAE/WASH', count: supsList.length }
     ];
 
-    // Conteo en vivo de aprendizajes seleccionados por área
+    // Conteo en vivo de aprendizajes seleccionados por área (considerando selecciones explícitas o premarcado del periodo)
     var countsByArea = { lenguaje: 0, matematicas: 0, sociales: 0, naturales: 0, socioemocional: 0, supervivencia: 0 };
-    Object.keys(userSelection).forEach(function(k) {
-      if (userSelection[k]) {
-        var prefix = k.split('_')[0];
-        if (countsByArea[prefix] !== undefined) countsByArea[prefix]++;
-      }
+    areas.forEach(function(a) {
+      var raw = [];
+      if (a.key === 'socioemocional') raw = habsList || [];
+      else if (a.key === 'supervivencia') raw = supsList || [];
+      else raw = (cicloData && cicloData[a.key]) || [];
+
+      raw.forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, a.key, idx, raw.length);
+        if (parsed) {
+          var st = self.getItemState(parsed, d, userStates);
+          var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+          if (sel) {
+            countsByArea[a.key]++;
+          }
+        }
+      });
     });
     var totalSelected = Object.keys(countsByArea).reduce(function(acc, k) { return acc + countsByArea[k]; }, 0);
+
 
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
     var isAcademicArea = (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia');

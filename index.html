@@ -196,12 +196,40 @@
               </div>
             </div>
 
+        <!-- 1.4. Guía para la identificación y flexibilización ante barreras de aprendizaje (BAP) -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>1.4. Guía para la identificación y flexibilización ante barreras de aprendizaje (BAP)</span>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="accordion-body" style="font-size: 0.88rem; line-height: 1.6;">
+            <p style="margin-bottom: 10px;">
+              <strong>Marco Técnico y Pedagógico:</strong> En situaciones de emergencia, las barreras no residen intrínsecamente en el estudiante, sino en las condiciones del entorno escolar, comunitario y familiar derivadas de la crisis (<em>Decreto 1421 de 2017, Diseño Universal para el Aprendizaje DUA y Normas Mínimas INEE</em>).
+            </p>
+
+            <p style="margin-bottom: 8px;"><strong>¿Cómo diligenciar la Matriz de Barreras (Punto 11)?:</strong></p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+              <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
+                <strong>⚪ Ninguna:</strong> No se evidencian impactos que impidan el desarrollo ordinario en esta dimensión.
+              </div>
+              <div style="background: #fefce8; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #eab308;">
+                <strong>🟡 Baja:</strong> Intermitencia esporádica o afectación leve que se compensa con ajustes puntuales del docente en clase.
+              </div>
+              <div style="background: #fff7ed; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #f97316;">
+                <strong>🟠 Media:</strong> Afectación significativa en varios estudiantes (duelo, pérdida parcial de materiales o dificultades de acceso) que requiere flexibilización metodológica y trabajo colaborativo.
+              </div>
+              <div style="background: #fef2f2; padding: 10px 14px; border-radius: var(--radius-sm); border-left: 3px solid #ef4444;">
+                <strong>🔴 Alta:</strong> Obstáculo crítico y generalizado (cero conectividad, desplazamiento activo, trauma psicosocial severo o destrucción de la sede). Exige priorizar contención socioemocional, tutoría focalizada y módulos impresos de autoaprendizaje.
+              </div>
+            </div>
+
             <p style="margin-bottom: 0; color: var(--primary); font-weight: 600;">
-              👉 <strong>¿Cómo seleccionar en el Panel de Diagnóstico?:</strong> Puede marcar una o varias categorías macro; el sistema consolidará dinámicamente el catálogo de amenazas específicas permitiéndole definir una <strong>Amenaza Principal</strong> y hasta dos <strong>Amenazas Secundarias / Concurrentes (Top 3)</strong>, articulando los riesgos institucionales y las rutas de protección interinstitucional según el PGIRE.
+              🔗 <strong>Articulación Relacional con Módulos B y C:</strong> Al marcar barreras en nivel <em>Medio o Alto</em>, la herramienta prioriza automáticamente en la <strong>Rayuela Curricular (Módulo B)</strong> las didácticas de apoyo (habilidades socioemocionales de contención, protocolos WASH y guías autónomas sin conectividad), e integra en las tarjetas del <strong>Monitoreo Semanal (Módulo C)</strong> alertas pedagógicas para que el docente implemente ajustes razonables sin sobrecargar al estudiante.
             </p>
           </div>
         </div>
       </div>
+
 
       <!-- 2. Panel de Control Paramétrico y Diagnóstico Integrado -->
       <div class="card-elite">
@@ -346,7 +374,7 @@
               </div>
             </div>
 
-            <!-- NUEVA SECCIÓN: MATRIZ DE BARRERAS DE APRENDIZAJE Y PARTICIPACIÓN -->
+            <!-- SECCIÓN: MATRIZ DE BARRERAS DE APRENDIZAJE Y PARTICIPACIÓN -->
             <div class="form-group" style="grid-column: span 2; margin-top: 14px; border-top: 2px dashed var(--border-medium); padding-top: 18px;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                 <label class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0;">
@@ -354,13 +382,21 @@
                 </label>
                 <span class="badge-pill badge-etapa2">Emergencia ➔ Barreras ➔ Necesidades ➔ Flexibilización</span>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-                Valore el nivel de afectación en su grupo de estudiantes (<em>Baja, Media o Alta</em>) para modular la respuesta curricular y de bienestar:
-              </p>
+              
+              <div style="background: var(--surface-hover); border-left: 4px solid var(--primary); padding: 10px 14px; border-radius: 4px; margin-bottom: 12px; font-size: 0.84rem; line-height: 1.5;">
+                <strong>📋 Instrucciones de Diligenciamiento:</strong>
+                Marque el nivel de impacto observado en su grupo de NNA para cada tipología:
+                <br>• <strong>Ninguna:</strong> Condición habitual sin afectación por la emergencia.
+                <br>• <strong>Baja:</strong> Afectación leve compensable con mediación rutinaria en aula.
+                <br>• <strong>Media:</strong> Dificultad recurrente que requiere proyectos colaborativos y flexibilización de tiempos.
+                <br>• <strong>Alta:</strong> Bloqueo crítico que exige priorizar contención emocional, guías impresas o tutoría individualizada.
+                <br><em>Nota: Los niveles seleccionados alimentan automáticamente las priorizaciones del Módulo B y generan alertas de ajuste en el Monitoreo Semanal (Módulo C).</em>
+              </div>
               
               <div id="container-barreras-aprendizaje" class="barriers-grid">
                 <!-- Se inyectan dinámicamente las 12 barreras desde modulo_a.js -->
               </div>
+
 
               <div style="margin-top: 14px;">
                 <label class="form-label" style="font-weight: 600;">Descripción cualitativa del docente sobre las barreras del grupo:</label>
