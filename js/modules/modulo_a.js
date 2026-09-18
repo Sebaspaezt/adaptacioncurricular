@@ -111,41 +111,43 @@ var ModuloA = {
     var currentS1 = selSec1 ? selSec1.value : '';
     var currentS2 = selSec2 ? selSec2.value : '';
 
-    if (selPrincipal) {
-      selPrincipal.innerHTML = '<option value="">-- Seleccione Amenaza Principal --</option>';
+    function buildOptionsHtml(defaultLabel) {
+      var html = '<option value="">' + defaultLabel + '</option>';
+      var groups = {};
       filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selPrincipal.appendChild(opt);
+        var cat = item.categoria || 'PGIRE';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(item);
       });
+
+      Object.keys(groups).forEach(function(cat) {
+        html += '<optgroup label="' + cat + '">';
+        groups[cat].forEach(function(it) {
+          html += '<option value="' + it.amenaza + '">' + it.amenaza + '</option>';
+        });
+        html += '</optgroup>';
+      });
+      return html;
+    }
+
+    if (selPrincipal) {
+      selPrincipal.innerHTML = buildOptionsHtml('-- Seleccione Amenaza Principal --');
       if (currentP) selPrincipal.value = currentP;
     }
 
     if (selSec1) {
-      selSec1.innerHTML = '<option value="">-- Ninguna / No Concurrente --</option>';
-      filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selSec1.appendChild(opt);
-      });
+      selSec1.innerHTML = buildOptionsHtml('-- Ninguna / Opcional --');
       if (currentS1) selSec1.value = currentS1;
     }
 
     if (selSec2) {
-      selSec2.innerHTML = '<option value="">-- Ninguna / No Concurrente --</option>';
-      filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selSec2.appendChild(opt);
-      });
+      selSec2.innerHTML = buildOptionsHtml('-- Ninguna / Opcional --');
       if (currentS2) selSec2.value = currentS2;
     }
 
     this.updateConsolidatedThreatDetails();
   },
+
 
   updateConsolidatedThreatDetails: function() {
     var selPrincipal = document.getElementById('select-amenaza-principal');
@@ -417,7 +419,9 @@ var ModuloA = {
     if (selEtapa) {
       selEtapa.addEventListener('change', function() {
         var recBloom = self.calculateBloom(selEtapa.value);
-        if (selBloom) selBloom.value = recBloom;
+        if (selBloom) {
+          selBloom.value = recBloom;
+        }
         if (inputBloomHidden) inputBloomHidden.value = recBloom;
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
@@ -429,6 +433,7 @@ var ModuloA = {
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
+
 
     categoryCheckboxes.forEach(function(cb) {
       cb.addEventListener('change', function() {

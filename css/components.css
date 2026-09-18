@@ -60,6 +60,11 @@ body {
   width: auto;
 }
 
+.brand-titles-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .brand-title {
   font-size: 1.15rem;
   font-weight: 800;
@@ -68,14 +73,14 @@ body {
   letter-spacing: -0.01em;
 }
 
-.brand-entity {
+.brand-subtitle-gov {
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 2px;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
 }
+
 
 
 .user-status-bar {
@@ -595,30 +600,49 @@ body {
   font-weight: 700;
 }
 
-/* Multirriesgo Top 3 */
+/* Multirriesgo Top 3 Armonioso */
 .threat-top3-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  margin-top: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .threat-top3-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .threat-top3-card {
-  background: #f8fafc;
+  background: var(--surface-white);
   border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-  padding: 12px;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.threat-top3-card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .threat-top3-badge {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
 
 /* Periodos y Estados en Rayuela Curricular */
 .periodos-bar {

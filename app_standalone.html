@@ -125,6 +125,11 @@ body {
   width: auto;
 }
 
+.brand-titles-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .brand-title {
   font-size: 1.15rem;
   font-weight: 800;
@@ -133,14 +138,14 @@ body {
   letter-spacing: -0.01em;
 }
 
-.brand-entity {
+.brand-subtitle-gov {
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 2px;
+  letter-spacing: 0.02em;
+  margin-top: 1px;
 }
+
 
 
 .user-status-bar {
@@ -660,30 +665,49 @@ body {
   font-weight: 700;
 }
 
-/* Multirriesgo Top 3 */
+/* Multirriesgo Top 3 Armonioso */
 .threat-top3-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  margin-top: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .threat-top3-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .threat-top3-card {
-  background: #f8fafc;
+  background: var(--surface-white);
   border: 1px solid var(--border-medium);
-  border-radius: var(--radius-sm);
-  padding: 12px;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.threat-top3-card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .threat-top3-badge {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
 
 /* Periodos y Estados en Rayuela Curricular */
 .periodos-bar {
@@ -903,10 +927,12 @@ body {
           <img src="assets/logo_icono_educacion.png" alt="Icono Educación" class="brand-icon-edu">
         </div>
       </div>
-      <div>
+      <div class="brand-titles-wrapper">
         <h1 class="brand-title">Herramienta de adaptación y flexibilización curricular en emergencias</h1>
+        <span class="brand-subtitle-gov">Secretaría de Educación Departamental | Gobernación de Norte de Santander</span>
       </div>
     </div>
+
 
 
     <div class="user-status-bar">
@@ -1162,18 +1188,19 @@ body {
                 <div class="threat-top3-card" style="border-top: 4px solid #d97706;">
                   <span class="threat-top3-badge" style="background:#fef3c7; color:#92400e;">⚠️ 2. Amenaza Secundaria / Concurrente</span>
                   <select id="select-amenaza-secundaria-1" class="select-elite">
-                    <option value="">-- Ninguna / No Concurrente --</option>
+                    <option value="">-- Ninguna / Opcional --</option>
                   </select>
                 </div>
-                <div class="threat-top3-card" style="border-top: 4px solid #2563eb;">
+                <div class="threat-top3-card" style="border-top: 4px solid #0284c7;">
                   <span class="threat-top3-badge" style="background:#e0f2fe; color:#0369a1;">⚠️ 3. Amenaza Terciaria / Concurrente</span>
                   <select id="select-amenaza-secundaria-2" class="select-elite">
-                    <option value="">-- Ninguna / No Concurrente --</option>
+                    <option value="">-- Ninguna / Opcional --</option>
                   </select>
                 </div>
               </div>
               <input type="hidden" id="select-amenaza" value="Inundación">
             </div>
+
 
             <div class="form-group" style="grid-column: span 2;">
               <label class="form-label">5. Ejemplos Contextualizados en la Institución Educativa (Consolidado Top 3):</label>
@@ -6539,41 +6566,43 @@ var ModuloA = {
     var currentS1 = selSec1 ? selSec1.value : '';
     var currentS2 = selSec2 ? selSec2.value : '';
 
-    if (selPrincipal) {
-      selPrincipal.innerHTML = '<option value="">-- Seleccione Amenaza Principal --</option>';
+    function buildOptionsHtml(defaultLabel) {
+      var html = '<option value="">' + defaultLabel + '</option>';
+      var groups = {};
       filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selPrincipal.appendChild(opt);
+        var cat = item.categoria || 'PGIRE';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(item);
       });
+
+      Object.keys(groups).forEach(function(cat) {
+        html += '<optgroup label="' + cat + '">';
+        groups[cat].forEach(function(it) {
+          html += '<option value="' + it.amenaza + '">' + it.amenaza + '</option>';
+        });
+        html += '</optgroup>';
+      });
+      return html;
+    }
+
+    if (selPrincipal) {
+      selPrincipal.innerHTML = buildOptionsHtml('-- Seleccione Amenaza Principal --');
       if (currentP) selPrincipal.value = currentP;
     }
 
     if (selSec1) {
-      selSec1.innerHTML = '<option value="">-- Ninguna / No Concurrente --</option>';
-      filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selSec1.appendChild(opt);
-      });
+      selSec1.innerHTML = buildOptionsHtml('-- Ninguna / Opcional --');
       if (currentS1) selSec1.value = currentS1;
     }
 
     if (selSec2) {
-      selSec2.innerHTML = '<option value="">-- Ninguna / No Concurrente --</option>';
-      filtradas.forEach(function(item) {
-        var opt = document.createElement('option');
-        opt.value = item.amenaza;
-        opt.textContent = '[' + (item.categoria || 'PGIRE') + '] ' + item.amenaza;
-        selSec2.appendChild(opt);
-      });
+      selSec2.innerHTML = buildOptionsHtml('-- Ninguna / Opcional --');
       if (currentS2) selSec2.value = currentS2;
     }
 
     this.updateConsolidatedThreatDetails();
   },
+
 
   updateConsolidatedThreatDetails: function() {
     var selPrincipal = document.getElementById('select-amenaza-principal');
@@ -6845,7 +6874,9 @@ var ModuloA = {
     if (selEtapa) {
       selEtapa.addEventListener('change', function() {
         var recBloom = self.calculateBloom(selEtapa.value);
-        if (selBloom) selBloom.value = recBloom;
+        if (selBloom) {
+          selBloom.value = recBloom;
+        }
         if (inputBloomHidden) inputBloomHidden.value = recBloom;
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
@@ -6857,6 +6888,7 @@ var ModuloA = {
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
+
 
     categoryCheckboxes.forEach(function(cb) {
       cb.addEventListener('change', function() {
