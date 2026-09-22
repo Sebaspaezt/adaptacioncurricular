@@ -114,7 +114,7 @@ def run_synchronization():
     print('\n[5/6] Ejecutando suite de verificacion cruzada...')
     test_script = os.path.join(p1_dir, 'scripts', 'test_diagnostic_filter_and_monitoring.py')
     if os.path.exists(test_script):
-        res_test = subprocess.run([sys.executable, test_script], capture_output=True, text=True)
+        res_test = subprocess.run([sys.executable, test_script], cwd=p1_dir, capture_output=True, text=True)
         if res_test.returncode == 0:
             print('    [OK] Pruebas combinatorias de diagnostico y monitoreo: 100% PASADAS.')
         else:
