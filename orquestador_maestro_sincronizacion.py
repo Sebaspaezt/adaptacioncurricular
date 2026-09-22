@@ -31,7 +31,8 @@ def run_synchronization():
     print('=' * 80)
     print('  SINCRONIZACION DE AJUSTES MAESTROS: PROYECTO 1 (EXCEL) Y PROYECTO 2 (WEB)')
     print('=' * 80)
-    print(f'Fecha y hora: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f'Fecha y hora: {now_str}')
     
     p1_dir, p2_dir = find_paths()
     print(f'[*] Directorio Proyecto 1 (Excel): {p1_dir}')
