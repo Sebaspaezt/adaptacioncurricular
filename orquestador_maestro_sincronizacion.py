@@ -94,17 +94,17 @@ def run_synchronization():
     standalone_script = os.path.join(p1_dir, 'scripts', 'create_standalone_app.py')
     
     if os.path.exists(build_script):
-        subprocess.run([sys.executable, build_script], capture_output=True, text=True)
+        subprocess.run([sys.executable, build_script], capture_output=True, text=True, encoding='utf-8', errors='replace')
         print('    [OK] Modulos web e index.html compilados.')
     if os.path.exists(standalone_script):
-        subprocess.run([sys.executable, standalone_script], capture_output=True, text=True)
+        subprocess.run([sys.executable, standalone_script], capture_output=True, text=True, encoding='utf-8', errors='replace')
         print('    [OK] app_standalone.html (version autonoma offline) compilada.')
         
     # 4. Actualizar libros Excel de Proyecto 1
     print('\n[4/6] Verificando y sincronizando Libros Excel (Ciclos I al V)...')
     sync_excel_script = os.path.join(p1_dir, 'scripts', 'standardize_all_vistas_and_monitoreo_all_ciclos.py')
     if os.path.exists(sync_excel_script):
-        res = subprocess.run([sys.executable, sync_excel_script], capture_output=True, text=True)
+        res = subprocess.run([sys.executable, sync_excel_script], capture_output=True, text=True, encoding='utf-8', errors='replace')
         if res.returncode == 0:
             print('    [OK] Hojas de Excel estandarizadas con exito.')
         else:
@@ -114,7 +114,7 @@ def run_synchronization():
     print('\n[5/6] Ejecutando suite de verificacion cruzada...')
     test_script = os.path.join(p1_dir, 'scripts', 'test_diagnostic_filter_and_monitoring.py')
     if os.path.exists(test_script):
-        res_test = subprocess.run([sys.executable, test_script], cwd=p1_dir, capture_output=True, text=True)
+        res_test = subprocess.run([sys.executable, test_script], cwd=p1_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
         if res_test.returncode == 0:
             print('    [OK] Pruebas combinatorias de diagnostico y monitoreo: 100% PASADAS.')
         else:
@@ -127,16 +127,16 @@ def run_synchronization():
         git_bin = 'git'
     try:
         # Añadir cambios
-        subprocess.run([git_bin, 'add', '.'], cwd=p2_dir, capture_output=True, text=True)
+        subprocess.run([git_bin, 'add', '.'], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
         # Commit con timestamp
         commit_msg = f"Actualización automática sincronizada: {now_str} (v{ver})"
-        commit_res = subprocess.run([git_bin, 'commit', '-m', commit_msg], cwd=p2_dir, capture_output=True, text=True)
+        commit_res = subprocess.run([git_bin, 'commit', '-m', commit_msg], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
         if "nothing to commit" in commit_res.stdout:
             print('    [OK] No hay cambios pendientes por subir a GitHub.')
         else:
             print('    [OK] Commit creado localmente en Proyecto 2.')
             # Push a GitHub
-            push_res = subprocess.run([git_bin, 'push', 'origin', 'main'], cwd=p2_dir, capture_output=True, text=True)
+            push_res = subprocess.run([git_bin, 'push', 'origin', 'main'], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
             if push_res.returncode == 0:
                 print('    [OK] ¡Despliegue exitoso en GitHub! Web actualizada en vivo.')
             else:
