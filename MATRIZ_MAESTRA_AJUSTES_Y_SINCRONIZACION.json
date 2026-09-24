@@ -19,6 +19,18 @@
   },
   "registro_ajustes": [
     {
+      "id": "AJUSTE-2026-004",
+      "fecha": "2026-09-24",
+      "autor": "Equipo Curricular NRC / AGY",
+      "componente": "PROYECTO_2_WEB_MODULO_C",
+      "area_o_modulo": "Módulo C: Monitoreo Semanal por Etapas",
+      "tipo_ajuste": "TRAZABILIDAD_MULTI_ACCION_KPIS_CALENDARIO_Y_MOTOR_TRANSICION_ETAPAS",
+      "descripcion": "Corrección e integración del monitoreo granular por procesos: cuando una misma semana integra 2 o más procesos (ej. Socioemocional + ERAE/WASH en Etapa 1 o DBA Principal + Complementaria en semanas académicas), cada acción cuenta con su propio selector de estado y bitácora de evidencias independiente. Incorporación de cálculo dinámico de procesos pendientes vs. logrados y semanas restantes en el calendario escolar oficial MEN (40 semanas, Decreto 0277 de 2025). Implementación del Motor de Transición Curricular por Etapas (Etapa 1 -> Etapa 2 -> Etapa 3) con recomendación contextualizada y botón de promoción automática que actualiza el desafío cognitivo Bloom y sincroniza los Módulos A, B y C.",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
+    {
       "id": "AJUSTE-2026-003",
       "fecha": "2026-09-18",
       "autor": "Gobernación de Norte de Santander / AGY",

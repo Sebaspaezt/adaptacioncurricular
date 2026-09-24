@@ -6,9 +6,9 @@
   <title>Herramienta de adaptación y flexibilización curricular en emergencias</title>
   
   <!-- Estilos Visuales Elite Swiss-Fine -->
-  <link rel="stylesheet" href="css/variables.css?v=15">
-  <link rel="stylesheet" href="css/components.css?v=15">
-  <link rel="stylesheet" href="css/print.css?v=15">
+  <link rel="stylesheet" href="css/variables.css?v=16">
+  <link rel="stylesheet" href="css/components.css?v=16">
+  <link rel="stylesheet" href="css/print.css?v=16">
 </head>
 <body>
 
@@ -7103,6 +7103,15 @@ var ModuloC = {
       var accionesPorSemana = Math.max(1, Math.round(decretoInfo.horasSemanales / duracionAccionHrs));
       var horasEfectivasPorAccion = (decretoInfo.horasSemanales / accionesPorSemana);
 
+      // Conteo de semanas escolares colombianas según MEN (Decreto 0277 / Calendario Oficial de 40 semanas)
+      var dInicioEmergencia = fechaBase;
+      var anoEmergencia = dInicioEmergencia.getFullYear() || 2026;
+      var inicioAnoClases = new Date(anoEmergencia, 0, 20); // 20 de enero según calendario MEN
+      var msTranscurridos = Math.max(0, dInicioEmergencia.getTime() - inicioAnoClases.getTime());
+      var semanaEscolarActual = Math.max(1, Math.min(40, Math.ceil(msTranscurridos / (1000 * 60 * 60 * 24 * 7))));
+      var totalSemanasCalendarioMEN = 40;
+      var semanasRestantesCalendario = Math.max(1, totalSemanasCalendarioMEN - semanaEscolarActual);
+
       // Generar 16 semanas articuladas con la canasta, el enfoque INEE y el Decreto 0277 de 2025
       for (var i = 1; i <= 16; i++) {
         var fechaSem = new Date(fechaBase.getTime());
@@ -7114,6 +7123,7 @@ var ModuloC = {
         var focoSemana = '';
         var areaKey = '';
         var desgloseHorarioHTML = '';
+        var accionesSemana = []; // Array estructurado de procesos/acciones para esta semana
 
         if (isEtapa1 && i <= 2) {
           // Semanas 1 y 2 de Etapa 1: Enfoque INEE en Contención Socioemocional y Supervivencia (ERAE/WASH)
@@ -7132,9 +7142,28 @@ var ModuloC = {
             didactica: 'Mapeo de riesgos en el aula y rutas seguras'
           };
 
-          // Distribución semanal de horas según Decreto 0277/2025 para Etapa 1
           var hrsContencion = isPrimaria ? 15 : 18;
           var hrsProteccion = isPrimaria ? 10 : 12;
+
+          accionesSemana.push({
+            id: 'acc_1',
+            tipo: 'socioemocional',
+            etiqueta: '🌱 Acción A (Socioemocional)',
+            codigo: socioItem.dbaCode || 'SOCIOEMOCIONAL',
+            descripcion: socioItem.dbaDesc,
+            horas: hrsContencion,
+            didactica: socioItem.didactica || 'Círculo de la palabra y acogida emocional'
+          });
+
+          accionesSemana.push({
+            id: 'acc_2',
+            tipo: 'supervivencia',
+            etiqueta: '🛡️ Acción B (ERAE / WASH)',
+            codigo: supItem.dbaCode || 'ERAE / WASH',
+            descripcion: supItem.dbaDesc,
+            horas: hrsProteccion,
+            didactica: supItem.didactica || 'Mapeo de riesgos en el aula y rutas seguras'
+          });
 
           var badgeAccionesEtapa1 = 
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
@@ -7149,8 +7178,8 @@ var ModuloC = {
           desgloseHorarioHTML = 
             '<div style="margin-top:6px; background:#fff1f2; border:1px solid #fecdd3; border-radius:4px; padding:6px 10px; font-size:0.78rem; color:#881337;">' +
               '⏱️ <strong>Distribución Horaria Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
-              '• <strong>Acción 1 (' + hrsContencion + 'h):</strong> Contención socioemocional, primeros auxilios psicológicos y círculo de la palabra.<br>' +
-              '• <strong>Acción 2 (' + hrsProteccion + 'h):</strong> Taller vivencial de autoprotección comunitaria, mapeo de riesgos y protocolos ERAE/WASH.' +
+              '• <strong>Acción A (' + hrsContencion + 'h):</strong> Contención socioemocional, primeros auxilios psicológicos y círculo de la palabra.<br>' +
+              '• <strong>Acción B (' + hrsProteccion + 'h):</strong> Taller vivencial de autoprotección comunitaria, mapeo de riesgos y protocolos ERAE/WASH.' +
             '</div>';
 
           tarjetaHTML = 
@@ -7176,14 +7205,12 @@ var ModuloC = {
           areaKey = academicAreas[acaIdx % academicAreas.length];
           focoSemana = areaKey.toUpperCase();
 
-          // Determinar las acciones a integrar en esta semana según la capacidad horaria del Decreto 0277
           var areaBasket = basket[areaKey] || [];
           var primaryAction = null;
           var secondaryAction = null;
 
           if (areaBasket.length > 0) {
             primaryAction = areaBasket[Math.floor(acaIdx / academicAreas.length) % areaBasket.length];
-            // Si la capacidad es de 2 o 3 acciones y hay más ítems en la canasta (del área o de socioemocional/supervivencia)
             if (accionesPorSemana >= 2) {
               if (areaBasket.length > 1) {
                 secondaryAction = areaBasket[(Math.floor(acaIdx / academicAreas.length) + 1) % areaBasket.length];
@@ -7221,14 +7248,35 @@ var ModuloC = {
             }
           }
 
-          // Horario semanal académico adaptado según Decreto 0277 de 2025
           var hrsFocoArea = isPrimaria ? 15 : 18;
           var hrsTransversales = isPrimaria ? 10 : 12;
+
+          accionesSemana.push({
+            id: 'acc_1',
+            tipo: 'academica_principal',
+            etiqueta: '📘 Acción 1 (Principal)',
+            codigo: primaryAction.dbaCode || 'DBA Principal',
+            descripcion: (primaryAction.subproceso ? (primaryAction.subproceso + ' - ') : '') + primaryAction.dbaDesc,
+            horas: secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales,
+            didactica: primaryAction.didactica || didacticaEstrategia
+          });
+
+          if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
+            accionesSemana.push({
+              id: 'acc_2',
+              tipo: 'academica_complementaria',
+              etiqueta: '➕ Acción 2 (Complementaria)',
+              codigo: secondaryAction.dbaCode || 'Acción Transversal',
+              descripcion: secondaryAction.dbaDesc,
+              horas: hrsTransversales,
+              didactica: secondaryAction.didactica || 'Aplicación situada y colaborativa'
+            });
+          }
 
           var badgeCapacidadAcademica = 
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
               '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:0.76rem; border:1px solid #a7f3d0;">' +
-                '🎯 Capacidad Semanal: ' + accionesPorSemana + ' Acción(es) (' + decretoInfo.horasSemanales + 'h/sem)' +
+                '🎯 Capacidad Semanal: ' + accionesSemana.length + ' Acción(es) (' + decretoInfo.horasSemanales + 'h/sem)' +
               '</span>' +
               '<span style="font-size:0.75rem; color:#047857; font-weight:600;">' +
                 'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / acción (' + tipoEstrategiaLabel + ')' +
@@ -7263,8 +7311,26 @@ var ModuloC = {
               desgloseHorarioHTML +
             '</div>';
 
-          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | ' + accionesPorSemana + ' acc/sem) | ' + amenazasLabel + ' | ' + primaryAction.dbaCode + ': ' + primaryAction.dbaDesc + ' | ' + primaryAction.didactica;
+          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | ' + accionesSemana.length + ' acc/sem) | ' + amenazasLabel + ' | ' + primaryAction.dbaCode + ': ' + primaryAction.dbaDesc + ' | ' + primaryAction.didactica;
+        }
 
+        var semSaved = savedMonitoreo[i] || {};
+        var semSavedAcciones = semSaved.acciones || {};
+
+        // Normalizar estado de avance por acción
+        accionesSemana.forEach(function(acc) {
+          var accSaved = semSavedAcciones[acc.id] || {};
+          acc.avance = accSaved.avance || (semSaved.avance || '⚪ Sin iniciar');
+          acc.observaciones = accSaved.observaciones || (semSaved.observaciones || '');
+        });
+
+        // Estado general de la semana (retrocompatibilidad)
+        var semAvanceGeneral = semSaved.avance || '⚪ Sin iniciar';
+        if (accionesSemana.length > 0) {
+          var allLog = accionesSemana.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
+          var anyProc = accionesSemana.some(function(a) { return a.avance && (a.avance.indexOf('proceso') !== -1 || a.avance.indexOf('Logrado') !== -1); });
+          if (allLog) semAvanceGeneral = '🟢 Logrado';
+          else if (anyProc) semAvanceGeneral = '🟡 En proceso';
         }
 
         semanas.push({
@@ -7274,22 +7340,104 @@ var ModuloC = {
           foco: focoSemana,
           areaNombre: focoSemana,
           horasSemana: decretoInfo.horasSemanales,
-          accionesCapacidad: accionesPorSemana,
+          accionesCapacidad: accionesSemana.length,
+          acciones: accionesSemana,
           duracionPromedioAccion: horasEfectivasPorAccion.toFixed(1),
           tarjeta: tarjetaHTML,
           tarjetaPlana: tarjetaPlana,
-          avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
-          observaciones: savedMonitoreo[i] ? savedMonitoreo[i].observaciones : ''
+          avance: semAvanceGeneral,
+          observaciones: semSaved.observaciones || ''
         });
       }
 
-      // Conteo de KPI
-      var monValues = Object.keys(savedMonitoreo).map(function(k) { return savedMonitoreo[k]; });
-      var logrados = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
-      var enProceso = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
-      var pctAvance = Math.round((logrados / semanas.length) * 100);
+      // ==========================================
+      // CÁLCULO DE KPIS Y PROCESOS PENDIENTES MEN
+      // ==========================================
+      var totalProcesosPlan = 0;
+      var procesosLogrados = 0;
+      var procesosEnProceso = 0;
+
+      semanas.forEach(function(s) {
+        s.acciones.forEach(function(acc) {
+          totalProcesosPlan++;
+          if (acc.avance && acc.avance.indexOf('Logrado') !== -1) {
+            procesosLogrados++;
+          } else if (acc.avance && acc.avance.indexOf('proceso') !== -1) {
+            procesosEnProceso++;
+          }
+        });
+      });
+
+      var procesosPendientes = Math.max(0, totalProcesosPlan - procesosLogrados);
+      var pctAvanceProcesos = totalProcesosPlan > 0 ? Math.round((procesosLogrados / totalProcesosPlan) * 100) : 0;
       var totalHorasPlan = semanas.length * decretoInfo.horasSemanales;
-      var horasEjecutadas = (logrados * decretoInfo.horasSemanales) + Math.round(enProceso * (decretoInfo.horasSemanales * 0.5));
+      var horasEjecutadas = Math.round((procesosLogrados / Math.max(1, totalProcesosPlan)) * totalHorasPlan);
+
+      // =======================================================
+      // MOTOR DE TRANSICIÓN DE ETAPAS (INEE / MEN & BLOOM)
+      // =======================================================
+      // Evalúa el avance curricular y las semanas para determinar el momento exacto
+      // de pasar de Etapa 1 -> Etapa 2 -> Etapa 3 para cumplir con la malla curricular del MEN.
+      var recomendacionTransicion = null;
+
+      if (isEtapa1) {
+        // En Etapa 1: Si las semanas 1 y 2 (o al menos 2 acciones de contención y supervivencia) están logradas
+        var s1 = semanas[0] || { acciones: [] };
+        var s2 = semanas[1] || { acciones: [] };
+        var accionesChoqueLogradas = s1.acciones.concat(s2.acciones).filter(function(a) {
+          return a.avance && a.avance.indexOf('Logrado') !== -1;
+        }).length;
+
+        var choqueCompleto = (accionesChoqueLogradas >= 3) || (s1.acciones.every(function(a){ return a.avance && a.avance.indexOf('Logrado') !== -1; }) && s1.acciones.length > 0);
+
+        if (choqueCompleto || pctAvanceProcesos >= 20) {
+          recomendacionTransicion = {
+            etapaOrigen: d.etapa,
+            etapaDestino: 'ETAPA 2: Recuperación temprana / Lúdica',
+            nuevoBloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+            motivo: 'Se han consolidado las acciones prioritarias de contención socioemocional y autoprotección ERAE/WASH (Normas INEE). Corresponde pasar a ETAPA 2 para reactivar los proyectos integrados, la nivelación en áreas nucleares y el trabajo lúdico cooperativo.',
+            btnTexto: '🚀 Transicionar a ETAPA 2 (Recuperación Temprana)'
+          };
+        }
+      } else if (d.etapa && d.etapa.indexOf('ETAPA 2') !== -1) {
+        // En Etapa 2: Si se ha avanzado en al menos el 50% de los procesos o semanas >= 8
+        if (pctAvanceProcesos >= 50 || procesosLogrados >= 10) {
+          recomendacionTransicion = {
+            etapaOrigen: d.etapa,
+            etapaDestino: 'ETAPA 3: Educación formal adaptada / Retorno formal',
+            nuevoBloom: 'Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)',
+            motivo: 'Se ha alcanzado un progreso superior al 50% en los aprendizajes esenciales de recuperación temprana. Según la malla curricular del MEN, corresponde avanzar a ETAPA 3 para restablecer la educación formal adaptada con estándares de alta complejidad evaluativa y creación autónoma.',
+            btnTexto: '🎓 Promover a ETAPA 3 (Retorno Formal)'
+          };
+        }
+      }
+
+      var bannerTransicionHTML = '';
+      if (recomendacionTransicion) {
+        bannerTransicionHTML = 
+          '<div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);">' +
+            '<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">' +
+              '<div style="flex:1; min-width:280px;">' +
+                '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
+                  '<span style="font-size:1.25rem;">✨</span>' +
+                  '<strong style="color:#1d4ed8; font-size:1rem;">Momento Óptimo de Transición Curricular MEN Identificado</strong>' +
+                  '<span class="badge-pill" style="background:#2563eb; color:white; font-size:0.75rem; font-weight:700;">Hito de Flexibilización</span>' +
+                '</div>' +
+                '<p style="font-size:0.86rem; color:#1e3a8a; line-height:1.5; margin:0;">' +
+                  recomendacionTransicion.motivo +
+                '</p>' +
+                '<div style="font-size:0.78rem; color:#3b82f6; margin-top:6px; font-weight:600;">' +
+                  'Siguiente Etapa Sugerida: <strong>' + recomendacionTransicion.etapaDestino + '</strong> | Nuevo Nivel Bloom: <strong>' + recomendacionTransicion.nuevoBloom + '</strong>' +
+                '</div>' +
+              '</div>' +
+              '<div style="align-self:center;">' +
+                '<button id="btn-promover-etapa" class="btn-elite" style="background:#1d4ed8; color:white; font-weight:700; padding:10px 18px; border-radius:8px; box-shadow:0 2px 6px rgba(29, 78, 216, 0.3);">' +
+                  recomendacionTransicion.btnTexto +
+                '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }
 
       var html = 
         '<div class="card-elite">' +
@@ -7311,6 +7459,8 @@ var ModuloC = {
             '</div>' +
           '</div>' +
 
+          (bannerTransicionHTML || '') +
+
           '<!-- Banner de Cumplimiento Decreto 0277 de 2025 e INEE -->' +
           '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.6;">' +
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">' +
@@ -7327,25 +7477,25 @@ var ModuloC = {
           '</div>' +
 
           '<div class="grid-4" style="margin-bottom: 24px;">' +
-            '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
-              '<div style="font-size: 0.72rem; color: #64748b; margin-top:2px;">' + horasEjecutadas + 'h de ' + totalHorasPlan + 'h plan</div>' +
+            '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
+              '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso de Procesos</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvanceProcesos + '%</div>' +
+              '<div style="font-size: 0.72rem; color: #64748b; margin-top:2px;">' + procesosLogrados + ' de ' + totalProcesosPlan + ' procesos logrados</div>' +
             '</div>' +
-            '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Capacidad Semanal</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + (isEtapa1 ? '2' : accionesPorSemana) + ' acc/sem</div>' +
-              '<div style="font-size: 0.72rem; color: #047857; margin-top:2px;">~' + (isEtapa1 ? (decretoInfo.horasSemanales / 2).toFixed(1) : horasEfectivasPorAccion.toFixed(1)) + 'h / acción</div>' +
+            '<div style="background: #fff7ed; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #ffedd5;">' +
+              '<div style="font-size: 0.8rem; color: #c2410c;">⏳ Procesos por Realizar</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: #ea580c;">' + procesosPendientes + ' pend.</div>' +
+              '<div style="font-size: 0.72rem; color: #9a3412; margin-top:2px;">' + procesosEnProceso + ' en proceso de aula</div>' +
             '</div>' +
-            '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 Horas Semanales</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + decretoInfo.horasSemanales + ' h</div>' +
-              '<div style="font-size: 0.72rem; color: #b45309; margin-top:2px;">Dec. 0277 (' + decretoInfo.horasDiarias + 'h/día)</div>' +
+            '<div style="background: #eff6ff; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #dbeafe;">' +
+              '<div style="font-size: 0.8rem; color: #1e40af;">📅 Semanas Calendario MEN</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: #2563eb;">' + semanasRestantesCalendario + ' sem.</div>' +
+              '<div style="font-size: 0.72rem; color: #1d4ed8; margin-top:2px;">Semana ' + semanaEscolarActual + ' de ' + totalSemanasCalendarioMEN + ' anuales</div>' +
             '</div>' +
-            '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
+            '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
               '<div style="font-size: 0.8rem; color: var(--color-blue);">Meta Semestral (16 sem)</div>' +
               '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + totalHorasPlan + ' h</div>' +
-              '<div style="font-size: 0.72rem; color: #0369a1; margin-top:2px;">16 sem × ' + decretoInfo.horasSemanales + 'h/sem</div>' +
+              '<div style="font-size: 0.72rem; color: #0369a1; margin-top:2px;">' + horasEjecutadas + 'h ejecutadas aprox.</div>' +
             '</div>' +
           '</div>' +
 
@@ -7357,31 +7507,56 @@ var ModuloC = {
                   '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
                   '<th style="padding: 10px; width: 130px;">Enfoque / Área</th>' +
                   '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada (Decreto 0277 de 2025)</th>' +
-                  '<th style="padding: 10px; width: 140px;">Estado de Avance</th>' +
-                  '<th style="padding: 10px; width: 220px;">Evidencias / Bitácora Docente</th>' +
+                  '<th style="padding: 10px; width: 170px;">Estado de Avance</th>' +
+                  '<th style="padding: 10px; width: 230px;">Evidencias / Bitácora Docente</th>' +
                 '</tr>' +
               '</thead>' +
               '<tbody>' +
                 semanas.map(function(s) {
+                  // Renderizar selectores individuales para cada acción si hay 2 o más procesos en la misma semana
+                  var estadosHTML = '';
+                  var bitacorasHTML = '';
+
+                  s.acciones.forEach(function(acc, idx) {
+                    var accBadgeStyle = acc.tipo.indexOf('socioemocional') !== -1 
+                      ? 'background:#fef3c7; color:#92400e; border:1px solid #fde68a;' 
+                      : (acc.tipo.indexOf('supervivencia') !== -1 
+                        ? 'background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd;' 
+                        : 'background:#f1f5f9; color:#334155; border:1px solid #cbd5e1;');
+
+                    estadosHTML += 
+                      '<div style="margin-bottom: 8px; padding: 4px; border-radius: 4px; background: rgba(0,0,0,0.01);">' +
+                        '<div style="font-size:0.74rem; font-weight:700; margin-bottom:3px; display:flex; align-items:center; gap:4px;">' +
+                          '<span class="badge-pill" style="padding:2px 6px; font-size:0.7rem; ' + accBadgeStyle + '">' + acc.etiqueta + '</span>' +
+                        '</div>' +
+                        '<select class="select-elite select-avance-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 4px 6px; width:100%;">' +
+                          '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
+                          '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
+                          '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
+                          '<option value="🔴 Postergado" ' + (acc.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
+                        '</select>' +
+                      '</div>';
+
+                    bitacorasHTML += 
+                      '<div style="margin-bottom: 8px;">' +
+                        '<div style="font-size:0.72rem; color:var(--text-muted); font-weight:600; margin-bottom:2px;">' +
+                          acc.etiqueta + ' (' + acc.horas + 'h):' +
+                        '</div>' +
+                        '<textarea class="textarea-elite input-observaciones-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%;">' + (acc.observaciones || '') + '</textarea>' +
+                      '</div>';
+                  });
+
                   return '<tr style="border-bottom: 1px solid var(--border-light);">' +
                     '<td style="padding: 10px; font-weight: 700; color: var(--primary); vertical-align: top;">' +
                       'Semana ' + s.num + '<br>' +
-                      '<span style="font-size:0.75rem; color:#0369a1; font-weight:600;">' + s.horasSemana + 'h/sem</span>' +
+                      '<span style="font-size:0.75rem; color:#0369a1; font-weight:600;">' + s.horasSemana + 'h/sem</span><br>' +
+                      '<span class="badge-pill" style="font-size:0.68rem; background:#f1f5f9; color:#475569; margin-top:3px;">' + s.acciones.length + ' proceso(s)</span>' +
                     '</td>' +
                     '<td style="padding: 10px; font-size: 0.82rem; color: var(--text-muted); vertical-align: top;">' + s.fecha + '</td>' +
                     '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e2e8f0; color:#1e293b; font-size:0.75rem;">' + s.foco + '</span></td>' +
                     '<td style="padding: 10px; vertical-align: top;">' + s.tarjeta + '</td>' +
-                    '<td style="padding: 10px; vertical-align: top;">' +
-                      '<select class="select-elite select-avance-semana" data-semana="' + s.num + '" style="font-size: 0.82rem; padding: 6px 8px;">' +
-                        '<option value="⚪ Sin iniciar" ' + (s.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
-                        '<option value="🟡 En proceso" ' + (s.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
-                        '<option value="🟢 Logrado" ' + (s.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
-                        '<option value="🔴 Postergado" ' + (s.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
-                      '</select>' +
-                    '</td>' +
-                    '<td style="padding: 10px; vertical-align: top;">' +
-                      '<textarea class="textarea-elite input-observaciones-semana" data-semana="' + s.num + '" rows="2" placeholder="Registro de evidencias, adaptaciones y acuerdos de aula..." style="font-size: 0.82rem;">' + s.observaciones + '</textarea>' +
-                    '</td>' +
+                    '<td style="padding: 10px; vertical-align: top;">' + estadosHTML + '</td>' +
+                    '<td style="padding: 10px; vertical-align: top;">' + bitacorasHTML + '</td>' +
                   '</tr>';
                 }).join('') +
               '</tbody>' +
@@ -7410,7 +7585,42 @@ var ModuloC = {
 
       container.innerHTML = html;
 
-      // Evento Guardar Avance
+      // Evento Transición de Etapa Curricular
+      var btnPromover = document.getElementById('btn-promover-etapa');
+      if (btnPromover && recomendacionTransicion) {
+        btnPromover.addEventListener('click', function(e) {
+          e.preventDefault();
+          var conf = confirm('¿Desea promover oficialmente el plan curricular a "' + recomendacionTransicion.etapaDestino + '"?\n\nEsta acción ajustará automáticamente el desafío cognitivo Bloom a "' + recomendacionTransicion.nuevoBloom + '" y reconfigurará las mallas de los Módulos A, B y C.');
+          if (!conf) return;
+
+          var u = AuthManager.getUserData() || {};
+          u.diagnostico = u.diagnostico || {};
+          u.diagnostico.etapa = recomendacionTransicion.etapaDestino;
+          u.diagnostico.bloom = recomendacionTransicion.nuevoBloom;
+          u.diagnostico.updatedAt = new Date().toISOString();
+          AuthManager.saveUserData('diagnostico', u.diagnostico);
+
+          // Actualizar interfaz del Módulo A si los elementos existen
+          var selEtapa = document.getElementById('select-etapa');
+          var selBloom = document.getElementById('select-bloom-ajustable');
+          var inputBloomHidden = document.getElementById('input-bloom');
+          if (selEtapa) selEtapa.value = recomendacionTransicion.etapaDestino;
+          if (selBloom) selBloom.value = recomendacionTransicion.nuevoBloom;
+          if (inputBloomHidden) inputBloomHidden.value = recomendacionTransicion.nuevoBloom;
+
+          if (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.renderDiagnosticSummary === 'function') {
+            ModuloA.renderDiagnosticSummary(u.diagnostico);
+          }
+          if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') {
+            ModuloB.renderRayuela();
+          }
+
+          self.renderMonitoreo();
+          alert('🎉 ¡Transición Curricular Exitosa!\nEl plan ha avanzado a: ' + recomendacionTransicion.etapaDestino + ' con nivel Bloom ' + recomendacionTransicion.nuevoBloom + '.');
+        });
+      }
+
+      // Evento Guardar Avance con Multi-Acción / Procesos Múltiples por Semana
       var btnGuardar = document.getElementById('btn-guardar-monitoreo');
       if (btnGuardar) {
         btnGuardar.addEventListener('click', function(e) {
@@ -7418,46 +7628,100 @@ var ModuloC = {
           var u = AuthManager.getUserData() || {};
           u.monitoreo = u.monitoreo || {};
 
-          container.querySelectorAll('.select-avance-semana').forEach(function(sel) {
-            var semNum = sel.getAttribute('data-semana');
-            var txtObs = container.querySelector('.input-observaciones-semana[data-semana="' + semNum + '"]');
+          semanas.forEach(function(s) {
+            var semNum = String(s.num);
+            var accionesObj = {};
+            var semLogrados = 0;
+            var semEnProceso = 0;
+            var combinedObs = [];
+
+            s.acciones.forEach(function(acc) {
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
+              var avVal = sel ? sel.value : acc.avance;
+              var obsVal = txt ? txt.value : acc.observaciones;
+
+              accionesObj[acc.id] = {
+                id: acc.id,
+                etiqueta: acc.etiqueta,
+                codigo: acc.codigo,
+                horas: acc.horas,
+                avance: avVal,
+                observaciones: obsVal
+              };
+
+              if (avVal.indexOf('Logrado') !== -1) semLogrados++;
+              else if (avVal.indexOf('proceso') !== -1) semEnProceso++;
+
+              if (obsVal && obsVal.trim()) {
+                combinedObs.push('[' + acc.etiqueta + ']: ' + obsVal.trim());
+              }
+            });
+
+            // Determinar estado agregado de la semana
+            var estadoSemana = '⚪ Sin iniciar';
+            if (s.acciones.length > 0 && semLogrados === s.acciones.length) {
+              estadoSemana = '🟢 Logrado';
+            } else if (semLogrados > 0 || semEnProceso > 0) {
+              estadoSemana = '🟡 En proceso';
+            }
+
             u.monitoreo[semNum] = {
-              avance: sel.value,
-              observaciones: txtObs ? txtObs.value : '',
+              avance: estadoSemana,
+              observaciones: combinedObs.join(' | '),
+              acciones: accionesObj,
               updatedAt: new Date().toISOString()
             };
           });
 
           AuthManager.saveUserData('monitoreo', u.monitoreo);
           self.renderMonitoreo();
-          alert('✅ Monitoreo Semanal guardado exitosamente en el perfil docente.');
+          alert('✅ Monitoreo Semanal guardado exitosamente.\nSe registraron los estados individuales de cada proceso pedagógico y se actualizaron los indicadores de avance.');
         });
       }
 
-      // Evento Exportar a Excel (CSV con UTF-8 BOM)
+      // Evento Exportar a Excel (CSV con desglose de procesos individuales)
       var btnExcel = document.getElementById('btn-exportar-excel');
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
           var csvRows = [];
-          csvRows.push(['Semana', 'Fecha Proyectada', 'Horas Semanales (Dec. 0277/2025)', 'Capacidad de Acciones / Semana', 'Duración Estimada / Acción', 'Etapa', 'Foco Pedagógico', 'Multirriesgo Top 3', 'Tarjeta Curricular Resumida', 'Estado de Avance', 'Evidencias y Observaciones Docente']);
+          csvRows.push([
+            'Semana',
+            'Fecha Proyectada',
+            'Horas Semanales (Dec. 0277/2025)',
+            'Proceso / Acción ID',
+            'Etiqueta Proceso',
+            'Código DBA / EBC / INEE',
+            'Horas Proceso',
+            'Etapa Curricular',
+            'Foco Pedagógico',
+            'Multirriesgo Top 3',
+            'Estado de Avance Proceso',
+            'Evidencias y Bitácora Docente'
+          ]);
+
           semanas.forEach(function(s) {
-            var txtObs = container.querySelector('.input-observaciones-semana[data-semana="' + s.num + '"]');
-            var selAvance = container.querySelector('.select-avance-semana[data-semana="' + s.num + '"]');
-            var obsVal = (txtObs ? txtObs.value : s.observaciones).replace(/;/g, ',').replace(/\n/g, ' ');
-            var avVal = selAvance ? selAvance.value : s.avance;
-            csvRows.push([
-              'Semana ' + s.num,
-              s.fecha,
-              s.horasSemana + ' horas efectivas',
-              s.accionesCapacidad + ' acción(es)/sem',
-              '~' + s.duracionPromedioAccion + ' horas efectivas',
-              s.etapa,
-              s.foco,
-              amenazasLabel,
-              s.tarjetaPlana.replace(/;/g, ','),
-              avVal,
-              obsVal
-            ]);
+            s.acciones.forEach(function(acc) {
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
+              var avVal = sel ? sel.value : acc.avance;
+              var obsVal = (txt ? txt.value : acc.observaciones).replace(/;/g, ',').replace(/\n/g, ' ');
+
+              csvRows.push([
+                'Semana ' + s.num,
+                s.fecha,
+                s.horasSemana + ' horas efectivas',
+                acc.id,
+                acc.etiqueta,
+                acc.codigo,
+                acc.horas + 'h',
+                s.etapa,
+                s.foco,
+                amenazasLabel,
+                avVal,
+                obsVal
+              ]);
+            });
           });
 
           var csvContent = '\uFEFF' + csvRows.map(function(e) { return e.join(';'); }).join('\n');
@@ -7465,7 +7729,7 @@ var ModuloC = {
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
-          a.download = 'monitoreo_semanal_ciclo_' + cicloKey + '_emergencia_' + new Date().toISOString().split('T')[0] + '.csv';
+          a.download = 'monitoreo_semanal_procesos_ciclo_' + cicloKey + '_emergencia_' + new Date().toISOString().split('T')[0] + '.csv';
           a.click();
           URL.revokeObjectURL(url);
         });
