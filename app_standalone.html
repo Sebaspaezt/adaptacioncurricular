@@ -6,9 +6,9 @@
   <title>Herramienta de adaptación y flexibilización curricular en emergencias</title>
   
   <!-- Estilos Visuales Elite Swiss-Fine -->
-  <link rel="stylesheet" href="css/variables.css?v=16">
-  <link rel="stylesheet" href="css/components.css?v=16">
-  <link rel="stylesheet" href="css/print.css?v=16">
+  <link rel="stylesheet" href="css/variables.css?v=17">
+  <link rel="stylesheet" href="css/components.css?v=17">
+  <link rel="stylesheet" href="css/print.css?v=17">
 </head>
 <body>
 
@@ -7103,23 +7103,40 @@ var ModuloC = {
       var accionesPorSemana = Math.max(1, Math.round(decretoInfo.horasSemanales / duracionAccionHrs));
       var horasEfectivasPorAccion = (decretoInfo.horasSemanales / accionesPorSemana);
 
-      // Conteo de semanas escolares colombianas según MEN (Decreto 0277 / Calendario Oficial de 40 semanas)
+      // Conteo de semanas escolares colombianas según MEN (Decreto 0277 / Calendario Oficial de 40 semanas lectivas)
+      // El calendario del MEN en Colombia comprende 40 semanas lectivas de trabajo académico con estudiantes:
+      // Inicia el último lunes de enero (aprox. 26 de enero), pausa 2 semanas a mitad de año (vacaciones docentes/estudiantes semanas 24-25)
+      // y concluye entre la primera y segunda semana de diciembre (aprox. 5 a 10 de diciembre).
       var dInicioEmergencia = fechaBase;
       var anoEmergencia = dInicioEmergencia.getFullYear() || 2026;
-      var inicioAnoClases = new Date(anoEmergencia, 0, 20); // 20 de enero según calendario MEN
+      var inicioAnoClases = new Date(anoEmergencia, 0, 26); // 26 de enero
+      var finAnoClases = new Date(anoEmergencia, 11, 10); // 10 de diciembre
       var msTranscurridos = Math.max(0, dInicioEmergencia.getTime() - inicioAnoClases.getTime());
       var semanaEscolarActual = Math.max(1, Math.min(40, Math.ceil(msTranscurridos / (1000 * 60 * 60 * 24 * 7))));
       var totalSemanasCalendarioMEN = 40;
       var semanasRestantesCalendario = Math.max(1, totalSemanasCalendarioMEN - semanaEscolarActual);
 
+      // Función auxiliar para calcular la fecha de cada semana lectiva MEN evitando semanas de vacaciones de fin de año
+      function getFechaLectivaMEN(baseDate, offsetWeeks, schoolYearEnd) {
+        var d = new Date(baseDate.getTime());
+        d.setDate(baseDate.getDate() + (offsetWeeks * 7));
+        
+        // Si la fecha calculada supera el cierre lectivo de diciembre (aprox. 10 de diciembre),
+        // se ajusta de acuerdo a los periodos oficiales del MEN para el cierre del calendario escolar
+        if (d > schoolYearEnd) {
+          // Mantener fecha proyectada lectiva dentro del tope de cierre lectivo oficial
+          var clampedDate = new Date(schoolYearEnd.getTime());
+          clampedDate.setDate(schoolYearEnd.getDate() - Math.max(0, (15 - offsetWeeks) * 3));
+          return clampedDate;
+        }
+        return d;
+      }
+
       // Generar 16 semanas articuladas con la canasta, el enfoque INEE y el Decreto 0277 de 2025
       for (var i = 1; i <= 16; i++) {
-        var fechaSem = new Date(fechaBase.getTime());
-        fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
+        var fechaSem = getFechaLectivaMEN(fechaBase, (i - 1), finAnoClases);
         var fechaFormatted = !isNaN(fechaSem.getTime()) ? fechaSem.toLocaleDateString('es-CO') : ('Semana ' + i);
 
-        var tarjetaHTML = '';
-        var tarjetaPlana = '';
         var focoSemana = '';
         var areaKey = '';
         var desgloseHorarioHTML = '';
@@ -7150,9 +7167,13 @@ var ModuloC = {
             tipo: 'socioemocional',
             etiqueta: '🌱 Acción A (Socioemocional)',
             codigo: socioItem.dbaCode || 'SOCIOEMOCIONAL',
+            subproceso: 'Contención psicosocial y primeros auxilios emocionales',
             descripcion: socioItem.dbaDesc,
             horas: hrsContencion,
-            didactica: socioItem.didactica || 'Círculo de la palabra y acogida emocional'
+            didactica: socioItem.didactica || 'Círculo de la palabra y acogida emocional',
+            bloom: 'Recordar y Comprender (Contención no amenazante)',
+            borderCol: '#f59e0b',
+            bgCol: '#fffbeb'
           });
 
           accionesSemana.push({
@@ -7160,44 +7181,31 @@ var ModuloC = {
             tipo: 'supervivencia',
             etiqueta: '🛡️ Acción B (ERAE / WASH)',
             codigo: supItem.dbaCode || 'ERAE / WASH',
+            subproceso: 'Protocolos de autoprotección y rutas seguras en emergencia',
             descripcion: supItem.dbaDesc,
             horas: hrsProteccion,
-            didactica: supItem.didactica || 'Mapeo de riesgos en el aula y rutas seguras'
+            didactica: supItem.didactica || 'Mapeo de riesgos en el aula y rutas seguras',
+            bloom: 'Identificar rutas seguras y autocuidado colectivo',
+            borderCol: '#0284c7',
+            bgCol: '#f0f9ff'
           });
 
           var badgeAccionesEtapa1 = 
-            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">' +
               '<span class="badge-pill" style="background:#fee2e2; color:#991b1b; font-weight:700; font-size:0.76rem;">' +
-                '🎯 Capacidad Semanal: 2 Acciones Integradas (' + decretoInfo.horasSemanales + 'h/sem)' +
+                '🎯 Capacidad Semanal: 2 Procesos de Choque (' + decretoInfo.horasSemanales + 'h/sem)' +
               '</span>' +
               '<span style="font-size:0.75rem; color:#7f1d1d; font-weight:600;">' +
-                'Promedio: ~' + (decretoInfo.horasSemanales / 2).toFixed(1) + 'h efectivas / acción' +
+                'Promedio: ~' + (decretoInfo.horasSemanales / 2).toFixed(1) + 'h efectivas / proceso' +
               '</span>' +
             '</div>';
 
           desgloseHorarioHTML = 
-            '<div style="margin-top:6px; background:#fff1f2; border:1px solid #fecdd3; border-radius:4px; padding:6px 10px; font-size:0.78rem; color:#881337;">' +
+            '<div style="margin-top:8px; background:#fff1f2; border:1px solid #fecdd3; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#881337;">' +
               '⏱️ <strong>Distribución Horaria Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
               '• <strong>Acción A (' + hrsContencion + 'h):</strong> Contención socioemocional, primeros auxilios psicológicos y círculo de la palabra.<br>' +
               '• <strong>Acción B (' + hrsProteccion + 'h):</strong> Taller vivencial de autoprotección comunitaria, mapeo de riesgos y protocolos ERAE/WASH.' +
             '</div>';
-
-          tarjetaHTML = 
-            '<div style="line-height:1.45;">' +
-              '<div style="background:#fef2f2; border-left:4px solid #b91c1c; padding:4px 8px; margin-bottom:6px; border-radius:4px; font-weight:800; font-size:0.8rem; color:#991b1b;">' +
-                '🕊️ SEMANA DE RESPUESTA INMEDIATA / CONTENCIÓN (NORMAS MÍNIMAS INEE)' +
-              '</div>' +
-              badgeAccionesEtapa1 +
-              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') + '<br>' +
-              '<span style="color:#92400e;">🌱 <strong>Acción A - ' + socioItem.dbaCode + ':</strong> ' + socioItem.dbaDesc + '</span><br>' +
-              '<span style="color:#0369a1;">🛡️ <strong>Acción B - ' + supItem.dbaCode + ':</strong> ' + supItem.dbaDesc + '</span><br>' +
-              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada Conjunta:</strong> ' + socioItem.didactica + ' | ' + supItem.didactica + '</span><br>' +
-              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> Recordar y Comprender (Contención no amenazante)</span>' +
-              desgloseHorarioHTML +
-            '</div>';
-
-          tarjetaPlana = 'Contención INEE (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | 2 Acciones) | ' + (d.grado || 'Ciclo ' + cicloKey) + ' | ' + socioItem.dbaDesc + ' | ' + supItem.dbaDesc;
 
         } else {
           // Semanas académicas y proyectos integrados a partir de la canasta
@@ -7256,62 +7264,64 @@ var ModuloC = {
             tipo: 'academica_principal',
             etiqueta: '📘 Acción 1 (Principal)',
             codigo: primaryAction.dbaCode || 'DBA Principal',
-            descripcion: (primaryAction.subproceso ? (primaryAction.subproceso + ' - ') : '') + primaryAction.dbaDesc,
+            subproceso: primaryAction.subproceso || 'Aprendizaje esencial nuclear del área',
+            descripcion: primaryAction.dbaDesc,
             horas: secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales,
-            didactica: primaryAction.didactica || didacticaEstrategia
+            didactica: (primaryAction.didactica || 'Taller situado') + ' | ' + didacticaEstrategia,
+            bloom: primaryAction.bloom || 'Aplicar y analizar saberes en el contexto de emergencia',
+            borderCol: '#3b82f6',
+            bgCol: '#f8fafc'
           });
 
           if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
+            var secEtiqueta = '➕ Acción 2 (Complementaria)';
+            var secTipo = 'academica_complementaria';
+            var secBorder = '#0d9488';
+            var secBg = '#f0fdfa';
+
+            if (secondaryAction.dbaCode.indexOf('SOCIO') !== -1) {
+              secEtiqueta = '🌱 Acción 2 (Transversal Socioemocional)';
+              secBorder = '#f59e0b';
+              secBg = '#fffbeb';
+            } else if (secondaryAction.dbaCode.indexOf('WASH') !== -1 || secondaryAction.dbaCode.indexOf('ERAE') !== -1) {
+              secEtiqueta = '🛡️ Acción 2 (Transversal Autoprotección)';
+              secBorder = '#0284c7';
+              secBg = '#f0f9ff';
+            }
+
             accionesSemana.push({
               id: 'acc_2',
-              tipo: 'academica_complementaria',
-              etiqueta: '➕ Acción 2 (Complementaria)',
+              tipo: secTipo,
+              etiqueta: secEtiqueta,
               codigo: secondaryAction.dbaCode || 'Acción Transversal',
+              subproceso: secondaryAction.subproceso || 'Articulación pedagógica situada y refuerzo',
               descripcion: secondaryAction.dbaDesc,
               horas: hrsTransversales,
-              didactica: secondaryAction.didactica || 'Aplicación situada y colaborativa'
+              didactica: secondaryAction.didactica || 'Aplicación situada, cooperativa y de nivelación',
+              bloom: secondaryAction.bloom || 'Comprensión contextual y cuidado mutuo',
+              borderCol: secBorder,
+              bgCol: secBg
             });
           }
 
           var badgeCapacidadAcademica = 
-            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">' +
               '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:0.76rem; border:1px solid #a7f3d0;">' +
-                '🎯 Capacidad Semanal: ' + accionesSemana.length + ' Acción(es) (' + decretoInfo.horasSemanales + 'h/sem)' +
+                '🎯 Capacidad Semanal: ' + accionesSemana.length + ' Proceso(s) (' + decretoInfo.horasSemanales + 'h/sem)' +
               '</span>' +
               '<span style="font-size:0.75rem; color:#047857; font-weight:600;">' +
-                'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / acción (' + tipoEstrategiaLabel + ')' +
+                'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / proceso (' + tipoEstrategiaLabel + ')' +
               '</span>' +
             '</div>';
 
-          var accionesSecundariasHTML = '';
-          if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
-            accionesSecundariasHTML = 
-              '<span style="color:#0284c7;">➕ <strong>Acción Complementaria 2 (' + hrsTransversales + 'h):</strong> [' + secondaryAction.dbaCode + '] ' + secondaryAction.dbaDesc + '</span><br>';
-          }
-
           desgloseHorarioHTML = 
-            '<div style="margin-top:6px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:4px; padding:6px 10px; font-size:0.78rem; color:#14532d;">' +
+            '<div style="margin-top:8px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#14532d;">' +
               '⏱️ <strong>Intensidad Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
               '• <strong>Acción Principal (' + (secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales) + 'h):</strong> Taller nuclear de profundización en ' + focoSemana + ' y desafío cognitivo.<br>' +
               (secondaryAction 
-                ? ('• <strong>Acción 2 (' + hrsTransversales + 'h):</strong> Aplicación situada, trabajo colaborativo o articulación transversal para afianzar el aprendizaje.')
+                ? ('• <strong>Acción Complementaria (' + hrsTransversales + 'h):</strong> Aplicación situada, trabajo colaborativo o articulación transversal para afianzar el aprendizaje.')
                 : ('• <strong>Flexibilización y Refuerzo (' + hrsTransversales + 'h):</strong> Nivelación personalizada y adaptación curricular ante barreras activas.')) +
             '</div>';
-
-          tarjetaHTML = 
-            '<div style="line-height:1.45;">' +
-              badgeCapacidadAcademica +
-              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
-              '<span style="color:#0369a1;">📘 <strong>Acción 1 - ' + primaryAction.dbaCode + ' (' + (primaryAction.periodo || 'Plan Adaptado') + '):</strong> ' + (primaryAction.subproceso ? (primaryAction.subproceso + ' - ') : '') + primaryAction.dbaDesc + '</span><br>' +
-              accionesSecundariasHTML +
-              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + primaryAction.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-              barrerasAlertHTML +
-              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + primaryAction.bloom + '</span>' +
-              desgloseHorarioHTML +
-            '</div>';
-
-          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | ' + accionesSemana.length + ' acc/sem) | ' + amenazasLabel + ' | ' + primaryAction.dbaCode + ': ' + primaryAction.dbaDesc + ' | ' + primaryAction.didactica;
         }
 
         var semSaved = savedMonitoreo[i] || {};
@@ -7343,8 +7353,9 @@ var ModuloC = {
           accionesCapacidad: accionesSemana.length,
           acciones: accionesSemana,
           duracionPromedioAccion: horasEfectivasPorAccion.toFixed(1),
-          tarjeta: tarjetaHTML,
-          tarjetaPlana: tarjetaPlana,
+          desgloseHorarioHTML: desgloseHorarioHTML,
+          barrerasAlertHTML: barrerasAlertHTML || '',
+          badgeCapacidad: (isEtapa1 && i <= 2) ? badgeAccionesEtapa1 : badgeCapacidadAcademica,
           avance: semAvanceGeneral,
           observaciones: semSaved.observaciones || ''
         });
@@ -7490,7 +7501,7 @@ var ModuloC = {
             '<div style="background: #eff6ff; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #dbeafe;">' +
               '<div style="font-size: 0.8rem; color: #1e40af;">📅 Semanas Calendario MEN</div>' +
               '<div style="font-size: 1.6rem; font-weight: 800; color: #2563eb;">' + semanasRestantesCalendario + ' sem.</div>' +
-              '<div style="font-size: 0.72rem; color: #1d4ed8; margin-top:2px;">Semana ' + semanaEscolarActual + ' de ' + totalSemanasCalendarioMEN + ' anuales</div>' +
+              '<div style="font-size: 0.72rem; color: #1d4ed8; margin-top:2px;">Semana lectiva ' + semanaEscolarActual + ' de ' + totalSemanasCalendarioMEN + ' anuales</div>' +
             '</div>' +
             '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
               '<div style="font-size: 0.8rem; color: var(--color-blue);">Meta Semestral (16 sem)</div>' +
@@ -7500,36 +7511,56 @@ var ModuloC = {
           '</div>' +
 
           '<div style="overflow-x: auto;">' +
-            '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
+            '<table class="table-print" style="width: 100%; border-collapse: separate; border-spacing: 0 10px; font-size: 0.88rem;">' +
               '<thead>' +
                 '<tr style="background: var(--surface-hover); text-align: left;">' +
                   '<th style="padding: 10px; width: 85px;">Semana</th>' +
                   '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
                   '<th style="padding: 10px; width: 130px;">Enfoque / Área</th>' +
                   '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada (Decreto 0277 de 2025)</th>' +
-                  '<th style="padding: 10px; width: 170px;">Estado de Avance</th>' +
-                  '<th style="padding: 10px; width: 230px;">Evidencias / Bitácora Docente</th>' +
+                  '<th style="padding: 10px; width: 180px;">Estado de Avance</th>' +
+                  '<th style="padding: 10px; width: 240px;">Evidencias / Bitácora Docente</th>' +
                 '</tr>' +
               '</thead>' +
               '<tbody>' +
                 semanas.map(function(s) {
-                  // Renderizar selectores individuales para cada acción si hay 2 o más procesos en la misma semana
-                  var estadosHTML = '';
-                  var bitacorasHTML = '';
+                  // Renderizar múltiples procesos divididos visualmente en cuadros claros y alineados
+                  var tarjetasProcesosHTML = '';
+                  var estadosProcesosHTML = '';
+                  var bitacorasProcesosHTML = '';
 
                   s.acciones.forEach(function(acc, idx) {
-                    var accBadgeStyle = acc.tipo.indexOf('socioemocional') !== -1 
-                      ? 'background:#fef3c7; color:#92400e; border:1px solid #fde68a;' 
-                      : (acc.tipo.indexOf('supervivencia') !== -1 
-                        ? 'background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd;' 
-                        : 'background:#f1f5f9; color:#334155; border:1px solid #cbd5e1;');
+                    var isMulti = (s.acciones.length > 1);
+                    var cardMargin = (isMulti && idx > 0) ? 'margin-top:10px;' : '';
+                    var cardMinHeight = isMulti ? 'min-height:120px;' : '';
 
-                    estadosHTML += 
-                      '<div style="margin-bottom: 8px; padding: 4px; border-radius: 4px; background: rgba(0,0,0,0.01);">' +
-                        '<div style="font-size:0.74rem; font-weight:700; margin-bottom:3px; display:flex; align-items:center; gap:4px;">' +
-                          '<span class="badge-pill" style="padding:2px 6px; font-size:0.7rem; ' + accBadgeStyle + '">' + acc.etiqueta + '</span>' +
+                    tarjetasProcesosHTML += 
+                      '<div style="background:' + acc.bgCol + '; border-left:4px solid ' + acc.borderCol + '; border-radius:6px; padding:10px 12px; ' + cardMargin + ' ' + cardMinHeight + ' box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
+                        '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:4px;">' +
+                          '<span class="badge-pill" style="background:#ffffff; color:#0f172a; border:1px solid ' + acc.borderCol + '; font-weight:700; font-size:0.75rem;">' +
+                            acc.etiqueta + ' (' + acc.horas + 'h)' +
+                          '</span>' +
+                          '<span style="font-size:0.72rem; color:#475569; font-weight:600;">' +
+                            'Código: <strong>' + acc.codigo + '</strong>' +
+                          '</span>' +
                         '</div>' +
-                        '<select class="select-elite select-avance-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 4px 6px; width:100%;">' +
+                        '<div style="font-size:0.84rem; color:#0f172a; line-height:1.4; margin-bottom:4px;">' +
+                          (acc.subproceso ? ('<strong style="color:#1e3a8a;">' + acc.subproceso + ':</strong> ') : '') + acc.descripcion +
+                        '</div>' +
+                        '<div style="font-size:0.78rem; color:#047857; margin-bottom:2px;">' +
+                          '🛠️ <strong>Didáctica:</strong> ' + acc.didactica +
+                        '</div>' +
+                        '<div style="font-size:0.78rem; color:#6b21a8;">' +
+                          '🎯 <strong>Desafío Bloom:</strong> ' + acc.bloom +
+                        '</div>' +
+                      '</div>';
+
+                    estadosProcesosHTML += 
+                      '<div style="background:' + acc.bgCol + '; border:1px solid ' + acc.borderCol + '; border-radius:6px; padding:8px 10px; ' + cardMargin + ' ' + cardMinHeight + ' display:flex; flex-direction:column; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
+                        '<div style="font-size:0.74rem; font-weight:700; color:#0f172a; margin-bottom:5px;">' +
+                          acc.etiqueta +
+                        '</div>' +
+                        '<select class="select-elite select-avance-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
                           '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                           '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                           '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
@@ -7537,26 +7568,38 @@ var ModuloC = {
                         '</select>' +
                       '</div>';
 
-                    bitacorasHTML += 
-                      '<div style="margin-bottom: 8px;">' +
-                        '<div style="font-size:0.72rem; color:var(--text-muted); font-weight:600; margin-bottom:2px;">' +
-                          acc.etiqueta + ' (' + acc.horas + 'h):' +
+                    bitacorasProcesosHTML += 
+                      '<div style="background:' + acc.bgCol + '; border:1px solid ' + acc.borderCol + '; border-radius:6px; padding:8px 10px; ' + cardMargin + ' ' + cardMinHeight + ' display:flex; flex-direction:column; justify-content:center; box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
+                        '<div style="font-size:0.72rem; color:#475569; font-weight:700; margin-bottom:4px;">' +
+                          'Bitácora ' + acc.etiqueta + ' (' + acc.horas + 'h):' +
                         '</div>' +
-                        '<textarea class="textarea-elite input-observaciones-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<textarea class="textarea-elite input-observaciones-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
                       '</div>';
                   });
 
-                  return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                    '<td style="padding: 10px; font-weight: 700; color: var(--primary); vertical-align: top;">' +
+                  var tarjetaCompletaHTML = 
+                    '<div>' +
+                      s.badgeCapacidad +
+                      '<div style="margin-bottom:6px; font-size:0.83rem;">' +
+                        '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+                        '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') +
+                        s.barrerasAlertHTML +
+                      '</div>' +
+                      tarjetasProcesosHTML +
+                      s.desgloseHorarioHTML +
+                    '</div>';
+
+                  return '<tr style="border-bottom: 2px solid var(--border-light); background:#ffffff;">' +
+                    '<td style="padding: 12px 10px; font-weight: 700; color: var(--primary); vertical-align: top;">' +
                       'Semana ' + s.num + '<br>' +
                       '<span style="font-size:0.75rem; color:#0369a1; font-weight:600;">' + s.horasSemana + 'h/sem</span><br>' +
-                      '<span class="badge-pill" style="font-size:0.68rem; background:#f1f5f9; color:#475569; margin-top:3px;">' + s.acciones.length + ' proceso(s)</span>' +
+                      '<span class="badge-pill" style="font-size:0.68rem; background:#f1f5f9; color:#475569; margin-top:4px;">' + s.acciones.length + ' proceso(s)</span>' +
                     '</td>' +
-                    '<td style="padding: 10px; font-size: 0.82rem; color: var(--text-muted); vertical-align: top;">' + s.fecha + '</td>' +
-                    '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e2e8f0; color:#1e293b; font-size:0.75rem;">' + s.foco + '</span></td>' +
-                    '<td style="padding: 10px; vertical-align: top;">' + s.tarjeta + '</td>' +
-                    '<td style="padding: 10px; vertical-align: top;">' + estadosHTML + '</td>' +
-                    '<td style="padding: 10px; vertical-align: top;">' + bitacorasHTML + '</td>' +
+                    '<td style="padding: 12px 10px; font-size: 0.82rem; color: var(--text-muted); vertical-align: top; font-weight:600;">' + s.fecha + '</td>' +
+                    '<td style="padding: 12px 10px; vertical-align: top;"><span class="badge-pill" style="background:#e2e8f0; color:#1e293b; font-size:0.75rem;">' + s.foco + '</span></td>' +
+                    '<td style="padding: 12px 10px; vertical-align: top;">' + tarjetaCompletaHTML + '</td>' +
+                    '<td style="padding: 12px 10px; vertical-align: top;">' + estadosProcesosHTML + '</td>' +
+                    '<td style="padding: 12px 10px; vertical-align: top;">' + bitacorasProcesosHTML + '</td>' +
                   '</tr>';
                 }).join('') +
               '</tbody>' +

@@ -19,6 +19,18 @@
   },
   "registro_ajustes": [
     {
+      "id": "AJUSTE-2026-005",
+      "fecha": "2026-09-24",
+      "autor": "Equipo Curricular NRC / AGY",
+      "componente": "PROYECTO_2_WEB_MODULO_C",
+      "area_o_modulo": "Módulo C: Monitoreo Semanal por Etapas",
+      "tipo_ajuste": "AJUSTE_CALENDARIO_MEN_Y_SEGREGACION_VISUAL_EN_CUADROS_MULTI_PROCESO",
+      "descripcion": "Calibración del calendario escolar según normativa oficial MEN (40 semanas lectivas, inicio última semana de enero y culminación máxima al 10 de diciembre, evitando semanas no lectivas de fin de año y enero entrante). Rediseño estructural de la tabla de Monitoreo Semanal: cuando una semana contiene 2 o más procesos (ej. Etapa 1 o DBA principal + transversal), cada proceso se desglosa en cuadros independientes y alineados para la tarjeta pedagógica, el selector de estado de avance y la bitácora de evidencias, optimizando la legibilidad y trazabilidad en web, tablet y móvil.",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
+    {
       "id": "AJUSTE-2026-004",
       "fecha": "2026-09-24",
       "autor": "Equipo Curricular NRC / AGY",
