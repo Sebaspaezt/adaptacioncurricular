@@ -6,9 +6,9 @@
   <title>Herramienta de adaptación y flexibilización curricular en emergencias</title>
   
   <!-- Estilos Visuales Elite Swiss-Fine -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/print.css">
+  <link rel="stylesheet" href="css/variables.css?v=15">
+  <link rel="stylesheet" href="css/components.css?v=15">
+  <link rel="stylesheet" href="css/print.css?v=15">
 </head>
 <body>
 
@@ -16,7 +16,6 @@
   <header class="header-bar">
     <div class="brand-section">
       <div class="brand-logos">
-        <img src="assets/logo_gobernacion.png" alt="Gobernación de Norte de Santander" class="brand-logo-img" title="Gobernación de Norte de Santander">
         <div class="brand-icon-edu-container" title="Sector Educación">
           <img src="assets/logo_icono_educacion.png" alt="Icono Educación" class="brand-icon-edu">
         </div>
@@ -30,7 +29,6 @@
 
 
     <div class="user-status-bar">
-      <button id="btn-header-feedback" class="btn-elite btn-secondary" onclick="document.getElementById('modal-feedback').style.display='flex';" style="padding: 6px 12px; font-size: 0.8rem; background: #0f766e; color: #fff; border: none; cursor: pointer;" title="Escribir comentarios de mejora como evaluador">💬 Evaluaciones</button>
       <div id="user-profile-badge" class="user-badge" onclick="window.openAuthModal ? window.openAuthModal() : (document.getElementById('modal-auth').style.display='flex');" title="Haga clic para cambiar de usuario o registrarse" style="cursor: pointer;">
         <span>👤</span>
         <span id="user-display-name">Docente Territorial</span>
@@ -207,7 +205,7 @@
               <strong>Marco Técnico y Pedagógico:</strong> En situaciones de emergencia, las barreras no residen intrínsecamente en el estudiante, sino en las condiciones del entorno escolar, comunitario y familiar derivadas de la crisis (<em>Decreto 1421 de 2017, Diseño Universal para el Aprendizaje DUA y Normas Mínimas INEE</em>).
             </p>
 
-            <p style="margin-bottom: 8px;"><strong>¿Cómo diligenciar la Matriz de Barreras (Punto 11)?:</strong></p>
+            <p style="margin-bottom: 8px;"><strong>¿Cómo diligenciar la Matriz de Barreras?:</strong></p>
             <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
               <div style="background: var(--surface-hover); padding: 10px 14px; border-radius: var(--radius-sm);">
                 <strong>⚪ Ninguna:</strong> No se evidencian impactos que impidan el desarrollo ordinario en esta dimensión.
@@ -556,19 +554,14 @@
     </div>
   </div>
 
-  <!-- Botón Flotante para Evaluadores -->
-  <button id="btn-floating-feedback" class="btn-feedback-floating no-print" onclick="document.getElementById('modal-feedback').style.display='flex';" title="Escribir observaciones de mejora">
-    <span>💬</span> Sugerencias
-  </button>
-
   <!-- Inyección de Scripts Estándar (Compatible con file:/// y Servidores Web) -->
-  <script src="js/data/curriculum_db.js?v=14"></script>
-  <script src="js/data/pgire_db.js?v=14"></script>
-  <script src="js/data/habs_sups_db.js?v=14"></script>
-  <script src="js/modules/auth.js?v=14"></script>
-  <script src="js/modules/modulo_a.js?v=14"></script>
-  <script src="js/modules/modulo_b.js?v=14"></script>
-  <script src="js/modules/modulo_c.js?v=14"></script>
-  <script src="js/app.js?v=14"></script>
+  <script src="js/data/curriculum_db.js?v=15"></script>
+  <script src="js/data/pgire_db.js?v=15"></script>
+  <script src="js/data/habs_sups_db.js?v=15"></script>
+  <script src="js/modules/auth.js?v=15"></script>
+  <script src="js/modules/modulo_a.js?v=15"></script>
+  <script src="js/modules/modulo_b.js?v=15"></script>
+  <script src="js/modules/modulo_c.js?v=15"></script>
+  <script src="js/app.js?v=15"></script>
 </body>
 </html>

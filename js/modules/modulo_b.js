@@ -119,7 +119,23 @@ var ModuloB = {
     if (userStates && userStates[item.id]) {
       return userStates[item.id];
     }
-    // Si no ha sido modificado manualmente por el docente, verificar estimación por fecha de emergencia
+    // Salvaguarda esencial técnica: Las dimensiones transversales de Contención Socioemocional
+    // y Supervivencia/Autoprotección (ERAE/WASH) son inmediatas a la emergencia y transversales.
+    // NUNCA deben marcarse como 'abordado' por efecto de periodos académicos previos del calendario escolar.
+    var isTransversal = (
+      item.id.indexOf('socioemocional') === 0 ||
+      item.id.indexOf('supervivencia') === 0 ||
+      item.dbaCode === 'SOCIOEMOCIONAL' ||
+      item.dbaCode === 'SUPERVIVENCIA' ||
+      item.dbaCode === 'ERAE (Minas)' ||
+      item.dbaCode === 'WASH (Agua)'
+    );
+
+    if (isTransversal) {
+      return 'pendiente';
+    }
+
+    // Si no ha sido modificado manualmente por el docente, verificar estimación por fecha de emergencia para áreas académicas ordinarias
     if (d && d.periodosPrevios && Array.isArray(d.periodosPrevios)) {
       if (d.periodosPrevios.indexOf('Periodo ' + item.periodoNum) !== -1) {
         return 'abordado';
@@ -147,7 +163,38 @@ var ModuloB = {
       // Se premarcan los del periodo lectivo en que ocurrió la emergencia
       return item.periodoNum === currentPNum;
     }
-    // 3. En áreas transversales (Socioemocional / Supervivencia), premarcar por defecto los prioritarios de contención
+    // 3. En áreas transversales (Socioemocional / Supervivencia):
+    var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
+    var isEtapa2 = (d && d.etapa && d.etapa.indexOf('ETAPA 2') !== -1);
+
+    if (item.id.indexOf('socioemocional') === 0) {
+      // En Etapa 1, priorizar las competencias socioemocionales de Etapa 1 (Recreativa y preparatoria / soporte afectivo)
+      if (isEtapa1) {
+        return (item.etapaSocio === 'Etapa 1');
+      }
+      if (isEtapa2) {
+        return (item.etapaSocio === 'Etapa 1' || item.etapaSocio === 'Etapa 2');
+      }
+      return true;
+    }
+
+    if (item.id.indexOf('supervivencia') === 0) {
+      // En Supervivencia, si es Etapa 1 o 2, preseleccionar prioritariamente las que corresponden a las amenazas activas del diagnóstico
+      var top3Names = (d && d.amenazasTop3) || (d && d.amenaza ? [d.amenaza] : []);
+      if (top3Names.length > 0) {
+        var textFull = (item.factor + ' ' + item.subproceso + ' ' + item.dbaDesc).toLowerCase();
+        var matchesThreat = top3Names.some(function(t) {
+          return t && textFull.indexOf(t.toLowerCase()) !== -1;
+        });
+        if (matchesThreat) return true;
+      }
+      // Preseleccionar por defecto ERAE/WASH críticos
+      if (item.dbaCode && (item.dbaCode.indexOf('ERAE') !== -1 || item.dbaCode.indexOf('WASH') !== -1)) {
+        return true;
+      }
+      return true;
+    }
+
     return true;
   },
 

@@ -192,6 +192,19 @@ var ModuloA = {
       if (elemRiesgos) elemRiesgos.value = '';
       if (elemRuta) elemRuta.value = '';
     }
+
+    this.autoAdjustTextareas();
+  },
+
+  autoAdjustTextareas: function() {
+    ['input-ejemplo-ie', 'input-riesgos-ie', 'input-ruta-gire', 'input-barreras-descripcion'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        el.style.height = 'auto';
+        var newH = Math.max(el.scrollHeight, 56);
+        el.style.height = (newH + 4) + 'px';
+      }
+    });
   },
 
   calculateDatesAndPeriods: function() {
@@ -490,6 +503,11 @@ var ModuloA = {
         self.saveDiagnostic();
       });
     }
+
+    // Auto-ajuste responsivo de cuadros de texto en redimensionamiento de pantalla (móvil, tablet, web)
+    window.addEventListener('resize', function() {
+      self.autoAdjustTextareas();
+    });
   },
 
   saveDiagnostic: function() {
@@ -511,10 +529,15 @@ var ModuloA = {
     AuthManager.saveUserData('diagnostico', d);
 
     this.renderDiagnosticSummary(d);
-    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente.');
+    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente.\n\nRedirigiendo automáticamente a la Rayuela Curricular (Módulo B)...');
 
     if (this.callbacks.onDiagnosticSaved) {
       this.callbacks.onDiagnosticSaved(d);
+    }
+
+    // Llevar automáticamente al Módulo B (Rayuela Curricular)
+    if (typeof window.switchTab === 'function') {
+      window.switchTab('tab-rayuela');
     }
   },
 

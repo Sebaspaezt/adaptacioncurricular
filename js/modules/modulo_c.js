@@ -166,7 +166,41 @@ var ModuloC = {
 
       var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
 
-      // Generar 16 semanas articuladas con la canasta y el enfoque INEE
+      // Parámetros de Jornada Escolar Regular según Decreto 0277 de 2025
+      // Básica Primaria (Grados 1° a 5°, Ciclos 1 y 2): Mínimo 25 horas semanales (5 horas diarias) y 1.000 horas anuales.
+      // Básica Secundaria y Media (Grados 6° a 11°, Ciclos 3, 4 y 5): Mínimo 30 horas semanales (6 horas diarias) y 1.200 horas anuales.
+      var isPrimaria = (cicloKey === '1' || cicloKey === '2' || (d.grado && d.grado.indexOf('Primaria') !== -1));
+      var decretoInfo = {
+        nivel: isPrimaria ? 'Básica Primaria (Grados 1° a 5°)' : 'Básica Secundaria y Media (Grados 6° a 11°)',
+        horasSemanales: isPrimaria ? 25 : 30,
+        horasDiarias: isPrimaria ? 5 : 6,
+        horasAnuales: isPrimaria ? 1000 : 1200
+      };
+
+      // Cálculo de Duración Promedio por Acción según Estrategia Didáctica Situada (Matrícula NNA y Tipo de Trabajo)
+      var nnaCount = parseInt(d.nna, 10) || 25;
+      var duracionAccionHrs = 10; // Valor base intermedio (horas efectivas de 60 min)
+      var tipoEstrategiaLabel = '';
+
+      if (nnaCount < 15) {
+        // Tutoría 1:1 y nivelación personalizada: sesiones más intensivas y focalizadas (~6.25h en primaria, ~7.5h en secundaria)
+        duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
+        tipoEstrategiaLabel = 'Tutoría 1:1 Focalizada';
+      } else if (nnaCount <= 35) {
+        // Aprendizaje Cooperativo en Equipos: proyectos articulados de mediana duración (~8.33h en primaria, ~10h en secundaria)
+        duracionAccionHrs = isPrimaria ? 8.33 : 10;
+        tipoEstrategiaLabel = 'Aprendizaje Cooperativo';
+      } else {
+        // Micro-estaciones Rotativas y Guías Modulares (>35 NNA): ciclos rotativos (~6.25h en primaria, ~7.5h en secundaria)
+        duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
+        tipoEstrategiaLabel = 'Micro-Estaciones Rotativas';
+      }
+
+      // Capacidad de acciones pedagógicas simultáneas o sucesivas por semana según la intensidad reglamentaria
+      var accionesPorSemana = Math.max(1, Math.round(decretoInfo.horasSemanales / duracionAccionHrs));
+      var horasEfectivasPorAccion = (decretoInfo.horasSemanales / accionesPorSemana);
+
+      // Generar 16 semanas articuladas con la canasta, el enfoque INEE y el Decreto 0277 de 2025
       for (var i = 1; i <= 16; i++) {
         var fechaSem = new Date(fechaBase.getTime());
         fechaSem.setDate(fechaBase.getDate() + (i - 1) * 7);
@@ -176,6 +210,7 @@ var ModuloC = {
         var tarjetaPlana = '';
         var focoSemana = '';
         var areaKey = '';
+        var desgloseHorarioHTML = '';
 
         if (isEtapa1 && i <= 2) {
           // Semanas 1 y 2 de Etapa 1: Enfoque INEE en Contención Socioemocional y Supervivencia (ERAE/WASH)
@@ -194,20 +229,43 @@ var ModuloC = {
             didactica: 'Mapeo de riesgos en el aula y rutas seguras'
           };
 
+          // Distribución semanal de horas según Decreto 0277/2025 para Etapa 1
+          var hrsContencion = isPrimaria ? 15 : 18;
+          var hrsProteccion = isPrimaria ? 10 : 12;
+
+          var badgeAccionesEtapa1 = 
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
+              '<span class="badge-pill" style="background:#fee2e2; color:#991b1b; font-weight:700; font-size:0.76rem;">' +
+                '🎯 Capacidad Semanal: 2 Acciones Integradas (' + decretoInfo.horasSemanales + 'h/sem)' +
+              '</span>' +
+              '<span style="font-size:0.75rem; color:#7f1d1d; font-weight:600;">' +
+                'Promedio: ~' + (decretoInfo.horasSemanales / 2).toFixed(1) + 'h efectivas / acción' +
+              '</span>' +
+            '</div>';
+
+          desgloseHorarioHTML = 
+            '<div style="margin-top:6px; background:#fff1f2; border:1px solid #fecdd3; border-radius:4px; padding:6px 10px; font-size:0.78rem; color:#881337;">' +
+              '⏱️ <strong>Distribución Horaria Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
+              '• <strong>Acción 1 (' + hrsContencion + 'h):</strong> Contención socioemocional, primeros auxilios psicológicos y círculo de la palabra.<br>' +
+              '• <strong>Acción 2 (' + hrsProteccion + 'h):</strong> Taller vivencial de autoprotección comunitaria, mapeo de riesgos y protocolos ERAE/WASH.' +
+            '</div>';
+
           tarjetaHTML = 
             '<div style="line-height:1.45;">' +
               '<div style="background:#fef2f2; border-left:4px solid #b91c1c; padding:4px 8px; margin-bottom:6px; border-radius:4px; font-weight:800; font-size:0.8rem; color:#991b1b;">' +
                 '🕊️ SEMANA DE RESPUESTA INMEDIATA / CONTENCIÓN (NORMAS MÍNIMAS INEE)' +
               '</div>' +
+              badgeAccionesEtapa1 +
               '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
               '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') + '<br>' +
-              '<span style="color:#92400e;">🌱 <strong>' + socioItem.dbaCode + ':</strong> ' + socioItem.dbaDesc + '</span><br>' +
-              '<span style="color:#0369a1;">🛡️ <strong>' + supItem.dbaCode + ':</strong> ' + supItem.dbaDesc + '</span><br>' +
-              '<span style="color:#047857;">🛠️ <strong>Acción Situada:</strong> ' + socioItem.didactica + ' | ' + supItem.didactica + '</span><br>' +
+              '<span style="color:#92400e;">🌱 <strong>Acción A - ' + socioItem.dbaCode + ':</strong> ' + socioItem.dbaDesc + '</span><br>' +
+              '<span style="color:#0369a1;">🛡️ <strong>Acción B - ' + supItem.dbaCode + ':</strong> ' + supItem.dbaDesc + '</span><br>' +
+              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada Conjunta:</strong> ' + socioItem.didactica + ' | ' + supItem.didactica + '</span><br>' +
               '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> Recordar y Comprender (Contención no amenazante)</span>' +
+              desgloseHorarioHTML +
             '</div>';
 
-          tarjetaPlana = 'Contención INEE | ' + (d.grado || 'Ciclo ' + cicloKey) + ' | ' + socioItem.dbaDesc + ' | ' + supItem.dbaDesc;
+          tarjetaPlana = 'Contención INEE (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | 2 Acciones) | ' + (d.grado || 'Ciclo ' + cicloKey) + ' | ' + socioItem.dbaDesc + ' | ' + supItem.dbaDesc;
 
         } else {
           // Semanas académicas y proyectos integrados a partir de la canasta
@@ -215,13 +273,25 @@ var ModuloC = {
           areaKey = academicAreas[acaIdx % academicAreas.length];
           focoSemana = areaKey.toUpperCase();
 
+          // Determinar las acciones a integrar en esta semana según la capacidad horaria del Decreto 0277
           var areaBasket = basket[areaKey] || [];
-          var parsedItem = null;
+          var primaryAction = null;
+          var secondaryAction = null;
 
           if (areaBasket.length > 0) {
-            parsedItem = areaBasket[Math.floor(acaIdx / academicAreas.length) % areaBasket.length];
+            primaryAction = areaBasket[Math.floor(acaIdx / academicAreas.length) % areaBasket.length];
+            // Si la capacidad es de 2 o 3 acciones y hay más ítems en la canasta (del área o de socioemocional/supervivencia)
+            if (accionesPorSemana >= 2) {
+              if (areaBasket.length > 1) {
+                secondaryAction = areaBasket[(Math.floor(acaIdx / academicAreas.length) + 1) % areaBasket.length];
+              } else if (basket.socioemocional.length > 0) {
+                secondaryAction = basket.socioemocional[i % basket.socioemocional.length];
+              } else if (basket.supervivencia.length > 0) {
+                secondaryAction = basket.supervivencia[i % basket.supervivencia.length];
+              }
+            }
           } else {
-            parsedItem = {
+            primaryAction = {
               dbaCode: 'DBA Adaptado',
               subproceso: 'Competencia priorizada en emergencia',
               dbaDesc: 'Aprendizaje esencial seleccionado en la canasta curricular',
@@ -248,17 +318,49 @@ var ModuloC = {
             }
           }
 
-          tarjetaHTML = 
-            '<div style="line-height:1.45;">' +
-              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
-              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
-              '<span style="color:#0369a1;">📘 <strong>' + parsedItem.dbaCode + ' (' + (parsedItem.periodo || 'Plan Adaptado') + '):</strong> ' + (parsedItem.subproceso ? (parsedItem.subproceso + ' - ') : '') + parsedItem.dbaDesc + '</span><br>' +
-              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + parsedItem.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
-              barrerasAlertHTML +
-              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + parsedItem.bloom + '</span>' +
+          // Horario semanal académico adaptado según Decreto 0277 de 2025
+          var hrsFocoArea = isPrimaria ? 15 : 18;
+          var hrsTransversales = isPrimaria ? 10 : 12;
+
+          var badgeCapacidadAcademica = 
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">' +
+              '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:0.76rem; border:1px solid #a7f3d0;">' +
+                '🎯 Capacidad Semanal: ' + accionesPorSemana + ' Acción(es) (' + decretoInfo.horasSemanales + 'h/sem)' +
+              '</span>' +
+              '<span style="font-size:0.75rem; color:#047857; font-weight:600;">' +
+                'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / acción (' + tipoEstrategiaLabel + ')' +
+              '</span>' +
             '</div>';
 
-          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + amenazasLabel + ' | ' + parsedItem.dbaCode + ': ' + parsedItem.dbaDesc + ' | ' + parsedItem.didactica;
+          var accionesSecundariasHTML = '';
+          if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
+            accionesSecundariasHTML = 
+              '<span style="color:#0284c7;">➕ <strong>Acción Complementaria 2 (' + hrsTransversales + 'h):</strong> [' + secondaryAction.dbaCode + '] ' + secondaryAction.dbaDesc + '</span><br>';
+          }
+
+          desgloseHorarioHTML = 
+            '<div style="margin-top:6px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:4px; padding:6px 10px; font-size:0.78rem; color:#14532d;">' +
+              '⏱️ <strong>Intensidad Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
+              '• <strong>Acción Principal (' + (secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales) + 'h):</strong> Taller nuclear de profundización en ' + focoSemana + ' y desafío cognitivo.<br>' +
+              (secondaryAction 
+                ? ('• <strong>Acción 2 (' + hrsTransversales + 'h):</strong> Aplicación situada, trabajo colaborativo o articulación transversal para afianzar el aprendizaje.')
+                : ('• <strong>Flexibilización y Refuerzo (' + hrsTransversales + 'h):</strong> Nivelación personalizada y adaptación curricular ante barreras activas.')) +
+            '</div>';
+
+          tarjetaHTML = 
+            '<div style="line-height:1.45;">' +
+              badgeCapacidadAcademica +
+              '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+              '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Riesgo institucional') + '<br>' +
+              '<span style="color:#0369a1;">📘 <strong>Acción 1 - ' + primaryAction.dbaCode + ' (' + (primaryAction.periodo || 'Plan Adaptado') + '):</strong> ' + (primaryAction.subproceso ? (primaryAction.subproceso + ' - ') : '') + primaryAction.dbaDesc + '</span><br>' +
+              accionesSecundariasHTML +
+              '<span style="color:#047857;">🛠️ <strong>Didáctica Situada:</strong> ' + primaryAction.didactica + ' | <em>' + didacticaEstrategia + '</em></span><br>' +
+              barrerasAlertHTML +
+              '<span style="color:#6b21a8;">🎯 <strong>Desafío Bloom:</strong> ' + primaryAction.bloom + '</span>' +
+              desgloseHorarioHTML +
+            '</div>';
+
+          tarjetaPlana = (d.grado || ('Ciclo ' + cicloKey)) + ' (' + decretoInfo.horasSemanales + 'h/sem Dec.0277 | ' + accionesPorSemana + ' acc/sem) | ' + amenazasLabel + ' | ' + primaryAction.dbaCode + ': ' + primaryAction.dbaDesc + ' | ' + primaryAction.didactica;
 
         }
 
@@ -268,6 +370,9 @@ var ModuloC = {
           etapa: d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica',
           foco: focoSemana,
           areaNombre: focoSemana,
+          horasSemana: decretoInfo.horasSemanales,
+          accionesCapacidad: accionesPorSemana,
+          duracionPromedioAccion: horasEfectivasPorAccion.toFixed(1),
           tarjeta: tarjetaHTML,
           tarjetaPlana: tarjetaPlana,
           avance: savedMonitoreo[i] ? savedMonitoreo[i].avance : '⚪ Sin iniciar',
@@ -280,6 +385,8 @@ var ModuloC = {
       var logrados = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('Logrado') !== -1; }).length;
       var enProceso = monValues.filter(function(x) { return x && x.avance && x.avance.indexOf('proceso') !== -1; }).length;
       var pctAvance = Math.round((logrados / semanas.length) * 100);
+      var totalHorasPlan = semanas.length * decretoInfo.horasSemanales;
+      var horasEjecutadas = (logrados * decretoInfo.horasSemanales) + Math.round(enProceso * (decretoInfo.horasSemanales * 0.5));
 
       var html = 
         '<div class="card-elite">' +
@@ -301,29 +408,41 @@ var ModuloC = {
             '</div>' +
           '</div>' +
 
-          '<!-- Banner de Canasta Curricular Activa -->' +
-          '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.55;">' +
-            '<strong>🎯 Planificación Curricular Alimentada desde la Rayuela (Módulo B):</strong> ' +
-            'Este cronograma semanal integra las prioridades seleccionadas por el docente en la Rayuela Curricular. ' +
-            (isEtapa1 ? '<strong>Enfoque Normas INEE Activo:</strong> Las Semanas 1 y 2 están blindadas con soporte psicosocial y autoprotección ERAE/WASH.' : 'Las semanas distribuyen de forma equilibrada los proyectos y DBA priorizados.') +
+          '<!-- Banner de Cumplimiento Decreto 0277 de 2025 e INEE -->' +
+          '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.6;">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">' +
+              '<strong style="color:#065f46; font-size:0.95rem;">⚖️ Cumplimiento Normativo Decreto 0277 de 2025 (Jornada Escolar Regular)</strong>' +
+              '<span class="badge-pill" style="background:#059669; color:#fff; font-size:0.8rem; font-weight:700;">' + decretoInfo.nivel + '</span>' +
+            '</div>' +
+            '<div>' +
+              '<strong>Intensidad Reglamentaria:</strong> Mínimo <strong>' + decretoInfo.horasSemanales + ' horas efectivas de 60 minutos semanales</strong> (~' + decretoInfo.horasDiarias + ' horas diarias) | Meta anual de referencia: <strong>' + decretoInfo.horasAnuales.toLocaleString('es-CO') + ' horas</strong>.<br>' +
+              '<strong>📐 Estimación de Capacidad Pedagógica por Semana:</strong> Para ' + d.nna + ' NNA (' + tipoEstrategiaLabel + '), la duración promedio calculada por acción pedagógica situada es de <strong>~' + horasEfectivasPorAccion.toFixed(1) + ' horas efectivas</strong>. Por tanto, cada semana integra <strong>' + (isEtapa1 ? '2 acciones de choque (Socioemocional + ERAE/WASH)' : (accionesPorSemana + ' acción(es) situada(s) con posibilidad de articular acciones complementarias)')) + '</strong>.<br>' +
+              (isEtapa1 
+                ? '<strong>⚠️ Etapa 1 Activa (Respuesta Inmediata / Contención):</strong> Las Semanas 1 y 2 canalizan las ' + decretoInfo.horasSemanales + ' horas en 2 acciones simultáneas: contención emocional (15h/18h) y autoprotección comunitaria ERAE/WASH (10h/12h).' 
+                : '<strong>Plan Curricular Sincronizado:</strong> Las semanas distribuyen las ' + decretoInfo.horasSemanales + ' horas entre profundización de DBA esenciales nucleares, proyectos de aula y mitigación de barreras.') +
+            '</div>' +
           '</div>' +
 
           '<div class="grid-4" style="margin-bottom: 24px;">' +
             '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
               '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso Logrado</div>' +
               '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvance + '%</div>' +
+              '<div style="font-size: 0.72rem; color: #64748b; margin-top:2px;">' + horasEjecutadas + 'h de ' + totalHorasPlan + 'h plan</div>' +
             '</div>' +
             '<div style="background: var(--color-etapa3-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Logrados</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + logrados + '</div>' +
+              '<div style="font-size: 0.8rem; color: var(--color-etapa3);">🟢 Capacidad Semanal</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa3);">' + (isEtapa1 ? '2' : accionesPorSemana) + ' acc/sem</div>' +
+              '<div style="font-size: 0.72rem; color: #047857; margin-top:2px;">~' + (isEtapa1 ? (decretoInfo.horasSemanales / 2).toFixed(1) : horasEfectivasPorAccion.toFixed(1)) + 'h / acción</div>' +
             '</div>' +
             '<div style="background: var(--color-etapa2-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 En Proceso</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + enProceso + '</div>' +
+              '<div style="font-size: 0.8rem; color: var(--color-etapa2);">🟡 Horas Semanales</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-etapa2);">' + decretoInfo.horasSemanales + ' h</div>' +
+              '<div style="font-size: 0.72rem; color: #b45309; margin-top:2px;">Dec. 0277 (' + decretoInfo.horasDiarias + 'h/día)</div>' +
             '</div>' +
             '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center;">' +
-              '<div style="font-size: 0.8rem; color: var(--color-blue);">Total Semanas Plan</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + semanas.length + '</div>' +
+              '<div style="font-size: 0.8rem; color: var(--color-blue);">Meta Semestral (16 sem)</div>' +
+              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + totalHorasPlan + ' h</div>' +
+              '<div style="font-size: 0.72rem; color: #0369a1; margin-top:2px;">16 sem × ' + decretoInfo.horasSemanales + 'h/sem</div>' +
             '</div>' +
           '</div>' +
 
@@ -331,10 +450,10 @@ var ModuloC = {
             '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">' +
               '<thead>' +
                 '<tr style="background: var(--surface-hover); text-align: left;">' +
-                  '<th style="padding: 10px; width: 75px;">Semana</th>' +
+                  '<th style="padding: 10px; width: 85px;">Semana</th>' +
                   '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
-                  '<th style="padding: 10px; width: 120px;">Enfoque / Área</th>' +
-                  '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada</th>' +
+                  '<th style="padding: 10px; width: 130px;">Enfoque / Área</th>' +
+                  '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada (Decreto 0277 de 2025)</th>' +
                   '<th style="padding: 10px; width: 140px;">Estado de Avance</th>' +
                   '<th style="padding: 10px; width: 220px;">Evidencias / Bitácora Docente</th>' +
                 '</tr>' +
@@ -342,7 +461,10 @@ var ModuloC = {
               '<tbody>' +
                 semanas.map(function(s) {
                   return '<tr style="border-bottom: 1px solid var(--border-light);">' +
-                    '<td style="padding: 10px; font-weight: 700; color: var(--primary); vertical-align: top;">Semana ' + s.num + '</td>' +
+                    '<td style="padding: 10px; font-weight: 700; color: var(--primary); vertical-align: top;">' +
+                      'Semana ' + s.num + '<br>' +
+                      '<span style="font-size:0.75rem; color:#0369a1; font-weight:600;">' + s.horasSemana + 'h/sem</span>' +
+                    '</td>' +
                     '<td style="padding: 10px; font-size: 0.82rem; color: var(--text-muted); vertical-align: top;">' + s.fecha + '</td>' +
                     '<td style="padding: 10px; vertical-align: top;"><span class="badge-pill" style="background:#e2e8f0; color:#1e293b; font-size:0.75rem;">' + s.foco + '</span></td>' +
                     '<td style="padding: 10px; vertical-align: top;">' + s.tarjeta + '</td>' +
@@ -414,7 +536,7 @@ var ModuloC = {
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
           var csvRows = [];
-          csvRows.push(['Semana', 'Fecha Proyectada', 'Etapa', 'Foco Pedagógico', 'Multirriesgo Top 3', 'Tarjeta Curricular Resumida', 'Estado de Avance', 'Evidencias y Observaciones Docente']);
+          csvRows.push(['Semana', 'Fecha Proyectada', 'Horas Semanales (Dec. 0277/2025)', 'Capacidad de Acciones / Semana', 'Duración Estimada / Acción', 'Etapa', 'Foco Pedagógico', 'Multirriesgo Top 3', 'Tarjeta Curricular Resumida', 'Estado de Avance', 'Evidencias y Observaciones Docente']);
           semanas.forEach(function(s) {
             var txtObs = container.querySelector('.input-observaciones-semana[data-semana="' + s.num + '"]');
             var selAvance = container.querySelector('.select-avance-semana[data-semana="' + s.num + '"]');
@@ -423,6 +545,9 @@ var ModuloC = {
             csvRows.push([
               'Semana ' + s.num,
               s.fecha,
+              s.horasSemana + ' horas efectivas',
+              s.accionesCapacidad + ' acción(es)/sem',
+              '~' + s.duracionPromedioAccion + ' horas efectivas',
               s.etapa,
               s.foco,
               amenazasLabel,
