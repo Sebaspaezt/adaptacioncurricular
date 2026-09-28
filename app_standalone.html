@@ -5,10 +5,1053 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Herramienta de adaptación y flexibilización curricular en emergencias</title>
   
-  <!-- Estilos Visuales Elite Swiss-Fine -->
-  <link rel="stylesheet" href="css/variables.css?v=17">
-  <link rel="stylesheet" href="css/components.css?v=17">
-  <link rel="stylesheet" href="css/print.css?v=17">
+  <style>
+/* Variables de Diseño Institucional - Gobernación de Norte de Santander & MinTIC UI/UX Kit 9.5 */
+:root {
+  /* Identidad Institucional Gobernación / SIT */
+  --gov-petroleo: #0e4c5b;
+  --gov-petroleo-dark: #09333e;
+  --gov-petroleo-light: #166d82;
+  --gov-petroleo-subtle: #e6f3f6;
+
+  /* MinTIC Kit UI/UX 9.5 */
+  --mintic-blue: #0066cc;
+  --mintic-blue-dark: #004c99;
+  --mintic-blue-light: #e6f0fa;
+
+  /* Primarios y secundarios del sistema */
+  --primary: #0e4c5b;
+  --primary-dark: #09333e;
+  --primary-light: #166d82;
+  --primary-subtle: #e6f3f6;
+  
+  --secondary: #d97706;
+  --secondary-light: #fef3c7;
+  
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #94a3b8;
+  
+  --bg-page: #f8fafc;
+  --surface-white: #ffffff;
+  --surface-hover: #f1f5f9;
+  --surface-muted: #e2e8f0;
+  
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-strong: #94a3b8;
+  
+  --color-etapa1: #dc2626;
+  --color-etapa1-bg: #fee2e2;
+  --color-etapa2: #d97706;
+  --color-etapa2-bg: #fef3c7;
+  --color-etapa3: #16a34a;
+  --color-etapa3-bg: #dcfce7;
+  
+  --color-blue: #0066cc;
+  --color-blue-bg: #e6f0fa;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+  
+  --font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+
+/* Componentes UI Swiss-Fine NRC */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.header-bar {
+  background: var(--surface-white);
+  border-bottom: 3px solid var(--primary);
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-icon-edu-container {
+  background: var(--gov-petroleo);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon-edu {
+  height: 34px;
+  width: auto;
+}
+
+.brand-titles-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.brand-subtitle-gov {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  margin-top: 1px;
+}
+
+
+
+.user-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-badge {
+  background: var(--surface-hover);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  border: 1px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-badge:hover {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+}
+
+/* Navigation Tabs */
+.nav-tabs-container {
+  background: var(--surface-white);
+  border-bottom: 1px solid var(--border-medium);
+  padding: 0 28px;
+  display: flex;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.nav-tab {
+  padding: 14px 22px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  color: var(--primary);
+  background: var(--surface-hover);
+}
+
+.nav-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+/* Main Layout */
+.main-container {
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 20px 60px;
+}
+
+/* Cards */
+.card-elite {
+  background: var(--surface-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Accordion */
+.accordion-item {
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: var(--surface-white);
+  transition: border-color 0.2s ease;
+}
+
+.accordion-item:hover {
+  border-color: var(--primary);
+}
+
+.accordion-header {
+  background: var(--surface-hover);
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 0.94rem;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.accordion-header:hover {
+  background: #e2e8f0;
+  color: var(--primary-dark);
+}
+
+.accordion-header .chevron {
+  transition: transform 0.25s ease;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.accordion-item.open .accordion-header .chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  padding: 18px;
+  display: none;
+  background: var(--surface-white);
+  border-top: 1px solid var(--border-light);
+}
+
+.accordion-item.open .accordion-body {
+  display: block;
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.select-elite, .input-elite {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-white);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.select-elite:focus, .input-elite:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 90, 54, 0.15);
+}
+
+.input-readonly {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-weight: 500;
+  cursor: default;
+  border-color: #cbd5e1;
+}
+
+.textarea-elite {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.90rem;
+  line-height: 1.55;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-white);
+  color: var(--text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.textarea-elite.input-readonly {
+  min-height: 60px;
+  height: auto;
+  overflow-y: hidden;
+  resize: none;
+}
+
+.textarea-elite:focus:not(.input-readonly) {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 90, 54, 0.15);
+}
+
+/* Chips y Checkboxes Multi-Categoría */
+.category-chips-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border-medium);
+  background: var(--surface-white);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.category-chip:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.category-chip.active {
+  background: var(--primary-subtle);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.category-chip input[type="checkbox"] {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn-elite {
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+.btn-secondary:hover {
+  background: #b45309;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--border-medium);
+  color: var(--text-main);
+}
+.btn-outline:hover {
+  background: var(--surface-hover);
+  border-color: var(--text-muted);
+}
+
+/* Badges */
+.badge-pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.badge-etapa1 { background: var(--color-etapa1-bg); color: var(--color-etapa1); }
+.badge-etapa2 { background: var(--color-etapa2-bg); color: var(--color-etapa2); }
+.badge-etapa3 { background: var(--color-etapa3-bg); color: var(--color-etapa3); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 95%;
+  max-width: 480px;
+  padding: 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  border-top: 5px solid var(--primary);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+.modal-close-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-main);
+}
+
+/* Botón Flotante y Modal de Evaluadores / Feedback */
+.btn-feedback-floating {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: #0f766e;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-feedback-floating:hover {
+  background: #115e59;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.5);
+}
+
+.star-rating-container {
+  display: flex;
+  gap: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #cbd5e1;
+}
+
+.star-rating-container .star-icon.active {
+  color: #f59e0b;
+}
+
+.feedback-status-badge {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  display: none;
+  margin-top: 12px;
+}
+
+.feedback-status-badge.success {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.feedback-status-badge.error {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.feedback-status-badge.loading {
+  display: block;
+  background: #f0fdf4;
+  color: #0f766e;
+  border: 1px solid #ccfbf1;
+}
+
+/* =================================================== */
+/* COMPONENTES PARA BARRERAS, PERIODOS Y CANASTA (V2.2)*/
+/* =================================================== */
+
+/* Matriz de Barreras de Aprendizaje */
+.barriers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.barrier-card {
+  background: var(--surface-white);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.barrier-card.active-low {
+  border-color: #fde047;
+  background: #fefce8;
+}
+
+.barrier-card.active-med {
+  border-color: #fdba74;
+  background: #fff7ed;
+}
+
+.barrier-card.active-high {
+  border-color: #fca5a5;
+  background: #fef2f2;
+}
+
+.barrier-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.barrier-levels {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.barrier-level-btn {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-medium);
+  background: var(--surface-white);
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.barrier-level-btn:hover {
+  background: var(--surface-hover);
+}
+
+.barrier-level-btn.selected-ninguna {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-baja {
+  background: #fef08a;
+  color: #854d0e;
+  border-color: #eab308;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-media {
+  background: #fed7aa;
+  color: #9a3412;
+  border-color: #f97316;
+  font-weight: 700;
+}
+
+.barrier-level-btn.selected-alta {
+  background: #fecaca;
+  color: #991b1b;
+  border-color: #ef4444;
+  font-weight: 700;
+}
+
+/* Multirriesgo Top 3 Armonioso */
+.threat-top3-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .threat-top3-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.threat-top3-card {
+  background: var(--surface-white);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.threat-top3-card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.threat-top3-badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* Periodos y Estados en Rayuela Curricular */
+.periodos-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  align-items: center;
+}
+
+.periodo-tab-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border: 1.5px solid var(--border-medium);
+  background: white;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.periodo-tab-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.periodo-tab-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Filas según estado pedagógico */
+.row-addressed {
+  background-color: #f0fdf4 !important;
+  opacity: 0.82;
+}
+
+.row-addressed:hover {
+  opacity: 1;
+}
+
+.row-pending {
+  background-color: #ffffff;
+}
+
+.row-postponed {
+  background-color: #f8fafc !important;
+  opacity: 0.65;
+}
+
+/* Badges de estado pedagógico */
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.status-badge-addressed {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.status-badge-pending {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
+}
+
+.status-badge-postponed {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+}
+
+/* Canasta Curricular Dock Flotante */
+.selection-dock-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 85;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.selection-dock-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.dock-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.dock-badge.active-count {
+  background: #059669;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* Banners informativos */
+.info-banner-inee {
+  background: #f0fdf4;
+  border-left: 5px solid #059669;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #065f46;
+}
+
+.info-banner-periodo {
+  background: #eff6ff;
+  border-left: 5px solid #2563eb;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #1e40af;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* Reglas de Impresión Optimizadas (A4 / Carta) - Flexibilidad Curricular NRC */
+@page {
+  size: letter landscape;
+  margin: 10mm 10mm 12mm 10mm;
+}
+
+@media print {
+  /* 1. Ocultar elementos no relevantes de navegación y botones interactivos */
+  .no-print, 
+  .header-bar, 
+  .nav-tabs-container, 
+  .modal-overlay, 
+  button, 
+  .btn-elite, 
+  .btn-feedback-floating, 
+  #modal-feedback, 
+  #modal-auth,
+  .periodos-bar,
+  .selection-dock-bar {
+    display: none !important;
+  }
+  
+  /* 2. Reseteo y formato general para hoja física */
+  html, body {
+    background: #ffffff !important;
+    font-size: 8.5pt !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .main-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* 3. Contenedores de tarjeta */
+  .card-elite {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 10px 14px !important;
+    margin-bottom: 14px !important;
+    page-break-inside: auto !important;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+  }
+
+  .card-header {
+    border-bottom: 1.5px solid #0f172a !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* 4. Tablas de alta legibilidad sin desbordamientos */
+  .table-print {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: auto !important;
+    margin-bottom: 16px !important;
+    table-layout: auto !important;
+  }
+  
+  .table-print thead {
+    display: table-header-group !important;
+  }
+
+  .table-print tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+  
+  .table-print th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #94a3b8 !important;
+    padding: 6px 8px !important;
+    font-size: 8pt !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px;
+  }
+
+  .table-print td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 8px !important;
+    font-size: 8pt !important;
+    line-height: 1.35 !important;
+    vertical-align: top !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 5. Asegurar lectura íntegra de select y textarea en impresión */
+  select.select-elite, 
+  select.select-item-state,
+  select.select-avance-accion {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    width: auto !important;
+    cursor: default !important;
+  }
+
+  textarea.textarea-elite,
+  textarea.input-observaciones-accion,
+  textarea.input-readonly {
+    border: 1px dashed #cbd5e1 !important;
+    background: #fafafa !important;
+    padding: 4px 6px !important;
+    font-size: 7.8pt !important;
+    line-height: 1.35 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    resize: none !important;
+    white-space: pre-wrap !important;
+    display: block !important;
+  }
+
+  /* 6. Textos duplicados de impresión limpia */
+  .print-only-text {
+    display: block !important;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  /* 7. Saltos de página y bloques especiales */
+  .print-area-break {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .print-signatures-block {
+    display: block !important;
+    page-break-inside: avoid !important;
+    margin-top: 24px !important;
+  }
+
+  /* Badges e insignias visibles */
+  .badge-pill {
+    border: 1px solid #cbd5e1 !important;
+    display: inline-block !important;
+    font-size: 7.2pt !important;
+    padding: 2px 6px !important;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -404,8 +1447,14 @@
 
           </div>
 
-          <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px;">
-            <button id="btn-guardar-diagnostico" class="btn-elite btn-primary">
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
+            <button type="button" id="btn-exportar-excel-diagnostico" class="btn-elite btn-secondary">
+              📊 Exportar Diagnóstico a Excel
+            </button>
+            <button type="button" id="btn-imprimir-diagnostico" class="btn-elite btn-outline">
+              🖨️ Imprimir Ficha Diagnóstica
+            </button>
+            <button type="submit" id="btn-guardar-diagnostico" class="btn-elite btn-primary">
               💾 Guardar y Aplicar Diagnóstico de Aula
             </button>
           </div>
@@ -6075,6 +7124,77 @@ var ModuloA = {
       });
     }
 
+    var btnExcelDiag = document.getElementById('btn-exportar-excel-diagnostico');
+    if (btnExcelDiag) {
+      btnExcelDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        var d = self.getLiveDiagnostic();
+        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+
+        var csvRows = [
+          ['PARÁMETRO DIAGNÓSTICO', 'VALOR REGISTRADO / ESTIMACIÓN'],
+          ['Docente Responsable', (user && user.nombreCompleto) || 'Docente Territorial'],
+          ['Institución Educativa', (user && user.institucion) || 'Sede Educativa Rural'],
+          ['Ciclo Formativo', 'Ciclo ' + d.ciclo],
+          ['Grado Escolar', d.grado],
+          ['Etapa de Respuesta INEE', d.etapa],
+          ['Complejidad y Desafío Cognitivo (Bloom)', d.bloom],
+          ['Categorías de Amenaza', d.categoriaAmenaza],
+          ['Amenaza Principal', d.amenazaPrincipal],
+          ['Amenaza Secundaria 1', d.amenazaSecundaria1 || '(Ninguna)'],
+          ['Amenaza Secundaria 2', d.amenazaSecundaria2 || '(Ninguna)'],
+          ['Consolidado Multirriesgo Top 3', (d.amenazasTop3 || []).join(' + ')],
+          ['Ejemplos Contextualizados en la IE', (d.ejemploIE || '').replace(/[\r\n]+/g, ' ')],
+          ['Riesgos Escolares Asociados', (d.riesgosIE || '').replace(/[\r\n]+/g, ' ')],
+          ['Rutas PGIRE de Articulación', (d.rutaGIRE || '').replace(/[\r\n]+/g, ' ')],
+          ['Matrícula de NNA', d.nna + ' estudiantes'],
+          ['Estrategia Didáctica por NNA', d.didacticaNNA],
+          ['Fecha Ocurrencia de la Emergencia', d.fechaInicio],
+          ['Fecha Inicio / Reanudación de Clases', d.fechaAtencion],
+          ['Desfase Escolar Estimado', d.desfaseDias + ' días (~' + d.desfaseSemanas + ' semanas)'],
+          ['Periodo Escolar en Curso', d.periodoEnCurso],
+          ['Periodos Previos Abordados', (d.periodosPrevios || []).join(', ') || '(Ninguno - Inicio de año)'],
+          ['Observación de Barreras del Docente', (d.barrerasDescripcion || '').replace(/[\r\n]+/g, ' ')]
+        ];
+
+        if (d.barreras) {
+          Object.keys(d.barreras).forEach(function(bKey) {
+            csvRows.push(['Barrera BAP: ' + bKey, d.barreras[bKey]]);
+          });
+        }
+
+        var formatCSVCell = function(val) {
+          var str = (val === null || val === undefined) ? '' : String(val);
+          if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            return '"' + str.replace(/"/g, '""') + '"';
+          }
+          return str;
+        };
+
+        var csvContent = '\uFEFF' + csvRows.map(function(row) {
+          return row.map(formatCSVCell).join(';');
+        }).join('\r\n');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'ficha_diagnostica_emergencia_ciclo_' + d.ciclo + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    var btnPrintDiag = document.getElementById('btn-imprimir-diagnostico');
+    if (btnPrintDiag) {
+      btnPrintDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        var d = self.getLiveDiagnostic();
+        self.renderDiagnosticSummary(d);
+        window.print();
+      });
+    }
+
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function(e) {
         e.preventDefault();
@@ -6583,7 +7703,7 @@ var ModuloB = {
 
           return '<tr class="' + rowClass + '" style="border-bottom: 1px solid var(--border-light);">' +
             '<td style="padding: 10px; vertical-align: top;">' +
-              '<div style="display:flex; flex-direction:column; gap:6px;">' +
+              '<div class="no-print" style="display:flex; flex-direction:column; gap:6px;">' +
                 '<label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:0.82rem; font-weight:700; color:' + (isChecked ? 'var(--primary)' : 'var(--text-muted)') + ';">' +
                   '<input type="checkbox" class="plan-checkbox" data-item-id="' + item.id + '" data-area="' + areaKey + '" ' + (isChecked ? 'checked' : '') + ' style="accent-color:var(--primary); width:16px; height:16px;">' +
                   '<span>' + checkboxLabel + '</span>' +
@@ -6593,6 +7713,10 @@ var ModuloB = {
                   '<option value="abordado" ' + (state === 'abordado' ? 'selected' : '') + '>👁️ Ya abordado</option>' +
                   '<option value="aplazado" ' + (state === 'aplazado' ? 'selected' : '') + '>⏸️ Pospuesto</option>' +
                 '</select>' +
+              '</div>' +
+              '<div class="print-only-text" style="display:none; font-size:7.5pt; line-height:1.3;">' +
+                '<strong>' + (isChecked ? '✓ EN PLAN' : '— NO INCLUIDO') + '</strong><br>' +
+                '<span style="text-transform:uppercase; color:#334155;">Estado: ' + state + '</span>' +
               '</div>' +
             '</td>' +
             '<td style="padding: 10px; vertical-align: top;">' +
@@ -6736,7 +7860,8 @@ var ModuloB = {
               'Amenaza: ' + ((d && d.amenazasTop3 && d.amenazasTop3.join(', ')) || (d && d.amenaza) || 'Natural') +
             '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 8px;">' +
+          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
+            '<button id="btn-exportar-excel-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
             '<button id="btn-imprimir-rayuela" class="btn-elite btn-outline">🖨️ Imprimir Malla</button>' +
           '</div>' +
         '</div>' +
@@ -6883,6 +8008,88 @@ var ModuloB = {
         if (typeof window.switchTab === 'function') {
           window.switchTab('tab-monitoreo');
         }
+      });
+    }
+
+    // Exportación a Excel de Rayuela Curricular (CSV estructurado y sanitizado RFC 4180)
+    var btnExcelRayuela = document.getElementById('btn-exportar-excel-rayuela');
+    if (btnExcelRayuela) {
+      btnExcelRayuela.addEventListener('click', function() {
+        var csvRows = [];
+        csvRows.push([
+          'Área Curricular',
+          'Periodo Escolar / Etapa',
+          'Factor / Eje Generador',
+          'Subproceso / Competencia Clave',
+          'Código DBA / EBC / INEE',
+          'Descripción del Aprendizaje Esencial',
+          'Complejidad Pedagógica',
+          'Desafío Cognitivo (Bloom)',
+          'Saber (Cognitivo)',
+          'Hacer (Procedimental / Didáctica)',
+          'Ser (Actitudinal / Convivencia)',
+          'Estado Pedagógico',
+          'Incluido en Canasta (Mód. C)'
+        ]);
+
+        areas.forEach(function(a) {
+          var raw = [];
+          if (a.key === 'socioemocional') raw = habsList || [];
+          else if (a.key === 'supervivencia') raw = supsList || [];
+          else raw = (cicloData && cicloData[a.key]) || [];
+
+          raw.forEach(function(it, idx) {
+            var item = self.getItemFields(it, a.key, idx, raw.length);
+            if (item) {
+              var st = self.getItemState(item, d, userStates);
+              var inPlan = self.isItemSelectedForPlan(item, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+
+              var cleanDesc = (item.dbaDesc || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSub = (item.subproceso || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanDidact = (item.didactica || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanBloom = (item.bloom || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSaber = (item.saber || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanHacer = (item.hacer || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSer = (item.ser || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+
+              csvRows.push([
+                a.name,
+                item.periodo,
+                item.factor,
+                cleanSub,
+                item.dbaCode,
+                cleanDesc,
+                item.complejidad,
+                cleanBloom,
+                cleanSaber,
+                cleanHacer || cleanDidact,
+                cleanSer,
+                st.toUpperCase(),
+                inPlan ? 'SÍ (EN PLAN)' : 'NO'
+              ]);
+            }
+          });
+        });
+
+        var formatCSVCell = function(val) {
+          var str = (val === null || val === undefined) ? '' : String(val);
+          if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            return '"' + str.replace(/"/g, '""') + '"';
+          }
+          return str;
+        };
+
+        var csvContent = '\uFEFF' + csvRows.map(function(row) {
+          return row.map(formatCSVCell).join(';');
+        }).join('\r\n');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'malla_curricular_rayuela_ciclo_' + cicloKey + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
       });
     }
 
@@ -7560,12 +8767,15 @@ var ModuloC = {
                         '<div style="font-size:0.74rem; font-weight:700; color:#0f172a; margin-bottom:5px;">' +
                           acc.etiqueta +
                         '</div>' +
-                        '<select class="select-elite select-avance-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
+                        '<select class="select-elite select-avance-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
                           '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                           '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                           '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
                           '<option value="🔴 Postergado" ' + (acc.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
                         '</select>' +
+                        '<div class="print-only-text" style="display:none; font-size:8pt; font-weight:800; color:#0f172a; padding:2px 0;">' +
+                          'Estado: ' + (acc.avance || '⚪ Sin iniciar') +
+                        '</div>' +
                       '</div>';
 
                     bitacorasProcesosHTML += 
@@ -7573,7 +8783,10 @@ var ModuloC = {
                         '<div style="font-size:0.72rem; color:#475569; font-weight:700; margin-bottom:4px;">' +
                           'Bitácora ' + acc.etiqueta + ' (' + acc.horas + 'h):' +
                         '</div>' +
-                        '<textarea class="textarea-elite input-observaciones-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<textarea class="textarea-elite input-observaciones-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<div class="print-only-text" style="display:none; font-size:7.5pt; color:#1e293b; line-height:1.35; padding:3px 0; border-top:1px dashed #cbd5e1; margin-top:2px;">' +
+                          (acc.observaciones && acc.observaciones.trim() ? acc.observaciones.trim() : '<em>(Sin observaciones adicionales registradas)</em>') +
+                        '</div>' +
                       '</div>';
                   });
 
@@ -7723,7 +8936,7 @@ var ModuloC = {
         });
       }
 
-      // Evento Exportar a Excel (CSV con desglose de procesos individuales)
+      // Evento Exportar a Excel (CSV con desglose curricular completo y compatibilidad 100% Excel RFC 4180)
       var btnExcel = document.getElementById('btn-exportar-excel');
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
@@ -7735,7 +8948,11 @@ var ModuloC = {
             'Proceso / Acción ID',
             'Etiqueta Proceso',
             'Código DBA / EBC / INEE',
+            'Subproceso / Articulación',
+            'Descripción del Aprendizaje Priorizado',
             'Horas Proceso',
+            'Didáctica Situada',
+            'Desafío Cognitivo (Bloom)',
             'Etapa Curricular',
             'Foco Pedagógico',
             'Multirriesgo Top 3',
@@ -7748,7 +8965,14 @@ var ModuloC = {
               var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
               var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
               var avVal = sel ? sel.value : acc.avance;
-              var obsVal = (txt ? txt.value : acc.observaciones).replace(/;/g, ',').replace(/\n/g, ' ');
+              var obsVal = txt ? txt.value : acc.observaciones;
+
+              // Sanitizar y limpiar textos sin romper celdas en Excel
+              var cleanObs = (obsVal || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanDesc = (acc.descripcion || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanSub = (acc.subproceso || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanDidact = (acc.didactica || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanBloom = (acc.bloom || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
 
               csvRows.push([
                 'Semana ' + s.num,
@@ -7757,17 +8981,33 @@ var ModuloC = {
                 acc.id,
                 acc.etiqueta,
                 acc.codigo,
+                cleanSub,
+                cleanDesc,
                 acc.horas + 'h',
+                cleanDidact,
+                cleanBloom,
                 s.etapa,
                 s.foco,
                 amenazasLabel,
                 avVal,
-                obsVal
+                cleanObs
               ]);
             });
           });
 
-          var csvContent = '\uFEFF' + csvRows.map(function(e) { return e.join(';'); }).join('\n');
+          // Función de escape estricto de celdas para CSV delimitado por punto y coma (formato estándar Excel en español)
+          var formatCSVCell = function(val) {
+            var str = (val === null || val === undefined) ? '' : String(val);
+            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+              return '"' + str.replace(/"/g, '""') + '"';
+            }
+            return str;
+          };
+
+          var csvContent = '\uFEFF' + csvRows.map(function(row) {
+            return row.map(formatCSVCell).join(';');
+          }).join('\r\n');
+
           var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');

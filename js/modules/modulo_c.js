@@ -657,12 +657,15 @@ var ModuloC = {
                         '<div style="font-size:0.74rem; font-weight:700; color:#0f172a; margin-bottom:5px;">' +
                           acc.etiqueta +
                         '</div>' +
-                        '<select class="select-elite select-avance-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
+                        '<select class="select-elite select-avance-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
                           '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                           '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                           '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
                           '<option value="🔴 Postergado" ' + (acc.avance === '🔴 Postergado' ? 'selected' : '') + '>🔴 Postergado</option>' +
                         '</select>' +
+                        '<div class="print-only-text" style="display:none; font-size:8pt; font-weight:800; color:#0f172a; padding:2px 0;">' +
+                          'Estado: ' + (acc.avance || '⚪ Sin iniciar') +
+                        '</div>' +
                       '</div>';
 
                     bitacorasProcesosHTML += 
@@ -670,7 +673,10 @@ var ModuloC = {
                         '<div style="font-size:0.72rem; color:#475569; font-weight:700; margin-bottom:4px;">' +
                           'Bitácora ' + acc.etiqueta + ' (' + acc.horas + 'h):' +
                         '</div>' +
-                        '<textarea class="textarea-elite input-observaciones-accion" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<textarea class="textarea-elite input-observaciones-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<div class="print-only-text" style="display:none; font-size:7.5pt; color:#1e293b; line-height:1.35; padding:3px 0; border-top:1px dashed #cbd5e1; margin-top:2px;">' +
+                          (acc.observaciones && acc.observaciones.trim() ? acc.observaciones.trim() : '<em>(Sin observaciones adicionales registradas)</em>') +
+                        '</div>' +
                       '</div>';
                   });
 
@@ -820,7 +826,7 @@ var ModuloC = {
         });
       }
 
-      // Evento Exportar a Excel (CSV con desglose de procesos individuales)
+      // Evento Exportar a Excel (CSV con desglose curricular completo y compatibilidad 100% Excel RFC 4180)
       var btnExcel = document.getElementById('btn-exportar-excel');
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
@@ -832,7 +838,11 @@ var ModuloC = {
             'Proceso / Acción ID',
             'Etiqueta Proceso',
             'Código DBA / EBC / INEE',
+            'Subproceso / Articulación',
+            'Descripción del Aprendizaje Priorizado',
             'Horas Proceso',
+            'Didáctica Situada',
+            'Desafío Cognitivo (Bloom)',
             'Etapa Curricular',
             'Foco Pedagógico',
             'Multirriesgo Top 3',
@@ -845,7 +855,14 @@ var ModuloC = {
               var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
               var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
               var avVal = sel ? sel.value : acc.avance;
-              var obsVal = (txt ? txt.value : acc.observaciones).replace(/;/g, ',').replace(/\n/g, ' ');
+              var obsVal = txt ? txt.value : acc.observaciones;
+
+              // Sanitizar y limpiar textos sin romper celdas en Excel
+              var cleanObs = (obsVal || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanDesc = (acc.descripcion || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanSub = (acc.subproceso || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanDidact = (acc.didactica || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
+              var cleanBloom = (acc.bloom || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
 
               csvRows.push([
                 'Semana ' + s.num,
@@ -854,17 +871,33 @@ var ModuloC = {
                 acc.id,
                 acc.etiqueta,
                 acc.codigo,
+                cleanSub,
+                cleanDesc,
                 acc.horas + 'h',
+                cleanDidact,
+                cleanBloom,
                 s.etapa,
                 s.foco,
                 amenazasLabel,
                 avVal,
-                obsVal
+                cleanObs
               ]);
             });
           });
 
-          var csvContent = '\uFEFF' + csvRows.map(function(e) { return e.join(';'); }).join('\n');
+          // Función de escape estricto de celdas para CSV delimitado por punto y coma (formato estándar Excel en español)
+          var formatCSVCell = function(val) {
+            var str = (val === null || val === undefined) ? '' : String(val);
+            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+              return '"' + str.replace(/"/g, '""') + '"';
+            }
+            return str;
+          };
+
+          var csvContent = '\uFEFF' + csvRows.map(function(row) {
+            return row.map(formatCSVCell).join(';');
+          }).join('\r\n');
+
           var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');

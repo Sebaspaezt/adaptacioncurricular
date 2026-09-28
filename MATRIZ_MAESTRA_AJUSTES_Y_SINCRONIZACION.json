@@ -3,8 +3,8 @@
     "titulo": "MATRIZ MAESTRA DE AJUSTES Y SINCRONIZACIÓN PEDAGÓGICA Y TÉCNICA (PROYECTOS 1 Y 2)",
     "iniciativa": "Iniciativa de Flexibilización y Adaptación Curricular en Situaciones de Emergencia (NRC / MEN / Gobernación de Norte de Santander)",
     "entidad_beneficiaria": "Secretaría de Educación Departamental / Gobernación de Norte de Santander",
-    "version": "2.1.0",
-    "ultima_sincronizacion": "2026-09-09 13:00:00",
+    "version": "2.3.0",
+    "ultima_sincronizacion": "2026-09-28 13:00:00",
     "descripcion": "Fuente única de verdad (SSOT) para ingresar ajustes curriculares, normativos y didácticos aplicables simultáneamente a los libros Excel (Proyecto 1) y a la plataforma Web (Proyecto 2), preparada para entrega y despliegue en la infraestructura TIC de la Gobernación de Norte de Santander.",
     "rutas_proyectos": {
       "proyecto_1_excel": "E:\\Proyectos antigravity\\NRC\\Proyecto herramienta 1",
@@ -18,6 +18,18 @@
     ]
   },
   "registro_ajustes": [
+    {
+      "id": "AJUSTE-2026-006",
+      "fecha": "2026-09-28",
+      "autor": "Equipo Curricular NRC / AGY",
+      "componente": "PROYECTO_2_WEB_PRINT_AND_EXCEL",
+      "area_o_modulo": "Impresión Física / PDF y Exportación Excel en Módulos A, B y C",
+      "tipo_ajuste": "OPTIMIZACION_IMPRESION_LEGIBILIDAD_TOTAL_Y_CORRECCION_EXPORTACION_EXCEL",
+      "descripcion": "Resolución integral de legibilidad en impresión y consistencia de datos en exportaciones: 1) En print.css se adoptó orientación apaisada (letter landscape), reseteo de márgenes, encabezados de tabla repetidos (thead table-header-group) y espejos de texto plano (print-only-text) para selectores y bitácoras evitando deformaciones o campos vacíos en papel o PDF. 2) En Módulo C se reestructuró la exportación a Excel bajo el estándar RFC 4180 con BOM UTF-8 y delimitador punto y coma, incorporando las columnas de Didáctica, Desafío Bloom, Subproceso y sanitización estricta de saltos de línea para apertura directa e impecable en Microsoft Excel sin mezclar filas. 3) En Módulos A y B se implementaron botones de exportación a Excel y hojas de impresión directa para la ficha diagnóstica y la malla curricular completa.",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
     {
       "id": "AJUSTE-2026-005",
       "fecha": "2026-09-24",

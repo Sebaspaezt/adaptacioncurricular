@@ -497,6 +497,77 @@ var ModuloA = {
       });
     }
 
+    var btnExcelDiag = document.getElementById('btn-exportar-excel-diagnostico');
+    if (btnExcelDiag) {
+      btnExcelDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        var d = self.getLiveDiagnostic();
+        var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
+
+        var csvRows = [
+          ['PARÁMETRO DIAGNÓSTICO', 'VALOR REGISTRADO / ESTIMACIÓN'],
+          ['Docente Responsable', (user && user.nombreCompleto) || 'Docente Territorial'],
+          ['Institución Educativa', (user && user.institucion) || 'Sede Educativa Rural'],
+          ['Ciclo Formativo', 'Ciclo ' + d.ciclo],
+          ['Grado Escolar', d.grado],
+          ['Etapa de Respuesta INEE', d.etapa],
+          ['Complejidad y Desafío Cognitivo (Bloom)', d.bloom],
+          ['Categorías de Amenaza', d.categoriaAmenaza],
+          ['Amenaza Principal', d.amenazaPrincipal],
+          ['Amenaza Secundaria 1', d.amenazaSecundaria1 || '(Ninguna)'],
+          ['Amenaza Secundaria 2', d.amenazaSecundaria2 || '(Ninguna)'],
+          ['Consolidado Multirriesgo Top 3', (d.amenazasTop3 || []).join(' + ')],
+          ['Ejemplos Contextualizados en la IE', (d.ejemploIE || '').replace(/[\r\n]+/g, ' ')],
+          ['Riesgos Escolares Asociados', (d.riesgosIE || '').replace(/[\r\n]+/g, ' ')],
+          ['Rutas PGIRE de Articulación', (d.rutaGIRE || '').replace(/[\r\n]+/g, ' ')],
+          ['Matrícula de NNA', d.nna + ' estudiantes'],
+          ['Estrategia Didáctica por NNA', d.didacticaNNA],
+          ['Fecha Ocurrencia de la Emergencia', d.fechaInicio],
+          ['Fecha Inicio / Reanudación de Clases', d.fechaAtencion],
+          ['Desfase Escolar Estimado', d.desfaseDias + ' días (~' + d.desfaseSemanas + ' semanas)'],
+          ['Periodo Escolar en Curso', d.periodoEnCurso],
+          ['Periodos Previos Abordados', (d.periodosPrevios || []).join(', ') || '(Ninguno - Inicio de año)'],
+          ['Observación de Barreras del Docente', (d.barrerasDescripcion || '').replace(/[\r\n]+/g, ' ')]
+        ];
+
+        if (d.barreras) {
+          Object.keys(d.barreras).forEach(function(bKey) {
+            csvRows.push(['Barrera BAP: ' + bKey, d.barreras[bKey]]);
+          });
+        }
+
+        var formatCSVCell = function(val) {
+          var str = (val === null || val === undefined) ? '' : String(val);
+          if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            return '"' + str.replace(/"/g, '""') + '"';
+          }
+          return str;
+        };
+
+        var csvContent = '\uFEFF' + csvRows.map(function(row) {
+          return row.map(formatCSVCell).join(';');
+        }).join('\r\n');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'ficha_diagnostica_emergencia_ciclo_' + d.ciclo + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    var btnPrintDiag = document.getElementById('btn-imprimir-diagnostico');
+    if (btnPrintDiag) {
+      btnPrintDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        var d = self.getLiveDiagnostic();
+        self.renderDiagnosticSummary(d);
+        window.print();
+      });
+    }
+
     if (btnGuardar) {
       btnGuardar.addEventListener('click', function(e) {
         e.preventDefault();

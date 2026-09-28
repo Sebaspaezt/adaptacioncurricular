@@ -334,7 +334,7 @@ var ModuloB = {
 
           return '<tr class="' + rowClass + '" style="border-bottom: 1px solid var(--border-light);">' +
             '<td style="padding: 10px; vertical-align: top;">' +
-              '<div style="display:flex; flex-direction:column; gap:6px;">' +
+              '<div class="no-print" style="display:flex; flex-direction:column; gap:6px;">' +
                 '<label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:0.82rem; font-weight:700; color:' + (isChecked ? 'var(--primary)' : 'var(--text-muted)') + ';">' +
                   '<input type="checkbox" class="plan-checkbox" data-item-id="' + item.id + '" data-area="' + areaKey + '" ' + (isChecked ? 'checked' : '') + ' style="accent-color:var(--primary); width:16px; height:16px;">' +
                   '<span>' + checkboxLabel + '</span>' +
@@ -344,6 +344,10 @@ var ModuloB = {
                   '<option value="abordado" ' + (state === 'abordado' ? 'selected' : '') + '>👁️ Ya abordado</option>' +
                   '<option value="aplazado" ' + (state === 'aplazado' ? 'selected' : '') + '>⏸️ Pospuesto</option>' +
                 '</select>' +
+              '</div>' +
+              '<div class="print-only-text" style="display:none; font-size:7.5pt; line-height:1.3;">' +
+                '<strong>' + (isChecked ? '✓ EN PLAN' : '— NO INCLUIDO') + '</strong><br>' +
+                '<span style="text-transform:uppercase; color:#334155;">Estado: ' + state + '</span>' +
               '</div>' +
             '</td>' +
             '<td style="padding: 10px; vertical-align: top;">' +
@@ -487,7 +491,8 @@ var ModuloB = {
               'Amenaza: ' + ((d && d.amenazasTop3 && d.amenazasTop3.join(', ')) || (d && d.amenaza) || 'Natural') +
             '</span>' +
           '</div>' +
-          '<div style="display: flex; gap: 8px;">' +
+          '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
+            '<button id="btn-exportar-excel-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
             '<button id="btn-imprimir-rayuela" class="btn-elite btn-outline">🖨️ Imprimir Malla</button>' +
           '</div>' +
         '</div>' +
@@ -634,6 +639,88 @@ var ModuloB = {
         if (typeof window.switchTab === 'function') {
           window.switchTab('tab-monitoreo');
         }
+      });
+    }
+
+    // Exportación a Excel de Rayuela Curricular (CSV estructurado y sanitizado RFC 4180)
+    var btnExcelRayuela = document.getElementById('btn-exportar-excel-rayuela');
+    if (btnExcelRayuela) {
+      btnExcelRayuela.addEventListener('click', function() {
+        var csvRows = [];
+        csvRows.push([
+          'Área Curricular',
+          'Periodo Escolar / Etapa',
+          'Factor / Eje Generador',
+          'Subproceso / Competencia Clave',
+          'Código DBA / EBC / INEE',
+          'Descripción del Aprendizaje Esencial',
+          'Complejidad Pedagógica',
+          'Desafío Cognitivo (Bloom)',
+          'Saber (Cognitivo)',
+          'Hacer (Procedimental / Didáctica)',
+          'Ser (Actitudinal / Convivencia)',
+          'Estado Pedagógico',
+          'Incluido en Canasta (Mód. C)'
+        ]);
+
+        areas.forEach(function(a) {
+          var raw = [];
+          if (a.key === 'socioemocional') raw = habsList || [];
+          else if (a.key === 'supervivencia') raw = supsList || [];
+          else raw = (cicloData && cicloData[a.key]) || [];
+
+          raw.forEach(function(it, idx) {
+            var item = self.getItemFields(it, a.key, idx, raw.length);
+            if (item) {
+              var st = self.getItemState(item, d, userStates);
+              var inPlan = self.isItemSelectedForPlan(item, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+
+              var cleanDesc = (item.dbaDesc || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSub = (item.subproceso || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanDidact = (item.didactica || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanBloom = (item.bloom || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSaber = (item.saber || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanHacer = (item.hacer || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+              var cleanSer = (item.ser || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+
+              csvRows.push([
+                a.name,
+                item.periodo,
+                item.factor,
+                cleanSub,
+                item.dbaCode,
+                cleanDesc,
+                item.complejidad,
+                cleanBloom,
+                cleanSaber,
+                cleanHacer || cleanDidact,
+                cleanSer,
+                st.toUpperCase(),
+                inPlan ? 'SÍ (EN PLAN)' : 'NO'
+              ]);
+            }
+          });
+        });
+
+        var formatCSVCell = function(val) {
+          var str = (val === null || val === undefined) ? '' : String(val);
+          if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            return '"' + str.replace(/"/g, '""') + '"';
+          }
+          return str;
+        };
+
+        var csvContent = '\uFEFF' + csvRows.map(function(row) {
+          return row.map(formatCSVCell).join(';');
+        }).join('\r\n');
+
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'malla_curricular_rayuela_ciclo_' + cicloKey + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
       });
     }
 

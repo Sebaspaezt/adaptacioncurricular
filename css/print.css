@@ -1,54 +1,160 @@
-/* Reglas de Impresión Tamaño Carta */
+/* Reglas de Impresión Optimizadas (A4 / Carta) - Flexibilidad Curricular NRC */
 @page {
-  size: letter portrait;
-  margin: 12mm 10mm 15mm 10mm;
+  size: letter landscape;
+  margin: 10mm 10mm 12mm 10mm;
 }
 
 @media print {
-  .no-print, .header-bar, .nav-tabs-container, .modal-overlay, button, .btn-feedback-floating, #modal-feedback, #modal-auth {
+  /* 1. Ocultar elementos no relevantes de navegación y botones interactivos */
+  .no-print, 
+  .header-bar, 
+  .nav-tabs-container, 
+  .modal-overlay, 
+  button, 
+  .btn-elite, 
+  .btn-feedback-floating, 
+  #modal-feedback, 
+  #modal-auth,
+  .periodos-bar,
+  .selection-dock-bar {
     display: none !important;
   }
   
-  body {
-    background: white !important;
-    font-size: 9.5pt !important;
-    color: black !important;
+  /* 2. Reseteo y formato general para hoja física */
+  html, body {
+    background: #ffffff !important;
+    font-size: 8.5pt !important;
+    color: #0f172a !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   
   .main-container {
     max-width: 100% !important;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
   
+  /* 3. Contenedores de tarjeta */
   .card-elite {
     box-shadow: none !important;
-    border: 1px solid #999 !important;
-    padding: 10px !important;
-    margin-bottom: 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 10px 14px !important;
+    margin-bottom: 14px !important;
     page-break-inside: auto !important;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+  }
+
+  .card-header {
+    border-bottom: 1.5px solid #0f172a !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 12px !important;
   }
   
+  /* 4. Tablas de alta legibilidad sin desbordamientos */
   .table-print {
     width: 100% !important;
     border-collapse: collapse !important;
     page-break-inside: auto !important;
+    margin-bottom: 16px !important;
+    table-layout: auto !important;
   }
   
-  .table-print tr {
-    page-break-inside: avoid !important;
-  }
-  
-  .table-print th, .table-print td {
-    border: 1px solid #777 !important;
-    padding: 5px 6px !important;
-    font-size: 8pt !important;
-    line-height: 1.3 !important;
+  .table-print thead {
+    display: table-header-group !important;
   }
 
+  .table-print tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+  
+  .table-print th {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border: 1px solid #94a3b8 !important;
+    padding: 6px 8px !important;
+    font-size: 8pt !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px;
+  }
+
+  .table-print td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 8px !important;
+    font-size: 8pt !important;
+    line-height: 1.35 !important;
+    vertical-align: top !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* 5. Asegurar lectura íntegra de select y textarea en impresión */
+  select.select-elite, 
+  select.select-item-state,
+  select.select-avance-accion {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 8pt !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    width: auto !important;
+    cursor: default !important;
+  }
+
+  textarea.textarea-elite,
+  textarea.input-observaciones-accion,
+  textarea.input-readonly {
+    border: 1px dashed #cbd5e1 !important;
+    background: #fafafa !important;
+    padding: 4px 6px !important;
+    font-size: 7.8pt !important;
+    line-height: 1.35 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    resize: none !important;
+    white-space: pre-wrap !important;
+    display: block !important;
+  }
+
+  /* 6. Textos duplicados de impresión limpia */
+  .print-only-text {
+    display: block !important;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  /* 7. Saltos de página y bloques especiales */
   .print-area-break {
-    page-break-before: always;
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .print-signatures-block {
+    display: block !important;
+    page-break-inside: avoid !important;
+    margin-top: 24px !important;
+  }
+
+  /* Badges e insignias visibles */
+  .badge-pill {
+    border: 1px solid #cbd5e1 !important;
+    display: inline-block !important;
+    font-size: 7.2pt !important;
+    padding: 2px 6px !important;
   }
 }
