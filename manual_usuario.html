@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Usuario - Herramienta de Adaptación y Flexibilización Curricular en Emergencias</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #005A36;
+      --primary-dark: #003d24;
+      --primary-light: #e8f5e9;
+      --secondary: #008080;
+      --accent-red: #b91c1c;
+      --accent-amber: #d97706;
+      --accent-blue: #0284c7;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg-page: #f8fafc;
+      --surface-white: #ffffff;
+      --border-color: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 15px;
+      padding: 30px 20px;
+    }
+
+    .manual-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface-white);
+      padding: 45px 55px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Encabezado Institucional */
+    .header-institutional {
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-title h1 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary);
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .brand-title p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .badge-doc {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Secciones y Tipografía */
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-top: 36px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-family: 'Outfit', sans-serif;
+      color: #1e293b;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #334155;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+      color: #334155;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Cajas destacadas */
+    .callout {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 18px 0;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .callout-info {
+      background: #f0fdf4;
+      border-left: 5px solid var(--primary);
+      color: #065f46;
+    }
+
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 5px solid var(--accent-amber);
+      color: #92400e;
+    }
+
+    .callout-danger {
+      background: #fef2f2;
+      border-left: 5px solid var(--accent-red);
+      color: #991b1b;
+    }
+
+    .callout-blue {
+      background: #eff6ff;
+      border-left: 5px solid var(--accent-blue);
+      color: #1e40af;
+    }
+
+    /* Tablas del manual */
+    .table-guide {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.88rem;
+    }
+
+    .table-guide th {
+      background: #f1f5f9;
+      color: var(--primary);
+      text-align: left;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      font-weight: 700;
+    }
+
+    .table-guide td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 0.82rem;
+      margin-right: 8px;
+    }
+
+    .print-actions-bar {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-action {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Estilos de Impresión */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        color: black;
+      }
+      .manual-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .print-actions-bar {
+        display: none !important;
+      }
+      h2 {
+        page-break-after: avoid;
+      }
+      .table-guide, .callout {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="manual-container">
+    
+    <div class="print-actions-bar">
+      <button class="btn-action" onclick="window.print();">🖨️ Imprimir Manual</button>
+      <a href="index.html" class="btn-action" style="background:#0f172a;">🔙 Volver a la Herramienta</a>
+    </div>
+
+    <!-- Encabezado Institucional -->
+    <header class="header-institutional">
+      <div class="brand-title">
+        <h1>Manual de Usuario y Guía de Navegación</h1>
+        <p>Herramienta de Adaptación y Flexibilización Curricular en Situaciones de Emergencia</p>
+        <p style="font-size:0.8rem; color:#64748b;">Secretaría de Educación Departamental de Norte de Santander | Consejo Noruego para Refugiados (NRC) | MEN</p>
+      </div>
+      <div>
+        <span class="badge-doc">Versión Oficial 2.5 - Guía Integral</span>
+      </div>
+    </header>
+
+    <!-- 1. INTRODUCCIÓN Y MARCO NORMATIVO -->
+    <section>
+      <h2><span>🏛️</span> 1. Presentación y Marco Normativo</h2>
+      <p>
+        La presente herramienta web ha sido diseñada para brindar a los docentes, directivos docentes y equipos pedagógicos de Norte de Santander una solución integral, estandarizada y offline-first para la gestión, adaptación, flexibilización y monitoreo del currículo escolar en contextos de crisis o emergencias (conflicto armado, inundaciones, olas de calor, deslizamientos, accidentes con minas antipersonal ERAE, entre otros).
+      </p>
+      
+      <div class="callout callout-info">
+        <strong>Fundamento Pedagógico y Legal:</strong>
+        <ul style="margin-top: 8px; margin-bottom: 0;">
+          <li><strong>Decreto 0277 de 2025 (Jornada Escolar Regular del MEN):</strong> Establece una intensidad obligatoria de <strong>25 horas semanales</strong> (5 horas diarias) y 1.000 horas anuales para Básica Primaria (Ciclos I y II); y <strong>30 horas semanales</strong> (6 horas diarias) y 1.200 horas anuales para Básica Secundaria y Media (Ciclos III, IV y V).</li>
+          <li><strong>Normas Mínimas INEE para Educación en Emergencias:</strong> Priorización del soporte psicosocial, la contención emocional y la supervivencia integral antes de la introducción de contenidos disciplinares densos.</li>
+          <li><strong>Planes de Gestión Integral del Riesgo Escolar (PGIRE):</strong> Vinculación directa con el catálogo de 40 amenazas territoriales clasificadas en 4 macro-categorías (Natural, Socionatural, Tecnológica/Institucional y Conflicto Armado).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. FUNCIONALIDAD DUAL DE FECHAS 10.1 Y 10.2 -->
+    <section>
+      <h2><span>⏱️</span> 2. Funcionalidad y Justificación de las Fechas Duales (10.1 y 10.2)</h2>
+      <p>
+        Una de las características más avanzadas del diagnóstico es la diferenciación explícita entre el momento del impacto territorial y el reinicio de las clases:
+      </p>
+
+      <table class="table-guide">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Campo</th>
+            <th style="width: 35%;">Definición Conceptual</th>
+            <th style="width: 40%;">Funcionalidad en la Herramienta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>10.1. Fecha de Inicio u Ocurrencia de la Emergencia</strong></td>
+            <td>Día exacto en que ocurrió el evento adverso crítico o afectación en la comunidad o sede educativa (ej. toma armada, desbordamiento de río, ola de calor extrema).</td>
+            <td>
+              • Determina la semana escolar lectiva dentro de las 40 semanas del calendario MEN.<br>
+              • Identifica el periodo académico en curso (Periodo 1, 2, 3 o 4).<br>
+              • Reconoce los periodos concluidos antes de la crisis y pre-marca en la Rayuela Curricular los aprendizajes como <em>Ya abordados</em>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>10.2. Fecha de Inicio o Reanudación de la Atención Educativa (Ingreso Docente)</strong></td>
+            <td>Día efectivo en el cual el docente ingresa o retoma las actividades pedagógicas y formativas con los estudiantes (en el aula habitual o en un espacio temporal de aprendizaje).</td>
+            <td>
+              • <strong>Cálculo del Desfase Lectivo:</strong> Computa automáticamente los días y semanas de interrupción académica.<br>
+              • <strong>Línea Base del Calendario de Monitoreo:</strong> La Semana 1 del Módulo C inicia exactamente en esta fecha de atención educativa, proyectando el cronograma de 16 semanas reales de trabajo efectivo.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-blue">
+        <strong>¿Por qué existen ambas fechas?</strong> En emergencias como las vividas en el Catatumbo o zonas ribereñas, las clases suelen suspenderse durante días o semanas después de la crisis. Si el cronograma se calculara con la fecha de la emergencia, las metas semanales quedarían desfasadas. Al ingresar la fecha real de reanudación (10.2), el sistema sincroniza exactamente el ritmo de recuperación pedagógica.
+      </div>
+    </section>
+
+    <!-- 3. MÓDULO A: DIAGNÓSTICO Y MULTIGRADO -->
+    <section>
+      <h2><span>🎛️</span> 3. Módulo A: Diagnóstico Paramétrico y Atención Multigrado</h2>
+      
+      <h3>3.1. Selección de Ciclo Formativo y Grado Escolar (Docencia Monogrado y Multigrado)</h3>
+      <p>
+        Para atender la realidad de las escuelas rurales multigrado y unitarias de Norte de Santander, la herramienta permite:
+      </p>
+      <ul>
+        <li><strong>Selección Multiciclo:</strong> Puede seleccionar uno, varios o todos los ciclos formativos simultáneamente mediante los chips interactivos o los botones rápidos: <code>🔘 Todos los Ciclos</code>, <code>🎒 Primaria (I y II)</code>, <code>🎓 Secundaria/Media (III, IV, V)</code>.</li>
+        <li><strong>Grados Dinámicos Filtrados:</strong> El panel de "Grados Escolares en Aula" se actualiza automáticamente mostrando únicamente los grados correspondientes a los ciclos marcados, permitiendo seleccionar los grados específicos del aula multigrado o marcar <code>🔘 Todos los Grados</code>.</li>
+        <li><strong>Articulación Automática:</strong> Cuando se activa el modo multigrado, la herramienta analiza todos los factores del diagnóstico (DBA cruzados, intensidad horaria según Decreto 0277, didáctica basada en rincones de aprendizaje inter-edad de Escuela Nueva).</li>
+      </ul>
+
+      <h3>3.2. Nivel de Complejidad Cognitiva Bloom (Orientador Pedagógico Automático)</h3>
+      <p>
+        El <strong>Nivel Bloom</strong> no debe seleccionarse manualmente. Funciona como un <strong>filtro orientador pedagógico estandarizado</strong> que se bloquea y calcula de forma automática según la etapa seleccionada:
+      </p>
+      <table class="table-guide">
+        <thead>
+          <tr>
+            <th>1. Etapa de Respuesta a la Emergencia</th>
+            <th>2. Nivel Bloom Automático</th>
+            <th>Propósito Pedagógico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge" style="background:#fee2e2; color:#991b1b;">ETAPA 1: Inmediata / Contención</span></td>
+            <td><strong>Baja / Esencial (Bloom 1-2: Recordar / Comprender)</strong></td>
+            <td>Contención psicosocial, rutinas básicas, mensajes de supervivencia no estresantes.</td>
+          </tr>
+          <tr>
+            <td><span class="badge" style="background:#fef3c7; color:#92400e;">ETAPA 2: Recuperación temprana / Lúdica</span></td>
+            <td><strong>Media / Intermedia (Bloom 3-4: Aplicar / Analizar)</strong></td>
+            <td>Aplicación práctica, trabajo colaborativo, nivelación de aprendizajes esenciales.</td>
+          </tr>
+          <tr>
+            <td><span class="badge" style="background:#e0f2fe; color:#0369a1;">ETAPA 3: Educación formal / Retorno</span></td>
+            <td><strong>Alta / Profundización (Bloom 5-6: Evaluar / Crear)</strong></td>
+            <td>Retorno al ritmo lectivo regular, proyectos integrados, pensamiento crítico y creación.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.3. Diagnóstico Multirriesgo Top 3 y Campos Consolidados</h3>
+      <p>
+        El sistema cuenta con el catálogo de 40 amenazas PGIRE. Los campos:
+      </p>
+      <ul>
+        <li><code>5. Ejemplos contextualizados en la Institución Educativa:</code></li>
+        <li><code>6. Riesgos y afectaciones escolares asociadas:</code></li>
+        <li><code>7. Instancias y rutas de articulación según PGIRE:</code></li>
+      </ul>
+      <p>
+        Consolidan de forma automática la información de la Amenaza Principal, Secundaria y Terciaria seleccionadas.
+      </p>
+
+      <h3>3.4. Matriz de 12 Barreras para Aprender y Participar</h3>
+      <p>
+        Permite clasificar el nivel de afectación (Ninguna, Baja, Media, Alta) en factores clave como intermitencia escolar, desplazamiento forzado, afectación socioemocional, falta de conectividad o deterioro de infraestructura.
+      </p>
+    </section>
+
+    <!-- 4. GESTIÓN DE HISTORIAL Y COHERENCIA DE EMERGENCIAS SUCESIVAS -->
+    <section>
+      <h2><span>📂</span> 4. Trazabilidad y Coherencia entre Múltiples Diagnósticos</h2>
+      <p>
+        En el territorio, un docente puede enfrentar diferentes emergencias en el mismo año escolar (por ejemplo, hoy registra <strong>Etapa 1 por Conflicto Armado</strong> con 14 estudiantes, y semanas después registra <strong>Etapa 3 por Ola de Calor</strong> con 28 estudiantes).
+      </p>
+      
+      <div class="callout callout-warning">
+        <strong>Garantía de Coherencia Interna y No Pérdida de Datos:</strong>
+        <p style="margin-bottom:0;">
+          Cada vez que el docente guarda un diagnóstico, la herramienta crea un registro con identificador único en el <strong>Historial de Diagnósticos</strong> del usuario. Los avances curriculares de la Rayuela (Módulo B) y las semanas evaluadas en el Monitoreo (Módulo C) quedan <strong>estrictamente vinculados a ese diagnóstico específico</strong>.
+        </p>
+      </div>
+
+      <p><strong>¿Cómo alternar entre diagnósticos?</strong></p>
+      <ol>
+        <li>En la parte superior del Módulo A encontrará el selector <code>📂 Historial de Diagnósticos Registrados</code>.</li>
+        <li>Seleccione cualquier diagnóstico previo y presione <code>Cargar Diagnóstico</code>: todos los campos del Módulo A, la canasta del Módulo B y el calendario con evidencias del Módulo C se reconfiguran inmediatamente con los datos de esa emergencia.</li>
+        <li>Para atender una nueva crisis sin alterar la anterior, haga clic en <code>➕ Crear Nuevo Diagnóstico</code>, ajuste los nuevos parámetros y guarde. Ambos planes coexistirán con absoluta trazabilidad.</li>
+      </ol>
+    </section>
+
+    <!-- 5. MÓDULO B: RAYUELA CURRICULAR -->
+    <section>
+      <h2><span>📚</span> 5. Módulo B: Rayuela Curricular (Planificación Situada)</h2>
+      <p>
+        La Rayuela Curricular contiene las mallas integradas de los 5 ciclos formativos en las áreas disciplinares (Lenguaje, Matemáticas, Ciencias Sociales, Ciencias Naturales & WASH) más las dimensiones de <strong>Socioemocional & Bienestar</strong> y <strong>Supervivencia (ERAE / WASH)</strong>:
+      </p>
+      <ul>
+        <li><strong>Insignias Multigrado:</strong> En aulas multigrado, cada aprendizaje indica claramente su ciclo y grados (ej. <code>[Ciclo I - 1° a 3°]</code>, <code>[Ciclo II - 4° a 5°]</code>) y cuenta con pestañas de filtro rápido para visualizar todos los ciclos o enfocarse en uno solo.</li>
+        <li><strong>Filtro por Periodos:</strong> Permite revisar aprendizajes de P1, P2, P3 o P4. Si la emergencia ocurrió en Periodo 2, los del Periodo 1 aparecen pre-marcados como <em>Ya abordados</em>.</li>
+        <li><strong>Canasta Curricular de Flexibilización:</strong> Marque la casilla de verificación (checkbox) en los aprendizajes prioritarios y presione el botón flotante <code>🧺 Sincronizar Canasta con Módulo C</code> para transferirlos directamente a la planeación semanal.</li>
+      </ul>
+    </section>
+
+    <!-- 6. MÓDULO C: MONITOREO SEMANAL Y SIEE -->
+    <section>
+      <h2><span>📋</span> 6. Módulo C: Monitoreo Semanal y Constancias Oficiales SIEE</h2>
+      <p>
+        El Módulo C estructura un cronograma de 16 semanas efectivas a partir de la fecha de atención educativa:
+      </p>
+      <ul>
+        <li><strong>Horas Efectivas y Procesos:</strong> Distribuye las 25 o 30 horas semanales según el Decreto 0277 de 2025 entre los procesos pedagógicos prioritarios.</li>
+        <li><strong>Blindaje INEE en Semanas 1 y 2 (Etapa 1):</strong> En la fase de choque inicial, el sistema prioriza procesos de contención emocional y autoprotección ERAE/WASH antes de introducir áreas disciplinares.</li>
+        <li><strong>Bitácora y Evidencias:</strong> Para cada acción, el docente puede registrar su estado individual (<code>⚪ Sin iniciar</code>, <code>🟡 En proceso</code>, <code>🟢 Logrado</code>, <code>🔴 Postergado</code>) y consignar observaciones de aula.</li>
+        <li><strong>Promoción Oficial de Etapa:</strong> Al alcanzar el progreso esperado, la herramienta habilita el botón <code>🚀 Promover a Siguiente Etapa</code>, actualizando el nivel Bloom y reconfigurando las mallas.</li>
+        <li><strong>Exportación a Excel e Impresión Oficial:</strong> Permite descargar un archivo CSV estructurado para Excel con la trazabilidad completa o imprimir la constancia oficial con bloques de firma para Docente y Rectoría conforme al SIEE.</li>
+      </ul>
+    </section>
+
+    <!-- 7. RECOMENDACIONES TÉCNICAS -->
+    <section>
+      <h2><span>💡</span> 7. Recomendaciones Técnicas y Operación Offline</h2>
+      <ul>
+        <li><strong>Operación sin Internet (Offline):</strong> La herramienta funciona 100% de manera local. Los archivos <code>index.html</code> o <code>app_standalone.html</code> pueden abrirse directamente en cualquier navegador moderno sin requerir conexión a internet.</li>
+        <li><strong>Persistencia Local Segura:</strong> La información se guarda en el almacenamiento local del navegador (LocalStorage). Recuerde no borrar el caché o utilizar la función de Exportar a Excel periódicamente para tener respaldos externos.</li>
+        <li><strong>Soporte y Contacto:</strong> Para asistencia técnica o retroalimentación institucional, diríjase al botón flotante de evaluación en la herramienta o contacte al equipo de la Secretaría de Educación Departamental / NRC.</li>
+      </ul>
+    </section>
+
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.82rem; color: var(--text-muted);">
+      Documento elaborado para la Estrategia de Flexibilización y Adaptación Curricular en Emergencias.<br>
+      Gobernación de Norte de Santander | Secretaría de Educación Departamental | NRC Colombia | Año 2026.
+    </footer>
+
+  </div>
+
+</body>
+</html>

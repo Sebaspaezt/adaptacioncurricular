@@ -889,6 +889,170 @@ body {
   gap: 10px;
 }
 
+/* Chips de Selección Multiciclo y Multigrado */
+.ciclo-chips-container, .grado-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ciclo-chip, .grado-chip {
+  background: var(--surface-hover);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.ciclo-chip:hover, .grado-chip:hover {
+  border-color: var(--primary);
+  background: #f0fdf4;
+}
+
+.ciclo-chip.active, .grado-chip.active {
+  background: #e8f5e9;
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  box-shadow: 0 1px 3px rgba(0, 90, 54, 0.15);
+}
+
+.ciclo-chip-input, .grado-chip-input {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.btn-micro {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-micro:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Indicador Bloom Automático */
+.badge-bloom-auto {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: -0.2px;
+}
+
+/* Banner Contextual del Diagnóstico Activo */
+.diagnostic-context-banner {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: #166534;
+}
+
+.history-selector-card {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+/* Footer Institucional y Visor Manual */
+.app-footer {
+  background: #ffffff;
+  border-top: 2px solid var(--border-medium);
+  margin-top: 40px;
+  padding: 24px 20px;
+}
+
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-manual-view {
+  background: #0f766e;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+}
+
+.btn-manual-view:hover {
+  background: #115e59;
+}
+
+.btn-manual-download {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.btn-manual-download:hover {
+  background: var(--primary-dark);
+}
+
+.btn-manual-print {
+  background: #334155;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+}
+
+.btn-manual-print:hover {
+  background: #1e293b;
+}
+
+.modal-manual-content {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeInModal 0.2s ease-out;
+}
+
+
 
 /* Reglas de Impresión Optimizadas (A4 / Carta) - Flexibilidad Curricular NRC */
 @page {
@@ -1278,12 +1442,68 @@ body {
           <h2 class="card-title">🎛️ 2. Panel de control paramétrico y diagnóstico integrado de la emergencia</h2>
         </div>
 
+        <!-- Historial y Trazabilidad Multi-Emergencia -->
+        <div class="history-selector-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+            <label class="form-label" style="font-weight:700; color:var(--primary); margin-bottom:0;">
+              📂 Historial de Diagnósticos y Trazabilidad de Crisis:
+            </label>
+            <div style="display:flex; gap:8px;">
+              <button type="button" id="btn-nuevo-diagnostico" class="btn-micro" style="background:#0f766e; color:white; padding:5px 12px; font-size:0.78rem;">
+                ➕ Registrar Nueva Emergencia / Diagnóstico
+              </button>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <select id="select-historial-diagnosticos" class="select-elite" style="flex:1; min-width:280px;">
+              <option value="">Cargando diagnósticos registrados...</option>
+            </select>
+            <button type="button" id="btn-cargar-diagnostico-historial" class="btn-elite btn-outline" style="padding:7px 14px; font-size:0.82rem; background:white;">
+              🔄 Cargar Diagnóstico
+            </button>
+          </div>
+        </div>
+
         <form id="form-diagnostico">
           <div class="grid-2">
             
-            <div class="form-group">
-              <label class="form-label">Selección de Ciclo Formativo:</label>
-              <select id="select-ciclo" class="select-elite">
+            <!-- Selección Multiciclo -->
+            <div class="form-group" style="grid-column: span 2;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
+                  🏫 Selección de Ciclo Formativo (Docencia Monogrado o Multigrado):
+                </label>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" id="btn-ciclos-todos" class="btn-micro" title="Seleccionar todos los ciclos">🔘 Todos los Ciclos</button>
+                  <button type="button" id="btn-ciclos-primaria" class="btn-micro" title="Ciclos I y II">🎒 Primaria (I y II)</button>
+                  <button type="button" id="btn-ciclos-secundaria" class="btn-micro" title="Ciclos III, IV y V">🎓 Secundaria/Media (III, IV, V)</button>
+                  <button type="button" id="btn-ciclos-limpiar" class="btn-micro" title="Limpiar selección">✖️ Limpiar</button>
+                </div>
+              </div>
+              <div class="ciclo-chips-container" id="container-ciclo-chips">
+                <label class="ciclo-chip" data-ciclo="1">
+                  <input type="checkbox" class="ciclo-chip-input" value="1"> 
+                  <span><strong>Ciclo I</strong> (1°, 2° y 3° Primaria Inicial)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="2">
+                  <input type="checkbox" class="ciclo-chip-input" value="2"> 
+                  <span><strong>Ciclo II</strong> (4° y 5° Primaria Superior)</span>
+                </label>
+                <label class="ciclo-chip active" data-ciclo="3">
+                  <input type="checkbox" class="ciclo-chip-input" value="3" checked> 
+                  <span><strong>Ciclo III</strong> (6° y 7° Secundaria Inicial)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="4">
+                  <input type="checkbox" class="ciclo-chip-input" value="4"> 
+                  <span><strong>Ciclo IV</strong> (8° y 9° Secundaria)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="5">
+                  <input type="checkbox" class="ciclo-chip-input" value="5"> 
+                  <span><strong>Ciclo V</strong> (10° y 11° Media)</span>
+                </label>
+              </div>
+              <!-- Select sincronizado para retrocompatibilidad total con pruebas existentes -->
+              <select id="select-ciclo" class="select-elite" style="display: none;">
                 <option value="1">Ciclo I (Grados 1°, 2° y 3° Primaria Inicial)</option>
                 <option value="2">Ciclo II (Grados 4° y 5° Primaria Superior)</option>
                 <option value="3" selected>Ciclo III (Grados 6° y 7° Secundaria Inicial)</option>
@@ -1292,9 +1512,22 @@ body {
               </select>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Grado Escolar en Aula:</label>
-              <select id="select-grado" class="select-elite">
+            <!-- Grados Escolares en Aula (Multigrado) -->
+            <div class="form-group" style="grid-column: span 2;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
+                  📚 Grado(s) Escolar(es) en Aula (Atención Monogrado o Multigrado):
+                </label>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" id="btn-grados-todos" class="btn-micro" title="Seleccionar todos los grados de los ciclos activos">🔘 Todos los Grados</button>
+                  <button type="button" id="btn-grados-limpiar" class="btn-micro" title="Desmarcar grados">✖️ Desmarcar</button>
+                </div>
+              </div>
+              <div class="grado-chips-container" id="container-grado-chips">
+                <!-- Generado dinámicamente según los ciclos seleccionados -->
+              </div>
+              <!-- Select sincronizado para retrocompatibilidad total con pruebas existentes -->
+              <select id="select-grado" class="select-elite" style="display: none;">
                 <option value="Grado 6° (Bachillerato)">Grado 6° (Bachillerato)</option>
                 <option value="Grado 7° (Bachillerato)">Grado 7° (Bachillerato)</option>
               </select>
@@ -1310,9 +1543,13 @@ body {
               </select>
             </div>
 
+            <!-- Nivel Bloom: Orientador pedagógico automático (no seleccionable manualmente) -->
             <div class="form-group">
-              <label class="form-label">2. Nivel de Complejidad Cognitiva Bloom (Orientador - Seleccionable):</label>
-              <select id="select-bloom-ajustable" class="select-elite">
+              <label class="form-label">2. Nivel de Complejidad Cognitiva Bloom (Orientador Pedagógico Automático):</label>
+              <div id="display-bloom-badge" class="badge-pill badge-bloom-auto" style="padding: 10px 14px; width: 100%; text-align: center; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>🎯</span> <span id="txt-bloom-display">Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)</span>
+              </div>
+              <select id="select-bloom-ajustable" class="select-elite" disabled style="display:none;">
                 <option value="Baja / Esencial (Bloom Nivel 1-2: Recordar / Comprender)">Baja / Esencial (Bloom Nivel 1-2: Recordar / Comprender)</option>
                 <option value="Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)" selected>Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)</option>
                 <option value="Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)">Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)</option>
@@ -1364,19 +1601,18 @@ body {
               <input type="hidden" id="select-amenaza" value="Inundación">
             </div>
 
-
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">5. Ejemplos Contextualizados en la Institución Educativa (Consolidado Top 3):</label>
+              <label class="form-label">5. Ejemplos contextualizados en la Institución Educativa:</label>
               <textarea id="input-ejemplo-ie" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">6. Riesgos y Afectaciones Escolares Asociadas (Consolidado Top 3):</label>
+              <label class="form-label">6. Riesgos y afectaciones escolares asociadas:</label>
               <textarea id="input-riesgos-ie" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">7. Instancias y Rutas de Articulación según PGIRE (Consolidado Top 3):</label>
+              <label class="form-label">7. Instancias y rutas de articulación según PGIRE:</label>
               <textarea id="input-ruta-gire" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
@@ -1481,6 +1717,51 @@ body {
     </section>
 
   </main>
+
+  <!-- Pie de Página Institucional con Manual de Usuario PDF -->
+  <footer class="app-footer no-print">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-weight: 800; color: var(--primary); font-size: 0.95rem;">
+          🏛️ Herramienta de Adaptación y Flexibilización Curricular en Situaciones de Emergencia
+        </div>
+        <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 3px;">
+          Secretaría de Educación Departamental | Gobernación de Norte de Santander | Consejo Noruego para Refugiados (NRC) | MEN
+        </div>
+      </div>
+      
+      <div class="footer-actions">
+        <button type="button" id="btn-ver-manual" class="btn-elite btn-manual-view" title="Visualizar Manual de Usuario Oficial en PDF">
+          <span>📖</span> Visualizar Manual de Usuario (PDF)
+        </button>
+        <a href="manual_usuario.pdf" download="Manual_Usuario_Flexibilizacion_Curricular_NRC.pdf" id="btn-descargar-manual" class="btn-elite btn-manual-download" title="Descargar Manual en Formato PDF para Imprimir">
+          <span>📥</span> Descargar PDF
+        </a>
+        <button type="button" id="btn-imprimir-manual" class="btn-elite btn-manual-print" title="Imprimir Manual de Usuario">
+          <span>🖨️</span> Imprimir Manual
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Visor de Manual de Usuario Oficial -->
+  <div id="modal-manual" class="modal-overlay" style="display: none;">
+    <div class="modal-content modal-manual-content" style="max-width: 950px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-light); padding-bottom: 12px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+        <h3 style="color: var(--primary); margin: 0; display: flex; align-items: center; gap: 8px; font-size: 1.15rem;">
+          <span>📖</span> Manual de Usuario y Guía de Navegación Oficial
+        </h3>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button type="button" class="btn-elite btn-outline" id="btn-modal-print-manual" style="padding: 6px 12px; font-size: 0.82rem; background: white;">🖨️ Imprimir</button>
+          <a href="manual_usuario.pdf" download="Manual_Usuario_Flexibilizacion_Curricular_NRC.pdf" class="btn-elite btn-primary" style="padding: 6px 12px; font-size: 0.82rem; text-decoration: none; color: white;">📥 Descargar PDF</a>
+          <button id="btn-close-manual-modal" class="modal-close-btn" style="position: static;" onclick="document.getElementById('modal-manual').style.display='none';" title="Cerrar visor">✕</button>
+        </div>
+      </div>
+      <div style="flex: 1; min-height: 500px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; background: #525659;">
+        <iframe id="iframe-manual" src="manual_usuario.html" style="width: 100%; height: 100%; min-height: 520px; border: none; background: white;"></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal de Autenticación / Registro Local -->
   <div id="modal-auth" class="modal-overlay" style="display: none;">
@@ -6530,7 +6811,7 @@ var HABS_SUPS_DB = {
 
 
 // --- MODULOS DE APLICACION ---
-// Módulo de Autenticación y Gestión de Usuarios Locales (Offline First)
+// Módulo de Autenticación y Gestión de Usuarios Locales (Offline First con Trazabilidad Multi-Diagnóstico)
 var AuthManager = {
   getUsers: function() {
     var raw = localStorage.getItem('nrc_users');
@@ -6544,27 +6825,64 @@ var AuthManager = {
   ensureDefaultUser: function() {
     var users = this.getUsers();
     if (!users['docente_nrc']) {
+      var defaultDiag = {
+        id: 'diag_default_1',
+        titulo: 'Etapa 2 | Inundación (Ciclo III - Grados 6° y 7°)',
+        ciclo: '3',
+        ciclos: ['3'],
+        grado: 'Grado 6° (Bachillerato)',
+        grados: ['Grado 6° (Bachillerato)'],
+        isMultigrado: false,
+        etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
+        bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
+        categoriasAmenaza: ['Natural'],
+        categoriaAmenaza: 'Natural',
+        amenaza: 'Inundación',
+        amenazaPrincipal: 'Inundación',
+        amenazasTop3: ['Inundación'],
+        ejemploIE: '🚨 [1. Principal - Inundación]: Creciente de río o quebrada',
+        riesgosIE: '🚨 [1. Principal - Inundación]: Daños a infraestructura, suspensión de actividades académicas',
+        rutaGIRE: '🚨 [1. Principal - Inundación]: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
+        nna: 28,
+        didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
+        fechaInicio: new Date().toISOString().split('T')[0],
+        fechaAtencion: new Date().toISOString().split('T')[0],
+        desfaseDias: 0,
+        desfaseSemanas: 0,
+        periodoEnCurso: 'Periodo 1',
+        periodosPrevios: [],
+        barreras: {},
+        barrerasDescripcion: '',
+        createdAt: new Date().toISOString()
+      };
+
       users['docente_nrc'] = {
         password: btoa('1234'),
         nombreCompleto: 'Docente Territorial NRC',
         institucion: 'Institución Educativa Rural de Emergencia',
         createdAt: new Date().toISOString(),
-        diagnostico: {
-          ciclo: '3',
-          etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
-          bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
-          categoriasAmenaza: ['NATURAL'],
-          categoriaAmenaza: 'NATURAL',
-          amenaza: 'Inundación',
-          ejemploIE: 'Creciente de río o quebrada',
-          riesgosIE: 'Daños a infraestructura, suspensión de actividades académicas',
-          rutaGIRE: '🏛️ Instancias PGIRE: Mesa Territorial de Gestión del Riesgo (CMGRD / CDGRD / UNGRD) + Bomberos + Defensa Civil + Cruz Roja + Alcaldía',
-          grado: 'Grado 6° (Bachillerato)',
-          nna: 28,
-          didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
-          fechaInicio: new Date().toISOString().split('T')[0]
+        activeDiagnosticId: 'diag_default_1',
+        diagnostico: defaultDiag,
+        diagnosticos: {
+          'diag_default_1': {
+            id: 'diag_default_1',
+            savedAt: new Date().toISOString(),
+            diagnostico: defaultDiag,
+            estadosCurriculo: {},
+            seleccionCurricular: {},
+            monitoreo: {}
+          }
         },
-        monitoreo: {}
+        estadosCurriculo: {},
+        seleccionCurricular: {},
+        monitoreo: {},
+        diagnosticoHistory: [
+          {
+            id: 'diag_default_1',
+            savedAt: new Date().toISOString(),
+            diagnostico: defaultDiag
+          }
+        ]
       };
       localStorage.setItem('nrc_users', JSON.stringify(users));
     }
@@ -6578,13 +6896,65 @@ var AuthManager = {
     if (users[username]) {
       return { success: false, message: 'El usuario ya existe.' };
     }
+    var newDiagId = 'diag_' + Date.now();
+    var initDiag = {
+      id: newDiagId,
+      titulo: 'Diagnóstico Inicial de Emergencia',
+      ciclo: '3',
+      ciclos: ['3'],
+      grado: 'Grado 6° (Bachillerato)',
+      grados: ['Grado 6° (Bachillerato)'],
+      isMultigrado: false,
+      etapa: 'ETAPA 1: Respuesta inmediata / Contención',
+      bloom: 'Baja / Esencial (Bloom Nivel 1-2: Recordar / Comprender)',
+      categoriasAmenaza: ['Natural'],
+      categoriaAmenaza: 'Natural',
+      amenaza: 'Inundación',
+      amenazaPrincipal: 'Inundación',
+      amenazasTop3: ['Inundación'],
+      ejemploIE: 'Afectación en sede escolar',
+      riesgosIE: 'Riesgo institucional reportado',
+      rutaGIRE: 'Ruta PGIRE',
+      nna: 25,
+      didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
+      fechaInicio: new Date().toISOString().split('T')[0],
+      fechaAtencion: new Date().toISOString().split('T')[0],
+      desfaseDias: 0,
+      desfaseSemanas: 0,
+      periodoEnCurso: 'Periodo 1',
+      periodosPrevios: [],
+      barreras: {},
+      barrerasDescripcion: '',
+      createdAt: new Date().toISOString()
+    };
+
     users[username] = {
       password: btoa(password),
       nombreCompleto: nombreCompleto || username,
       institucion: institucion || 'Institución Educativa Rural',
       createdAt: new Date().toISOString(),
-      diagnostico: null,
-      monitoreo: {}
+      activeDiagnosticId: newDiagId,
+      diagnostico: initDiag,
+      diagnosticos: {
+        [newDiagId]: {
+          id: newDiagId,
+          savedAt: new Date().toISOString(),
+          diagnostico: initDiag,
+          estadosCurriculo: {},
+          seleccionCurricular: {},
+          monitoreo: {}
+        }
+      },
+      estadosCurriculo: {},
+      seleccionCurricular: {},
+      monitoreo: {},
+      diagnosticoHistory: [
+        {
+          id: newDiagId,
+          savedAt: new Date().toISOString(),
+          diagnostico: initDiag
+        }
+      ]
     };
     localStorage.setItem('nrc_users', JSON.stringify(users));
     this.login(username, password);
@@ -6611,7 +6981,25 @@ var AuthManager = {
     this.ensureDefaultUser();
     var current = this.getCurrentUser();
     var users = this.getUsers();
-    return users[current] || users['docente_nrc'] || null;
+    var u = users[current] || users['docente_nrc'] || null;
+    if (u && !u.diagnosticos) {
+      u.diagnosticos = {};
+      var d = u.diagnostico || {};
+      var diagId = d.id || ('diag_' + Date.now());
+      d.id = diagId;
+      u.activeDiagnosticId = diagId;
+      u.diagnosticos[diagId] = {
+        id: diagId,
+        savedAt: d.createdAt || new Date().toISOString(),
+        diagnostico: d,
+        estadosCurriculo: u.estadosCurriculo || {},
+        seleccionCurricular: u.seleccionCurricular || {},
+        monitoreo: u.monitoreo || {}
+      };
+      users[current] = u;
+      localStorage.setItem('nrc_users', JSON.stringify(users));
+    }
+    return u;
   },
 
   saveUserData: function(key, data) {
@@ -6620,12 +7008,59 @@ var AuthManager = {
     var users = this.getUsers();
     if (users[current]) {
       users[current][key] = data;
+
+      // Mantener vinculación con el diagnóstico activo
+      var activeId = users[current].activeDiagnosticId || (users[current].diagnostico && users[current].diagnostico.id) || 'diag_default_1';
+      users[current].diagnosticos = users[current].diagnosticos || {};
+      
+      if (!users[current].diagnosticos[activeId]) {
+        users[current].diagnosticos[activeId] = {
+          id: activeId,
+          savedAt: new Date().toISOString(),
+          diagnostico: users[current].diagnostico || {},
+          estadosCurriculo: {},
+          seleccionCurricular: {},
+          monitoreo: {}
+        };
+      }
+
+      var currentDiagEntry = users[current].diagnosticos[activeId];
+      if (key === 'diagnostico') {
+        currentDiagEntry.diagnostico = data;
+        currentDiagEntry.id = data.id || activeId;
+        users[current].activeDiagnosticId = currentDiagEntry.id;
+      } else if (key === 'monitoreo') {
+        currentDiagEntry.monitoreo = data;
+      } else if (key === 'estadosCurriculo') {
+        currentDiagEntry.estadosCurriculo = data;
+      } else if (key === 'seleccionCurricular') {
+        currentDiagEntry.seleccionCurricular = data;
+      }
+
+      currentDiagEntry.updatedAt = new Date().toISOString();
       localStorage.setItem('nrc_users', JSON.stringify(users));
     }
+  },
+
+  setActiveDiagnostic: function(diagId) {
+    this.ensureDefaultUser();
+    var current = this.getCurrentUser();
+    var users = this.getUsers();
+    if (users[current] && users[current].diagnosticos && users[current].diagnosticos[diagId]) {
+      var entry = users[current].diagnosticos[diagId];
+      users[current].activeDiagnosticId = diagId;
+      users[current].diagnostico = entry.diagnostico || {};
+      users[current].estadosCurriculo = entry.estadosCurriculo || {};
+      users[current].seleccionCurricular = entry.seleccionCurricular || {};
+      users[current].monitoreo = entry.monitoreo || {};
+      localStorage.setItem('nrc_users', JSON.stringify(users));
+      return entry;
+    }
+    return null;
   }
 };
 
-// Módulo A: Diagnóstico Paramétrico PGIRE (Versión 2.2 - Multirriesgo, Barreras y Fechas Duales)
+// Módulo A: Diagnóstico Paramétrico PGIRE (Versión 2.5 - Multiciclo/Multigrado, Bloom Automático, Fechas Duales e Historial Sincronizado)
 var ModuloA = {
   cicloGradosMap: {
     '1': ['Grado 1° (Primaria)', 'Grado 2° (Primaria)', 'Grado 3° (Primaria)'],
@@ -6651,6 +7086,7 @@ var ModuloA = {
   ],
 
   currentBarrerasState: {},
+  currentDiagnosticId: null,
 
   init: function(callbacks) {
     this.callbacks = callbacks || {};
@@ -6659,6 +7095,7 @@ var ModuloA = {
     this.loadSavedDiagnostic();
   },
 
+  // 2. Nivel Bloom: Orientador pedagógico automático (no seleccionable manualmente)
   calculateBloom: function(etapa) {
     if (!etapa) return 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)';
     if (etapa.indexOf('ETAPA 1') !== -1) {
@@ -6671,36 +7108,165 @@ var ModuloA = {
     return 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)';
   },
 
-  calculateDidacticaNNA: function(nnaCount) {
+  updateBloomDisplay: function(bloomVal) {
+    var txtDisplay = document.getElementById('txt-bloom-display');
+    var badgeDisplay = document.getElementById('display-bloom-badge');
+    var selBloom = document.getElementById('select-bloom-ajustable');
+    var inputHidden = document.getElementById('input-bloom');
+
+    if (txtDisplay) txtDisplay.textContent = bloomVal;
+    if (badgeDisplay) {
+      if (bloomVal.indexOf('Baja') !== -1) {
+        badgeDisplay.style.background = '#fef2f2';
+        badgeDisplay.style.color = '#991b1b';
+        badgeDisplay.style.borderColor = '#fca5a5';
+      } else if (bloomVal.indexOf('Media') !== -1) {
+        badgeDisplay.style.background = '#fef3c7';
+        badgeDisplay.style.color = '#92400e';
+        badgeDisplay.style.borderColor = '#fcd34d';
+      } else {
+        badgeDisplay.style.background = '#e0f2fe';
+        badgeDisplay.style.color = '#0369a1';
+        badgeDisplay.style.borderColor = '#7dd3fc';
+      }
+    }
+    if (selBloom) selBloom.value = bloomVal;
+    if (inputHidden) inputHidden.value = bloomVal;
+  },
+
+  // Estrategia didáctica según matrícula NNA y consideración de aula multigrado
+  calculateDidacticaNNA: function(nnaCount, isMultigrado) {
     var n = parseInt(nnaCount, 10);
     if (isNaN(n) || n <= 0) return '';
+    if (isMultigrado) {
+      if (n < 15) return '📝 TUTORÍA 1:1 INTER-EDAD (<15 NNA - Multigrado)';
+      if (n <= 35) return '👥 TRABAJO COOPERATIVO Y RINCONES (15-35 NNA - Multigrado)';
+      return '⚡ MICRO-ESTACIONES MULTINIVEL (>35 NNA - Multigrado)';
+    }
     if (n < 15) return '📝 TUTORÍA 1:1 (<15 NNA)';
     if (n <= 35) return '👥 TRABAJO COOPERATIVO (15 a 35 NNA)';
     return '⚡ MICRO-ESTACIONES (>35 NNA)';
   },
 
-  updateGradosForCiclo: function(ciclo) {
+  // Gestión de Ciclos Múltiples (Monogrado y Multigrado)
+  getSelectedCiclos: function() {
+    var checkboxes = document.querySelectorAll('.ciclo-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      if (cb.value) selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var sel = document.getElementById('select-ciclo');
+      return (sel && sel.value) ? [sel.value] : ['3'];
+    }
+    return selected;
+  },
+
+  setSelectedCiclos: function(ciclosArray, preselectedGrados) {
+    if (!Array.isArray(ciclosArray) || ciclosArray.length === 0) {
+      ciclosArray = ['3'];
+    }
+    var checkboxes = document.querySelectorAll('.ciclo-chip-input');
+    checkboxes.forEach(function(cb) {
+      var isChecked = ciclosArray.indexOf(cb.value) !== -1;
+      cb.checked = isChecked;
+      var parentLabel = cb.closest('.ciclo-chip');
+      if (parentLabel) {
+        if (isChecked) parentLabel.classList.add('active');
+        else parentLabel.classList.remove('active');
+      }
+    });
+
+    var selCiclo = document.getElementById('select-ciclo');
+    if (selCiclo) selCiclo.value = ciclosArray[0] || '3';
+
+    this.updateGradosForCiclos(ciclosArray, preselectedGrados);
+  },
+
+  // Actualización Dinámica de Grados Disponibles según Ciclos Seleccionados
+  updateGradosForCiclos: function(ciclosArray, preselectedGrados) {
+    var self = this;
+    var container = document.getElementById('container-grado-chips');
     var selectGrado = document.getElementById('select-grado');
-    if (!selectGrado) return;
-    var grados = this.cicloGradosMap[ciclo] || this.cicloGradosMap['3'];
-    selectGrado.innerHTML = '';
-    grados.forEach(function(g) {
-      var opt = document.createElement('option');
-      opt.value = g;
-      opt.textContent = g;
-      selectGrado.appendChild(opt);
+    if (!container) return;
+
+    ciclosArray = ciclosArray || this.getSelectedCiclos();
+    var allGrados = [];
+    ciclosArray.forEach(function(c) {
+      var list = self.cicloGradosMap[c] || [];
+      list.forEach(function(g) {
+        if (allGrados.indexOf(g) === -1) allGrados.push(g);
+      });
+    });
+
+    if (allGrados.length === 0) {
+      allGrados = this.cicloGradosMap['3'];
+    }
+
+    if (!preselectedGrados || preselectedGrados.length === 0) {
+      preselectedGrados = [allGrados[0]];
+    }
+
+    // Generar chips interactivos de grados
+    var html = allGrados.map(function(g) {
+      var isChecked = preselectedGrados.indexOf(g) !== -1;
+      var activeCls = isChecked ? ' active' : '';
+      return '<label class="grado-chip' + activeCls + '" data-grado="' + g + '">' +
+        '<input type="checkbox" class="grado-chip-input" value="' + g + '"' + (isChecked ? ' checked' : '') + '> ' +
+        '<span>' + g + '</span>' +
+      '</label>';
+    }).join('');
+
+    container.innerHTML = html;
+
+    // Sincronizar select tradicional
+    if (selectGrado) {
+      selectGrado.innerHTML = '';
+      allGrados.forEach(function(g) {
+        var opt = document.createElement('option');
+        opt.value = g;
+        opt.textContent = g;
+        if (preselectedGrados.indexOf(g) !== -1) opt.selected = true;
+        selectGrado.appendChild(opt);
+      });
+    }
+
+    // Listeners para los chips de grados
+    container.querySelectorAll('.grado-chip-input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        var parent = input.closest('.grado-chip');
+        if (parent) {
+          if (input.checked) parent.classList.add('active');
+          else parent.classList.remove('active');
+        }
+        var selectedG = self.getSelectedGrados();
+        if (selectGrado && selectedG.length > 0) selectGrado.value = selectedG[0];
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
     });
   },
 
+  getSelectedGrados: function() {
+    var checkboxes = document.querySelectorAll('.grado-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      if (cb.value) selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var sel = document.getElementById('select-grado');
+      return (sel && sel.value) ? [sel.value] : ['Grado 6° (Bachillerato)'];
+    }
+    return selected;
+  },
+
+  // Categorías y Amenazas PGIRE
   getSelectedCategories: function() {
     var checkboxes = document.querySelectorAll('.category-chip-input:checked');
     var selected = [];
     checkboxes.forEach(function(cb) {
       if (cb.value) selected.push(cb.value);
     });
-    if (selected.length === 0) {
-      return ['Natural'];
-    }
+    if (selected.length === 0) return ['Natural'];
     return selected;
   },
 
@@ -6775,7 +7341,6 @@ var ModuloA = {
     this.updateConsolidatedThreatDetails();
   },
 
-
   updateConsolidatedThreatDetails: function() {
     var selPrincipal = document.getElementById('select-amenaza-principal');
     var selSec1 = document.getElementById('select-amenaza-secundaria-1');
@@ -6834,6 +7399,7 @@ var ModuloA = {
     });
   },
 
+  // 10.1 y 10.2: Cálculo de fechas duales, desfase lectivo y calendario escolar MEN
   calculateDatesAndPeriods: function() {
     var inputFechaInicio = document.getElementById('input-fecha-inicio');
     var inputFechaAtencion = document.getElementById('input-fecha-atencion');
@@ -6852,9 +7418,9 @@ var ModuloA = {
     var diffDays = Math.max(0, Math.round(diffMs / (1000 * 60 * 60 * 24)));
     var diffWeeks = Math.max(0, Math.round(diffDays / 7));
 
-    // Determinar semana del calendario escolar oficial (inicia aprox. 26 de enero del año de la emergencia)
+    // Determinar semana del calendario escolar oficial (inicia última semana de enero)
     var ano = dInicio.getFullYear() || 2026;
-    var inicioClases = new Date(ano, 0, 26); // 26 de enero
+    var inicioClases = new Date(ano, 0, 26);
     var msDesdeInicio = dInicio.getTime() - inicioClases.getTime();
     var semanaEscolar = Math.max(1, Math.ceil(msDesdeInicio / (1000 * 60 * 60 * 24 * 7)));
 
@@ -6931,7 +7497,6 @@ var ModuloA = {
 
     container.innerHTML = html;
 
-    // Listeners para los botones de nivel
     container.querySelectorAll('.barrier-level-btn').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -6941,7 +7506,6 @@ var ModuloA = {
 
         self.currentBarrerasState[barrierId] = level;
 
-        // Actualizar visualmente la tarjeta
         parentCard.classList.remove('active-low', 'active-med', 'active-high');
         if (level === 'Baja') parentCard.classList.add('active-low');
         else if (level === 'Media') parentCard.classList.add('active-med');
@@ -6957,15 +7521,20 @@ var ModuloA = {
     });
   },
 
+  // Obtener estado del diagnóstico actual
   getLiveDiagnostic: function() {
     var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
     var d = user ? user.diagnostico : null;
-    var selectedCats = this.getSelectedCategories();
 
-    var selCiclo = document.getElementById('select-ciclo');
-    var selGrado = document.getElementById('select-grado');
+    var selectedCiclos = this.getSelectedCiclos();
+    var selectedGrados = this.getSelectedGrados();
+    var isMultigrado = selectedCiclos.length > 1 || selectedGrados.length > 1;
+
     var selEtapa = document.getElementById('select-etapa');
-    var selBloom = document.getElementById('select-bloom-ajustable');
+    var etapa = (selEtapa && selEtapa.value) || (d && d.etapa) || 'ETAPA 2: Recuperación temprana / Lúdica';
+    var bloom = this.calculateBloom(etapa);
+
+    var selectedCats = this.getSelectedCategories();
     var selP = document.getElementById('select-amenaza-principal');
     var selS1 = document.getElementById('select-amenaza-secundaria-1');
     var selS2 = document.getElementById('select-amenaza-secundaria-2');
@@ -6977,15 +7546,10 @@ var ModuloA = {
     var pVal = (selP && selP.value) || (d && d.amenazaPrincipal) || (d && d.amenaza) || 'Inundación';
     var s1Val = (selS1 && selS1.value) || (d && d.amenazaSecundaria1) || '';
     var s2Val = (selS2 && selS2.value) || (d && d.amenazaSecundaria2) || '';
-
     var amenazasTop3 = [pVal, s1Val, s2Val].filter(function(x) { return Boolean(x); });
 
-    var ciclo = (selCiclo && selCiclo.value) || (d && d.ciclo) || '3';
-    var etapa = (selEtapa && selEtapa.value) || (d && d.etapa) || 'ETAPA 2: Recuperación temprana / Lúdica';
-    var bloom = (selBloom && selBloom.value) || (d && d.bloom) || this.calculateBloom(etapa);
-    var grado = (selGrado && selGrado.value) || (d && d.grado) || 'Grado 6° (Bachillerato)';
     var nna = (inputNNA && inputNNA.value) || (d && d.nna) || 28;
-    var didactica = this.calculateDidacticaNNA(nna) || (d && d.didacticaNNA) || '👥 TRABAJO COOPERATIVO (15 a 35 NNA)';
+    var didactica = this.calculateDidacticaNNA(nna, isMultigrado);
 
     var fechaInicio = (inputFechaInicio && inputFechaInicio.value) || (d && d.fechaInicio) || new Date().toISOString().split('T')[0];
     var fechaAtencion = (inputFechaAtencion && inputFechaAtencion.value) || (d && d.fechaAtencion) || fechaInicio;
@@ -6996,9 +7560,17 @@ var ModuloA = {
     var elemRiesgos = document.getElementById('input-riesgos-ie');
     var elemRuta = document.getElementById('input-ruta-gire');
 
+    var diagId = this.currentDiagnosticId || (d && d.id) || ('diag_' + Date.now());
+    var tituloContextual = etapa.split(':')[0] + ' | ' + pVal + ' (' + (isMultigrado ? 'Multigrado: C' + selectedCiclos.join('+') : 'Ciclo ' + selectedCiclos[0]) + ') - ' + fechaAtencion;
+
     return {
-      ciclo: String(ciclo),
-      grado: grado,
+      id: diagId,
+      titulo: tituloContextual,
+      ciclos: selectedCiclos,
+      ciclo: selectedCiclos[0] || '3',
+      grados: selectedGrados,
+      grado: selectedGrados.join(', ') || 'Grado 6° (Bachillerato)',
+      isMultigrado: isMultigrado,
       etapa: etapa,
       bloom: bloom,
       categoriasAmenaza: selectedCats,
@@ -7007,7 +7579,7 @@ var ModuloA = {
       amenazaSecundaria1: s1Val,
       amenazaSecundaria2: s2Val,
       amenazasTop3: amenazasTop3,
-      amenaza: pVal, // Retrocompatibilidad
+      amenaza: pVal,
       ejemploIE: (elemEjemplo && elemEjemplo.value) || (d && d.ejemploIE) || '',
       riesgosIE: (elemRiesgos && elemRiesgos.value) || (d && d.riesgosIE) || '',
       rutaGIRE: (elemRuta && elemRuta.value) || (d && d.rutaGIRE) || '',
@@ -7025,13 +7597,69 @@ var ModuloA = {
     };
   },
 
+  // Gestión de Historial Multi-Diagnóstico
+  renderHistorialSelect: function() {
+    var selHistorial = document.getElementById('select-historial-diagnosticos');
+    if (!selHistorial) return;
+
+    var user = AuthManager.getUserData() || {};
+    var activeId = user.activeDiagnosticId || (user.diagnostico && user.diagnostico.id) || 'diag_default_1';
+    var diagnosticos = user.diagnosticos || {};
+
+    var keys = Object.keys(diagnosticos);
+    if (keys.length === 0) {
+      if (user.diagnostico) {
+        diagnosticos[activeId] = {
+          id: activeId,
+          savedAt: user.diagnostico.updatedAt || new Date().toISOString(),
+          diagnostico: user.diagnostico
+        };
+        keys = [activeId];
+      }
+    }
+
+    var html = keys.map(function(k) {
+      var item = diagnosticos[k];
+      var d = item.diagnostico || {};
+      var isActivo = (k === activeId);
+      var prefix = isActivo ? '⭐ [ACTIVO] ' : '📋 ';
+      var label = prefix + (d.titulo || (d.etapa ? (d.etapa.split(':')[0] + ' - ' + (d.amenazaPrincipal || d.amenaza)) : 'Diagnóstico'));
+      return '<option value="' + k + '"' + (isActivo ? ' selected' : '') + '>' + label + '</option>';
+    }).join('');
+
+    selHistorial.innerHTML = html || '<option value="">Sin diagnósticos guardados</option>';
+  },
+
+  prepareNewDiagnostic: function() {
+    var newId = 'diag_' + Date.now();
+    this.currentDiagnosticId = newId;
+
+    // Resetear formulario a valores base para una nueva emergencia
+    this.setSelectedCiclos(['3'], ['Grado 6° (Bachillerato)']);
+
+    var selEtapa = document.getElementById('select-etapa');
+    if (selEtapa) selEtapa.value = 'ETAPA 1: Respuesta inmediata / Contención';
+    this.updateBloomDisplay(this.calculateBloom('ETAPA 1: Respuesta inmediata / Contención'));
+
+    var today = new Date().toISOString().split('T')[0];
+    if (document.getElementById('input-fecha-inicio')) document.getElementById('input-fecha-inicio').value = today;
+    if (document.getElementById('input-fecha-atencion')) document.getElementById('input-fecha-atencion').value = today;
+
+    this.currentBarrerasState = {};
+    this.renderBarrerasUI();
+    if (document.getElementById('input-barreras-descripcion')) document.getElementById('input-barreras-descripcion').value = '';
+
+    this.calculateDatesAndPeriods();
+    this.renderHistorialSelect();
+
+    alert('✨ Se ha iniciado el formulario para un NUEVO Diagnóstico de Emergencia.\nComplete los nuevos datos y haga clic en "Guardar y Aplicar Diagnóstico" para registrarlo en su historial.');
+  },
+
   bindEvents: function() {
     var self = this;
     var selCiclo = document.getElementById('select-ciclo');
     var selGrado = document.getElementById('select-grado');
     var selEtapa = document.getElementById('select-etapa');
-    var selBloom = document.getElementById('select-bloom-ajustable');
-    var inputBloomHidden = document.getElementById('input-bloom');
     var selP = document.getElementById('select-amenaza-principal');
     var selS1 = document.getElementById('select-amenaza-secundaria-1');
     var selS2 = document.getElementById('select-amenaza-secundaria-2');
@@ -7042,10 +7670,97 @@ var ModuloA = {
     var inputBarrerasDesc = document.getElementById('input-barreras-descripcion');
     var btnGuardar = document.getElementById('btn-guardar-diagnostico');
     var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
+    var cicloCheckboxes = document.querySelectorAll('.ciclo-chip-input');
+
+    // Botones rápidos de selección de ciclos
+    var btnCiclosTodos = document.getElementById('btn-ciclos-todos');
+    var btnCiclosPrimaria = document.getElementById('btn-ciclos-primaria');
+    var btnCiclosSecundaria = document.getElementById('btn-ciclos-secundaria');
+    var btnCiclosLimpiar = document.getElementById('btn-ciclos-limpiar');
+
+    if (btnCiclosTodos) {
+      btnCiclosTodos.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['1', '2', '3', '4', '5']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosPrimaria) {
+      btnCiclosPrimaria.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['1', '2']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosSecundaria) {
+      btnCiclosSecundaria.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['3', '4', '5']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosLimpiar) {
+      btnCiclosLimpiar.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['3']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    // Botones rápidos de selección de grados
+    var btnGradosTodos = document.getElementById('btn-grados-todos');
+    var btnGradosLimpiar = document.getElementById('btn-grados-limpiar');
+
+    if (btnGradosTodos) {
+      btnGradosTodos.addEventListener('click', function(e) {
+        e.preventDefault();
+        var allBoxes = document.querySelectorAll('.grado-chip-input');
+        allBoxes.forEach(function(b) {
+          b.checked = true;
+          var parent = b.closest('.grado-chip');
+          if (parent) parent.classList.add('active');
+        });
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnGradosLimpiar) {
+      btnGradosLimpiar.addEventListener('click', function(e) {
+        e.preventDefault();
+        var allBoxes = document.querySelectorAll('.grado-chip-input');
+        allBoxes.forEach(function(b, idx) {
+          b.checked = (idx === 0);
+          var parent = b.closest('.grado-chip');
+          if (parent) {
+            if (idx === 0) parent.classList.add('active');
+            else parent.classList.remove('active');
+          }
+        });
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    // Listeners de los chips de ciclo
+    cicloCheckboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var parentLabel = cb.closest('.ciclo-chip');
+        if (parentLabel) {
+          if (cb.checked) parentLabel.classList.add('active');
+          else parentLabel.classList.remove('active');
+        }
+        var selectedC = self.getSelectedCiclos();
+        if (selCiclo) selCiclo.value = selectedC[0] || '3';
+        self.updateGradosForCiclos(selectedC);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    });
 
     if (selCiclo) {
       selCiclo.addEventListener('change', function() {
-        self.updateGradosForCiclo(selCiclo.value);
+        self.setSelectedCiclos([selCiclo.value]);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
@@ -7056,25 +7771,16 @@ var ModuloA = {
       });
     }
 
+    // Etapa -> Bloom Automático
     if (selEtapa) {
       selEtapa.addEventListener('change', function() {
         var recBloom = self.calculateBloom(selEtapa.value);
-        if (selBloom) {
-          selBloom.value = recBloom;
-        }
-        if (inputBloomHidden) inputBloomHidden.value = recBloom;
+        self.updateBloomDisplay(recBloom);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
-    if (selBloom) {
-      selBloom.addEventListener('change', function() {
-        if (inputBloomHidden) inputBloomHidden.value = selBloom.value;
-        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
-      });
-    }
-
-
+    // Categorías PGIRE
     categoryCheckboxes.forEach(function(cb) {
       cb.addEventListener('change', function() {
         var parentLabel = cb.closest('.category-chip');
@@ -7099,13 +7805,17 @@ var ModuloA = {
 
     if (inputNNA && labelDidactica) {
       inputNNA.addEventListener('input', function() {
-        labelDidactica.textContent = self.calculateDidacticaNNA(inputNNA.value);
+        var isMulti = self.getSelectedCiclos().length > 1;
+        labelDidactica.textContent = self.calculateDidacticaNNA(inputNNA.value, isMulti);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
     if (inputFechaInicio) {
       inputFechaInicio.addEventListener('change', function() {
+        if (inputFechaAtencion && (!inputFechaAtencion.value || inputFechaAtencion.value < inputFechaInicio.value)) {
+          inputFechaAtencion.value = inputFechaInicio.value;
+        }
         self.calculateDatesAndPeriods();
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
@@ -7120,10 +7830,79 @@ var ModuloA = {
 
     if (inputBarrerasDesc) {
       inputBarrerasDesc.addEventListener('input', function() {
-        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+        self.autoAdjustTextareas();
       });
     }
 
+    // Historial: Cargar Diagnóstico seleccionado
+    var btnCargarHistorial = document.getElementById('btn-cargar-diagnostico-historial');
+    if (btnCargarHistorial) {
+      btnCargarHistorial.addEventListener('click', function(e) {
+        e.preventDefault();
+        var selHistorial = document.getElementById('select-historial-diagnosticos');
+        var diagId = selHistorial ? selHistorial.value : '';
+        if (!diagId) return alert('Por favor seleccione un diagnóstico del historial.');
+
+        AuthManager.setActiveDiagnostic(diagId);
+        self.loadSavedDiagnostic();
+
+        if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') {
+          ModuloB.renderRayuela();
+        }
+        if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
+          ModuloC.renderMonitoreo();
+        }
+
+        alert('✅ Diagnóstico cargado exitosamente. Se han sincronizado las planificaciones de la Rayuela y el Monitoreo Semanal.');
+      });
+    }
+
+    // Historial: Crear Nuevo Diagnóstico
+    var btnNuevoDiag = document.getElementById('btn-nuevo-diagnostico');
+    if (btnNuevoDiag) {
+      btnNuevoDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.prepareNewDiagnostic();
+      });
+    }
+
+    // Botones de Manual de Usuario en Footer
+    var btnVerManual = document.getElementById('btn-ver-manual');
+    if (btnVerManual) {
+      btnVerManual.addEventListener('click', function(e) {
+        e.preventDefault();
+        var modal = document.getElementById('modal-manual');
+        if (modal) modal.style.display = 'flex';
+      });
+    }
+
+    var btnModalPrint = document.getElementById('btn-modal-print-manual');
+    if (btnModalPrint) {
+      btnModalPrint.addEventListener('click', function(e) {
+        e.preventDefault();
+        var iframe = document.getElementById('iframe-manual');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.print();
+        } else {
+          window.print();
+        }
+      });
+    }
+
+    var btnImprimirManual = document.getElementById('btn-imprimir-manual');
+    if (btnImprimirManual) {
+      btnImprimirManual.addEventListener('click', function(e) {
+        e.preventDefault();
+        var iframe = document.getElementById('iframe-manual');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.print();
+        } else {
+          window.open('manual_usuario.html', '_blank');
+        }
+      });
+    }
+
+    // Exportar Ficha a CSV
     var btnExcelDiag = document.getElementById('btn-exportar-excel-diagnostico');
     if (btnExcelDiag) {
       btnExcelDiag.addEventListener('click', function(e) {
@@ -7135,8 +7914,9 @@ var ModuloA = {
           ['PARÁMETRO DIAGNÓSTICO', 'VALOR REGISTRADO / ESTIMACIÓN'],
           ['Docente Responsable', (user && user.nombreCompleto) || 'Docente Territorial'],
           ['Institución Educativa', (user && user.institucion) || 'Sede Educativa Rural'],
-          ['Ciclo Formativo', 'Ciclo ' + d.ciclo],
-          ['Grado Escolar', d.grado],
+          ['Ciclos Formativos', d.ciclos.join(', ')],
+          ['Grados Escolares', d.grado],
+          ['Atención Multigrado', d.isMultigrado ? 'SÍ (Aula Multigrado Activa)' : 'NO (Monogrado)'],
           ['Etapa de Respuesta INEE', d.etapa],
           ['Complejidad y Desafío Cognitivo (Bloom)', d.bloom],
           ['Categorías de Amenaza', d.categoriaAmenaza],
@@ -7179,7 +7959,7 @@ var ModuloA = {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'ficha_diagnostica_emergencia_ciclo_' + d.ciclo + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.download = 'ficha_diagnostica_emergencia_' + (d.ciclos || ['3']).join('_') + '_' + new Date().toISOString().split('T')[0] + '.csv';
         a.click();
         URL.revokeObjectURL(url);
       });
@@ -7202,7 +7982,6 @@ var ModuloA = {
       });
     }
 
-    // Auto-ajuste responsivo de cuadros de texto en redimensionamiento de pantalla (móvil, tablet, web)
     window.addEventListener('resize', function() {
       self.autoAdjustTextareas();
     });
@@ -7216,24 +7995,37 @@ var ModuloA = {
       return;
     }
 
+    this.currentDiagnosticId = d.id;
+
     // Historial y persistencia
     var user = AuthManager.getUserData() || {};
     var history = user.diagnosticoHistory || [];
-    history.push({
-      savedAt: new Date().toISOString(),
-      diagnostico: JSON.parse(JSON.stringify(d))
-    });
+    var existingIndex = history.findIndex(function(h) { return h.id === d.id; });
+    if (existingIndex >= 0) {
+      history[existingIndex] = {
+        id: d.id,
+        savedAt: new Date().toISOString(),
+        diagnostico: JSON.parse(JSON.stringify(d))
+      };
+    } else {
+      history.push({
+        id: d.id,
+        savedAt: new Date().toISOString(),
+        diagnostico: JSON.parse(JSON.stringify(d))
+      });
+    }
+
     AuthManager.saveUserData('diagnosticoHistory', history);
     AuthManager.saveUserData('diagnostico', d);
 
+    this.renderHistorialSelect();
     this.renderDiagnosticSummary(d);
-    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente.\n\nRedirigiendo automáticamente a la Rayuela Curricular (Módulo B)...');
+    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente en su historial.\n\nRedirigiendo automáticamente a la Rayuela Curricular (Módulo B)...');
 
     if (this.callbacks.onDiagnosticSaved) {
       this.callbacks.onDiagnosticSaved(d);
     }
 
-    // Llevar automáticamente al Módulo B (Rayuela Curricular)
     if (typeof window.switchTab === 'function') {
       window.switchTab('tab-rayuela');
     }
@@ -7254,6 +8046,7 @@ var ModuloA = {
     }
 
     var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
+    var ciclosLabel = (d.ciclos && d.ciclos.length > 1) ? ('Multigrado (Ciclos ' + d.ciclos.join(', ') + ')') : ('Ciclo ' + d.ciclo);
 
     container.style.display = 'block';
     container.innerHTML = 
@@ -7263,12 +8056,12 @@ var ModuloA = {
           '<span class="badge-pill badge-etapa2">' + d.periodoEnCurso + '</span>' +
         '</div>' +
         '<div class="grid-3" style="gap: 12px; font-size: 0.88rem;">' +
-          '<div><strong>Ciclo:</strong> Ciclo ' + d.ciclo + ' | <strong>Grado:</strong> ' + d.grado + '</div>' +
+          '<div><strong>Ciclos y Grados:</strong> ' + ciclosLabel + ' | ' + d.grado + '</div>' +
           '<div><strong>Etapa:</strong> ' + d.etapa + '</div>' +
-          '<div><strong>Demanda Bloom:</strong> ' + d.bloom + '</div>' +
+          '<div><strong>Demanda Bloom (Auto):</strong> ' + d.bloom + '</div>' +
           '<div><strong>Multirriesgo Top 3:</strong> ' + amenazasLabel + '</div>' +
           '<div><strong>Estrategia NNA:</strong> ' + d.didacticaNNA + ' (' + d.nna + ' NNA)</div>' +
-          '<div><strong>Fechas:</strong> Emergencia: ' + d.fechaInicio + ' | Atención: ' + d.fechaAtencion + '</div>' +
+          '<div><strong>Fechas Duales:</strong> Emergencia: ' + d.fechaInicio + ' | Atención: ' + d.fechaAtencion + '</div>' +
         '</div>' +
         (activeBarrerasList.length > 0 ? (
           '<div style="margin-top: 10px; font-size: 0.82rem; color: #92400e; background: #fef3c7; padding: 6px 12px; border-radius: 4px;">' +
@@ -7288,8 +8081,12 @@ var ModuloA = {
     var d = user ? user.diagnostico : null;
     if (!d) {
       d = {
+        id: 'diag_default_1',
+        ciclos: ['3'],
         ciclo: '3',
+        grados: ['Grado 6° (Bachillerato)'],
         grado: 'Grado 6° (Bachillerato)',
+        isMultigrado: false,
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
         categoriasAmenaza: ['Natural'],
@@ -7303,19 +8100,26 @@ var ModuloA = {
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         fechaInicio: new Date().toISOString().split('T')[0],
         fechaAtencion: new Date().toISOString().split('T')[0],
+        desfaseDias: 0,
+        desfaseSemanas: 0,
+        periodoEnCurso: 'Periodo 1',
+        periodosPrevios: [],
         barreras: {},
         barrerasDescripcion: ''
       };
     }
 
-    if (document.getElementById('select-ciclo')) document.getElementById('select-ciclo').value = d.ciclo;
-    this.updateGradosForCiclo(d.ciclo);
-    if (document.getElementById('select-grado')) document.getElementById('select-grado').value = d.grado;
+    this.currentDiagnosticId = d.id || 'diag_default_1';
+
+    // Cargar selección de ciclos y grados
+    var ciclos = d.ciclos || (d.ciclo ? [d.ciclo] : ['3']);
+    var grados = d.grados || (d.grado ? [d.grado] : ['Grado 6° (Bachillerato)']);
+    this.setSelectedCiclos(ciclos, grados);
+
     if (document.getElementById('select-etapa')) document.getElementById('select-etapa').value = d.etapa;
 
     var bloomVal = d.bloom || this.calculateBloom(d.etapa);
-    if (document.getElementById('select-bloom-ajustable')) document.getElementById('select-bloom-ajustable').value = bloomVal;
-    if (document.getElementById('input-bloom')) document.getElementById('input-bloom').value = bloomVal;
+    this.updateBloomDisplay(bloomVal);
 
     var cats = d.categoriasAmenaza || [d.categoriaAmenaza || 'Natural'];
     var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
@@ -7345,7 +8149,7 @@ var ModuloA = {
     if (document.getElementById('input-nna')) {
       document.getElementById('input-nna').value = d.nna;
       if (document.getElementById('label-didactica-nna')) {
-        document.getElementById('label-didactica-nna').textContent = this.calculateDidacticaNNA(d.nna);
+        document.getElementById('label-didactica-nna').textContent = this.calculateDidacticaNNA(d.nna, d.isMultigrado);
       }
     }
 
@@ -7363,29 +8167,35 @@ var ModuloA = {
       document.getElementById('input-barreras-descripcion').value = d.barrerasDescripcion;
     }
 
+    this.renderHistorialSelect();
     this.renderDiagnosticSummary(d);
   }
 };
 
-// Módulo B: Rayuela Curricular (Biblioteca de Planificación - Versión 2.2 con Periodos, Canasta y Normas INEE)
+// Módulo B: Rayuela Curricular (Biblioteca de Planificación - Versión 2.5 con Multiciclo/Multigrado, Periodos, Canasta y Normas INEE)
 var ModuloB = {
   currentArea: 'lenguaje',
   currentPeriodoFilter: 'todos', // 'todos', '1', '2', '3', '4'
+  currentCycleFilter: 'todos', // 'todos' o número de ciclo específico '1', '2', etc.
 
   init: function() {
     this.renderRayuela();
   },
 
-  getItemFields: function(item, areaKey, itemIndex, totalItems) {
+  getItemFields: function(item, areaKey, itemIndex, totalItems, cycleInfo) {
     areaKey = areaKey || this.currentArea;
     if (!item) return null;
     totalItems = totalItems || 8;
     itemIndex = (typeof itemIndex === 'number') ? itemIndex : 0;
+    cycleInfo = cycleInfo || {};
 
     // Asignación de periodo escolar académico (P1, P2, P3, P4)
     var pNum = Math.min(4, Math.floor((itemIndex / Math.max(1, totalItems)) * 4) + 1);
     var periodoLabel = 'Periodo ' + pNum;
-    var itemId = areaKey + '_' + itemIndex;
+    var cPrefix = cycleInfo.key ? ('c' + cycleInfo.key + '_') : '';
+    var itemId = cPrefix + areaKey + '_' + itemIndex;
+
+    var cycleBadge = cycleInfo.roman ? ('Ciclo ' + cycleInfo.roman) : '';
 
     if (Array.isArray(item)) {
       var dbaRaw = item[2] || '';
@@ -7398,6 +8208,11 @@ var ModuloB = {
       }
       return {
         id: itemId,
+        areaKey: areaKey,
+        itemIndex: itemIndex,
+        cycleKey: cycleInfo.key || '3',
+        cycleRoman: cycleInfo.roman || 'III',
+        cycleBadge: cycleBadge,
         periodoNum: pNum,
         periodo: periodoLabel,
         factor: item[0] || 'Eje Curricular',
@@ -7423,6 +8238,11 @@ var ModuloB = {
 
         return {
           id: itemId,
+          areaKey: areaKey,
+          itemIndex: itemIndex,
+          cycleKey: 'transversal',
+          cycleRoman: 'Transversal',
+          cycleBadge: '🌱 Bienestar Transversal',
           periodoNum: (etapaSocio === 'Etapa 1' ? 1 : (etapaSocio === 'Etapa 2' ? 2 : 3)),
           periodo: etapaSocio + ' (Respuesta)',
           etapaSocio: etapaSocio,
@@ -7450,6 +8270,11 @@ var ModuloB = {
 
         return {
           id: itemId,
+          areaKey: areaKey,
+          itemIndex: itemIndex,
+          cycleKey: 'transversal',
+          cycleRoman: 'Transversal',
+          cycleBadge: '🛡️ Protección Transversal',
           periodoNum: 1,
           periodo: 'Protección Integral',
           factor: '🛡️ ' + tipologiaLabel,
@@ -7467,6 +8292,11 @@ var ModuloB = {
 
       return {
         id: itemId,
+        areaKey: areaKey,
+        itemIndex: itemIndex,
+        cycleKey: cycleInfo.key || '3',
+        cycleRoman: cycleInfo.roman || 'III',
+        cycleBadge: cycleBadge,
         periodoNum: pNum,
         periodo: periodoLabel,
         factor: item.factor || item.eje || item.pensamiento || item.area || 'Eje Curricular',
@@ -7488,12 +8318,15 @@ var ModuloB = {
     if (userStates && userStates[item.id]) {
       return userStates[item.id];
     }
-    // Salvaguarda esencial técnica: Las dimensiones transversales de Contención Socioemocional
-    // y Supervivencia/Autoprotección (ERAE/WASH) son inmediatas a la emergencia y transversales.
-    // NUNCA deben marcarse como 'abordado' por efecto de periodos académicos previos del calendario escolar.
+    // Fallback para IDs sin prefijo de ciclo
+    var fallbackId = item.areaKey ? (item.areaKey + '_' + item.itemIndex) : item.id.replace(/^c\d+_/, '');
+    if (userStates && userStates[fallbackId]) {
+      return userStates[fallbackId];
+    }
+
     var isTransversal = (
-      item.id.indexOf('socioemocional') === 0 ||
-      item.id.indexOf('supervivencia') === 0 ||
+      item.id.indexOf('socioemocional') !== -1 ||
+      item.id.indexOf('supervivencia') !== -1 ||
       item.dbaCode === 'SOCIOEMOCIONAL' ||
       item.dbaCode === 'SUPERVIVENCIA' ||
       item.dbaCode === 'ERAE (Minas)' ||
@@ -7504,120 +8337,104 @@ var ModuloB = {
       return 'pendiente';
     }
 
-    // Si no ha sido modificado manualmente por el docente, verificar estimación por fecha de emergencia para áreas académicas ordinarias
+    // Estimación por fecha de emergencia
     if (d && d.periodosPrevios && Array.isArray(d.periodosPrevios)) {
       if (d.periodosPrevios.indexOf('Periodo ' + item.periodoNum) !== -1) {
         return 'abordado';
       }
     }
+
     return 'pendiente';
   },
 
-  isItemSelectedForPlan: function(item, userSelection, state, isAcademic, d) {
-    if (userSelection && typeof userSelection[item.id] !== 'undefined') {
-      return Boolean(userSelection[item.id]);
+  isItemSelectedForPlan: function(item, userSelection, state, isAcademicArea, d) {
+    if (userSelection && typeof userSelection[item.id] === 'boolean') {
+      return userSelection[item.id];
     }
-    // Si no hay intervención manual previa:
-    // 1. Si el ítem ya fue abordado en periodos previos, NO se premarca para el plan (queda como abordado/excluido a menos que se active repaso)
-    if (state === 'abordado') {
-      return false;
+    var fallbackId = item.areaKey ? (item.areaKey + '_' + item.itemIndex) : item.id.replace(/^c\d+_/, '');
+    if (userSelection && typeof userSelection[fallbackId] === 'boolean') {
+      return userSelection[fallbackId];
     }
-    // 2. En áreas académicas, premarcar los aprendizajes correspondientes al periodo en curso o sugeridos
-    if (isAcademic) {
-      var currentPNum = 1;
-      if (d && d.periodoEnCurso) {
-        var match = d.periodoEnCurso.match(/\d+/);
-        if (match) currentPNum = parseInt(match[0], 10);
-      }
-      // Se premarcan los del periodo lectivo en que ocurrió la emergencia
-      return item.periodoNum === currentPNum;
-    }
-    // 3. En áreas transversales (Socioemocional / Supervivencia):
+
+    // En Etapa 1: blindaje INEE (socioemocional y supervivencia pre-seleccionados)
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
-    var isEtapa2 = (d && d.etapa && d.etapa.indexOf('ETAPA 2') !== -1);
+    if (isEtapa1 && !isAcademicArea) {
+      return true;
+    }
 
-    if (item.id.indexOf('socioemocional') === 0) {
-      // En Etapa 1, priorizar las competencias socioemocionales de Etapa 1 (Recreativa y preparatoria / soporte afectivo)
-      if (isEtapa1) {
-        return (item.etapaSocio === 'Etapa 1');
-      }
-      if (isEtapa2) {
-        return (item.etapaSocio === 'Etapa 1' || item.etapaSocio === 'Etapa 2');
+    // Si es área académica y está pendiente
+    if (state === 'pendiente') {
+      if (d && d.periodoEnCurso) {
+        return ('Periodo ' + item.periodoNum) === d.periodoEnCurso;
       }
       return true;
     }
 
-    if (item.id.indexOf('supervivencia') === 0) {
-      // En Supervivencia, si es Etapa 1 o 2, preseleccionar prioritariamente las que corresponden a las amenazas activas del diagnóstico
-      var top3Names = (d && d.amenazasTop3) || (d && d.amenaza ? [d.amenaza] : []);
-      if (top3Names.length > 0) {
-        var textFull = (item.factor + ' ' + item.subproceso + ' ' + item.dbaDesc).toLowerCase();
-        var matchesThreat = top3Names.some(function(t) {
-          return t && textFull.indexOf(t.toLowerCase()) !== -1;
-        });
-        if (matchesThreat) return true;
-      }
-      // Preseleccionar por defecto ERAE/WASH críticos
-      if (item.dbaCode && (item.dbaCode.indexOf('ERAE') !== -1 || item.dbaCode.indexOf('WASH') !== -1)) {
-        return true;
-      }
-      return true;
-    }
-
-    return true;
+    return false;
   },
 
-
-  buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList, d, userStates, userSelection) {
+  // Recolectar todos los items para un área dada según los ciclos activos
+  getItemsForArea: function(areaKey, selectedCycles, habsList, supsList) {
     var self = this;
-    var rawItems = [];
+    var allItems = [];
+
     if (areaKey === 'socioemocional') {
-      rawItems = habsList || [];
-    } else if (areaKey === 'supervivencia') {
-      rawItems = supsList || [];
-    } else {
-      rawItems = (cicloData && cicloData[areaKey]) || [];
+      (habsList || []).forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, 'socioemocional', idx, habsList.length, { key: 'transversal', roman: 'T' });
+        if (parsed) allItems.push(parsed);
+      });
+      return allItems;
     }
 
-    var validItems = [];
-    rawItems.forEach(function(item, idx) {
-      var parsed = self.getItemFields(item, areaKey, idx, rawItems.length);
-      if (parsed) validItems.push(parsed);
+    if (areaKey === 'supervivencia') {
+      (supsList || []).forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, 'supervivencia', idx, supsList.length, { key: 'transversal', roman: 'T' });
+        if (parsed) allItems.push(parsed);
+      });
+      return allItems;
+    }
+
+    // Áreas disciplinarias: recolectar de todos los ciclos seleccionados
+    selectedCycles.forEach(function(cKey) {
+      var cData = (CURRICULUM_DB && CURRICULUM_DB[cKey]) || {};
+      var rawList = cData[areaKey] || [];
+      var cInfo = {
+        key: cKey,
+        roman: cData.roman || cKey,
+        badge: 'Ciclo ' + (cData.roman || cKey),
+        title: cData.stage_title || ('Ciclo ' + cKey)
+      };
+
+      rawList.forEach(function(rawIt, idx) {
+        var parsed = self.getItemFields(rawIt, areaKey, idx, rawList.length, cInfo);
+        if (parsed) allItems.push(parsed);
+      });
     });
+
+    return allItems;
+  },
+
+  buildAreaTableHTML: function(areaKey, selectedCycles, habsList, supsList, d, userStates, userSelection) {
+    var self = this;
+    var items = this.getItemsForArea(areaKey, selectedCycles, habsList, supsList);
 
     var isSocio = (areaKey === 'socioemocional');
     var isSuperv = (areaKey === 'supervivencia');
-    var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
+    var isAcademic = (!isSocio && !isSuperv);
+    var isMultigrado = (selectedCycles.length > 1);
 
-    // Filtrar por periodo seleccionado en pestaña si aplica
-    if (!isSocio && !isSuperv && self.currentPeriodoFilter !== 'todos') {
-      var targetP = parseInt(self.currentPeriodoFilter, 10);
-      validItems = validItems.filter(function(x) { return x.periodoNum === targetP; });
-    }
+    // Filtrado por Periodo (solo áreas ordinarias)
+    var validItems = items.filter(function(item) {
+      if (isAcademic && self.currentPeriodoFilter !== 'todos') {
+        if (String(item.periodoNum) !== self.currentPeriodoFilter) return false;
+      }
+      if (isAcademic && isMultigrado && self.currentCycleFilter !== 'todos') {
+        if (String(item.cycleKey) !== self.currentCycleFilter) return false;
+      }
+      return true;
+    });
 
-    // En Etapa 1, si es socioemocional, priorizar Etapa 1
-    if (isSocio && isEtapa1) {
-      // Ordenar para que los de Etapa 1 aparezcan primero
-      validItems.sort(function(a, b) {
-        if (a.etapaSocio === 'Etapa 1' && b.etapaSocio !== 'Etapa 1') return -1;
-        if (a.etapaSocio !== 'Etapa 1' && b.etapaSocio === 'Etapa 1') return 1;
-        return 0;
-      });
-    }
-
-    // En supervivencia, destacar las que coinciden con las amenazas Top 3 del diagnóstico
-    var top3Names = (d && d.amenazasTop3) || (d && d.amenaza ? [d.amenaza] : []);
-    if (isSuperv && top3Names.length > 0) {
-      validItems.sort(function(a, b) {
-        var matchA = top3Names.some(function(t) { return (a.factor + ' ' + a.subproceso).toLowerCase().indexOf(t.toLowerCase()) !== -1; });
-        var matchB = top3Names.some(function(t) { return (b.factor + ' ' + b.subproceso).toLowerCase().indexOf(t.toLowerCase()) !== -1; });
-        if (matchA && !matchB) return -1;
-        if (!matchA && matchB) return 1;
-        return 0;
-      });
-    }
-
-    // Extraer barreras de aprendizaje críticas para orientar didácticas en Módulo B
+    // Barreras activas
     var activeBarriersList = [];
     if (d && d.barreras) {
       Object.keys(d.barreras).forEach(function(bKey) {
@@ -7628,9 +8445,8 @@ var ModuloB = {
       });
     }
 
-
     var th0 = 'Plan / Estado';
-    var th1 = 'Factor / Eje & Periodo';
+    var th1 = isMultigrado ? 'Ciclo & Periodo' : 'Factor / Eje & Periodo';
     var th2 = 'DBA / Aprendizaje Esencial';
     var th3 = 'Complejidad & Bloom';
     var th4 = 'Didáctica Situada';
@@ -7660,12 +8476,11 @@ var ModuloB = {
       '<tbody>' +
         validItems.map(function(item) {
           var state = self.getItemState(item, d, userStates);
-          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, (!isSocio && !isSuperv), d);
+          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, isAcademic, d);
 
           var rowClass = 'row-pending';
           if (state === 'abordado') rowClass = 'row-addressed';
           else if (state === 'aplazado') rowClass = 'row-postponed';
-
 
           var badgeBg = '#e0f2fe';
           var badgeColor = '#0369a1';
@@ -7678,14 +8493,19 @@ var ModuloB = {
           }
 
           var periodoBadgeHTML = '';
-          if (!isSocio && !isSuperv) {
+          if (isAcademic) {
             periodoBadgeHTML = '<span class="badge-pill" style="background:#e2e8f0; color:#334155; font-size:0.7rem; margin-top:4px; display:inline-block;">📅 ' + item.periodo + '</span>';
           } else if (isSocio) {
             periodoBadgeHTML = '<span class="badge-pill badge-etapa2" style="font-size:0.7rem; margin-top:4px; display:inline-block;">' + item.periodo + '</span>';
           }
 
+          var cycleBadgeHTML = '';
+          if (isAcademic && isMultigrado) {
+            cycleBadgeHTML = '<span class="badge-pill" style="background:#e0e7ff; color:#3730a3; font-weight:700; font-size:0.72rem; margin-bottom:4px; display:inline-block;">' + item.cycleBadge + '</span><br>';
+          }
+
           var articulacionHTML = '';
-          if (!isSocio && !isSuperv) {
+          if (isAcademic) {
             articulacionHTML = '<div style="line-height:1.45; margin-top:5px; font-size: 0.88rem;">' +
               '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700; margin-bottom: 4px;">' + item.dbaCode + '</span> ' +
               '<span>' + item.dbaDesc + '</span>' +
@@ -7720,6 +8540,7 @@ var ModuloB = {
               '</div>' +
             '</td>' +
             '<td style="padding: 10px; vertical-align: top;">' +
+              cycleBadgeHTML +
               '<strong>' + item.factor + '</strong>' +
               (item.subproceso && (isSocio || isSuperv) ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
               '<br>' + periodoBadgeHTML +
@@ -7739,15 +8560,15 @@ var ModuloB = {
         }).join('') +
       '</tbody>' +
     '</table>';
-
   },
 
   renderRayuela: function() {
     var self = this;
     var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
     var d = (typeof ModuloA !== 'undefined' && ModuloA.getLiveDiagnostic) ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
-    var cicloKey = String((d && d.ciclo) || '3');
-    var cicloData = (CURRICULUM_DB && CURRICULUM_DB[cicloKey]) || (CURRICULUM_DB && CURRICULUM_DB['3']) || {};
+    
+    var selectedCycles = (d && d.ciclos && d.ciclos.length > 0) ? d.ciclos : [(d && d.ciclo) || '3'];
+    var isMultigrado = (selectedCycles.length > 1);
 
     var userStates = (user && user.estadosCurriculo) || {};
     var userSelection = (user && user.seleccionCurricular) || {};
@@ -7764,38 +8585,48 @@ var ModuloB = {
     });
 
     var areas = [
-      { key: 'lenguaje', name: '📖 Lenguaje', count: ((cicloData && cicloData.lenguaje) || []).length },
-      { key: 'matematicas', name: '📐 Matemáticas', count: ((cicloData && cicloData.matematicas) || []).length },
-      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: ((cicloData && cicloData.sociales) || []).length },
-      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: ((cicloData && cicloData.naturales) || []).length },
+      { key: 'lenguaje', name: '📖 Lenguaje', count: this.getItemsForArea('lenguaje', selectedCycles, habsList, supsList).length },
+      { key: 'matematicas', name: '📐 Matemáticas', count: this.getItemsForArea('matematicas', selectedCycles, habsList, supsList).length },
+      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: this.getItemsForArea('sociales', selectedCycles, habsList, supsList).length },
+      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: this.getItemsForArea('naturales', selectedCycles, habsList, supsList).length },
       { key: 'socioemocional', name: '🌱 Socioemocional & Bienestar', count: habsList.length },
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERAE/WASH', count: supsList.length }
     ];
 
-    // Conteo en vivo de aprendizajes seleccionados por área (considerando selecciones explícitas o premarcado del periodo)
+    // Conteo en vivo de aprendizajes seleccionados por área
     var countsByArea = { lenguaje: 0, matematicas: 0, sociales: 0, naturales: 0, socioemocional: 0, supervivencia: 0 };
     areas.forEach(function(a) {
-      var raw = [];
-      if (a.key === 'socioemocional') raw = habsList || [];
-      else if (a.key === 'supervivencia') raw = supsList || [];
-      else raw = (cicloData && cicloData[a.key]) || [];
-
-      raw.forEach(function(it, idx) {
-        var parsed = self.getItemFields(it, a.key, idx, raw.length);
-        if (parsed) {
-          var st = self.getItemState(parsed, d, userStates);
-          var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
-          if (sel) {
-            countsByArea[a.key]++;
-          }
+      var allItems = self.getItemsForArea(a.key, selectedCycles, habsList, supsList);
+      allItems.forEach(function(parsed) {
+        var st = self.getItemState(parsed, d, userStates);
+        var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+        if (sel) {
+          countsByArea[a.key]++;
         }
       });
     });
     var totalSelected = Object.keys(countsByArea).reduce(function(acc, k) { return acc + countsByArea[k]; }, 0);
 
-
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
     var isAcademicArea = (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia');
+
+    // Banner Contextual de Diagnóstico Activo
+    var amenazasLabel = (d && d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : ((d && d.amenaza) || 'Emergencia territorial');
+    var bannerContexto_HTML = 
+      '<div class="diagnostic-context-banner">' +
+        '<div>' +
+          '<strong>📌 Diagnóstico Curricular Vinculado:</strong> ' + ((d && d.etapa && d.etapa.split(':')[0]) || 'Etapa 2') + ' | ' +
+          '<strong>Multirriesgo:</strong> ' + amenazasLabel + ' | ' +
+          '<strong>' + (isMultigrado ? ('Multigrado (' + selectedCycles.map(function(c) { return 'Ciclo ' + c; }).join(', ') + ')') : ('Ciclo ' + selectedCycles[0])) + '</strong> ' +
+          '(' + ((d && d.nna) || 28) + ' NNA - ' + ((d && d.didacticaNNA) || 'TRABAJO COOPERATIVO') + ') | ' +
+          '<em>Reanudación: ' + ((d && d.fechaAtencion) || '2026-03-22') + '</em>' +
+        '</div>' +
+        '<div>' +
+          '<button type="button" class="btn-micro" onclick="window.switchTab(\'tab-diagnostico\');" style="background:white; border-color:#86efac; color:#166534; font-weight:700;">' +
+            '⚙️ Ver / Cambiar Diagnóstico' +
+          '</button>' +
+        '</div>' +
+      '</div>';
 
     var bannerINEE_HTML = '';
     if (isEtapa1) {
@@ -7822,6 +8653,21 @@ var ModuloB = {
         '</div>';
     }
 
+    // Barra de filtros por Ciclo (solo si hay más de 1 ciclo en multigrado)
+    var cicloFilterBar_HTML = '';
+    if (isMultigrado && isAcademicArea) {
+      cicloFilterBar_HTML = 
+        '<div class="periodos-bar no-print" style="margin-bottom: 10px; background: #e0e7ff; border-left: 4px solid #4338ca;">' +
+          '<span style="font-size:0.82rem; font-weight:700; color:#3730a3;">🏫 Filtro Multigrado por Ciclo:</span>' +
+          '<button class="ciclo-tab-btn ' + (self.currentCycleFilter === 'todos' ? 'active' : '') + '" data-ciclo="todos">Todos los Ciclos (' + selectedCycles.map(function(c) { return 'Ciclo ' + c; }).join('+') + ')</button>' +
+          selectedCycles.map(function(c) {
+            var act = (self.currentCycleFilter === c) ? 'active' : '';
+            var cObj = (CURRICULUM_DB && CURRICULUM_DB[c]) || {};
+            return '<button class="ciclo-tab-btn ' + act + '" data-ciclo="' + c + '">Ciclo ' + (cObj.roman || c) + '</button>';
+          }).join('') +
+        '</div>';
+    }
+
     // Barra de filtros por Periodo (solo para áreas académicas)
     var periodosBar_HTML = '';
     if (isAcademicArea) {
@@ -7836,32 +8682,20 @@ var ModuloB = {
         '</div>';
     }
 
-    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, cicloData, habsList, supsList, d, userStates, userSelection);
-
-    var fullPrintHTML = areas.map(function(a, idx) {
-      var tableHTML = self.buildAreaTableHTML(a.key, cicloData, habsList, supsList, d, userStates, userSelection);
-      var pageBreakClass = idx > 0 ? 'print-area-break' : '';
-      return '<div class="print-area-section ' + pageBreakClass + '" style="margin-bottom: 28px;">' +
-        '<h3 style="color: var(--primary); font-weight: 800; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">' +
-          a.name + ' — Malla Curricular Priorizada (Ciclo ' + cicloKey + ')' +
-        '</h3>' +
-        tableHTML +
-      '</div>';
-    }).join('');
+    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, selectedCycles, habsList, supsList, d, userStates, userSelection);
 
     var html = 
       '<div class="card-elite">' +
-        '<div class="card-header">' +
+        bannerContexto_HTML +
+        '<div class="card-header" style="flex-wrap: wrap; gap: 12px;">' +
           '<div>' +
-            '<h3 class="card-title">📚 Rayuela Curricular: Selección y Planificación (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">' +
-              'Grados: ' + (((cicloData && cicloData.grados) || []).join(', ')) + ' | ' +
-              'Etapa: ' + ((d && d.etapa) || 'Etapa 2') + ' | ' +
-              'Amenaza: ' + ((d && d.amenazasTop3 && d.amenazasTop3.join(', ')) || (d && d.amenaza) || 'Natural') +
-            '</span>' +
+            '<h2 class="card-title">📚 Biblioteca de Adaptación y Rayuela Curricular</h2>' +
+            '<p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">' +
+              'Planificación pedagógica situada. Seleccione los aprendizajes esenciales que integrará en la Canasta de Flexibilización Curricular para el seguimiento en el Módulo C.' +
+            '</p>' +
           '</div>' +
           '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
-            '<button id="btn-exportar-excel-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
+            '<button id="btn-exportar-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
             '<button id="btn-imprimir-rayuela" class="btn-elite btn-outline">🖨️ Imprimir Malla</button>' +
           '</div>' +
         '</div>' +
@@ -7869,206 +8703,219 @@ var ModuloB = {
         bannerINEE_HTML +
         bannerPeriodo_HTML +
 
-        '<!-- Pestañas de Áreas -->' +
-        '<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;" class="no-print">' +
+        '<!-- Pestañas de Áreas Disciplinares y Transversales -->' +
+        '<div class="tabs-nav no-print" style="margin-bottom: 14px; border-bottom: 2px solid var(--border-medium);">' +
           areas.map(function(a) {
-            var activeClass = self.currentArea === a.key ? 'btn-primary' : 'btn-outline';
-            return '<button class="btn-elite ' + activeClass + ' tab-area-btn" data-area="' + a.key + '">' +
-              a.name + ' (' + a.count + ')' +
+            var activeClass = (self.currentArea === a.key) ? 'active' : '';
+            var countSel = countsByArea[a.key] || 0;
+            var badgeSelHTML = (countSel > 0) ? (' <span class="badge-pill" style="background:#059669; color:white; font-size:0.7rem; padding:1px 6px;">' + countSel + ' en plan</span>') : '';
+            return '<button class="tab-button tab-rayuela-area ' + activeClass + '" data-area="' + a.key + '">' +
+              a.name + ' (' + a.count + ')' + badgeSelHTML +
             '</button>';
           }).join('') +
         '</div>' +
 
+        cicloFilterBar_HTML +
         periodosBar_HTML +
 
-        '<div class="no-print" style="overflow-x: auto;">' +
+        '<!-- Tabla Curricular Dinámica -->' +
+        '<div id="table-rayuela-container" style="overflow-x: auto;">' +
           activeTableHTML +
         '</div>' +
 
-        '<!-- Canasta Curricular Dock Flotante -->' +
-        '<div class="selection-dock-bar no-print">' +
-          '<div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">' +
-            '<div><strong>🧺 Canasta Curricular Seleccionada:</strong></div>' +
-            '<div class="selection-dock-badges">' +
-              '<span class="dock-badge ' + (countsByArea.lenguaje > 0 ? 'active-count' : '') + '">📖 Lenguaje: ' + countsByArea.lenguaje + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.matematicas > 0 ? 'active-count' : '') + '">📐 Mates: ' + countsByArea.matematicas + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.sociales > 0 ? 'active-count' : '') + '">🌍 Sociales: ' + countsByArea.sociales + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.naturales > 0 ? 'active-count' : '') + '">🔬 Naturales: ' + countsByArea.naturales + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.socioemocional > 0 ? 'active-count' : '') + '">🌱 Socioemocional: ' + countsByArea.socioemocional + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.supervivencia > 0 ? 'active-count' : '') + '">🛡️ ERAE/WASH: ' + countsByArea.supervivencia + '</span>' +
-              '<span class="dock-badge active-count" style="background:#f59e0b; color:#0f172a;">Total: ' + totalSelected + '</span>' +
-            '</div>' +
+        '<!-- Dock Flotante de Canasta de Aprendizajes -->' +
+        '<div class="selection-dock no-print">' +
+          '<div class="selection-dock-badges">' +
+            '<span>🧺 <strong>Canasta Curricular de Emergencia:</strong></span>' +
+            '<span class="dock-badge active-count">' + totalSelected + ' Aprendizajes seleccionados</span>' +
+            '<span class="dock-badge">📖 ' + countsByArea.lenguaje + ' Lenguaje</span>' +
+            '<span class="dock-badge">📐 ' + countsByArea.matematicas + ' Matemáticas</span>' +
+            '<span class="dock-badge">🌍 ' + countsByArea.sociales + ' Sociales</span>' +
+            '<span class="dock-badge">🔬 ' + countsByArea.naturales + ' Naturales</span>' +
+            '<span class="dock-badge">🌱 ' + countsByArea.socioemocional + ' Socioemocional</span>' +
+            '<span class="dock-badge">🛡️ ' + countsByArea.supervivencia + ' Supervivencia</span>' +
           '</div>' +
-          '<div>' +
-            '<button id="btn-sincronizar-canasta-monitoreo" class="btn-elite btn-secondary" style="background:#059669; font-weight:800; border:none; padding:10px 18px;">' +
-              '🚀 Sincronizar Selección con Monitoreo (Módulo C)' +
-            '</button>' +
+          '<div style="display:flex; gap:8px;">' +
+            '<button id="btn-seleccionar-todos-area" class="btn-elite btn-outline" style="font-size:0.8rem; background:white; color:var(--primary); padding:6px 12px;">+ Marcar toda el área</button>' +
+            '<button id="btn-deseleccionar-todos-area" class="btn-elite btn-outline" style="font-size:0.8rem; background:white; color:#b91c1c; padding:6px 12px;">Desmarcar área</button>' +
+            '<button id="btn-sincronizar-canasta-monitoreo" class="btn-elite btn-primary" style="font-size:0.82rem; padding:8px 16px;">🚀 Sincronizar Canasta con Módulo C</button>' +
           '</div>' +
         '</div>' +
 
-        '<div id="full-print-matrix-container" style="display: none;">' +
-          '<div style="text-align: center; margin-bottom: 18px; border-bottom: 2px solid #005A36; padding-bottom: 10px;">' +
-            '<h2 style="color: #005A36; font-size: 1.3rem; margin-bottom: 4px;">Malla Curricular Completa Flexibilizada en Emergencias</h2>' +
-            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + (((cicloData && cicloData.grados) || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
-          '</div>' +
-          fullPrintHTML +
-        '</div>' +
       '</div>';
 
     container.innerHTML = html;
 
-    // Eventos de Navegación por Áreas
-    container.querySelectorAll('.tab-area-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    // Listeners de pestañas de área
+    container.querySelectorAll('.tab-rayuela-area').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         self.currentArea = btn.getAttribute('data-area');
         self.renderRayuela();
       });
     });
 
-    // Eventos de Filtro por Periodo
+    // Listeners de filtro por ciclo (multigrado)
+    container.querySelectorAll('.ciclo-tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.currentCycleFilter = btn.getAttribute('data-ciclo');
+        self.renderRayuela();
+      });
+    });
+
+    // Listeners de filtro de periodo
     container.querySelectorAll('.periodo-tab-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         self.currentPeriodoFilter = btn.getAttribute('data-periodo');
         self.renderRayuela();
       });
     });
 
-    // Checkbox de selección en plan
-    container.querySelectorAll('.plan-checkbox').forEach(function(chk) {
-      chk.addEventListener('change', function() {
-        var itemId = chk.getAttribute('data-item-id');
-        var u = AuthManager.getUserData() || {};
-        u.seleccionCurricular = u.seleccionCurricular || {};
-        u.seleccionCurricular[itemId] = chk.checked;
-        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
-        self.renderRayuela();
-      });
-    });
-
-    // Cambio de estado pedagógico por ítem (pendiente, abordado, aplazado)
-    container.querySelectorAll('.select-item-state').forEach(function(sel) {
-      sel.addEventListener('change', function() {
-        var itemId = sel.getAttribute('data-item-id');
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = u.estadosCurriculo || {};
-        u.estadosCurriculo[itemId] = sel.value;
-
-        // Si se marca como abordado o aplazado, desmarcar de la canasta por defecto a menos que sea repaso
-        u.seleccionCurricular = u.seleccionCurricular || {};
-        if (sel.value === 'aplazado') {
-          u.seleccionCurricular[itemId] = false;
-        } else if (sel.value === 'abordado') {
-          // Mantener solo si el docente expresamente lo dejó
-          u.seleccionCurricular[itemId] = false;
-        } else if (sel.value === 'pendiente') {
-          u.seleccionCurricular[itemId] = true;
-        }
-
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
-        self.renderRayuela();
-      });
-    });
-
-    // Botones de acción de fechas
-    var btnReapply = document.getElementById('btn-reaplicar-fechas');
-    if (btnReapply) {
-      btnReapply.addEventListener('click', function() {
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = {}; // Limpia para que tome el cálculo del diagnóstico
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        self.renderRayuela();
-      });
-    }
-
-    var btnReset = document.getElementById('btn-reset-pendientes');
-    if (btnReset) {
-      btnReset.addEventListener('click', function() {
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = {};
-        // Marcar todo como pendiente forzado
-        var allKeys = [];
-        container.querySelectorAll('.select-item-state').forEach(function(s) {
-          allKeys.push(s.getAttribute('data-item-id'));
-        });
-        allKeys.forEach(function(k) { u.estadosCurriculo[k] = 'pendiente'; });
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        self.renderRayuela();
-      });
-    }
-
-    // Botón de sincronización con Monitoreo Semanal
+    // Listener para el botón Sincronizar Canasta con Módulo C
     var btnSync = document.getElementById('btn-sincronizar-canasta-monitoreo');
     if (btnSync) {
-      btnSync.addEventListener('click', function() {
+      btnSync.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
         if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
           ModuloC.renderMonitoreo();
         }
-        alert('✅ Canasta Curricular sincronizada exitosamente con el Módulo C (Monitoreo Semanal).\nPuede ingresar a la pestaña "📋 Módulo C" para ver el plan organizado por semanas.');
+        alert('🎉 ¡Canasta Curricular Sincronizada!\nSe han vinculado ' + totalSelected + ' aprendizajes prioritarios con el cronograma y bitácora del Módulo C.\n\nRedirigiendo al Monitoreo Semanal...');
         if (typeof window.switchTab === 'function') {
           window.switchTab('tab-monitoreo');
         }
       });
     }
 
-    // Exportación a Excel de Rayuela Curricular (CSV estructurado y sanitizado RFC 4180)
-    var btnExcelRayuela = document.getElementById('btn-exportar-excel-rayuela');
-    if (btnExcelRayuela) {
-      btnExcelRayuela.addEventListener('click', function() {
-        var csvRows = [];
-        csvRows.push([
-          'Área Curricular',
-          'Periodo Escolar / Etapa',
-          'Factor / Eje Generador',
-          'Subproceso / Competencia Clave',
-          'Código DBA / EBC / INEE',
-          'Descripción del Aprendizaje Esencial',
-          'Complejidad Pedagógica',
-          'Desafío Cognitivo (Bloom)',
-          'Saber (Cognitivo)',
-          'Hacer (Procedimental / Didáctica)',
-          'Ser (Actitudinal / Convivencia)',
-          'Estado Pedagógico',
-          'Incluido en Canasta (Mód. C)'
-        ]);
+    // Listeners de Checkboxes de Canasta
+    container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var itemId = cb.getAttribute('data-item-id');
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        u.seleccionCurricular[itemId] = cb.checked;
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    });
 
-        areas.forEach(function(a) {
-          var raw = [];
-          if (a.key === 'socioemocional') raw = habsList || [];
-          else if (a.key === 'supervivencia') raw = supsList || [];
-          else raw = (cicloData && cicloData[a.key]) || [];
+    // Listeners de Select de Estado
+    container.querySelectorAll('.select-item-state').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var itemId = sel.getAttribute('data-item-id');
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = u.estadosCurriculo || {};
+        u.estadosCurriculo[itemId] = sel.value;
+        if (sel.value === 'abordado') {
+          u.seleccionCurricular = u.seleccionCurricular || {};
+          u.seleccionCurricular[itemId] = false;
+        }
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    });
 
-          raw.forEach(function(it, idx) {
-            var item = self.getItemFields(it, a.key, idx, raw.length);
-            if (item) {
-              var st = self.getItemState(item, d, userStates);
-              var inPlan = self.isItemSelectedForPlan(item, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+    // Botones de acción rápida en Canasta
+    var btnMarcarArea = document.getElementById('btn-seleccionar-todos-area');
+    if (btnMarcarArea) {
+      btnMarcarArea.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+          var id = cb.getAttribute('data-item-id');
+          u.seleccionCurricular[id] = true;
+        });
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    }
 
-              var cleanDesc = (item.dbaDesc || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSub = (item.subproceso || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanDidact = (item.didactica || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanBloom = (item.bloom || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSaber = (item.saber || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanHacer = (item.hacer || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSer = (item.ser || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+    var btnDesmarcarArea = document.getElementById('btn-deseleccionar-todos-area');
+    if (btnDesmarcarArea) {
+      btnDesmarcarArea.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+          var id = cb.getAttribute('data-item-id');
+          u.seleccionCurricular[id] = false;
+        });
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    }
 
-              csvRows.push([
-                a.name,
-                item.periodo,
-                item.factor,
-                cleanSub,
-                item.dbaCode,
-                cleanDesc,
-                item.complejidad,
-                cleanBloom,
-                cleanSaber,
-                cleanHacer || cleanDidact,
-                cleanSer,
-                st.toUpperCase(),
-                inPlan ? 'SÍ (EN PLAN)' : 'NO'
-              ]);
-            }
-          });
+    // Botones de re-aplicar fechas o resetear a pendiente
+    var btnReaplicar = document.getElementById('btn-reaplicar-fechas');
+    if (btnReaplicar) {
+      btnReaplicar.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = {};
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        self.renderRayuela();
+        alert('📅 Fechas re-aplicadas: los periodos previos a la emergencia se han pre-marcado como ya abordados.');
+      });
+    }
+
+    var btnReset = document.getElementById('btn-reset-pendientes');
+    if (btnReset) {
+      btnReset.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = {};
+        container.querySelectorAll('.select-item-state').forEach(function(sel) {
+          var id = sel.getAttribute('data-item-id');
+          u.estadosCurriculo[id] = 'pendiente';
+        });
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        self.renderRayuela();
+        alert('🎯 Todos los aprendizajes se han establecido como pendientes para flexibilización.');
+      });
+    }
+
+    // Exportar e Imprimir Módulo B
+    var btnPrintB = document.getElementById('btn-imprimir-rayuela');
+    if (btnPrintB) {
+      btnPrintB.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+      });
+    }
+
+    var btnExportB = document.getElementById('btn-exportar-rayuela');
+    if (btnExportB) {
+      btnExportB.addEventListener('click', function(e) {
+        e.preventDefault();
+        var items = self.getItemsForArea(self.currentArea, selectedCycles, habsList, supsList);
+        var csvRows = [
+          ['CICLO', 'PERIODO', 'FACTOR / EJE', 'SUBPROCESO', 'DBA CODIGO', 'DBA DESCRIPCION', 'COMPLEJIDAD', 'OBJETIVO BLOOM', 'SABER', 'HACER', 'SER', 'DIDACTICA', 'ESTADO DOCENTE', 'EN PLAN CANASTA']
+        ];
+
+        items.forEach(function(it) {
+          var st = self.getItemState(it, d, userStates);
+          var isSel = self.isItemSelectedForPlan(it, userSelection, st, (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia'), d);
+          csvRows.push([
+            it.cycleBadge || 'Ciclo ' + (d.ciclo || '3'),
+            it.periodo,
+            it.factor,
+            it.subproceso,
+            it.dbaCode,
+            it.dbaDesc,
+            it.complejidad,
+            it.bloom,
+            it.saber,
+            it.hacer,
+            it.ser,
+            it.didactica,
+            st,
+            isSel ? 'SI' : 'NO'
+          ]);
         });
 
         var formatCSVCell = function(val) {
@@ -8087,55 +8934,42 @@ var ModuloB = {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'malla_curricular_rayuela_ciclo_' + cicloKey + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.download = 'malla_curricular_' + self.currentArea + '_multiciclo_' + new Date().toISOString().split('T')[0] + '.csv';
         a.click();
         URL.revokeObjectURL(url);
-      });
-    }
-
-    // Impresión
-    var btnPrint = document.getElementById('btn-imprimir-rayuela');
-    if (btnPrint) {
-      btnPrint.addEventListener('click', function() {
-        var printContainer = document.getElementById('full-print-matrix-container');
-        if (printContainer) printContainer.style.display = 'block';
-        window.print();
-        setTimeout(function() {
-          if (printContainer) printContainer.style.display = 'none';
-        }, 1000);
       });
     }
   }
 };
 
-// Módulo C: Monitoreo Semanal por Etapas (Versión 2.2 - Canasta Curricular, Normas INEE y Multirriesgo)
+// Módulo C: Monitoreo Semanal, Avance Pedagógico y Trazabilidad SIEE
+// (Versión 2.5 - Multiciclo/Multigrado, Decreto 0277 de 2025, Blindaje INEE, Fechas Duales y Coherencia Multi-Diagnóstico)
 var ModuloC = {
   init: function() {
     this.renderMonitoreo();
   },
 
   getDidacticaStrategyForArea: function(areaKey, nnaCount) {
-    try {
-      var strategies = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
-      var areaMap = {
-        'lenguaje': 'LENGUAJE',
-        'matematicas': 'MATEMATICAS',
-        'sociales': 'CIENCIAS_SOCIALES',
-        'naturales': 'CIENCIAS_NATURALES'
+    var n = parseInt(nnaCount, 10) || 25;
+    if (n < 15) {
+      return {
+        tipo: 'TUTORÍA 1:1 FOCALIZADA',
+        desc: 'Nivelación personalizada con guías modulares adaptadas y acompañamiento directo docente-estudiante.'
       };
-      var stObj = strategies[areaMap[areaKey]] || {};
-      var n = parseInt(nnaCount, 10) || 25;
-      if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
-      if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
-      return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
-    } catch (e) {
-      return 'Aprendizaje situado y cooperativo';
+    } else if (n <= 35) {
+      return {
+        tipo: 'TRABAJO COOPERATIVO EN EQUIPOS',
+        desc: 'Proyectos integrados de aprendizaje, rincones temáticos y resolución de retos pedagógicos situados.'
+      };
+    } else {
+      return {
+        tipo: 'MICRO-ESTACIONES ROTATIVAS',
+        desc: 'Circuitos de aprendizaje por rincones con guías de autoaprendizaje y roles colaborativos rotativos.'
+      };
     }
   },
 
-  getSelectedBasket: function(user, cicloData, habsList, supsList, d) {
-    var userSelection = (user && user.seleccionCurricular) || {};
-    var userStates = (user && user.estadosCurriculo) || {};
+  getSelectedBasket: function(user, activeCycles, habsList, supsList, d) {
     var basket = {
       lenguaje: [],
       matematicas: [],
@@ -8145,71 +8979,71 @@ var ModuloC = {
       supervivencia: []
     };
 
-    var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
+    var userStates = (user && user.estadosCurriculo) || {};
+    var userSelection = (user && user.seleccionCurricular) || {};
 
-    areas.forEach(function(aKey) {
-      var rawList = [];
-      if (aKey === 'socioemocional') rawList = habsList || [];
-      else if (aKey === 'supervivencia') rawList = supsList || [];
-      else rawList = (cicloData && cicloData[aKey]) || [];
+    var allAreas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
+    allAreas.forEach(function(aKey) {
+      var allItems = (typeof ModuloB !== 'undefined' && ModuloB.getItemsForArea)
+        ? ModuloB.getItemsForArea(aKey, activeCycles, habsList, supsList)
+        : [];
 
       var isAcademic = (aKey !== 'socioemocional' && aKey !== 'supervivencia');
+      allItems.forEach(function(parsed) {
+        var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
+          ? ModuloB.getItemState(parsed, d, userStates) 
+          : 'pendiente';
+        var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
+          ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
+          : (userSelection[parsed.id] === true);
 
-      rawList.forEach(function(item, idx) {
-        var parsed = (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') 
-          ? ModuloB.getItemFields(item, aKey, idx, rawList.length)
-          : { id: aKey + '_' + idx, dbaCode: 'DBA', dbaDesc: '', didactica: 'Taller situado' };
-
-        if (parsed) {
-          var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
-            ? ModuloB.getItemState(parsed, d, userStates) 
-            : 'pendiente';
-          var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
-            ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
-            : (userSelection[parsed.id] === true);
-
-          if (isSel) {
-            basket[aKey].push(parsed);
-          }
+        if (isSel) {
+          basket[aKey].push(parsed);
         }
       });
     });
 
     var totalItemsInBasket = Object.keys(basket).reduce(function(acc, k) { return acc + basket[k].length; }, 0);
 
-    // Salvaguarda: si por algún motivo extremo la canasta queda vacía, asegurar al menos 1 ítem nuclear por área
+    // Salvaguarda: si la canasta está vacía, seleccionar los primeros items esenciales
     if (totalItemsInBasket === 0) {
-
       var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
-      
+
       // Socioemocional
-      habsList.forEach(function(item, idx) {
-        var parsed = ModuloB.getItemFields(item, 'socioemocional', idx, habsList.length);
-        if (isEtapa1) {
-          if (parsed.etapaSocio === 'Etapa 1' && basket.socioemocional.length < 3) basket.socioemocional.push(parsed);
-        } else {
-          if (basket.socioemocional.length < 2) basket.socioemocional.push(parsed);
+      (habsList || []).forEach(function(item, idx) {
+        var parsed = (typeof ModuloB !== 'undefined' && ModuloB.getItemFields)
+          ? ModuloB.getItemFields(item, 'socioemocional', idx, habsList.length, { key: 'transversal', roman: 'T' })
+          : { id: 'socioemocional_' + idx, dbaCode: 'SOCIOEMOCIONAL', dbaDesc: item.hacer || '' };
+        if (parsed) {
+          if (isEtapa1) {
+            if (parsed.etapaSocio === 'Etapa 1' && basket.socioemocional.length < 3) basket.socioemocional.push(parsed);
+          } else {
+            if (basket.socioemocional.length < 2) basket.socioemocional.push(parsed);
+          }
         }
       });
 
       // Supervivencia (ERAE / WASH)
-      supsList.forEach(function(item, idx) {
-        var parsed = ModuloB.getItemFields(item, 'supervivencia', idx, supsList.length);
-        if (basket.supervivencia.length < 2) basket.supervivencia.push(parsed);
+      (supsList || []).forEach(function(item, idx) {
+        var parsed = (typeof ModuloB !== 'undefined' && ModuloB.getItemFields)
+          ? ModuloB.getItemFields(item, 'supervivencia', idx, supsList.length, { key: 'transversal', roman: 'T' })
+          : { id: 'supervivencia_' + idx, dbaCode: 'ERAE / WASH', dbaDesc: item.aprendizaje || '' };
+        if (parsed && basket.supervivencia.length < 2) basket.supervivencia.push(parsed);
       });
 
-      // Áreas Académicas (filtrar solo las que no estén marcadas como abordadas previas a la fecha)
+      // Áreas Académicas
       ['lenguaje', 'matematicas', 'sociales', 'naturales'].forEach(function(aKey) {
-        var rawList = (cicloData && cicloData[aKey]) || [];
-        rawList.forEach(function(item, idx) {
-          var parsed = ModuloB.getItemFields(item, aKey, idx, rawList.length);
+        var allItems = (typeof ModuloB !== 'undefined' && ModuloB.getItemsForArea)
+          ? ModuloB.getItemsForArea(aKey, activeCycles, habsList, supsList)
+          : [];
+        allItems.forEach(function(parsed) {
           var isPrevio = (d && d.periodosPrevios && d.periodosPrevios.indexOf('Periodo ' + parsed.periodoNum) !== -1);
           if (!isPrevio && basket[aKey].length < 3) {
             basket[aKey].push(parsed);
           }
         });
-        if (basket[aKey].length === 0 && rawList.length > 0) {
-          basket[aKey].push(ModuloB.getItemFields(rawList[0], aKey, 0, rawList.length));
+        if (basket[aKey].length === 0 && allItems.length > 0) {
+          basket[aKey].push(allItems[0]);
         }
       });
     }
@@ -8227,6 +9061,7 @@ var ModuloC = {
       var d = (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.getLiveDiagnostic === 'function') ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
       if (!d) {
         d = {
+          ciclos: ['3'],
           ciclo: '3',
           grado: 'Grado 6° (Bachillerato)',
           nna: 28,
@@ -8243,10 +9078,15 @@ var ModuloC = {
         };
       }
 
-      var cicloKey = String(d.ciclo || '3');
-      var currDB = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB) ? CURRICULUM_DB : {};
-      var cicloData = currDB[cicloKey] || currDB['3'] || currDB['1'] || {};
+      var activeCycles = (d && d.ciclos && d.ciclos.length > 0) ? d.ciclos : [(d && d.ciclo) || '3'];
+      var isMultigrado = (activeCycles.length > 1);
+
+      // Monitoreo guardado según diagnóstico activo
+      var activeDiagId = user && user.activeDiagnosticId;
       var savedMonitoreo = (user && user.monitoreo) || {};
+      if (user && user.diagnosticos && activeDiagId && user.diagnosticos[activeDiagId] && user.diagnosticos[activeDiagId].monitoreo) {
+        savedMonitoreo = user.diagnosticos[activeDiagId].monitoreo;
+      }
 
       var habsList = ((HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || []).filter(function(h) {
         return h && h.habilidad && h.habilidad.indexOf('Etapa de respuesta') === -1 && (!h.hacer || h.hacer.indexOf('=SUBTOTAL') === -1);
@@ -8256,7 +9096,7 @@ var ModuloC = {
         return s && s.tipo_afectacion && s.tipo_afectacion.indexOf('Tipologías') === -1 && (!s.aprendizaje || s.aprendizaje.indexOf('=SUBTOTAL') === -1);
       });
 
-      var basket = self.getSelectedBasket(user, cicloData, habsList, supsList, d);
+      var basket = self.getSelectedBasket(user, activeCycles, habsList, supsList, d);
 
       var semanas = [];
       var fechaBaseStr = String(d.fechaAtencion || d.fechaInicio || '').trim();
@@ -8273,70 +9113,54 @@ var ModuloC = {
 
       var isEtapa1 = (d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
       var academicAreas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
-
       var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
 
       // Parámetros de Jornada Escolar Regular según Decreto 0277 de 2025
-      // Básica Primaria (Grados 1° a 5°, Ciclos 1 y 2): Mínimo 25 horas semanales (5 horas diarias) y 1.000 horas anuales.
-      // Básica Secundaria y Media (Grados 6° a 11°, Ciclos 3, 4 y 5): Mínimo 30 horas semanales (6 horas diarias) y 1.200 horas anuales.
-      var isPrimaria = (cicloKey === '1' || cicloKey === '2' || (d.grado && d.grado.indexOf('Primaria') !== -1));
+      var isAllPrimaria = activeCycles.every(function(c) { return c === '1' || c === '2'; });
+      var isPrimaria = isAllPrimaria || (activeCycles.length === 1 && (activeCycles[0] === '1' || activeCycles[0] === '2'));
+
       var decretoInfo = {
-        nivel: isPrimaria ? 'Básica Primaria (Grados 1° a 5°)' : 'Básica Secundaria y Media (Grados 6° a 11°)',
+        nivel: isPrimaria 
+          ? 'Básica Primaria (Grados 1° a 5°)' 
+          : (isMultigrado ? 'Aula Multigrado Integrada (Básica Primaria y Secundaria)' : 'Básica Secundaria y Media (Grados 6° a 11°)'),
         horasSemanales: isPrimaria ? 25 : 30,
         horasDiarias: isPrimaria ? 5 : 6,
         horasAnuales: isPrimaria ? 1000 : 1200
       };
 
-      // Cálculo de Duración Promedio por Acción según Estrategia Didáctica Situada (Matrícula NNA y Tipo de Trabajo)
+      // Cálculo de Duración Promedio por Acción según Estrategia Didáctica Situada
       var nnaCount = parseInt(d.nna, 10) || 25;
-      var duracionAccionHrs = 10; // Valor base intermedio (horas efectivas de 60 min)
+      var duracionAccionHrs = 10;
       var tipoEstrategiaLabel = '';
 
       if (nnaCount < 15) {
-        // Tutoría 1:1 y nivelación personalizada: sesiones más intensivas y focalizadas (~6.25h en primaria, ~7.5h en secundaria)
         duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
-        tipoEstrategiaLabel = 'Tutoría 1:1 Focalizada';
+        tipoEstrategiaLabel = isMultigrado ? 'Tutoría 1:1 Inter-Edad' : 'Tutoría 1:1 Focalizada';
       } else if (nnaCount <= 35) {
-        // Aprendizaje Cooperativo en Equipos: proyectos articulados de mediana duración (~8.33h en primaria, ~10h en secundaria)
         duracionAccionHrs = isPrimaria ? 8.33 : 10;
-        tipoEstrategiaLabel = 'Aprendizaje Cooperativo';
+        tipoEstrategiaLabel = isMultigrado ? 'Trabajo Cooperativo y Rincones Multigrado' : 'Aprendizaje Cooperativo';
       } else {
-        // Micro-estaciones Rotativas y Guías Modulares (>35 NNA): ciclos rotativos (~6.25h en primaria, ~7.5h en secundaria)
         duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
-        tipoEstrategiaLabel = 'Micro-Estaciones Rotativas';
+        tipoEstrategiaLabel = isMultigrado ? 'Micro-Estaciones Multinivel' : 'Micro-Estaciones Rotativas';
       }
 
-      // Capacidad de acciones pedagógicas simultáneas o sucesivas por semana según la intensidad reglamentaria
       var accionesPorSemana = Math.max(1, Math.round(decretoInfo.horasSemanales / duracionAccionHrs));
       var horasEfectivasPorAccion = (decretoInfo.horasSemanales / accionesPorSemana);
 
-      // Conteo de semanas escolares colombianas según MEN (Decreto 0277 / Calendario Oficial de 40 semanas lectivas)
-      // El calendario del MEN en Colombia comprende 40 semanas lectivas de trabajo académico con estudiantes:
-      // Inicia el último lunes de enero (aprox. 26 de enero), pausa 2 semanas a mitad de año (vacaciones docentes/estudiantes semanas 24-25)
-      // y concluye entre la primera y segunda semana de diciembre (aprox. 5 a 10 de diciembre).
+      // Conteo de semanas escolares según calendario oficial MEN
       var dInicioEmergencia = fechaBase;
       var anoEmergencia = dInicioEmergencia.getFullYear() || 2026;
-      var inicioAnoClases = new Date(anoEmergencia, 0, 26); // 26 de enero
       var finAnoClases = new Date(anoEmergencia, 11, 10); // 10 de diciembre
-      var msTranscurridos = Math.max(0, dInicioEmergencia.getTime() - inicioAnoClases.getTime());
-      var semanaEscolarActual = Math.max(1, Math.min(40, Math.ceil(msTranscurridos / (1000 * 60 * 60 * 24 * 7))));
-      var totalSemanasCalendarioMEN = 40;
-      var semanasRestantesCalendario = Math.max(1, totalSemanasCalendarioMEN - semanaEscolarActual);
 
-      // Función auxiliar para calcular la fecha de cada semana lectiva MEN evitando semanas de vacaciones de fin de año
       function getFechaLectivaMEN(baseDate, offsetWeeks, schoolYearEnd) {
-        var d = new Date(baseDate.getTime());
-        d.setDate(baseDate.getDate() + (offsetWeeks * 7));
-        
-        // Si la fecha calculada supera el cierre lectivo de diciembre (aprox. 10 de diciembre),
-        // se ajusta de acuerdo a los periodos oficiales del MEN para el cierre del calendario escolar
-        if (d > schoolYearEnd) {
-          // Mantener fecha proyectada lectiva dentro del tope de cierre lectivo oficial
+        var dateObj = new Date(baseDate.getTime());
+        dateObj.setDate(baseDate.getDate() + (offsetWeeks * 7));
+        if (dateObj > schoolYearEnd) {
           var clampedDate = new Date(schoolYearEnd.getTime());
           clampedDate.setDate(schoolYearEnd.getDate() - Math.max(0, (15 - offsetWeeks) * 3));
           return clampedDate;
         }
-        return d;
+        return dateObj;
       }
 
       // Generar 16 semanas articuladas con la canasta, el enfoque INEE y el Decreto 0277 de 2025
@@ -8347,7 +9171,7 @@ var ModuloC = {
         var focoSemana = '';
         var areaKey = '';
         var desgloseHorarioHTML = '';
-        var accionesSemana = []; // Array estructurado de procesos/acciones para esta semana
+        var accionesSemana = [];
 
         if (isEtapa1 && i <= 2) {
           // Semanas 1 y 2 de Etapa 1: Enfoque INEE en Contención Socioemocional y Supervivencia (ERAE/WASH)
@@ -8442,13 +9266,14 @@ var ModuloC = {
               dbaDesc: 'Aprendizaje esencial seleccionado en la canasta curricular',
               complejidad: 'Intermedia',
               bloom: 'Aplicar y contextualizar en el entorno',
-              didactica: 'Taller situado y pedagógico de aula'
+              didactica: 'Taller situado y pedagógico de aula',
+              cycleBadge: isMultigrado ? ('Ciclo ' + activeCycles[0]) : ''
             };
           }
 
           var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
-          // Articulación relacional con Barreras para el Aprendizaje y la Participación (BAP)
+          // Articulación relacional con Barreras BAP
           var barrerasAlertHTML = '';
           if (d.barreras) {
             var activeBAP = [];
@@ -8459,293 +9284,248 @@ var ModuloC = {
               }
             });
             if (activeBAP.length > 0) {
-              barrerasAlertHTML = '<span style="color:#c2410c; font-size:0.8rem; display:block; margin-top:3px;">🧩 <strong>Ajuste Razonable ante Barreras:</strong> Flexibilizar tiempos y diversificar formatos por ' + activeBAP.slice(0, 2).join(', ') + '.</span>';
+              barrerasAlertHTML = 
+                '<div style="font-size:0.75rem; color:#9a3412; background:#ffedd5; padding:3px 6px; border-radius:4px; margin-top:4px;">' +
+                  '🧩 <strong>Ajuste por Barreras Activas:</strong> ' + activeBAP.slice(0, 2).join(' | ') +
+                '</div>';
             }
           }
 
-          var hrsFocoArea = isPrimaria ? 15 : 18;
-          var hrsTransversales = isPrimaria ? 10 : 12;
+          var hrsAccion1 = (accionesPorSemana === 1) ? decretoInfo.horasSemanales : Math.round(horasEfectivasPorAccion);
+          var hrsAccion2 = decretoInfo.horasSemanales - hrsAccion1;
 
+          var cicloTag1 = (primaryAction && primaryAction.cycleBadge) ? (' [' + primaryAction.cycleBadge + ']') : '';
           accionesSemana.push({
             id: 'acc_1',
-            tipo: 'academica_principal',
-            etiqueta: '📘 Acción 1 (Principal)',
-            codigo: primaryAction.dbaCode || 'DBA Principal',
-            subproceso: primaryAction.subproceso || 'Aprendizaje esencial nuclear del área',
-            descripcion: primaryAction.dbaDesc,
-            horas: secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales,
-            didactica: (primaryAction.didactica || 'Taller situado') + ' | ' + didacticaEstrategia,
-            bloom: primaryAction.bloom || 'Aplicar y analizar saberes en el contexto de emergencia',
+            tipo: 'disciplinar',
+            etiqueta: '📘 Proceso 1 (' + areaKey.charAt(0).toUpperCase() + areaKey.slice(1) + ')' + cicloTag1,
+            codigo: primaryAction.dbaCode || 'DBA OFICIAL',
+            subproceso: primaryAction.subproceso || 'Eje articulador',
+            descripcion: primaryAction.dbaDesc || primaryAction.enunciado || 'Aprendizaje esencial priorizado',
+            horas: hrsAccion1,
+            didactica: primaryAction.didactica || didacticaEstrategia.desc,
+            bloom: primaryAction.bloom || (d.bloom ? d.bloom.split('(')[0] : 'Aplicar y analizar'),
             borderCol: '#3b82f6',
             bgCol: '#f8fafc'
           });
 
-          if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
-            var secEtiqueta = '➕ Acción 2 (Complementaria)';
-            var secTipo = 'academica_complementaria';
-            var secBorder = '#0d9488';
-            var secBg = '#f0fdfa';
-
-            if (secondaryAction.dbaCode.indexOf('SOCIO') !== -1) {
-              secEtiqueta = '🌱 Acción 2 (Transversal Socioemocional)';
-              secBorder = '#f59e0b';
-              secBg = '#fffbeb';
-            } else if (secondaryAction.dbaCode.indexOf('WASH') !== -1 || secondaryAction.dbaCode.indexOf('ERAE') !== -1) {
-              secEtiqueta = '🛡️ Acción 2 (Transversal Autoprotección)';
-              secBorder = '#0284c7';
-              secBg = '#f0f9ff';
-            }
-
+          if (accionesPorSemana >= 2 && secondaryAction) {
+            var isSecTransversal = (secondaryAction.dbaCode === 'SOCIOEMOCIONAL' || secondaryAction.dbaCode === 'ERAE / WASH' || secondaryAction.dbaCode === 'SUPERVIVENCIA');
+            var cicloTag2 = (secondaryAction.cycleBadge) ? (' [' + secondaryAction.cycleBadge + ']') : '';
             accionesSemana.push({
               id: 'acc_2',
-              tipo: secTipo,
-              etiqueta: secEtiqueta,
-              codigo: secondaryAction.dbaCode || 'Acción Transversal',
-              subproceso: secondaryAction.subproceso || 'Articulación pedagógica situada y refuerzo',
-              descripcion: secondaryAction.dbaDesc,
-              horas: hrsTransversales,
-              didactica: secondaryAction.didactica || 'Aplicación situada, cooperativa y de nivelación',
-              bloom: secondaryAction.bloom || 'Comprensión contextual y cuidado mutuo',
-              borderCol: secBorder,
-              bgCol: secBg
+              tipo: isSecTransversal ? 'transversal' : 'disciplinar',
+              etiqueta: isSecTransversal ? ('🌱 Proceso 2 (' + secondaryAction.dbaCode + ')') : ('📙 Proceso 2 (' + areaKey.charAt(0).toUpperCase() + areaKey.slice(1) + ')' + cicloTag2),
+              codigo: secondaryAction.dbaCode || 'DBA ARTICULADO',
+              subproceso: secondaryAction.subproceso || 'Refuerzo y aplicación',
+              descripcion: secondaryAction.dbaDesc || secondaryAction.enunciado || 'Proceso complementario en el aula',
+              horas: hrsAccion2,
+              didactica: secondaryAction.didactica || 'Taller situado y resolución colaborativa',
+              bloom: secondaryAction.bloom || 'Aplicar y contextualizar en el entorno',
+              borderCol: isSecTransversal ? '#10b981' : '#6366f1',
+              bgCol: isSecTransversal ? '#ecfdf5' : '#eef2ff'
             });
           }
 
-          var badgeCapacidadAcademica = 
+          var badgeAccionesRegular = 
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">' +
-              '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:0.76rem; border:1px solid #a7f3d0;">' +
-                '🎯 Capacidad Semanal: ' + accionesSemana.length + ' Proceso(s) (' + decretoInfo.horasSemanales + 'h/sem)' +
+              '<span class="badge-pill" style="background:#e0f2fe; color:#0369a1; font-weight:700; font-size:0.76rem;">' +
+                '🎯 Capacidad: ' + accionesSemana.length + ' Proceso(s) Activo(s) (' + decretoInfo.horasSemanales + 'h/sem)' +
               '</span>' +
-              '<span style="font-size:0.75rem; color:#047857; font-weight:600;">' +
-                'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / proceso (' + tipoEstrategiaLabel + ')' +
+              '<span style="font-size:0.75rem; color:#0c4a6e; font-weight:600;">' +
+                tipoEstrategiaLabel + ' (~' + (decretoInfo.horasSemanales / accionesSemana.length).toFixed(1) + 'h c/u)' +
               '</span>' +
             '</div>';
 
           desgloseHorarioHTML = 
-            '<div style="margin-top:8px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#14532d;">' +
-              '⏱️ <strong>Intensidad Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
-              '• <strong>Acción Principal (' + (secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales) + 'h):</strong> Taller nuclear de profundización en ' + focoSemana + ' y desafío cognitivo.<br>' +
-              (secondaryAction 
-                ? ('• <strong>Acción Complementaria (' + hrsTransversales + 'h):</strong> Aplicación situada, trabajo colaborativo o articulación transversal para afianzar el aprendizaje.')
-                : ('• <strong>Flexibilización y Refuerzo (' + hrsTransversales + 'h):</strong> Nivelación personalizada y adaptación curricular ante barreras activas.')) +
+            '<div style="margin-top:8px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#0369a1;">' +
+              '⏱️ <strong>Jornada Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h/sem efectivas):</strong> ' +
+              accionesSemana.map(function(acc) {
+                return '<strong>' + acc.etiqueta.split('(')[0].trim() + ':</strong> ' + acc.horas + 'h (' + acc.codigo + ')';
+              }).join(' | ') +
             '</div>';
         }
 
-        var semSaved = savedMonitoreo[i] || {};
-        var semSavedAcciones = semSaved.acciones || {};
+        // Recuperar estados y bitácoras guardados por proceso
+        var savedSem = savedMonitoreo[String(i)] || {};
+        var savedAcciones = savedSem.acciones || {};
 
-        // Normalizar estado de avance por acción
         accionesSemana.forEach(function(acc) {
-          var accSaved = semSavedAcciones[acc.id] || {};
-          acc.avance = accSaved.avance || (semSaved.avance || '⚪ Sin iniciar');
-          acc.observaciones = accSaved.observaciones || (semSaved.observaciones || '');
+          if (savedAcciones[acc.id]) {
+            acc.avance = savedAcciones[acc.id].avance || '⚪ Sin iniciar';
+            acc.observaciones = savedAcciones[acc.id].observaciones || '';
+          } else {
+            // Compatibilidad con registros monolíticos previos
+            if (acc.id === 'acc_1') {
+              acc.avance = savedSem.avance || '⚪ Sin iniciar';
+              acc.observaciones = savedSem.observaciones || '';
+            } else {
+              acc.avance = '⚪ Sin iniciar';
+              acc.observaciones = '';
+            }
+          }
         });
-
-        // Estado general de la semana (retrocompatibilidad)
-        var semAvanceGeneral = semSaved.avance || '⚪ Sin iniciar';
-        if (accionesSemana.length > 0) {
-          var allLog = accionesSemana.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
-          var anyProc = accionesSemana.some(function(a) { return a.avance && (a.avance.indexOf('proceso') !== -1 || a.avance.indexOf('Logrado') !== -1); });
-          if (allLog) semAvanceGeneral = '🟢 Logrado';
-          else if (anyProc) semAvanceGeneral = '🟡 En proceso';
-        }
 
         semanas.push({
           num: i,
           fecha: fechaFormatted,
-          etapa: d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica',
           foco: focoSemana,
-          areaNombre: focoSemana,
           horasSemana: decretoInfo.horasSemanales,
-          accionesCapacidad: accionesSemana.length,
           acciones: accionesSemana,
-          duracionPromedioAccion: horasEfectivasPorAccion.toFixed(1),
+          badgeCapacidad: isEtapa1 && i <= 2 ? badgeAccionesEtapa1 : badgeAccionesRegular,
           desgloseHorarioHTML: desgloseHorarioHTML,
-          barrerasAlertHTML: barrerasAlertHTML || '',
-          badgeCapacidad: (isEtapa1 && i <= 2) ? badgeAccionesEtapa1 : badgeCapacidadAcademica,
-          avance: semAvanceGeneral,
-          observaciones: semSaved.observaciones || ''
+          barrerasAlertHTML: barrerasAlertHTML || ''
         });
       }
 
-      // ==========================================
-      // CÁLCULO DE KPIS Y PROCESOS PENDIENTES MEN
-      // ==========================================
-      var totalProcesosPlan = 0;
-      var procesosLogrados = 0;
-      var procesosEnProceso = 0;
+      // Cálculo de Métricas y Transición de Etapa Curricular
+      var totalAccionesTodas = 0;
+      var totalLogradasTodas = 0;
+      var totalEnProcesoTodas = 0;
 
       semanas.forEach(function(s) {
         s.acciones.forEach(function(acc) {
-          totalProcesosPlan++;
-          if (acc.avance && acc.avance.indexOf('Logrado') !== -1) {
-            procesosLogrados++;
-          } else if (acc.avance && acc.avance.indexOf('proceso') !== -1) {
-            procesosEnProceso++;
-          }
+          totalAccionesTodas++;
+          if (acc.avance && acc.avance.indexOf('Logrado') !== -1) totalLogradasTodas++;
+          else if (acc.avance && acc.avance.indexOf('proceso') !== -1) totalEnProcesoTodas++;
         });
       });
 
-      var procesosPendientes = Math.max(0, totalProcesosPlan - procesosLogrados);
-      var pctAvanceProcesos = totalProcesosPlan > 0 ? Math.round((procesosLogrados / totalProcesosPlan) * 100) : 0;
-      var totalHorasPlan = semanas.length * decretoInfo.horasSemanales;
-      var horasEjecutadas = Math.round((procesosLogrados / Math.max(1, totalProcesosPlan)) * totalHorasPlan);
+      var pctLogrado = totalAccionesTodas > 0 ? Math.round((totalLogradasTodas / totalAccionesTodas) * 100) : 0;
+      var pctEfectivo = totalAccionesTodas > 0 ? Math.round(((totalLogradasTodas + (totalEnProcesoTodas * 0.5)) / totalAccionesTodas) * 100) : 0;
 
-      // =======================================================
-      // MOTOR DE TRANSICIÓN DE ETAPAS (INEE / MEN & BLOOM)
-      // =======================================================
-      // Evalúa el avance curricular y las semanas para determinar el momento exacto
-      // de pasar de Etapa 1 -> Etapa 2 -> Etapa 3 para cumplir con la malla curricular del MEN.
+      // Recomendación de Transición de Etapa
       var recomendacionTransicion = null;
+      var etapaActualStr = d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica';
 
-      if (isEtapa1) {
-        // En Etapa 1: Si las semanas 1 y 2 (o al menos 2 acciones de contención y supervivencia) están logradas
-        var s1 = semanas[0] || { acciones: [] };
-        var s2 = semanas[1] || { acciones: [] };
-        var accionesChoqueLogradas = s1.acciones.concat(s2.acciones).filter(function(a) {
-          return a.avance && a.avance.indexOf('Logrado') !== -1;
-        }).length;
-
-        var choqueCompleto = (accionesChoqueLogradas >= 3) || (s1.acciones.every(function(a){ return a.avance && a.avance.indexOf('Logrado') !== -1; }) && s1.acciones.length > 0);
-
-        if (choqueCompleto || pctAvanceProcesos >= 20) {
+      if (etapaActualStr.indexOf('ETAPA 1') !== -1) {
+        var sem1Lograda = semanas[0] && semanas[0].acciones.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
+        var sem2Lograda = semanas[1] && semanas[1].acciones.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
+        if (sem1Lograda && sem2Lograda) {
           recomendacionTransicion = {
-            etapaOrigen: d.etapa,
             etapaDestino: 'ETAPA 2: Recuperación temprana / Lúdica',
             nuevoBloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
-            motivo: 'Se han consolidado las acciones prioritarias de contención socioemocional y autoprotección ERAE/WASH (Normas INEE). Corresponde pasar a ETAPA 2 para reactivar los proyectos integrados, la nivelación en áreas nucleares y el trabajo lúdico cooperativo.',
-            btnTexto: '🚀 Transicionar a ETAPA 2 (Recuperación Temprana)'
+            motivo: '¡Contención inicial superada! Los procesos de choque socioemocional y autoprotección de las Semanas 1 y 2 están 100% logrados.',
+            icono: '🌱',
+            colorFondo: '#fef3c7',
+            colorBorde: '#f59e0b',
+            colorTexto: '#92400e'
           };
         }
-      } else if (d.etapa && d.etapa.indexOf('ETAPA 2') !== -1) {
-        // En Etapa 2: Si se ha avanzado en al menos el 50% de los procesos o semanas >= 8
-        if (pctAvanceProcesos >= 50 || procesosLogrados >= 10) {
+      } else if (etapaActualStr.indexOf('ETAPA 2') !== -1) {
+        if (pctLogrado >= 60 || totalLogradasTodas >= 8) {
           recomendacionTransicion = {
-            etapaOrigen: d.etapa,
-            etapaDestino: 'ETAPA 3: Educación formal adaptada / Retorno formal',
+            etapaDestino: 'ETAPA 3: Educación formal adaptada / Retorno',
             nuevoBloom: 'Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)',
-            motivo: 'Se ha alcanzado un progreso superior al 50% en los aprendizajes esenciales de recuperación temprana. Según la malla curricular del MEN, corresponde avanzar a ETAPA 3 para restablecer la educación formal adaptada con estándares de alta complejidad evaluativa y creación autónoma.',
-            btnTexto: '🎓 Promover a ETAPA 3 (Retorno Formal)'
+            motivo: '¡Consolidación pedagógica exitosa! Se ha alcanzado un ' + pctLogrado + '% de aprendizajes logrados. El grupo está listo para la educación formal adaptada.',
+            icono: '🎓',
+            colorFondo: '#eff6ff',
+            colorBorde: '#3b82f6',
+            colorTexto: '#1e40af'
           };
         }
       }
+
+      // Banner Contextual de Diagnóstico Activo en Módulo C
+      var ciclosLabel = isMultigrado ? ('Multigrado (Ciclos ' + activeCycles.join(', ') + ')') : ('Ciclo ' + activeCycles[0]);
+      var bannerContextoMonitoreo_HTML = 
+        '<div class="diagnostic-context-banner">' +
+          '<div>' +
+            '<strong>📌 Monitoreo Curricular Vinculado:</strong> ' + ((d && d.etapa && d.etapa.split(':')[0]) || 'Etapa 2') + ' | ' +
+            '<strong>Multirriesgo:</strong> ' + amenazasLabel + ' | ' +
+            '<strong>' + ciclosLabel + '</strong> ' +
+            '(' + ((d && d.nna) || 28) + ' NNA - ' + ((d && d.didacticaNNA) || 'TRABAJO COOPERATIVO') + ') | ' +
+            '<em>Reanudación: ' + ((d && d.fechaAtencion) || '2026-03-22') + '</em>' +
+          '</div>' +
+          '<div>' +
+            '<button type="button" class="btn-micro" onclick="window.switchTab(\'tab-diagnostico\');" style="background:white; border-color:#86efac; color:#166534; font-weight:700;">' +
+              '⚙️ Ver / Cambiar Diagnóstico' +
+            '</button>' +
+          '</div>' +
+        '</div>';
 
       var bannerTransicionHTML = '';
       if (recomendacionTransicion) {
         bannerTransicionHTML = 
-          '<div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);">' +
-            '<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">' +
-              '<div style="flex:1; min-width:280px;">' +
-                '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
-                  '<span style="font-size:1.25rem;">✨</span>' +
-                  '<strong style="color:#1d4ed8; font-size:1rem;">Momento Óptimo de Transición Curricular MEN Identificado</strong>' +
-                  '<span class="badge-pill" style="background:#2563eb; color:white; font-size:0.75rem; font-weight:700;">Hito de Flexibilización</span>' +
-                '</div>' +
-                '<p style="font-size:0.86rem; color:#1e3a8a; line-height:1.5; margin:0;">' +
-                  recomendacionTransicion.motivo +
-                '</p>' +
-                '<div style="font-size:0.78rem; color:#3b82f6; margin-top:6px; font-weight:600;">' +
-                  'Siguiente Etapa Sugerida: <strong>' + recomendacionTransicion.etapaDestino + '</strong> | Nuevo Nivel Bloom: <strong>' + recomendacionTransicion.nuevoBloom + '</strong>' +
-                '</div>' +
-              '</div>' +
-              '<div style="align-self:center;">' +
-                '<button id="btn-promover-etapa" class="btn-elite" style="background:#1d4ed8; color:white; font-weight:700; padding:10px 18px; border-radius:8px; box-shadow:0 2px 6px rgba(29, 78, 216, 0.3);">' +
-                  recomendacionTransicion.btnTexto +
-                '</button>' +
-              '</div>' +
+          '<div style="background:' + recomendacionTransicion.colorFondo + '; border:2px solid ' + recomendacionTransicion.colorBorde + '; border-radius:8px; padding:14px 18px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">' +
+            '<div style="color:' + recomendacionTransicion.colorTexto + '; font-size:0.92rem; line-height:1.45;">' +
+              '<h4 style="margin:0 0 4px 0; font-size:1.02rem; display:flex; align-items:center; gap:6px;">' +
+                recomendacionTransicion.icono + ' <strong>Recomendación Oficial de Transición Curricular (Normas INEE):</strong>' +
+              '</h4>' +
+              recomendacionTransicion.motivo + '<br>' +
+              '<span style="font-size:0.82rem; font-weight:600;">Siguiente Nivel: <strong>' + recomendacionTransicion.etapaDestino + '</strong> con nivel cognitivo <strong>' + recomendacionTransicion.nuevoBloom + '</strong>.</span>' +
+            '</div>' +
+            '<div>' +
+              '<button id="btn-promover-etapa" class="btn-elite" style="background:' + recomendacionTransicion.colorBorde + '; color:white; font-weight:700; padding:10px 18px; font-size:0.88rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">' +
+                '🚀 Promover Plan a ' + recomendacionTransicion.etapaDestino.split(':')[0] +
+              '</button>' +
             '</div>' +
           '</div>';
       }
 
       var html = 
         '<div class="card-elite">' +
-          '<div class="card-header">' +
+          bannerContextoMonitoreo_HTML +
+          '<div class="card-header" style="flex-wrap: wrap; gap: 12px;">' +
             '<div>' +
-              '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-              '<span style="font-size: 0.85rem; color: var(--text-muted);">' +
-                'Gobernación de Norte de Santander | ' +
-                'Docente: ' + ((user && user.nombreCompleto) || 'Docente Territorial') + ' | ' +
-                'Amenazas: ' + amenazasLabel + ' | ' +
-                'Reanudación: ' + (d.fechaAtencion || d.fechaInicio) +
-              '</span>' +
+              '<h2 class="card-title">📋 Módulo C: Monitoreo Semanal de Aprendizajes y Avance Pedagógico</h2>' +
+              '<p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">' +
+                'Cronograma de 16 semanas articulado con el <strong>Decreto 0277 de 2025</strong> (' + decretoInfo.horasSemanales + 'h/sem efectivas) y las Normas Mínimas INEE.' +
+              '</p>' +
             '</div>' +
             '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
-              '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-              '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
-              '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
-              '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
+              '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel</button>' +
+              '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta SIEE</button>' +
+              '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avances</button>' +
             '</div>' +
           '</div>' +
 
-          (bannerTransicionHTML || '') +
+          bannerTransicionHTML +
 
-          '<!-- Banner de Cumplimiento Decreto 0277 de 2025 e INEE -->' +
-          '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.6;">' +
-            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">' +
-              '<strong style="color:#065f46; font-size:0.95rem;">⚖️ Cumplimiento Normativo Decreto 0277 de 2025 (Jornada Escolar Regular)</strong>' +
-              '<span class="badge-pill" style="background:#059669; color:#fff; font-size:0.8rem; font-weight:700;">' + decretoInfo.nivel + '</span>' +
+          '<!-- Panel de Métricas e Indicadores de Rendimiento SIEE -->' +
+          '<div class="grid-3" style="gap: 12px; margin-bottom: 20px;">' +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #059669; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Procesos Logrados</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #059669; margin-top: 2px;">' + totalLogradasTodas + ' / ' + totalAccionesTodas + ' <span style="font-size: 0.88rem; font-weight: 600;">(' + pctLogrado + '%)</span></div>' +
             '</div>' +
-            '<div>' +
-              '<strong>Intensidad Reglamentaria:</strong> Mínimo <strong>' + decretoInfo.horasSemanales + ' horas efectivas de 60 minutos semanales</strong> (~' + decretoInfo.horasDiarias + ' horas diarias) | Meta anual de referencia: <strong>' + decretoInfo.horasAnuales.toLocaleString('es-CO') + ' horas</strong>.<br>' +
-              '<strong>📐 Estimación de Capacidad Pedagógica por Semana:</strong> Para ' + d.nna + ' NNA (' + tipoEstrategiaLabel + '), la duración promedio calculada por acción pedagógica situada es de <strong>~' + horasEfectivasPorAccion.toFixed(1) + ' horas efectivas</strong>. Por tanto, cada semana integra <strong>' + (isEtapa1 ? '2 acciones de choque (Socioemocional + ERAE/WASH)' : (accionesPorSemana + ' acción(es) situada(s) con posibilidad de articular acciones complementarias)')) + '</strong>.<br>' +
-              (isEtapa1 
-                ? '<strong>⚠️ Etapa 1 Activa (Respuesta Inmediata / Contención):</strong> Las Semanas 1 y 2 canalizan las ' + decretoInfo.horasSemanales + ' horas en 2 acciones simultáneas: contención emocional (15h/18h) y autoprotección comunitaria ERAE/WASH (10h/12h).' 
-                : '<strong>Plan Curricular Sincronizado:</strong> Las semanas distribuyen las ' + decretoInfo.horasSemanales + ' horas entre profundización de DBA esenciales nucleares, proyectos de aula y mitigación de barreras.') +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #d97706; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Procesos en Marcha</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #d97706; margin-top: 2px;">' + totalEnProcesoTodas + ' <span style="font-size: 0.88rem; font-weight: 600;">en desarrollo</span></div>' +
+            '</div>' +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #0284c7; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Jornada Oficial (Dec. 0277/2025)</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #0284c7; margin-top: 2px;">' + decretoInfo.horasSemanales + 'h/sem <span style="font-size: 0.82rem; font-weight: 600;">(' + decretoInfo.horasDiarias + 'h/día)</span></div>' +
             '</div>' +
           '</div>' +
 
-          '<div class="grid-4" style="margin-bottom: 24px;">' +
-            '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
-              '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso de Procesos</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvanceProcesos + '%</div>' +
-              '<div style="font-size: 0.72rem; color: #64748b; margin-top:2px;">' + procesosLogrados + ' de ' + totalProcesosPlan + ' procesos logrados</div>' +
-            '</div>' +
-            '<div style="background: #fff7ed; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #ffedd5;">' +
-              '<div style="font-size: 0.8rem; color: #c2410c;">⏳ Procesos por Realizar</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: #ea580c;">' + procesosPendientes + ' pend.</div>' +
-              '<div style="font-size: 0.72rem; color: #9a3412; margin-top:2px;">' + procesosEnProceso + ' en proceso de aula</div>' +
-            '</div>' +
-            '<div style="background: #eff6ff; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #dbeafe;">' +
-              '<div style="font-size: 0.8rem; color: #1e40af;">📅 Semanas Calendario MEN</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: #2563eb;">' + semanasRestantesCalendario + ' sem.</div>' +
-              '<div style="font-size: 0.72rem; color: #1d4ed8; margin-top:2px;">Semana lectiva ' + semanaEscolarActual + ' de ' + totalSemanasCalendarioMEN + ' anuales</div>' +
-            '</div>' +
-            '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
-              '<div style="font-size: 0.8rem; color: var(--color-blue);">Meta Semestral (16 sem)</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + totalHorasPlan + ' h</div>' +
-              '<div style="font-size: 0.72rem; color: #0369a1; margin-top:2px;">' + horasEjecutadas + 'h ejecutadas aprox.</div>' +
-            '</div>' +
-          '</div>' +
-
+          '<!-- Tabla de Monitoreo Semanal Multi-Acción -->' +
           '<div style="overflow-x: auto;">' +
-            '<table class="table-print" style="width: 100%; border-collapse: separate; border-spacing: 0 10px; font-size: 0.88rem;">' +
+            '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">' +
               '<thead>' +
-                '<tr style="background: var(--surface-hover); text-align: left;">' +
-                  '<th style="padding: 10px; width: 85px;">Semana</th>' +
-                  '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
-                  '<th style="padding: 10px; width: 130px;">Enfoque / Área</th>' +
-                  '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada (Decreto 0277 de 2025)</th>' +
-                  '<th style="padding: 10px; width: 180px;">Estado de Avance</th>' +
-                  '<th style="padding: 10px; width: 240px;">Evidencias / Bitácora Docente</th>' +
+                '<tr style="background: var(--surface-hover); text-align: left; border-bottom: 2px solid var(--border-medium);">' +
+                  '<th style="padding: 10px; width: 9%;">Semana</th>' +
+                  '<th style="padding: 10px; width: 10%;">Fecha Lectiva</th>' +
+                  '<th style="padding: 10px; width: 12%;">Foco Curricular</th>' +
+                  '<th style="padding: 10px; width: 33%;">Procesos y Aprendizajes Priorizados (Decreto 0277)</th>' +
+                  '<th style="padding: 10px; width: 16%;">Estado por Proceso</th>' +
+                  '<th style="padding: 10px; width: 20%;">Bitácora y Evidencias</th>' +
                 '</tr>' +
               '</thead>' +
               '<tbody>' +
                 semanas.map(function(s) {
-                  // Renderizar múltiples procesos divididos visualmente en cuadros claros y alineados
                   var tarjetasProcesosHTML = '';
                   var estadosProcesosHTML = '';
                   var bitacorasProcesosHTML = '';
 
-                  s.acciones.forEach(function(acc, idx) {
-                    var isMulti = (s.acciones.length > 1);
-                    var cardMargin = (isMulti && idx > 0) ? 'margin-top:10px;' : '';
-                    var cardMinHeight = isMulti ? 'min-height:120px;' : '';
+                  s.acciones.forEach(function(acc, accIdx) {
+                    var cardMargin = (accIdx > 0) ? 'margin-top: 8px;' : '';
+                    var cardMinHeight = (s.acciones.length > 1) ? 'min-height: 85px;' : '';
 
                     tarjetasProcesosHTML += 
-                      '<div style="background:' + acc.bgCol + '; border-left:4px solid ' + acc.borderCol + '; border-radius:6px; padding:10px 12px; ' + cardMargin + ' ' + cardMinHeight + ' box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
-                        '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:4px;">' +
-                          '<span class="badge-pill" style="background:#ffffff; color:#0f172a; border:1px solid ' + acc.borderCol + '; font-weight:700; font-size:0.75rem;">' +
-                            acc.etiqueta + ' (' + acc.horas + 'h)' +
+                      '<div style="background:' + acc.bgCol + '; border:1px solid ' + acc.borderCol + '; border-radius:6px; padding:8px 10px; ' + cardMargin + ' ' + cardMinHeight + ' box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
+                        '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">' +
+                          '<span style="font-size:0.75rem; font-weight:700; color:' + acc.borderCol + ';">' +
+                            acc.etiqueta + ' • ' + acc.horas + 'h efectivas' +
                           '</span>' +
                           '<span style="font-size:0.72rem; color:#475569; font-weight:600;">' +
                             'Código: <strong>' + acc.codigo + '</strong>' +
@@ -8767,7 +9547,7 @@ var ModuloC = {
                         '<div style="font-size:0.74rem; font-weight:700; color:#0f172a; margin-bottom:5px;">' +
                           acc.etiqueta +
                         '</div>' +
-                        '<select class="select-elite select-avance-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
+                        '<select class="select-elite select-avance-accion select-avance-semana no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
                           '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                           '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                           '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
@@ -8783,7 +9563,7 @@ var ModuloC = {
                         '<div style="font-size:0.72rem; color:#475569; font-weight:700; margin-bottom:4px;">' +
                           'Bitácora ' + acc.etiqueta + ' (' + acc.horas + 'h):' +
                         '</div>' +
-                        '<textarea class="textarea-elite input-observaciones-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<textarea class="textarea-elite input-observaciones-accion input-observaciones-semana no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
                         '<div class="print-only-text" style="display:none; font-size:7.5pt; color:#1e293b; line-height:1.35; padding:3px 0; border-top:1px dashed #cbd5e1; margin-top:2px;">' +
                           (acc.observaciones && acc.observaciones.trim() ? acc.observaciones.trim() : '<em>(Sin observaciones adicionales registradas)</em>') +
                         '</div>' +
@@ -8794,7 +9574,7 @@ var ModuloC = {
                     '<div>' +
                       s.badgeCapacidad +
                       '<div style="margin-bottom:6px; font-size:0.83rem;">' +
-                        '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+                        '<strong>🎓 ' + (d.grado || ciclosLabel) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
                         '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') +
                         s.barrerasAlertHTML +
                       '</div>' +
@@ -8856,14 +9636,12 @@ var ModuloC = {
           u.diagnostico.updatedAt = new Date().toISOString();
           AuthManager.saveUserData('diagnostico', u.diagnostico);
 
-          // Actualizar interfaz del Módulo A si los elementos existen
           var selEtapa = document.getElementById('select-etapa');
-          var selBloom = document.getElementById('select-bloom-ajustable');
-          var inputBloomHidden = document.getElementById('input-bloom');
           if (selEtapa) selEtapa.value = recomendacionTransicion.etapaDestino;
-          if (selBloom) selBloom.value = recomendacionTransicion.nuevoBloom;
-          if (inputBloomHidden) inputBloomHidden.value = recomendacionTransicion.nuevoBloom;
 
+          if (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.updateBloomDisplay === 'function') {
+            ModuloA.updateBloomDisplay(recomendacionTransicion.nuevoBloom);
+          }
           if (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.renderDiagnosticSummary === 'function') {
             ModuloA.renderDiagnosticSummary(u.diagnostico);
           }
@@ -8876,7 +9654,7 @@ var ModuloC = {
         });
       }
 
-      // Evento Guardar Avance con Multi-Acción / Procesos Múltiples por Semana
+      // Evento Guardar Avance con Multi-Acción
       var btnGuardar = document.getElementById('btn-guardar-monitoreo');
       if (btnGuardar) {
         btnGuardar.addEventListener('click', function(e) {
@@ -8892,8 +9670,8 @@ var ModuloC = {
             var combinedObs = [];
 
             s.acciones.forEach(function(acc) {
-              var sel = container.querySelector('.select-avance-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
-              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.select-avance-semana[data-semana="' + semNum + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.input-observaciones-semana[data-semana="' + semNum + '"]');
               var avVal = sel ? sel.value : acc.avance;
               var obsVal = txt ? txt.value : acc.observaciones;
 
@@ -8914,7 +9692,6 @@ var ModuloC = {
               }
             });
 
-            // Determinar estado agregado de la semana
             var estadoSemana = '⚪ Sin iniciar';
             if (s.acciones.length > 0 && semLogrados === s.acciones.length) {
               estadoSemana = '🟢 Logrado';
@@ -8932,11 +9709,11 @@ var ModuloC = {
 
           AuthManager.saveUserData('monitoreo', u.monitoreo);
           self.renderMonitoreo();
-          alert('✅ Monitoreo Semanal guardado exitosamente.\nSe registraron los estados individuales de cada proceso pedagógico y se actualizaron los indicadores de avance.');
+          alert('✅ Monitoreo Semanal guardado exitosamente.\nSe registraron los estados de cada proceso pedagógico y se actualizaron los indicadores de avance vinculados a este diagnóstico.');
         });
       }
 
-      // Evento Exportar a Excel (CSV con desglose curricular completo y compatibilidad 100% Excel RFC 4180)
+      // Evento Exportar a Excel
       var btnExcel = document.getElementById('btn-exportar-excel');
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
@@ -8962,43 +9739,36 @@ var ModuloC = {
 
           semanas.forEach(function(s) {
             s.acciones.forEach(function(acc) {
-              var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
-              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.select-avance-semana[data-semana="' + s.num + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.input-observaciones-semana[data-semana="' + s.num + '"]');
               var avVal = sel ? sel.value : acc.avance;
               var obsVal = txt ? txt.value : acc.observaciones;
 
-              // Sanitizar y limpiar textos sin romper celdas en Excel
-              var cleanObs = (obsVal || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanDesc = (acc.descripcion || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanSub = (acc.subproceso || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanDidact = (acc.didactica || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanBloom = (acc.bloom || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-
-              csvRows.push([
+              var row = [
                 'Semana ' + s.num,
                 s.fecha,
-                s.horasSemana + ' horas efectivas',
+                s.horasSemana + 'h',
                 acc.id,
                 acc.etiqueta,
                 acc.codigo,
-                cleanSub,
-                cleanDesc,
+                acc.subproceso || '',
+                acc.descripcion || '',
                 acc.horas + 'h',
-                cleanDidact,
-                cleanBloom,
-                s.etapa,
-                s.foco,
+                acc.didactica || '',
+                acc.bloom || '',
+                d.etapa || '',
+                s.foco || '',
                 amenazasLabel,
                 avVal,
-                cleanObs
-              ]);
+                obsVal
+              ];
+              csvRows.push(row);
             });
           });
 
-          // Función de escape estricto de celdas para CSV delimitado por punto y coma (formato estándar Excel en español)
           var formatCSVCell = function(val) {
             var str = (val === null || val === undefined) ? '' : String(val);
-            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1 || str.indexOf('\r') !== -1) {
               return '"' + str.replace(/"/g, '""') + '"';
             }
             return str;
@@ -9012,26 +9782,13 @@ var ModuloC = {
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
-          a.download = 'monitoreo_semanal_procesos_ciclo_' + cicloKey + '_emergencia_' + new Date().toISOString().split('T')[0] + '.csv';
+          a.download = 'monitoreo_semanal_decreto0277_' + (d.ciclos || ['3']).join('_') + '_' + new Date().toISOString().split('T')[0] + '.csv';
           a.click();
           URL.revokeObjectURL(url);
         });
       }
 
-      // Evento Exportar JSON Respaldo
-      var btnJSON = document.getElementById('btn-exportar-json');
-      if (btnJSON) {
-        btnJSON.addEventListener('click', function() {
-          var u = AuthManager.getUserData();
-          var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(u, null, 2));
-          var a = document.createElement('a');
-          a.href = dataStr;
-          a.download = 'respaldo_plan_curricular_nrc_' + new Date().toISOString().split('T')[0] + '.json';
-          a.click();
-        });
-      }
-
-      // Evento Imprimir Carta
+      // Evento Imprimir Carta SIEE
       var btnPrint = document.getElementById('btn-imprimir-carta');
       if (btnPrint) {
         btnPrint.addEventListener('click', function() {
@@ -9039,8 +9796,8 @@ var ModuloC = {
         });
       }
 
-    } catch (e) {
-      console.error('Error rendering Monitoreo Semanal:', e);
+    } catch (err) {
+      console.error('Error renderizando Módulo C:', err);
     }
   }
 };

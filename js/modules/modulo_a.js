@@ -1,4 +1,4 @@
-// Módulo A: Diagnóstico Paramétrico PGIRE (Versión 2.2 - Multirriesgo, Barreras y Fechas Duales)
+// Módulo A: Diagnóstico Paramétrico PGIRE (Versión 2.5 - Multiciclo/Multigrado, Bloom Automático, Fechas Duales e Historial Sincronizado)
 var ModuloA = {
   cicloGradosMap: {
     '1': ['Grado 1° (Primaria)', 'Grado 2° (Primaria)', 'Grado 3° (Primaria)'],
@@ -24,6 +24,7 @@ var ModuloA = {
   ],
 
   currentBarrerasState: {},
+  currentDiagnosticId: null,
 
   init: function(callbacks) {
     this.callbacks = callbacks || {};
@@ -32,6 +33,7 @@ var ModuloA = {
     this.loadSavedDiagnostic();
   },
 
+  // 2. Nivel Bloom: Orientador pedagógico automático (no seleccionable manualmente)
   calculateBloom: function(etapa) {
     if (!etapa) return 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)';
     if (etapa.indexOf('ETAPA 1') !== -1) {
@@ -44,36 +46,165 @@ var ModuloA = {
     return 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)';
   },
 
-  calculateDidacticaNNA: function(nnaCount) {
+  updateBloomDisplay: function(bloomVal) {
+    var txtDisplay = document.getElementById('txt-bloom-display');
+    var badgeDisplay = document.getElementById('display-bloom-badge');
+    var selBloom = document.getElementById('select-bloom-ajustable');
+    var inputHidden = document.getElementById('input-bloom');
+
+    if (txtDisplay) txtDisplay.textContent = bloomVal;
+    if (badgeDisplay) {
+      if (bloomVal.indexOf('Baja') !== -1) {
+        badgeDisplay.style.background = '#fef2f2';
+        badgeDisplay.style.color = '#991b1b';
+        badgeDisplay.style.borderColor = '#fca5a5';
+      } else if (bloomVal.indexOf('Media') !== -1) {
+        badgeDisplay.style.background = '#fef3c7';
+        badgeDisplay.style.color = '#92400e';
+        badgeDisplay.style.borderColor = '#fcd34d';
+      } else {
+        badgeDisplay.style.background = '#e0f2fe';
+        badgeDisplay.style.color = '#0369a1';
+        badgeDisplay.style.borderColor = '#7dd3fc';
+      }
+    }
+    if (selBloom) selBloom.value = bloomVal;
+    if (inputHidden) inputHidden.value = bloomVal;
+  },
+
+  // Estrategia didáctica según matrícula NNA y consideración de aula multigrado
+  calculateDidacticaNNA: function(nnaCount, isMultigrado) {
     var n = parseInt(nnaCount, 10);
     if (isNaN(n) || n <= 0) return '';
+    if (isMultigrado) {
+      if (n < 15) return '📝 TUTORÍA 1:1 INTER-EDAD (<15 NNA - Multigrado)';
+      if (n <= 35) return '👥 TRABAJO COOPERATIVO Y RINCONES (15-35 NNA - Multigrado)';
+      return '⚡ MICRO-ESTACIONES MULTINIVEL (>35 NNA - Multigrado)';
+    }
     if (n < 15) return '📝 TUTORÍA 1:1 (<15 NNA)';
     if (n <= 35) return '👥 TRABAJO COOPERATIVO (15 a 35 NNA)';
     return '⚡ MICRO-ESTACIONES (>35 NNA)';
   },
 
-  updateGradosForCiclo: function(ciclo) {
+  // Gestión de Ciclos Múltiples (Monogrado y Multigrado)
+  getSelectedCiclos: function() {
+    var checkboxes = document.querySelectorAll('.ciclo-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      if (cb.value) selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var sel = document.getElementById('select-ciclo');
+      return (sel && sel.value) ? [sel.value] : ['3'];
+    }
+    return selected;
+  },
+
+  setSelectedCiclos: function(ciclosArray, preselectedGrados) {
+    if (!Array.isArray(ciclosArray) || ciclosArray.length === 0) {
+      ciclosArray = ['3'];
+    }
+    var checkboxes = document.querySelectorAll('.ciclo-chip-input');
+    checkboxes.forEach(function(cb) {
+      var isChecked = ciclosArray.indexOf(cb.value) !== -1;
+      cb.checked = isChecked;
+      var parentLabel = cb.closest('.ciclo-chip');
+      if (parentLabel) {
+        if (isChecked) parentLabel.classList.add('active');
+        else parentLabel.classList.remove('active');
+      }
+    });
+
+    var selCiclo = document.getElementById('select-ciclo');
+    if (selCiclo) selCiclo.value = ciclosArray[0] || '3';
+
+    this.updateGradosForCiclos(ciclosArray, preselectedGrados);
+  },
+
+  // Actualización Dinámica de Grados Disponibles según Ciclos Seleccionados
+  updateGradosForCiclos: function(ciclosArray, preselectedGrados) {
+    var self = this;
+    var container = document.getElementById('container-grado-chips');
     var selectGrado = document.getElementById('select-grado');
-    if (!selectGrado) return;
-    var grados = this.cicloGradosMap[ciclo] || this.cicloGradosMap['3'];
-    selectGrado.innerHTML = '';
-    grados.forEach(function(g) {
-      var opt = document.createElement('option');
-      opt.value = g;
-      opt.textContent = g;
-      selectGrado.appendChild(opt);
+    if (!container) return;
+
+    ciclosArray = ciclosArray || this.getSelectedCiclos();
+    var allGrados = [];
+    ciclosArray.forEach(function(c) {
+      var list = self.cicloGradosMap[c] || [];
+      list.forEach(function(g) {
+        if (allGrados.indexOf(g) === -1) allGrados.push(g);
+      });
+    });
+
+    if (allGrados.length === 0) {
+      allGrados = this.cicloGradosMap['3'];
+    }
+
+    if (!preselectedGrados || preselectedGrados.length === 0) {
+      preselectedGrados = [allGrados[0]];
+    }
+
+    // Generar chips interactivos de grados
+    var html = allGrados.map(function(g) {
+      var isChecked = preselectedGrados.indexOf(g) !== -1;
+      var activeCls = isChecked ? ' active' : '';
+      return '<label class="grado-chip' + activeCls + '" data-grado="' + g + '">' +
+        '<input type="checkbox" class="grado-chip-input" value="' + g + '"' + (isChecked ? ' checked' : '') + '> ' +
+        '<span>' + g + '</span>' +
+      '</label>';
+    }).join('');
+
+    container.innerHTML = html;
+
+    // Sincronizar select tradicional
+    if (selectGrado) {
+      selectGrado.innerHTML = '';
+      allGrados.forEach(function(g) {
+        var opt = document.createElement('option');
+        opt.value = g;
+        opt.textContent = g;
+        if (preselectedGrados.indexOf(g) !== -1) opt.selected = true;
+        selectGrado.appendChild(opt);
+      });
+    }
+
+    // Listeners para los chips de grados
+    container.querySelectorAll('.grado-chip-input').forEach(function(input) {
+      input.addEventListener('change', function() {
+        var parent = input.closest('.grado-chip');
+        if (parent) {
+          if (input.checked) parent.classList.add('active');
+          else parent.classList.remove('active');
+        }
+        var selectedG = self.getSelectedGrados();
+        if (selectGrado && selectedG.length > 0) selectGrado.value = selectedG[0];
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
     });
   },
 
+  getSelectedGrados: function() {
+    var checkboxes = document.querySelectorAll('.grado-chip-input:checked');
+    var selected = [];
+    checkboxes.forEach(function(cb) {
+      if (cb.value) selected.push(cb.value);
+    });
+    if (selected.length === 0) {
+      var sel = document.getElementById('select-grado');
+      return (sel && sel.value) ? [sel.value] : ['Grado 6° (Bachillerato)'];
+    }
+    return selected;
+  },
+
+  // Categorías y Amenazas PGIRE
   getSelectedCategories: function() {
     var checkboxes = document.querySelectorAll('.category-chip-input:checked');
     var selected = [];
     checkboxes.forEach(function(cb) {
       if (cb.value) selected.push(cb.value);
     });
-    if (selected.length === 0) {
-      return ['Natural'];
-    }
+    if (selected.length === 0) return ['Natural'];
     return selected;
   },
 
@@ -148,7 +279,6 @@ var ModuloA = {
     this.updateConsolidatedThreatDetails();
   },
 
-
   updateConsolidatedThreatDetails: function() {
     var selPrincipal = document.getElementById('select-amenaza-principal');
     var selSec1 = document.getElementById('select-amenaza-secundaria-1');
@@ -207,6 +337,7 @@ var ModuloA = {
     });
   },
 
+  // 10.1 y 10.2: Cálculo de fechas duales, desfase lectivo y calendario escolar MEN
   calculateDatesAndPeriods: function() {
     var inputFechaInicio = document.getElementById('input-fecha-inicio');
     var inputFechaAtencion = document.getElementById('input-fecha-atencion');
@@ -225,9 +356,9 @@ var ModuloA = {
     var diffDays = Math.max(0, Math.round(diffMs / (1000 * 60 * 60 * 24)));
     var diffWeeks = Math.max(0, Math.round(diffDays / 7));
 
-    // Determinar semana del calendario escolar oficial (inicia aprox. 26 de enero del año de la emergencia)
+    // Determinar semana del calendario escolar oficial (inicia última semana de enero)
     var ano = dInicio.getFullYear() || 2026;
-    var inicioClases = new Date(ano, 0, 26); // 26 de enero
+    var inicioClases = new Date(ano, 0, 26);
     var msDesdeInicio = dInicio.getTime() - inicioClases.getTime();
     var semanaEscolar = Math.max(1, Math.ceil(msDesdeInicio / (1000 * 60 * 60 * 24 * 7)));
 
@@ -304,7 +435,6 @@ var ModuloA = {
 
     container.innerHTML = html;
 
-    // Listeners para los botones de nivel
     container.querySelectorAll('.barrier-level-btn').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -314,7 +444,6 @@ var ModuloA = {
 
         self.currentBarrerasState[barrierId] = level;
 
-        // Actualizar visualmente la tarjeta
         parentCard.classList.remove('active-low', 'active-med', 'active-high');
         if (level === 'Baja') parentCard.classList.add('active-low');
         else if (level === 'Media') parentCard.classList.add('active-med');
@@ -330,15 +459,20 @@ var ModuloA = {
     });
   },
 
+  // Obtener estado del diagnóstico actual
   getLiveDiagnostic: function() {
     var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
     var d = user ? user.diagnostico : null;
-    var selectedCats = this.getSelectedCategories();
 
-    var selCiclo = document.getElementById('select-ciclo');
-    var selGrado = document.getElementById('select-grado');
+    var selectedCiclos = this.getSelectedCiclos();
+    var selectedGrados = this.getSelectedGrados();
+    var isMultigrado = selectedCiclos.length > 1 || selectedGrados.length > 1;
+
     var selEtapa = document.getElementById('select-etapa');
-    var selBloom = document.getElementById('select-bloom-ajustable');
+    var etapa = (selEtapa && selEtapa.value) || (d && d.etapa) || 'ETAPA 2: Recuperación temprana / Lúdica';
+    var bloom = this.calculateBloom(etapa);
+
+    var selectedCats = this.getSelectedCategories();
     var selP = document.getElementById('select-amenaza-principal');
     var selS1 = document.getElementById('select-amenaza-secundaria-1');
     var selS2 = document.getElementById('select-amenaza-secundaria-2');
@@ -350,15 +484,10 @@ var ModuloA = {
     var pVal = (selP && selP.value) || (d && d.amenazaPrincipal) || (d && d.amenaza) || 'Inundación';
     var s1Val = (selS1 && selS1.value) || (d && d.amenazaSecundaria1) || '';
     var s2Val = (selS2 && selS2.value) || (d && d.amenazaSecundaria2) || '';
-
     var amenazasTop3 = [pVal, s1Val, s2Val].filter(function(x) { return Boolean(x); });
 
-    var ciclo = (selCiclo && selCiclo.value) || (d && d.ciclo) || '3';
-    var etapa = (selEtapa && selEtapa.value) || (d && d.etapa) || 'ETAPA 2: Recuperación temprana / Lúdica';
-    var bloom = (selBloom && selBloom.value) || (d && d.bloom) || this.calculateBloom(etapa);
-    var grado = (selGrado && selGrado.value) || (d && d.grado) || 'Grado 6° (Bachillerato)';
     var nna = (inputNNA && inputNNA.value) || (d && d.nna) || 28;
-    var didactica = this.calculateDidacticaNNA(nna) || (d && d.didacticaNNA) || '👥 TRABAJO COOPERATIVO (15 a 35 NNA)';
+    var didactica = this.calculateDidacticaNNA(nna, isMultigrado);
 
     var fechaInicio = (inputFechaInicio && inputFechaInicio.value) || (d && d.fechaInicio) || new Date().toISOString().split('T')[0];
     var fechaAtencion = (inputFechaAtencion && inputFechaAtencion.value) || (d && d.fechaAtencion) || fechaInicio;
@@ -369,9 +498,17 @@ var ModuloA = {
     var elemRiesgos = document.getElementById('input-riesgos-ie');
     var elemRuta = document.getElementById('input-ruta-gire');
 
+    var diagId = this.currentDiagnosticId || (d && d.id) || ('diag_' + Date.now());
+    var tituloContextual = etapa.split(':')[0] + ' | ' + pVal + ' (' + (isMultigrado ? 'Multigrado: C' + selectedCiclos.join('+') : 'Ciclo ' + selectedCiclos[0]) + ') - ' + fechaAtencion;
+
     return {
-      ciclo: String(ciclo),
-      grado: grado,
+      id: diagId,
+      titulo: tituloContextual,
+      ciclos: selectedCiclos,
+      ciclo: selectedCiclos[0] || '3',
+      grados: selectedGrados,
+      grado: selectedGrados.join(', ') || 'Grado 6° (Bachillerato)',
+      isMultigrado: isMultigrado,
       etapa: etapa,
       bloom: bloom,
       categoriasAmenaza: selectedCats,
@@ -380,7 +517,7 @@ var ModuloA = {
       amenazaSecundaria1: s1Val,
       amenazaSecundaria2: s2Val,
       amenazasTop3: amenazasTop3,
-      amenaza: pVal, // Retrocompatibilidad
+      amenaza: pVal,
       ejemploIE: (elemEjemplo && elemEjemplo.value) || (d && d.ejemploIE) || '',
       riesgosIE: (elemRiesgos && elemRiesgos.value) || (d && d.riesgosIE) || '',
       rutaGIRE: (elemRuta && elemRuta.value) || (d && d.rutaGIRE) || '',
@@ -398,13 +535,69 @@ var ModuloA = {
     };
   },
 
+  // Gestión de Historial Multi-Diagnóstico
+  renderHistorialSelect: function() {
+    var selHistorial = document.getElementById('select-historial-diagnosticos');
+    if (!selHistorial) return;
+
+    var user = AuthManager.getUserData() || {};
+    var activeId = user.activeDiagnosticId || (user.diagnostico && user.diagnostico.id) || 'diag_default_1';
+    var diagnosticos = user.diagnosticos || {};
+
+    var keys = Object.keys(diagnosticos);
+    if (keys.length === 0) {
+      if (user.diagnostico) {
+        diagnosticos[activeId] = {
+          id: activeId,
+          savedAt: user.diagnostico.updatedAt || new Date().toISOString(),
+          diagnostico: user.diagnostico
+        };
+        keys = [activeId];
+      }
+    }
+
+    var html = keys.map(function(k) {
+      var item = diagnosticos[k];
+      var d = item.diagnostico || {};
+      var isActivo = (k === activeId);
+      var prefix = isActivo ? '⭐ [ACTIVO] ' : '📋 ';
+      var label = prefix + (d.titulo || (d.etapa ? (d.etapa.split(':')[0] + ' - ' + (d.amenazaPrincipal || d.amenaza)) : 'Diagnóstico'));
+      return '<option value="' + k + '"' + (isActivo ? ' selected' : '') + '>' + label + '</option>';
+    }).join('');
+
+    selHistorial.innerHTML = html || '<option value="">Sin diagnósticos guardados</option>';
+  },
+
+  prepareNewDiagnostic: function() {
+    var newId = 'diag_' + Date.now();
+    this.currentDiagnosticId = newId;
+
+    // Resetear formulario a valores base para una nueva emergencia
+    this.setSelectedCiclos(['3'], ['Grado 6° (Bachillerato)']);
+
+    var selEtapa = document.getElementById('select-etapa');
+    if (selEtapa) selEtapa.value = 'ETAPA 1: Respuesta inmediata / Contención';
+    this.updateBloomDisplay(this.calculateBloom('ETAPA 1: Respuesta inmediata / Contención'));
+
+    var today = new Date().toISOString().split('T')[0];
+    if (document.getElementById('input-fecha-inicio')) document.getElementById('input-fecha-inicio').value = today;
+    if (document.getElementById('input-fecha-atencion')) document.getElementById('input-fecha-atencion').value = today;
+
+    this.currentBarrerasState = {};
+    this.renderBarrerasUI();
+    if (document.getElementById('input-barreras-descripcion')) document.getElementById('input-barreras-descripcion').value = '';
+
+    this.calculateDatesAndPeriods();
+    this.renderHistorialSelect();
+
+    alert('✨ Se ha iniciado el formulario para un NUEVO Diagnóstico de Emergencia.\nComplete los nuevos datos y haga clic en "Guardar y Aplicar Diagnóstico" para registrarlo en su historial.');
+  },
+
   bindEvents: function() {
     var self = this;
     var selCiclo = document.getElementById('select-ciclo');
     var selGrado = document.getElementById('select-grado');
     var selEtapa = document.getElementById('select-etapa');
-    var selBloom = document.getElementById('select-bloom-ajustable');
-    var inputBloomHidden = document.getElementById('input-bloom');
     var selP = document.getElementById('select-amenaza-principal');
     var selS1 = document.getElementById('select-amenaza-secundaria-1');
     var selS2 = document.getElementById('select-amenaza-secundaria-2');
@@ -415,10 +608,97 @@ var ModuloA = {
     var inputBarrerasDesc = document.getElementById('input-barreras-descripcion');
     var btnGuardar = document.getElementById('btn-guardar-diagnostico');
     var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
+    var cicloCheckboxes = document.querySelectorAll('.ciclo-chip-input');
+
+    // Botones rápidos de selección de ciclos
+    var btnCiclosTodos = document.getElementById('btn-ciclos-todos');
+    var btnCiclosPrimaria = document.getElementById('btn-ciclos-primaria');
+    var btnCiclosSecundaria = document.getElementById('btn-ciclos-secundaria');
+    var btnCiclosLimpiar = document.getElementById('btn-ciclos-limpiar');
+
+    if (btnCiclosTodos) {
+      btnCiclosTodos.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['1', '2', '3', '4', '5']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosPrimaria) {
+      btnCiclosPrimaria.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['1', '2']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosSecundaria) {
+      btnCiclosSecundaria.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['3', '4', '5']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnCiclosLimpiar) {
+      btnCiclosLimpiar.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.setSelectedCiclos(['3']);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    // Botones rápidos de selección de grados
+    var btnGradosTodos = document.getElementById('btn-grados-todos');
+    var btnGradosLimpiar = document.getElementById('btn-grados-limpiar');
+
+    if (btnGradosTodos) {
+      btnGradosTodos.addEventListener('click', function(e) {
+        e.preventDefault();
+        var allBoxes = document.querySelectorAll('.grado-chip-input');
+        allBoxes.forEach(function(b) {
+          b.checked = true;
+          var parent = b.closest('.grado-chip');
+          if (parent) parent.classList.add('active');
+        });
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    if (btnGradosLimpiar) {
+      btnGradosLimpiar.addEventListener('click', function(e) {
+        e.preventDefault();
+        var allBoxes = document.querySelectorAll('.grado-chip-input');
+        allBoxes.forEach(function(b, idx) {
+          b.checked = (idx === 0);
+          var parent = b.closest('.grado-chip');
+          if (parent) {
+            if (idx === 0) parent.classList.add('active');
+            else parent.classList.remove('active');
+          }
+        });
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    }
+
+    // Listeners de los chips de ciclo
+    cicloCheckboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var parentLabel = cb.closest('.ciclo-chip');
+        if (parentLabel) {
+          if (cb.checked) parentLabel.classList.add('active');
+          else parentLabel.classList.remove('active');
+        }
+        var selectedC = self.getSelectedCiclos();
+        if (selCiclo) selCiclo.value = selectedC[0] || '3';
+        self.updateGradosForCiclos(selectedC);
+        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+      });
+    });
 
     if (selCiclo) {
       selCiclo.addEventListener('change', function() {
-        self.updateGradosForCiclo(selCiclo.value);
+        self.setSelectedCiclos([selCiclo.value]);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
@@ -429,25 +709,16 @@ var ModuloA = {
       });
     }
 
+    // Etapa -> Bloom Automático
     if (selEtapa) {
       selEtapa.addEventListener('change', function() {
         var recBloom = self.calculateBloom(selEtapa.value);
-        if (selBloom) {
-          selBloom.value = recBloom;
-        }
-        if (inputBloomHidden) inputBloomHidden.value = recBloom;
+        self.updateBloomDisplay(recBloom);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
-    if (selBloom) {
-      selBloom.addEventListener('change', function() {
-        if (inputBloomHidden) inputBloomHidden.value = selBloom.value;
-        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
-      });
-    }
-
-
+    // Categorías PGIRE
     categoryCheckboxes.forEach(function(cb) {
       cb.addEventListener('change', function() {
         var parentLabel = cb.closest('.category-chip');
@@ -472,13 +743,17 @@ var ModuloA = {
 
     if (inputNNA && labelDidactica) {
       inputNNA.addEventListener('input', function() {
-        labelDidactica.textContent = self.calculateDidacticaNNA(inputNNA.value);
+        var isMulti = self.getSelectedCiclos().length > 1;
+        labelDidactica.textContent = self.calculateDidacticaNNA(inputNNA.value, isMulti);
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
     }
 
     if (inputFechaInicio) {
       inputFechaInicio.addEventListener('change', function() {
+        if (inputFechaAtencion && (!inputFechaAtencion.value || inputFechaAtencion.value < inputFechaInicio.value)) {
+          inputFechaAtencion.value = inputFechaInicio.value;
+        }
         self.calculateDatesAndPeriods();
         if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
       });
@@ -493,10 +768,79 @@ var ModuloA = {
 
     if (inputBarrerasDesc) {
       inputBarrerasDesc.addEventListener('input', function() {
-        if (self.callbacks.onDiagnosticChanged) self.callbacks.onDiagnosticChanged(self.getLiveDiagnostic());
+        self.autoAdjustTextareas();
       });
     }
 
+    // Historial: Cargar Diagnóstico seleccionado
+    var btnCargarHistorial = document.getElementById('btn-cargar-diagnostico-historial');
+    if (btnCargarHistorial) {
+      btnCargarHistorial.addEventListener('click', function(e) {
+        e.preventDefault();
+        var selHistorial = document.getElementById('select-historial-diagnosticos');
+        var diagId = selHistorial ? selHistorial.value : '';
+        if (!diagId) return alert('Por favor seleccione un diagnóstico del historial.');
+
+        AuthManager.setActiveDiagnostic(diagId);
+        self.loadSavedDiagnostic();
+
+        if (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.renderRayuela === 'function') {
+          ModuloB.renderRayuela();
+        }
+        if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
+          ModuloC.renderMonitoreo();
+        }
+
+        alert('✅ Diagnóstico cargado exitosamente. Se han sincronizado las planificaciones de la Rayuela y el Monitoreo Semanal.');
+      });
+    }
+
+    // Historial: Crear Nuevo Diagnóstico
+    var btnNuevoDiag = document.getElementById('btn-nuevo-diagnostico');
+    if (btnNuevoDiag) {
+      btnNuevoDiag.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.prepareNewDiagnostic();
+      });
+    }
+
+    // Botones de Manual de Usuario en Footer
+    var btnVerManual = document.getElementById('btn-ver-manual');
+    if (btnVerManual) {
+      btnVerManual.addEventListener('click', function(e) {
+        e.preventDefault();
+        var modal = document.getElementById('modal-manual');
+        if (modal) modal.style.display = 'flex';
+      });
+    }
+
+    var btnModalPrint = document.getElementById('btn-modal-print-manual');
+    if (btnModalPrint) {
+      btnModalPrint.addEventListener('click', function(e) {
+        e.preventDefault();
+        var iframe = document.getElementById('iframe-manual');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.print();
+        } else {
+          window.print();
+        }
+      });
+    }
+
+    var btnImprimirManual = document.getElementById('btn-imprimir-manual');
+    if (btnImprimirManual) {
+      btnImprimirManual.addEventListener('click', function(e) {
+        e.preventDefault();
+        var iframe = document.getElementById('iframe-manual');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.print();
+        } else {
+          window.open('manual_usuario.html', '_blank');
+        }
+      });
+    }
+
+    // Exportar Ficha a CSV
     var btnExcelDiag = document.getElementById('btn-exportar-excel-diagnostico');
     if (btnExcelDiag) {
       btnExcelDiag.addEventListener('click', function(e) {
@@ -508,8 +852,9 @@ var ModuloA = {
           ['PARÁMETRO DIAGNÓSTICO', 'VALOR REGISTRADO / ESTIMACIÓN'],
           ['Docente Responsable', (user && user.nombreCompleto) || 'Docente Territorial'],
           ['Institución Educativa', (user && user.institucion) || 'Sede Educativa Rural'],
-          ['Ciclo Formativo', 'Ciclo ' + d.ciclo],
-          ['Grado Escolar', d.grado],
+          ['Ciclos Formativos', d.ciclos.join(', ')],
+          ['Grados Escolares', d.grado],
+          ['Atención Multigrado', d.isMultigrado ? 'SÍ (Aula Multigrado Activa)' : 'NO (Monogrado)'],
           ['Etapa de Respuesta INEE', d.etapa],
           ['Complejidad y Desafío Cognitivo (Bloom)', d.bloom],
           ['Categorías de Amenaza', d.categoriaAmenaza],
@@ -552,7 +897,7 @@ var ModuloA = {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'ficha_diagnostica_emergencia_ciclo_' + d.ciclo + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.download = 'ficha_diagnostica_emergencia_' + (d.ciclos || ['3']).join('_') + '_' + new Date().toISOString().split('T')[0] + '.csv';
         a.click();
         URL.revokeObjectURL(url);
       });
@@ -575,7 +920,6 @@ var ModuloA = {
       });
     }
 
-    // Auto-ajuste responsivo de cuadros de texto en redimensionamiento de pantalla (móvil, tablet, web)
     window.addEventListener('resize', function() {
       self.autoAdjustTextareas();
     });
@@ -589,24 +933,37 @@ var ModuloA = {
       return;
     }
 
+    this.currentDiagnosticId = d.id;
+
     // Historial y persistencia
     var user = AuthManager.getUserData() || {};
     var history = user.diagnosticoHistory || [];
-    history.push({
-      savedAt: new Date().toISOString(),
-      diagnostico: JSON.parse(JSON.stringify(d))
-    });
+    var existingIndex = history.findIndex(function(h) { return h.id === d.id; });
+    if (existingIndex >= 0) {
+      history[existingIndex] = {
+        id: d.id,
+        savedAt: new Date().toISOString(),
+        diagnostico: JSON.parse(JSON.stringify(d))
+      };
+    } else {
+      history.push({
+        id: d.id,
+        savedAt: new Date().toISOString(),
+        diagnostico: JSON.parse(JSON.stringify(d))
+      });
+    }
+
     AuthManager.saveUserData('diagnosticoHistory', history);
     AuthManager.saveUserData('diagnostico', d);
 
+    this.renderHistorialSelect();
     this.renderDiagnosticSummary(d);
-    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente.\n\nRedirigiendo automáticamente a la Rayuela Curricular (Módulo B)...');
+    alert('✅ Diagnóstico Integrado y Parametrización guardados exitosamente en su historial.\n\nRedirigiendo automáticamente a la Rayuela Curricular (Módulo B)...');
 
     if (this.callbacks.onDiagnosticSaved) {
       this.callbacks.onDiagnosticSaved(d);
     }
 
-    // Llevar automáticamente al Módulo B (Rayuela Curricular)
     if (typeof window.switchTab === 'function') {
       window.switchTab('tab-rayuela');
     }
@@ -627,6 +984,7 @@ var ModuloA = {
     }
 
     var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
+    var ciclosLabel = (d.ciclos && d.ciclos.length > 1) ? ('Multigrado (Ciclos ' + d.ciclos.join(', ') + ')') : ('Ciclo ' + d.ciclo);
 
     container.style.display = 'block';
     container.innerHTML = 
@@ -636,12 +994,12 @@ var ModuloA = {
           '<span class="badge-pill badge-etapa2">' + d.periodoEnCurso + '</span>' +
         '</div>' +
         '<div class="grid-3" style="gap: 12px; font-size: 0.88rem;">' +
-          '<div><strong>Ciclo:</strong> Ciclo ' + d.ciclo + ' | <strong>Grado:</strong> ' + d.grado + '</div>' +
+          '<div><strong>Ciclos y Grados:</strong> ' + ciclosLabel + ' | ' + d.grado + '</div>' +
           '<div><strong>Etapa:</strong> ' + d.etapa + '</div>' +
-          '<div><strong>Demanda Bloom:</strong> ' + d.bloom + '</div>' +
+          '<div><strong>Demanda Bloom (Auto):</strong> ' + d.bloom + '</div>' +
           '<div><strong>Multirriesgo Top 3:</strong> ' + amenazasLabel + '</div>' +
           '<div><strong>Estrategia NNA:</strong> ' + d.didacticaNNA + ' (' + d.nna + ' NNA)</div>' +
-          '<div><strong>Fechas:</strong> Emergencia: ' + d.fechaInicio + ' | Atención: ' + d.fechaAtencion + '</div>' +
+          '<div><strong>Fechas Duales:</strong> Emergencia: ' + d.fechaInicio + ' | Atención: ' + d.fechaAtencion + '</div>' +
         '</div>' +
         (activeBarrerasList.length > 0 ? (
           '<div style="margin-top: 10px; font-size: 0.82rem; color: #92400e; background: #fef3c7; padding: 6px 12px; border-radius: 4px;">' +
@@ -661,8 +1019,12 @@ var ModuloA = {
     var d = user ? user.diagnostico : null;
     if (!d) {
       d = {
+        id: 'diag_default_1',
+        ciclos: ['3'],
         ciclo: '3',
+        grados: ['Grado 6° (Bachillerato)'],
         grado: 'Grado 6° (Bachillerato)',
+        isMultigrado: false,
         etapa: 'ETAPA 2: Recuperación temprana / Lúdica',
         bloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
         categoriasAmenaza: ['Natural'],
@@ -676,19 +1038,26 @@ var ModuloA = {
         didacticaNNA: '👥 TRABAJO COOPERATIVO (15 a 35 NNA)',
         fechaInicio: new Date().toISOString().split('T')[0],
         fechaAtencion: new Date().toISOString().split('T')[0],
+        desfaseDias: 0,
+        desfaseSemanas: 0,
+        periodoEnCurso: 'Periodo 1',
+        periodosPrevios: [],
         barreras: {},
         barrerasDescripcion: ''
       };
     }
 
-    if (document.getElementById('select-ciclo')) document.getElementById('select-ciclo').value = d.ciclo;
-    this.updateGradosForCiclo(d.ciclo);
-    if (document.getElementById('select-grado')) document.getElementById('select-grado').value = d.grado;
+    this.currentDiagnosticId = d.id || 'diag_default_1';
+
+    // Cargar selección de ciclos y grados
+    var ciclos = d.ciclos || (d.ciclo ? [d.ciclo] : ['3']);
+    var grados = d.grados || (d.grado ? [d.grado] : ['Grado 6° (Bachillerato)']);
+    this.setSelectedCiclos(ciclos, grados);
+
     if (document.getElementById('select-etapa')) document.getElementById('select-etapa').value = d.etapa;
 
     var bloomVal = d.bloom || this.calculateBloom(d.etapa);
-    if (document.getElementById('select-bloom-ajustable')) document.getElementById('select-bloom-ajustable').value = bloomVal;
-    if (document.getElementById('input-bloom')) document.getElementById('input-bloom').value = bloomVal;
+    this.updateBloomDisplay(bloomVal);
 
     var cats = d.categoriasAmenaza || [d.categoriaAmenaza || 'Natural'];
     var categoryCheckboxes = document.querySelectorAll('.category-chip-input');
@@ -718,7 +1087,7 @@ var ModuloA = {
     if (document.getElementById('input-nna')) {
       document.getElementById('input-nna').value = d.nna;
       if (document.getElementById('label-didactica-nna')) {
-        document.getElementById('label-didactica-nna').textContent = this.calculateDidacticaNNA(d.nna);
+        document.getElementById('label-didactica-nna').textContent = this.calculateDidacticaNNA(d.nna, d.isMultigrado);
       }
     }
 
@@ -736,6 +1105,7 @@ var ModuloA = {
       document.getElementById('input-barreras-descripcion').value = d.barrerasDescripcion;
     }
 
+    this.renderHistorialSelect();
     this.renderDiagnosticSummary(d);
   }
 };

@@ -235,12 +235,68 @@
           <h2 class="card-title">🎛️ 2. Panel de control paramétrico y diagnóstico integrado de la emergencia</h2>
         </div>
 
+        <!-- Historial y Trazabilidad Multi-Emergencia -->
+        <div class="history-selector-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+            <label class="form-label" style="font-weight:700; color:var(--primary); margin-bottom:0;">
+              📂 Historial de Diagnósticos y Trazabilidad de Crisis:
+            </label>
+            <div style="display:flex; gap:8px;">
+              <button type="button" id="btn-nuevo-diagnostico" class="btn-micro" style="background:#0f766e; color:white; padding:5px 12px; font-size:0.78rem;">
+                ➕ Registrar Nueva Emergencia / Diagnóstico
+              </button>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <select id="select-historial-diagnosticos" class="select-elite" style="flex:1; min-width:280px;">
+              <option value="">Cargando diagnósticos registrados...</option>
+            </select>
+            <button type="button" id="btn-cargar-diagnostico-historial" class="btn-elite btn-outline" style="padding:7px 14px; font-size:0.82rem; background:white;">
+              🔄 Cargar Diagnóstico
+            </button>
+          </div>
+        </div>
+
         <form id="form-diagnostico">
           <div class="grid-2">
             
-            <div class="form-group">
-              <label class="form-label">Selección de Ciclo Formativo:</label>
-              <select id="select-ciclo" class="select-elite">
+            <!-- Selección Multiciclo -->
+            <div class="form-group" style="grid-column: span 2;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
+                  🏫 Selección de Ciclo Formativo (Docencia Monogrado o Multigrado):
+                </label>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" id="btn-ciclos-todos" class="btn-micro" title="Seleccionar todos los ciclos">🔘 Todos los Ciclos</button>
+                  <button type="button" id="btn-ciclos-primaria" class="btn-micro" title="Ciclos I y II">🎒 Primaria (I y II)</button>
+                  <button type="button" id="btn-ciclos-secundaria" class="btn-micro" title="Ciclos III, IV y V">🎓 Secundaria/Media (III, IV, V)</button>
+                  <button type="button" id="btn-ciclos-limpiar" class="btn-micro" title="Limpiar selección">✖️ Limpiar</button>
+                </div>
+              </div>
+              <div class="ciclo-chips-container" id="container-ciclo-chips">
+                <label class="ciclo-chip" data-ciclo="1">
+                  <input type="checkbox" class="ciclo-chip-input" value="1"> 
+                  <span><strong>Ciclo I</strong> (1°, 2° y 3° Primaria Inicial)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="2">
+                  <input type="checkbox" class="ciclo-chip-input" value="2"> 
+                  <span><strong>Ciclo II</strong> (4° y 5° Primaria Superior)</span>
+                </label>
+                <label class="ciclo-chip active" data-ciclo="3">
+                  <input type="checkbox" class="ciclo-chip-input" value="3" checked> 
+                  <span><strong>Ciclo III</strong> (6° y 7° Secundaria Inicial)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="4">
+                  <input type="checkbox" class="ciclo-chip-input" value="4"> 
+                  <span><strong>Ciclo IV</strong> (8° y 9° Secundaria)</span>
+                </label>
+                <label class="ciclo-chip" data-ciclo="5">
+                  <input type="checkbox" class="ciclo-chip-input" value="5"> 
+                  <span><strong>Ciclo V</strong> (10° y 11° Media)</span>
+                </label>
+              </div>
+              <!-- Select sincronizado para retrocompatibilidad total con pruebas existentes -->
+              <select id="select-ciclo" class="select-elite" style="display: none;">
                 <option value="1">Ciclo I (Grados 1°, 2° y 3° Primaria Inicial)</option>
                 <option value="2">Ciclo II (Grados 4° y 5° Primaria Superior)</option>
                 <option value="3" selected>Ciclo III (Grados 6° y 7° Secundaria Inicial)</option>
@@ -249,9 +305,22 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label class="form-label">Grado Escolar en Aula:</label>
-              <select id="select-grado" class="select-elite">
+            <!-- Grados Escolares en Aula (Multigrado) -->
+            <div class="form-group" style="grid-column: span 2;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+                <label class="form-label" style="font-weight: 700; color: var(--primary); margin-bottom: 0;">
+                  📚 Grado(s) Escolar(es) en Aula (Atención Monogrado o Multigrado):
+                </label>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" id="btn-grados-todos" class="btn-micro" title="Seleccionar todos los grados de los ciclos activos">🔘 Todos los Grados</button>
+                  <button type="button" id="btn-grados-limpiar" class="btn-micro" title="Desmarcar grados">✖️ Desmarcar</button>
+                </div>
+              </div>
+              <div class="grado-chips-container" id="container-grado-chips">
+                <!-- Generado dinámicamente según los ciclos seleccionados -->
+              </div>
+              <!-- Select sincronizado para retrocompatibilidad total con pruebas existentes -->
+              <select id="select-grado" class="select-elite" style="display: none;">
                 <option value="Grado 6° (Bachillerato)">Grado 6° (Bachillerato)</option>
                 <option value="Grado 7° (Bachillerato)">Grado 7° (Bachillerato)</option>
               </select>
@@ -267,9 +336,13 @@
               </select>
             </div>
 
+            <!-- Nivel Bloom: Orientador pedagógico automático (no seleccionable manualmente) -->
             <div class="form-group">
-              <label class="form-label">2. Nivel de Complejidad Cognitiva Bloom (Orientador - Seleccionable):</label>
-              <select id="select-bloom-ajustable" class="select-elite">
+              <label class="form-label">2. Nivel de Complejidad Cognitiva Bloom (Orientador Pedagógico Automático):</label>
+              <div id="display-bloom-badge" class="badge-pill badge-bloom-auto" style="padding: 10px 14px; width: 100%; text-align: center; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>🎯</span> <span id="txt-bloom-display">Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)</span>
+              </div>
+              <select id="select-bloom-ajustable" class="select-elite" disabled style="display:none;">
                 <option value="Baja / Esencial (Bloom Nivel 1-2: Recordar / Comprender)">Baja / Esencial (Bloom Nivel 1-2: Recordar / Comprender)</option>
                 <option value="Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)" selected>Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)</option>
                 <option value="Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)">Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)</option>
@@ -321,19 +394,18 @@
               <input type="hidden" id="select-amenaza" value="Inundación">
             </div>
 
-
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">5. Ejemplos Contextualizados en la Institución Educativa (Consolidado Top 3):</label>
+              <label class="form-label">5. Ejemplos contextualizados en la Institución Educativa:</label>
               <textarea id="input-ejemplo-ie" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">6. Riesgos y Afectaciones Escolares Asociadas (Consolidado Top 3):</label>
+              <label class="form-label">6. Riesgos y afectaciones escolares asociadas:</label>
               <textarea id="input-riesgos-ie" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
             <div class="form-group" style="grid-column: span 2;">
-              <label class="form-label">7. Instancias y Rutas de Articulación según PGIRE (Consolidado Top 3):</label>
+              <label class="form-label">7. Instancias y rutas de articulación según PGIRE:</label>
               <textarea id="input-ruta-gire" class="textarea-elite input-readonly" rows="2" readonly></textarea>
             </div>
 
@@ -438,6 +510,51 @@
     </section>
 
   </main>
+
+  <!-- Pie de Página Institucional con Manual de Usuario PDF -->
+  <footer class="app-footer no-print">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="font-weight: 800; color: var(--primary); font-size: 0.95rem;">
+          🏛️ Herramienta de Adaptación y Flexibilización Curricular en Situaciones de Emergencia
+        </div>
+        <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 3px;">
+          Secretaría de Educación Departamental | Gobernación de Norte de Santander | Consejo Noruego para Refugiados (NRC) | MEN
+        </div>
+      </div>
+      
+      <div class="footer-actions">
+        <button type="button" id="btn-ver-manual" class="btn-elite btn-manual-view" title="Visualizar Manual de Usuario Oficial en PDF">
+          <span>📖</span> Visualizar Manual de Usuario (PDF)
+        </button>
+        <a href="manual_usuario.pdf" download="Manual_Usuario_Flexibilizacion_Curricular_NRC.pdf" id="btn-descargar-manual" class="btn-elite btn-manual-download" title="Descargar Manual en Formato PDF para Imprimir">
+          <span>📥</span> Descargar PDF
+        </a>
+        <button type="button" id="btn-imprimir-manual" class="btn-elite btn-manual-print" title="Imprimir Manual de Usuario">
+          <span>🖨️</span> Imprimir Manual
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Visor de Manual de Usuario Oficial -->
+  <div id="modal-manual" class="modal-overlay" style="display: none;">
+    <div class="modal-content modal-manual-content" style="max-width: 950px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-light); padding-bottom: 12px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+        <h3 style="color: var(--primary); margin: 0; display: flex; align-items: center; gap: 8px; font-size: 1.15rem;">
+          <span>📖</span> Manual de Usuario y Guía de Navegación Oficial
+        </h3>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button type="button" class="btn-elite btn-outline" id="btn-modal-print-manual" style="padding: 6px 12px; font-size: 0.82rem; background: white;">🖨️ Imprimir</button>
+          <a href="manual_usuario.pdf" download="Manual_Usuario_Flexibilizacion_Curricular_NRC.pdf" class="btn-elite btn-primary" style="padding: 6px 12px; font-size: 0.82rem; text-decoration: none; color: white;">📥 Descargar PDF</a>
+          <button id="btn-close-manual-modal" class="modal-close-btn" style="position: static;" onclick="document.getElementById('modal-manual').style.display='none';" title="Cerrar visor">✕</button>
+        </div>
+      </div>
+      <div style="flex: 1; min-height: 500px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); overflow: hidden; background: #525659;">
+        <iframe id="iframe-manual" src="manual_usuario.html" style="width: 100%; height: 100%; min-height: 520px; border: none; background: white;"></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal de Autenticación / Registro Local -->
   <div id="modal-auth" class="modal-overlay" style="display: none;">

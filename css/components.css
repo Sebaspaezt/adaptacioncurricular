@@ -824,3 +824,167 @@ body {
   gap: 10px;
 }
 
+/* Chips de Selección Multiciclo y Multigrado */
+.ciclo-chips-container, .grado-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ciclo-chip, .grado-chip {
+  background: var(--surface-hover);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.ciclo-chip:hover, .grado-chip:hover {
+  border-color: var(--primary);
+  background: #f0fdf4;
+}
+
+.ciclo-chip.active, .grado-chip.active {
+  background: #e8f5e9;
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  box-shadow: 0 1px 3px rgba(0, 90, 54, 0.15);
+}
+
+.ciclo-chip-input, .grado-chip-input {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.btn-micro {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-micro:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Indicador Bloom Automático */
+.badge-bloom-auto {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: -0.2px;
+}
+
+/* Banner Contextual del Diagnóstico Activo */
+.diagnostic-context-banner {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-left: 5px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: #166534;
+}
+
+.history-selector-card {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+/* Footer Institucional y Visor Manual */
+.app-footer {
+  background: #ffffff;
+  border-top: 2px solid var(--border-medium);
+  margin-top: 40px;
+  padding: 24px 20px;
+}
+
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-manual-view {
+  background: #0f766e;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+}
+
+.btn-manual-view:hover {
+  background: #115e59;
+}
+
+.btn-manual-download {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.btn-manual-download:hover {
+  background: var(--primary-dark);
+}
+
+.btn-manual-print {
+  background: #334155;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 9px 16px;
+}
+
+.btn-manual-print:hover {
+  background: #1e293b;
+}
+
+.modal-manual-content {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeInModal 0.2s ease-out;
+}
+
+

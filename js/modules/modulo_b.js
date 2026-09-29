@@ -1,22 +1,27 @@
-// Módulo B: Rayuela Curricular (Biblioteca de Planificación - Versión 2.2 con Periodos, Canasta y Normas INEE)
+// Módulo B: Rayuela Curricular (Biblioteca de Planificación - Versión 2.5 con Multiciclo/Multigrado, Periodos, Canasta y Normas INEE)
 var ModuloB = {
   currentArea: 'lenguaje',
   currentPeriodoFilter: 'todos', // 'todos', '1', '2', '3', '4'
+  currentCycleFilter: 'todos', // 'todos' o número de ciclo específico '1', '2', etc.
 
   init: function() {
     this.renderRayuela();
   },
 
-  getItemFields: function(item, areaKey, itemIndex, totalItems) {
+  getItemFields: function(item, areaKey, itemIndex, totalItems, cycleInfo) {
     areaKey = areaKey || this.currentArea;
     if (!item) return null;
     totalItems = totalItems || 8;
     itemIndex = (typeof itemIndex === 'number') ? itemIndex : 0;
+    cycleInfo = cycleInfo || {};
 
     // Asignación de periodo escolar académico (P1, P2, P3, P4)
     var pNum = Math.min(4, Math.floor((itemIndex / Math.max(1, totalItems)) * 4) + 1);
     var periodoLabel = 'Periodo ' + pNum;
-    var itemId = areaKey + '_' + itemIndex;
+    var cPrefix = cycleInfo.key ? ('c' + cycleInfo.key + '_') : '';
+    var itemId = cPrefix + areaKey + '_' + itemIndex;
+
+    var cycleBadge = cycleInfo.roman ? ('Ciclo ' + cycleInfo.roman) : '';
 
     if (Array.isArray(item)) {
       var dbaRaw = item[2] || '';
@@ -29,6 +34,11 @@ var ModuloB = {
       }
       return {
         id: itemId,
+        areaKey: areaKey,
+        itemIndex: itemIndex,
+        cycleKey: cycleInfo.key || '3',
+        cycleRoman: cycleInfo.roman || 'III',
+        cycleBadge: cycleBadge,
         periodoNum: pNum,
         periodo: periodoLabel,
         factor: item[0] || 'Eje Curricular',
@@ -54,6 +64,11 @@ var ModuloB = {
 
         return {
           id: itemId,
+          areaKey: areaKey,
+          itemIndex: itemIndex,
+          cycleKey: 'transversal',
+          cycleRoman: 'Transversal',
+          cycleBadge: '🌱 Bienestar Transversal',
           periodoNum: (etapaSocio === 'Etapa 1' ? 1 : (etapaSocio === 'Etapa 2' ? 2 : 3)),
           periodo: etapaSocio + ' (Respuesta)',
           etapaSocio: etapaSocio,
@@ -81,6 +96,11 @@ var ModuloB = {
 
         return {
           id: itemId,
+          areaKey: areaKey,
+          itemIndex: itemIndex,
+          cycleKey: 'transversal',
+          cycleRoman: 'Transversal',
+          cycleBadge: '🛡️ Protección Transversal',
           periodoNum: 1,
           periodo: 'Protección Integral',
           factor: '🛡️ ' + tipologiaLabel,
@@ -98,6 +118,11 @@ var ModuloB = {
 
       return {
         id: itemId,
+        areaKey: areaKey,
+        itemIndex: itemIndex,
+        cycleKey: cycleInfo.key || '3',
+        cycleRoman: cycleInfo.roman || 'III',
+        cycleBadge: cycleBadge,
         periodoNum: pNum,
         periodo: periodoLabel,
         factor: item.factor || item.eje || item.pensamiento || item.area || 'Eje Curricular',
@@ -119,12 +144,15 @@ var ModuloB = {
     if (userStates && userStates[item.id]) {
       return userStates[item.id];
     }
-    // Salvaguarda esencial técnica: Las dimensiones transversales de Contención Socioemocional
-    // y Supervivencia/Autoprotección (ERAE/WASH) son inmediatas a la emergencia y transversales.
-    // NUNCA deben marcarse como 'abordado' por efecto de periodos académicos previos del calendario escolar.
+    // Fallback para IDs sin prefijo de ciclo
+    var fallbackId = item.areaKey ? (item.areaKey + '_' + item.itemIndex) : item.id.replace(/^c\d+_/, '');
+    if (userStates && userStates[fallbackId]) {
+      return userStates[fallbackId];
+    }
+
     var isTransversal = (
-      item.id.indexOf('socioemocional') === 0 ||
-      item.id.indexOf('supervivencia') === 0 ||
+      item.id.indexOf('socioemocional') !== -1 ||
+      item.id.indexOf('supervivencia') !== -1 ||
       item.dbaCode === 'SOCIOEMOCIONAL' ||
       item.dbaCode === 'SUPERVIVENCIA' ||
       item.dbaCode === 'ERAE (Minas)' ||
@@ -135,120 +163,104 @@ var ModuloB = {
       return 'pendiente';
     }
 
-    // Si no ha sido modificado manualmente por el docente, verificar estimación por fecha de emergencia para áreas académicas ordinarias
+    // Estimación por fecha de emergencia
     if (d && d.periodosPrevios && Array.isArray(d.periodosPrevios)) {
       if (d.periodosPrevios.indexOf('Periodo ' + item.periodoNum) !== -1) {
         return 'abordado';
       }
     }
+
     return 'pendiente';
   },
 
-  isItemSelectedForPlan: function(item, userSelection, state, isAcademic, d) {
-    if (userSelection && typeof userSelection[item.id] !== 'undefined') {
-      return Boolean(userSelection[item.id]);
+  isItemSelectedForPlan: function(item, userSelection, state, isAcademicArea, d) {
+    if (userSelection && typeof userSelection[item.id] === 'boolean') {
+      return userSelection[item.id];
     }
-    // Si no hay intervención manual previa:
-    // 1. Si el ítem ya fue abordado en periodos previos, NO se premarca para el plan (queda como abordado/excluido a menos que se active repaso)
-    if (state === 'abordado') {
-      return false;
+    var fallbackId = item.areaKey ? (item.areaKey + '_' + item.itemIndex) : item.id.replace(/^c\d+_/, '');
+    if (userSelection && typeof userSelection[fallbackId] === 'boolean') {
+      return userSelection[fallbackId];
     }
-    // 2. En áreas académicas, premarcar los aprendizajes correspondientes al periodo en curso o sugeridos
-    if (isAcademic) {
-      var currentPNum = 1;
-      if (d && d.periodoEnCurso) {
-        var match = d.periodoEnCurso.match(/\d+/);
-        if (match) currentPNum = parseInt(match[0], 10);
-      }
-      // Se premarcan los del periodo lectivo en que ocurrió la emergencia
-      return item.periodoNum === currentPNum;
-    }
-    // 3. En áreas transversales (Socioemocional / Supervivencia):
+
+    // En Etapa 1: blindaje INEE (socioemocional y supervivencia pre-seleccionados)
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
-    var isEtapa2 = (d && d.etapa && d.etapa.indexOf('ETAPA 2') !== -1);
+    if (isEtapa1 && !isAcademicArea) {
+      return true;
+    }
 
-    if (item.id.indexOf('socioemocional') === 0) {
-      // En Etapa 1, priorizar las competencias socioemocionales de Etapa 1 (Recreativa y preparatoria / soporte afectivo)
-      if (isEtapa1) {
-        return (item.etapaSocio === 'Etapa 1');
-      }
-      if (isEtapa2) {
-        return (item.etapaSocio === 'Etapa 1' || item.etapaSocio === 'Etapa 2');
+    // Si es área académica y está pendiente
+    if (state === 'pendiente') {
+      if (d && d.periodoEnCurso) {
+        return ('Periodo ' + item.periodoNum) === d.periodoEnCurso;
       }
       return true;
     }
 
-    if (item.id.indexOf('supervivencia') === 0) {
-      // En Supervivencia, si es Etapa 1 o 2, preseleccionar prioritariamente las que corresponden a las amenazas activas del diagnóstico
-      var top3Names = (d && d.amenazasTop3) || (d && d.amenaza ? [d.amenaza] : []);
-      if (top3Names.length > 0) {
-        var textFull = (item.factor + ' ' + item.subproceso + ' ' + item.dbaDesc).toLowerCase();
-        var matchesThreat = top3Names.some(function(t) {
-          return t && textFull.indexOf(t.toLowerCase()) !== -1;
-        });
-        if (matchesThreat) return true;
-      }
-      // Preseleccionar por defecto ERAE/WASH críticos
-      if (item.dbaCode && (item.dbaCode.indexOf('ERAE') !== -1 || item.dbaCode.indexOf('WASH') !== -1)) {
-        return true;
-      }
-      return true;
-    }
-
-    return true;
+    return false;
   },
 
-
-  buildAreaTableHTML: function(areaKey, cicloData, habsList, supsList, d, userStates, userSelection) {
+  // Recolectar todos los items para un área dada según los ciclos activos
+  getItemsForArea: function(areaKey, selectedCycles, habsList, supsList) {
     var self = this;
-    var rawItems = [];
+    var allItems = [];
+
     if (areaKey === 'socioemocional') {
-      rawItems = habsList || [];
-    } else if (areaKey === 'supervivencia') {
-      rawItems = supsList || [];
-    } else {
-      rawItems = (cicloData && cicloData[areaKey]) || [];
+      (habsList || []).forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, 'socioemocional', idx, habsList.length, { key: 'transversal', roman: 'T' });
+        if (parsed) allItems.push(parsed);
+      });
+      return allItems;
     }
 
-    var validItems = [];
-    rawItems.forEach(function(item, idx) {
-      var parsed = self.getItemFields(item, areaKey, idx, rawItems.length);
-      if (parsed) validItems.push(parsed);
+    if (areaKey === 'supervivencia') {
+      (supsList || []).forEach(function(it, idx) {
+        var parsed = self.getItemFields(it, 'supervivencia', idx, supsList.length, { key: 'transversal', roman: 'T' });
+        if (parsed) allItems.push(parsed);
+      });
+      return allItems;
+    }
+
+    // Áreas disciplinarias: recolectar de todos los ciclos seleccionados
+    selectedCycles.forEach(function(cKey) {
+      var cData = (CURRICULUM_DB && CURRICULUM_DB[cKey]) || {};
+      var rawList = cData[areaKey] || [];
+      var cInfo = {
+        key: cKey,
+        roman: cData.roman || cKey,
+        badge: 'Ciclo ' + (cData.roman || cKey),
+        title: cData.stage_title || ('Ciclo ' + cKey)
+      };
+
+      rawList.forEach(function(rawIt, idx) {
+        var parsed = self.getItemFields(rawIt, areaKey, idx, rawList.length, cInfo);
+        if (parsed) allItems.push(parsed);
+      });
     });
+
+    return allItems;
+  },
+
+  buildAreaTableHTML: function(areaKey, selectedCycles, habsList, supsList, d, userStates, userSelection) {
+    var self = this;
+    var items = this.getItemsForArea(areaKey, selectedCycles, habsList, supsList);
 
     var isSocio = (areaKey === 'socioemocional');
     var isSuperv = (areaKey === 'supervivencia');
-    var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
+    var isAcademic = (!isSocio && !isSuperv);
+    var isMultigrado = (selectedCycles.length > 1);
 
-    // Filtrar por periodo seleccionado en pestaña si aplica
-    if (!isSocio && !isSuperv && self.currentPeriodoFilter !== 'todos') {
-      var targetP = parseInt(self.currentPeriodoFilter, 10);
-      validItems = validItems.filter(function(x) { return x.periodoNum === targetP; });
-    }
+    // Filtrado por Periodo (solo áreas ordinarias)
+    var validItems = items.filter(function(item) {
+      if (isAcademic && self.currentPeriodoFilter !== 'todos') {
+        if (String(item.periodoNum) !== self.currentPeriodoFilter) return false;
+      }
+      if (isAcademic && isMultigrado && self.currentCycleFilter !== 'todos') {
+        if (String(item.cycleKey) !== self.currentCycleFilter) return false;
+      }
+      return true;
+    });
 
-    // En Etapa 1, si es socioemocional, priorizar Etapa 1
-    if (isSocio && isEtapa1) {
-      // Ordenar para que los de Etapa 1 aparezcan primero
-      validItems.sort(function(a, b) {
-        if (a.etapaSocio === 'Etapa 1' && b.etapaSocio !== 'Etapa 1') return -1;
-        if (a.etapaSocio !== 'Etapa 1' && b.etapaSocio === 'Etapa 1') return 1;
-        return 0;
-      });
-    }
-
-    // En supervivencia, destacar las que coinciden con las amenazas Top 3 del diagnóstico
-    var top3Names = (d && d.amenazasTop3) || (d && d.amenaza ? [d.amenaza] : []);
-    if (isSuperv && top3Names.length > 0) {
-      validItems.sort(function(a, b) {
-        var matchA = top3Names.some(function(t) { return (a.factor + ' ' + a.subproceso).toLowerCase().indexOf(t.toLowerCase()) !== -1; });
-        var matchB = top3Names.some(function(t) { return (b.factor + ' ' + b.subproceso).toLowerCase().indexOf(t.toLowerCase()) !== -1; });
-        if (matchA && !matchB) return -1;
-        if (!matchA && matchB) return 1;
-        return 0;
-      });
-    }
-
-    // Extraer barreras de aprendizaje críticas para orientar didácticas en Módulo B
+    // Barreras activas
     var activeBarriersList = [];
     if (d && d.barreras) {
       Object.keys(d.barreras).forEach(function(bKey) {
@@ -259,9 +271,8 @@ var ModuloB = {
       });
     }
 
-
     var th0 = 'Plan / Estado';
-    var th1 = 'Factor / Eje & Periodo';
+    var th1 = isMultigrado ? 'Ciclo & Periodo' : 'Factor / Eje & Periodo';
     var th2 = 'DBA / Aprendizaje Esencial';
     var th3 = 'Complejidad & Bloom';
     var th4 = 'Didáctica Situada';
@@ -291,12 +302,11 @@ var ModuloB = {
       '<tbody>' +
         validItems.map(function(item) {
           var state = self.getItemState(item, d, userStates);
-          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, (!isSocio && !isSuperv), d);
+          var isChecked = self.isItemSelectedForPlan(item, userSelection, state, isAcademic, d);
 
           var rowClass = 'row-pending';
           if (state === 'abordado') rowClass = 'row-addressed';
           else if (state === 'aplazado') rowClass = 'row-postponed';
-
 
           var badgeBg = '#e0f2fe';
           var badgeColor = '#0369a1';
@@ -309,14 +319,19 @@ var ModuloB = {
           }
 
           var periodoBadgeHTML = '';
-          if (!isSocio && !isSuperv) {
+          if (isAcademic) {
             periodoBadgeHTML = '<span class="badge-pill" style="background:#e2e8f0; color:#334155; font-size:0.7rem; margin-top:4px; display:inline-block;">📅 ' + item.periodo + '</span>';
           } else if (isSocio) {
             periodoBadgeHTML = '<span class="badge-pill badge-etapa2" style="font-size:0.7rem; margin-top:4px; display:inline-block;">' + item.periodo + '</span>';
           }
 
+          var cycleBadgeHTML = '';
+          if (isAcademic && isMultigrado) {
+            cycleBadgeHTML = '<span class="badge-pill" style="background:#e0e7ff; color:#3730a3; font-weight:700; font-size:0.72rem; margin-bottom:4px; display:inline-block;">' + item.cycleBadge + '</span><br>';
+          }
+
           var articulacionHTML = '';
-          if (!isSocio && !isSuperv) {
+          if (isAcademic) {
             articulacionHTML = '<div style="line-height:1.45; margin-top:5px; font-size: 0.88rem;">' +
               '<span class="badge-pill" style="background:' + badgeBg + '; color:' + badgeColor + '; font-weight:700; margin-bottom: 4px;">' + item.dbaCode + '</span> ' +
               '<span>' + item.dbaDesc + '</span>' +
@@ -351,6 +366,7 @@ var ModuloB = {
               '</div>' +
             '</td>' +
             '<td style="padding: 10px; vertical-align: top;">' +
+              cycleBadgeHTML +
               '<strong>' + item.factor + '</strong>' +
               (item.subproceso && (isSocio || isSuperv) ? ('<br><small style="color: var(--text-muted); display:inline-block; margin-top:3px;">' + item.subproceso + '</small>') : '') +
               '<br>' + periodoBadgeHTML +
@@ -370,15 +386,15 @@ var ModuloB = {
         }).join('') +
       '</tbody>' +
     '</table>';
-
   },
 
   renderRayuela: function() {
     var self = this;
     var user = (typeof AuthManager !== 'undefined' && AuthManager.getUserData) ? AuthManager.getUserData() : null;
     var d = (typeof ModuloA !== 'undefined' && ModuloA.getLiveDiagnostic) ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
-    var cicloKey = String((d && d.ciclo) || '3');
-    var cicloData = (CURRICULUM_DB && CURRICULUM_DB[cicloKey]) || (CURRICULUM_DB && CURRICULUM_DB['3']) || {};
+    
+    var selectedCycles = (d && d.ciclos && d.ciclos.length > 0) ? d.ciclos : [(d && d.ciclo) || '3'];
+    var isMultigrado = (selectedCycles.length > 1);
 
     var userStates = (user && user.estadosCurriculo) || {};
     var userSelection = (user && user.seleccionCurricular) || {};
@@ -395,38 +411,48 @@ var ModuloB = {
     });
 
     var areas = [
-      { key: 'lenguaje', name: '📖 Lenguaje', count: ((cicloData && cicloData.lenguaje) || []).length },
-      { key: 'matematicas', name: '📐 Matemáticas', count: ((cicloData && cicloData.matematicas) || []).length },
-      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: ((cicloData && cicloData.sociales) || []).length },
-      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: ((cicloData && cicloData.naturales) || []).length },
+      { key: 'lenguaje', name: '📖 Lenguaje', count: this.getItemsForArea('lenguaje', selectedCycles, habsList, supsList).length },
+      { key: 'matematicas', name: '📐 Matemáticas', count: this.getItemsForArea('matematicas', selectedCycles, habsList, supsList).length },
+      { key: 'sociales', name: '🌍 Ciencias Sociales (MEN 2026)', count: this.getItemsForArea('sociales', selectedCycles, habsList, supsList).length },
+      { key: 'naturales', name: '🔬 Ciencias Naturales & WASH', count: this.getItemsForArea('naturales', selectedCycles, habsList, supsList).length },
       { key: 'socioemocional', name: '🌱 Socioemocional & Bienestar', count: habsList.length },
       { key: 'supervivencia', name: '🛡️ Supervivencia & ERAE/WASH', count: supsList.length }
     ];
 
-    // Conteo en vivo de aprendizajes seleccionados por área (considerando selecciones explícitas o premarcado del periodo)
+    // Conteo en vivo de aprendizajes seleccionados por área
     var countsByArea = { lenguaje: 0, matematicas: 0, sociales: 0, naturales: 0, socioemocional: 0, supervivencia: 0 };
     areas.forEach(function(a) {
-      var raw = [];
-      if (a.key === 'socioemocional') raw = habsList || [];
-      else if (a.key === 'supervivencia') raw = supsList || [];
-      else raw = (cicloData && cicloData[a.key]) || [];
-
-      raw.forEach(function(it, idx) {
-        var parsed = self.getItemFields(it, a.key, idx, raw.length);
-        if (parsed) {
-          var st = self.getItemState(parsed, d, userStates);
-          var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
-          if (sel) {
-            countsByArea[a.key]++;
-          }
+      var allItems = self.getItemsForArea(a.key, selectedCycles, habsList, supsList);
+      allItems.forEach(function(parsed) {
+        var st = self.getItemState(parsed, d, userStates);
+        var sel = self.isItemSelectedForPlan(parsed, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+        if (sel) {
+          countsByArea[a.key]++;
         }
       });
     });
     var totalSelected = Object.keys(countsByArea).reduce(function(acc, k) { return acc + countsByArea[k]; }, 0);
 
-
     var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
     var isAcademicArea = (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia');
+
+    // Banner Contextual de Diagnóstico Activo
+    var amenazasLabel = (d && d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : ((d && d.amenaza) || 'Emergencia territorial');
+    var bannerContexto_HTML = 
+      '<div class="diagnostic-context-banner">' +
+        '<div>' +
+          '<strong>📌 Diagnóstico Curricular Vinculado:</strong> ' + ((d && d.etapa && d.etapa.split(':')[0]) || 'Etapa 2') + ' | ' +
+          '<strong>Multirriesgo:</strong> ' + amenazasLabel + ' | ' +
+          '<strong>' + (isMultigrado ? ('Multigrado (' + selectedCycles.map(function(c) { return 'Ciclo ' + c; }).join(', ') + ')') : ('Ciclo ' + selectedCycles[0])) + '</strong> ' +
+          '(' + ((d && d.nna) || 28) + ' NNA - ' + ((d && d.didacticaNNA) || 'TRABAJO COOPERATIVO') + ') | ' +
+          '<em>Reanudación: ' + ((d && d.fechaAtencion) || '2026-03-22') + '</em>' +
+        '</div>' +
+        '<div>' +
+          '<button type="button" class="btn-micro" onclick="window.switchTab(\'tab-diagnostico\');" style="background:white; border-color:#86efac; color:#166534; font-weight:700;">' +
+            '⚙️ Ver / Cambiar Diagnóstico' +
+          '</button>' +
+        '</div>' +
+      '</div>';
 
     var bannerINEE_HTML = '';
     if (isEtapa1) {
@@ -453,6 +479,21 @@ var ModuloB = {
         '</div>';
     }
 
+    // Barra de filtros por Ciclo (solo si hay más de 1 ciclo en multigrado)
+    var cicloFilterBar_HTML = '';
+    if (isMultigrado && isAcademicArea) {
+      cicloFilterBar_HTML = 
+        '<div class="periodos-bar no-print" style="margin-bottom: 10px; background: #e0e7ff; border-left: 4px solid #4338ca;">' +
+          '<span style="font-size:0.82rem; font-weight:700; color:#3730a3;">🏫 Filtro Multigrado por Ciclo:</span>' +
+          '<button class="ciclo-tab-btn ' + (self.currentCycleFilter === 'todos' ? 'active' : '') + '" data-ciclo="todos">Todos los Ciclos (' + selectedCycles.map(function(c) { return 'Ciclo ' + c; }).join('+') + ')</button>' +
+          selectedCycles.map(function(c) {
+            var act = (self.currentCycleFilter === c) ? 'active' : '';
+            var cObj = (CURRICULUM_DB && CURRICULUM_DB[c]) || {};
+            return '<button class="ciclo-tab-btn ' + act + '" data-ciclo="' + c + '">Ciclo ' + (cObj.roman || c) + '</button>';
+          }).join('') +
+        '</div>';
+    }
+
     // Barra de filtros por Periodo (solo para áreas académicas)
     var periodosBar_HTML = '';
     if (isAcademicArea) {
@@ -467,32 +508,20 @@ var ModuloB = {
         '</div>';
     }
 
-    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, cicloData, habsList, supsList, d, userStates, userSelection);
-
-    var fullPrintHTML = areas.map(function(a, idx) {
-      var tableHTML = self.buildAreaTableHTML(a.key, cicloData, habsList, supsList, d, userStates, userSelection);
-      var pageBreakClass = idx > 0 ? 'print-area-break' : '';
-      return '<div class="print-area-section ' + pageBreakClass + '" style="margin-bottom: 28px;">' +
-        '<h3 style="color: var(--primary); font-weight: 800; margin-bottom: 10px; border-bottom: 2px solid var(--primary); padding-bottom: 4px;">' +
-          a.name + ' — Malla Curricular Priorizada (Ciclo ' + cicloKey + ')' +
-        '</h3>' +
-        tableHTML +
-      '</div>';
-    }).join('');
+    var activeTableHTML = this.buildAreaTableHTML(this.currentArea, selectedCycles, habsList, supsList, d, userStates, userSelection);
 
     var html = 
       '<div class="card-elite">' +
-        '<div class="card-header">' +
+        bannerContexto_HTML +
+        '<div class="card-header" style="flex-wrap: wrap; gap: 12px;">' +
           '<div>' +
-            '<h3 class="card-title">📚 Rayuela Curricular: Selección y Planificación (Ciclo ' + cicloKey + ')</h3>' +
-            '<span style="font-size: 0.85rem; color: var(--text-muted);">' +
-              'Grados: ' + (((cicloData && cicloData.grados) || []).join(', ')) + ' | ' +
-              'Etapa: ' + ((d && d.etapa) || 'Etapa 2') + ' | ' +
-              'Amenaza: ' + ((d && d.amenazasTop3 && d.amenazasTop3.join(', ')) || (d && d.amenaza) || 'Natural') +
-            '</span>' +
+            '<h2 class="card-title">📚 Biblioteca de Adaptación y Rayuela Curricular</h2>' +
+            '<p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">' +
+              'Planificación pedagógica situada. Seleccione los aprendizajes esenciales que integrará en la Canasta de Flexibilización Curricular para el seguimiento en el Módulo C.' +
+            '</p>' +
           '</div>' +
           '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
-            '<button id="btn-exportar-excel-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
+            '<button id="btn-exportar-rayuela" class="btn-elite btn-secondary">📊 Exportar Malla a Excel</button>' +
             '<button id="btn-imprimir-rayuela" class="btn-elite btn-outline">🖨️ Imprimir Malla</button>' +
           '</div>' +
         '</div>' +
@@ -500,206 +529,219 @@ var ModuloB = {
         bannerINEE_HTML +
         bannerPeriodo_HTML +
 
-        '<!-- Pestañas de Áreas -->' +
-        '<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;" class="no-print">' +
+        '<!-- Pestañas de Áreas Disciplinares y Transversales -->' +
+        '<div class="tabs-nav no-print" style="margin-bottom: 14px; border-bottom: 2px solid var(--border-medium);">' +
           areas.map(function(a) {
-            var activeClass = self.currentArea === a.key ? 'btn-primary' : 'btn-outline';
-            return '<button class="btn-elite ' + activeClass + ' tab-area-btn" data-area="' + a.key + '">' +
-              a.name + ' (' + a.count + ')' +
+            var activeClass = (self.currentArea === a.key) ? 'active' : '';
+            var countSel = countsByArea[a.key] || 0;
+            var badgeSelHTML = (countSel > 0) ? (' <span class="badge-pill" style="background:#059669; color:white; font-size:0.7rem; padding:1px 6px;">' + countSel + ' en plan</span>') : '';
+            return '<button class="tab-button tab-rayuela-area ' + activeClass + '" data-area="' + a.key + '">' +
+              a.name + ' (' + a.count + ')' + badgeSelHTML +
             '</button>';
           }).join('') +
         '</div>' +
 
+        cicloFilterBar_HTML +
         periodosBar_HTML +
 
-        '<div class="no-print" style="overflow-x: auto;">' +
+        '<!-- Tabla Curricular Dinámica -->' +
+        '<div id="table-rayuela-container" style="overflow-x: auto;">' +
           activeTableHTML +
         '</div>' +
 
-        '<!-- Canasta Curricular Dock Flotante -->' +
-        '<div class="selection-dock-bar no-print">' +
-          '<div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">' +
-            '<div><strong>🧺 Canasta Curricular Seleccionada:</strong></div>' +
-            '<div class="selection-dock-badges">' +
-              '<span class="dock-badge ' + (countsByArea.lenguaje > 0 ? 'active-count' : '') + '">📖 Lenguaje: ' + countsByArea.lenguaje + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.matematicas > 0 ? 'active-count' : '') + '">📐 Mates: ' + countsByArea.matematicas + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.sociales > 0 ? 'active-count' : '') + '">🌍 Sociales: ' + countsByArea.sociales + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.naturales > 0 ? 'active-count' : '') + '">🔬 Naturales: ' + countsByArea.naturales + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.socioemocional > 0 ? 'active-count' : '') + '">🌱 Socioemocional: ' + countsByArea.socioemocional + '</span>' +
-              '<span class="dock-badge ' + (countsByArea.supervivencia > 0 ? 'active-count' : '') + '">🛡️ ERAE/WASH: ' + countsByArea.supervivencia + '</span>' +
-              '<span class="dock-badge active-count" style="background:#f59e0b; color:#0f172a;">Total: ' + totalSelected + '</span>' +
-            '</div>' +
+        '<!-- Dock Flotante de Canasta de Aprendizajes -->' +
+        '<div class="selection-dock no-print">' +
+          '<div class="selection-dock-badges">' +
+            '<span>🧺 <strong>Canasta Curricular de Emergencia:</strong></span>' +
+            '<span class="dock-badge active-count">' + totalSelected + ' Aprendizajes seleccionados</span>' +
+            '<span class="dock-badge">📖 ' + countsByArea.lenguaje + ' Lenguaje</span>' +
+            '<span class="dock-badge">📐 ' + countsByArea.matematicas + ' Matemáticas</span>' +
+            '<span class="dock-badge">🌍 ' + countsByArea.sociales + ' Sociales</span>' +
+            '<span class="dock-badge">🔬 ' + countsByArea.naturales + ' Naturales</span>' +
+            '<span class="dock-badge">🌱 ' + countsByArea.socioemocional + ' Socioemocional</span>' +
+            '<span class="dock-badge">🛡️ ' + countsByArea.supervivencia + ' Supervivencia</span>' +
           '</div>' +
-          '<div>' +
-            '<button id="btn-sincronizar-canasta-monitoreo" class="btn-elite btn-secondary" style="background:#059669; font-weight:800; border:none; padding:10px 18px;">' +
-              '🚀 Sincronizar Selección con Monitoreo (Módulo C)' +
-            '</button>' +
+          '<div style="display:flex; gap:8px;">' +
+            '<button id="btn-seleccionar-todos-area" class="btn-elite btn-outline" style="font-size:0.8rem; background:white; color:var(--primary); padding:6px 12px;">+ Marcar toda el área</button>' +
+            '<button id="btn-deseleccionar-todos-area" class="btn-elite btn-outline" style="font-size:0.8rem; background:white; color:#b91c1c; padding:6px 12px;">Desmarcar área</button>' +
+            '<button id="btn-sincronizar-canasta-monitoreo" class="btn-elite btn-primary" style="font-size:0.82rem; padding:8px 16px;">🚀 Sincronizar Canasta con Módulo C</button>' +
           '</div>' +
         '</div>' +
 
-        '<div id="full-print-matrix-container" style="display: none;">' +
-          '<div style="text-align: center; margin-bottom: 18px; border-bottom: 2px solid #005A36; padding-bottom: 10px;">' +
-            '<h2 style="color: #005A36; font-size: 1.3rem; margin-bottom: 4px;">Malla Curricular Completa Flexibilizada en Emergencias</h2>' +
-            '<p style="font-size: 0.85rem; color: #475569;">Ciclo ' + cicloKey + ' (' + (((cicloData && cicloData.grados) || []).join(', ')) + ') | Docente: ' + ((user && user.nombreCompleto) || 'Docente') + ' | Institución: ' + ((user && user.institucion) || 'IE Rural') + '</p>' +
-          '</div>' +
-          fullPrintHTML +
-        '</div>' +
       '</div>';
 
     container.innerHTML = html;
 
-    // Eventos de Navegación por Áreas
-    container.querySelectorAll('.tab-area-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    // Listeners de pestañas de área
+    container.querySelectorAll('.tab-rayuela-area').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         self.currentArea = btn.getAttribute('data-area');
         self.renderRayuela();
       });
     });
 
-    // Eventos de Filtro por Periodo
+    // Listeners de filtro por ciclo (multigrado)
+    container.querySelectorAll('.ciclo-tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        self.currentCycleFilter = btn.getAttribute('data-ciclo');
+        self.renderRayuela();
+      });
+    });
+
+    // Listeners de filtro de periodo
     container.querySelectorAll('.periodo-tab-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
         self.currentPeriodoFilter = btn.getAttribute('data-periodo');
         self.renderRayuela();
       });
     });
 
-    // Checkbox de selección en plan
-    container.querySelectorAll('.plan-checkbox').forEach(function(chk) {
-      chk.addEventListener('change', function() {
-        var itemId = chk.getAttribute('data-item-id');
-        var u = AuthManager.getUserData() || {};
-        u.seleccionCurricular = u.seleccionCurricular || {};
-        u.seleccionCurricular[itemId] = chk.checked;
-        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
-        self.renderRayuela();
-      });
-    });
-
-    // Cambio de estado pedagógico por ítem (pendiente, abordado, aplazado)
-    container.querySelectorAll('.select-item-state').forEach(function(sel) {
-      sel.addEventListener('change', function() {
-        var itemId = sel.getAttribute('data-item-id');
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = u.estadosCurriculo || {};
-        u.estadosCurriculo[itemId] = sel.value;
-
-        // Si se marca como abordado o aplazado, desmarcar de la canasta por defecto a menos que sea repaso
-        u.seleccionCurricular = u.seleccionCurricular || {};
-        if (sel.value === 'aplazado') {
-          u.seleccionCurricular[itemId] = false;
-        } else if (sel.value === 'abordado') {
-          // Mantener solo si el docente expresamente lo dejó
-          u.seleccionCurricular[itemId] = false;
-        } else if (sel.value === 'pendiente') {
-          u.seleccionCurricular[itemId] = true;
-        }
-
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
-        self.renderRayuela();
-      });
-    });
-
-    // Botones de acción de fechas
-    var btnReapply = document.getElementById('btn-reaplicar-fechas');
-    if (btnReapply) {
-      btnReapply.addEventListener('click', function() {
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = {}; // Limpia para que tome el cálculo del diagnóstico
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        self.renderRayuela();
-      });
-    }
-
-    var btnReset = document.getElementById('btn-reset-pendientes');
-    if (btnReset) {
-      btnReset.addEventListener('click', function() {
-        var u = AuthManager.getUserData() || {};
-        u.estadosCurriculo = {};
-        // Marcar todo como pendiente forzado
-        var allKeys = [];
-        container.querySelectorAll('.select-item-state').forEach(function(s) {
-          allKeys.push(s.getAttribute('data-item-id'));
-        });
-        allKeys.forEach(function(k) { u.estadosCurriculo[k] = 'pendiente'; });
-        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
-        self.renderRayuela();
-      });
-    }
-
-    // Botón de sincronización con Monitoreo Semanal
+    // Listener para el botón Sincronizar Canasta con Módulo C
     var btnSync = document.getElementById('btn-sincronizar-canasta-monitoreo');
     if (btnSync) {
-      btnSync.addEventListener('click', function() {
+      btnSync.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
         if (typeof ModuloC !== 'undefined' && ModuloC && typeof ModuloC.renderMonitoreo === 'function') {
           ModuloC.renderMonitoreo();
         }
-        alert('✅ Canasta Curricular sincronizada exitosamente con el Módulo C (Monitoreo Semanal).\nPuede ingresar a la pestaña "📋 Módulo C" para ver el plan organizado por semanas.');
+        alert('🎉 ¡Canasta Curricular Sincronizada!\nSe han vinculado ' + totalSelected + ' aprendizajes prioritarios con el cronograma y bitácora del Módulo C.\n\nRedirigiendo al Monitoreo Semanal...');
         if (typeof window.switchTab === 'function') {
           window.switchTab('tab-monitoreo');
         }
       });
     }
 
-    // Exportación a Excel de Rayuela Curricular (CSV estructurado y sanitizado RFC 4180)
-    var btnExcelRayuela = document.getElementById('btn-exportar-excel-rayuela');
-    if (btnExcelRayuela) {
-      btnExcelRayuela.addEventListener('click', function() {
-        var csvRows = [];
-        csvRows.push([
-          'Área Curricular',
-          'Periodo Escolar / Etapa',
-          'Factor / Eje Generador',
-          'Subproceso / Competencia Clave',
-          'Código DBA / EBC / INEE',
-          'Descripción del Aprendizaje Esencial',
-          'Complejidad Pedagógica',
-          'Desafío Cognitivo (Bloom)',
-          'Saber (Cognitivo)',
-          'Hacer (Procedimental / Didáctica)',
-          'Ser (Actitudinal / Convivencia)',
-          'Estado Pedagógico',
-          'Incluido en Canasta (Mód. C)'
-        ]);
+    // Listeners de Checkboxes de Canasta
+    container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var itemId = cb.getAttribute('data-item-id');
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        u.seleccionCurricular[itemId] = cb.checked;
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    });
 
-        areas.forEach(function(a) {
-          var raw = [];
-          if (a.key === 'socioemocional') raw = habsList || [];
-          else if (a.key === 'supervivencia') raw = supsList || [];
-          else raw = (cicloData && cicloData[a.key]) || [];
+    // Listeners de Select de Estado
+    container.querySelectorAll('.select-item-state').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var itemId = sel.getAttribute('data-item-id');
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = u.estadosCurriculo || {};
+        u.estadosCurriculo[itemId] = sel.value;
+        if (sel.value === 'abordado') {
+          u.seleccionCurricular = u.seleccionCurricular || {};
+          u.seleccionCurricular[itemId] = false;
+        }
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    });
 
-          raw.forEach(function(it, idx) {
-            var item = self.getItemFields(it, a.key, idx, raw.length);
-            if (item) {
-              var st = self.getItemState(item, d, userStates);
-              var inPlan = self.isItemSelectedForPlan(item, userSelection, st, (a.key !== 'socioemocional' && a.key !== 'supervivencia'), d);
+    // Botones de acción rápida en Canasta
+    var btnMarcarArea = document.getElementById('btn-seleccionar-todos-area');
+    if (btnMarcarArea) {
+      btnMarcarArea.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+          var id = cb.getAttribute('data-item-id');
+          u.seleccionCurricular[id] = true;
+        });
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    }
 
-              var cleanDesc = (item.dbaDesc || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSub = (item.subproceso || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanDidact = (item.didactica || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanBloom = (item.bloom || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSaber = (item.saber || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanHacer = (item.hacer || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
-              var cleanSer = (item.ser || '').replace(/[\r\n]+/g, ' ').replace(/"/g, '""').trim();
+    var btnDesmarcarArea = document.getElementById('btn-deseleccionar-todos-area');
+    if (btnDesmarcarArea) {
+      btnDesmarcarArea.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.seleccionCurricular = u.seleccionCurricular || {};
+        container.querySelectorAll('.plan-checkbox').forEach(function(cb) {
+          var id = cb.getAttribute('data-item-id');
+          u.seleccionCurricular[id] = false;
+        });
+        AuthManager.saveUserData('seleccionCurricular', u.seleccionCurricular);
+        self.renderRayuela();
+      });
+    }
 
-              csvRows.push([
-                a.name,
-                item.periodo,
-                item.factor,
-                cleanSub,
-                item.dbaCode,
-                cleanDesc,
-                item.complejidad,
-                cleanBloom,
-                cleanSaber,
-                cleanHacer || cleanDidact,
-                cleanSer,
-                st.toUpperCase(),
-                inPlan ? 'SÍ (EN PLAN)' : 'NO'
-              ]);
-            }
-          });
+    // Botones de re-aplicar fechas o resetear a pendiente
+    var btnReaplicar = document.getElementById('btn-reaplicar-fechas');
+    if (btnReaplicar) {
+      btnReaplicar.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = {};
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        self.renderRayuela();
+        alert('📅 Fechas re-aplicadas: los periodos previos a la emergencia se han pre-marcado como ya abordados.');
+      });
+    }
+
+    var btnReset = document.getElementById('btn-reset-pendientes');
+    if (btnReset) {
+      btnReset.addEventListener('click', function(e) {
+        e.preventDefault();
+        var u = AuthManager.getUserData() || {};
+        u.estadosCurriculo = {};
+        container.querySelectorAll('.select-item-state').forEach(function(sel) {
+          var id = sel.getAttribute('data-item-id');
+          u.estadosCurriculo[id] = 'pendiente';
+        });
+        AuthManager.saveUserData('estadosCurriculo', u.estadosCurriculo);
+        self.renderRayuela();
+        alert('🎯 Todos los aprendizajes se han establecido como pendientes para flexibilización.');
+      });
+    }
+
+    // Exportar e Imprimir Módulo B
+    var btnPrintB = document.getElementById('btn-imprimir-rayuela');
+    if (btnPrintB) {
+      btnPrintB.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+      });
+    }
+
+    var btnExportB = document.getElementById('btn-exportar-rayuela');
+    if (btnExportB) {
+      btnExportB.addEventListener('click', function(e) {
+        e.preventDefault();
+        var items = self.getItemsForArea(self.currentArea, selectedCycles, habsList, supsList);
+        var csvRows = [
+          ['CICLO', 'PERIODO', 'FACTOR / EJE', 'SUBPROCESO', 'DBA CODIGO', 'DBA DESCRIPCION', 'COMPLEJIDAD', 'OBJETIVO BLOOM', 'SABER', 'HACER', 'SER', 'DIDACTICA', 'ESTADO DOCENTE', 'EN PLAN CANASTA']
+        ];
+
+        items.forEach(function(it) {
+          var st = self.getItemState(it, d, userStates);
+          var isSel = self.isItemSelectedForPlan(it, userSelection, st, (self.currentArea !== 'socioemocional' && self.currentArea !== 'supervivencia'), d);
+          csvRows.push([
+            it.cycleBadge || 'Ciclo ' + (d.ciclo || '3'),
+            it.periodo,
+            it.factor,
+            it.subproceso,
+            it.dbaCode,
+            it.dbaDesc,
+            it.complejidad,
+            it.bloom,
+            it.saber,
+            it.hacer,
+            it.ser,
+            it.didactica,
+            st,
+            isSel ? 'SI' : 'NO'
+          ]);
         });
 
         var formatCSVCell = function(val) {
@@ -718,22 +760,9 @@ var ModuloB = {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'malla_curricular_rayuela_ciclo_' + cicloKey + '_' + new Date().toISOString().split('T')[0] + '.csv';
+        a.download = 'malla_curricular_' + self.currentArea + '_multiciclo_' + new Date().toISOString().split('T')[0] + '.csv';
         a.click();
         URL.revokeObjectURL(url);
-      });
-    }
-
-    // Impresión
-    var btnPrint = document.getElementById('btn-imprimir-rayuela');
-    if (btnPrint) {
-      btnPrint.addEventListener('click', function() {
-        var printContainer = document.getElementById('full-print-matrix-container');
-        if (printContainer) printContainer.style.display = 'block';
-        window.print();
-        setTimeout(function() {
-          if (printContainer) printContainer.style.display = 'none';
-        }, 1000);
       });
     }
   }

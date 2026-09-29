@@ -1,31 +1,31 @@
-// Módulo C: Monitoreo Semanal por Etapas (Versión 2.2 - Canasta Curricular, Normas INEE y Multirriesgo)
+// Módulo C: Monitoreo Semanal, Avance Pedagógico y Trazabilidad SIEE
+// (Versión 2.5 - Multiciclo/Multigrado, Decreto 0277 de 2025, Blindaje INEE, Fechas Duales y Coherencia Multi-Diagnóstico)
 var ModuloC = {
   init: function() {
     this.renderMonitoreo();
   },
 
   getDidacticaStrategyForArea: function(areaKey, nnaCount) {
-    try {
-      var strategies = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB && CURRICULUM_DB.situated_didactic_strategies) || {};
-      var areaMap = {
-        'lenguaje': 'LENGUAJE',
-        'matematicas': 'MATEMATICAS',
-        'sociales': 'CIENCIAS_SOCIALES',
-        'naturales': 'CIENCIAS_NATURALES'
+    var n = parseInt(nnaCount, 10) || 25;
+    if (n < 15) {
+      return {
+        tipo: 'TUTORÍA 1:1 FOCALIZADA',
+        desc: 'Nivelación personalizada con guías modulares adaptadas y acompañamiento directo docente-estudiante.'
       };
-      var stObj = strategies[areaMap[areaKey]] || {};
-      var n = parseInt(nnaCount, 10) || 25;
-      if (n < 15) return stObj.tier_small || 'Tutoría 1:1 y mediación personalizada';
-      if (n <= 35) return stObj.tier_medium || 'Aprendizaje cooperativo en equipos';
-      return stObj.tier_large || 'Micro-estaciones y rincones autónomos';
-    } catch (e) {
-      return 'Aprendizaje situado y cooperativo';
+    } else if (n <= 35) {
+      return {
+        tipo: 'TRABAJO COOPERATIVO EN EQUIPOS',
+        desc: 'Proyectos integrados de aprendizaje, rincones temáticos y resolución de retos pedagógicos situados.'
+      };
+    } else {
+      return {
+        tipo: 'MICRO-ESTACIONES ROTATIVAS',
+        desc: 'Circuitos de aprendizaje por rincones con guías de autoaprendizaje y roles colaborativos rotativos.'
+      };
     }
   },
 
-  getSelectedBasket: function(user, cicloData, habsList, supsList, d) {
-    var userSelection = (user && user.seleccionCurricular) || {};
-    var userStates = (user && user.estadosCurriculo) || {};
+  getSelectedBasket: function(user, activeCycles, habsList, supsList, d) {
     var basket = {
       lenguaje: [],
       matematicas: [],
@@ -35,71 +35,71 @@ var ModuloC = {
       supervivencia: []
     };
 
-    var areas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
+    var userStates = (user && user.estadosCurriculo) || {};
+    var userSelection = (user && user.seleccionCurricular) || {};
 
-    areas.forEach(function(aKey) {
-      var rawList = [];
-      if (aKey === 'socioemocional') rawList = habsList || [];
-      else if (aKey === 'supervivencia') rawList = supsList || [];
-      else rawList = (cicloData && cicloData[aKey]) || [];
+    var allAreas = ['lenguaje', 'matematicas', 'sociales', 'naturales', 'socioemocional', 'supervivencia'];
+    allAreas.forEach(function(aKey) {
+      var allItems = (typeof ModuloB !== 'undefined' && ModuloB.getItemsForArea)
+        ? ModuloB.getItemsForArea(aKey, activeCycles, habsList, supsList)
+        : [];
 
       var isAcademic = (aKey !== 'socioemocional' && aKey !== 'supervivencia');
+      allItems.forEach(function(parsed) {
+        var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
+          ? ModuloB.getItemState(parsed, d, userStates) 
+          : 'pendiente';
+        var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
+          ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
+          : (userSelection[parsed.id] === true);
 
-      rawList.forEach(function(item, idx) {
-        var parsed = (typeof ModuloB !== 'undefined' && ModuloB && typeof ModuloB.getItemFields === 'function') 
-          ? ModuloB.getItemFields(item, aKey, idx, rawList.length)
-          : { id: aKey + '_' + idx, dbaCode: 'DBA', dbaDesc: '', didactica: 'Taller situado' };
-
-        if (parsed) {
-          var state = (typeof ModuloB !== 'undefined' && ModuloB.getItemState) 
-            ? ModuloB.getItemState(parsed, d, userStates) 
-            : 'pendiente';
-          var isSel = (typeof ModuloB !== 'undefined' && ModuloB.isItemSelectedForPlan)
-            ? ModuloB.isItemSelectedForPlan(parsed, userSelection, state, isAcademic, d)
-            : (userSelection[parsed.id] === true);
-
-          if (isSel) {
-            basket[aKey].push(parsed);
-          }
+        if (isSel) {
+          basket[aKey].push(parsed);
         }
       });
     });
 
     var totalItemsInBasket = Object.keys(basket).reduce(function(acc, k) { return acc + basket[k].length; }, 0);
 
-    // Salvaguarda: si por algún motivo extremo la canasta queda vacía, asegurar al menos 1 ítem nuclear por área
+    // Salvaguarda: si la canasta está vacía, seleccionar los primeros items esenciales
     if (totalItemsInBasket === 0) {
-
       var isEtapa1 = (d && d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
-      
+
       // Socioemocional
-      habsList.forEach(function(item, idx) {
-        var parsed = ModuloB.getItemFields(item, 'socioemocional', idx, habsList.length);
-        if (isEtapa1) {
-          if (parsed.etapaSocio === 'Etapa 1' && basket.socioemocional.length < 3) basket.socioemocional.push(parsed);
-        } else {
-          if (basket.socioemocional.length < 2) basket.socioemocional.push(parsed);
+      (habsList || []).forEach(function(item, idx) {
+        var parsed = (typeof ModuloB !== 'undefined' && ModuloB.getItemFields)
+          ? ModuloB.getItemFields(item, 'socioemocional', idx, habsList.length, { key: 'transversal', roman: 'T' })
+          : { id: 'socioemocional_' + idx, dbaCode: 'SOCIOEMOCIONAL', dbaDesc: item.hacer || '' };
+        if (parsed) {
+          if (isEtapa1) {
+            if (parsed.etapaSocio === 'Etapa 1' && basket.socioemocional.length < 3) basket.socioemocional.push(parsed);
+          } else {
+            if (basket.socioemocional.length < 2) basket.socioemocional.push(parsed);
+          }
         }
       });
 
       // Supervivencia (ERAE / WASH)
-      supsList.forEach(function(item, idx) {
-        var parsed = ModuloB.getItemFields(item, 'supervivencia', idx, supsList.length);
-        if (basket.supervivencia.length < 2) basket.supervivencia.push(parsed);
+      (supsList || []).forEach(function(item, idx) {
+        var parsed = (typeof ModuloB !== 'undefined' && ModuloB.getItemFields)
+          ? ModuloB.getItemFields(item, 'supervivencia', idx, supsList.length, { key: 'transversal', roman: 'T' })
+          : { id: 'supervivencia_' + idx, dbaCode: 'ERAE / WASH', dbaDesc: item.aprendizaje || '' };
+        if (parsed && basket.supervivencia.length < 2) basket.supervivencia.push(parsed);
       });
 
-      // Áreas Académicas (filtrar solo las que no estén marcadas como abordadas previas a la fecha)
+      // Áreas Académicas
       ['lenguaje', 'matematicas', 'sociales', 'naturales'].forEach(function(aKey) {
-        var rawList = (cicloData && cicloData[aKey]) || [];
-        rawList.forEach(function(item, idx) {
-          var parsed = ModuloB.getItemFields(item, aKey, idx, rawList.length);
+        var allItems = (typeof ModuloB !== 'undefined' && ModuloB.getItemsForArea)
+          ? ModuloB.getItemsForArea(aKey, activeCycles, habsList, supsList)
+          : [];
+        allItems.forEach(function(parsed) {
           var isPrevio = (d && d.periodosPrevios && d.periodosPrevios.indexOf('Periodo ' + parsed.periodoNum) !== -1);
           if (!isPrevio && basket[aKey].length < 3) {
             basket[aKey].push(parsed);
           }
         });
-        if (basket[aKey].length === 0 && rawList.length > 0) {
-          basket[aKey].push(ModuloB.getItemFields(rawList[0], aKey, 0, rawList.length));
+        if (basket[aKey].length === 0 && allItems.length > 0) {
+          basket[aKey].push(allItems[0]);
         }
       });
     }
@@ -117,6 +117,7 @@ var ModuloC = {
       var d = (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.getLiveDiagnostic === 'function') ? ModuloA.getLiveDiagnostic() : (user ? user.diagnostico : null);
       if (!d) {
         d = {
+          ciclos: ['3'],
           ciclo: '3',
           grado: 'Grado 6° (Bachillerato)',
           nna: 28,
@@ -133,10 +134,15 @@ var ModuloC = {
         };
       }
 
-      var cicloKey = String(d.ciclo || '3');
-      var currDB = (typeof CURRICULUM_DB !== 'undefined' && CURRICULUM_DB) ? CURRICULUM_DB : {};
-      var cicloData = currDB[cicloKey] || currDB['3'] || currDB['1'] || {};
+      var activeCycles = (d && d.ciclos && d.ciclos.length > 0) ? d.ciclos : [(d && d.ciclo) || '3'];
+      var isMultigrado = (activeCycles.length > 1);
+
+      // Monitoreo guardado según diagnóstico activo
+      var activeDiagId = user && user.activeDiagnosticId;
       var savedMonitoreo = (user && user.monitoreo) || {};
+      if (user && user.diagnosticos && activeDiagId && user.diagnosticos[activeDiagId] && user.diagnosticos[activeDiagId].monitoreo) {
+        savedMonitoreo = user.diagnosticos[activeDiagId].monitoreo;
+      }
 
       var habsList = ((HABS_SUPS_DB && HABS_SUPS_DB.habilidades) || []).filter(function(h) {
         return h && h.habilidad && h.habilidad.indexOf('Etapa de respuesta') === -1 && (!h.hacer || h.hacer.indexOf('=SUBTOTAL') === -1);
@@ -146,7 +152,7 @@ var ModuloC = {
         return s && s.tipo_afectacion && s.tipo_afectacion.indexOf('Tipologías') === -1 && (!s.aprendizaje || s.aprendizaje.indexOf('=SUBTOTAL') === -1);
       });
 
-      var basket = self.getSelectedBasket(user, cicloData, habsList, supsList, d);
+      var basket = self.getSelectedBasket(user, activeCycles, habsList, supsList, d);
 
       var semanas = [];
       var fechaBaseStr = String(d.fechaAtencion || d.fechaInicio || '').trim();
@@ -163,70 +169,54 @@ var ModuloC = {
 
       var isEtapa1 = (d.etapa && d.etapa.indexOf('ETAPA 1') !== -1);
       var academicAreas = ['lenguaje', 'matematicas', 'sociales', 'naturales'];
-
       var amenazasLabel = (d.amenazasTop3 && d.amenazasTop3.length > 0) ? d.amenazasTop3.join(' + ') : d.amenaza;
 
       // Parámetros de Jornada Escolar Regular según Decreto 0277 de 2025
-      // Básica Primaria (Grados 1° a 5°, Ciclos 1 y 2): Mínimo 25 horas semanales (5 horas diarias) y 1.000 horas anuales.
-      // Básica Secundaria y Media (Grados 6° a 11°, Ciclos 3, 4 y 5): Mínimo 30 horas semanales (6 horas diarias) y 1.200 horas anuales.
-      var isPrimaria = (cicloKey === '1' || cicloKey === '2' || (d.grado && d.grado.indexOf('Primaria') !== -1));
+      var isAllPrimaria = activeCycles.every(function(c) { return c === '1' || c === '2'; });
+      var isPrimaria = isAllPrimaria || (activeCycles.length === 1 && (activeCycles[0] === '1' || activeCycles[0] === '2'));
+
       var decretoInfo = {
-        nivel: isPrimaria ? 'Básica Primaria (Grados 1° a 5°)' : 'Básica Secundaria y Media (Grados 6° a 11°)',
+        nivel: isPrimaria 
+          ? 'Básica Primaria (Grados 1° a 5°)' 
+          : (isMultigrado ? 'Aula Multigrado Integrada (Básica Primaria y Secundaria)' : 'Básica Secundaria y Media (Grados 6° a 11°)'),
         horasSemanales: isPrimaria ? 25 : 30,
         horasDiarias: isPrimaria ? 5 : 6,
         horasAnuales: isPrimaria ? 1000 : 1200
       };
 
-      // Cálculo de Duración Promedio por Acción según Estrategia Didáctica Situada (Matrícula NNA y Tipo de Trabajo)
+      // Cálculo de Duración Promedio por Acción según Estrategia Didáctica Situada
       var nnaCount = parseInt(d.nna, 10) || 25;
-      var duracionAccionHrs = 10; // Valor base intermedio (horas efectivas de 60 min)
+      var duracionAccionHrs = 10;
       var tipoEstrategiaLabel = '';
 
       if (nnaCount < 15) {
-        // Tutoría 1:1 y nivelación personalizada: sesiones más intensivas y focalizadas (~6.25h en primaria, ~7.5h en secundaria)
         duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
-        tipoEstrategiaLabel = 'Tutoría 1:1 Focalizada';
+        tipoEstrategiaLabel = isMultigrado ? 'Tutoría 1:1 Inter-Edad' : 'Tutoría 1:1 Focalizada';
       } else if (nnaCount <= 35) {
-        // Aprendizaje Cooperativo en Equipos: proyectos articulados de mediana duración (~8.33h en primaria, ~10h en secundaria)
         duracionAccionHrs = isPrimaria ? 8.33 : 10;
-        tipoEstrategiaLabel = 'Aprendizaje Cooperativo';
+        tipoEstrategiaLabel = isMultigrado ? 'Trabajo Cooperativo y Rincones Multigrado' : 'Aprendizaje Cooperativo';
       } else {
-        // Micro-estaciones Rotativas y Guías Modulares (>35 NNA): ciclos rotativos (~6.25h en primaria, ~7.5h en secundaria)
         duracionAccionHrs = isPrimaria ? 6.25 : 7.5;
-        tipoEstrategiaLabel = 'Micro-Estaciones Rotativas';
+        tipoEstrategiaLabel = isMultigrado ? 'Micro-Estaciones Multinivel' : 'Micro-Estaciones Rotativas';
       }
 
-      // Capacidad de acciones pedagógicas simultáneas o sucesivas por semana según la intensidad reglamentaria
       var accionesPorSemana = Math.max(1, Math.round(decretoInfo.horasSemanales / duracionAccionHrs));
       var horasEfectivasPorAccion = (decretoInfo.horasSemanales / accionesPorSemana);
 
-      // Conteo de semanas escolares colombianas según MEN (Decreto 0277 / Calendario Oficial de 40 semanas lectivas)
-      // El calendario del MEN en Colombia comprende 40 semanas lectivas de trabajo académico con estudiantes:
-      // Inicia el último lunes de enero (aprox. 26 de enero), pausa 2 semanas a mitad de año (vacaciones docentes/estudiantes semanas 24-25)
-      // y concluye entre la primera y segunda semana de diciembre (aprox. 5 a 10 de diciembre).
+      // Conteo de semanas escolares según calendario oficial MEN
       var dInicioEmergencia = fechaBase;
       var anoEmergencia = dInicioEmergencia.getFullYear() || 2026;
-      var inicioAnoClases = new Date(anoEmergencia, 0, 26); // 26 de enero
       var finAnoClases = new Date(anoEmergencia, 11, 10); // 10 de diciembre
-      var msTranscurridos = Math.max(0, dInicioEmergencia.getTime() - inicioAnoClases.getTime());
-      var semanaEscolarActual = Math.max(1, Math.min(40, Math.ceil(msTranscurridos / (1000 * 60 * 60 * 24 * 7))));
-      var totalSemanasCalendarioMEN = 40;
-      var semanasRestantesCalendario = Math.max(1, totalSemanasCalendarioMEN - semanaEscolarActual);
 
-      // Función auxiliar para calcular la fecha de cada semana lectiva MEN evitando semanas de vacaciones de fin de año
       function getFechaLectivaMEN(baseDate, offsetWeeks, schoolYearEnd) {
-        var d = new Date(baseDate.getTime());
-        d.setDate(baseDate.getDate() + (offsetWeeks * 7));
-        
-        // Si la fecha calculada supera el cierre lectivo de diciembre (aprox. 10 de diciembre),
-        // se ajusta de acuerdo a los periodos oficiales del MEN para el cierre del calendario escolar
-        if (d > schoolYearEnd) {
-          // Mantener fecha proyectada lectiva dentro del tope de cierre lectivo oficial
+        var dateObj = new Date(baseDate.getTime());
+        dateObj.setDate(baseDate.getDate() + (offsetWeeks * 7));
+        if (dateObj > schoolYearEnd) {
           var clampedDate = new Date(schoolYearEnd.getTime());
           clampedDate.setDate(schoolYearEnd.getDate() - Math.max(0, (15 - offsetWeeks) * 3));
           return clampedDate;
         }
-        return d;
+        return dateObj;
       }
 
       // Generar 16 semanas articuladas con la canasta, el enfoque INEE y el Decreto 0277 de 2025
@@ -237,7 +227,7 @@ var ModuloC = {
         var focoSemana = '';
         var areaKey = '';
         var desgloseHorarioHTML = '';
-        var accionesSemana = []; // Array estructurado de procesos/acciones para esta semana
+        var accionesSemana = [];
 
         if (isEtapa1 && i <= 2) {
           // Semanas 1 y 2 de Etapa 1: Enfoque INEE en Contención Socioemocional y Supervivencia (ERAE/WASH)
@@ -332,13 +322,14 @@ var ModuloC = {
               dbaDesc: 'Aprendizaje esencial seleccionado en la canasta curricular',
               complejidad: 'Intermedia',
               bloom: 'Aplicar y contextualizar en el entorno',
-              didactica: 'Taller situado y pedagógico de aula'
+              didactica: 'Taller situado y pedagógico de aula',
+              cycleBadge: isMultigrado ? ('Ciclo ' + activeCycles[0]) : ''
             };
           }
 
           var didacticaEstrategia = self.getDidacticaStrategyForArea(areaKey, d.nna);
 
-          // Articulación relacional con Barreras para el Aprendizaje y la Participación (BAP)
+          // Articulación relacional con Barreras BAP
           var barrerasAlertHTML = '';
           if (d.barreras) {
             var activeBAP = [];
@@ -349,293 +340,248 @@ var ModuloC = {
               }
             });
             if (activeBAP.length > 0) {
-              barrerasAlertHTML = '<span style="color:#c2410c; font-size:0.8rem; display:block; margin-top:3px;">🧩 <strong>Ajuste Razonable ante Barreras:</strong> Flexibilizar tiempos y diversificar formatos por ' + activeBAP.slice(0, 2).join(', ') + '.</span>';
+              barrerasAlertHTML = 
+                '<div style="font-size:0.75rem; color:#9a3412; background:#ffedd5; padding:3px 6px; border-radius:4px; margin-top:4px;">' +
+                  '🧩 <strong>Ajuste por Barreras Activas:</strong> ' + activeBAP.slice(0, 2).join(' | ') +
+                '</div>';
             }
           }
 
-          var hrsFocoArea = isPrimaria ? 15 : 18;
-          var hrsTransversales = isPrimaria ? 10 : 12;
+          var hrsAccion1 = (accionesPorSemana === 1) ? decretoInfo.horasSemanales : Math.round(horasEfectivasPorAccion);
+          var hrsAccion2 = decretoInfo.horasSemanales - hrsAccion1;
 
+          var cicloTag1 = (primaryAction && primaryAction.cycleBadge) ? (' [' + primaryAction.cycleBadge + ']') : '';
           accionesSemana.push({
             id: 'acc_1',
-            tipo: 'academica_principal',
-            etiqueta: '📘 Acción 1 (Principal)',
-            codigo: primaryAction.dbaCode || 'DBA Principal',
-            subproceso: primaryAction.subproceso || 'Aprendizaje esencial nuclear del área',
-            descripcion: primaryAction.dbaDesc,
-            horas: secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales,
-            didactica: (primaryAction.didactica || 'Taller situado') + ' | ' + didacticaEstrategia,
-            bloom: primaryAction.bloom || 'Aplicar y analizar saberes en el contexto de emergencia',
+            tipo: 'disciplinar',
+            etiqueta: '📘 Proceso 1 (' + areaKey.charAt(0).toUpperCase() + areaKey.slice(1) + ')' + cicloTag1,
+            codigo: primaryAction.dbaCode || 'DBA OFICIAL',
+            subproceso: primaryAction.subproceso || 'Eje articulador',
+            descripcion: primaryAction.dbaDesc || primaryAction.enunciado || 'Aprendizaje esencial priorizado',
+            horas: hrsAccion1,
+            didactica: primaryAction.didactica || didacticaEstrategia.desc,
+            bloom: primaryAction.bloom || (d.bloom ? d.bloom.split('(')[0] : 'Aplicar y analizar'),
             borderCol: '#3b82f6',
             bgCol: '#f8fafc'
           });
 
-          if (secondaryAction && secondaryAction.dbaCode !== primaryAction.dbaCode) {
-            var secEtiqueta = '➕ Acción 2 (Complementaria)';
-            var secTipo = 'academica_complementaria';
-            var secBorder = '#0d9488';
-            var secBg = '#f0fdfa';
-
-            if (secondaryAction.dbaCode.indexOf('SOCIO') !== -1) {
-              secEtiqueta = '🌱 Acción 2 (Transversal Socioemocional)';
-              secBorder = '#f59e0b';
-              secBg = '#fffbeb';
-            } else if (secondaryAction.dbaCode.indexOf('WASH') !== -1 || secondaryAction.dbaCode.indexOf('ERAE') !== -1) {
-              secEtiqueta = '🛡️ Acción 2 (Transversal Autoprotección)';
-              secBorder = '#0284c7';
-              secBg = '#f0f9ff';
-            }
-
+          if (accionesPorSemana >= 2 && secondaryAction) {
+            var isSecTransversal = (secondaryAction.dbaCode === 'SOCIOEMOCIONAL' || secondaryAction.dbaCode === 'ERAE / WASH' || secondaryAction.dbaCode === 'SUPERVIVENCIA');
+            var cicloTag2 = (secondaryAction.cycleBadge) ? (' [' + secondaryAction.cycleBadge + ']') : '';
             accionesSemana.push({
               id: 'acc_2',
-              tipo: secTipo,
-              etiqueta: secEtiqueta,
-              codigo: secondaryAction.dbaCode || 'Acción Transversal',
-              subproceso: secondaryAction.subproceso || 'Articulación pedagógica situada y refuerzo',
-              descripcion: secondaryAction.dbaDesc,
-              horas: hrsTransversales,
-              didactica: secondaryAction.didactica || 'Aplicación situada, cooperativa y de nivelación',
-              bloom: secondaryAction.bloom || 'Comprensión contextual y cuidado mutuo',
-              borderCol: secBorder,
-              bgCol: secBg
+              tipo: isSecTransversal ? 'transversal' : 'disciplinar',
+              etiqueta: isSecTransversal ? ('🌱 Proceso 2 (' + secondaryAction.dbaCode + ')') : ('📙 Proceso 2 (' + areaKey.charAt(0).toUpperCase() + areaKey.slice(1) + ')' + cicloTag2),
+              codigo: secondaryAction.dbaCode || 'DBA ARTICULADO',
+              subproceso: secondaryAction.subproceso || 'Refuerzo y aplicación',
+              descripcion: secondaryAction.dbaDesc || secondaryAction.enunciado || 'Proceso complementario en el aula',
+              horas: hrsAccion2,
+              didactica: secondaryAction.didactica || 'Taller situado y resolución colaborativa',
+              bloom: secondaryAction.bloom || 'Aplicar y contextualizar en el entorno',
+              borderCol: isSecTransversal ? '#10b981' : '#6366f1',
+              bgCol: isSecTransversal ? '#ecfdf5' : '#eef2ff'
             });
           }
 
-          var badgeCapacidadAcademica = 
+          var badgeAccionesRegular = 
             '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">' +
-              '<span class="badge-pill" style="background:#ecfdf5; color:#065f46; font-weight:700; font-size:0.76rem; border:1px solid #a7f3d0;">' +
-                '🎯 Capacidad Semanal: ' + accionesSemana.length + ' Proceso(s) (' + decretoInfo.horasSemanales + 'h/sem)' +
+              '<span class="badge-pill" style="background:#e0f2fe; color:#0369a1; font-weight:700; font-size:0.76rem;">' +
+                '🎯 Capacidad: ' + accionesSemana.length + ' Proceso(s) Activo(s) (' + decretoInfo.horasSemanales + 'h/sem)' +
               '</span>' +
-              '<span style="font-size:0.75rem; color:#047857; font-weight:600;">' +
-                'Tiempo Promedio: ~' + horasEfectivasPorAccion.toFixed(1) + 'h efectivas / proceso (' + tipoEstrategiaLabel + ')' +
+              '<span style="font-size:0.75rem; color:#0c4a6e; font-weight:600;">' +
+                tipoEstrategiaLabel + ' (~' + (decretoInfo.horasSemanales / accionesSemana.length).toFixed(1) + 'h c/u)' +
               '</span>' +
             '</div>';
 
           desgloseHorarioHTML = 
-            '<div style="margin-top:8px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#14532d;">' +
-              '⏱️ <strong>Intensidad Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h efectivas/sem):</strong><br>' +
-              '• <strong>Acción Principal (' + (secondaryAction ? hrsFocoArea : decretoInfo.horasSemanales) + 'h):</strong> Taller nuclear de profundización en ' + focoSemana + ' y desafío cognitivo.<br>' +
-              (secondaryAction 
-                ? ('• <strong>Acción Complementaria (' + hrsTransversales + 'h):</strong> Aplicación situada, trabajo colaborativo o articulación transversal para afianzar el aprendizaje.')
-                : ('• <strong>Flexibilización y Refuerzo (' + hrsTransversales + 'h):</strong> Nivelación personalizada y adaptación curricular ante barreras activas.')) +
+            '<div style="margin-top:8px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:6px; padding:6px 10px; font-size:0.78rem; color:#0369a1;">' +
+              '⏱️ <strong>Jornada Decreto 0277/2025 (' + decretoInfo.horasSemanales + 'h/sem efectivas):</strong> ' +
+              accionesSemana.map(function(acc) {
+                return '<strong>' + acc.etiqueta.split('(')[0].trim() + ':</strong> ' + acc.horas + 'h (' + acc.codigo + ')';
+              }).join(' | ') +
             '</div>';
         }
 
-        var semSaved = savedMonitoreo[i] || {};
-        var semSavedAcciones = semSaved.acciones || {};
+        // Recuperar estados y bitácoras guardados por proceso
+        var savedSem = savedMonitoreo[String(i)] || {};
+        var savedAcciones = savedSem.acciones || {};
 
-        // Normalizar estado de avance por acción
         accionesSemana.forEach(function(acc) {
-          var accSaved = semSavedAcciones[acc.id] || {};
-          acc.avance = accSaved.avance || (semSaved.avance || '⚪ Sin iniciar');
-          acc.observaciones = accSaved.observaciones || (semSaved.observaciones || '');
+          if (savedAcciones[acc.id]) {
+            acc.avance = savedAcciones[acc.id].avance || '⚪ Sin iniciar';
+            acc.observaciones = savedAcciones[acc.id].observaciones || '';
+          } else {
+            // Compatibilidad con registros monolíticos previos
+            if (acc.id === 'acc_1') {
+              acc.avance = savedSem.avance || '⚪ Sin iniciar';
+              acc.observaciones = savedSem.observaciones || '';
+            } else {
+              acc.avance = '⚪ Sin iniciar';
+              acc.observaciones = '';
+            }
+          }
         });
-
-        // Estado general de la semana (retrocompatibilidad)
-        var semAvanceGeneral = semSaved.avance || '⚪ Sin iniciar';
-        if (accionesSemana.length > 0) {
-          var allLog = accionesSemana.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
-          var anyProc = accionesSemana.some(function(a) { return a.avance && (a.avance.indexOf('proceso') !== -1 || a.avance.indexOf('Logrado') !== -1); });
-          if (allLog) semAvanceGeneral = '🟢 Logrado';
-          else if (anyProc) semAvanceGeneral = '🟡 En proceso';
-        }
 
         semanas.push({
           num: i,
           fecha: fechaFormatted,
-          etapa: d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica',
           foco: focoSemana,
-          areaNombre: focoSemana,
           horasSemana: decretoInfo.horasSemanales,
-          accionesCapacidad: accionesSemana.length,
           acciones: accionesSemana,
-          duracionPromedioAccion: horasEfectivasPorAccion.toFixed(1),
+          badgeCapacidad: isEtapa1 && i <= 2 ? badgeAccionesEtapa1 : badgeAccionesRegular,
           desgloseHorarioHTML: desgloseHorarioHTML,
-          barrerasAlertHTML: barrerasAlertHTML || '',
-          badgeCapacidad: (isEtapa1 && i <= 2) ? badgeAccionesEtapa1 : badgeCapacidadAcademica,
-          avance: semAvanceGeneral,
-          observaciones: semSaved.observaciones || ''
+          barrerasAlertHTML: barrerasAlertHTML || ''
         });
       }
 
-      // ==========================================
-      // CÁLCULO DE KPIS Y PROCESOS PENDIENTES MEN
-      // ==========================================
-      var totalProcesosPlan = 0;
-      var procesosLogrados = 0;
-      var procesosEnProceso = 0;
+      // Cálculo de Métricas y Transición de Etapa Curricular
+      var totalAccionesTodas = 0;
+      var totalLogradasTodas = 0;
+      var totalEnProcesoTodas = 0;
 
       semanas.forEach(function(s) {
         s.acciones.forEach(function(acc) {
-          totalProcesosPlan++;
-          if (acc.avance && acc.avance.indexOf('Logrado') !== -1) {
-            procesosLogrados++;
-          } else if (acc.avance && acc.avance.indexOf('proceso') !== -1) {
-            procesosEnProceso++;
-          }
+          totalAccionesTodas++;
+          if (acc.avance && acc.avance.indexOf('Logrado') !== -1) totalLogradasTodas++;
+          else if (acc.avance && acc.avance.indexOf('proceso') !== -1) totalEnProcesoTodas++;
         });
       });
 
-      var procesosPendientes = Math.max(0, totalProcesosPlan - procesosLogrados);
-      var pctAvanceProcesos = totalProcesosPlan > 0 ? Math.round((procesosLogrados / totalProcesosPlan) * 100) : 0;
-      var totalHorasPlan = semanas.length * decretoInfo.horasSemanales;
-      var horasEjecutadas = Math.round((procesosLogrados / Math.max(1, totalProcesosPlan)) * totalHorasPlan);
+      var pctLogrado = totalAccionesTodas > 0 ? Math.round((totalLogradasTodas / totalAccionesTodas) * 100) : 0;
+      var pctEfectivo = totalAccionesTodas > 0 ? Math.round(((totalLogradasTodas + (totalEnProcesoTodas * 0.5)) / totalAccionesTodas) * 100) : 0;
 
-      // =======================================================
-      // MOTOR DE TRANSICIÓN DE ETAPAS (INEE / MEN & BLOOM)
-      // =======================================================
-      // Evalúa el avance curricular y las semanas para determinar el momento exacto
-      // de pasar de Etapa 1 -> Etapa 2 -> Etapa 3 para cumplir con la malla curricular del MEN.
+      // Recomendación de Transición de Etapa
       var recomendacionTransicion = null;
+      var etapaActualStr = d.etapa || 'ETAPA 2: Recuperación temprana / Lúdica';
 
-      if (isEtapa1) {
-        // En Etapa 1: Si las semanas 1 y 2 (o al menos 2 acciones de contención y supervivencia) están logradas
-        var s1 = semanas[0] || { acciones: [] };
-        var s2 = semanas[1] || { acciones: [] };
-        var accionesChoqueLogradas = s1.acciones.concat(s2.acciones).filter(function(a) {
-          return a.avance && a.avance.indexOf('Logrado') !== -1;
-        }).length;
-
-        var choqueCompleto = (accionesChoqueLogradas >= 3) || (s1.acciones.every(function(a){ return a.avance && a.avance.indexOf('Logrado') !== -1; }) && s1.acciones.length > 0);
-
-        if (choqueCompleto || pctAvanceProcesos >= 20) {
+      if (etapaActualStr.indexOf('ETAPA 1') !== -1) {
+        var sem1Lograda = semanas[0] && semanas[0].acciones.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
+        var sem2Lograda = semanas[1] && semanas[1].acciones.every(function(a) { return a.avance && a.avance.indexOf('Logrado') !== -1; });
+        if (sem1Lograda && sem2Lograda) {
           recomendacionTransicion = {
-            etapaOrigen: d.etapa,
             etapaDestino: 'ETAPA 2: Recuperación temprana / Lúdica',
             nuevoBloom: 'Media / Intermedia (Bloom Nivel 3-4: Aplicar / Analizar)',
-            motivo: 'Se han consolidado las acciones prioritarias de contención socioemocional y autoprotección ERAE/WASH (Normas INEE). Corresponde pasar a ETAPA 2 para reactivar los proyectos integrados, la nivelación en áreas nucleares y el trabajo lúdico cooperativo.',
-            btnTexto: '🚀 Transicionar a ETAPA 2 (Recuperación Temprana)'
+            motivo: '¡Contención inicial superada! Los procesos de choque socioemocional y autoprotección de las Semanas 1 y 2 están 100% logrados.',
+            icono: '🌱',
+            colorFondo: '#fef3c7',
+            colorBorde: '#f59e0b',
+            colorTexto: '#92400e'
           };
         }
-      } else if (d.etapa && d.etapa.indexOf('ETAPA 2') !== -1) {
-        // En Etapa 2: Si se ha avanzado en al menos el 50% de los procesos o semanas >= 8
-        if (pctAvanceProcesos >= 50 || procesosLogrados >= 10) {
+      } else if (etapaActualStr.indexOf('ETAPA 2') !== -1) {
+        if (pctLogrado >= 60 || totalLogradasTodas >= 8) {
           recomendacionTransicion = {
-            etapaOrigen: d.etapa,
-            etapaDestino: 'ETAPA 3: Educación formal adaptada / Retorno formal',
+            etapaDestino: 'ETAPA 3: Educación formal adaptada / Retorno',
             nuevoBloom: 'Alta / Profundización (Bloom Nivel 5-6: Evaluar / Crear)',
-            motivo: 'Se ha alcanzado un progreso superior al 50% en los aprendizajes esenciales de recuperación temprana. Según la malla curricular del MEN, corresponde avanzar a ETAPA 3 para restablecer la educación formal adaptada con estándares de alta complejidad evaluativa y creación autónoma.',
-            btnTexto: '🎓 Promover a ETAPA 3 (Retorno Formal)'
+            motivo: '¡Consolidación pedagógica exitosa! Se ha alcanzado un ' + pctLogrado + '% de aprendizajes logrados. El grupo está listo para la educación formal adaptada.',
+            icono: '🎓',
+            colorFondo: '#eff6ff',
+            colorBorde: '#3b82f6',
+            colorTexto: '#1e40af'
           };
         }
       }
+
+      // Banner Contextual de Diagnóstico Activo en Módulo C
+      var ciclosLabel = isMultigrado ? ('Multigrado (Ciclos ' + activeCycles.join(', ') + ')') : ('Ciclo ' + activeCycles[0]);
+      var bannerContextoMonitoreo_HTML = 
+        '<div class="diagnostic-context-banner">' +
+          '<div>' +
+            '<strong>📌 Monitoreo Curricular Vinculado:</strong> ' + ((d && d.etapa && d.etapa.split(':')[0]) || 'Etapa 2') + ' | ' +
+            '<strong>Multirriesgo:</strong> ' + amenazasLabel + ' | ' +
+            '<strong>' + ciclosLabel + '</strong> ' +
+            '(' + ((d && d.nna) || 28) + ' NNA - ' + ((d && d.didacticaNNA) || 'TRABAJO COOPERATIVO') + ') | ' +
+            '<em>Reanudación: ' + ((d && d.fechaAtencion) || '2026-03-22') + '</em>' +
+          '</div>' +
+          '<div>' +
+            '<button type="button" class="btn-micro" onclick="window.switchTab(\'tab-diagnostico\');" style="background:white; border-color:#86efac; color:#166534; font-weight:700;">' +
+              '⚙️ Ver / Cambiar Diagnóstico' +
+            '</button>' +
+          '</div>' +
+        '</div>';
 
       var bannerTransicionHTML = '';
       if (recomendacionTransicion) {
         bannerTransicionHTML = 
-          '<div style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);">' +
-            '<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">' +
-              '<div style="flex:1; min-width:280px;">' +
-                '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">' +
-                  '<span style="font-size:1.25rem;">✨</span>' +
-                  '<strong style="color:#1d4ed8; font-size:1rem;">Momento Óptimo de Transición Curricular MEN Identificado</strong>' +
-                  '<span class="badge-pill" style="background:#2563eb; color:white; font-size:0.75rem; font-weight:700;">Hito de Flexibilización</span>' +
-                '</div>' +
-                '<p style="font-size:0.86rem; color:#1e3a8a; line-height:1.5; margin:0;">' +
-                  recomendacionTransicion.motivo +
-                '</p>' +
-                '<div style="font-size:0.78rem; color:#3b82f6; margin-top:6px; font-weight:600;">' +
-                  'Siguiente Etapa Sugerida: <strong>' + recomendacionTransicion.etapaDestino + '</strong> | Nuevo Nivel Bloom: <strong>' + recomendacionTransicion.nuevoBloom + '</strong>' +
-                '</div>' +
-              '</div>' +
-              '<div style="align-self:center;">' +
-                '<button id="btn-promover-etapa" class="btn-elite" style="background:#1d4ed8; color:white; font-weight:700; padding:10px 18px; border-radius:8px; box-shadow:0 2px 6px rgba(29, 78, 216, 0.3);">' +
-                  recomendacionTransicion.btnTexto +
-                '</button>' +
-              '</div>' +
+          '<div style="background:' + recomendacionTransicion.colorFondo + '; border:2px solid ' + recomendacionTransicion.colorBorde + '; border-radius:8px; padding:14px 18px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">' +
+            '<div style="color:' + recomendacionTransicion.colorTexto + '; font-size:0.92rem; line-height:1.45;">' +
+              '<h4 style="margin:0 0 4px 0; font-size:1.02rem; display:flex; align-items:center; gap:6px;">' +
+                recomendacionTransicion.icono + ' <strong>Recomendación Oficial de Transición Curricular (Normas INEE):</strong>' +
+              '</h4>' +
+              recomendacionTransicion.motivo + '<br>' +
+              '<span style="font-size:0.82rem; font-weight:600;">Siguiente Nivel: <strong>' + recomendacionTransicion.etapaDestino + '</strong> con nivel cognitivo <strong>' + recomendacionTransicion.nuevoBloom + '</strong>.</span>' +
+            '</div>' +
+            '<div>' +
+              '<button id="btn-promover-etapa" class="btn-elite" style="background:' + recomendacionTransicion.colorBorde + '; color:white; font-weight:700; padding:10px 18px; font-size:0.88rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">' +
+                '🚀 Promover Plan a ' + recomendacionTransicion.etapaDestino.split(':')[0] +
+              '</button>' +
             '</div>' +
           '</div>';
       }
 
       var html = 
         '<div class="card-elite">' +
-          '<div class="card-header">' +
+          bannerContextoMonitoreo_HTML +
+          '<div class="card-header" style="flex-wrap: wrap; gap: 12px;">' +
             '<div>' +
-              '<h3 class="card-title">📋 Monitoreo Semanal por Etapas (Ciclo ' + cicloKey + ')</h3>' +
-              '<span style="font-size: 0.85rem; color: var(--text-muted);">' +
-                'Gobernación de Norte de Santander | ' +
-                'Docente: ' + ((user && user.nombreCompleto) || 'Docente Territorial') + ' | ' +
-                'Amenazas: ' + amenazasLabel + ' | ' +
-                'Reanudación: ' + (d.fechaAtencion || d.fechaInicio) +
-              '</span>' +
+              '<h2 class="card-title">📋 Módulo C: Monitoreo Semanal de Aprendizajes y Avance Pedagógico</h2>' +
+              '<p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">' +
+                'Cronograma de 16 semanas articulado con el <strong>Decreto 0277 de 2025</strong> (' + decretoInfo.horasSemanales + 'h/sem efectivas) y las Normas Mínimas INEE.' +
+              '</p>' +
             '</div>' +
             '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
-              '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avance</button>' +
-              '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel (CSV)</button>' +
-              '<button id="btn-exportar-json" class="btn-elite btn-outline">📥 Respaldo JSON</button>' +
-              '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta</button>' +
+              '<button id="btn-exportar-excel" class="btn-elite btn-secondary">📊 Exportar a Excel</button>' +
+              '<button id="btn-imprimir-carta" class="btn-elite btn-outline">🖨️ Imprimir Carta SIEE</button>' +
+              '<button id="btn-guardar-monitoreo" class="btn-elite btn-primary">💾 Guardar Avances</button>' +
             '</div>' +
           '</div>' +
 
-          (bannerTransicionHTML || '') +
+          bannerTransicionHTML +
 
-          '<!-- Banner de Cumplimiento Decreto 0277 de 2025 e INEE -->' +
-          '<div style="background: #f0fdf4; border-left: 5px solid #059669; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 18px; font-size: 0.88rem; line-height: 1.6;">' +
-            '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px;">' +
-              '<strong style="color:#065f46; font-size:0.95rem;">⚖️ Cumplimiento Normativo Decreto 0277 de 2025 (Jornada Escolar Regular)</strong>' +
-              '<span class="badge-pill" style="background:#059669; color:#fff; font-size:0.8rem; font-weight:700;">' + decretoInfo.nivel + '</span>' +
+          '<!-- Panel de Métricas e Indicadores de Rendimiento SIEE -->' +
+          '<div class="grid-3" style="gap: 12px; margin-bottom: 20px;">' +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #059669; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Procesos Logrados</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #059669; margin-top: 2px;">' + totalLogradasTodas + ' / ' + totalAccionesTodas + ' <span style="font-size: 0.88rem; font-weight: 600;">(' + pctLogrado + '%)</span></div>' +
             '</div>' +
-            '<div>' +
-              '<strong>Intensidad Reglamentaria:</strong> Mínimo <strong>' + decretoInfo.horasSemanales + ' horas efectivas de 60 minutos semanales</strong> (~' + decretoInfo.horasDiarias + ' horas diarias) | Meta anual de referencia: <strong>' + decretoInfo.horasAnuales.toLocaleString('es-CO') + ' horas</strong>.<br>' +
-              '<strong>📐 Estimación de Capacidad Pedagógica por Semana:</strong> Para ' + d.nna + ' NNA (' + tipoEstrategiaLabel + '), la duración promedio calculada por acción pedagógica situada es de <strong>~' + horasEfectivasPorAccion.toFixed(1) + ' horas efectivas</strong>. Por tanto, cada semana integra <strong>' + (isEtapa1 ? '2 acciones de choque (Socioemocional + ERAE/WASH)' : (accionesPorSemana + ' acción(es) situada(s) con posibilidad de articular acciones complementarias)')) + '</strong>.<br>' +
-              (isEtapa1 
-                ? '<strong>⚠️ Etapa 1 Activa (Respuesta Inmediata / Contención):</strong> Las Semanas 1 y 2 canalizan las ' + decretoInfo.horasSemanales + ' horas en 2 acciones simultáneas: contención emocional (15h/18h) y autoprotección comunitaria ERAE/WASH (10h/12h).' 
-                : '<strong>Plan Curricular Sincronizado:</strong> Las semanas distribuyen las ' + decretoInfo.horasSemanales + ' horas entre profundización de DBA esenciales nucleares, proyectos de aula y mitigación de barreras.') +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #d97706; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Procesos en Marcha</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #d97706; margin-top: 2px;">' + totalEnProcesoTodas + ' <span style="font-size: 0.88rem; font-weight: 600;">en desarrollo</span></div>' +
+            '</div>' +
+            '<div style="background: var(--surface-hover); border-left: 4px solid #0284c7; padding: 12px 14px; border-radius: var(--radius-sm);">' +
+              '<div style="font-size: 0.76rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Jornada Oficial (Dec. 0277/2025)</div>' +
+              '<div style="font-size: 1.45rem; font-weight: 800; color: #0284c7; margin-top: 2px;">' + decretoInfo.horasSemanales + 'h/sem <span style="font-size: 0.82rem; font-weight: 600;">(' + decretoInfo.horasDiarias + 'h/día)</span></div>' +
             '</div>' +
           '</div>' +
 
-          '<div class="grid-4" style="margin-bottom: 24px;">' +
-            '<div style="background: var(--surface-hover); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
-              '<div style="font-size: 0.8rem; color: var(--text-muted);">Progreso de Procesos</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">' + pctAvanceProcesos + '%</div>' +
-              '<div style="font-size: 0.72rem; color: #64748b; margin-top:2px;">' + procesosLogrados + ' de ' + totalProcesosPlan + ' procesos logrados</div>' +
-            '</div>' +
-            '<div style="background: #fff7ed; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #ffedd5;">' +
-              '<div style="font-size: 0.8rem; color: #c2410c;">⏳ Procesos por Realizar</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: #ea580c;">' + procesosPendientes + ' pend.</div>' +
-              '<div style="font-size: 0.72rem; color: #9a3412; margin-top:2px;">' + procesosEnProceso + ' en proceso de aula</div>' +
-            '</div>' +
-            '<div style="background: #eff6ff; padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid #dbeafe;">' +
-              '<div style="font-size: 0.8rem; color: #1e40af;">📅 Semanas Calendario MEN</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: #2563eb;">' + semanasRestantesCalendario + ' sem.</div>' +
-              '<div style="font-size: 0.72rem; color: #1d4ed8; margin-top:2px;">Semana lectiva ' + semanaEscolarActual + ' de ' + totalSemanasCalendarioMEN + ' anuales</div>' +
-            '</div>' +
-            '<div style="background: var(--color-blue-bg); padding: 14px; border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-light);">' +
-              '<div style="font-size: 0.8rem; color: var(--color-blue);">Meta Semestral (16 sem)</div>' +
-              '<div style="font-size: 1.6rem; font-weight: 800; color: var(--color-blue);">' + totalHorasPlan + ' h</div>' +
-              '<div style="font-size: 0.72rem; color: #0369a1; margin-top:2px;">' + horasEjecutadas + 'h ejecutadas aprox.</div>' +
-            '</div>' +
-          '</div>' +
-
+          '<!-- Tabla de Monitoreo Semanal Multi-Acción -->' +
           '<div style="overflow-x: auto;">' +
-            '<table class="table-print" style="width: 100%; border-collapse: separate; border-spacing: 0 10px; font-size: 0.88rem;">' +
+            '<table class="table-print" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">' +
               '<thead>' +
-                '<tr style="background: var(--surface-hover); text-align: left;">' +
-                  '<th style="padding: 10px; width: 85px;">Semana</th>' +
-                  '<th style="padding: 10px; width: 105px;">Fecha Proy.</th>' +
-                  '<th style="padding: 10px; width: 130px;">Enfoque / Área</th>' +
-                  '<th style="padding: 10px;">Tarjeta de Acción Pedagógica Situada (Decreto 0277 de 2025)</th>' +
-                  '<th style="padding: 10px; width: 180px;">Estado de Avance</th>' +
-                  '<th style="padding: 10px; width: 240px;">Evidencias / Bitácora Docente</th>' +
+                '<tr style="background: var(--surface-hover); text-align: left; border-bottom: 2px solid var(--border-medium);">' +
+                  '<th style="padding: 10px; width: 9%;">Semana</th>' +
+                  '<th style="padding: 10px; width: 10%;">Fecha Lectiva</th>' +
+                  '<th style="padding: 10px; width: 12%;">Foco Curricular</th>' +
+                  '<th style="padding: 10px; width: 33%;">Procesos y Aprendizajes Priorizados (Decreto 0277)</th>' +
+                  '<th style="padding: 10px; width: 16%;">Estado por Proceso</th>' +
+                  '<th style="padding: 10px; width: 20%;">Bitácora y Evidencias</th>' +
                 '</tr>' +
               '</thead>' +
               '<tbody>' +
                 semanas.map(function(s) {
-                  // Renderizar múltiples procesos divididos visualmente en cuadros claros y alineados
                   var tarjetasProcesosHTML = '';
                   var estadosProcesosHTML = '';
                   var bitacorasProcesosHTML = '';
 
-                  s.acciones.forEach(function(acc, idx) {
-                    var isMulti = (s.acciones.length > 1);
-                    var cardMargin = (isMulti && idx > 0) ? 'margin-top:10px;' : '';
-                    var cardMinHeight = isMulti ? 'min-height:120px;' : '';
+                  s.acciones.forEach(function(acc, accIdx) {
+                    var cardMargin = (accIdx > 0) ? 'margin-top: 8px;' : '';
+                    var cardMinHeight = (s.acciones.length > 1) ? 'min-height: 85px;' : '';
 
                     tarjetasProcesosHTML += 
-                      '<div style="background:' + acc.bgCol + '; border-left:4px solid ' + acc.borderCol + '; border-radius:6px; padding:10px 12px; ' + cardMargin + ' ' + cardMinHeight + ' box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
-                        '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:4px;">' +
-                          '<span class="badge-pill" style="background:#ffffff; color:#0f172a; border:1px solid ' + acc.borderCol + '; font-weight:700; font-size:0.75rem;">' +
-                            acc.etiqueta + ' (' + acc.horas + 'h)' +
+                      '<div style="background:' + acc.bgCol + '; border:1px solid ' + acc.borderCol + '; border-radius:6px; padding:8px 10px; ' + cardMargin + ' ' + cardMinHeight + ' box-shadow:0 1px 3px rgba(0,0,0,0.04);">' +
+                        '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">' +
+                          '<span style="font-size:0.75rem; font-weight:700; color:' + acc.borderCol + ';">' +
+                            acc.etiqueta + ' • ' + acc.horas + 'h efectivas' +
                           '</span>' +
                           '<span style="font-size:0.72rem; color:#475569; font-weight:600;">' +
                             'Código: <strong>' + acc.codigo + '</strong>' +
@@ -657,7 +603,7 @@ var ModuloC = {
                         '<div style="font-size:0.74rem; font-weight:700; color:#0f172a; margin-bottom:5px;">' +
                           acc.etiqueta +
                         '</div>' +
-                        '<select class="select-elite select-avance-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
+                        '<select class="select-elite select-avance-accion select-avance-semana no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" style="font-size: 0.82rem; padding: 5px 8px; width:100%; background:white; font-weight:600;">' +
                           '<option value="⚪ Sin iniciar" ' + (acc.avance === '⚪ Sin iniciar' ? 'selected' : '') + '>⚪ Sin iniciar</option>' +
                           '<option value="🟡 En proceso" ' + (acc.avance === '🟡 En proceso' ? 'selected' : '') + '>🟡 En proceso</option>' +
                           '<option value="🟢 Logrado" ' + (acc.avance === '🟢 Logrado' ? 'selected' : '') + '>🟢 Logrado</option>' +
@@ -673,7 +619,7 @@ var ModuloC = {
                         '<div style="font-size:0.72rem; color:#475569; font-weight:700; margin-bottom:4px;">' +
                           'Bitácora ' + acc.etiqueta + ' (' + acc.horas + 'h):' +
                         '</div>' +
-                        '<textarea class="textarea-elite input-observaciones-accion no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
+                        '<textarea class="textarea-elite input-observaciones-accion input-observaciones-semana no-print" data-semana="' + s.num + '" data-accion-id="' + acc.id + '" rows="2" placeholder="Registro de evidencias y acuerdos para ' + acc.codigo + '..." style="font-size: 0.8rem; width:100%; background:white;">' + (acc.observaciones || '') + '</textarea>' +
                         '<div class="print-only-text" style="display:none; font-size:7.5pt; color:#1e293b; line-height:1.35; padding:3px 0; border-top:1px dashed #cbd5e1; margin-top:2px;">' +
                           (acc.observaciones && acc.observaciones.trim() ? acc.observaciones.trim() : '<em>(Sin observaciones adicionales registradas)</em>') +
                         '</div>' +
@@ -684,7 +630,7 @@ var ModuloC = {
                     '<div>' +
                       s.badgeCapacidad +
                       '<div style="margin-bottom:6px; font-size:0.83rem;">' +
-                        '<strong>🎓 ' + (d.grado || ('Ciclo ' + cicloKey)) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
+                        '<strong>🎓 ' + (d.grado || ciclosLabel) + ' | ' + (d.didacticaNNA || 'TRABAJO COOPERATIVO') + '</strong><br>' +
                         '<span style="color:#b91c1c;">⚠️ Multirriesgo [' + amenazasLabel + ']:</span> ' + (d.riesgosIE || 'Protección de la comunidad educativa') +
                         s.barrerasAlertHTML +
                       '</div>' +
@@ -746,14 +692,12 @@ var ModuloC = {
           u.diagnostico.updatedAt = new Date().toISOString();
           AuthManager.saveUserData('diagnostico', u.diagnostico);
 
-          // Actualizar interfaz del Módulo A si los elementos existen
           var selEtapa = document.getElementById('select-etapa');
-          var selBloom = document.getElementById('select-bloom-ajustable');
-          var inputBloomHidden = document.getElementById('input-bloom');
           if (selEtapa) selEtapa.value = recomendacionTransicion.etapaDestino;
-          if (selBloom) selBloom.value = recomendacionTransicion.nuevoBloom;
-          if (inputBloomHidden) inputBloomHidden.value = recomendacionTransicion.nuevoBloom;
 
+          if (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.updateBloomDisplay === 'function') {
+            ModuloA.updateBloomDisplay(recomendacionTransicion.nuevoBloom);
+          }
           if (typeof ModuloA !== 'undefined' && ModuloA && typeof ModuloA.renderDiagnosticSummary === 'function') {
             ModuloA.renderDiagnosticSummary(u.diagnostico);
           }
@@ -766,7 +710,7 @@ var ModuloC = {
         });
       }
 
-      // Evento Guardar Avance con Multi-Acción / Procesos Múltiples por Semana
+      // Evento Guardar Avance con Multi-Acción
       var btnGuardar = document.getElementById('btn-guardar-monitoreo');
       if (btnGuardar) {
         btnGuardar.addEventListener('click', function(e) {
@@ -782,8 +726,8 @@ var ModuloC = {
             var combinedObs = [];
 
             s.acciones.forEach(function(acc) {
-              var sel = container.querySelector('.select-avance-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
-              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]');
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.select-avance-semana[data-semana="' + semNum + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + semNum + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.input-observaciones-semana[data-semana="' + semNum + '"]');
               var avVal = sel ? sel.value : acc.avance;
               var obsVal = txt ? txt.value : acc.observaciones;
 
@@ -804,7 +748,6 @@ var ModuloC = {
               }
             });
 
-            // Determinar estado agregado de la semana
             var estadoSemana = '⚪ Sin iniciar';
             if (s.acciones.length > 0 && semLogrados === s.acciones.length) {
               estadoSemana = '🟢 Logrado';
@@ -822,11 +765,11 @@ var ModuloC = {
 
           AuthManager.saveUserData('monitoreo', u.monitoreo);
           self.renderMonitoreo();
-          alert('✅ Monitoreo Semanal guardado exitosamente.\nSe registraron los estados individuales de cada proceso pedagógico y se actualizaron los indicadores de avance.');
+          alert('✅ Monitoreo Semanal guardado exitosamente.\nSe registraron los estados de cada proceso pedagógico y se actualizaron los indicadores de avance vinculados a este diagnóstico.');
         });
       }
 
-      // Evento Exportar a Excel (CSV con desglose curricular completo y compatibilidad 100% Excel RFC 4180)
+      // Evento Exportar a Excel
       var btnExcel = document.getElementById('btn-exportar-excel');
       if (btnExcel) {
         btnExcel.addEventListener('click', function() {
@@ -852,43 +795,36 @@ var ModuloC = {
 
           semanas.forEach(function(s) {
             s.acciones.forEach(function(acc) {
-              var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
-              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]');
+              var sel = container.querySelector('.select-avance-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.select-avance-semana[data-semana="' + s.num + '"]');
+              var txt = container.querySelector('.input-observaciones-accion[data-semana="' + s.num + '"][data-accion-id="' + acc.id + '"]') || container.querySelector('.input-observaciones-semana[data-semana="' + s.num + '"]');
               var avVal = sel ? sel.value : acc.avance;
               var obsVal = txt ? txt.value : acc.observaciones;
 
-              // Sanitizar y limpiar textos sin romper celdas en Excel
-              var cleanObs = (obsVal || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanDesc = (acc.descripcion || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanSub = (acc.subproceso || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanDidact = (acc.didactica || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-              var cleanBloom = (acc.bloom || '').replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ').replace(/"/g, '""').trim();
-
-              csvRows.push([
+              var row = [
                 'Semana ' + s.num,
                 s.fecha,
-                s.horasSemana + ' horas efectivas',
+                s.horasSemana + 'h',
                 acc.id,
                 acc.etiqueta,
                 acc.codigo,
-                cleanSub,
-                cleanDesc,
+                acc.subproceso || '',
+                acc.descripcion || '',
                 acc.horas + 'h',
-                cleanDidact,
-                cleanBloom,
-                s.etapa,
-                s.foco,
+                acc.didactica || '',
+                acc.bloom || '',
+                d.etapa || '',
+                s.foco || '',
                 amenazasLabel,
                 avVal,
-                cleanObs
-              ]);
+                obsVal
+              ];
+              csvRows.push(row);
             });
           });
 
-          // Función de escape estricto de celdas para CSV delimitado por punto y coma (formato estándar Excel en español)
           var formatCSVCell = function(val) {
             var str = (val === null || val === undefined) ? '' : String(val);
-            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+            if (str.indexOf(';') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1 || str.indexOf('\r') !== -1) {
               return '"' + str.replace(/"/g, '""') + '"';
             }
             return str;
@@ -902,26 +838,13 @@ var ModuloC = {
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
-          a.download = 'monitoreo_semanal_procesos_ciclo_' + cicloKey + '_emergencia_' + new Date().toISOString().split('T')[0] + '.csv';
+          a.download = 'monitoreo_semanal_decreto0277_' + (d.ciclos || ['3']).join('_') + '_' + new Date().toISOString().split('T')[0] + '.csv';
           a.click();
           URL.revokeObjectURL(url);
         });
       }
 
-      // Evento Exportar JSON Respaldo
-      var btnJSON = document.getElementById('btn-exportar-json');
-      if (btnJSON) {
-        btnJSON.addEventListener('click', function() {
-          var u = AuthManager.getUserData();
-          var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(u, null, 2));
-          var a = document.createElement('a');
-          a.href = dataStr;
-          a.download = 'respaldo_plan_curricular_nrc_' + new Date().toISOString().split('T')[0] + '.json';
-          a.click();
-        });
-      }
-
-      // Evento Imprimir Carta
+      // Evento Imprimir Carta SIEE
       var btnPrint = document.getElementById('btn-imprimir-carta');
       if (btnPrint) {
         btnPrint.addEventListener('click', function() {
@@ -929,8 +852,8 @@ var ModuloC = {
         });
       }
 
-    } catch (e) {
-      console.error('Error rendering Monitoreo Semanal:', e);
+    } catch (err) {
+      console.error('Error renderizando Módulo C:', err);
     }
   }
 };
