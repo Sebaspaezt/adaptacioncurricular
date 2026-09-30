@@ -123,18 +123,16 @@ function initAuthUI() {
       var n = document.getElementById('auth-name') ? document.getElementById('auth-name').value.trim() : '';
       var ie = document.getElementById('auth-ie') ? document.getElementById('auth-ie').value.trim() : '';
       var rol = document.getElementById('auth-role') ? document.getElementById('auth-role').value : 'IE';
-      var dane = document.getElementById('auth-dane') ? document.getElementById('auth-dane').value.trim() : '';
-      var mun = document.getElementById('auth-municipio') ? document.getElementById('auth-municipio').value.trim() : '';
       
       if (!u || !p) return alert('Por favor ingrese al menos un nombre de usuario y una contraseña.');
-      var res = AuthManager.register(u, p, n, ie, rol, dane, mun);
+      var res = AuthManager.register(u, p, n, ie, rol);
       if (res.success) {
         window.closeAuthModal();
         updateDisplay();
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
         ModuloC.renderMonitoreo();
-        alert('✅ Perfil institucional creado exitosamente para ' + (n || u) + ' con rol: ' + rol + '.');
+        alert('✅ Perfil creado y activado exitosamente para ' + (n || u) + '.');
       } else {
         alert(res.message);
       }

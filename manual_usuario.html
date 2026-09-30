@@ -297,48 +297,48 @@
     <section>
       <h2><span>🔐</span> 2. Arquitectura de Perfiles y Control de Acceso (RBAC) para el Subdominio Departamental</h2>
       <p>
-        Para la operación segura en el subdominio de la Gobernación de Norte de Santander (ej. <code>herramientas.sednortedesantander.gov.co</code>), la plataforma incorpora 4 perfiles estandarizados según las competencias de cada actor territorial:
+        Para la operación en el subdominio institucional de la Gobernación de Norte de Santander (<code>flexedu.nortedesantander.gov.co</code>), la plataforma incorpora 4 perfiles adaptados a los procesos pedagógicos de la herramienta:
       </p>
 
       <table class="table-guide">
         <thead>
           <tr>
-            <th style="width: 20%;">Perfil Institucional</th>
-            <th style="width: 30%;">¿Quién podría tenerlo?</th>
-            <th style="width: 35%;">Permisos y Alcance en la Plataforma</th>
-            <th style="width: 15%;">Acceso a Edición</th>
+            <th style="width: 22%;">Perfil Institucional</th>
+            <th style="width: 28%;">Destinatario</th>
+            <th style="width: 36%;">Permisos y Alcance en la Plataforma Curricular</th>
+            <th style="width: 14%;">Permiso</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong style="color: #991b1b;">👑 Administrador</strong></td>
-            <td>SED / Responsable institucional de la herramienta / Administrador TIC</td>
-            <td>Crear y gestionar usuarios, asignar permisos, parametrizar umbrales IRE y administrar integralmente la plataforma.</td>
+            <td>SED / Responsable de la Plataforma / TIC</td>
+            <td>Gestionar usuarios y credenciales, configurar la herramienta y supervisar de forma integral todos los diagnósticos y planes curriculares de emergencia.</td>
             <td><span class="badge" style="background:#fee2e2; color:#991b1b; font-weight:700;">Total (RW)</span></td>
           </tr>
           <tr>
             <td><strong style="color: #1e40af;">🛠️ Usuario Técnico</strong></td>
-            <td>Equipo técnico SED / Gestión del Riesgo / Planeación Educativa</td>
-            <td>Consultar el IRE, mapas, filtros, indicadores y resultados; cargar y actualizar información curricular y territorial según sus competencias.</td>
+            <td>Equipo Técnico Pedagógico SED (Calidad y Cobertura)</td>
+            <td>Acompañar a las IE, consultar diagnósticos, revisar la canasta curricular de la Rayuela (Módulo B) y el avance de monitoreo (Módulo C).</td>
             <td><span class="badge" style="background:#eff6ff; color:#1e40af; font-weight:700;">Departamental</span></td>
           </tr>
           <tr>
             <td><strong style="color: #166534;">🏫 Usuario IE</strong></td>
-            <td>Rectores / directivos docentes o personal autorizado de cada IE</td>
-            <td>Consultar información y resultados, y actualizar la información correspondiente a su propia institución educativa (restringido por código DANE), sin modificar datos de otras IE.</td>
-            <td><span class="badge" style="background:#f0fdf4; color:#166534; font-weight:700;">Por Sede (DANE)</span></td>
+            <td>Rectores, directivos docentes y docentes de aula</td>
+            <td>Diligenciar el diagnóstico pedagógico (Módulo A), seleccionar aprendizajes en la Rayuela Curricular (Módulo B) y registrar el Monitoreo Semanal con bitácora SIEE (Módulo C) de su propia institución.</td>
+            <td><span class="badge" style="background:#f0fdf4; color:#166534; font-weight:700;">Edición IE</span></td>
           </tr>
           <tr>
             <td><strong style="color: #6b21a8;">👁️ Usuario de Consulta</strong></td>
-            <td>Otros usuarios autorizados, docentes observadores, cooperantes (NRC, UNICEF, OIM) o veeduría</td>
-            <td>Consultar resultados, mapas e información habilitada y exportar constancias de avance, en modo de solo lectura (sin modificar datos).</td>
-            <td><span class="badge" style="background:#f5f3ff; color:#6b21a8; font-weight:700;">Solo Lectura (RO)</span></td>
+            <td>Comunidad educativa, docentes observadores y cooperantes</td>
+            <td>Explorar mallas curriculares, revisar diagnósticos guardados y exportar constancias oficiales en modo de solo lectura (sin modificar datos).</td>
+            <td><span class="badge" style="background:#f5f3ff; color:#6b21a8; font-weight:700;">Solo Lectura</span></td>
           </tr>
         </tbody>
       </table>
 
       <div class="callout callout-info" style="border-left-color: #0284c7; background: #f0f9ff; color: #0369a1;">
-        <strong>Conmutador Rápido de Usuarios Demostrativos:</strong> Al abrir el modal de Perfil Docente/Institucional en la barra superior, encontrará un selector desplegable con cuentas precargadas para cada uno de los 4 perfiles, permitiendo verificar de inmediato las restricciones y capacidades de cada rol.
+        <strong>Conmutador de Acceso Rápido:</strong> Al presionar sobre el nombre de usuario en la barra superior se despliega la ventana de acceso, permitiendo conmutar entre los perfiles con un solo clic para validar los permisos y restricciones en tiempo real.
       </div>
     </section>
 

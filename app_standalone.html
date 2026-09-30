@@ -1822,39 +1822,37 @@ body {
   </div>
 
   <!-- Modal de Autenticación / Registro Local -->
-  <!-- Modal de Autenticación / Registro Institucional RBAC -->
+  <!-- Modal de Autenticación / Registro Institucional -->
   <div id="modal-auth" class="modal-overlay" style="display: none;">
-    <div class="modal-content" style="max-width: 520px;">
+    <div class="modal-content" style="max-width: 480px;">
       <button id="btn-close-modal" class="modal-close-btn" onclick="document.getElementById('modal-auth').style.display='none';" title="Cerrar ventana">✕</button>
       <h2 style="color: var(--primary); font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
-        <span>🔐</span> Control de Acceso y Perfiles Institucionales
+        <span>🔐</span> Perfiles y Control de Acceso
       </h2>
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4;">
-        Secretaría de Educación Departamental | Gobernación de Norte de Santander.<br>
-        <em>Seleccione una cuenta institucional predeterminada o ingrese sus credenciales:</em>
+        Herramienta de adaptación y flexibilización curricular en emergencias.<br>
+        <em>Seleccione una cuenta de prueba o ingrese sus credenciales:</em>
       </p>
 
-      <!-- Selector Rápido de Cuentas Demostrativas Institucionales -->
+      <!-- Selector Rápido de Cuentas Demostrativas -->
       <div style="background: var(--surface-hover); padding: 10px 12px; border-radius: var(--radius-sm); margin-bottom: 14px; border: 1px solid var(--border-medium);">
-        <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas Institucionales Demostrativas:</label>
+        <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas de Acceso Rápido:</label>
         <select id="quick-user-select" class="select-elite" style="font-size: 0.82rem; padding: 6px 10px;" onchange="
           var val = this.value;
           var users = AuthManager.getUsers();
           if (users[val]) {
             document.getElementById('auth-user').value = val;
-            document.getElementById('auth-pass').value = (val === 'admin_sed' ? 'admin123*' : (val === 'tecnico_sed' ? 'tecnico123*' : (val === 'rector_tibucito' ? 'rector123*' : (val === 'consulta_nrc' ? 'consulta123*' : '1234'))));
+            document.getElementById('auth-pass').value = (val === 'admin_sed' ? 'admin123*' : (val === 'tecnico_sed' ? 'tecnico123*' : (val === 'usuario_ie' ? 'ie123*' : (val === 'usuario_consulta' ? 'consulta123*' : '1234'))));
             document.getElementById('auth-name').value = users[val].nombreCompleto || '';
             document.getElementById('auth-ie').value = users[val].institucion || '';
             document.getElementById('auth-role').value = users[val].rol || 'IE';
-            document.getElementById('auth-dane').value = users[val].dane || '';
-            document.getElementById('auth-municipio').value = users[val].municipio || '';
           }
         ">
-          <option value="admin_sed">👑 Administrador SED (Ing. Carlos Mendoza - Control Total)</option>
-          <option value="tecnico_sed">🛠️ Usuario Técnico SED / IRE (Dra. Liliana Gómez - Planeación y Riesgo)</option>
-          <option value="rector_tibucito">🏫 Usuario IE (Lic. Álvaro Restrepo - Rector Tibú)</option>
-          <option value="consulta_nrc">👁️ Usuario de Consulta (Solo Lectura - NRC / MEN / Cooperantes)</option>
-          <option value="docente_nrc">🎒 Docente Territorial NRC (I.E. Rural de Emergencia)</option>
+          <option value="admin_sed">👑 Administrador SED (Control total de la plataforma)</option>
+          <option value="tecnico_sed">🛠️ Usuario Técnico SED (Equipo pedagógico departamental)</option>
+          <option value="usuario_ie">🏫 Usuario IE (Directivo / Docente de Institución Educativa)</option>
+          <option value="usuario_consulta">👁️ Usuario de Consulta (Solo lectura / Observadores)</option>
+          <option value="docente_nrc">🎒 Docente Territorial (I.E. Rural de Emergencia)</option>
         </select>
       </div>
 
@@ -1871,39 +1869,28 @@ body {
       </div>
 
       <div class="form-group" style="margin-bottom: 10px;">
-        <label class="form-label" style="font-size: 0.82rem;">Perfil / Rol Institucional *:</label>
+        <label class="form-label" style="font-size: 0.82rem;">Perfil / Rol en la Herramienta *:</label>
         <select id="auth-role" class="select-elite" style="font-size: 0.85rem; font-weight: 600;">
-          <option value="ADMIN">👑 Administrador (SED / Responsable Institucional de la Herramienta)</option>
-          <option value="TECNICO">🛠️ Usuario Técnico (Equipo SED / Gestión del Riesgo / Planeación)</option>
-          <option value="IE" selected>🏫 Usuario IE (Rectores / Directivos Docentes de cada IE)</option>
-          <option value="CONSULTA">👁️ Usuario de Consulta (Solo lectura / Cooperantes / Veeduría)</option>
+          <option value="ADMIN">👑 Administrador (SED / Responsable de la Plataforma)</option>
+          <option value="TECNICO">🛠️ Usuario Técnico (Equipo Pedagógico SED)</option>
+          <option value="IE" selected>🏫 Usuario IE (Directivos / Docentes de la IE)</option>
+          <option value="CONSULTA">👁️ Usuario de Consulta (Solo Lectura)</option>
         </select>
       </div>
 
       <div class="form-group" style="margin-bottom: 10px;">
-        <label class="form-label" style="font-size: 0.82rem;">Nombre del Funcionario / Directivo:</label>
-        <input type="text" id="auth-name" class="input-elite" placeholder="ej. Carlos Mendoza" value="Ing. Carlos Mendoza (SED Administrador TIC)">
+        <label class="form-label" style="font-size: 0.82rem;">Nombre Completo:</label>
+        <input type="text" id="auth-name" class="input-elite" placeholder="ej. Carlos Mendoza" value="Administrador SED">
       </div>
 
-      <div class="form-group" style="margin-bottom: 10px;">
+      <div class="form-group" style="margin-bottom: 12px;">
         <label class="form-label" style="font-size: 0.82rem;">Institución Educativa / Entidad:</label>
-        <input type="text" id="auth-ie" class="input-elite" placeholder="I.E. Rural El Porvenir" value="Secretaría de Educación Departamental de Norte de Santander">
-      </div>
-
-      <div class="grid-2" style="gap: 10px; margin-bottom: 12px;">
-        <div class="form-group" style="margin-bottom: 0;">
-          <label class="form-label" style="font-size: 0.82rem;">Código DANE (Obligatorio para IE):</label>
-          <input type="text" id="auth-dane" class="input-elite" placeholder="ej. 254810000123" value="154001000000">
-        </div>
-        <div class="form-group" style="margin-bottom: 0;">
-          <label class="form-label" style="font-size: 0.82rem;">Municipio:</label>
-          <input type="text" id="auth-municipio" class="input-elite" placeholder="ej. Tibú, Cúcuta, Sardinata" value="Cúcuta">
-        </div>
+        <input type="text" id="auth-ie" class="input-elite" placeholder="I.E. Rural de Emergencia" value="Secretaría de Educación Departamental">
       </div>
 
       <div style="display: flex; gap: 10px; margin-top: 16px;">
-        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center; padding: 9px 12px;">Iniciar Sesión</button>
-        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center; padding: 9px 12px;">Registrar / Guardar Perfil</button>
+        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center; padding: 9px 12px;">Ingresar</button>
+        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center; padding: 9px 12px;">Crear Perfil</button>
       </div>
     </div>
   </div>
@@ -6921,9 +6908,10 @@ var HABS_SUPS_DB = {
 
 // --- MODULOS DE APLICACION ---
 // Módulo de Autenticación, Gestión de Roles y Permisos RBAC (Secretaría de Educación Departamental / Gobernación de Norte de Santander)
-// Compatible con Arquitectura Offline-First y Despliegue en Subdominio Institucional
+// Adaptado con fidelidad al alcance pedagógico real de la Plataforma de Flexibilización y Adaptación Curricular en Emergencias.
+
 var AuthManager = {
-  // Catálogo Oficial de Roles y Capacidades según requerimiento SED
+  // Catálogo de Roles Adaptados Estrictamente a Nuestra Herramienta Curricular:
   ROLES: {
     ADMIN: {
       id: 'ADMIN',
@@ -6935,14 +6923,12 @@ var AuthManager = {
         canCreateUsers: true,
         canManagePlatform: true,
         canExportReport: true,
-        canSwitchIE: true,
-        scopeIE: 'all',
-        description: 'Crear y gestionar usuarios, asignar permisos, configurar y administrar la plataforma.'
+        description: 'Gestionar usuarios y credenciales, configurar parámetros institucionales y supervisar todos los planes curriculares de emergencia.'
       }
     },
     TECNICO: {
       id: 'TECNICO',
-      nombre: 'Usuario Técnico (Equipo SED / Gestión del Riesgo / Planeación)',
+      nombre: 'Usuario Técnico (Equipo SED / Calidad y Cobertura)',
       badge: '🛠️ Usuario Técnico',
       badgeClass: 'badge-role-tecnico',
       permisos: {
@@ -6950,14 +6936,12 @@ var AuthManager = {
         canCreateUsers: false,
         canManagePlatform: false,
         canExportReport: true,
-        canSwitchIE: true,
-        scopeIE: 'all',
-        description: 'Consultar el IRE, mapas, filtros, indicadores y resultados; cargar y actualizar información según sus competencias.'
+        description: 'Consultar y acompañar la flexibilización curricular de las IE del departamento; registrar y actualizar planes pedagógicos y monitoreo.'
       }
     },
     IE: {
       id: 'IE',
-      nombre: 'Usuario IE (Rectores / Directivos Docentes)',
+      nombre: 'Usuario IE (Rectores / Directivos / Docentes de la IE)',
       badge: '🏫 Usuario IE',
       badgeClass: 'badge-role-ie',
       permisos: {
@@ -6965,14 +6949,12 @@ var AuthManager = {
         canCreateUsers: false,
         canManagePlatform: false,
         canExportReport: true,
-        canSwitchIE: false,
-        scopeIE: 'own',
-        description: 'Consultar información y resultados, y actualizar la información correspondiente a su propia institución educativa, sin modificar información de otras IE.'
+        description: 'Diligenciar el diagnóstico pedagógico (Módulo A), planificar la canasta en la Rayuela Curricular (Módulo B) y registrar el Monitoreo Semanal (Módulo C) de su propia institución.'
       }
     },
     CONSULTA: {
       id: 'CONSULTA',
-      nombre: 'Usuario de Consulta (Otros Usuarios Autorizados / Cooperantes)',
+      nombre: 'Usuario de Consulta (Docentes Observadores / Cooperantes / Veeduría)',
       badge: '👁️ Usuario de Consulta',
       badgeClass: 'badge-role-consulta',
       permisos: {
@@ -6980,9 +6962,7 @@ var AuthManager = {
         canCreateUsers: false,
         canManagePlatform: false,
         canExportReport: true,
-        canSwitchIE: true,
-        scopeIE: 'all',
-        description: 'Consultar resultados, mapas e información habilitada, sin modificar datos.'
+        description: 'Consultar diagnósticos, explorar mallas curriculares, visualizar avances de monitoreo y exportar constancias e informes en modo lectura.'
       }
     }
   },
@@ -7059,62 +7039,52 @@ var AuthManager = {
     if (!users['admin_sed']) {
       users['admin_sed'] = Object.assign({}, baseTemplate, {
         password: btoa('admin123*'),
-        nombreCompleto: 'Ing. Carlos Mendoza (SED Administrador TIC)',
+        nombreCompleto: 'Administrador SED',
         institucion: 'Secretaría de Educación Departamental de Norte de Santander',
-        municipio: 'Cúcuta',
-        dane: '154001000000',
         rol: 'ADMIN',
-        cargo: 'Responsable Institucional de la Herramienta'
+        cargo: 'Responsable Institucional de la Plataforma'
       });
     }
 
-    // 2. Usuario Técnico (SED / Planeación / Gestión del Riesgo)
+    // 2. Usuario Técnico (SED)
     if (!users['tecnico_sed']) {
       users['tecnico_sed'] = Object.assign({}, baseTemplate, {
         password: btoa('tecnico123*'),
-        nombreCompleto: 'Dra. Liliana Gómez (Equipo Técnico SED / IRE)',
-        institucion: 'Subsecretaría de Planeación y Gestión del Riesgo SED',
-        municipio: 'Cúcuta',
-        dane: '154001000001',
+        nombreCompleto: 'Equipo Técnico Pedagógico SED',
+        institucion: 'Secretaría de Educación Departamental',
         rol: 'TECNICO',
-        cargo: 'Especialista en Gestión del Riesgo y Emergencias'
+        cargo: 'Equipo de Calidad y Cobertura Educativa'
       });
     }
 
-    // 3. Usuario IE (Rector / Directivo Docente)
-    if (!users['rector_tibucito']) {
-      users['rector_tibucito'] = Object.assign({}, baseTemplate, {
-        password: btoa('rector123*'),
-        nombreCompleto: 'Lic. Álvaro Restrepo (Rector)',
-        institucion: 'I.E. Rural Campo Dos - Sede Central',
-        municipio: 'Tibú',
-        dane: '254810000123',
+    // 3. Usuario IE (Institución Educativa)
+    if (!users['usuario_ie']) {
+      users['usuario_ie'] = Object.assign({}, baseTemplate, {
+        password: btoa('ie123*'),
+        nombreCompleto: 'Directivo / Docente IE',
+        institucion: 'Institución Educativa Departamental',
         rol: 'IE',
-        cargo: 'Rector de Institución Educativa'
+        cargo: 'Directivo / Docente de la IE'
       });
     }
 
-    // 4. Usuario de Consulta (Público / Cooperantes / Veeduría)
-    if (!users['consulta_nrc']) {
-      users['consulta_nrc'] = Object.assign({}, baseTemplate, {
+    // 4. Usuario de Consulta
+    if (!users['usuario_consulta']) {
+      users['usuario_consulta'] = Object.assign({}, baseTemplate, {
         password: btoa('consulta123*'),
-        nombreCompleto: 'Equipo Humanitario de Consulta (NRC / MEN / Veeduría)',
-        institucion: 'Mesa Humanitaria Departamental',
-        municipio: 'Norte de Santander (Departamental)',
-        dane: '000000000000',
+        nombreCompleto: 'Usuario de Consulta',
+        institucion: 'Comunidad Educativa / Organismos Cooperantes',
         rol: 'CONSULTA',
-        cargo: 'Observador / Cooperante Humanitario'
+        cargo: 'Observador / Consulta de Planes'
       });
     }
 
-    // Compatibilidad retroactiva con docente_nrc previo
+    // Retrocompatibilidad con docente territorial
     if (!users['docente_nrc']) {
       users['docente_nrc'] = Object.assign({}, baseTemplate, {
         password: btoa('1234'),
-        nombreCompleto: 'Docente Territorial NRC',
+        nombreCompleto: 'Docente Territorial',
         institucion: 'Institución Educativa Rural de Emergencia',
-        municipio: 'Tibú',
-        dane: '254810000123',
         rol: 'IE',
         cargo: 'Docente de Aula'
       });
@@ -7127,10 +7097,10 @@ var AuthManager = {
     }
   },
 
-  register: function(username, password, nombreCompleto, institucion, rol, dane, municipio) {
+  register: function(username, password, nombreCompleto, institucion, rol) {
     var users = this.getUsers();
     if (users[username]) {
-      return { success: false, message: 'El usuario ya se encuentra registrado.' };
+      return { success: false, message: 'El usuario ya existe.' };
     }
 
     var validRol = (rol && this.ROLES[rol]) ? rol : 'IE';
@@ -7170,8 +7140,6 @@ var AuthManager = {
       password: btoa(password),
       nombreCompleto: nombreCompleto || username,
       institucion: institucion || 'Institución Educativa Departamental',
-      municipio: municipio || 'Norte de Santander',
-      dane: dane || '154001000000',
       rol: validRol,
       cargo: this.ROLES[validRol].nombre,
       createdAt: new Date().toISOString(),
@@ -7207,10 +7175,10 @@ var AuthManager = {
   login: function(username, password) {
     var users = this.getUsers();
     if (!users[username]) {
-      return { success: false, message: 'Usuario no registrado en el sistema institucional.' };
+      return { success: false, message: 'Usuario no registrado.' };
     }
     if (users[username].password !== btoa(password)) {
-      return { success: false, message: 'Contraseña incorrecta para el usuario indicado.' };
+      return { success: false, message: 'Contraseña incorrecta.' };
     }
     localStorage.setItem('nrc_current_user', username);
     this.applyRoleRestrictions();
@@ -7227,7 +7195,7 @@ var AuthManager = {
     var users = this.getUsers();
     var u = users[current] || users['admin_sed'] || users['docente_nrc'] || null;
     if (u && !u.rol) {
-      u.rol = 'IE'; // Default seguro
+      u.rol = 'IE';
     }
     if (u && !u.diagnosticos) {
       u.diagnosticos = {};
@@ -7262,7 +7230,7 @@ var AuthManager = {
 
   saveUserData: function(key, data) {
     if (!this.canCurrentUserEdit()) {
-      console.warn('Acción bloqueada: El perfil actual tiene permisos de solo consulta (Read-Only).');
+      console.warn('Acción bloqueada: El perfil actual tiene permisos de solo lectura.');
       return false;
     }
     this.ensureDefaultUser();
@@ -7271,7 +7239,6 @@ var AuthManager = {
     if (users[current]) {
       users[current][key] = data;
 
-      // Mantener vinculación con el diagnóstico activo
       var activeId = users[current].activeDiagnosticId || (users[current].diagnostico && users[current].diagnostico.id) || 'diag_default_1';
       users[current].diagnosticos = users[current].diagnosticos || {};
       
@@ -7323,20 +7290,18 @@ var AuthManager = {
     return null;
   },
 
-  // Aplicación Dinámica de Restricciones RBAC en la Interfaz Web
   applyRoleRestrictions: function() {
-    var user = this.getUserData();
     var roleInfo = this.getUserRoleInfo();
     var canEdit = this.canCurrentUserEdit();
 
-    // 1. Notificación o banner de solo lectura si es perfil de consulta
+    // Banner de modo solo lectura
     var readOnlyBanner = document.getElementById('banner-role-readonly');
     if (!canEdit) {
       if (!readOnlyBanner) {
         readOnlyBanner = document.createElement('div');
         readOnlyBanner.id = 'banner-role-readonly';
         readOnlyBanner.className = 'role-readonly-alert';
-        readOnlyBanner.innerHTML = '<span>👁️ <strong>MODO CONSULTA INSTITUCIONAL:</strong> Ha iniciado sesión con perfil de Solo Lectura (' + roleInfo.nombre + '). Puede navegar, aplicar filtros y exportar constancias, pero la modificación de datos y parámetros se encuentra deshabilitada.</span>';
+        readOnlyBanner.innerHTML = '<span>👁️ <strong>MODO DE CONSULTA:</strong> Ha ingresado con un perfil de Solo Lectura (' + roleInfo.nombre + '). Puede navegar por las mallas curriculares, revisar diagnósticos y exportar reportes, pero no puede modificar ni guardar datos.</span>';
         var mainEl = document.querySelector('.main-container');
         if (mainEl && mainEl.firstChild) {
           mainEl.insertBefore(readOnlyBanner, mainEl.firstChild);
@@ -7348,7 +7313,7 @@ var AuthManager = {
       readOnlyBanner.style.display = 'none';
     }
 
-    // 2. Deshabilitar o bloquear botones de guardado en modo Consulta
+    // Botones de guardado/edición de nuestra herramienta
     var saveButtons = [
       'btn-guardar-diagnostico',
       'btn-guardar-monitoreo',
@@ -7363,7 +7328,7 @@ var AuthManager = {
         if (!canEdit) {
           btn.disabled = true;
           btn.classList.add('btn-disabled-rbac');
-          btn.title = 'Acción bloqueada: Su perfil cuenta con acceso de consulta exclusivamente.';
+          btn.title = 'Acción no permitida en modo consulta.';
         } else {
           btn.disabled = false;
           btn.classList.remove('btn-disabled-rbac');
@@ -7372,19 +7337,10 @@ var AuthManager = {
       }
     });
 
-    // 3. Deshabilitar selectores y checkboxes interactivos de edición si no tiene permiso
+    // Deshabilitar checkboxes y selects de la rayuela/monitoreo si es solo lectura
     document.querySelectorAll('.plan-checkbox, .select-item-state, .select-avance-accion, .input-observaciones-accion').forEach(function(el) {
       el.disabled = !canEdit;
     });
-
-    // 4. Si el usuario es de rol IE, fijar y reflejar su I.E. y DANE
-    var ieInput = document.getElementById('auth-ie');
-    if (ieInput && roleInfo.id === 'IE' && user.institucion) {
-      ieInput.value = user.institucion + (user.dane ? (' [DANE: ' + user.dane + ']') : '');
-      ieInput.disabled = true;
-    } else if (ieInput) {
-      ieInput.disabled = false;
-    }
   }
 };
 
@@ -10257,18 +10213,16 @@ function initAuthUI() {
       var n = document.getElementById('auth-name') ? document.getElementById('auth-name').value.trim() : '';
       var ie = document.getElementById('auth-ie') ? document.getElementById('auth-ie').value.trim() : '';
       var rol = document.getElementById('auth-role') ? document.getElementById('auth-role').value : 'IE';
-      var dane = document.getElementById('auth-dane') ? document.getElementById('auth-dane').value.trim() : '';
-      var mun = document.getElementById('auth-municipio') ? document.getElementById('auth-municipio').value.trim() : '';
       
       if (!u || !p) return alert('Por favor ingrese al menos un nombre de usuario y una contraseña.');
-      var res = AuthManager.register(u, p, n, ie, rol, dane, mun);
+      var res = AuthManager.register(u, p, n, ie, rol);
       if (res.success) {
         window.closeAuthModal();
         updateDisplay();
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
         ModuloC.renderMonitoreo();
-        alert('✅ Perfil institucional creado exitosamente para ' + (n || u) + ' con rol: ' + rol + '.');
+        alert('✅ Perfil creado y activado exitosamente para ' + (n || u) + '.');
       } else {
         alert(res.message);
       }
