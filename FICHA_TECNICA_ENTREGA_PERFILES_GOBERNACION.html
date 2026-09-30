@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha Técnica y Guía de Entrega de Perfiles de Usuario - Gobernación de Norte de Santander</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --gov-petroleo: #0e4c5b;
+      --gov-petroleo-dark: #09333e;
+      --gov-petroleo-light: #166d82;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --surface-bg: #f8fafc;
+      --card-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--surface-bg);
+      color: var(--text-main);
+      line-height: 1.55;
+      font-size: 14px;
+      padding: 30px 20px;
+    }
+
+    .doc-container {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--card-white);
+      padding: 45px 55px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .header-gov {
+      border-bottom: 3px solid var(--gov-petroleo);
+      padding-bottom: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-gov h1 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--gov-petroleo);
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .header-gov p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .badge-oficial {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .actions-bar {
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-print {
+      background: var(--gov-petroleo);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .btn-print:hover {
+      background: var(--gov-petroleo-dark);
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--gov-petroleo);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #334155;
+    }
+
+    .info-box {
+      background: #f0fdf4;
+      border-left: 4px solid var(--gov-petroleo);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 16px 0;
+      font-size: 0.9rem;
+      color: #065f46;
+    }
+
+    .info-box-blue {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      color: #1e40af;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 0.86rem;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: var(--gov-petroleo-dark);
+      font-weight: 700;
+    }
+
+    .badge-role {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .badge-admin { background: #fee2e2; color: #991b1b; }
+    .badge-tecnico { background: #eff6ff; color: #1e40af; }
+    .badge-ie { background: #f0fdf4; color: #166534; }
+    .badge-consulta { background: #f5f3ff; color: #6b21a8; }
+
+    .code-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 0.82rem;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+
+    .footer-doc {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        color: black;
+      }
+      .doc-container {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .actions-bar {
+        display: none !important;
+      }
+      h2 {
+        page-break-after: avoid;
+      }
+      table, .info-box {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-container">
+
+    <div class="actions-bar">
+      <button class="btn-print" onclick="window.print();">🖨️ Guardar en PDF / Imprimir Documento</button>
+    </div>
+
+    <!-- Encabezado Institucional -->
+    <header class="header-gov">
+      <div>
+        <h1>Ficha Técnica de Entrega de Perfiles de Usuario</h1>
+        <p>Herramienta de Adaptación y Flexibilización Curricular en Situaciones de Emergencia</p>
+        <p style="font-size: 0.8rem; color: #64748b;">Gobernación de Norte de Santander | Secretaría de Educación Departamental | Año 2026</p>
+      </div>
+      <div>
+        <span class="badge-oficial">Documento Oficial</span>
+      </div>
+    </header>
+
+    <!-- 1. OBJETO DE LA ENTREGA -->
+    <section>
+      <h2><span>📋</span> 1. Objeto de la Entrega Técnica</h2>
+      <p>
+        El presente documento formaliza la entrega de la estructura de perfiles de usuario, roles y credenciales iniciales de acceso para la puesta en producción de la <strong>Herramienta de Adaptación y Flexibilización Curricular en Situaciones de Emergencia</strong>, alojada bajo el subdominio oficial de la Gobernación de Norte de Santander: <code>https://flexedu.nortedesantander.gov.co</code>.
+      </p>
+      <div class="info-box">
+        <strong>Alcance Funcional:</strong> Los perfiles están calibrados para responder a los tres módulos de la herramienta: <strong>Módulo A</strong> (Diagnóstico de Emergencia), <strong>Módulo B</strong> (Rayuela Curricular con canasta de aprendizajes de 5 ciclos) y <strong>Módulo C</strong> (Monitoreo Semanal con bitácora de evidencias y constancia oficial de acreditación SIEE).
+      </div>
+    </section>
+
+    <!-- 2. MATRIZ DE ROLES Y PERMISOS -->
+    <section>
+      <h2><span>🔐</span> 2. Matriz Institucional de Roles y Permisos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">Perfil</th>
+            <th style="width: 26%;">Destinatario / Asignación</th>
+            <th style="width: 38%;">Alcance y Funcionalidad en la Plataforma</th>
+            <th style="width: 14%;">Permiso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>👑 Administrador</strong></td>
+            <td>Responsable de la plataforma / Oficina TIC SED</td>
+            <td>Gestión de usuarios y contraseñas, configuración de parámetros institucionales y supervisión global de todos los planes curriculares registrados en el departamento.</td>
+            <td><span class="badge-role badge-admin">Total (RW)</span></td>
+          </tr>
+          <tr>
+            <td><strong>🛠️ Usuario Técnico</strong></td>
+            <td>Equipo Técnico Pedagógico SED (Calidad y Cobertura)</td>
+            <td>Acompañamiento a las Instituciones Educativas; consulta de diagnósticos, revisión de canastas curriculares seleccionadas en la Rayuela (Módulo B) y seguimiento a bitácoras semanales (Módulo C).</td>
+            <td><span class="badge-role badge-tecnico">Departamental</span></td>
+          </tr>
+          <tr>
+            <td><strong>🏫 Usuario IE</strong></td>
+            <td>Rectores, directivos docentes y docentes de aula</td>
+            <td>Diligenciamiento del diagnóstico de la emergencia en su sede (Módulo A), selección y sincronización de aprendizajes prioritarios (Módulo B) y registro del avance semanal con bitácora de aula y firmas oficiales SIEE (Módulo C).</td>
+            <td><span class="badge-role badge-ie">Edición de su IE</span></td>
+          </tr>
+          <tr>
+            <td><strong>👁️ Usuario de Consulta</strong></td>
+            <td>Docentes observadores, organismos cooperantes y veeduría</td>
+            <td>Navegación por las mallas curriculares de los 5 ciclos formativos, visualización de diagnósticos guardados y exportación de informes oficiales en PDF y Excel en <strong>modo de solo lectura</strong> (bloqueo preventivo de edición).</td>
+            <td><span class="badge-role badge-consulta">Solo Lectura</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. CUENTAS MAESTRAS INICIALES -->
+    <section>
+      <h2><span>🔑</span> 3. Cuentas Maestras Iniciales para Puesta en Marcha</h2>
+      <p>
+        Para habilitar de inmediato el acceso al equipo de la Secretaría de Educación Departamental y a las instituciones educativas piloto, se han configurado las siguientes cuentas de inicio:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">Usuario</th>
+            <th style="width: 20%;">Contraseña Inicial</th>
+            <th style="width: 22%;">Perfil Asignado</th>
+            <th style="width: 38%;">Entidad / Uso Previsto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>admin_sed</code></td>
+            <td><code>admin123*</code></td>
+            <td><span class="badge-role badge-admin">Administrador</span></td>
+            <td>Secretaría de Educación Departamental (Administrador general)</td>
+          </tr>
+          <tr>
+            <td><code>tecnico_sed</code></td>
+            <td><code>tecnico123*</code></td>
+            <td><span class="badge-role badge-tecnico">Usuario Técnico</span></td>
+            <td>Equipo Pedagógico SED (Acompañamiento y supervisión)</td>
+          </tr>
+          <tr>
+            <td><code>usuario_ie</code></td>
+            <td><code>ie123*</code></td>
+            <td><span class="badge-role badge-ie">Usuario IE</span></td>
+            <td>Institución Educativa (Modelo para rectores y docentes)</td>
+          </tr>
+          <tr>
+            <td><code>usuario_consulta</code></td>
+            <td><code>consulta123*</code></td>
+            <td><span class="badge-role badge-consulta">Usuario Consulta</span></td>
+            <td>Observadores, docentes de consulta y cooperantes (Solo Lectura)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box info-box-blue">
+        <strong>🔒 Recomendación de Seguridad:</strong> Una vez entregado este documento, el Administrador institucional de la SED podrá actualizar las contraseñas directamente en la plataforma desde el botón de Perfil en la barra superior.
+      </div>
+    </section>
+
+    <!-- 4. GUÍA DE INSTALACIÓN EN EL SERVIDOR -->
+    <section>
+      <h2><span>🖥️</span> 4. Despliegue en el Servidor de la Gobernación (Oficina TIC)</h2>
+      <p>
+        La plataforma opera con arquitectura web ligera (HTML5, Vanilla CSS y JavaScript nativo), sin necesidad de instalar entornos complejos de ejecución:
+      </p>
+      <ol style="margin-left: 20px; line-height: 1.8; color: #334155;">
+        <li><strong>Ruta de alojamiento en el servidor:</strong> Copiar los archivos de la aplicación en el directorio raíz web del servidor Ubuntu:
+          <div class="code-box">/var/www/flexedu/</div>
+        </li>
+        <li><strong>Permisos recomendados:</strong>
+          <div class="code-box">sudo chown -R www-data:www-data /var/www/flexedu/<br>sudo chmod -R 755 /var/www/flexedu/</div>
+        </li>
+        <li><strong>Verificación de acceso:</strong> Ingresar a <code>https://flexedu.nortedesantander.gov.co</code> y verificar en la esquina superior derecha el estado de inicio de sesión con cualquiera de las cuentas maestras descritas en la Sección 3.</li>
+      </ol>
+    </section>
+
+    <footer class="footer-doc">
+      Documento técnico elaborado para la Estrategia de Flexibilización y Adaptación Curricular en Situaciones de Emergencia.<br>
+      Gobernación de Norte de Santander | Secretaría de Educación Departamental | NRC Colombia | Año 2026.
+    </footer>
+
+  </div>
+
+</body>
+</html>
