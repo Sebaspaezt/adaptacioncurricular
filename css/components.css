@@ -987,4 +987,62 @@ body {
   animation: fadeInModal 0.2s ease-out;
 }
 
+/* =================================================== */
+/* ROLES INSTITUCIONALES Y GESTION RBAC (SED)          */
+/* =================================================== */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border: 1px solid transparent;
+}
+
+.badge-role-admin {
+  background: #fef2f2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.badge-role-tecnico {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #93c5fd;
+}
+
+.badge-role-ie {
+  background: #f0fdf4;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.badge-role-consulta {
+  background: #f5f3ff;
+  color: #6b21a8;
+  border-color: #d8b4fe;
+}
+
+.role-readonly-alert {
+  background: #fef3c7;
+  border: 1px solid #f59e0b;
+  border-left: 5px solid #d97706;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  color: #92400e;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: var(--shadow-sm);
+  animation: fadeInModal 0.25s ease-out;
+}
+
+.btn-disabled-rbac {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  filter: grayscale(1);
+}
+
 

@@ -45,9 +45,15 @@ function initAuthUI() {
 
   function updateDisplay() {
     var user = AuthManager.getUserData();
+    var roleInfo = AuthManager.getUserRoleInfo();
     if (userDisplay && user) {
-      userDisplay.textContent = user.nombreCompleto || 'Docente Territorial';
+      var badgeHtml = '<span class="role-badge ' + (roleInfo.badgeClass || '') + '" style="margin-left: 8px; font-size: 0.76rem; padding: 2px 8px; border-radius: 12px; font-weight: 700;">' + (roleInfo.badge || user.rol || 'IE') + '</span>';
+      userDisplay.innerHTML = (user.nombreCompleto || 'Usuario Territorial') + badgeHtml;
+      if (userBadge) {
+        userBadge.title = 'Sesión activa: ' + (user.nombreCompleto || '') + ' (' + roleInfo.nombre + ')\nInstitución: ' + (user.institucion || '') + '\nCódigo DANE: ' + (user.dane || 'N/A') + '\nHaga clic para cambiar de usuario.';
+      }
     }
+    AuthManager.applyRoleRestrictions();
   }
 
   updateDisplay();
@@ -61,17 +67,19 @@ function initAuthUI() {
   };
 
   window.handleLogout = function() {
-    if (confirm('¿Desea cerrar la sesión actual y cambiar de usuario?')) {
+    if (confirm('¿Desea cerrar la sesión actual y cambiar de perfil de usuario?')) {
       AuthManager.logout();
       window.openAuthModal();
       var uInput = document.getElementById('auth-user');
       var pInput = document.getElementById('auth-pass');
       var nInput = document.getElementById('auth-name');
       var ieInput = document.getElementById('auth-ie');
+      var rSelect = document.getElementById('auth-role');
       if (uInput) uInput.value = '';
       if (pInput) pInput.value = '';
       if (nInput) nInput.value = '';
       if (ieInput) ieInput.value = '';
+      if (rSelect) rSelect.value = 'IE';
     }
   };
 
@@ -100,7 +108,7 @@ function initAuthUI() {
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
         ModuloC.renderMonitoreo();
-        alert('Bienvenido/a, ' + (res.user.nombreCompleto || u));
+        alert('Bienvenido/a, ' + (res.user.nombreCompleto || u) + '\nPerfil activo: ' + (AuthManager.getUserRoleInfo().nombre));
       } else {
         alert(res.message);
       }
@@ -114,15 +122,19 @@ function initAuthUI() {
       var p = document.getElementById('auth-pass') ? document.getElementById('auth-pass').value : '';
       var n = document.getElementById('auth-name') ? document.getElementById('auth-name').value.trim() : '';
       var ie = document.getElementById('auth-ie') ? document.getElementById('auth-ie').value.trim() : '';
+      var rol = document.getElementById('auth-role') ? document.getElementById('auth-role').value : 'IE';
+      var dane = document.getElementById('auth-dane') ? document.getElementById('auth-dane').value.trim() : '';
+      var mun = document.getElementById('auth-municipio') ? document.getElementById('auth-municipio').value.trim() : '';
+      
       if (!u || !p) return alert('Por favor ingrese al menos un nombre de usuario y una contraseña.');
-      var res = AuthManager.register(u, p, n, ie);
+      var res = AuthManager.register(u, p, n, ie, rol, dane, mun);
       if (res.success) {
         window.closeAuthModal();
         updateDisplay();
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
         ModuloC.renderMonitoreo();
-        alert('✅ Perfil docente creado y activado exitosamente para ' + (n || u) + '.');
+        alert('✅ Perfil institucional creado exitosamente para ' + (n || u) + ' con rol: ' + rol + '.');
       } else {
         alert(res.message);
       }

@@ -19,6 +19,18 @@
   },
   "registro_ajustes": [
     {
+      "id": "AJUSTE-2026-007",
+      "fecha": "2026-09-30",
+      "autor": "Secretaría de Educación Departamental / NRC / AGY",
+      "componente": "PROYECTO_2_WEB_AUTH_RBAC",
+      "area_o_modulo": "Módulo de Seguridad, Autenticación y Control de Acceso por Roles (RBAC)",
+      "tipo_ajuste": "ARQUITECTURA_PERFILES_RBAC_SUBDOMINIO_GOBERNACION",
+      "descripcion": "Implementación oficial de la matriz de roles y control de acceso institucional requerida para el subdominio departamental de la Gobernación de Norte de Santander: 1) Cuatro niveles de perfil (Administrador SED: control total y gestión de usuarios; Técnico SED: gestión integral departamental de riesgo e IRE; Usuario IE: rectores con ámbito restringido a su código DANE institucional; Usuario Consulta: modo de solo lectura para cooperantes y veedurías sin permisos de alteración). 2) Control activo en la interfaz (deshabilitación de botones de guardado, banderas visuales de modo lectura y sincronización de código DANE). 3) Cuentas demostrativas precargadas para validación instantánea. 4) Preparación de esquema de entrega de credenciales y script SQL/JWT para el despliegue en servidor.",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
+    {
       "id": "AJUSTE-2026-006",
       "fecha": "2026-09-28",
       "autor": "Equipo Curricular NRC / AGY",
