@@ -571,9 +571,18 @@
 
       <!-- Selector Rápido de Cuentas Demostrativas -->
       <div style="background: var(--surface-hover); padding: 10px 12px; border-radius: var(--radius-sm); margin-bottom: 14px; border: 1px solid var(--border-medium);">
-        <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas de Acceso Rápido:</label>
+        <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas Preconfiguradas / Acción Rápida:</label>
         <select id="quick-user-select" class="select-elite" style="font-size: 0.82rem; padding: 6px 10px;" onchange="
           var val = this.value;
+          if (val === '__NEW_TEACHER__') {
+            document.getElementById('auth-user').value = '';
+            document.getElementById('auth-pass').value = '';
+            document.getElementById('auth-name').value = '';
+            document.getElementById('auth-ie').value = '';
+            document.getElementById('auth-role').value = 'IE';
+            document.getElementById('auth-user').focus();
+            return;
+          }
           var users = AuthManager.getUsers();
           if (users[val]) {
             document.getElementById('auth-user').value = val;
@@ -583,18 +592,18 @@
             document.getElementById('auth-role').value = users[val].rol || 'IE';
           }
         ">
-          <option value="admin_sed">👑 Administrador SED (Control total de la plataforma)</option>
-          <option value="tecnico_sed">🛠️ Usuario Técnico SED (Equipo pedagógico departamental)</option>
-          <option value="usuario_ie">🏫 Usuario IE (Directivo / Docente de Institución Educativa)</option>
-          <option value="usuario_consulta">👁️ Usuario de Consulta (Solo lectura / Observadores)</option>
-          <option value="docente_nrc">🎒 Docente Territorial (I.E. Rural de Emergencia)</option>
+          <option value="admin_sed">👑 Administrador SED (Control total)</option>
+          <option value="tecnico_sed">🛠️ Usuario Técnico SED (Equipo pedagógico)</option>
+          <option value="usuario_ie">🏫 Usuario IE (Docente / Directivo Departamental)</option>
+          <option value="usuario_consulta">👁️ Usuario de Consulta (Solo Lectura)</option>
+          <option value="__NEW_TEACHER__">➕ Registrar un Nuevo Docente / Perfil en Blanco</option>
         </select>
       </div>
 
       <div class="grid-2" style="gap: 10px;">
         <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label" style="font-size: 0.82rem;">Usuario *:</label>
-          <input type="text" id="auth-user" class="input-elite" placeholder="ej. admin_sed" value="admin_sed">
+          <label class="form-label" style="font-size: 0.82rem;">Usuario (para iniciar sesión) *:</label>
+          <input type="text" id="auth-user" class="input-elite" placeholder="ej. profesor_ramirez" value="admin_sed">
         </div>
 
         <div class="form-group" style="margin-bottom: 10px;">
@@ -604,28 +613,30 @@
       </div>
 
       <div class="form-group" style="margin-bottom: 10px;">
-        <label class="form-label" style="font-size: 0.82rem;">Perfil / Rol en la Herramienta *:</label>
-        <select id="auth-role" class="select-elite" style="font-size: 0.85rem; font-weight: 600;">
-          <option value="ADMIN">👑 Administrador (SED / Responsable de la Plataforma)</option>
-          <option value="TECNICO">🛠️ Usuario Técnico (Equipo Pedagógico SED)</option>
-          <option value="IE" selected>🏫 Usuario IE (Directivos / Docentes de la IE)</option>
-          <option value="CONSULTA">👁️ Usuario de Consulta (Solo Lectura)</option>
-        </select>
+        <label class="form-label" style="font-size: 0.82rem;">Nombre Completo del Docente / Funcionario:</label>
+        <input type="text" id="auth-name" class="input-elite" placeholder="ej. Juan Sebastián Páez" value="Administrador SED">
       </div>
 
-      <div class="form-group" style="margin-bottom: 10px;">
-        <label class="form-label" style="font-size: 0.82rem;">Nombre Completo:</label>
-        <input type="text" id="auth-name" class="input-elite" placeholder="ej. Carlos Mendoza" value="Administrador SED">
+      <div class="grid-2" style="gap: 10px;">
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label class="form-label" style="font-size: 0.82rem;">Perfil / Rol en la Herramienta *:</label>
+          <select id="auth-role" class="select-elite" style="font-size: 0.85rem; font-weight: 600;">
+            <option value="IE" selected>🏫 Usuario IE (Docente / Directivo)</option>
+            <option value="ADMIN">👑 Administrador (SED / Control Total)</option>
+            <option value="TECNICO">🛠️ Usuario Técnico (Equipo SED)</option>
+            <option value="CONSULTA">👁️ Usuario de Consulta (Solo Lectura)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label class="form-label" style="font-size: 0.82rem;">Institución Educativa / Sede:</label>
+          <input type="text" id="auth-ie" class="input-elite" placeholder="ej. I.E. Colegio La Frontera" value="Secretaría de Educación Departamental">
+        </div>
       </div>
 
-      <div class="form-group" style="margin-bottom: 12px;">
-        <label class="form-label" style="font-size: 0.82rem;">Institución Educativa / Entidad:</label>
-        <input type="text" id="auth-ie" class="input-elite" placeholder="I.E. Rural de Emergencia" value="Secretaría de Educación Departamental">
-      </div>
-
-      <div style="display: flex; gap: 10px; margin-top: 16px;">
-        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center; padding: 9px 12px;">Ingresar</button>
-        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center; padding: 9px 12px;">Crear Perfil</button>
+      <div style="display: flex; gap: 10px; margin-top: 14px;">
+        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center; padding: 10px 14px; font-weight: 700;">🔑 Iniciar Sesión</button>
+        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center; padding: 10px 14px; font-weight: 700; background: #ea580c; color: white;">➕ Registrar Perfil</button>
       </div>
     </div>
   </div>
