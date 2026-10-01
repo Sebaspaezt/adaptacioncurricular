@@ -559,84 +559,94 @@
   <!-- Modal de Autenticación / Registro Local -->
   <!-- Modal de Autenticación / Registro Institucional -->
   <div id="modal-auth" class="modal-overlay" style="display: none;">
-    <div class="modal-content" style="max-width: 480px;">
+    <div class="modal-content" style="max-width: 490px;">
       <button id="btn-close-modal" class="modal-close-btn" onclick="document.getElementById('modal-auth').style.display='none';" title="Cerrar ventana">✕</button>
       <h2 style="color: var(--primary); font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
         <span>🔐</span> Perfiles y Control de Acceso
       </h2>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.4;">
-        Herramienta de adaptación y flexibilización curricular en emergencias.<br>
-        <em>Seleccione una cuenta de prueba o ingrese sus credenciales:</em>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+        Herramienta institucional de flexibilización y adaptación curricular en emergencias.
       </p>
 
-      <!-- Selector Rápido de Cuentas Demostrativas -->
-      <div style="background: var(--surface-hover); padding: 10px 12px; border-radius: var(--radius-sm); margin-bottom: 14px; border: 1px solid var(--border-medium);">
-        <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas Preconfiguradas / Acción Rápida:</label>
-        <select id="quick-user-select" class="select-elite" style="font-size: 0.82rem; padding: 6px 10px;" onchange="
-          var val = this.value;
-          if (val === '__NEW_TEACHER__') {
-            document.getElementById('auth-user').value = '';
-            document.getElementById('auth-pass').value = '';
-            document.getElementById('auth-name').value = '';
-            document.getElementById('auth-ie').value = '';
-            document.getElementById('auth-role').value = 'IE';
-            document.getElementById('auth-user').focus();
-            return;
-          }
-          var users = AuthManager.getUsers();
-          if (users[val]) {
-            document.getElementById('auth-user').value = val;
-            document.getElementById('auth-pass').value = (val === 'admin_sed' ? 'admin123*' : (val === 'tecnico_sed' ? 'tecnico123*' : (val === 'usuario_ie' ? 'ie123*' : (val === 'usuario_consulta' ? 'consulta123*' : '1234'))));
-            document.getElementById('auth-name').value = users[val].nombreCompleto || '';
-            document.getElementById('auth-ie').value = users[val].institucion || '';
-            document.getElementById('auth-role').value = users[val].rol || 'IE';
-          }
-        ">
-          <option value="admin_sed">👑 Administrador SED (Control total)</option>
-          <option value="tecnico_sed">🛠️ Usuario Técnico SED (Equipo pedagógico)</option>
-          <option value="usuario_ie">🏫 Usuario IE (Docente / Directivo Departamental)</option>
-          <option value="usuario_consulta">👁️ Usuario de Consulta (Solo Lectura)</option>
-          <option value="__NEW_TEACHER__">➕ Registrar un Nuevo Docente / Perfil en Blanco</option>
-        </select>
+      <!-- Selector de Modo: Iniciar Sesión vs Registrar Nuevo Docente -->
+      <div style="display: flex; gap: 8px; margin-bottom: 14px; background: var(--surface-hover); padding: 4px; border-radius: var(--radius-sm); border: 1px solid var(--border-medium);">
+        <button type="button" id="tab-auth-login" class="btn-elite" style="flex: 1; justify-content: center; font-size: 0.82rem; padding: 7px; background: var(--primary); color: white; border: none; border-radius: 4px; font-weight: 700;">
+          🔑 Iniciar Sesión
+        </button>
+        <button type="button" id="tab-auth-register" class="btn-elite" style="flex: 1; justify-content: center; font-size: 0.82rem; padding: 7px; background: transparent; color: var(--text-main); border: none; border-radius: 4px; font-weight: 700;">
+          ➕ Registrar Nuevo Docente
+        </button>
       </div>
 
-      <div class="grid-2" style="gap: 10px;">
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label" style="font-size: 0.82rem;">Usuario (para iniciar sesión) *:</label>
-          <input type="text" id="auth-user" class="input-elite" placeholder="ej. profesor_ramirez" value="admin_sed">
-        </div>
-
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label" style="font-size: 0.82rem;">Contraseña *:</label>
-          <input type="password" id="auth-pass" class="input-elite" placeholder="••••••••" value="admin123*">
-        </div>
-      </div>
-
-      <div class="form-group" style="margin-bottom: 10px;">
-        <label class="form-label" style="font-size: 0.82rem;">Nombre Completo del Docente / Funcionario:</label>
-        <input type="text" id="auth-name" class="input-elite" placeholder="ej. Juan Sebastián Páez" value="Administrador SED">
-      </div>
-
-      <div class="grid-2" style="gap: 10px;">
-        <div class="form-group" style="margin-bottom: 10px;">
-          <label class="form-label" style="font-size: 0.82rem;">Perfil / Rol en la Herramienta *:</label>
-          <select id="auth-role" class="select-elite" style="font-size: 0.85rem; font-weight: 600;">
-            <option value="IE" selected>🏫 Usuario IE (Docente / Directivo)</option>
-            <option value="ADMIN">👑 Administrador (SED / Control Total)</option>
-            <option value="TECNICO">🛠️ Usuario Técnico (Equipo SED)</option>
-            <option value="CONSULTA">👁️ Usuario de Consulta (Solo Lectura)</option>
+      <!-- VISTA 1: INICIAR SESIÓN -->
+      <div id="auth-panel-login">
+        <!-- Selector Rápido de Cuentas Demostrativas -->
+        <div style="background: #f8fafc; padding: 10px 12px; border-radius: var(--radius-sm); margin-bottom: 14px; border: 1px solid #e2e8f0;">
+          <label class="form-label" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">⚡ Cuentas Institucionales Preconfiguradas:</label>
+          <select id="quick-user-select" class="select-elite" style="font-size: 0.82rem; padding: 6px 10px;" onchange="
+            var val = this.value;
+            var users = AuthManager.getUsers();
+            if (users[val]) {
+              document.getElementById('auth-user').value = val;
+              document.getElementById('auth-pass').value = (val === 'admin_sed' ? 'admin123*' : (val === 'tecnico_sed' ? 'tecnico123*' : (val === 'usuario_ie' ? 'ie123*' : (val === 'usuario_consulta' ? 'consulta123*' : '1234'))));
+            }
+          ">
+            <option value="usuario_ie">🏫 Usuario IE (Docente / Directivo Departamental)</option>
+            <option value="admin_sed">👑 Administrador SED (Control total)</option>
+            <option value="tecnico_sed">🛠️ Usuario Técnico SED (Equipo pedagógico)</option>
+            <option value="usuario_consulta">👁️ Usuario de Consulta (Solo Lectura)</option>
           </select>
         </div>
 
-        <div class="form-group" style="margin-bottom: 12px;">
-          <label class="form-label" style="font-size: 0.82rem;">Institución Educativa / Sede:</label>
-          <input type="text" id="auth-ie" class="input-elite" placeholder="ej. I.E. Colegio La Frontera" value="Secretaría de Educación Departamental">
+        <div class="grid-2" style="gap: 10px; margin-bottom: 14px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 0.82rem;">Usuario *:</label>
+            <input type="text" id="auth-user" class="input-elite" placeholder="ej. profesor_perez" value="usuario_ie">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 0.82rem;">Contraseña *:</label>
+            <input type="password" id="auth-pass" class="input-elite" placeholder="••••••••" value="ie123*">
+          </div>
         </div>
+
+        <button id="btn-login-submit" class="btn-elite btn-primary" style="width: 100%; justify-content: center; padding: 10px 14px; font-weight: 700;">
+          🔑 Acceder a la Herramienta
+        </button>
       </div>
 
-      <div style="display: flex; gap: 10px; margin-top: 14px;">
-        <button id="btn-login-submit" class="btn-elite btn-primary" style="flex: 1; justify-content: center; padding: 10px 14px; font-weight: 700;">🔑 Iniciar Sesión</button>
-        <button id="btn-register-submit" class="btn-elite btn-secondary" style="flex: 1; justify-content: center; padding: 10px 14px; font-weight: 700; background: #ea580c; color: white;">➕ Registrar Perfil</button>
+      <!-- VISTA 2: REGISTRAR NUEVO DOCENTE (ROL IE PROTEGIDO) -->
+      <div id="auth-panel-register" style="display: none;">
+        <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 8px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 0.82rem; color: #1e40af; line-height: 1.4;">
+          <strong>🏫 Registro de Docente / Directivo de IE:</strong> Su cuenta se creará con el perfil institucional <strong>Usuario IE</strong> para registrar y certificar diagnósticos y planes curriculares de su escuela.
+        </div>
+
+        <div class="grid-2" style="gap: 10px; margin-bottom: 10px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 0.82rem;">Usuario Deseado *:</label>
+            <input type="text" id="auth-reg-user" class="input-elite" placeholder="ej. profe_carlos">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" style="font-size: 0.82rem;">Contraseña de Acceso *:</label>
+            <input type="password" id="auth-reg-pass" class="input-elite" placeholder="Mínimo 4 caracteres">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 10px;">
+          <label class="form-label" style="font-size: 0.82rem;">Nombre Completo del Docente / Directivo *:</label>
+          <input type="text" id="auth-reg-name" class="input-elite" placeholder="ej. Lic. Carlos Alberto Mendoza">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" style="font-size: 0.82rem;">Institución Educativa / Sede Escolar *:</label>
+          <input type="text" id="auth-reg-ie" class="input-elite" placeholder="ej. I.E. Colegio La Frontera - Sede Rural">
+        </div>
+
+        <!-- Rol fijo y no alterable por el docente -->
+        <input type="hidden" id="auth-reg-role" value="IE">
+
+        <button id="btn-register-submit" class="btn-elite" style="width: 100%; justify-content: center; padding: 10px 14px; font-weight: 700; background: #ea580c; color: white;">
+          ➕ Registrar y Activar Mi Perfil Docente
+        </button>
       </div>
     </div>
   </div>

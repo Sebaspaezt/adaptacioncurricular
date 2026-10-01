@@ -83,6 +83,34 @@ function initAuthUI() {
     }
   };
 
+  // Alternancia de pestañas Login vs Registrar Docente
+  var tabLogin = document.getElementById('tab-auth-login');
+  var tabRegister = document.getElementById('tab-auth-register');
+  var panelLogin = document.getElementById('auth-panel-login');
+  var panelRegister = document.getElementById('auth-panel-register');
+
+  if (tabLogin && tabRegister && panelLogin && panelRegister) {
+    tabLogin.addEventListener('click', function() {
+      tabLogin.style.background = 'var(--primary)';
+      tabLogin.style.color = 'white';
+      tabRegister.style.background = 'transparent';
+      tabRegister.style.color = 'var(--text-main)';
+      panelLogin.style.display = 'block';
+      panelRegister.style.display = 'none';
+    });
+
+    tabRegister.addEventListener('click', function() {
+      tabRegister.style.background = '#ea580c';
+      tabRegister.style.color = 'white';
+      tabLogin.style.background = 'transparent';
+      tabLogin.style.color = 'var(--text-main)';
+      panelLogin.style.display = 'none';
+      panelRegister.style.display = 'block';
+      var regUser = document.getElementById('auth-reg-user');
+      if (regUser) regUser.focus();
+    });
+  }
+
   if (userBadge) {
     userBadge.addEventListener('click', function() {
       window.openAuthModal();
@@ -118,11 +146,12 @@ function initAuthUI() {
   if (btnRegister) {
     btnRegister.addEventListener('click', function(e) {
       e.preventDefault();
-      var u = document.getElementById('auth-user') ? document.getElementById('auth-user').value.trim() : '';
-      var p = document.getElementById('auth-pass') ? document.getElementById('auth-pass').value : '';
-      var n = document.getElementById('auth-name') ? document.getElementById('auth-name').value.trim() : '';
-      var ie = document.getElementById('auth-ie') ? document.getElementById('auth-ie').value.trim() : '';
-      var rol = document.getElementById('auth-role') ? document.getElementById('auth-role').value : 'IE';
+      var u = document.getElementById('auth-reg-user') ? document.getElementById('auth-reg-user').value.trim() : '';
+      var p = document.getElementById('auth-reg-pass') ? document.getElementById('auth-reg-pass').value : '';
+      var n = document.getElementById('auth-reg-name') ? document.getElementById('auth-reg-name').value.trim() : '';
+      var ie = document.getElementById('auth-reg-ie') ? document.getElementById('auth-reg-ie').value.trim() : '';
+      // Rol blindado institucionalmente a IE
+      var rol = 'IE';
       
       if (!u || !p) return alert('Por favor ingrese al menos un nombre de usuario y una contraseña.');
       var res = AuthManager.register(u, p, n, ie, rol);
@@ -132,7 +161,7 @@ function initAuthUI() {
         ModuloA.loadSavedDiagnostic();
         ModuloB.renderRayuela();
         ModuloC.renderMonitoreo();
-        alert('✅ Perfil creado y activado exitosamente para ' + (n || u) + '.');
+        alert('✅ Perfil creado y activado exitosamente para ' + (n || u) + ' (Usuario IE).');
       } else {
         alert(res.message);
       }
