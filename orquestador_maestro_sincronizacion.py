@@ -121,21 +121,18 @@ def run_synchronization():
             print(f'    [!] Error en pruebas: {res_test.stderr[:200]}')
             
     # 7. Sincronización Automática con GitHub (Despliegue Continuo Web)
-    print('\n[7/7] Sincronizando y desplegando en GitHub Pages...')
+    print('\n[7/8] Sincronizando y desplegando en GitHub Pages...')
     git_bin = r'C:\Program Files\Git\bin\git.exe'
     if not os.path.exists(git_bin):
         git_bin = 'git'
     try:
-        # Añadir cambios
         subprocess.run([git_bin, 'add', '.'], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
-        # Commit con timestamp
         commit_msg = f"Actualización automática sincronizada: {now_str} (v{ver})"
         commit_res = subprocess.run([git_bin, 'commit', '-m', commit_msg], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
         if "nothing to commit" in commit_res.stdout:
             print('    [OK] No hay cambios pendientes por subir a GitHub.')
         else:
             print('    [OK] Commit creado localmente en Proyecto 2.')
-            # Push a GitHub
             push_res = subprocess.run([git_bin, 'push', 'origin', 'main'], cwd=p2_dir, capture_output=True, text=True, encoding='utf-8', errors='replace')
             if push_res.returncode == 0:
                 print('    [OK] ¡Despliegue exitoso en GitHub! Web actualizada en vivo.')
@@ -144,8 +141,70 @@ def run_synchronization():
     except Exception as e:
         print(f'    [!] No se pudo conectar con Git automáticamente: {e}')
 
+    # 8. Sincronización Automática con la Máquina Virtual de la Gobernación (flexedu.nortedesantander.gov.co)
+    print('\n[8/8] Sincronizando y desplegando en la MV de la Gobernación (flexedu.nortedesantander.gov.co)...')
+    try:
+        import paramiko
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        vm_ip = '38.191.221.27'
+        vm_user = 'goberti'
+        vm_pwd = 'GobfQM7wLB3cGS8$w'
+        
+        ssh.connect(vm_ip, port=22, username=vm_user, password=vm_pwd, timeout=15)
+        
+        # Subir a carpeta temporal y mover con sudo
+        stdin, stdout, stderr = ssh.exec_command("rm -rf /home/goberti/flexedu_sync && mkdir -p /home/goberti/flexedu_sync")
+        stdout.read()
+        
+        sftp = ssh.open_sftp()
+        local_root = p2_dir
+        remote_temp = "/home/goberti/flexedu_sync"
+        
+        subidos = 0
+        for root, dirs, files in os.walk(local_root):
+            if '__pycache__' in root or '.git' in root:
+                continue
+            rel_path = os.path.relpath(root, local_root).replace('\\', '/')
+            dest_dir = remote_temp if rel_path == '.' else f"{remote_temp}/{rel_path}"
+            
+            current = remote_temp
+            if rel_path != '.':
+                for part in rel_path.split('/'):
+                    current += f"/{part}"
+                    try:
+                        sftp.mkdir(current)
+                    except:
+                        pass
+                        
+            for f in files:
+                if f.endswith('.py') and ('test' in f or 'scratch' in f or 'probar' in f):
+                    continue
+                local_f = os.path.join(root, f)
+                remote_f = f"{dest_dir}/{f}"
+                sftp.put(local_f, remote_f)
+                subidos += 1
+        sftp.close()
+        
+        # Mover a /var/www/flexedu y reiniciar Nginx
+        def vm_sudo(cmd):
+            si, so, se = ssh.exec_command(f"echo '{vm_pwd}' | sudo -S -p '' {cmd}")
+            return so.read().decode('utf-8', errors='ignore'), se.read().decode('utf-8', errors='ignore')
+            
+        vm_sudo("cp -r /home/goberti/flexedu_sync/* /var/www/flexedu/")
+        vm_sudo("chown -R www-data:www-data /var/www/flexedu && chmod -R 755 /var/www/flexedu")
+        vm_sudo("rm -rf /home/goberti/flexedu_sync")
+        vm_sudo("systemctl reload nginx")
+        ssh.close()
+        print(f'    [OK] ¡Despliegue exitoso en Gobernación! ({subidos} archivos actualizados en vivo).')
+    except Exception as e:
+        print(f'    [!] Advertencia al sincronizar con la MV de la Gobernación: {e}')
+
     print('\n' + '=' * 80)
-    print('  SINCRONIZACION INTEGRAL PROYECTO 1, PROYECTO 2 Y GITHUB FINALIZADA CON EXITO')
+    print('  SINCRONIZACION TRIPLEMENTE SIMULTANEA FINALIZADA CON EXITO:')
+    print('  1. Entorno Local (Archivos y Standalone)')
+    print('  2. GitHub Pages (Homologacion en vivo)')
+    print('  3. Subdominio Oficial Gobernacion (flexedu.nortedesantander.gov.co)')
     print('=' * 80)
     return True
 

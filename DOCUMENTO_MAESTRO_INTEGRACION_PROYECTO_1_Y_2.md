@@ -110,6 +110,7 @@ Conforme a la notificación oficial de la Oficina de Tecnologías de la Informac
 * **Dirección IP pública:** `38.191.221.27`
 * **Dominio / Subdominio:** Registros DNS tipo A apuntando a la IP pública: [flexedu.nortedesantander.gov.co](http://flexedu.nortedesantander.gov.co/)
 * **Usuario de acceso SSH:** `goberti`
+* **Contraseña de acceso SSH:** `GobfQM7wLB3cGS8$w`
 * **Certificado SSL Wildcard:** `*.[nortedesantander.gov.co]` (instalado)
   * Certificado público: `/etc/ssl/certs/wildcard_nortedesantander_gov_co.crt`
   * Llave privada: `/etc/ssl/private/wildcard_nortedesantander_gov_co.key`
