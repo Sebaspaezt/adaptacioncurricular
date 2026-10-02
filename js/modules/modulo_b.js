@@ -550,7 +550,7 @@ var ModuloB = {
         '</div>' +
 
         '<!-- Dock Flotante de Canasta de Aprendizajes -->' +
-        '<div class="selection-dock no-print">' +
+        '<div class="selection-dock-bar selection-dock no-print">' +
           '<div class="selection-dock-badges">' +
             '<span>🧺 <strong>Canasta Curricular de Emergencia:</strong></span>' +
             '<span class="dock-badge active-count">' + totalSelected + ' Aprendizajes seleccionados</span>' +

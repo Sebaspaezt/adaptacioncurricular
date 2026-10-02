@@ -47,8 +47,8 @@ function initAuthUI() {
     var user = AuthManager.getUserData();
     var roleInfo = AuthManager.getUserRoleInfo();
     if (userDisplay && user) {
-      var badgeHtml = '<span class="role-badge ' + (roleInfo.badgeClass || '') + '" style="margin-left: 8px; font-size: 0.76rem; padding: 2px 8px; border-radius: 12px; font-weight: 700;">' + (roleInfo.badge || user.rol || 'IE') + '</span>';
-      userDisplay.innerHTML = (user.nombreCompleto || 'Usuario Territorial') + badgeHtml;
+      var badgeHtml = '<span class="role-badge ' + (roleInfo.badgeClass || '') + '" style="font-size: 0.74rem; padding: 2px 7px; border-radius: 12px; font-weight: 700; white-space: nowrap;">' + (roleInfo.badge || user.rol || 'IE') + '</span>';
+      userDisplay.innerHTML = '<span class="user-name-text">' + (user.nombreCompleto || 'Usuario Territorial') + '</span> ' + badgeHtml;
       if (userBadge) {
         userBadge.title = 'Sesión activa: ' + (user.nombreCompleto || '') + ' (' + roleInfo.nombre + ')\nInstitución: ' + (user.institucion || '') + '\nCódigo DANE: ' + (user.dane || 'N/A') + '\nHaga clic para cambiar de usuario.';
       }

@@ -19,6 +19,18 @@
   },
   "registro_ajustes": [
     {
+      "id": "AJUSTE-2026-008",
+      "fecha": "2026-10-02",
+      "autor": "Secretaría de Educación Departamental / NRC / AGY",
+      "componente": "PROYECTO_2_WEB_RESPONSIVE_MOBILE",
+      "area_o_modulo": "Diseño Responsivo Móvil (Smartphones y Pantallas Estrechas)",
+      "tipo_ajuste": "ARMONIZACION_CABECERA_PERFIL_PESTANAS_Y_TARJETAS_MOVIL",
+      "descripcion": "Corrección y armonización visual total de la plataforma en dispositivos móviles y smartphones (<=768px y <=480px): 1) Solución al desbordamiento y solapamiento de la cabecera institucional donde el chip de usuario ('Docente Territorial' / 'Administrador SED') y la insignia de rol rompían líneas y desplazaban el botón de sesión hacia el borde. 2) Ajuste de proporciones en el logotipo institucional, títulos de secretaría e insignias de estado para un apilamiento fluido e intuitivo sin scroll horizontal ni descalces visuales. 3) Optimización de pestañas sticky de navegación y alineación limpia de cabeceras de tarjeta y acordeones en Módulos A, B y C. 4) Sincronización en la versión modular (index.html, css/components.css) y compilación automática en versión autónoma offline (app_standalone.html).",
+      "estado": "APLICADO",
+      "afecta_excel_p1": false,
+      "afecta_web_p2": true
+    },
+    {
       "id": "AJUSTE-2026-007",
       "fecha": "2026-09-30",
       "autor": "Secretaría de Educación Departamental / NRC / AGY",

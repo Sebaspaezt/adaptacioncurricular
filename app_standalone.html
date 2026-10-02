@@ -1110,7 +1110,481 @@ body {
   filter: grayscale(1);
 }
 
+/* =================================================== */
+/* DISEÑO RESPONSIVO ADAPTATIVO MÓVIL Y TABLET (100%)  */
+/* =================================================== */
 
+/* Envoltorio de tablas para deslizamiento horizontal táctil suave */
+#table-rayuela-container,
+.table-responsive-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.table-print {
+  min-width: 680px;
+}
+
+@media (max-width: 992px) {
+  .header-bar {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .user-status-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .main-container {
+    padding: 0 16px 40px;
+    margin: 16px auto;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Prevención de desbordamiento horizontal global */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Cabecera institucional */
+  .header-bar {
+    position: relative !important;
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .brand-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-icon-edu-container {
+    padding: 4px 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-icon-edu {
+    height: 28px;
+    width: auto;
+  }
+
+  .brand-titles-wrapper {
+    flex: 1;
+    min-width: 0; /* Previene desbordamiento flex */
+  }
+
+  .brand-title {
+    font-size: 0.90rem;
+    line-height: 1.25;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .brand-subtitle-gov {
+    font-size: 0.70rem;
+    line-height: 1.2;
+    display: block;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* Barra de usuario y perfil */
+  .user-status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-light);
+    box-sizing: border-box;
+  }
+
+  .user-badge {
+    padding: 4px 8px;
+    font-size: 0.78rem;
+    max-width: 65%;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .user-name-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 120px;
+    vertical-align: middle;
+  }
+
+  .role-badge {
+    font-size: 0.70rem !important;
+    padding: 2px 6px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0;
+  }
+
+  #btn-logout {
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Barra de navegación de pestañas (Sticky) */
+  .nav-tabs-container {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 95 !important;
+    padding: 4px 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    display: flex;
+    gap: 4px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--border-medium);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-tabs-container::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .nav-tabs-container::-webkit-scrollbar-thumb {
+    background: var(--border-medium);
+    border-radius: 3px;
+  }
+
+  .nav-tab {
+    padding: 8px 12px;
+    font-size: 0.80rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Contenedores y Tarjetas */
+  .main-container {
+    padding: 0 8px 40px;
+    margin: 8px auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .card-elite {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    width: 100%;
+  }
+
+  .card-header .badge-pill,
+  .card-header .badge-etapa2 {
+    align-self: flex-start;
+    margin-top: 2px;
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  /* Acordeón */
+  .accordion-header {
+    padding: 12px 14px;
+    font-size: 0.86rem;
+  }
+
+  .accordion-body {
+    padding: 12px;
+  }
+
+  /* Grids de formularios y multirriesgo */
+  .grid-2, .grid-3, .grid-4, .threat-top3-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  .form-group[style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+
+  /* Chips de Ciclo y Grado */
+  .ciclo-chip, .grado-chip {
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .ciclo-chips-container, .grado-chips-container {
+    gap: 6px;
+  }
+
+  /* Pestañas de áreas en Módulo B */
+  .tabs-nav {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    gap: 4px;
+    padding-bottom: 6px;
+  }
+
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  /* Filtros de periodo y ciclo */
+  .periodos-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .periodo-tab-btn, .ciclo-tab-btn {
+    padding: 5px 10px;
+    font-size: 0.76rem;
+    flex-shrink: 0;
+  }
+
+  /* Dock flotante de canasta */
+  .selection-dock-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    padding: 10px 14px;
+    margin: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    z-index: 105;
+  }
+
+  .selection-dock-badges {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .dock-badge {
+    font-size: 0.74rem;
+    padding: 3px 8px;
+    flex-shrink: 0;
+  }
+
+  .selection-dock-bar > div:last-child {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .selection-dock-bar button {
+    flex: 1;
+    padding: 6px 8px !important;
+    font-size: 0.74rem !important;
+  }
+
+  /* Botón flotante de feedback */
+  .btn-feedback-floating {
+    bottom: 74px;
+    right: 14px;
+    padding: 9px 14px;
+    font-size: 0.8rem;
+  }
+
+  /* Modales */
+  .modal-content {
+    width: 96% !important;
+    max-width: 96% !important;
+    padding: 18px 14px !important;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .modal-manual-content {
+    max-height: 94vh;
+  }
+
+  /* Banner de diagnóstico activo */
+  .diagnostic-context-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  /* Footer */
+  .app-footer {
+    padding: 20px 14px 80px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-actions .btn-elite {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =================================================== */
+/* AJUSTES ULTRA-FINOS PARA SMARTPHONES (<= 480px)     */
+/* =================================================== */
+@media (max-width: 480px) {
+  .header-bar {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .brand-section {
+    gap: 8px;
+  }
+
+  .brand-icon-edu-container {
+    padding: 3px 5px;
+  }
+
+  .brand-icon-edu {
+    height: 24px;
+  }
+
+  .brand-title {
+    font-size: 0.84rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-subtitle-gov {
+    font-size: 0.66rem;
+    line-height: 1.15;
+    margin-top: 2px;
+  }
+
+  .user-status-bar {
+    gap: 6px;
+    padding-top: 6px;
+  }
+
+  .user-badge {
+    padding: 3px 6px;
+    font-size: 0.72rem;
+    max-width: 62%;
+    gap: 4px;
+  }
+
+  .user-name-text {
+    max-width: 95px;
+    font-size: 0.72rem;
+  }
+
+  .role-badge {
+    font-size: 0.68rem !important;
+    padding: 1px 5px !important;
+  }
+
+  #btn-logout {
+    padding: 4px 6px !important;
+    font-size: 0.68rem !important;
+  }
+
+  .nav-tabs-container {
+    padding: 3px 4px;
+    gap: 2px;
+  }
+
+  .nav-tab {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+    gap: 4px;
+  }
+
+  .card-elite {
+    padding: 10px 12px;
+  }
+
+  .card-header {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-size: 0.88rem;
+    line-height: 1.25;
+  }
+
+  .card-header .badge-pill,
+  .card-header .badge-etapa2 {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+  }
+
+  .accordion-header {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+  }
+
+  .accordion-body {
+    padding: 10px 12px;
+    font-size: 0.84rem;
+  }
+}
 
 /* Reglas de Impresión Optimizadas (A4 / Carta) - Flexibilidad Curricular NRC */
 @page {
@@ -9029,7 +9503,7 @@ var ModuloB = {
         '</div>' +
 
         '<!-- Dock Flotante de Canasta de Aprendizajes -->' +
-        '<div class="selection-dock no-print">' +
+        '<div class="selection-dock-bar selection-dock no-print">' +
           '<div class="selection-dock-badges">' +
             '<span>🧺 <strong>Canasta Curricular de Emergencia:</strong></span>' +
             '<span class="dock-badge active-count">' + totalSelected + ' Aprendizajes seleccionados</span>' +
@@ -10158,8 +10632,8 @@ function initAuthUI() {
     var user = AuthManager.getUserData();
     var roleInfo = AuthManager.getUserRoleInfo();
     if (userDisplay && user) {
-      var badgeHtml = '<span class="role-badge ' + (roleInfo.badgeClass || '') + '" style="margin-left: 8px; font-size: 0.76rem; padding: 2px 8px; border-radius: 12px; font-weight: 700;">' + (roleInfo.badge || user.rol || 'IE') + '</span>';
-      userDisplay.innerHTML = (user.nombreCompleto || 'Usuario Territorial') + badgeHtml;
+      var badgeHtml = '<span class="role-badge ' + (roleInfo.badgeClass || '') + '" style="font-size: 0.74rem; padding: 2px 7px; border-radius: 12px; font-weight: 700; white-space: nowrap;">' + (roleInfo.badge || user.rol || 'IE') + '</span>';
+      userDisplay.innerHTML = '<span class="user-name-text">' + (user.nombreCompleto || 'Usuario Territorial') + '</span> ' + badgeHtml;
       if (userBadge) {
         userBadge.title = 'Sesión activa: ' + (user.nombreCompleto || '') + ' (' + roleInfo.nombre + ')\nInstitución: ' + (user.institucion || '') + '\nCódigo DANE: ' + (user.dane || 'N/A') + '\nHaga clic para cambiar de usuario.';
       }
