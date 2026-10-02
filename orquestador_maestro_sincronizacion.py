@@ -178,7 +178,7 @@ def run_synchronization():
                         pass
                         
             for f in files:
-                if f.endswith('.py') and ('test' in f or 'scratch' in f or 'probar' in f):
+                if f.endswith('.mp4') or (f.endswith('.py') and ('test' in f or 'scratch' in f or 'probar' in f)):
                     continue
                 local_f = os.path.join(root, f)
                 remote_f = f"{dest_dir}/{f}"
@@ -194,6 +194,7 @@ def run_synchronization():
         vm_sudo("cp -r /home/goberti/flexedu_sync/* /var/www/flexedu/")
         vm_sudo("chown -R www-data:www-data /var/www/flexedu && chmod -R 755 /var/www/flexedu")
         vm_sudo("rm -rf /home/goberti/flexedu_sync")
+        vm_sudo("sed -i 's/wildcard_nortedesantander_gov_co\\.crt/wildcard_nortedesantander_gov_co_fullchain\\.crt/g' /etc/nginx/sites-available/flexedu.nortedesantander.gov.co")
         vm_sudo("systemctl reload nginx")
         ssh.close()
         print(f'    [OK] ¡Despliegue exitoso en Gobernación! ({subidos} archivos actualizados en vivo).')
